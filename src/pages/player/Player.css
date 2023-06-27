@@ -1,0 +1,4 @@
+.like__dislike__btns{
+    display: grid;
+    grid-template-columns: repeat(2, 3rem);
+}
