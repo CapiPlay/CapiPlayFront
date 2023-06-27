@@ -1,8 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
 :root {
-  whitesmoke: #F5F5F5;
-  beige: #EBEBEB;
-  darkpurple: #1F1D2B;
-  darkblue: #141317;
-  purple: #772CE8;
-  lightpurple: #BF94FF;
+  --whitesmoke: #F5F5F5;
+  --beige: #EBEBEB;
+  --darkpurple: #1F1D2B;
+  --darkblue: #141317;
+  --purple: #772CE8;
+  --lightpurple: #BF94FF;
 }
