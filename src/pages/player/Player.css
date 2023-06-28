@@ -1,4 +1,56 @@
+body{
+    background-color: var(--darkpurple);
+}
+
 .like__dislike__btns{
     display: grid;
     grid-template-columns: repeat(2, 3rem);
+}
+
+.views__div{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--lightpurple);
+}
+
+.likes__div{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--lightpurple);
+}
+
+.interaction{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    font-size: 0.9rem;
+    margin: 1rem;
+    font-weight: bolder;
+}
+
+.video__title{
+    color: #fff;
+    margin: 1rem;
+    font-size: 2rem;
+}
+
+.interaction__info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.video__player{
+    margin: 0;
+    width: 100%;
+    height: 19rem;
+}
+
+.channel__image{
+    border-radius: 10rem;
+    width: 3rem;
+    margin: 1.5rem;
 }
