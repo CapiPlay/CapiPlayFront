@@ -7,17 +7,31 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    background-color: var(--darkpurple);
+    /* background-color: var(--darkpurple); */
 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container__login {
     width: 20rem;
     height: 35rem;
-    border: 1px solid black;
+    border: 1px solid white;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
+
+.container__login > span {
+    width: 80%;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.container__inputs__login {
+    width: 100%;
+    padding: 0 1rem;
+}
+
 

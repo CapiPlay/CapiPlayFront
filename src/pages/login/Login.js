@@ -1,6 +1,8 @@
 
 import { useEffect, useState } from "react";
+
 import "./Login.css"
+import Input from "../../components/input/Input";
 
 const Login = () => {
     const [windowHeight, setWindowHeight] = useState(document.documentElement.scrollHeight)
@@ -19,9 +21,19 @@ const Login = () => {
     }, [])
 
     return (
-        <div className="container__all__login" style={{height: `${windowHeight}px`}}>
+        <div className="container__all__login" style={{ height: `${windowHeight}px` }}>
             <div className="container__login">
-                {windowHeight}
+                <h2>Login</h2>
+                <span>
+                    O Mundo dos Vídeos ao seu <br /> Alcance!
+                </span>
+
+                <div className="container__inputs__login">
+
+                    <Input placeholder={"Nome"} />
+
+                </div>
+
             </div>
         </div>
     )
