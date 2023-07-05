@@ -1,4 +1,7 @@
 .container__home {
     background-color: var(--darkpurple);
-    
+}
+
+.container__slider__base {
+    padding-top: 4rem;
 }
