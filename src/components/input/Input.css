@@ -1,45 +1,46 @@
-.custom__input__login {
-    height: 3rem;
-}
-
-.custom__input__login:focus {
-    box-shadow: 2px 2px 2px var(--purple);
-}
-
-
-.form-group {
+.input__group {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 20px;    
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.form-control {
-    border: none;
-    border: 1px solid #ccc;
-    outline: none;
-    height: 40px;
+.input__control {
+    height: 3rem;
     width: 100%;
     font-size: 16px;
-    transition: all 0.3s;
     box-sizing: border-box;
-    padding: 0 1rem;
+    border: none;
+    padding: 0 13px;
+    outline: none;
+    transition: 0.2s ease-out;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.form-control:focus {
-    border-color: #007bff;
+.input__control:focus {
+    border-color: var(--purple);
 }
 
-.form-control:focus+label {
-    transform: translateY(-20px);
-    font-size: 14px;
-    color: #007bff;
+.input__control:focus+label, .active {
+    transform: translateY(-170%);
+    font-size: 16px;
+    color: var(--lightpurple);
 }
 
-label {
+.label__input {
     position: absolute;
-    top: 0;
     left: 0;
     font-size: 16px;
-    color: #888;
-    transition: all 0.3s;
+    color: var(--darkblue);
+    transition: 0.2s ease-out;
     pointer-events: none;
+    box-sizing: border-box;
+    padding: 0 14px;
 }
