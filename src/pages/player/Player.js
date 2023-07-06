@@ -10,8 +10,8 @@ function Player() {
   return (
     <>
       <div>
-        <video  controls className='video__player'>
-        <source src={pingu} type="video/mp4"/>
+        <video controls className='video__player'>
+          <source src={pingu} type="video/mp4" />
         </video>
       </div>
       <div className='video__title'>
@@ -32,8 +32,8 @@ function Player() {
         </div>
       </div>
       <div>
-        <Channel_component/>
-     </div>
+        <Channel_component />
+      </div>
     </>
   )
 }
