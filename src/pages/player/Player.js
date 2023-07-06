@@ -8,6 +8,7 @@ import Channel_component from './channel_component/Channel_component'
 import Description_component from './description_component/Description_component'
 import Divider_component from './divider_component/Divider_component'
 import Comments_component from './comments_componet/Comments_component'
+import Video_card from '../../components/video_card/Video_card'
 
 function Player() {
   return (
@@ -55,6 +56,7 @@ function Player() {
         <Divider_component/>
       </div>
       <div>
+        <Video_card/>
       </div>
     </>
   )
