@@ -12,8 +12,8 @@ function Channel_component() {
                 <div className='channel__name'>Pingu - OfficialChannel</div>
                 <div className='channel__subs'>50 mi de inscritos</div>
             </div>
-            <div className='subscribe__btn'>
-                <button>inscrever-se</button>
+            <div className='subscribe'>
+                <button className='subscribe__btn'>inscrever-se</button>
             </div>
         </div>
     </div>

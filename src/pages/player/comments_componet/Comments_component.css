@@ -1,0 +1,19 @@
+.user__icon{
+    border-radius: 10rem;
+    margin: 1rem;
+    width: 3rem; 
+}
+
+.comment{
+    color: white;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    
+}
+
+.comment__content{
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+}

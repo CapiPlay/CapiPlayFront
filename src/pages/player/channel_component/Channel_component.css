@@ -23,14 +23,28 @@
     width: 2rem;
 }
 
-.subscribe__btn{
+.subscribe{
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     margin-bottom: 1.2rem;
     float: right;
 }
 
+.subscribe__btn{
+    background: none;
+    border: solid var(--purple) 6px;
+    background-color: var(--purple);
+    border-radius: 10px;
+    color: white;
+    font-size: 0.8rem;
+    height: 2rem;
+    width: 7rem;
+}
+
 .channel{
     width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }

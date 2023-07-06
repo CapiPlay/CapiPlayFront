@@ -1,0 +1,29 @@
+.description__container{
+    color: white;
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.description__moreORless{
+    background: none;
+    border: none;
+    color: var(--lightpurple);
+}
+
+.selection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.selection__icon{
+    margin-top: 5%;
+}
+
+.description__date{
+    margin-left: auto;
+    color: var(--lightpurple);
+}

@@ -5,7 +5,7 @@ body{
 .like__dislike__btns{
     display: flex;
     justify-content: end;
-    gap: 0.3rem;
+    gap: 0.6rem;
     float: right;
 }
 
@@ -40,9 +40,8 @@ body{
 }
 
 .interaction__info{
-    display: flex;
-    justify-content: start;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
 }
 
@@ -54,4 +53,12 @@ body{
 
 .channel{
     width: max-content;
+}
+
+.comments__container{
+    margin: 1rem;
+}
+
+.total__comments{
+    color: var(--lightpurple);
 }

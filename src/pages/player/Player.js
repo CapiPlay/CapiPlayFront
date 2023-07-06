@@ -5,6 +5,9 @@ import { AiFillEye, AiFillHeart } from 'react-icons/ai'
 import pingu from '../../assets/image/pingu.mp4'
 import './Player.css'
 import Channel_component from './channel_component/Channel_component'
+import Description_component from './description_component/Description_component'
+import Divider_component from './divider_component/Divider_component'
+import Comments_component from './comments_componet/Comments_component'
 
 function Player() {
   return (
@@ -33,6 +36,25 @@ function Player() {
       </div>
       <div>
         <Channel_component />
+      </div>
+      <div>
+        <Description_component/>
+      </div>
+      <div>
+        <Divider_component/>
+      </div>
+      <div className='comments__container'>
+        <div className='total__comments'>
+          <p>Comentários</p>
+        </div>
+        <div>
+          <Comments_component/>
+        </div>
+      </div>
+      <div>
+        <Divider_component/>
+      </div>
+      <div>
       </div>
     </>
   )
