@@ -28,7 +28,13 @@
     border-color: var(--purple);
 }
 
-.input__control:focus+label, .active {
+.input__control:focus+label {
+    transform: translateY(-170%);
+    font-size: 16px;
+    color: var(--lightpurple);
+}
+
+.active {
     transform: translateY(-170%);
     font-size: 16px;
     color: var(--lightpurple);
