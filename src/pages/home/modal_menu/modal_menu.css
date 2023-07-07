@@ -5,7 +5,7 @@
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 980;
+    z-index: 90;
 }
 
 .menu{
@@ -18,13 +18,24 @@
     cursor: pointer;
 }
 
-.modal-menu-content{
+.modal__category__title {
+    color: var(--white);
+    font-size: 22px;
+}
+
+.modal__category__content{
     z-index: 100;
     display: flex;
+    flex-direction: column;
     height: 100%;
     width: 50%;
     position: fixed;
     left: 0;
     top: 0;
     background-color: var(--darkpurple);
+}
+
+.modal__category__item {
+    font-size: 14px;
+    color: var(--white);
 }

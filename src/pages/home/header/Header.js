@@ -1,7 +1,7 @@
 import React from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { FiUpload } from 'react-icons/fi';
-import logo from '../../../assets/image/CapiPlay.png'
+import logo from '../../../assets/image/Logo.png'
 import { AiOutlineSearch } from 'react-icons/ai';
 import './Header.css'
 import Modal_menu from '../modal_menu/Modal_menu';
@@ -20,7 +20,7 @@ function Header() {
           <Modal_menu />
         </div>
         <div className='container__logo'>
-          <img src={logo} className='container__perfilImage' />
+          <img src={logo} className='container__logo' />
         </div>
       </div>
       <div className='box__header'>
