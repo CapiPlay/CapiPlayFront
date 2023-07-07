@@ -26,3 +26,8 @@
     border-radius: 100%;
     background-color: var(--beige);
 }
+
+.modal__menu {
+    display: flex;
+    z-index: 100;
+}
