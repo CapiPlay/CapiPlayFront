@@ -7,29 +7,29 @@
 }
 
 .component{
-    display: grid;
-    grid-template-columns: 30%  70%;
+    display: flex;
+    gap: 2rem;
 }
 
 .channel__info{
     color: aliceblue;
-    margin-top: 1.5rem;
     width: max-content;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
 .channel__image{
     border-radius: 10rem;
     margin: 1.5rem;
     width: 2rem;
+    cursor: pointer;
 }
 
 .subscribe{
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-bottom: 1.2rem;
-    float: right;
-    margin-right: 3%;
 }
 
 .subscribe__btn{
@@ -41,16 +41,15 @@
     font-size: 0.8rem;
     height: 2rem;
     width: 7rem;
+    cursor: pointer;
 }
 
 .channel{
-    width: fit-content;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
 }
 
 .channel__container{
-    display: grid;
-    grid-template-columns: 50% 80%;
+    display: flex;
 }

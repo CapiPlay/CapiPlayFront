@@ -26,4 +26,5 @@
 .description__date{
     margin-left: auto;
     color: var(--lightpurple);
+    margin-bottom: 3px;
 }
