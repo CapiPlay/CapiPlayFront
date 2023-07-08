@@ -1,0 +1,29 @@
+.file-input__container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.file-input__label {
+    width: 100%;
+    height: 2.5rem;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--lightpurple);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.file-input__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}

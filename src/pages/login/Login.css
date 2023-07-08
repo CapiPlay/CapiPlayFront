@@ -15,7 +15,7 @@
 .container__login {
     width: 20rem;
     height: 35rem;
-    color: white;
+    color: var(--whitesmoke);
 
     display: flex;
     align-items: center;
@@ -109,7 +109,7 @@
 .container__seperation__login div {
     width: 100%;
     height: 1px;
-    background-color: var(--purple);
+    background-color: var(--lightpurple);
 }
 
 /* Facebook e Google */
