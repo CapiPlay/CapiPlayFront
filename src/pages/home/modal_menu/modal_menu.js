@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiOutlineClose } from 'react-icons/ai';
-import "./Modal_menu.css"
+import "./modal_menu.css"
 import art from '../../../assets/image/palette.png'
 import science from '../../../assets/image/science.png'
 import school from '../../../assets/image/school.png'

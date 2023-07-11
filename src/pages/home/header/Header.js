@@ -4,7 +4,7 @@ import { FiUpload } from 'react-icons/fi';
 import logo from '../../../assets/image/Logo.png'
 import { AiOutlineSearch } from 'react-icons/ai';
 import './Header.css'
-import Modal_menu from '../modal_menu/Modal_menu';
+import Modal_menu from '../modal_menu/modal_menu';
 import Aos from 'aos';
 
 function Header() {

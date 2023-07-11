@@ -1,3 +1,5 @@
+ /* Home Mobile */
+
 .container__home {
     background-color: var(--darkpurple);
 }
@@ -13,3 +15,5 @@
     flex-direction: column;
     gap: 2rem;
 }
+
+/* Home Desktop */
