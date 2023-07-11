@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Header from './header/Header'
+import HeaderDesk from '../../components/header/Header'
 import './Home.css'
 import MySlider from './slider/Slider'
 import DeskSlider from './slider_desk/Slider_Desk'
@@ -29,27 +30,27 @@ function Home() {
   }
 
   return (
-    <><Header />
+    <> 
       {verifyScreen() ?
-        <div className='container__home'>
-        <div className='container__slider__base'>
-          <MySlider />
-        </div>
-        <div className='container__video__cards'>
-          <Video_card />
-          <Video_card />
-        </div>
-      </div>
+      <><Header /><div className='container__home'>
+          <div className='container__slider__base'>
+            <MySlider />
+          </div>
+          <div className='container__video__cards'>
+            <Video_card />
+            <Video_card />
+          </div>
+        </div></>
         :
-        <div className='container__home'>
-        <div className='container__slider__base'>
-          <DeskSlider />
-        </div>
-        <div className='container__video__cards'>
-          <Video_card />
-          <Video_card />
-        </div>
-      </div>
+        <><HeaderDesk /><div className='container__home'>
+          <div className='container__slider__base'>
+            <DeskSlider />
+          </div>
+          <div className='container__video__cards'>
+            <Video_card />
+            <Video_card />
+          </div>
+        </div></>
       }
     </>
 
