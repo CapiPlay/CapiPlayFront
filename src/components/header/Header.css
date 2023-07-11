@@ -1,0 +1,36 @@
+.header__container{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    color: var(--lightpurple);
+    margin: 1rem;
+    margin-bottom: 3rem;
+}
+
+.header__info{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.header__input__container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__input{
+    width: 45rem;
+    height: 25px;
+}
+
+.user__image{
+    border-radius: 10rem;
+    margin: 0.3rem;
+    width: 2rem;
+}
+
+.header__menu__icon{
+    display: flex;
+    align-items: center;
+}
