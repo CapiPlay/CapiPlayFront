@@ -7,7 +7,6 @@ import Historic from './pages/historic/Historic'
 import Shorts from './pages/shorts/Shorts'
 import VideoDetails from './pages/videoDetails/VideoDetails'
 import VideoUpload from './pages/videoUpload/VideoUpload'
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {

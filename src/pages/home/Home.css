@@ -1,0 +1,19 @@
+ /* Home Mobile */
+
+.container__home {
+    background-color: var(--darkpurple);
+}
+
+.container__slider__base {
+    padding-top: 4rem;
+}
+
+.container__video__cards {
+    padding-top: 4rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Home Desktop */

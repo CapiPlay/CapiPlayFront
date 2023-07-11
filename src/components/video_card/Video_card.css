@@ -1,0 +1,76 @@
+.box__video__card {
+    height: 100%;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    background-color: var(--darkblue);
+}
+
+.container__video__image{
+    width: 100%;
+    height: 100%;
+    
+}
+
+.container__video__card__image {
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.container__video__perfilImage {
+    width: 3rem;
+    height: 2.5rem;
+    margin-left: 3%;
+    border-radius: 100px;
+}	
+
+.container__video__perfil {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.container__video__info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.container__video__title__text {
+    color: var(--white);
+    width: 100%;
+    align-items: start;
+    justify-content: start;
+    display: flex;
+    font-size: 16px;
+}
+
+.container__video__perfilName {
+    color: var(--white);
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+.container__video__views {
+    color: var(--white);
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+.container__video__info__text {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
