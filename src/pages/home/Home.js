@@ -5,6 +5,7 @@ import './Home.css'
 import MySlider from './slider/Slider'
 import DeskSlider from './slider_desk/Slider_Desk'
 import Video_card from '../../components/video_card/Video_card'
+import Side_Bar from './side_bar/Side_Bar'
 
 function Home() {
 
@@ -42,7 +43,7 @@ function Home() {
           </div>
         </div></>
         :
-        <><HeaderDesk /><div className='container__home'>
+        <><HeaderDesk /><Side_Bar/> <div className='container__home'>
           <div className='container__slider__base'>
             <DeskSlider />
           </div>
