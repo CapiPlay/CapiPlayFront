@@ -1,0 +1,130 @@
+/* Containers */
+.container__all__shorts {
+    width: 100%;
+    overflow: hidden;
+}
+
+.container__video {
+    position: relative;
+    width: 100%;
+}
+
+.container__video img {
+    width: 100%;
+}
+
+/* Icones */
+.container__icons__shorts {
+    position: absolute;
+
+    width: 5rem;
+    height: 12rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+
+    bottom: 12rem;
+    right: 0;
+}
+
+.container__icons__shorts> :first-child {
+    width: 100%;
+    height: 40%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    color: var(--whitesmoke);
+    font-size: 16px;
+}
+
+.container__icons__shorts> :first-child>span {
+    transition: .3s ease-in-out;
+}
+
+.container__icons__shorts> :last-child {
+    width: 100%;
+    height: 60%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+
+    color: var(--whitesmoke);
+    font-size: 16px;
+}
+
+.container__icons__shorts div svg {
+    width: 2rem;
+    height: 2rem;
+
+    color: var(--whitesmoke);
+    transition: .4s ease-in-out;
+}
+
+.container__icons__shorts> :first-child:hover svg,
+.container__icons__shorts> :last-child :nth-child(1):hover,
+.container__icons__shorts> :last-child :nth-child(2):hover,
+.container__icons__shorts> :first-child:hover span {
+    color: var(--purple);
+}
+
+/* Informações sobre o vídeo */
+.container__informations__video {
+    position: absolute;
+
+    width: 100%;
+    height: 10rem;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+
+    color: var(--whitesmoke);
+    bottom: 0;
+}
+
+.title__short {
+    width: 100%;
+    height: 40%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.title__short span {
+    max-width: 80%;
+    font-size: 18px;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.informations__profile__shorts {
+    width: 75%;
+    height: 30%;
+    padding: .2rem 0 .2rem 0;
+    font-size: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.informations__profile__shorts img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
+
+.informations__profile__shorts div {
+    width: 40%;
+}
