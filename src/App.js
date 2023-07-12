@@ -3,6 +3,7 @@ import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import Register from './pages/register/Register'
 import Player from './pages/player/Player'
+import Profile from './pages/profile/Profile'
 import Historic from './pages/historic/Historic'
 import Shorts from './pages/shorts/Shorts'
 import VideoDetails from './pages/videoDetails/VideoDetails'
@@ -22,6 +23,7 @@ function App() {
           <Route path="/shorts" element={<Shorts />} />
           <Route path="/video-details" element={<VideoDetails />} />
           <Route path="/video-upload" element={<VideoUpload />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </div>

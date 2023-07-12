@@ -1,0 +1,53 @@
+.container__home {
+    background-color: var(--darkpurple);
+}
+
+.container__slider__base {
+    padding-top: 4rem;
+}
+
+.container__video__cards {
+    padding-top: 4rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.profile__pic {
+    margin: 0 auto;
+}
+
+.container__picture__profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile__subscribe__button {
+    background-color: var(--purple);
+    border: 0;
+    color: var(--whitesmoke);
+    padding: 0.7rem;
+    border-radius: 1rem;
+}
+
+.id__profile {
+    font-size: 13px;
+    color: var(--lightpurple);
+}
+
+.profile__name {
+    color: var(--lightpurple);
+}
+
+.details__profile {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    font-size: 13px;
+}
+.description__profile{
+    width: 50%;
+}
