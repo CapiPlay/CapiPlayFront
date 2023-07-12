@@ -4,8 +4,6 @@ import Slider from 'react-slick';
 
 function Slider_Category() {
     const settings = {
-        autoplay: true,
-        autoplaySpeed: 5000,
         slidesToShow: 5,
         responsive: [
           {
