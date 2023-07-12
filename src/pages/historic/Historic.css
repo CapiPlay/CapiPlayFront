@@ -1,0 +1,33 @@
+.historic__container {
+    width: 100%;
+    height: 100%;
+    background-color: var(--darkpurple);
+}
+
+.historic__date>span {
+    margin-top: 38px;
+    margin-left: 10px;
+    color: var(--whitesmoke);
+    font-size: 14px;
+}
+
+.container__shorts__historic,
+.container__videos__historic {
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.container__videos__historic {
+    flex-direction: column;
+}
+
+.container__shorts__historic>div {
+    width: 9rem;
+    height: 16rem;
+    background: url("../../assets/image/img_shorts.png");
+    border-radius: 10px;
+}
+
