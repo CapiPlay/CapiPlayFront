@@ -17,3 +17,12 @@
 }
 
 /* Home Desktop */
+
+.container__video__cards__desk {
+    padding-top: 4rem;
+    padding-left: 10%;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}

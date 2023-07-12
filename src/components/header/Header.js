@@ -11,7 +11,7 @@ function Header() {
             <GiHamburgerMenu size={'2rem'}/>
         </div>
         <div className='header__input__container'>
-            <input className='header__input' placeholder=' Pesquisar...'/>
+            <input className='header__input' placeholder=''/>
             <AiOutlineSearch className='menu__icon__header' color='var(--lightpurple)' size={'2rem'} />
         </div>
         <div className='header__info'>

@@ -1,0 +1,17 @@
+.container__banner__category {
+    background-color: var(--lightpurple);
+    height: 5vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: 20px;
+    border-radius: 20px;
+}
+
+.container__banner__large__category {
+    background-color: var(--purple);
+    height: 40vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}

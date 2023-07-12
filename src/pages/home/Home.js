@@ -6,6 +6,7 @@ import MySlider from './slider/Slider'
 import DeskSlider from './slider_desk/Slider_Desk'
 import Video_card from '../../components/video_card/Video_card'
 import Side_Bar from './side_bar/Side_Bar'
+import Slider_Category from './slider_category/Slider_Category'
 
 function Home() {
 
@@ -31,9 +32,9 @@ function Home() {
   }
 
   return (
-    <> 
+    <>
       {verifyScreen() ?
-      <><Header /><div className='container__home'>
+        <><Header /><div className='container__home'>
           <div className='container__slider__base'>
             <MySlider />
           </div>
@@ -43,11 +44,21 @@ function Home() {
           </div>
         </div></>
         :
-        <><HeaderDesk /><Side_Bar/> <div className='container__home'>
-          <div className='container__slider__base'>
+        <><HeaderDesk /><Side_Bar /> <div className='container__home'>
+          <div className='container__slider__base__desk'>
+            <Slider_Category />
+          </div>
+          <div className='container__slider__base__desk'>
             <DeskSlider />
           </div>
-          <div className='container__video__cards'>
+          <div className='container__video__cards__desk'>
+            <Video_card />
+            <Video_card />
+            <Video_card />
+            <Video_card />
+            <Video_card />
+            <Video_card />
+            <Video_card />
             <Video_card />
             <Video_card />
           </div>
