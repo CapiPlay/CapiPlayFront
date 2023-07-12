@@ -135,6 +135,7 @@
 .container__register__login {
     width: 35%;
     font-size: 14px;
+    color: var(--whitesmoke);
     
     display: flex;
     align-items: center;

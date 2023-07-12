@@ -25,6 +25,7 @@ const Register = () => {
     }
 
     const [registerData, setRegisterData] = useState(objRegister)
+    const [image, setImage] = useState()
     const [confirmPassword, setConfirmPassword] = useState("")
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
 
@@ -44,16 +45,31 @@ const Register = () => {
         setRegisterData({ ...registerData, [e.target.name]: e.target.value })
     }
 
+    const register = () => {
+        setRegisterData({ ...registerData, foto: image })
+        console.log(registerData)
+        alert("")
+    }
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0]
+        if (file) {
+            const formData = new FormData()
+            formData.append("foto", file)
+            setImage(formData)
+        }
+    }
+
     return (
         <div className="container__all__register" style={{ height: `${windowHeight}px` }}>
-            <form className="container__register">
+            <div className="container__register">
                 <h1>Cadastro</h1>
                 <h2>O Mundo dos Videos ao seu Alcance</h2>
                 <div className="container__inputs__register">
                     <Input
                         placeholder={"E-mail"}
                         type={"email"}
-                        required={true}
+                        // required={true}
                         name={"email"}
                         onChange={keyboard}
                         value={registerData.email}
@@ -61,7 +77,7 @@ const Register = () => {
                     <Input
                         placeholder={"Nome de usuário"}
                         type={"text"}
-                        required={true}
+                        // required={true}
                         name={"nome"}
                         onChange={keyboard}
                         value={registerData.nome}
@@ -69,7 +85,7 @@ const Register = () => {
                     <Input
                         placeholder={"Data de Nascimento"}
                         type={"date"}
-                        required={true}
+                        // required={true}
                         name={"dataNascimento"}
                         onChange={keyboard}
                         value={registerData.dataNascimento}
@@ -77,7 +93,7 @@ const Register = () => {
                     <Input
                         placeholder={"Senha"}
                         type={"password"}
-                        required={true}
+                        // required={true}
                         name={"senha"}
                         onChange={keyboard}
                         value={registerData.senha}
@@ -85,13 +101,15 @@ const Register = () => {
                     <Input
                         placeholder={"Confirmar senha"}
                         type={"password"}
-                        required={true}
+                        // required={true}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         value={confirmPassword}
                     />
                     <InputFile
                         label={"Foto de perfil"}
                         radius={"20px"}
+                        onChange={handleFileChange}
+                        file={image}
                     />
                 </div>
                 <div className="container__button__register">
@@ -99,6 +117,7 @@ const Register = () => {
                         label={"Cadastrar"}
                         principal={true}
                         isActived={false}
+                        onClick={register}
                     />
                 </div>
                 <div className="container__seperation__register">
@@ -118,7 +137,7 @@ const Register = () => {
                         </Link>
                     </span>
                 </div>
-            </form>
+            </div>
         </div>
     )
 }

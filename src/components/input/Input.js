@@ -1,15 +1,6 @@
 import React, { useRef, useEffect, useState } from "react"
 import "./Input.css"
 
-// placeholder: O texto de espaço reservado (placeholder) exibido na caixa de entrada.
-// value: O valor atual da caixa de entrada.
-// onChange: Uma função de retorno de chamada chamada sempre que o valor da caixa de entrada é alterado.
-// onClick: Uma função de retorno de chamada chamada quando a caixa de entrada é clicada.
-// required: Um valor booleano indicando se a caixa de entrada é obrigatória.
-// type: O tipo de entrada da caixa de texto (por exemplo, "text", "password", "date"). O padrão é "text".
-// enable: Um valor booleano indicando se a caixa de entrada está habilitada para interação do usuário.
-// name: O nome atribuído à caixa de entrada.
-
 const Input = ({ placeholder, value, onChange, onClick, required, type, enable, name }) => {
   const [inputType, setInputType] = useState("text")
   const [labelColor, setLabelColor] = useState({})
@@ -18,21 +9,29 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
   const ref = useRef(null)
   const hasValue = value && value.length > 0
 
+  const maxYear = new Date().getFullYear() - 6
+  const minYear = new Date().getFullYear - 150
+  const month = new Date().getMonth() + 1
+  const day = new Date().getDate()
+
+
   useEffect(() => {
     const handleFocus = () => {
-      if(type === "date") {
+      if (type === "date") {
         setInputType("date")
-      } 
+      }
       setLabelColor({ color: "#BF94FF" })
       setInputBorderColor({ borderColor: "#BF94FF" })
     }
 
-    if(type !== "date") {
+    if (type !== "date") {
       setInputType(type)
     }
 
     const handleBlur = () => {
-      setInputType("text")
+      if (type !== "password") {
+        setInputType("text")
+      }
       if (!hasValue) {
         setLabelColor({ color: "#141317" })
         setInputBorderColor({ borderColor: "#141317" })
@@ -54,19 +53,49 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
     }
   }, [hasValue, type])
 
+  const handleInputChange = (event) => {
+    const inputValue = event.target.value;
+    const isValidDate = type === "date" ? validateDate(inputValue) : true
+
+    if (isValidDate) {
+      onChange(event)
+    } else {
+        const updatedEvent = { ...event }
+        updatedEvent.target.value = ""
+        onChange(updatedEvent)
+    }
+  }
+
+  const validateDate = (inputValue) => {
+    if (type === "date" && inputValue) {
+      const inputDate = new Date(inputValue)
+      const yearInputDate = inputDate.getFullYear()
+      const maxDate = new Date(`${maxYear}-${month}-${day}`)
+      const minDate = new Date(`${minYear}-${month}-${day}`)
+
+      if (inputDate > maxDate || (inputDate < minDate && String(yearInputDate).length === 4)) {
+        console.log("Entrei, pois sou minimo")
+        return false
+      }
+    }
+    return true
+  }
+
   return (
     <div className="input__group">
       <input
         className="input__control"
         type={inputType}
         value={value}
-        onChange={onChange}
+        onChange={handleInputChange}
         onClick={onClick}
         enable={enable}
         required={required}
         ref={ref}
         style={inputBorderColor}
         name={name}
+        max={type === "date" ? `${maxYear}-${month}-${day}` : undefined}
+        min={type === "date" ? `${minYear}-${month}-${day}` : undefined}
       />
       <label className={`label__input ${hasValue ? "active" : ""}`} style={labelColor}>
         {placeholder}
