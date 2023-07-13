@@ -23,7 +23,7 @@ function Home() {
     };
   }, []);
 
-  const verifyScreen = () => {
+  const verifyDesktop = () => {
     if (screenSize.width >= 900) {
       return false
     } else {
@@ -31,7 +31,7 @@ function Home() {
     }
   }
 
-  const verifyDesktop = () => {
+  const verifyTablet = () => {
     if (screenSize.width < 900 && screenSize.width >= 500) {
       return false
     } else {
@@ -41,7 +41,7 @@ function Home() {
 
   return (
     <>
-      {verifyScreen() ?
+      {verifyDesktop() ?
         <><Header /><div className='container__home'>
           <div className='container__slider__base'>
             <MySlider />
