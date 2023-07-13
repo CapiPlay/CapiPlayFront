@@ -62,7 +62,7 @@
 
 .container__video__cards__desktop {
     padding-top: 4rem;
-    align-items: center;
+
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -75,7 +75,6 @@
 .container__picture__profile__desktop {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 1rem;
 }
 
