@@ -32,8 +32,8 @@ function Home() {
     }
   }
 
-  const verifyPhone = () => {
-    if (screenSize.width < 600) {
+  const verifyDesktop = () => {
+    if (screenSize.width > 900) {
       return true
     } else {
       return false
@@ -43,19 +43,27 @@ function Home() {
 
   return (
     <>
-      {verifyPhone() ?
+      {verifyDesktop() ?
 
-        <><Header /><div className='container__home'>
-          <div className='container__slider__base'>
-            <MySlider />
+        <><HeaderDesk /><Side_Bar /> <div className='container__home'>
+          <div className='container__slider__base__desk'>
+            <Slider_Category />
           </div>
-          <div className='container__video__cards'>
+          <div className='container__slider__base__desk'>
+            <DeskSlider />
+          </div>
+          <div className='container__video__cards__desk'>
+            <Video_card />
+            <Video_card />
+            <Video_card />
+            <Video_card />
+            <Video_card />
+            <Video_card />
+            <Video_card />
             <Video_card />
             <Video_card />
           </div>
         </div></>
-
-
 
         :
 
@@ -85,25 +93,15 @@ function Home() {
 
             :
 
-            <><HeaderDesk /><Side_Bar /> <div className='container__home'>
-            <div className='container__slider__base__desk'>
-              <Slider_Category />
-            </div>
-            <div className='container__slider__base__desk'>
-              <DeskSlider />
-            </div>
-            <div className='container__video__cards__desk'>
-              <Video_card />
-              <Video_card />
-              <Video_card />
-              <Video_card />
-              <Video_card />
-              <Video_card />
-              <Video_card />
-              <Video_card />
-              <Video_card />
-            </div>
-          </div></>
+            <><Header /><div className='container__home'>
+              <div className='container__slider__base'>
+                <MySlider />
+              </div>
+              <div className='container__video__cards'>
+                <Video_card />
+                <Video_card />
+              </div>
+            </div></>
 
           }
         </div>
