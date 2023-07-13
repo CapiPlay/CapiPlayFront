@@ -19,7 +19,7 @@ function Side_Bar() {
         <div className='container__side__bar'>
             <div className='category__box'>
             <div className='modal__category__item__side' >
-                    <GiHamburgerMenu color='var(--lightpurple)' size={'2rem'} />
+                    <GiHamburgerMenu  color='var(--lightpurple)' size={'2rem'} />
                 </div>
                 <div className='modal__category__item__side' >
                     <div className='icon__category__area__side'>
