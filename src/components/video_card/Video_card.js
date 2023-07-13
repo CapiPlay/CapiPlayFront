@@ -6,7 +6,7 @@ function Video_card() {
     return (
 
         <div className='box__video__card'>
-            <Link to='/video-details'>
+            <Link to='/player'>
                 <div className='container__video__image'>
                     <img src="https://i.ytimg.com/vi/1Ne1hqOXKKI/maxresdefault.jpg" className='container__video__card__image' />
                 </div>
