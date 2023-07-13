@@ -24,7 +24,15 @@ function Home() {
   }, []);
 
   const verifyScreen = () => {
-    if (screenSize.width > 900) {
+    if (screenSize.width >= 900) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  const verifyDesktop = () => {
+    if (screenSize.width < 900 && screenSize.width >= 500) {
       return false
     } else {
       return true
