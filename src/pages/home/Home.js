@@ -7,6 +7,7 @@ import DeskSlider from './slider_desk/Slider_Desk'
 import Video_card from '../../components/video_card/Video_card'
 import Side_Bar from './side_bar/Side_Bar'
 import Slider_Category from './slider_category/Slider_Category'
+import Header_Tablet from './header_tablet/Header_Tablet'
 
 function Home() {
 
@@ -24,16 +25,26 @@ function Home() {
   }, []);
 
   const verifyScreen = () => {
-    if (screenSize.width > 900) {
-      return false
-    } else {
+    if (screenSize.width < 900 && screenSize.width > 600) {
       return true
+    } else {
+      return false
     }
   }
 
+  const verifyPhone = () => {
+    if (screenSize.width < 600) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+
   return (
     <>
-      {verifyScreen() ?
+      {verifyPhone() ?
+
         <><Header /><div className='container__home'>
           <div className='container__slider__base'>
             <MySlider />
@@ -43,26 +54,59 @@ function Home() {
             <Video_card />
           </div>
         </div></>
+
+
+
         :
-        <><HeaderDesk /><Side_Bar /> <div className='container__home'>
-          <div className='container__slider__base__desk'>
-            <Slider_Category />
-          </div>
-          <div className='container__slider__base__desk'>
-            <DeskSlider />
-          </div>
-          <div className='container__video__cards__desk'>
-            <Video_card />
-            <Video_card />
-            <Video_card />
-            <Video_card />
-            <Video_card />
-            <Video_card />
-            <Video_card />
-            <Video_card />
-            <Video_card />
-          </div>
-        </div></>
+
+        <div>
+
+          {verifyScreen() ?
+
+            <><Header_Tablet /><Side_Bar /> <div className='container__home'>
+              <div className='container__slider__base__desk'>
+                <Slider_Category />
+              </div>
+              <div className='container__slider__base__desk'>
+                <DeskSlider />
+              </div>
+              <div className='container__video__cards__desk'>
+                <Video_card />
+                <Video_card />
+                <Video_card />
+                <Video_card />
+                <Video_card />
+                <Video_card />
+                <Video_card />
+                <Video_card />
+                <Video_card />
+              </div>
+            </div></>
+
+            :
+
+            <><HeaderDesk /><Side_Bar /> <div className='container__home'>
+            <div className='container__slider__base__desk'>
+              <Slider_Category />
+            </div>
+            <div className='container__slider__base__desk'>
+              <DeskSlider />
+            </div>
+            <div className='container__video__cards__desk'>
+              <Video_card />
+              <Video_card />
+              <Video_card />
+              <Video_card />
+              <Video_card />
+              <Video_card />
+              <Video_card />
+              <Video_card />
+              <Video_card />
+            </div>
+          </div></>
+
+          }
+        </div>
       }
     </>
 
