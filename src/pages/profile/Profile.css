@@ -49,5 +49,61 @@
     font-size: 13px;
 }
 .description__profile{
-    width: 50%;
+    width: 83%;
+    text-align: justify;
+    font-size: 13px;
+}
+
+/* Desktop */
+
+.container__slider__base__desktop {
+    padding-top: 4rem;
+}
+
+.container__video__cards__desktop {
+    padding-top: 4rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.profile__pic__desktop {
+    margin: 0 auto;
+}
+
+.container__picture__profile__desktop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile__subscribe__button__desktop {
+    background-color: var(--purple);
+    border: 0;
+    color: var(--whitesmoke);
+    padding: 0.7rem;
+    border-radius: 1rem;
+}
+
+.id__profile__desktop {
+    font-size: 13px;
+    color: var(--lightpurple);
+}
+
+.profile__name__desktop {
+    color: var(--lightpurple);
+}
+
+.details__profile__desktop {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    font-size: 13px;
+}
+.description__profile__desktop {
+    width: 83%;
+    text-align: justify;
+    font-size: 13px;
 }
