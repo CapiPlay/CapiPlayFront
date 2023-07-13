@@ -71,6 +71,18 @@ function Home() {
 
           {verifyScreen() ?
 
+            <><Header /><div className='container__home'>
+              <div className='container__slider__base'>
+                <MySlider />
+              </div>
+              <div className='container__video__cards'>
+                <Video_card />
+                <Video_card />
+              </div>
+            </div></>
+
+            :
+
             <><Header_Tablet /><Side_Bar /> <div className='container__home'>
               <div className='container__slider__base__desk'>
                 <Slider_Category />
@@ -86,18 +98,6 @@ function Home() {
                 <Video_card />
                 <Video_card />
                 <Video_card />
-                <Video_card />
-                <Video_card />
-              </div>
-            </div></>
-
-            :
-
-            <><Header /><div className='container__home'>
-              <div className='container__slider__base'>
-                <MySlider />
-              </div>
-              <div className='container__video__cards'>
                 <Video_card />
                 <Video_card />
               </div>
