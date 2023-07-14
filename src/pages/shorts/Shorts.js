@@ -8,15 +8,14 @@ import imageShorts from "../../assets/imagemShorts.png"
 import imagePerfil from "../../assets/imagemPerfil.png"
 
 //componentes
-import Button from '../../components/button/Button.js'
+import ButtonSubmit from '../../components/buttonSubmit/ButtonSubmit'
 
 //icons
 import { BiLike } from "react-icons/bi"
 import { BiDislike } from "react-icons/bi"
 import { BiCommentDetail } from "react-icons/bi"
-import ButtonSubmit from '../../components/buttonSubmit/ButtonSubmit'
 
-const Shorts = () => {
+const Shorts = ({ videoTitle }) => {
 
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
 
@@ -53,12 +52,14 @@ const Shorts = () => {
 
                 <div className='container__informations__video'>
                     <div className='title__short'>
-                        <span>Como montar rapidamente um cubo mágicomu ito rápidocomo ome lhormonta dor do mundo</span>
+                        <span>Testando o título do vídeo, para ver se ele está funcionando corretamente</span>
                     </div>
                     <div className='informations__profile__shorts'>
-                        <img src={imagePerfil} alt="Imagem de Perfil" />
-                        <span>Chill Vibes</span>
-                        <div>
+                        <div className='profile__shorts'>
+                            <img src={imagePerfil} alt="Imagem de Perfil" />
+                            <span>@11111111111111111111</span>
+                        </div>
+                        <div className='button__submit__shorts'>
                             <ButtonSubmit label={"Inscrever-se"} onClick={null} />
                         </div>
                     </div>

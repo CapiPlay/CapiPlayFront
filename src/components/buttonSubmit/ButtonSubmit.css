@@ -1,13 +1,50 @@
-.custom__button__submit {
+.container__submit__button {
+    position: relative;
     width: 100%;
-    height: 2.4rem;
-    background-color: var(--purple);
-    color: var(--white);
-
-    outline: 0;
-    border: 0;
+    height: 100%;
     border-radius: 10px;
-    cursor: pointer;
 
-    font-size: 14px;
-}
+    background-color: var(--purple);
+    cursor: pointer;
+    overflow: hidden;
+    transition: background-position 0.5s ease;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  .container__submit__button::before {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    right: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+
+    background-color: var(--lightpurple);
+    transition: right 0.5s ease;
+  }
+  
+  .container__submit__button.animate::before {
+    right: 0;
+  }
+  
+  .button-label {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .container__submit__button.animate .button-label {
+    transform: scale(1.1);
+  }
+  
