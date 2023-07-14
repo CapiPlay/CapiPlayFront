@@ -4,8 +4,11 @@
     background-color: var(--darkpurple);
 }
 
-.container__slider__base {
+.container__slider__base_desk {
     padding-top: 4rem;
+    align-items: center;
+    display: flex;
+    
 }
 
 .container__video__cards {
@@ -24,5 +27,15 @@
     align-items: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
+.container__video__cards__tablet {
+    padding-top: 4rem;
+    padding-left: 5%;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
 }

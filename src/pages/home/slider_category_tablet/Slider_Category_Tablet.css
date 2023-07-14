@@ -1,7 +1,7 @@
-.container__banner__category {
+.container__banner__category__tablet {
     background-color: var(--lightpurple);
-    height: 5vh;
-    min-height: 5vh;
+    height: 4vh;
+    min-height: 4vh;
     min-width: 10rem;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,7 @@
     border-radius: 20px;
 }
 
-.container__banner__large__category {
+.container__banner__large__category__tablet {
     background-color: var(--purple);
     height: 40vh;
     justify-content: center;
