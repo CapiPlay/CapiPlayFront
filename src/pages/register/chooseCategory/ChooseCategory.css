@@ -1,0 +1,129 @@
+/* Containers */
+.container__all__chooseCategory {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: var(--darkpurple);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.container__chooseCategory {
+    width: 45rem;
+    color: var(--whitesmoke);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    position: absolute;
+    top: 3.5rem;
+}
+
+/* Content chooseCategory */
+.container__chooseCategory h1 {
+    font-size: 22px;
+    color: var(--lightpurple);
+}
+
+.container__chooseCategory h2 {
+    width: 70%;
+    margin: 2rem 0;
+
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    word-break: normal;
+}
+
+.chooseCategory {
+    width: 95%;
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Category */
+.category {
+    width: 9.375rem;
+    height: 9.375rem;
+    background-color: var(--whitesmoke);
+
+    font-size: 13px;
+    text-align: center;
+    color: var(--darkblue);
+    font-weight: 400;
+    cursor: pointer;
+    margin: 4px;
+
+    box-sizing: content-box;
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    margin-bottom: 36px;
+}
+
+.category div {
+    width: 100%;
+    height: 63%;
+    border-radius: 10px 10px 0 0;
+}
+
+.category div img {
+    width: 100%;
+    height: 100%;
+}
+
+.category span {
+    width: 90%;
+    height: 35%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Botões */
+.container__buttons__chooseCategory {
+    width: 95%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3.5rem;
+}
+
+.container__buttons__chooseCategory div {
+    width: 45%;
+}
+
+@media screen and (max-width: 820px) {
+    .container__chooseCategory {
+        width: 35rem;
+    }
+
+    .category {
+        width: 9.375rem;
+        height: 9.375rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .container__chooseCategory {
+        width: 21rem;
+    }
+
+    .category {
+
+        width: 5.625rem;
+        height: 5.625rem;
+    }
+}
