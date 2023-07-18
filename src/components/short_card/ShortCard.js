@@ -1,9 +1,13 @@
-const Shortcard = ({short}) => {
+
+import imgShort from "../../assets/image/img_shorts.png"
+import "./ShortCard.css"
+
+const Shortcard = () => {
     return(
         <div className="container__short__card">
-            <img src={short.img} alt="" />
-            <span>{short.title}</span>
-            <span>{short.views}</span>
+            <img src={imgShort} />
+            <span>teste</span>
+            <span>teste</span>
         </div>
     )
 }

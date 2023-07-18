@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Slider from 'react-slick';
 import { DraggableCore } from 'react-draggable';
 
+import imgShort from "../../../assets/image/img_shorts.png"
+
 import "./CarouselShorts.css";
 import { useEffect, useRef } from 'react';
 import Shortcard from '../../../components/short_card/ShortCard';
@@ -10,7 +12,7 @@ import Shortcard from '../../../components/short_card/ShortCard';
 const CarouselShorts = () => {
 
     const sliderRef = useRef(null);
-    const [shorts, setShorts] = useState([]); 
+    // const [shorts, setShorts] = useState([]);
 
     const handleDrag = (e, drag) => {
         const distanceThreshold = 100;
@@ -29,21 +31,37 @@ const CarouselShorts = () => {
         className: 'horizontal-carousel',
     };
 
+
+    // lista de shorts exemplar 
+    const shorts = [{
+        title: "short1",
+        views: "1000",
+        img: imgShort
+    },
+    {
+        title: "short2",
+        views: "1000",
+        img: imgShort
+    },
+    {
+        title: "short3",
+        views: "1000",
+        img: imgShort
+    }]
+
     useEffect(() => {
         sliderRef.current.slickGoTo(0);
     }, [shorts]);
 
-    // object exemplar 
-    const short = [{
-        title: "short1", 
-        views: "1000", 
-        img: ""
-    }]
-
     return (
         <DraggableCore axis="x" onDrag={handleDrag}>
             <Slider ref={sliderRef}{...settings}>
-                <Shortcard/>
+                {/* {shorts && shorts.map((short) => {
+                })} */}
+                <Shortcard />
+                <Shortcard />
+                <Shortcard />
+                <Shortcard />
             </Slider>
         </DraggableCore>
     );
