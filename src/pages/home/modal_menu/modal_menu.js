@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { BsArrowBarLeft } from 'react-icons/bs';
 import "./modal_menu.css"
@@ -17,6 +17,7 @@ import styler from '../../../assets/image/styler.png'
 
 function Modal_menu() {
     const [openModal, setOpenModal] = useState(0)
+    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     function verify() {
         if (openModal !== 0) {
@@ -26,7 +27,125 @@ function Modal_menu() {
         }
     }
 
-    return (
+    useEffect(() => {
+        function handleResize() {
+            setScreenSize({ width: window.innerWidth, height: window.innerHeight });
+        }
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    const getViewToRender = () => {
+
+        if (screenSize.width < 900 && screenSize.width > 500) {
+            return renderTabletView();
+        } else {
+            return renderMobileView();
+        }
+    };
+
+
+    const renderTabletView = () => (
+        <>
+            <div>
+                <GiHamburgerMenu className="MenuIcon" onClick={() => setOpenModal(openModal + 1)}></GiHamburgerMenu>
+            </div>
+            {verify() &&
+                <div>
+                    <div className='modal__category__content__detail__tablet'>
+                        <div className='close__icon__area__tablet'>
+                            <BsArrowBarLeft className="close__icon__tablet" onClick={() => setOpenModal(openModal - 1)}></BsArrowBarLeft >
+                        </div>
+                        <div className='modal__category__content__tablet' data-aos="fade-right">
+                            <div className='modal__category__title__tablet' >
+                                <p>Categorias</p>
+                            </div>
+                            <div className='modal__category__item__tablet' >
+                                <div className='icon__category__area__tablet'>
+                                    <img className='icon__category__tablet' src={art} />
+                                </div>
+                                <p>Artes e Cultura</p>
+                            </div>
+                            <div className='modal__category__item__tablet' >
+                                <div className='icon__category__area__tablet'>
+                                    <img className='icon__category__tablet' src={science} />
+                                </div>
+                                <p>Ciências e Tecnologia</p>
+                            </div>
+                            <div className='modal__category__item__tablet' >
+                                <div className='icon__category__area__tablet'>
+                                    <img className='icon__category__tablet' src={oven_gen} />
+                                </div>
+                                <p>Culinária</p>
+                            </div>
+                            <div className='modal__category__item__tablet' >
+                                <div className='icon__category__area__tablet'>
+                                    <img className='icon__category__tablet' src={school} />
+                                </div>
+                                <p>Educação</p>
+                            </div>
+                            <div className='modal__category__item__tablet' >
+                                <div className='icon__category__area__tablet'>
+                                    <img className='icon__category__tablet' src={interactive_space} />
+                                </div>
+                                <p>Entreterimento</p>
+                            </div>
+                            <div className='modal__category__item__tablet' >
+                                <div className='icon__category__area__tablet'>
+                                    <img className='icon__category__tablet' src={kayaking} />
+                                </div>
+                                <p>Esportes</p>
+                            </div>
+                            <div className='modal__category__item__tablet' >
+                                <div className='icon__category__area__tablet'>
+                                    <img className='icon__category__tablet' src={video_file} />
+                                </div>
+                                <p>Documentários</p>
+                            </div>
+                            <div className='modal__category__item__tablet' >
+                                <div className='icon__category__area__tablet'>
+                                    <img className='icon__category__tablet' src={sports_esports} />
+                                </div>
+                                <p>Jogos</p>
+                            </div>
+                            <div className='modal__category__item__tablet' >
+                                <div className='icon__category__area__tablet'>
+                                    <img className='icon__category__tablet' src={psychiatry} />
+                                </div>
+                                <p>Life Style</p>
+                            </div>
+                            <div className='modal__category__item__tablet' >
+                                <div className='icon__category__area__tablet'>
+                                    <img className='icon__category__tablet' src={styler} />
+                                </div>
+                                <p>Moda e Beleza</p>
+                            </div>
+                            <div className='modal__category__item__tablet' >
+                                <div className='icon__category__area__tablet'>
+                                    <img className='icon__category__tablet' src={music_note} />
+                                </div>
+                                <p>Música</p>
+                            </div>
+                            <div className='modal__category__item__tablet' >
+                                <div className='icon__category__area__tablet'>
+                                    <img className='icon__category__tablet' src={flightsmode} />
+                                </div>
+                                <p>Viagem e Turismo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            {verify() &&
+                <div className="background" onClick={() => setOpenModal(openModal - 1)}></div>
+            }
+        </>
+    );
+
+    const renderMobileView = () => (
         <>
             <div>
                 <GiHamburgerMenu className="MenuIcon" onClick={() => setOpenModal(openModal + 1)}></GiHamburgerMenu>
@@ -121,7 +240,11 @@ function Modal_menu() {
                 <div className="background" onClick={() => setOpenModal(openModal - 1)}></div>
             }
         </>
-    )
+    );
+
+    return <>{getViewToRender()}</>;
+
+
 }
 
 export default Modal_menu
