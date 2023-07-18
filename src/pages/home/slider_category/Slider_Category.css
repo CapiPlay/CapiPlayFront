@@ -17,3 +17,11 @@
     align-items: center;
     display: flex;
 }
+
+.container__banner__category:hover {
+    cursor: pointer;
+}
+
+.container__banner__large__category:hover {
+    cursor: pointer;
+}
