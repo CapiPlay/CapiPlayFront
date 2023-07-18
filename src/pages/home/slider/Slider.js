@@ -9,6 +9,7 @@ const MySlider = () => {
     autoplay: true,
     autoplaySpeed: 5000,
     slidesToShow: 3,
+    arrows: false,
     responsive: [
       {
         breakpoint: 768,

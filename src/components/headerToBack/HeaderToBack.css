@@ -1,0 +1,19 @@
+.header__to__back {
+    width: 100%;
+    height: 3rem;
+    background-color: var(--darkpurple);
+}
+
+.button__text__back {
+    padding-top: 17px;
+    margin-left: 18px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 14px;
+}
+
+.button__text__back>span {
+    color: var(--whitesmoke);
+    font-size: 14px;
+}

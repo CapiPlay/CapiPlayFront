@@ -1,0 +1,24 @@
+.historic__container {
+    width: 100%;
+    height: 100%;
+    background-color: var(--darkpurple);
+}
+
+.historic__date>span {
+    margin-top: 38px;
+    margin-left: 10px;
+    color: var(--whitesmoke);
+    font-size: 14px;
+}
+
+.container__videos__historic {
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-direction: column;
+}
+
+
+

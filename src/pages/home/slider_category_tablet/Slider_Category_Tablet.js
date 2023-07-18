@@ -1,12 +1,11 @@
 import React from 'react'
-import './Slider_Category.css'
+import './Slider_Category_Tablet.css'
 import Slider from 'react-slick';
 
-function Slider_Category() {
+function Slider_Category_Tablet() {
     const settings = {
-        slidesToShow: 5,
+        slidesToShow: 3,
         slidesToScroll: 3,
-        swipeToSlide: true,
         arrows: false,
         responsive: [
           {
@@ -14,10 +13,7 @@ function Slider_Category() {
             settings: {
               arrows: false,
               centerPadding: '40px',
-              slidesToShow: 3,
-              slidesToScroll: 3,
-              swipeToSlide: true,
-              arrows: false,
+              slidesToShow: 1,
             }
           },
           {
@@ -25,10 +21,7 @@ function Slider_Category() {
             settings: {
               arrows: false,
               centerPadding: '40px',
-              slidesToShow: 3,
-              slidesToScroll: 3,
-              swipeToSlide: true,
-              arrows: false,  
+              slidesToShow: 1,
             }
           }
         ]
@@ -40,11 +33,11 @@ function Slider_Category() {
         <Slider {...settings}>
           {numbers.map((number, index) => (
             <div  key={number}>
-              <h3 className={index === number ? 'container__banner__large__category' : 'container__banner__category'} ></h3>
+              <h3 className={index === number ? 'container__banner__large__category__tablet' : 'container__banner__category__tablet'} ></h3>
             </div>
           ))}
         </Slider>
       );
-    };
+}
 
-export default Slider_Category
+export default Slider_Category_Tablet
