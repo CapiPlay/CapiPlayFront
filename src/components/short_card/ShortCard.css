@@ -1,5 +1,29 @@
 .container__short__card {
+    position: relative;
     width: 10rem;
     height: 17rem;
     border-radius: 15px;
+}
+
+.container__informations__shorts {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: 1rem;
+    left: 5%;
+}
+
+.container__informations__shorts>span:first-child{
+    width: 8.5rem;
+    height: 1rem;
+    font-size: 14px;
+    font-weight: 600;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.container__informations__shorts>span:last-child{
+    font-size: 12px;
+    font-weight: 400;
 }
