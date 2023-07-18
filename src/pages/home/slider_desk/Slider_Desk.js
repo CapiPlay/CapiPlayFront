@@ -4,8 +4,8 @@ import Slider from 'react-slick';
 
 const MySlider = () => {
   const settings = {
-    centerMode: true,
     autoplay: true,
+    arrows: false,
     autoplaySpeed: 5000,
     slidesToShow: 1,
     responsive: [
@@ -13,7 +13,6 @@ const MySlider = () => {
         breakpoint: 768,
         settings: {
           arrows: false,
-          centerMode: true,
           centerPadding: '40px',
           slidesToShow: 1,
         }
@@ -22,7 +21,6 @@ const MySlider = () => {
         breakpoint: 480,
         settings: {
           arrows: false,
-          centerMode: true,
           centerPadding: '40px',
           slidesToShow: 1,
         }

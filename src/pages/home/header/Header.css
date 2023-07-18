@@ -25,10 +25,6 @@
     border-radius: 100%;
 }
 
-.container__logo {
-    
-}
-
 .modal__menu {
     display: flex;
     z-index: 100;

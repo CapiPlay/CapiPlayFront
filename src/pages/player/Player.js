@@ -36,6 +36,7 @@ function Player(video) {
     }
   }
 
+
   //são apenas variáveis de exemplo, elas vão vir com o objeto 
   const video_title_var = 'Pingu.'
   const video_views_var = '57k'

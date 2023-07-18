@@ -1,14 +1,18 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './Video_card.css'
 
 import img_miniatura from "../../assets/image/img_base_miniatura.png"
  
 function Video_card(video) {
     return (
+
         <div className='box__video__card'>
-            <div className='container__video__image'>
-                <img src={img_miniatura} className='container__video__card__image' />
-            </div>
+            <Link to='/player'>
+                <div className='container__video__image'>
+                    <img src="https://i.ytimg.com/vi/1Ne1hqOXKKI/maxresdefault.jpg" className='container__video__card__image' />
+                </div>
+            </Link>
             <div className='container__video__info'>
                 <img src="https://1.bp.blogspot.com/_i5HYEqTAi9w/SfkWb4gS0jI/AAAAAAAABXE/8BEdz7gYctA/s280/Pingu1.jpg" className='container__video__perfilImage' />
                 <div className='container__video__info__text'>
@@ -19,7 +23,7 @@ function Video_card(video) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 
