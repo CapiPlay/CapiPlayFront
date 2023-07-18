@@ -28,7 +28,7 @@ const VideoDetails = () => {
     return (
         <><HeaderSettings />
             {verifyScreen() ?
-                <div className='container__settings'>
+                <div className='settings__container'>
                     <div className="settings__form">
                         <img src={ProfileImage} className='profile__settings' />
                         <div className='settings__box__image__options'>
@@ -49,7 +49,7 @@ const VideoDetails = () => {
                         </div>
                         <div class="settings__field">
                             <label>Data de nascimento</label>
-                            <input type="date" className='settings__input'  />
+                            <input type="date" className='settings__input' />
                         </div>
                         <div class="settings__field">
                             <label>Senha atual</label>
@@ -64,41 +64,60 @@ const VideoDetails = () => {
                             <textarea className='settings__field__textarea__input' placeholder='Descrição' ></textarea>
                         </div>
                     </div>
-                    <hr class="solid"/>
+                    <hr class="solid" />
                     <div>
-                    <button className='settings__image__options__buttons__delete'>Deletar conta</button>
+                        <button className='settings__options__buttons__delete'>Deletar perfil</button>
+                    </div>
+                    <div className='settings__options__buttons__div'>
+                        <button className='settings__options__buttons__cancel'>Cancelar</button>
+                        <button className='settings__options__buttons__confirm'>Confirmar</button>
                     </div>
                 </div>
                 :
-                <div className='container__settings'>
-                    <div class="ui form">
-                        <div class="field">
-                            <label>E-mail</label>
-                            <input type="email" />
+                <div className='settings__container__desktop'>
+                    <div className="settings__form__desktop">
+                        <img src={ProfileImage} className='profile__settings__desktop' />
+                        <div className='settings__box__image__options__desktop'>
+                            <button className='settings__image__options__buttons__desktop'>Alterar</button>
+                            <button className='settings__image__options__buttons__desktop'>Remover</button>
                         </div>
-                        <div class="field">
-                            <label>Nome de usuario</label>
-                            <input type="email" />
+                        <div className='settings__field_container__desktop'>
+                            <div className="settings__field__desktop">
+                                <label>E-mail</label>
+                                <input type="email" className='settings__input__desktop' placeholder='E-mail' />
+                            </div>
+                            <div class="settings__field__desktop">
+                                <label>Nome de usuario</label>
+                                <input type="text" className='settings__input__desktop' placeholder='Nome de usuário' />
+                            </div>
+                            <div class="settings__field__desktop">
+                                <label>Nome do canal</label>
+                                <input type="text" className='settings__input__desktop' placeholder='Nome do canal' />
+                            </div>
+                            <div class="settings__field__desktop">
+                                <label>Data de nascimento</label>
+                                <input type="date" className='settings__input__desktop' />
+                            </div>
+                            <div class="settings__field__desktop">
+                                <label>Senha atual</label>
+                                <input type="password" className='settings__input__desktop' placeholder='Senha atual' />
+                            </div>
+                            <div class="settings__field__desktop">
+                                <label>Senha nova</label>
+                                <input type="password" className='settings__input__desktop' placeholder='Senha nova' />
+                            </div>
+                            <div class="settings__field__textarea__desktop">
+                                <label>Descrição do canal</label>
+                                <textarea className='settings__field__textarea__input__desktop' placeholder='Descrição' ></textarea>
+                            </div>
                         </div>
-                        <div class="field">
-                            <label>Nome do canal</label>
-                            <input type="email" />
-                        </div>
-                        <div class="field">
-                            <label>Data de nascimento</label>
-                            <input type="email" />
-                        </div>
-                        <div class="field">
-                            <label>Senha atual</label>
-                            <input type="email" />
-                        </div>
-                        <div class="field">
-                            <label>Senha nova</label>
-                            <input type="email" />
-                        </div>
-                        <div class="field">
-                            <label>Descrição do canal</label>
-                            <textarea ></textarea>
+                    </div>
+                    <hr class="solid" />
+                    <div className='settings__options__buttons__container'>
+                        <button className='settings__options__buttons__delete__desktop'>Deletar perfil</button>
+                        <div className='settings__options__buttons__div__desktop'>
+                            <button className='settings__options__buttons__cancel__desktop'>Cancelar</button>
+                            <button className='settings__options__buttons__confirm__desktop'>Confirmar</button>
                         </div>
                     </div>
                 </div>
