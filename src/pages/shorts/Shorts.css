@@ -8,6 +8,7 @@
 .container__video {
     position: relative;
     width: 100%;
+    height: 100%;
 }
 
 .container__video img {
@@ -137,3 +138,42 @@
     height: 50%;
     margin-left: 1rem;
 }
+
+/* Responsividade */
+
+@media (max-width: 575.98px) {
+    
+  }
+  
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    
+  }
+  
+  @media (min-width: 768px) and (max-width: 991.98px) {
+
+    .container__all__shorts {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container__video {
+        width: 60%;
+        height: 80%;
+    }
+
+    .container__video img {
+        height: 100%;
+
+        border-radius: 10px;
+    }
+
+  }
+  
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+   
+  }
+  
+  @media (min-width: 1200px) {
+    
+  }
