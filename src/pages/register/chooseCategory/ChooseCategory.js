@@ -6,10 +6,10 @@ import "./ChooseCategory.css"
 import Button from "../../../components/button/Button";
 import categorys from './CategoryData.js';
 
-const ChooseCategory = () => {
+const ChooseCategory = ({ back }) => {
 
     const [windowHeight, setWindowHeight] = useState(document.documentElement.scrollHeight)
-    let defaultDesktopHeight = 0;
+    let defaultDesktopHeight = 0
     const [listChooseCategory, setListChooseCategory] = useState([])
     // const [chooseCategory, setChooseCategory] = useState([])
 
@@ -17,15 +17,13 @@ const ChooseCategory = () => {
         defaultDesktopHeight = windowHeight
 
         const handleResize = () => {
-            const currentHeight = document.documentElement.scrollHeight;
+            const currentHeight = document.documentElement.scrollHeight
 
             if (currentHeight < defaultDesktopHeight) {
                 setWindowHeight(defaultDesktopHeight)
             } else {
                 setWindowHeight(currentHeight)
-
             }
-
         }
 
         handleResize()
@@ -66,7 +64,7 @@ const ChooseCategory = () => {
     }
 
     return (
-        <div className="container__all__chooseCategory" style={{ height: `${windowHeight}px` }} >
+        <div className="container__all__chooseCategory" style={{ minHeight: `${windowHeight}px` }} >
             <div className="container__chooseCategory">
                 <h1>Cadastro</h1>
                 <h2>Selecione as categorias de seu interesse</h2>
@@ -80,6 +78,7 @@ const ChooseCategory = () => {
                 <div className="container__buttons__chooseCategory">
                     <div>
                         <Button
+                            onClick={() => back()}
                             label={"Pular"}
                             principal={false}
                         />

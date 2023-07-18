@@ -30,6 +30,8 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
 
+    const [bPChooseCategory, setbPChooseCategory] = useState(false)
+
     useEffect(() => {
         const handleResize = () => {
             setWindowHeight(window.innerHeight)
@@ -46,8 +48,13 @@ const Register = () => {
         setRegisterData({ ...registerData, [e.target.name]: e.target.value })
     }
 
+    const nextStep = () => {
+        setbPChooseCategory(!bPChooseCategory)
+    }
+
     const register = () => {
         setRegisterData({ ...registerData, foto: image })
+        nextStep()
         console.log(registerData)
         alert("")
     }
@@ -63,16 +70,16 @@ const Register = () => {
 
     return (
         <>
-            {false &&
+            {!bPChooseCategory &&
                 <div className="container__all__register" style={{ height: `${windowHeight}px` }}>
                     <div className="container__register">
                         <h1>Cadastro</h1>
                         <h2>O Mundo dos Videos ao seu Alcance</h2>
-                        <div className="container__inputs__register">
+                        <form className="container__inputs__register">
                             <Input
                                 placeholder={"E-mail"}
                                 type={"email"}
-                                // required={true}
+                                required={true}
                                 name={"email"}
                                 onChange={keyboard}
                                 value={registerData.email}
@@ -80,7 +87,7 @@ const Register = () => {
                             <Input
                                 placeholder={"Nome de usuário"}
                                 type={"text"}
-                                // required={true}
+                                required={true}
                                 name={"nome"}
                                 onChange={keyboard}
                                 value={registerData.nome}
@@ -88,7 +95,7 @@ const Register = () => {
                             <Input
                                 placeholder={"Data de Nascimento"}
                                 type={"date"}
-                                // required={true}
+                                required={true}
                                 name={"dataNascimento"}
                                 onChange={keyboard}
                                 value={registerData.dataNascimento}
@@ -96,7 +103,7 @@ const Register = () => {
                             <Input
                                 placeholder={"Senha"}
                                 type={"password"}
-                                // required={true}
+                                required={true}
                                 name={"senha"}
                                 onChange={keyboard}
                                 value={registerData.senha}
@@ -104,7 +111,7 @@ const Register = () => {
                             <Input
                                 placeholder={"Confirmar senha"}
                                 type={"password"}
-                                // required={true}
+                                required={true}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 value={confirmPassword}
                             />
@@ -114,7 +121,7 @@ const Register = () => {
                                 onChange={handleFileChange}
                                 file={image}
                             />
-                        </div>
+                        </form>
                         <div className="container__button__register">
                             <Button
                                 label={"Cadastrar"}
@@ -143,8 +150,8 @@ const Register = () => {
                     </div>
                 </div>
             }
-            {true &&
-                <ChooseCategory />
+            {bPChooseCategory &&
+                <ChooseCategory back={nextStep} />
             }
         </>
     )

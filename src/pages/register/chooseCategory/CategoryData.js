@@ -1,16 +1,16 @@
 
-import artescultura from "../../../assets/category/artescultura.png"
-import cienciatech from "../../../assets/category/cienciatech.png"
-import culinaria from "../../../assets/category/culinaria.png"
-import documentarios from "../../../assets/category/documentarios.png"
-import educacao from "../../../assets/category/educação.png"
-import entretenimento from "../../../assets/category/entretenimento.png"
-import esportes from "../../../assets/category/esportes.png"
-import jogos from "../../../assets/category/jogos.png"
-import lifestyle from "../../../assets/category/lifestyle.png"
-import modabeleza from "../../../assets/category/modabeleza.png"
-import musica from "../../../assets/category/musica.png"
-import viagemturismo from "../../../assets/category/viagemturismo.png"
+import artescultura from "../../../assets/category/artescultura.jpg"
+import cienciatech from "../../../assets/category/cienciatech.jpg"
+import culinaria from "../../../assets/category/culinaria.jpg"
+import documentarios from "../../../assets/category/documentarios.jpg"
+import educacao from "../../../assets/category/educação.jpg"
+import entretenimento from "../../../assets/category/entretenimento.jpg"
+import esportes from "../../../assets/category/esportes.jpg"
+import jogos from "../../../assets/category/jogos.jpg"
+import lifestyle from "../../../assets/category/lifestyle.jpg"
+import modabeleza from "../../../assets/category/modabeleza.jpg"
+import musica from "../../../assets/category/musica.jpg"
+import viagemturismo from "../../../assets/category/viagemturismo.jpg"
 
 const categorys = [
     {
