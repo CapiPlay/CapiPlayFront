@@ -5,6 +5,8 @@ import Slider from 'react-slick';
 function Slider_Category_Tablet() {
     const settings = {
         slidesToShow: 3,
+        slidesToScroll: 3,
+        arrows: false,
         responsive: [
           {
             breakpoint: 768,
