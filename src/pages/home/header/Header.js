@@ -16,7 +16,7 @@ function Header() {
   return (
     <div className='container__header'>
       <div className='box__header'>
-        <div className='modal__menu'>
+        <div className='modal__menu' >
           <Modal_menu />
         </div>
         <div className='container__logo'>

@@ -64,4 +64,5 @@
 
 .icon__category__area__side:hover {
     background-color: var(--purple);
+    cursor: pointer;
 }

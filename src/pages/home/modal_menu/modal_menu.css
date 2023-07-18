@@ -34,20 +34,46 @@
     position: fixed;
     left: 0;
     top: 0;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
     background-color: var(--darkpurple);
+}
+
+.close__icon {
+    color: var(--white);
+    position: fixed;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.close__icon__area {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    color: var(--white);
+    height: 100%;
 }
 
 .modal__category__title {
     display: flex;
     align-items: center;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    padding-top: 1.5rem;
 }
 
-.close__icon {
-    color: var(--lightpurple);
-    font-size: 1rem;
-    padding-top: 1rem;
-    cursor: pointer;
+.modal__category__content__detail {
+    z-index: 100;
+    display: flex;
+    overflow: scroll;
+    flex-direction: column;
+    height: 100%;
+    width: 55%;
+    gap: 2rem;
+    position: fixed;
+    left: 0;
+    top: 0;
+    border-radius: 15px;
+    background-color: var(--lightpurple);
 }
 
 .icon__close__content {
