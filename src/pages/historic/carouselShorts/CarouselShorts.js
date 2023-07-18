@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
-import Slider from 'react-slick';
-import { DraggableCore } from 'react-draggable';
-
-import imgShort from "../../../assets/image/img_shorts.png"
-
 import "./CarouselShorts.css";
 import { useEffect, useRef } from 'react';
+import { DraggableCore } from 'react-draggable';
 import Shortcard from '../../../components/short_card/ShortCard';
+import Slider from 'react-slick';
 
+// imagem exemplar
+import imgShort from "../../../assets/image/img_shorts.png"
 
 const CarouselShorts = () => {
 
@@ -25,7 +23,7 @@ const CarouselShorts = () => {
 
     const settings = {
         dots: false,
-        infinite: true,
+        infinite: false,
         slidesToShow: 2.3,
         slidesToScroll: 2.3,
         className: 'horizontal-carousel',
@@ -34,20 +32,26 @@ const CarouselShorts = () => {
 
     // lista de shorts exemplar 
     const shorts = [{
-        title: "short1",
-        views: "1000",
-        img: imgShort
+        img: imgShort,
+        title: "Como montar rapidamente um cubo mágico",
+        views: 17,
     },
     {
-        title: "short2",
-        views: "1000",
-        img: imgShort
+        img: imgShort,
+        title: "Como montar rapidamente um cubo mágico",
+        views: 17604,
     },
     {
-        title: "short3",
-        views: "1000",
-        img: imgShort
-    }]
+        img: imgShort,
+        title: "Como montar rapidamente um cubo mágico",
+        views: 199846,
+    },
+    {
+        img: imgShort,
+        title: "Como montar rapidamente um cubo mágico",
+        views: 1760467,
+    },
+    ]
 
     useEffect(() => {
         sliderRef.current.slickGoTo(0);
@@ -56,12 +60,9 @@ const CarouselShorts = () => {
     return (
         <DraggableCore axis="x" onDrag={handleDrag}>
             <Slider ref={sliderRef}{...settings}>
-                {/* {shorts && shorts.map((short) => {
-                })} */}
-                <Shortcard />
-                <Shortcard />
-                <Shortcard />
-                <Shortcard />
+                {shorts && shorts.map((short) => {
+                    return <Shortcard short={short} />
+                })}
             </Slider>
         </DraggableCore>
     );
