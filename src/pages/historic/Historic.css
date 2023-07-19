@@ -5,8 +5,6 @@
 }
 
 .historic__data>span {
-    margin-top: 38px;
-    margin-left: 10px;
     color: var(--whitesmoke);
     font-size: 14px;
 }
@@ -25,5 +23,10 @@
     font-size: 14px;
 }
 
+@media screen and (min-width: 768px){
+    .historic__data>div:first-child>span{
+        font-size: 20px;
+    }
+}
 
 

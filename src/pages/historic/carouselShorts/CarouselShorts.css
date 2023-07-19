@@ -15,3 +15,9 @@
     font-size: 14px;
     padding: 5%;
 }
+
+@media screen and (min-width: 768px){
+    .container__capi__shorts>span{
+        font-size: 20px;
+    }
+}
