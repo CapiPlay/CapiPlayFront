@@ -37,8 +37,13 @@ function Home() {
           <DeskSlider />
         </div>
         <div className='container__video__cards__desk'>
-          {Array.from({ length: 9 }, (_, index) => (
+          {Array.from({ length: 6 }, (_, index) => (
             <Video_card key={index} />
+          ))}
+        </div>
+        <div className='container__shorts__cards__desk'>
+          {Array.from({ length: 5 }, (_, index) => (
+            <Shortcard key={index} />
           ))}
         </div>
       </div>
@@ -61,8 +66,13 @@ function Home() {
           ))}
         </div>
         <div className='container__shorts__cards__tablet'>
-        {Array.from({ length: 6 }, (_, index) => (
-            <Shortcard key={index} /> 
+          {Array.from({ length: 6 }, (_, index) => (
+            <Shortcard key={index} />
+          ))}
+        </div>
+        <div className='container__video__cards__tablet'>
+          {Array.from({ length: 6 }, (_, index) => (
+            <Video_card key={index} />
           ))}
         </div>
       </div>
@@ -77,17 +87,17 @@ function Home() {
           <MySlider />
         </div>
         <div className='container__video__cards'>
-        {Array.from({ length: 2 }, (_, index) => (
+          {Array.from({ length: 2 }, (_, index) => (
             <Video_card key={index} />
           ))}
         </div>
         <div className='container__shorts__cards__desk'>
-        {Array.from({ length: 5 }, (_, index) => (
-            <Shortcard key={index} /> 
+          {Array.from({ length: 5 }, (_, index) => (
+            <Shortcard key={index} />
           ))}
         </div>
         <div className='container__video__cards'>
-        {Array.from({ length: 2 }, (_, index) => (
+          {Array.from({ length: 2 }, (_, index) => (
             <Video_card key={index} />
           ))}
         </div>

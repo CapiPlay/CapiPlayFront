@@ -1,7 +1,14 @@
+/* Modelo Mobile */
+
 .container__short__card {
     position: relative;
-    width: 10rem;
-    height: 17rem;
+    width: 13rem;
+    height: 19rem;
+    border-radius: 15px;
+}
+
+.short__image {
+    height: 100%;
     border-radius: 15px;
 }
 
@@ -26,4 +33,23 @@
 .container__informations__shorts>span:last-child{
     font-size: 12px;
     font-weight: 400;
+}
+
+/* Modelo Tablet */
+
+.container__short__card__tablet {
+    position: relative;
+    height: 25rem;
+    width: 15rem;
+    border-radius: 15px;
+}
+
+
+/* Modelo Desktop */
+
+.container__short__card__desk {
+    position: relative;
+    height: 30rem;
+    width: 15rem;
+    border-radius: 15px;
 }

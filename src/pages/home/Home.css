@@ -42,13 +42,13 @@
 
 .container__shorts__cards__desk {
     padding-top: 4rem;
-    padding-left: 6%;
-    padding-right: 6%;
+    padding-left: 10%;
     overflow-x: scroll;
     align-items: center;
     display: flex;
     flex-direction: row;
-    gap: 2rem;
+    gap: 2.3rem;
+    
 }
 
 .container__shorts__cards__tablet {
