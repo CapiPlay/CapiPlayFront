@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import "./Login.css"
 
@@ -12,7 +13,7 @@ import Button from "../../components/button/Button";
 import { FaFacebookF } from 'react-icons/fa';
 import { FaGoogle } from 'react-icons/fa';
 
-const Login = () => {
+const Login = ({ }) => {
 
     const objLogin = {
         email: '',
@@ -98,4 +99,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default (Login);
