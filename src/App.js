@@ -9,6 +9,9 @@ import Shorts from './pages/shorts/Shorts'
 import VideoDetails from './pages/videoDetails/VideoDetails'
 import VideoUpload from './pages/videoUpload/VideoUpload'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Upload from './pages/upload/Upload';
+import UploadVideo from './pages/uploadVideo/UploadVideo';
+import UploadShorts from './pages/uploadShorts/UploadShorts';
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
           <Route path="/video-details" element={<VideoDetails />} />
           <Route path="/video-upload" element={<VideoUpload />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/upload" element={<Upload />} />
+          <Route path="/upload-video" element={<UploadVideo />} />
+          <Route path="/upload-shorts" element={<UploadShorts />} />
         </Routes>
       </BrowserRouter>
     </div>
