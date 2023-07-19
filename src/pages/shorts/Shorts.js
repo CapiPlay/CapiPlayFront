@@ -9,33 +9,56 @@ import imagePerfil from "../../assets/imagemPerfil.png"
 
 //componentes
 import ButtonSubmit from '../../components/buttonSubmit/ButtonSubmit'
+import Header from '../../components/header/Header'
 
 //icons
 import { BiLike } from "react-icons/bi"
 import { BiDislike } from "react-icons/bi"
 import { BiCommentDetail } from "react-icons/bi"
+import { BsFillArrowUpSquareFill } from "react-icons/bs"
+import { BsFillArrowDownSquareFill } from "react-icons/bs"
 
 const Shorts = ({ videoTitle }) => {
 
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [headerAppearing, setHeaderAppearing] = useState(window.innerWidth >= 768);
 
     useEffect(() => {
         const handleResize = () => {
-            setWindowHeight(window.innerHeight)
-        }
+            setWindowWidth(window.innerWidth);
+        };
 
-        window.addEventListener('resize', handleResize)
+        window.addEventListener('resize', handleResize);
 
         return () => {
-            window.removeEventListener('resize', handleResize)
-        }
-    }, [])
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    useEffect(() => {
+        setHeaderAppearing(windowWidth >= 576);
+    }, [windowWidth]);
 
     return (
         <div className='container__all__shorts' style={{ minHeight: `${windowHeight}px` }} >
 
-            {/* HEADER e BACK HEADER*/}
+            {
+                headerAppearing &&
+                <>
+                    <Header />
+                </>
 
+            }
+            {
+                headerAppearing &&
+                <>
+                    <div className='container__button__pass__shorts'>
+                        <button><BsFillArrowUpSquareFill /></button>
+                        <button><BsFillArrowDownSquareFill /></button>
+                    </div>
+                </>
+            }
             <div className='container__video'>
                 <img src={imageShorts} alt="Imagem shorts" />
 

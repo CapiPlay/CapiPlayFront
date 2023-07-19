@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Header from './header/Header'
+import Header from '../../components/header/Header'
 import HeaderDesk from '../../components/header/Header'
 import './Home.css'
 import MySlider from './slider/Slider'
@@ -43,7 +43,8 @@ function Home() {
 
   return (
     <>
-      {verifyDesktop() ?
+      <Header />
+      {/* {verifyDesktop() ?
 
         <><HeaderDesk /><Side_Bar /> <div className='container__home'>
           <div className='container__slider__base__desk'>
@@ -105,7 +106,7 @@ function Home() {
 
           }
         </div>
-      }
+      } */}
     </>
 
   )
