@@ -1,5 +1,6 @@
 .container__short__card {
     position: relative;
+    margin-left: 5%;
     width: 10rem;
     height: 17rem;
     border-radius: 15px;

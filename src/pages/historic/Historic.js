@@ -24,16 +24,18 @@ const Historic = () => {
             {
                 videoHistoric
                     ?
-                    <div className="historic__date">
-                        <span>{format(dateTest, dateFormat)}</span>
+                    <div className="historic__data">
+                        <div>
+                            <span>{format(dateTest, dateFormat)}</span>
+                        </div>
                         {shortHistoric &&
-                            <CarouselShorts/>
+                            <CarouselShorts />
                         }
                         {videoHistoric &&
                             <div className="container__videos__historic">
-                                <Video_card/>
-                                <Video_card/>
-                                <Video_card/>
+                                <Video_card />
+                                <Video_card />
+                                <Video_card />
                             </div>
                         }
                     </div>
