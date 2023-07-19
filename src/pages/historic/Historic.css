@@ -4,7 +4,7 @@
     background-color: var(--darkpurple);
 }
 
-.historic__date>span {
+.historic__data>span {
     margin-top: 38px;
     margin-left: 10px;
     color: var(--whitesmoke);
@@ -18,6 +18,11 @@
     align-items: center;
     gap: 12px;
     flex-direction: column;
+}
+
+.historic__data>div:first-child>span{
+    margin-left: 2%;
+    font-size: 14px;
 }
 
 

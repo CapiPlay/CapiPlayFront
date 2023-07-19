@@ -1,5 +1,17 @@
 .horizontal-carousel {
+    margin-top: 2%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.container__capi__shorts {
+    margin-top: 2%;
+    margin-left: 1%;
+}
+
+.container__capi__shorts>span {
+    font-weight: 500;
+    font-size: 14px;
+    padding: 5%;
 }

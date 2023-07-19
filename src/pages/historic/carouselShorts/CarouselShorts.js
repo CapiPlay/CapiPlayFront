@@ -59,11 +59,14 @@ const CarouselShorts = () => {
 
     return (
         <DraggableCore axis="x" onDrag={handleDrag}>
-            <Slider ref={sliderRef}{...settings}>
-                {shorts && shorts.map((short) => {
-                    return <Shortcard short={short} />
-                })}
-            </Slider>
+            <div className="container__capi__shorts">
+                <span>CapiShorts</span>
+                <Slider ref={sliderRef}{...settings}>
+                    {shorts && shorts.map((short) => {
+                        return <Shortcard short={short} />
+                    })}
+                </Slider>
+            </div>
         </DraggableCore>
     );
 
