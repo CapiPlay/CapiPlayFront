@@ -1,5 +1,4 @@
 
-function Home() {
 import React, { useEffect, useState } from 'react';
 import Header from './header/Header';
 import HeaderDesk from '../../components/header/Header';
