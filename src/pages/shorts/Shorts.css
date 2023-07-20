@@ -181,12 +181,15 @@
 
 /* Responsividade */
 
-@media (max-width: 575.98px) {}
-
-@media (min-width: 576px) and (max-width: 767.98px) {
-
+@media (min-width: 1200px) {
     .container__video {
-        width: 50%;
+        width: 35%;
+        height: 80%;
+
+        margin-top: 5%;
+    }
+
+    .container__button__pass__shorts {
         height: 80%;
 
         margin-top: 5%;
@@ -199,10 +202,6 @@
         border-radius: 10px;
     }
 
-    .container__button__pass__shorts {
-        margin-top: 5%;
-    }
-
     .container__informations__video span {
         font-size: 14px;
     }
@@ -211,12 +210,101 @@
         border-radius: 50px;
     }
 
+    .container__icons__shorts {
+        width: 4rem;
+        height: 8rem;
+
+        bottom: 10rem;
+    }
+
+    .container__icons__shorts> :first-child {
+        font-size: 14px;
+    }
+
+    .container__icons__shorts div svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .container__informations__video {
+        height: 7rem;
+    }
+
+    .button__submit__shorts {
+        width: 6rem;
+
+        transform: translate(.4rem);
+    }
+
+    .profile__shorts span {
+        font-size: 12px;
+    }
 }
 
-@media (min-width: 768px) and (max-width: 991.98px) {}
+@media (min-width: 835px) and (max-width: 1199.98px) {
 
-@media (min-width: 992px) and (max-width: 1199.98px) {}
+    .container__video {
+        width: 45%;
+        height: 60%;
 
-@media (min-width: 1200px) {
-    
+        margin-top: 5%;
+    }
+
+    .container__button__pass__shorts {
+        height: 60%;
+
+        margin-top: 5%;
+    }
+
+    .container__video img {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 10px;
+    }
+
+    .container__icons__shorts {
+        width: 4rem;
+        height: 8rem;
+
+        bottom: 10rem;
+    }
 }
+
+@media (min-width: 576px) and (max-width: 834px) {
+
+    .container__video {
+        width: 50%;
+        height: 70%;
+
+        margin-top: 5%;
+    }
+
+    .container__button__pass__shorts {
+        height: 70%;
+
+        margin-top: 5%;
+    }
+
+    .container__video img {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 10px;
+    }
+
+    .container__icons__shorts {
+        width: 4rem;
+        height: 8rem;
+
+        bottom: 10rem;
+    }
+
+    .button__submit__shorts {
+        width: 6rem;
+
+        transform: translate(.4rem);
+    }
+}
+
+@media (max-width: 575.98px) {}
