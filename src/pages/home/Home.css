@@ -19,6 +19,11 @@
     gap: 2rem;
 }
 
+.container__shorts__cards__mobile {
+    padding-left: 10%;
+    padding-top: 4rem;
+}
+
 /* Home Desktop */
 
 .container__video__cards__desk {
@@ -42,22 +47,11 @@
 
 .container__shorts__cards__desk {
     padding-top: 4rem;
-    padding-left: 6%;
-    padding-right: 6%;
-    overflow-x: scroll;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
+    padding-left: 10%;
+    
 }
 
 .container__shorts__cards__tablet {
     padding-top: 4rem;
-    padding-left: 5%;
-    padding-right: 5%;
-    overflow-x: scroll;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
+    padding-left: 6%;
 }
