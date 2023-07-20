@@ -7,7 +7,6 @@ import Video_card from '../../components/video_card/Video_card';
 import Side_Bar from './side_bar/Side_Bar';
 import Slider_Category from './slider_category/Slider_Category';
 import Header_Tablet from './header_tablet/Header_Tablet';
-import Shortcard from '../../components/short_card/ShortCard';
 import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
 
 function Home() {
