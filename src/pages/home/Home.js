@@ -32,10 +32,18 @@ function Home() {
           <Slider_Category />
         </div>
         <div className='container__slider__base__desk'>
-          <DeskSlider />
+          <Slider />
         </div>
         <div className='container__video__cards__desk'>
-          {Array.from({ length: 9 }, (_, index) => (
+          {Array.from({ length: 6 }, (_, index) => (
+            <Video_card key={index} />
+          ))}
+        </div>
+        <div className='container__shorts__cards__desk'>
+          <Slider_Shorts />
+        </div>
+        <div className='container__video__cards__desk'>
+          {Array.from({ length: 6 }, (_, index) => (
             <Video_card key={index} />
           ))}
         </div>
@@ -48,10 +56,10 @@ function Home() {
       <Header_Tablet />
       <div className='container__home'>
         <div className='container__slider__base__tablet'>
-          <Slider_Category_Tablet />
+          <Slider_Category />
         </div>
         <div className='container__slider__base__tablet'>
-          <DeskSlider />
+          <Slider />
         </div>
         <div className='container__video__cards__tablet'>
           {Array.from({ length: 4 }, (_, index) => (
@@ -59,8 +67,11 @@ function Home() {
           ))}
         </div>
         <div className='container__shorts__cards__tablet'>
-        {Array.from({ length: 6 }, (_, index) => (
-            <Shortcard key={index} /> 
+          <Slider_Shorts />
+        </div>
+        <div className='container__video__cards__tablet'>
+          {Array.from({ length: 6 }, (_, index) => (
+            <Video_card key={index} />
           ))}
         </div>
       </div>
@@ -72,20 +83,18 @@ function Home() {
       <Header />
       <div className='container__home'>
         <div className='container__slider__base'>
-          <MySlider />
+          <Slider />
         </div>
         <div className='container__video__cards'>
-        {Array.from({ length: 2 }, (_, index) => (
+          {Array.from({ length: 2 }, (_, index) => (
             <Video_card key={index} />
           ))}
         </div>
-        <div className='container__shorts__cards__desk'>
-        {Array.from({ length: 5 }, (_, index) => (
-            <Shortcard key={index} /> 
-          ))}
+        <div className='container__shorts__cards__mobile'>
+          <Slider_Shorts />
         </div>
         <div className='container__video__cards'>
-        {Array.from({ length: 2 }, (_, index) => (
+          {Array.from({ length: 2 }, (_, index) => (
             <Video_card key={index} />
           ))}
         </div>
