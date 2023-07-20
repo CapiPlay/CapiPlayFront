@@ -1,6 +1,8 @@
 .container__banner__category {
     background-color: var(--lightpurple);
     height: 5vh;
+    min-height: 5vh;
+    min-width: 10rem;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -14,4 +16,12 @@
     justify-content: center;
     align-items: center;
     display: flex;
+}
+
+.container__banner__category:hover {
+    cursor: pointer;
+}
+
+.container__banner__large__category:hover {
+    cursor: pointer;
 }

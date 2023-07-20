@@ -1,0 +1,58 @@
+.file-input__container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+}
+
+.file-input__label {
+    width: 100%;
+    height: 2.5rem;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--lightpurple);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--whitesmoke);
+}
+
+.file-input__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.file-input__span {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.file-input__span svg {
+    width: 2rem;
+    height: 2rem;
+    box-sizing: border-box;
+    padding: .5rem;
+    color: var(--whitesmoke);
+
+    position: absolute;
+    right: 1.5rem;
+    z-index: 15;
+
+    transition: .2s ease-out;
+}
+
+.file-input__span svg:hover {
+    color: var(--purple);
+}

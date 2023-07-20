@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 const MySlider = () => {
   const settings = {
     autoplay: true,
+    arrows: false,
     autoplaySpeed: 5000,
     slidesToShow: 1,
     responsive: [

@@ -1,0 +1,32 @@
+.historic__container {
+    width: 100%;
+    height: 100%;
+    background-color: var(--darkpurple);
+}
+
+.historic__data>span {
+    color: var(--whitesmoke);
+    font-size: 14px;
+}
+
+.container__videos__historic {
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-direction: column;
+}
+
+.historic__data>div:first-child>span{
+    margin-left: 2%;
+    font-size: 14px;
+}
+
+@media screen and (min-width: 768px){
+    .historic__data>div:first-child>span{
+        font-size: 20px;
+    }
+}
+
+

@@ -5,13 +5,19 @@ import Slider from 'react-slick';
 function Slider_Category() {
     const settings = {
         slidesToShow: 5,
+        slidesToScroll: 3,
+        swipeToSlide: true,
+        arrows: false,
         responsive: [
           {
             breakpoint: 768,
             settings: {
               arrows: false,
               centerPadding: '40px',
-              slidesToShow: 1,
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              swipeToSlide: true,
+              arrows: false,
             }
           },
           {
@@ -19,7 +25,10 @@ function Slider_Category() {
             settings: {
               arrows: false,
               centerPadding: '40px',
-              slidesToShow: 1,
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              swipeToSlide: true,
+              arrows: false,  
             }
           }
         ]

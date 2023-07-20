@@ -4,7 +4,7 @@ import './Header_Tablet.css'
 import Modal_menu from '../modal_menu/modal_menu';
 import Aos from 'aos';
 
-function Header_Tablet() {
+function HeaderTablet() {
 
     Aos.init({
         duration: 200
@@ -25,4 +25,4 @@ function Header_Tablet() {
   )
 }
 
-export default Header_Tablet
+export default HeaderTablet

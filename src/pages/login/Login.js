@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import "./Login.css"
 
@@ -10,16 +11,15 @@ import Button from "../../components/button/Button";
 // Icons
 import { FaFacebookF } from 'react-icons/fa';
 import { FaGoogle } from 'react-icons/fa';
-import { Link } from "react-router-dom";
 
 const Login = () => {
 
-    const obj = {
+    const objLogin = {
         email: '',
         senha: ''
     }
 
-    const [loginData, setLoginData] = useState(obj)
+    const [loginData, setLoginData] = useState(objLogin)
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
 
     useEffect(() => {
@@ -35,8 +35,7 @@ const Login = () => {
     }, [])
 
     const login = () => {
-        console.log("Entrei aqui")
-
+        console.log(loginData)
     }
 
     return (
@@ -46,7 +45,6 @@ const Login = () => {
                 <h2>
                     O Mundo dos Vídeos ao seu Alcance!
                 </h2>
-
                 <div className="container__inputs__login">
                     <Input
                         placeholder={"E-mail"}
@@ -55,7 +53,6 @@ const Login = () => {
                         onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                         required={true}
                     />
-
                     <Input
                         placeholder={"Senha"}
                         type={"password"}
@@ -64,31 +61,30 @@ const Login = () => {
                         required={true}
                     />
                 </div>
-
                 <div className="container__specialty__login">
                     <div>
                         <input type="checkbox" />
                         <label>Manter-me conectado</label>
                     </div>
-
                     <span>Esqueceu a senha?</span>
                 </div>
-
                 <div className="container__button__login">
-                    <Button label={"Entrar"} onClick={login} type={"submit"} />
+                    <Button
+                        label={"Entrar"}
+                        onClick={login}
+                        type={"submit"}
+                        principal={true}
+                    />
                 </div>
-
                 <div className="container__seperation__login">
                     <div></div>
                     <span>ou</span>
                     <div></div>
                 </div>
-
                 <div className="container__other__login">
                     <div><FaFacebookF style={{ height: "1.5rem" }} /></div>
                     <div><FaGoogle style={{ height: "2rem" }} /></div>
                 </div>
-
                 <div className="container__register__login">
                     <span>Novo aqui?</span>
                     <span>
@@ -97,7 +93,6 @@ const Login = () => {
                         </Link>
                     </span>
                 </div>
-
             </form>
         </div>
     )
