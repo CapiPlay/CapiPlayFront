@@ -19,6 +19,11 @@
     gap: 2rem;
 }
 
+.container__shorts__cards__mobile {
+    padding-left: 10%;
+    padding-top: 4rem;
+}
+
 /* Home Desktop */
 
 .container__video__cards__desk {

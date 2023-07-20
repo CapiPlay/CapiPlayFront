@@ -90,7 +90,7 @@ function Home() {
             <Video_card key={index} />
           ))}
         </div>
-        <div className='container__shorts__cards__desk'>
+        <div className='container__shorts__cards__mobile'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards'>
