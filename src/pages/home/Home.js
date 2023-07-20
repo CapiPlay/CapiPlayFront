@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import Header from './header/Header';
-import HeaderDesk from '../../components/header/Header';
-import './Home.css';
-import MySlider from './slider/Slider';
-import DeskSlider from './slider_desk/Slider_Desk';
-import Video_card from '../../components/video_card/Video_card';
-import Side_Bar from './side_bar/Side_Bar';
-import Slider_Category from './slider_category/Slider_Category';
-import Header_Tablet from './header_tablet/Header_Tablet';
-import Slider_Category_Tablet from './slider_category_tablet/Slider_Category_Tablet';
-import Shortcard from '../../components/short_card/ShortCard';
+import React, { useEffect, useState } from 'react'
+import Header from '../../components/header/Header'
+import HeaderDesk from '../../components/header/Header'
+import './Home.css'
+import MySlider from './slider/Slider'
+import DeskSlider from './slider_desk/Slider_Desk'
+import Video_card from '../../components/video_card/Video_card'
+import Side_Bar from './side_bar/Side_Bar'
+import Slider_Category from './slider_category/Slider_Category'
+import Header_Tablet from './header_tablet/Header_Tablet'
 
 function Home() {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
