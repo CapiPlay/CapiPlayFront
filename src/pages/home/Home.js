@@ -43,8 +43,7 @@ function Home() {
 
   return (
     <>
-      <Header />
-      {/* {verifyDesktop() ?
+      {verifyDesktop() ?
 
         <><HeaderDesk /><Side_Bar /> <div className='container__home'>
           <div className='container__slider__base__desk'>
@@ -106,7 +105,7 @@ function Home() {
 
           }
         </div>
-      } */}
+      }
     </>
 
   )
