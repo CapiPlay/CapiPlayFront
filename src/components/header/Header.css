@@ -13,7 +13,6 @@
     color: var(--lightpurple);
 
     z-index: 1;
-
     background-color: var(--darkpurple);
 }
 
@@ -76,12 +75,6 @@
     color: var(--darkpurple);
 
     transform: translate(-2.2rem);
-.header__input{
-    width: 50rem;
-    height: 40px;
-    border: none;
-    padding-left: 0.5rem;
-    border-radius: 5px;
 }
 
 .header__info {
