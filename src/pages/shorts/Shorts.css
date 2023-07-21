@@ -183,14 +183,14 @@
 
 @media (min-width: 1200px) {
     .container__video {
-        width: 35%;
-        height: 80%;
+        width: 25%;
+        height: 78%;
 
         margin-top: 5%;
     }
 
     .container__button__pass__shorts {
-        height: 80%;
+        height: 78%;
 
         margin-top: 5%;
     }
@@ -245,13 +245,13 @@
 
     .container__video {
         width: 45%;
-        height: 60%;
+        height: 65%;
 
         margin-top: 5%;
     }
 
     .container__button__pass__shorts {
-        height: 60%;
+        height: 65%;
 
         margin-top: 5%;
     }
@@ -263,27 +263,40 @@
         border-radius: 10px;
     }
 
+    .container__informations__video span {
+        font-size: 14px;
+    }   
+
     .container__icons__shorts {
         width: 4rem;
         height: 8rem;
 
         bottom: 10rem;
+    }
+
+    .container__icons__shorts div svg {
+        width: 1.5rem;
+        height: 1.5rem;
     }
 }
 
 @media (min-width: 576px) and (max-width: 834px) {
 
     .container__video {
-        width: 50%;
-        height: 70%;
+        width: 45%;
+        height: 65%;
 
         margin-top: 5%;
     }
 
     .container__button__pass__shorts {
-        height: 70%;
+        height: 65%;
 
         margin-top: 5%;
+    }
+
+    .container__informations__video span {
+        font-size: 14px;
     }
 
     .container__video img {
@@ -293,6 +306,12 @@
         border-radius: 10px;
     }
 
+    .button__submit__shorts {
+        width: 6rem;
+
+        transform: translate(.4rem);
+    }
+
     .container__icons__shorts {
         width: 4rem;
         height: 8rem;
@@ -300,10 +319,9 @@
         bottom: 10rem;
     }
 
-    .button__submit__shorts {
-        width: 6rem;
-
-        transform: translate(.4rem);
+    .container__icons__shorts div svg {
+        width: 1.5rem;
+        height: 1.5rem;
     }
 }
 
