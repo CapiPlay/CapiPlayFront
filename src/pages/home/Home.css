@@ -2,6 +2,7 @@
 
 .container__home {
     background-color: var(--darkpurple);
+    margin-top: 6rem;
 }
 
 .container__slider__base_desk {
@@ -18,6 +19,7 @@
     flex-direction: column;
     gap: 2rem;
 }
+
 
 .container__shorts__cards__mobile {
     padding-left: 10%;
