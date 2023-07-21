@@ -49,6 +49,10 @@
     height: 90%;
 }
 
+.upload__right__side__container {
+    width: 50%;
+}
+
 .upload__next__buttons__box {
     display: flex;
     flex-direction: row;

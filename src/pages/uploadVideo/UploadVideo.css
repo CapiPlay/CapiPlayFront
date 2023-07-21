@@ -1,0 +1,17 @@
+.upload__video__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 80%;
+}
+
+.upload__video__child__friendly_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 1rem;
+    width: 70%;
+    background-color: var(--whitesmoke);
+}

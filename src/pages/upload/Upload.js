@@ -6,6 +6,7 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 import Button from "../../components/button/Button";
 import InputFile from '../../components/inputFile/InputFile';
+import { tr } from 'date-fns/locale';
 
 function Upload() {
 
@@ -58,52 +59,44 @@ function Upload() {
                         }
                     </div>
                     <div className='upload__divider' />
-                    <div>
-                        {isVideo &&
-                            <>
-                                <InputFile
-                                    label={"Foto de perfil"}
-                                    radius={"20px"}
-                                    onChange={handleFileChange}
-                                    file={image}
-                                />
-                                <div>videoooooooooooooooooo</div>
-                                <Button
-                                    label={"Entrar"}
-                                    // onClick={}
-                                    type={"submit"}
-                                    principal={true}
-                                />
-                                <Button
-                                    label={"Entrar"}
-                                    // onClick={}
-                                    type={"submit"}
-                                    principal={true}
-                                />
-                            </>
-                        }
-                        {!isVideo &&
-                            <>
-                                <div>
-                                    <div>shooooooooooooooooorts</div>
-                                    <div className='upload__next__buttons__box'>
-                                        <Button
-                                            label={"Entrar"}
-                                            // onClick={}
-                                            type={"submit"}
-                                            principal={true}
-                                        />
-                                        <Button
-                                            label={"Entrar"}
-                                            // onClick={}
-                                            type={"submit"}
-                                            principal={true}
-                                        />
-                                    </div>
-                                </div>
-                            </>
-                        }
+                    {isVideo &&
+                        <div className='upload__right__side__container'>
+                        <div>video</div>
+                        <div className='upload__next__buttons__box'>
+                            <Button
+                                label={"Cancelar"}
+                                // onClick={}
+                                type={"submit"}
+                                principal={false}
+                            />
+                            <Button
+                                label={"Próximo"}
+                                // onClick={}
+                                type={"submit"}
+                                principal={true}
+                            />
+                        </div>
                     </div>
+                    }
+                    {!isVideo &&
+                        <div className='upload__right__side__container'>
+                            <div>shorts</div>
+                            <div className='upload__next__buttons__box'>
+                                <Button
+                                    label={"Cancelar"}
+                                    // onClick={}
+                                    type={"submit"}
+                                    principal={false}
+                                />
+                                <Button
+                                    label={"Próximo"}
+                                    // onClick={}
+                                    type={"submit"}
+                                    principal={true}
+                                />
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
 
