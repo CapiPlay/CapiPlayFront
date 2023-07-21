@@ -1,6 +1,9 @@
 import "./Historic.css"
+
 import { useState } from "react"
 import { format } from 'date-fns';
+
+// Componentes
 import HeaderToBack from "../../components/headerToBack/HeaderToBack"
 import Video_card from "../../components/video_card/Video_card"
 import CarouselShorts from "./carouselShorts/CarouselShorts";
