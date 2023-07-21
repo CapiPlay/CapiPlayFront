@@ -129,7 +129,6 @@ function Slider_Shorts() {
         </Slider>
     );
 
-
     const getViewToRender = () => {
         if (screenSize.width > 900) {
             return renderDesktopView();
