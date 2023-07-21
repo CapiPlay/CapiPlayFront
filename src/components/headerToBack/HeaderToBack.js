@@ -13,7 +13,7 @@ const HeaderToBack = ({ text, route }) => {
     return (
         <div className="header__to__back">
             <div className="button__text__back" onClick={handleClick}>
-                <IoMdArrowBack size={16} color="var(--lightpurple)" />
+                <IoMdArrowBack size={20} color="var(--lightpurple)" />
                 <span>{text || "Voltar"}</span>
             </div>
         </div>
