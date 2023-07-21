@@ -4,9 +4,7 @@
     background-color: var(--darkpurple);
 }
 
-.historic__date>span {
-    margin-top: 38px;
-    margin-left: 10px;
+.historic__data>span {
     color: var(--whitesmoke);
     font-size: 14px;
 }
@@ -20,5 +18,15 @@
     flex-direction: column;
 }
 
+.historic__data>div:first-child>span{
+    margin-left: 2%;
+    font-size: 14px;
+}
+
+@media screen and (min-width: 768px){
+    .historic__data>div:first-child>span{
+        font-size: 20px;
+    }
+}
 
 

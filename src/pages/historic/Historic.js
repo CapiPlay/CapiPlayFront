@@ -1,6 +1,9 @@
 import "./Historic.css"
+
 import { useState } from "react"
 import { format } from 'date-fns';
+
+// Componentes
 import HeaderToBack from "../../components/headerToBack/HeaderToBack"
 import Video_card from "../../components/video_card/Video_card"
 import CarouselShorts from "./carouselShorts/CarouselShorts";
@@ -24,16 +27,18 @@ const Historic = () => {
             {
                 videoHistoric
                     ?
-                    <div className="historic__date">
-                        <span>{format(dateTest, dateFormat)}</span>
+                    <div className="historic__data">
+                        <div>
+                            <span>{format(dateTest, dateFormat)}</span>
+                        </div>
                         {shortHistoric &&
-                            <CarouselShorts/>
+                            <CarouselShorts />
                         }
                         {videoHistoric &&
                             <div className="container__videos__historic">
-                                <Video_card/>
-                                <Video_card/>
-                                <Video_card/>
+                                <Video_card />
+                                <Video_card />
+                                <Video_card />
                             </div>
                         }
                     </div>

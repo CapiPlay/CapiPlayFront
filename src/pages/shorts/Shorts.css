@@ -2,11 +2,48 @@
 .container__all__shorts {
     width: 100%;
     height: 100vh;
+
     overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+
+    background-color: var(--darkpurple);
+}
+
+.container__button__pass__shorts {
+    width: 2rem;
+    height: 78%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+
+    transform: translate(1rem);
+}
+
+.container__button__pass__shorts button {
+    width: 100%;
+    height: 2rem;
+
+    border: none;
+
+    border-radius: 5px;
+}
+
+.container__button__pass__shorts button svg {
+    width: 100%;
+    height: 100%;
+
+    color: var(--purple);
 }
 
 .container__video {
     position: relative;
+
     width: 100%;
     height: 100%;
 }
@@ -108,8 +145,10 @@
     width: auto;
     height: 20%;
     font-size: 16px;
+
     display: flex;
     align-items: center;
+
     padding-left: 1rem;
     flex-grow: 1;
 }
@@ -118,13 +157,14 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
+
     flex-grow: 1;
 }
 
 .profile__shorts img {
     width: 2rem;
     height: 2rem;
-    border-radius: 50%;
+    border-radius: 50px;
     margin-right: .5rem;
 }
 
@@ -141,39 +181,148 @@
 
 /* Responsividade */
 
-@media (max-width: 575.98px) {
-    
-  }
-  
-  @media (min-width: 576px) and (max-width: 767.98px) {
-    
-  }
-  
-  @media (min-width: 768px) and (max-width: 991.98px) {
+@media (min-width: 1200px) {
+    .container__video {
+        width: 25%;
+        height: 78%;
 
-    .container__all__shorts {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        margin-top: 5%;
     }
 
-    .container__video {
-        width: 60%;
-        height: 80%;
+    .container__button__pass__shorts {
+        height: 78%;
+
+        margin-top: 5%;
     }
 
     .container__video img {
+        width: 100%;
         height: 100%;
 
         border-radius: 10px;
     }
 
-  }
-  
-  @media (min-width: 992px) and (max-width: 1199.98px) {
-   
-  }
-  
-  @media (min-width: 1200px) {
-    
-  }
+    .container__informations__video span {
+        font-size: 14px;
+    }
+
+    .profile__shorts img {
+        border-radius: 50px;
+    }
+
+    .container__icons__shorts {
+        width: 4rem;
+        height: 8rem;
+
+        bottom: 10rem;
+    }
+
+    .container__icons__shorts> :first-child {
+        font-size: 14px;
+    }
+
+    .container__icons__shorts div svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .container__informations__video {
+        height: 7rem;
+    }
+
+    .button__submit__shorts {
+        width: 6rem;
+
+        transform: translate(.4rem);
+    }
+
+    .profile__shorts span {
+        font-size: 12px;
+    }
+}
+
+@media (min-width: 835px) and (max-width: 1199.98px) {
+
+    .container__video {
+        width: 45%;
+        height: 65%;
+
+        margin-top: 5%;
+    }
+
+    .container__button__pass__shorts {
+        height: 65%;
+
+        margin-top: 5%;
+    }
+
+    .container__video img {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 10px;
+    }
+
+    .container__informations__video span {
+        font-size: 14px;
+    }   
+
+    .container__icons__shorts {
+        width: 4rem;
+        height: 8rem;
+
+        bottom: 10rem;
+    }
+
+    .container__icons__shorts div svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 834px) {
+
+    .container__video {
+        width: 45%;
+        height: 65%;
+
+        margin-top: 5%;
+    }
+
+    .container__button__pass__shorts {
+        height: 65%;
+
+        margin-top: 5%;
+    }
+
+    .container__informations__video span {
+        font-size: 14px;
+    }
+
+    .container__video img {
+        width: 100%;
+        height: 100%;
+
+        border-radius: 10px;
+    }
+
+    .button__submit__shorts {
+        width: 6rem;
+
+        transform: translate(.4rem);
+    }
+
+    .container__icons__shorts {
+        width: 4rem;
+        height: 8rem;
+
+        bottom: 10rem;
+    }
+
+    .container__icons__shorts div svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {}

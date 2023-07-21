@@ -8,9 +8,11 @@ import Historic from './pages/historic/Historic'
 import Shorts from './pages/shorts/Shorts'
 import VideoDetails from './pages/videoDetails/VideoDetails'
 import VideoUpload from './pages/videoUpload/VideoUpload'
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './store';
+import Search from './pages/search/Search'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from './store'
+
 
 function App() {
   return (
@@ -26,12 +28,13 @@ function App() {
             <Route path="/shorts" element={<Shorts />} />
             <Route path="/video-details" element={<VideoDetails />} />
             <Route path="/video-upload" element={<VideoUpload />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
         </BrowserRouter>
       </Provider>
     </div>
-  );
+  )
 }
 
 export default App;
