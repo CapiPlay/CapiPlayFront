@@ -183,14 +183,14 @@
 
 @media (min-width: 1200px) {
     .container__video {
-        width: 25%;
-        height: 78%;
+        width: 30%;
+        height: 80%;
 
         margin-top: 5%;
     }
 
     .container__button__pass__shorts {
-        height: 78%;
+        height: 80%;
 
         margin-top: 5%;
     }
@@ -244,7 +244,7 @@
 @media (min-width: 835px) and (max-width: 1199.98px) {
 
     .container__video {
-        width: 45%;
+        width: 50%;
         height: 65%;
 
         margin-top: 5%;
@@ -283,7 +283,7 @@
 @media (min-width: 576px) and (max-width: 834px) {
 
     .container__video {
-        width: 45%;
+        width: 50%;
         height: 65%;
 
         margin-top: 5%;
@@ -324,5 +324,3 @@
         height: 1.5rem;
     }
 }
-
-@media (max-width: 575.98px) {}
