@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import Header from './header/Header';
-import HeaderDesk from '../../components/header/Header';
+import Header from '../../components/header/Header';
 import './Home.css';
 import Slider from './slider/Slider';
 import Video_card from '../../components/video_card/Video_card';
@@ -26,7 +25,7 @@ function Home() {
 
   const renderDesktopView = () => (
     <>
-      <HeaderDesk />
+      <Header />
       <Side_Bar />
       <div className='container__home'>
         <div className='container__slider__base__desk'>
@@ -54,7 +53,7 @@ function Home() {
 
   const renderTabletView = () => (
     <>
-      <Header_Tablet />
+      <Header />
       <div className='container__home'>
         <div className='container__slider__base__tablet'>
           <Slider_Category />
