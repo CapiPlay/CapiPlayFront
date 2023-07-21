@@ -1,26 +1,24 @@
 
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { doLogin } from "../../store/features/user/userSlice"
 
 import "./Login.css"
 
 // Componentes
-import Input from "../../components/input/Input";
-import Button from "../../components/button/Button";
+import Input from "../../components/input/Input"
+import Button from "../../components/button/Button"
 
 // Icons
-import { FaFacebookF } from 'react-icons/fa';
-import { FaGoogle } from 'react-icons/fa';
+import { FaFacebookF } from 'react-icons/fa'
+import { FaGoogle } from 'react-icons/fa'
 
-const Login = () => {
+const Login = ({ }) => {
 
-    const objLogin = {
-        email: '',
-        senha: ''
-    }
-
-    const [loginData, setLoginData] = useState(objLogin)
+    const [loginData, setLoginData] = useState({ email: '', senha: '' })
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const handleResize = () => {
@@ -35,12 +33,17 @@ const Login = () => {
     }, [])
 
     const login = () => {
-        console.log(loginData)
+        try {
+            const res = dispatch(doLogin(loginData))
+            console.log(res)
+        } catch (err) {
+            console.log("Deu erro")
+        }
     }
 
     return (
         <div className="container__all__login" style={{ minHeight: `${windowHeight}px` }} >
-            <form className="container__login">
+            <div className="container__login">
                 <h1>Login</h1>
                 <h2>
                     O Mundo dos Vídeos ao seu Alcance!
@@ -93,9 +96,9 @@ const Login = () => {
                         </Link>
                     </span>
                 </div>
-            </form>
+            </div>
         </div>
     )
 }
 
-export default Login;
+export default (Login);

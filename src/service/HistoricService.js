@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios from "./AxiosConfig";
 
 const HistoricService = {
 
     criar: async (criarHistoricoCommand) => {
         try {
-            const response = await axios.get("http://localhost:8081/api/engajamento/historico", criarHistoricoCommand);
+            const response = await axios.get("/engajamento/historico", criarHistoricoCommand);
             return response;
         } catch (error) {
             console.error(error);
@@ -12,7 +12,7 @@ const HistoricService = {
     },
     buscarUm: async (buscarUmHistoricoCommand) => {
         try {
-            const response = await axios.get("http://localhost:8081/api/engajamento/historico", buscarUmHistoricoCommand);
+            const response = await axios.get("/engajamento/historico", buscarUmHistoricoCommand);
             return response;
         } catch (error) {
             console.error(error);
