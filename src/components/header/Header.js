@@ -42,7 +42,7 @@ function Header() {
         <div className='header__container'>
             <div></div>
             <div className='header__input__container'>
-                <input placeholder='Pesquisar' />
+                <input className='header__input__text__search' placeholder='Pesquisar' />
                 <AiOutlineSearch />
             </div>
             <div className='header__info'>
