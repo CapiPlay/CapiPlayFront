@@ -6,6 +6,10 @@
     top: 5%;
 }
 
+.settings__options__buttons__delete_div {
+    margin-bottom: 3.5rem;
+}
+
 .settings__form {
     margin: 0 1.5rem;
     display: flex;
@@ -15,6 +19,7 @@
 }
 
 .settings__box__image__options {
+    margin-bottom: 2rem;
     padding-top: 1rem;
     display: flex;
     flex-direction: row;
