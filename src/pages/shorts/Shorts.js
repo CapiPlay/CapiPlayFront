@@ -45,60 +45,61 @@ const Shorts = ({ videoTitle }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const [headerAppearing, setHeaderAppearing] = useState(window.innerWidth >= 768)
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
-
+    const [startY, setStartY] = useState(0); // Adicionando a declaração da variável startY aqui
+  
     const handleNextVideo = () => {
-        setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length)
+      setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length)
     }
-
+  
     const handlePreviousVideo = () => {
-        setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length)
+      setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length)
     }
-
+  
     const handleScrollUp = (event) => {
-        if (event.deltaY < 0) {
-            handlePreviousVideo()
-        } else {
-            handleNextVideo()
-        }
+      if (event.deltaY < 0) {
+        handlePreviousVideo()
+      } else {
+        handleNextVideo()
+      }
     };
-
+  
     const handleTouchMove = (event) => {
-        const deltaY = event.touches[0].clientY - startY;
-        if (deltaY < -50) { // Pode ajustar esse valor conforme necessário para determinar a sensibilidade do movimento
-            handleNextVideo();
-        } else if (deltaY > 50) { // Pode ajustar esse valor conforme necessário para determinar a sensibilidade do movimento
-            handlePreviousVideo();
-        }
+      const deltaY = event.touches[0].clientY - startY;
+      if (deltaY < -50) {
+        handleNextVideo();
+      } else if (deltaY > 50) {
+        handlePreviousVideo();
+      }
     };
-
+  
     useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
-
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+  
+      window.addEventListener('resize', handleResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
     }, []);
-
+  
     useEffect(() => {
-        setHeaderAppearing(windowWidth >= 576);
+      setHeaderAppearing(windowWidth >= 576);
     }, [windowWidth]);
-
+  
     return (
-        <div
-            className='container__all__shorts'
-            style={{ minHeight: `${windowHeight}px` }}
-            onWheel={handleScrollUp}
-            onTouchStart={(event) => {
-                startY = event.touches[0].clientY;
-            }}
-            onTouchMove={handleTouchMove}
-        >
-            {headerAppearing && <Header />}
-            {headerAppearing && (
+      <div
+        className='container__all__shorts'
+        style={{ minHeight: `${windowHeight}px` }}
+        onWheel={handleScrollUp}
+        onTouchStart={(event) => {
+          setStartY(event.touches[0].clientY); // Definindo o valor da variável startY no início do toque
+        }}
+        onTouchMove={handleTouchMove}
+      >
+        {headerAppearing && <Header />}
+        {headerAppearing && (
                 <div className='container__button__pass__shorts'>
                     <button
                         id='voltar'
