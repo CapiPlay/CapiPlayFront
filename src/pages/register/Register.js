@@ -15,6 +15,7 @@ import ChooseCategory from "./chooseCategory/ChooseCategory"
 
 const Register = () => {
 
+    const user = new FormData()
     const objRegister = {
         nome: "",
         senha: "",
@@ -54,17 +55,20 @@ const Register = () => {
 
     const register = () => {
         setRegisterData({ ...registerData, foto: image })
+        user.append("nome", registerData.nome)
+        user.append("senha", registerData.senha)
+        user.append("email", registerData.email)
+        user.append("perfil", registerData.perfil)
+        user.append("dataNascimento", registerData.dataNascimento)
+        user.append("descricao", registerData.descricao)
         nextStep()
-        console.log(registerData)
-        alert("")
     }
 
     const handleFileChange = (e) => {
         const file = e.target.files[0]
         if (file) {
-            const formData = new FormData()
-            formData.append("foto", file)
-            setImage(formData)
+            user.append("foto", file)
+            setImage(user)
         }
     }
 

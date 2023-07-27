@@ -13,6 +13,20 @@
     background-color: var(--darkpurple);
 }
 
+.container__video {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+}
+
+.container__video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Utilizamos 'cover' para preencher o contêiner mantendo a proporção */
+}
+
 .container__button__pass__shorts {
     width: 2rem;
     height: 78%;
@@ -32,6 +46,7 @@
     border: none;
 
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .container__button__pass__shorts button svg {
@@ -41,17 +56,6 @@
     color: var(--purple);
 }
 
-.container__video {
-    position: relative;
-
-    width: 100%;
-    height: 100%;
-}
-
-.container__video img {
-    width: 100%;
-    height: 100vh;
-}
 
 /* Icones */
 .container__icons__shorts {
@@ -105,6 +109,7 @@
 
     color: var(--whitesmoke);
     transition: .4s ease-in-out;
+    cursor: pointer;
 }
 
 .container__icons__shorts> :first-child:hover svg,
@@ -183,14 +188,14 @@
 
 @media (min-width: 1200px) {
     .container__video {
-        width: 25%;
-        height: 78%;
+        width: 30%;
+        height: 80%;
 
         margin-top: 5%;
     }
 
     .container__button__pass__shorts {
-        height: 78%;
+        height: 80%;
 
         margin-top: 5%;
     }
@@ -244,7 +249,7 @@
 @media (min-width: 835px) and (max-width: 1199.98px) {
 
     .container__video {
-        width: 45%;
+        width: 50%;
         height: 65%;
 
         margin-top: 5%;
@@ -265,7 +270,7 @@
 
     .container__informations__video span {
         font-size: 14px;
-    }   
+    }
 
     .container__icons__shorts {
         width: 4rem;
@@ -283,7 +288,7 @@
 @media (min-width: 576px) and (max-width: 834px) {
 
     .container__video {
-        width: 45%;
+        width: 50%;
         height: 65%;
 
         margin-top: 5%;
@@ -324,5 +329,3 @@
         height: 1.5rem;
     }
 }
-
-@media (max-width: 575.98px) {}
