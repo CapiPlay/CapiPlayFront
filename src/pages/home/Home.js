@@ -27,6 +27,7 @@ function Home() {
     <>
       <Header />
       <Side_Bar />
+      <div className='container__header__home'></div>
       <div className='container__home'>
         <div className='container__slider__base__desk'>
           <Slider_Category />
@@ -54,6 +55,7 @@ function Home() {
   const renderTabletView = () => (
     <>
       <Header />
+      <div className='container__header__home'></div>
       <div className='container__home'>
         <div className='container__slider__base__tablet'>
           <Slider_Category />
@@ -81,6 +83,7 @@ function Home() {
   const renderMobileView = () => (
     <>
       <Header />
+      <div className='container__header__home'></div>
       <div className='container__home'>
         <div className='container__slider__base'>
           <Slider />
