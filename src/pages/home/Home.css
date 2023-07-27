@@ -1,5 +1,14 @@
  /* Home Mobile */
 
+.container__header__home {
+    width: 100%;
+    margin-top: 5%;
+}
+
+.container__slider__base__tablet {
+    padding-top: 3rem;
+}
+
 .container__home {
     background-color: var(--darkpurple);
 }
