@@ -47,6 +47,15 @@ const Shorts = ({ videoTitle }) => {
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [startY, setStartY] = useState(0);
 
+    const [videoTransition, setVideoTransition] = useState(false);
+
+    useEffect(() => {
+        setVideoTransition(true);
+        const timer = setTimeout(() => setVideoTransition(false), 300);
+
+        return () => clearTimeout(timer);
+    }, [currentVideoIndex]);
+
     const handleNextVideo = () => {
         setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
     };
@@ -122,7 +131,15 @@ const Shorts = ({ videoTitle }) => {
                 </div>
             )}
             <div className='container__video'>
-                <img src={videos[currentVideoIndex].image} alt='Imagem shorts' />
+                <img src={videos[currentVideoIndex].image}
+                    alt='Imagem shorts'
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        opacity: videoTransition ? 0 : 1,
+                        transition: 'opacity 0.3s ease-in-out',
+                    }} />
                 <div className='container__icons__shorts'>
                     <div>
                         <BiLike />
