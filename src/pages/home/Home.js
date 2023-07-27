@@ -26,6 +26,7 @@ function Home() {
     <>
       <Header />
       <Side_Bar />
+      <div className='container__header__home'></div>
       <div className='container__home'>
         <div className='container__slider__base__desk'>
           <Slider_Category />
