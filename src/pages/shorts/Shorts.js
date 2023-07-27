@@ -62,27 +62,40 @@ const Shorts = ({ videoTitle }) => {
         }
     };
 
+    const handleTouchMove = (event) => {
+        const deltaY = event.touches[0].clientY - startY;
+        if (deltaY < -50) { // Pode ajustar esse valor conforme necessário para determinar a sensibilidade do movimento
+            handleNextVideo();
+        } else if (deltaY > 50) { // Pode ajustar esse valor conforme necessário para determinar a sensibilidade do movimento
+            handlePreviousVideo();
+        }
+    };
+
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
-        }
+        };
 
-        window.addEventListener('resize', handleResize)
+        window.addEventListener('resize', handleResize);
 
         return () => {
-            window.removeEventListener('resize', handleResize)
-        }
-    }, [])
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     useEffect(() => {
-        setHeaderAppearing(windowWidth >= 576)
-    }, [windowWidth])
+        setHeaderAppearing(windowWidth >= 576);
+    }, [windowWidth]);
 
     return (
         <div
             className='container__all__shorts'
             style={{ minHeight: `${windowHeight}px` }}
             onWheel={handleScrollUp}
+            onTouchStart={(event) => {
+                startY = event.touches[0].clientY;
+            }}
+            onTouchMove={handleTouchMove}
         >
             {headerAppearing && <Header />}
             {headerAppearing && (
