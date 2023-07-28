@@ -1,7 +1,7 @@
 import '../shorts/Shorts.css'
 
 //hooks
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 //imagens
 import imagePerfil from "../../assets/imagemPerfil.png"
@@ -51,6 +51,8 @@ const Shorts = ({ videoTitle }) => {
 
     const [transitioning, setTransitioning] = useState(false)
 
+    const containerRef = useRef(null);
+
     const handleNextVideo = () => {
         if (!transitioning) {
             setTransitioning(true)
@@ -70,7 +72,6 @@ const Shorts = ({ videoTitle }) => {
             }, 500)
         }
     }
-
 
     const handleScrollUp = (event) => {
         if (event.deltaY > 0 && currentVideoIndex !== 0) {
@@ -94,6 +95,24 @@ const Shorts = ({ videoTitle }) => {
             handlePreviousVideo()
         }
     }
+
+    useEffect(() => {
+        const containerElement = containerRef.current;
+
+        if (containerElement) {
+            containerElement.addEventListener('touchstart', handleTouchStart);
+            containerElement.addEventListener('touchmove', handleTouchMove, { passive: false });
+            containerElement.addEventListener('wheel', handleScrollUp);
+        }
+
+        return () => {
+            if (containerElement) {
+                containerElement.removeEventListener('touchstart', handleTouchStart);
+                containerElement.removeEventListener('touchmove', handleTouchMove);
+                containerElement.removeEventListener('wheel', handleScrollUp);
+            }
+        };
+    }, []);
 
     useEffect(() => {
         const handleResize = () => {
