@@ -12,7 +12,7 @@ import Search from './pages/search/Search'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
-
+import Settings from './pages/settings/Settings'
 
 
 function App() {
@@ -31,6 +31,7 @@ function App() {
             <Route path="/video-upload" element={<VideoUpload />} />
             <Route path="/search" element={<Search />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </BrowserRouter>
       </Provider>

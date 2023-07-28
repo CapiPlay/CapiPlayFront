@@ -12,13 +12,13 @@ import Button from "../../components/button/Button";
 const VideoDetails = () => {
 
     const obj = {
-        email: '',
-        nomeUsuario: '',
-        nomeCanal: '',
-        dataNascimento: '',
-        senhaAtual: '',
-        senhaNova: '',
-        descricao: ''
+        email: 'eeeee',
+        nomeUsuario: 'eeee',
+        nomeCanal: 'eeee',
+        dataNascimento: 'eee',
+        senhaAtual: 'eeee',
+        senhaNova: 'eeee',
+        descricao: 'eeeee'
     }
 
     const [settingsData, setSettingsData] = useState(obj)
@@ -74,15 +74,6 @@ const VideoDetails = () => {
                         </div>
                         <div class="settings__field">
                             <Input
-                                value={settingsData.dataNascimento}
-                                onChange={(e) => setSettingsData({ ...settingsData, dataNascimento: e.target.value })}
-                                type={"date"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        </div>
-                        <div class="settings__field">
-                            <Input
                                 placeholder={"Senha"}
                                 value={settingsData.senhaAtual}
                                 onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
@@ -102,14 +93,15 @@ const VideoDetails = () => {
                             />
                         </div>
                     </div>
+                    <br />
                     <hr class="solid" />
                     <div className='settings__options__buttons__delete_div'>
                         <button className='settings__options__buttons__delete'>Deletar perfil</button>
                     </div>
                     <div className='settings__options__buttons__div'>
-                        <Button label={"cancelar"} className='settings__options__buttons__cancel'
+                        <Button label={"Cancelar"} className='settings__options__buttons__cancel'
                             principal={true} />
-                        <Button label={"confirmar"} className='settings__options__buttons__confirm'
+                        <Button label={"Confirmar"} className='settings__options__buttons__confirm'
                             principal={false} />
                     </div>
                 </div>
@@ -121,44 +113,54 @@ const VideoDetails = () => {
                             <button className='settings__image__options__buttons__desktop'>Alterar</button>
                             <button className='settings__image__options__buttons__desktop'>Remover</button>
                         </div>
-                        <div className='settings__field_container__desktop'>
-                            <div className="settings__field__desktop">
-                                <label>E-mail</label>
-                                <input type="email" className='settings__input__desktop' placeholder='E-mail' />
-                            </div>
-                            <div class="settings__field__desktop">
-                                <label>Nome de usuario</label>
-                                <input type="text" className='settings__input__desktop' placeholder='Nome de usuário' />
-                            </div>
-                            <div class="settings__field__desktop">
-                                <label>Nome do canal</label>
-                                <input type="text" className='settings__input__desktop' placeholder='Nome do canal' />
-                            </div>
-                            <div class="settings__field__desktop">
-                                <label>Data de nascimento</label>
-                                <input type="date" className='settings__input__desktop' />
-                            </div>
-                            <div class="settings__field__desktop">
-                                <label>Senha atual</label>
-                                <input type="password" className='settings__input__desktop' placeholder='Senha atual' />
-                            </div>
-                            <div class="settings__field__desktop">
-                                <label>Senha nova</label>
-                                <input type="password" className='settings__input__desktop' placeholder='Senha nova' />
-                            </div>
-                            <div class="settings__field__textarea__desktop">
-                                <label>Descrição do canal</label>
-                                <textarea className='settings__field__textarea__input__desktop' placeholder='Descrição' ></textarea>
-                            </div>
+                        <div class="settings__field__desktop">
+                            <Input
+                                placeholder={"Nome de usuário"}
+                                value={settingsData.nomeUsuario}
+                                onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
+                                type={"text"}
+                                required={true}
+                                className='settings__input__desktop'
+                            />
+                        </div>
+                        <div class="settings__field__desktop">
+                            <Input
+                                placeholder={"Nome do canal"}
+                                value={settingsData.nomeCanal}
+                                onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
+                                type={"text"}
+                                required={true}
+                                className='settings__input__desktop'
+                            />
+                        </div>
+                        <div class="settings__field__desktop">
+                            <Input
+                                placeholder={"Senha"}
+                                value={settingsData.senhaAtual}
+                                onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
+                                type={"password"}
+                                required={true}
+                                className='settings__input__desktop'
+                            />
+                        </div>
+                        <div class="settings__field__desktop">
+                            <Input
+                                placeholder={"Descrição do canal"}
+                                value={settingsData.descricao}
+                                onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
+                                type={"text"}
+                                required={true}
+                                className='settings__input__desktop'
+                            />
                         </div>
                     </div>
-                    <hr class="solid" />
+                    <hr className="solid" />
                     <div className='settings__options__buttons__container'>
                         <button className='settings__options__buttons__delete__desktop'>Deletar perfil</button>
                         <div className='settings__options__buttons__div__desktop'>
-                            <Button label={"cancelar"} className='settings__options__buttons__cancel__desktop'
+                            <Button label={"Cancelar"} className='settings__options__buttons__cancel__desktop'
                                 principal={true} />
-                            <Button label={"confirmar"} className='settings__options__buttons__confirm__desktop'
+                            <Button label={"Confirmar"} className='settings__options__buttons__confirm__desktop'
                                 principal={true} />
                         </div>
                     </div>
