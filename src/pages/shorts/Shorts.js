@@ -81,10 +81,12 @@ const Shorts = ({ videoTitle }) => {
     }
 
     const handleTouchStart = (event) => {
+        event.preventDefault()
         setStartY(event.touches[0].clientY)
     }
 
     const handleTouchMove = (event) => {
+        event.preventDefault()
         const deltaY = event.touches[0].clientY - startY
         if (deltaY > 50 && currentVideoIndex !== 0) {
             handleNextVideo()
