@@ -9,6 +9,7 @@ import { BiSearchAlt2 } from "react-icons/bi"
 // componentes
 import InputSearch from "../../components/inputSearch/InputSearch";
 import { useState } from "react";
+import ResultSearch from "../resultSearch/ResultSearch";
 
 const Search = () => {
 
