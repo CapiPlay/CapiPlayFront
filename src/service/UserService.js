@@ -4,9 +4,9 @@ const url = 'http://localhost:8081/user'
 
 export const UserService = {
 
-  create: function (user) {
-    console.log(user)
-    axios.post(url, user).then((response) => {
+  create: function (Usuario) {
+    console.log(Usuario)
+    axios.post(url, Usuario).then((response) => {
       return response.data;
     });
   },

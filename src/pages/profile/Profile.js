@@ -13,7 +13,7 @@ import ProfilePicture from '../../assets/image/channel_profile.png'
 
 
 
-const Profile = ({ user }) => {
+const Profile = ({ Usuario }) => {
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
@@ -51,20 +51,20 @@ const Profile = ({ user }) => {
                 <>
                     <HeaderProfile />
                     <div>
-                        {users.map((user) => (
-                            <div key={user.id}  >
+                        {users.map((Usuario) => (
+                            <div key={Usuario.uuid}  >
                                 <div className='profile__container'>
-                                    <div className='profile__container__picture' key={user.id}>
+                                    <div className='profile__container__picture' key={Usuario.uuid}>
                                         <img className="profile__pic" src={ProfilePicture} />
-                                        <h2 className='profile__name'> {user.name}</h2>
+                                        <h2 className='profile__name'> {Usuario.name}</h2>
                                         <button className='profile__subscribe__button'>Inscrever-se</button>
-                                        <p className='profile__id'> {user.id}</p>
+                                        <p className='profile__id'> {Usuario.perfil}</p>
                                         <div className='profile__details'>
-                                            <p> {user.subscribers}</p>
-                                            <p> {user.videos}</p>
+                                            <p> 14k</p>
+                                            <p> 11 videos</p>
                                         </div>
                                         <div className='profile__description'>
-                                            <p> {user.description}</p>
+                                            <p> {Usuario.description}</p>
                                         </div>
                                     </div>
                                 </div>
