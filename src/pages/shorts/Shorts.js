@@ -1,7 +1,7 @@
 import '../shorts/Shorts.css'
 
 //hooks
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 //imagens
 import imagePerfil from "../../assets/imagemPerfil.png"
@@ -51,8 +51,6 @@ const Shorts = ({ videoTitle }) => {
 
     const [transitioning, setTransitioning] = useState(false)
 
-    const containerRef = useRef(null);
-
     const handleNextVideo = () => {
         if (!transitioning) {
             setTransitioning(true)
@@ -73,46 +71,27 @@ const Shorts = ({ videoTitle }) => {
         }
     }
 
+
     const handleScrollUp = (event) => {
-        if (event.deltaY > 0 && currentVideoIndex !== 0) {
+        if (event.deltaY < 0 && currentVideoIndex !== 0) {
             handlePreviousVideo()
-        } else if (event.deltaY < 0 && currentVideoIndex !== videos.length - 1) {
+        } else if (event.deltaY > 0 && currentVideoIndex !== videos.length - 1) {
             handleNextVideo()
         }
     }
 
     const handleTouchStart = (event) => {
-        event.preventDefault()
         setStartY(event.touches[0].clientY)
     }
 
     const handleTouchMove = (event) => {
-        event.preventDefault()
         const deltaY = event.touches[0].clientY - startY
-        if (deltaY > 50 && currentVideoIndex !== 0) {
-            handleNextVideo()
-        } else if (deltaY < -50 && currentVideoIndex !== videos.length - 1) {
+        if (deltaY < 50 && currentVideoIndex !== 0) {
             handlePreviousVideo()
+        } else if (deltaY > -50 && currentVideoIndex !== videos.length - 1) {
+            handleNextVideo()
         }
     }
-
-    useEffect(() => {
-        const containerElement = containerRef.current;
-
-        if (containerElement) {
-            containerElement.addEventListener('touchstart', handleTouchStart);
-            containerElement.addEventListener('touchmove', handleTouchMove, { passive: false });
-            containerElement.addEventListener('wheel', handleScrollUp);
-        }
-
-        return () => {
-            if (containerElement) {
-                containerElement.removeEventListener('touchstart', handleTouchStart);
-                containerElement.removeEventListener('touchmove', handleTouchMove);
-                containerElement.removeEventListener('wheel', handleScrollUp);
-            }
-        };
-    }, []);
 
     useEffect(() => {
         const handleResize = () => {
