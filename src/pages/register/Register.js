@@ -27,7 +27,7 @@ const Register = () => {
     }
 
     const [registerData, setRegisterData] = useState(objRegister)
-    const [image, setImage] = useState()
+    const [image, setImage] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState("")
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
 
@@ -53,7 +53,8 @@ const Register = () => {
         setbPChooseCategory(!bPChooseCategory)
     }
 
-    const register = () => {
+    const register = (e) => {
+        e.preventDefault()
         setRegisterData({ ...registerData, foto: image })
         user.append("nome", registerData.nome)
         user.append("senha", registerData.senha)
@@ -70,6 +71,12 @@ const Register = () => {
             user.append("foto", file)
             setImage(user)
         }
+    }
+
+    const handleRemoveFile = (e) => {
+        e.preventDefault()
+        user.append("foto", null)
+        setImage(null)
     }
 
     return (
@@ -123,6 +130,7 @@ const Register = () => {
                                 label={"Foto de perfil"}
                                 radius={"20px"}
                                 onChange={handleFileChange}
+                                removeFile={handleRemoveFile}
                                 file={image}
                             />
                         </form>
@@ -141,7 +149,7 @@ const Register = () => {
                         </div>
                         <div className="container__other__register">
                             <div><FaFacebookF style={{ height: "1.5rem" }} /></div>
-                            <div><FaGoogle style={{ height: "2rem" }} /></div>
+                            <div><FaGoogle style={{ fontSize: "1.5rem" }} /></div>
                         </div>
                         <div className="container__login__register">
                             <span>Já possui uma conta?</span>

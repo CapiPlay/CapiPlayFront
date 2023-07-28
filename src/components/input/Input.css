@@ -35,6 +35,10 @@
     color: var(--lightpurple);
 }
 
+.input__control::placeholder {
+    color: transparent;
+}
+
 .active {
     transform: translateY(-170%);
     font-size: 16px;
