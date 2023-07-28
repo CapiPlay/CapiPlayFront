@@ -159,7 +159,7 @@ const VideoDetails = () => {
                         <button className='settings__options__buttons__delete__desktop'>Deletar perfil</button>
                         <div className='settings__options__buttons__div__desktop'>
                             <Button label={"Cancelar"} className='settings__options__buttons__cancel__desktop'
-                                principal={true} />
+                                principal={false} />
                             <Button label={"Confirmar"} className='settings__options__buttons__confirm__desktop'
                                 principal={true} />
                         </div>
