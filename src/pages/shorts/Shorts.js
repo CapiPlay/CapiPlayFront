@@ -53,23 +53,23 @@ const Shorts = ({ videoTitle }) => {
 
     const handleNextVideo = () => {
         if (!transitioning) {
-            setTransitioning(true)
+            setTransitioning(true);
             setTimeout(() => {
-                setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length)
+                setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
                 setTransitioning(false);
-            }, 500)
+            }, 500);
         }
     };
-
+    
     const handlePreviousVideo = () => {
         if (!transitioning) {
-            setTransitioning(true)
+            setTransitioning(true);
             setTimeout(() => {
-                setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length)
+                setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length);
                 setTransitioning(false);
-            }, 500)
+            }, 500);
         }
-    }
+    };
 
 
     const handleScrollUp = (event) => {
@@ -81,17 +81,18 @@ const Shorts = ({ videoTitle }) => {
     }
 
     const handleTouchStart = (event) => {
-        setStartY(event.touches[0].clientY)
-    }
+        setStartY(event.touches[0].clientY);
+        setTransitioning(false); // Adicione esta linha para evitar problemas de transição
+    };
 
     const handleTouchMove = (event) => {
-        const deltaY = event.touches[0].clientY - startY
-        if (deltaY < 50 && currentVideoIndex !== 0) {
-            handlePreviousVideo()
-        } else if (deltaY > -50 && currentVideoIndex !== videos.length - 1) {
-            handleNextVideo()
+        const deltaY = event.touches[0].clientY - startY;
+        if (deltaY < -50 && currentVideoIndex !== 0) {
+            handlePreviousVideo();
+        } else if (deltaY > 50 && currentVideoIndex !== videos.length - 1) {
+            handleNextVideo();
         }
-    }
+    };
 
     useEffect(() => {
         const handleResize = () => {
