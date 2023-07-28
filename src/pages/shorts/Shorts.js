@@ -47,59 +47,65 @@ const Shorts = ({ videoTitle }) => {
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [startY, setStartY] = useState(0);
 
-    const [videoTransition, setVideoTransition] = useState(false);
+    const [transitioning, setTransitioning] = useState(false);
 
-    useEffect(() => {
-        setVideoTransition(true);
-        const timer = setTimeout(() => setVideoTransition(false), 300);
-
-        return () => clearTimeout(timer);
-    }, [currentVideoIndex]);
-
-    const handleNextVideo = () => {
+  const handleNextVideo = () => {
+    if (!transitioning) {
+      setTransitioning(true);
+      setTimeout(() => {
         setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
-    };
+        setTransitioning(false);
+      }, 500); // Change this value to adjust the transition duration
+    }
+  };
 
-    const handlePreviousVideo = () => {
+  const handlePreviousVideo = () => {
+    if (!transitioning) {
+      setTransitioning(true);
+      setTimeout(() => {
         setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length);
-    };
+        setTransitioning(false);
+      }, 500); // Change this value to adjust the transition duration
+    }
+  };
+
 
     const handleScrollUp = (event) => {
         if (event.deltaY < 0) {
-            handlePreviousVideo();
+            handlePreviousVideo()
         } else {
-            handleNextVideo();
+            handleNextVideo()
         }
-    };
+    }
 
     const handleTouchStart = (event) => {
-        setStartY(event.touches[0].clientY);
-    };
+        setStartY(event.touches[0].clientY)
+    }
 
     const handleTouchMove = (event) => {
         const deltaY = event.touches[0].clientY - startY;
         if (deltaY < -50) {
             handleNextVideo();
         } else if (deltaY > 50) {
-            handlePreviousVideo();
+            handlePreviousVideo()
         }
-    };
+    }
 
     useEffect(() => {
         const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
+            setWindowWidth(window.innerWidth)
+        }
 
-        window.addEventListener('resize', handleResize);
+        window.addEventListener('resize', handleResize)
 
         return () => {
             window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+        }
+    }, [])
 
     useEffect(() => {
-        setHeaderAppearing(windowWidth >= 576);
-    }, [windowWidth]);
+        setHeaderAppearing(windowWidth >= 576)
+    }, [windowWidth])
 
     return (
         <div
@@ -131,15 +137,7 @@ const Shorts = ({ videoTitle }) => {
                 </div>
             )}
             <div className='container__video'>
-                <img src={videos[currentVideoIndex].image}
-                    alt='Imagem shorts'
-                    style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        opacity: videoTransition ? 0 : 1,
-                        transition: 'opacity 0.3s ease-in-out',
-                    }} />
+                <img src={videos[currentVideoIndex].image} alt='Imagem shorts' />
                 <div className='container__icons__shorts'>
                     <div>
                         <BiLike />
@@ -155,7 +153,7 @@ const Shorts = ({ videoTitle }) => {
                         <span>{videos[currentVideoIndex].title}</span>
                     </div>
                     <div className='informations__profile__shorts'>
-                        <div className='profile__shorts'>
+                        <div className={`container__video ${transitioning ? 'transitioning' : ''}`}>
                             <img src={imagePerfil} alt='Imagem de Perfil' />
                             <span>{videos[currentVideoIndex].profile}</span>
                         </div>
