@@ -1,17 +1,19 @@
 import './Upload.css'
 
-import { useState } from "react"
-import HeaderUpload from './headerUpload/HeaderUpload';
+import { useState, useRef } from "react"
+import { HiUpload } from 'react-icons/hi';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { BsFillFastForwardFill } from 'react-icons/bs';
 
+import HeaderUpload from './headerUpload/HeaderUpload';
 import Button from "../../components/button/Button";
 import InputFile from '../../components/inputFile/InputFile';
-import { tr } from 'date-fns/locale';
 
 function Upload() {
 
     const [isVideo, setIsVideo] = useState(true)
     const [image, setImage] = useState()
+    const imagePreviewRef = useRef(null)
 
     const handleVideoChange = () => {
         setIsVideo(true)
@@ -26,6 +28,18 @@ function Upload() {
             const formData = new FormData()
             formData.append("foto", file)
             setImage(formData)
+            localStorage.setItem("foto", formData)
+
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                if (imagePreviewRef.current) {
+                    imagePreviewRef.current.src = event.target.result;
+                    imagePreviewRef.current.style.display = 'block';
+                }
+            };
+
+            reader.readAsDataURL(file);
         }
     }
 
@@ -38,22 +52,22 @@ function Upload() {
                         {isVideo &&
                             <>
                                 <button className='upload_button_selected' type='button' onClick={handleVideoChange}>
-                                    <AiOutlineArrowLeft className='arrow__icon' color='var(--lightpurple)' fontSize={25} />
+                                    <HiUpload className='arrow__icon' color='var(--lightpurple)' fontSize={25} />
                                     Vídeo
                                 </button>
                                 <button className='upload_button' type='button' onClick={handleShortsChange}>
-                                    <AiOutlineArrowLeft className='arrow__icon' color='var(--lightpurple)' fontSize={25} />                            CapiShorts
+                                    <BsFillFastForwardFill className='arrow__icon' color='var(--lightpurple)' fontSize={25} />                            CapiShorts
                                 </button>
                             </>
                         }
                         {!isVideo &&
                             <>
                                 <button className='upload_button' type='button' onClick={handleVideoChange}>
-                                    <AiOutlineArrowLeft className='arrow__icon' color='var(--lightpurple)' fontSize={25} />
+                                    <HiUpload className='arrow__icon' color='var(--lightpurple)' fontSize={25} />
                                     Vídeo
                                 </button>
                                 <button className='upload_button_selected' type='button' onClick={handleShortsChange}>
-                                    <AiOutlineArrowLeft className='arrow__icon' color='var(--lightpurple)' fontSize={25} />                            CapiShorts
+                                    <BsFillFastForwardFill className='arrow__icon' color='var(--lightpurple)' fontSize={25} />                            CapiShorts
                                 </button>
                             </>
                         }
@@ -61,39 +75,73 @@ function Upload() {
                     <div className='upload__divider' />
                     {isVideo &&
                         <div className='upload__right__side__container'>
-                        <div>video</div>
-                        <div className='upload__next__buttons__box'>
-                            <Button
-                                label={"Cancelar"}
-                                // onClick={}
-                                type={"submit"}
-                                principal={false}
-                            />
-                            <Button
-                                label={"Próximo"}
-                                // onClick={}
-                                type={"submit"}
-                                principal={true}
-                            />
+                            <div className='upload__file__box'>
+                                <img
+                                    id="upload__image__preview"
+                                    ref={imagePreviewRef}
+                                    src="#"
+                                    alt="Preview da Imagem" />
+                                <InputFile
+                                    label={"Selecionar arquivo"}
+                                    radius={"10px"}
+                                    onChange={handleFileChange}
+                                    file={image}
+                                />
+                            </div>
+                            <div className='upload__next__buttons__box'>
+                                <div className='upload__next__button'>
+                                    <Button
+                                        label={"Cancelar"}
+                                        // onClick={}
+                                        type={"submit"}
+                                        principal={false}
+                                    />
+                                </div>
+                                <div className='upload__next__button'>
+                                    <Button
+                                        label={"Próximo"}
+                                        // onClick={}
+                                        type={"submit"}
+                                        principal={true}
+                                    />
+                                </div>
+                            </div>
                         </div>
-                    </div>
                     }
                     {!isVideo &&
                         <div className='upload__right__side__container'>
-                            <div>shorts</div>
-                            <div className='upload__next__buttons__box'>
-                                <Button
-                                    label={"Cancelar"}
-                                    // onClick={}
-                                    type={"submit"}
-                                    principal={false}
-                                />
-                                <Button
-                                    label={"Próximo"}
-                                    // onClick={}
-                                    type={"submit"}
-                                    principal={true}
-                                />
+                            <div className='upload__file__box__shorts'>
+                                <img
+                                    id="upload__image__preview__shorts"
+                                    ref={imagePreviewRef}
+                                    src="#"
+                                    alt="Preview da Imagem" />
+
+                                <div className='testeeeeee'>
+
+
+                                    <InputFile
+                                        label={"Selecionar arquivo"}
+                                        radius={"10px"}
+                                        onChange={handleFileChange}
+                                        file={image}
+                                    />
+                                    <div className='upload__next__buttons__box'>
+                                        <Button
+                                            label={"Cancelar"}
+                                            // onClick={}
+                                            type={"submit"}
+                                            principal={false}
+                                        />
+                                        <Button
+                                            label={"Próximo"}
+                                            // onClick={}
+                                            type={"submit"}
+                                            principal={true}
+                                        />
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     }
