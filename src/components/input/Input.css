@@ -16,7 +16,7 @@
     border: none;
     padding: 0 13px;
     outline: none;
-    border: 1px solid transparent;
+    border: 1px solid var(--darkblue);
     border-radius: 10px;
     transition: 0.2s ease-out;
 

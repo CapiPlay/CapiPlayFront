@@ -30,8 +30,9 @@ const Register = () => {
     const [image, setImage] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState("")
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
-
+    
     const [bPChooseCategory, setbPChooseCategory] = useState(false)
+    const [fileChanged, setFileChanged] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -69,13 +70,15 @@ const Register = () => {
         const file = e.target.files[0]
         if (file) {
             user.append("foto", file)
+            setFileChanged(true)
             setImage(user)
         }
     }
 
     const handleRemoveFile = (e) => {
         e.preventDefault()
-        user.append("foto", null)
+        user.delete("foto")
+        setFileChanged(!fileChanged)
         setImage(null)
     }
 
@@ -132,6 +135,7 @@ const Register = () => {
                                 onChange={handleFileChange}
                                 removeFile={handleRemoveFile}
                                 file={image}
+                                key={fileChanged.toString()}
                             />
                         </form>
                         <div className="container__button__register">
