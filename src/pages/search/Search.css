@@ -1,26 +1,27 @@
 .container__search {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: var(--darkpurple);
+    overflow: hidden;
 }
 
 .header__search {
     margin: 4%;
     width: 100%;
-    height: 20%;
+    height: 8%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 14px;
 }
 
-.container__last__search {
+.search__box {
     display: flex;
     gap: 12px;
-    margin: 4%;
+    margin: 5% 4%;
 }
 
-.container__last__search>span {
+.search__box>span {
     width: 100%;
     overflow: hidden;
     white-space: nowrap;

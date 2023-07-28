@@ -25,3 +25,10 @@
     background-color: transparent;
     border: transparent;
 }
+
+.icon__search {
+    cursor: pointer;
+    color: var(--lightpurple);
+    width: 20px;
+    height: 20px;
+}
