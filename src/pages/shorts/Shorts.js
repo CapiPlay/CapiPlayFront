@@ -73,9 +73,9 @@ const Shorts = ({ videoTitle }) => {
 
 
     const handleScrollUp = (event) => {
-        if (event.deltaY < 0 && currentVideoIndex !== 0) {
+        if (event.deltaY > 0 && currentVideoIndex !== 0) {
             handlePreviousVideo()
-        } else if (event.deltaY > 0 && currentVideoIndex !== videos.length - 1) {
+        } else if (event.deltaY < 0 && currentVideoIndex !== videos.length - 1) {
             handleNextVideo()
         }
     }
@@ -85,10 +85,10 @@ const Shorts = ({ videoTitle }) => {
     }
 
     const handleTouchMove = (event) => {
-        const deltaY = event.touches[0].clientY - startY;
-        if (deltaY < -50 && currentVideoIndex !== 0) {
+        const deltaY = event.touches[0].clientY - startY
+        if (deltaY > 50 && currentVideoIndex !== 0) {
             handlePreviousVideo()
-        } else if (deltaY > 50 && currentVideoIndex !== videos.length - 1) {
+        } else if (deltaY < -50 && currentVideoIndex !== videos.length - 1) {
             handleNextVideo()
         }
     }
