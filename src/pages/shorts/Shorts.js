@@ -153,7 +153,7 @@ const Shorts = ({ videoTitle }) => {
                         <span>{videos[currentVideoIndex].title}</span>
                     </div>
                     <div className='informations__profile__shorts'>
-                        <div className={`container__video ${transitioning ? 'transitioning' : ''}`}>
+                        <div className={`container__video ${transitioning ? 'transitioning' : ''}`}> {/*verificar aqui*/ }
                             <img src={imagePerfil} alt='Imagem de Perfil' />
                             <span>{videos[currentVideoIndex].profile}</span>
                         </div>
