@@ -8,8 +8,9 @@ function Slider_Category() {
 
   const settingsDesk = {
     slidesToShow: 5,
-    slidesToScroll: 3,
+    slidesToScroll: 1,
     swipeToSlide: true,
+    autoplay: true,
     arrows: false,
     responsive: [
       {
@@ -18,7 +19,7 @@ function Slider_Category() {
           arrows: false,
           centerPadding: '40px',
           slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToScroll: 1,
           swipeToSlide: true,
           arrows: false,
         }
@@ -29,7 +30,7 @@ function Slider_Category() {
           arrows: false,
           centerPadding: '40px',
           slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToScroll: 1,
           swipeToSlide: true,
           arrows: false,
         }

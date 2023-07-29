@@ -1,0 +1,9 @@
+.modal__profile__container {
+    width: 1000px;
+    height: 1000px;
+    right: 0;
+    top: 0;
+    position: absolute;
+    background-color: aqua;
+    border-radius: 10px;
+  }

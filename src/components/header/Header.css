@@ -106,10 +106,10 @@
 }
 
 .header__info div svg:hover {
-    padding: .5rem .5rem .5rem .5rem;
+    padding-bottom: 0.5rem;
 
     background-color: var(--darkpurplebackground);
-    border-radius: 50%;
+    border-radius: 50px;
 }
 
 .header__info img {
