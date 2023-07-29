@@ -1,4 +1,5 @@
 import Aos from 'aos';
+import './Modal_profile.css';
 import React, { useEffect, useState } from 'react'
 
 function Modal_profile() {
@@ -30,12 +31,12 @@ function Modal_profile() {
 
     const renderDesktopView = () => (
         <>
-            <div>
-                <img onClick={() => setOpenModal(openModal - 1)} src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
+            <div onClick={() => setOpenModal(openModal + 1)}>
+                <img onClick={() => setOpenModal(openModal + 1)} src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className='modal__profile__container'>
-
+                    A
                 </div>
             }
         </>
@@ -43,7 +44,7 @@ function Modal_profile() {
 
     const renderTabletView = () => (
         <>
-            <div onClick={() => setOpenModal(openModal - 1)}>
+            <div onClick={() => setOpenModal(openModal + 1)}>
                 <img src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
             </div>
             {verify() &&
@@ -57,7 +58,7 @@ function Modal_profile() {
 
     const renderMobileView = () => (
         <>
-            <div onClick={() => setOpenModal(openModal - 1)}>
+            <div onClick={() => setOpenModal(openModal + 1)}>
                 <img src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
             </div>
             {verify() &&

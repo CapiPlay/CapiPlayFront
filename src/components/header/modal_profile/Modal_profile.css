@@ -1,9 +1,25 @@
 .modal__profile__container {
-    width: 1000px;
-    height: 1000px;
-    right: 0;
-    top: 0;
-    position: absolute;
-    background-color: aqua;
-    border-radius: 10px;
-  }
+  --size: 100px;
+  --size2: 50px;
+  right: 10%;
+  top: 100%;
+  position: absolute;
+  width: var(--size);
+  height: calc(var(--size) * 0.66);
+  background-color: var(--darkblue);
+  border-radius: 10px;
+}
+
+.modal__profile__container:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 80%;
+  width: 0;
+  height: 0;
+  border: calc(var(--size2) * 0.13) solid transparent;
+  background-color: var(--darkblue);
+  border-top: 0;
+  margin-left: calc(var(--size2) * 0.13 * -1);
+  margin-top: calc(var(--size2) * 0.13 * -1);
+}
