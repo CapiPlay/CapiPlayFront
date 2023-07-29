@@ -52,7 +52,9 @@ function Upload() {
                         {isVideo &&
                             <>
                                 <button className='upload_button_selected' type='button' onClick={handleVideoChange}>
-                                    <HiUpload className='arrow__icon' color='var(--lightpurple)' fontSize={25} />
+                                    <div className='upload__icons__border'>
+                                        <HiUpload className='arrow__icon' color='var(--lightpurple)' fontSize={25} />
+                                    </div>
                                     Vídeo
                                 </button>
                                 <button className='upload_button' type='button' onClick={handleShortsChange}>
@@ -89,18 +91,18 @@ function Upload() {
                                 />
                             </div>
                             <div className='upload__next__buttons__box'>
-                                    <Button
-                                        label={"Cancelar"}
-                                        // onClick={}
-                                        type={"submit"}
-                                        principal={false}
-                                    />
-                                    <Button
-                                        label={"Próximo"}
-                                        // onClick={}
-                                        type={"submit"}
-                                        principal={true}
-                                    />
+                                <Button
+                                    label={"Cancelar"}
+                                    // onClick={}
+                                    type={"submit"}
+                                    principal={false}
+                                />
+                                <Button
+                                    label={"Próximo"}
+                                    // onClick={}
+                                    type={"submit"}
+                                    principal={true}
+                                />
                             </div>
                         </div>
                     }

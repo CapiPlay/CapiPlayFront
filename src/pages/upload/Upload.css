@@ -82,6 +82,12 @@
     gap: 1rem;
 }
 
+.upload__icons__border {
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    border: 2.5px solid var(--whitesmoke);
+}
+
 /* shorts */
 .upload__file__box__shorts {
     display: flex;
