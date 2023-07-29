@@ -43,9 +43,10 @@ const VideoDetails = () => {
         }
     }
     return (
-        <><HeaderSettings />
+        <>
             {verifyScreen() ?
                 <div className='settings__container'>
+                    <HeaderSettings />
                     <div className="settings__form">
                         <img src={ProfileImage} className='profile__settings' />
                         <div className='settings__box__image__options'>
@@ -107,51 +108,59 @@ const VideoDetails = () => {
                 </div>
                 :
                 <div className='settings__container__desktop'>
+                    <HeaderSettings />
                     <div className="settings__form__desktop">
                         <img src={ProfileImage} className='profile__settings__desktop' />
                         <div className='settings__box__image__options__desktop'>
                             <button className='settings__image__options__buttons__desktop'>Alterar</button>
                             <button className='settings__image__options__buttons__desktop'>Remover</button>
                         </div>
-                        <div class="settings__field__desktop">
-                            <Input
-                                placeholder={"Nome de usuário"}
-                                value={settingsData.nomeUsuario}
-                                onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
-                                type={"text"}
-                                required={true}
-                                className='settings__input__desktop'
-                            />
-                        </div>
-                        <div class="settings__field__desktop">
-                            <Input
-                                placeholder={"Nome do canal"}
-                                value={settingsData.nomeCanal}
-                                onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
-                                type={"text"}
-                                required={true}
-                                className='settings__input__desktop'
-                            />
-                        </div>
-                        <div class="settings__field__desktop">
-                            <Input
-                                placeholder={"Senha"}
-                                value={settingsData.senhaAtual}
-                                onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
-                                type={"password"}
-                                required={true}
-                                className='settings__input__desktop'
-                            />
-                        </div>
-                        <div class="settings__field__desktop">
-                            <Input
-                                placeholder={"Descrição do canal"}
-                                value={settingsData.descricao}
-                                onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
-                                type={"text"}
-                                required={true}
-                                className='settings__input__desktop'
-                            />
+                        <div className='settings__input__container__desktop'>
+                            <div className='settings__input__box'>
+                                <div class="settings__field__desktop">
+                                    <Input
+                                        placeholder={"Nome de usuário"}
+                                        value={settingsData.nomeUsuario}
+                                        onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
+                                        type={"text"}
+                                        required={true}
+                                        className='settings__input__desktop'
+                                    />
+                                </div>
+                                <div class="settings__field__desktop">
+                                    <Input
+                                        placeholder={"Nome do canal"}
+                                        value={settingsData.nomeCanal}
+                                        onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
+                                        type={"text"}
+                                        required={true}
+                                        className='settings__input__desktop'
+                                    />
+                                </div>
+                            </div>
+                            <div className='settings__input__box'>
+                                <div class="settings__field__desktop">
+                                    <Input
+                                        placeholder={"Senha"}
+                                        value={settingsData.senhaAtual}
+                                        onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
+                                        type={"password"}
+                                        required={true}
+                                        className='settings__input__desktop'
+                                    />
+                                </div>
+                                <div class="settings__field__desktop">
+                                    <Input
+                                        placeholder={"Descrição do canal"}
+                                        value={settingsData.descricao}
+                                        onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
+                                        type={"text"}
+                                        required={true}
+                                        className='settings__input__desktop'
+                                    />
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <hr className="solid" />
