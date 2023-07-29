@@ -70,7 +70,7 @@
 #upload__image__preview {
     display: none;
     width: 45vw; 
-    height: 41.5vh;
+    height: 50vhvh;
     border-radius: 1rem;
 }
 
@@ -79,10 +79,7 @@
     flex-direction: row;
     justify-content: space-between;
     width: 45vw;
-}
-
-.upload__next__button {
-    width: 48%;
+    gap: 1rem;
 }
 
 /* shorts */
@@ -92,19 +89,29 @@
     justify-content: space-around;
     align-items: center;
     width: 45vw;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 #upload__image__preview__shorts {
     display: none;
-    width: 15vw; 
-    height: 10vh;
+    width: 14rem; 
+    height: 60vh;
     border-radius: 1rem;
 }
 
-.testeeeeee {
+.upload__box__all__buttons__shorts {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    width: 60%;
+    gap: 1rem;
+}
+
+.upload__next__buttons__box__shorts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
 }

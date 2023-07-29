@@ -89,22 +89,18 @@ function Upload() {
                                 />
                             </div>
                             <div className='upload__next__buttons__box'>
-                                <div className='upload__next__button'>
                                     <Button
                                         label={"Cancelar"}
                                         // onClick={}
                                         type={"submit"}
                                         principal={false}
                                     />
-                                </div>
-                                <div className='upload__next__button'>
                                     <Button
                                         label={"Próximo"}
                                         // onClick={}
                                         type={"submit"}
                                         principal={true}
                                     />
-                                </div>
                             </div>
                         </div>
                     }
@@ -117,16 +113,14 @@ function Upload() {
                                     src="#"
                                     alt="Preview da Imagem" />
 
-                                <div className='testeeeeee'>
-
-
+                                <div className='upload__box__all__buttons__shorts'>
                                     <InputFile
                                         label={"Selecionar arquivo"}
                                         radius={"10px"}
                                         onChange={handleFileChange}
                                         file={image}
                                     />
-                                    <div className='upload__next__buttons__box'>
+                                    <div className='upload__next__buttons__box__shorts'>
                                         <Button
                                             label={"Cancelar"}
                                             // onClick={}
