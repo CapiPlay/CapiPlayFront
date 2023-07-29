@@ -22,7 +22,6 @@ const Historic = () => {
     const dateFormat = 'dd/MM/yy';
 
     // responsividade
-
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     useEffect(() => {

@@ -1,7 +1,7 @@
 import { BiSearchAlt2 } from "react-icons/bi"
 import "./InputSearch.css"
 import { useNavigate } from "react-router-dom"
-import ResultSearch from "../../pages/resultSearch/ResultSearch";
+import ResultSearch from "../tagsCarousel/TagsCarousel";
 import { useState } from "react";
 
 const InputSearch = ({ value, handleChange }) => {

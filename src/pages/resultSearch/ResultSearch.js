@@ -1,20 +1,11 @@
-const ResultSearch = () => {
+import "./ResultSearch.css"
+import TagsCarousel from "../../components/tagsCarousel/TagsCarousel";
 
-    const tags = [
-        "Roupas brancas", 
-        "Henrique e Juliano", 
-        "Comidas japonesas", 
-        "Seriados antigos"
-    ]
-    return (
-        <>
-            {tags && tags.map((tag) => (
-                <div className="container__tags__search">
-                    <span>{tag}</span>
-                </div>
-            ))}
-        </>
+const ResultSearch = () =>{
+    return(
+        <div className="container__result__search">
+            <TagsCarousel/>
+        </div>
     )
 }
-
 export default ResultSearch;

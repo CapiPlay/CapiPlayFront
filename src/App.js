@@ -12,6 +12,7 @@ import Search from './pages/search/Search'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
+import ResultSearch from './pages/resultSearch/ResultSearch';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/video-upload" element={<VideoUpload />} />
             <Route path="/search" element={<Search />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/result-search" element={<ResultSearch />} />
           </Routes>
         </BrowserRouter>
       </Provider>
