@@ -30,7 +30,7 @@ const Register = () => {
     const [image, setImage] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState("")
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
-    
+
     const [bPChooseCategory, setbPChooseCategory] = useState(false)
     const [fileChanged, setFileChanged] = useState(false)
 
@@ -56,6 +56,7 @@ const Register = () => {
 
     const register = (e) => {
         e.preventDefault()
+        alert("ENTREI NESSE CARALHO")
         setRegisterData({ ...registerData, foto: image })
         user.append("nome", registerData.nome)
         user.append("senha", registerData.senha)
@@ -63,7 +64,7 @@ const Register = () => {
         user.append("perfil", registerData.perfil)
         user.append("dataNascimento", registerData.dataNascimento)
         user.append("descricao", registerData.descricao)
-        nextStep()
+        // nextStep()
     }
 
     const handleFileChange = (e) => {
@@ -86,10 +87,10 @@ const Register = () => {
         <>
             {!bPChooseCategory &&
                 <div className="container__all__register" style={{ height: `${windowHeight}px` }}>
-                    <div className="container__register">
+                    <form className="container__register">
                         <h1>Cadastro</h1>
                         <h2>O Mundo dos Videos ao seu Alcance</h2>
-                        <form className="container__inputs__register">
+                        <div className="container__inputs__register">
                             <Input
                                 placeholder={"E-mail"}
                                 type={"email"}
@@ -137,10 +138,11 @@ const Register = () => {
                                 file={image}
                                 key={fileChanged.toString()}
                             />
-                        </form>
+                        </div>
                         <div className="container__button__register">
                             <Button
                                 label={"Cadastrar"}
+                                type={"submit"}
                                 principal={true}
                                 isActived={false}
                                 onClick={register}
@@ -163,7 +165,7 @@ const Register = () => {
                                 </Link>
                             </span>
                         </div>
-                    </div>
+                    </form>
                 </div>
             }
             {bPChooseCategory &&

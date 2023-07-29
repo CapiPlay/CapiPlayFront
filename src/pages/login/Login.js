@@ -33,17 +33,20 @@ const Login = ({ }) => {
     }, [])
 
     const login = () => {
-        try {
-            const res = dispatch(doLogin(loginData))
-            console.log(res)
-        } catch (err) {
-            console.log("Deu erro")
-        }
+
+        console.log("Entrei nesse caralho")
+
+        // try {
+        //     // const res = dispatch(doLogin(loginData))
+        //     // console.log(res)
+        // } catch (err) {
+        //     console.log("Deu erro")
+        // }
     }
 
     return (
         <div className="container__all__login" style={{ minHeight: `${windowHeight}px` }} >
-            <div className="container__login">
+            <form className="container__login">
                 <h1>Login</h1>
                 <h2>
                     O Mundo dos Vídeos ao seu Alcance!
@@ -96,7 +99,7 @@ const Login = ({ }) => {
                         </Link>
                     </span>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }

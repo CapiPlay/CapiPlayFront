@@ -44,7 +44,7 @@ export default userSlice.reducer
 
 export const doLogin = (userCredentials) => async (dispatch) => {
   try {
-    const response = await fakeLoginAPI(userCredentials)
+    const response = await _fakeLoginAPI(userCredentials)
     dispatch(login({ user: response.user, token: response.token }))
     return response
   } catch (error) {
@@ -52,7 +52,7 @@ export const doLogin = (userCredentials) => async (dispatch) => {
   }
 }
 
-const fakeLoginAPI = (userCredentials) => {
+const _fakeLoginAPI = (userCredentials) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (userCredentials.email === "user@example.com" && userCredentials.senha === "123456") {
