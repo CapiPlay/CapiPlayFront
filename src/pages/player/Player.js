@@ -7,7 +7,7 @@ import './Player.css'
 import Channel_component from './channel_component/Channel_component'
 import Description_component from './description_component/Description_component'
 import Divider_component from './divider_component/Divider_component'
-import Comments_component from './comments_componet/Comments_component'
+import Comments_component from './comments/Comments'
 import Video_card from '../../components/video_card/Video_card'
 import { BiArrowBack } from 'react-icons/bi'
 import Header from '../../components/header/Header'
@@ -35,8 +35,7 @@ function Player(video) {
       return true
     }
   }
-
-
+s
   //são apenas variáveis de exemplo, elas vão vir com o objeto 
   const video_title_var = 'Pingu.'
   const video_views_var = '57k'

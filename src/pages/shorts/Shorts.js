@@ -9,6 +9,7 @@ import imagePerfil from "../../assets/imagemPerfil.png"
 //componentes
 import ButtonSubmit from '../../components/buttonSubmit/ButtonSubmit'
 import Header from '../../components/header/Header'
+import CommentsComponent from '../../components/commentsComponent/CommentsComponent'
 
 //icons
 import { BiLike, BiDislike, BiCommentDetail } from "react-icons/bi"
@@ -51,6 +52,8 @@ const Shorts = ({ videoTitle }) => {
 
     const [transitioning, setTransitioning] = useState(false)
 
+    const [openModalComments, setOpenModalComments] = useState(true)
+
     const handleNextVideo = () => {
         if (!transitioning) {
             setTransitioning(true);
@@ -70,7 +73,6 @@ const Shorts = ({ videoTitle }) => {
             }, 500);
         }
     };
-
 
     const handleScrollUp = (event) => {
         if (event.deltaY < 0 && currentVideoIndex !== 0) {
@@ -166,6 +168,10 @@ const Shorts = ({ videoTitle }) => {
                     </div>
                 </div>
             </div>
+            {
+                openModalComments &&
+                <CommentsComponent />
+            }
         </div>
     )
 }

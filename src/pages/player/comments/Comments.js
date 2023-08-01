@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import './Comments_component.css'
+import './Comments.css'
 import { BiSolidDownArrow, BiSolidUpArrow, BiDislike, BiLike } from 'react-icons/bi'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
-function Comments_component(video) {
+function Comments(video) {
     const [showMore, setShowMore] = useState(false);
 
     //são apenas variáveis de exemplo, elas vão vir com o objeto
@@ -50,4 +50,4 @@ function Comments_component(video) {
   )
 }
 
-export default Comments_component
+export default Comments
