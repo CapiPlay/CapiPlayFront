@@ -156,14 +156,12 @@ const Shorts = ({ videoTitle }) => {
                         <span>{videos[currentVideoIndex].title}</span>
                     </div>
                     <div className='informations__profile__shorts'>
-                        <div className={`container__video ${transitioning ? 'transitioning' : ''}`}> {/*verificar aqui*/}
-                            <div className='profile__shorts'>
-                                <img src={imagePerfil} alt='Imagem de Perfil' />
-                                <span>{videos[currentVideoIndex].profile}</span>
-                            </div>
-                            <div className='button__submit__shorts'>
-                                <ButtonSubmit label={'Inscrever-se'} onClick={null} />
-                            </div>
+                        <div className='profile__shorts'>
+                            <img src={imagePerfil} alt='Imagem de Perfil' />
+                            <span>{videos[currentVideoIndex].profile}</span>
+                        </div>
+                        <div className='button__submit__shorts'>
+                            <ButtonSubmit label={'Inscrever-se'} onClick={null} />
                         </div>
                     </div>
                 </div>
