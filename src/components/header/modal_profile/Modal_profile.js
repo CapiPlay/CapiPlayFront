@@ -35,8 +35,10 @@ function Modal_profile() {
                 <img onClick={() => setOpenModal(openModal + 1)} src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
             </div>
             {verify() &&
-                <div className='modal__profile__container'>
-                    A
+                <div className="background" onClick={() => setOpenModal(openModal - 1)}>
+                    <div className='modal__profile__container'>
+                        A
+                    </div>
                 </div>
             }
         </>
@@ -48,8 +50,10 @@ function Modal_profile() {
                 <img src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
             </div>
             {verify() &&
-                <div className='modal__profile__container'>
-                    
+                <div className="background" onClick={() => setOpenModal(openModal - 1)}>
+                    <div className='modal__profile__container'>
+                        A
+                    </div>
                 </div>
             }
 
@@ -62,8 +66,10 @@ function Modal_profile() {
                 <img src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
             </div>
             {verify() &&
-                <div className='modal__profile__container'>
-
+                <div className="background" onClick={() => setOpenModal(openModal - 1)}>
+                    <div className='modal__profile__container'>
+                        A
+                    </div>
                 </div>
             }
         </>
