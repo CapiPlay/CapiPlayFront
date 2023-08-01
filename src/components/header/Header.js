@@ -4,7 +4,9 @@ import { GiHamburgerMenu } from 'react-icons/gi'
 import { AiOutlineSearch } from 'react-icons/ai'
 import './Header.css'
 
-function Header() {
+//imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
+//ser passada para o header para ser exibida 
+function Header({imageProfile}) {
 
     return (
         <div className='header__container'>

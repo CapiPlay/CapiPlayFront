@@ -41,55 +41,58 @@ const Shorts = ({ videoTitle }) => {
         },
     ]
 
-    const [windowHeight, setWindowHeight] = useState(window.innerHeight);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [headerAppearing, setHeaderAppearing] = useState(window.innerWidth >= 768);
-    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-    const [startY, setStartY] = useState(0);
+    const [windowHeight, setWindowHeight] = useState(window.innerHeight)
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
-    const [transitioning, setTransitioning] = useState(false);
+    const [headerAppearing, setHeaderAppearing] = useState(window.innerWidth >= 768)
 
-  const handleNextVideo = () => {
-    if (!transitioning) {
-      setTransitioning(true);
-      setTimeout(() => {
-        setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
-        setTransitioning(false);
-      }, 500); // Change this value to adjust the transition duration
-    }
-  };
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+    const [startY, setStartY] = useState(0)
 
-  const handlePreviousVideo = () => {
-    if (!transitioning) {
-      setTransitioning(true);
-      setTimeout(() => {
-        setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length);
-        setTransitioning(false);
-      }, 500); // Change this value to adjust the transition duration
-    }
-  };
+    const [transitioning, setTransitioning] = useState(false)
+
+    const handleNextVideo = () => {
+        if (!transitioning) {
+            setTransitioning(true);
+            setTimeout(() => {
+                setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
+                setTransitioning(false);
+            }, 500);
+        }
+    };
+
+    const handlePreviousVideo = () => {
+        if (!transitioning) {
+            setTransitioning(true);
+            setTimeout(() => {
+                setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length);
+                setTransitioning(false);
+            }, 500);
+        }
+    };
 
 
     const handleScrollUp = (event) => {
-        if (event.deltaY < 0) {
+        if (event.deltaY < 0 && currentVideoIndex !== 0) {
             handlePreviousVideo()
-        } else {
+        } else if (event.deltaY > 0 && currentVideoIndex !== videos.length - 1) {
             handleNextVideo()
         }
     }
 
     const handleTouchStart = (event) => {
-        setStartY(event.touches[0].clientY)
-    }
+        setStartY(event.touches[0].clientY);
+        setTransitioning(false); // Adicione esta linha para evitar problemas de transição
+    };
 
     const handleTouchMove = (event) => {
         const deltaY = event.touches[0].clientY - startY;
-        if (deltaY < -50) {
+        if (deltaY > -50 && currentVideoIndex !== 0) {
+            handlePreviousVideo();
+        } else if (deltaY < 50 && currentVideoIndex !== videos.length - 1) {
             handleNextVideo();
-        } else if (deltaY > 50) {
-            handlePreviousVideo()
         }
-    }
+    };
 
     useEffect(() => {
         const handleResize = () => {
@@ -136,7 +139,7 @@ const Shorts = ({ videoTitle }) => {
                     </button>
                 </div>
             )}
-            <div className='container__video'>
+            <div className={`container__video ${transitioning ? 'transitioning' : ''}`}>
                 <img src={videos[currentVideoIndex].image} alt='Imagem shorts' />
                 <div className='container__icons__shorts'>
                     <div>
@@ -153,12 +156,14 @@ const Shorts = ({ videoTitle }) => {
                         <span>{videos[currentVideoIndex].title}</span>
                     </div>
                     <div className='informations__profile__shorts'>
-                        <div className={`container__video ${transitioning ? 'transitioning' : ''}`}> {/*verificar aqui*/ }
-                            <img src={imagePerfil} alt='Imagem de Perfil' />
-                            <span>{videos[currentVideoIndex].profile}</span>
-                        </div>
-                        <div className='button__submit__shorts'>
-                            <ButtonSubmit label={'Inscrever-se'} onClick={null} />
+                        <div className={`container__video ${transitioning ? 'transitioning' : ''}`}> {/*verificar aqui*/}
+                            <div className='profile__shorts'>
+                                <img src={imagePerfil} alt='Imagem de Perfil' />
+                                <span>{videos[currentVideoIndex].profile}</span>
+                            </div>
+                            <div className='button__submit__shorts'>
+                                <ButtonSubmit label={'Inscrever-se'} onClick={null} />
+                            </div>
                         </div>
                     </div>
                 </div>
