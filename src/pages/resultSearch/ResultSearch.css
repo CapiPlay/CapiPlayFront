@@ -4,3 +4,28 @@
     background-color: var(--darkpurple);
     overflow: hidden;
 }
+
+.tags__carousel__search{
+    margin-top: 10%;
+}
+
+.container__filter{
+    margin: 5%;
+    width: 20%;
+    gap: 5%;
+    padding: 2%;
+    border: solid 2px var(--purple);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container__filter>span{
+    font-size: 12px;
+}
+
+.table__header__filter>th{
+    text-align: justify;
+    width: 20rem;
+}

@@ -5,16 +5,20 @@
 }
 
 .tags__search {
+    margin-left: 10%;
     background-color: var(--lightpurple);
-    width: 8rem;
-    height: 1rem;
     border-radius: 25px;
     text-align: center;
-}
+    height: 1.4rem;
+    min-width: 6rem; 
+    max-width: 8rem;
 
-.tags__search>span{
-    font-size: 12px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.tags__search>span {
+    padding: 5%;
+    font-size: 12px;
 }
