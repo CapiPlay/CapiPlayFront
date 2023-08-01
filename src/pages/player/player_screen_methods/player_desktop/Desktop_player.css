@@ -40,6 +40,10 @@ background: linear-gradient(180deg, rgba(31,29,43,1) 0%, rgba(49,37,79,1) 88%);
     font-size: 2rem;
 }
 
+.space{
+    height: 50px;
+}
+
 .interaction__info{
     display: flex;
     gap: 0.5rem;

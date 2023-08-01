@@ -21,6 +21,7 @@ function Desktop_player(video) {
 
     return (
         <><Header></Header>
+        <div className='space'></div>
             <div className='things'>
                 <div>
                     <div>
