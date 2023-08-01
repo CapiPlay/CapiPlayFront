@@ -43,34 +43,66 @@ const Shorts = ({ videoTitle }) => {
 
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
     const [headerAppearing, setHeaderAppearing] = useState(window.innerWidth >= 768)
+
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+    const [startY, setStartY] = useState(0)
+
+    const [transitioning, setTransitioning] = useState(false)
 
     const handleNextVideo = () => {
-        setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length)
-    }
+        if (!transitioning) {
+            setTransitioning(true);
+            setTimeout(() => {
+                setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
+                setTransitioning(false);
+            }, 500);
+        }
+    };
 
     const handlePreviousVideo = () => {
-        setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length)
-    }
+        if (!transitioning) {
+            setTransitioning(true);
+            setTimeout(() => {
+                setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length);
+                setTransitioning(false);
+            }, 500);
+        }
+    };
+
 
     const handleScrollUp = (event) => {
-        if (event.deltaY < 0) {
+        if (event.deltaY < 0 && currentVideoIndex !== 0) {
             handlePreviousVideo()
-        } else {
+        } else if (event.deltaY > 0 && currentVideoIndex !== videos.length - 1) {
             handleNextVideo()
+        }
+    }
+
+    const handleTouchStart = (event) => {
+        setStartY(event.touches[0].clientY);
+        setTransitioning(false); // Adicione esta linha para evitar problemas de transição
+    };
+
+    const handleTouchMove = (event) => {
+        const deltaY = event.touches[0].clientY - startY;
+        if (deltaY > -50 && currentVideoIndex !== 0) {
+            handlePreviousVideo();
+        } else if (deltaY < 50 && currentVideoIndex !== videos.length - 1) {
+            handleNextVideo();
         }
     };
 
     useEffect(() => {
         const handleResize = () => {
-            setWindowWidth(window.innerWidth);
+            setWindowWidth(window.innerWidth)
         }
 
         window.addEventListener('resize', handleResize)
 
         return () => {
-            window.removeEventListener('resize', handleResize)
+            window.removeEventListener('resize', handleResize);
         }
     }, [])
 
@@ -83,6 +115,8 @@ const Shorts = ({ videoTitle }) => {
             className='container__all__shorts'
             style={{ minHeight: `${windowHeight}px` }}
             onWheel={handleScrollUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
         >
             {headerAppearing && <Header />}
             {headerAppearing && (
@@ -105,7 +139,7 @@ const Shorts = ({ videoTitle }) => {
                     </button>
                 </div>
             )}
-            <div className='container__video'>
+            <div className={`container__video ${transitioning ? 'transitioning' : ''}`}>
                 <img src={videos[currentVideoIndex].image} alt='Imagem shorts' />
                 <div className='container__icons__shorts'>
                     <div>
