@@ -1,3 +1,4 @@
+import Comments from '../../pages/player/comments/Comments'
 import '../commentsComponent/CommentsComponent.css'
 
 //icons
@@ -12,7 +13,7 @@ const CommentsComponent = () => {
                 <IoMdClose color="var(--white)" />
             </div>
             <div>
-                
+                <Comments />
             </div>
         </div>
     )
