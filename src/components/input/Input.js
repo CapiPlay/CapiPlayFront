@@ -10,10 +10,18 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
   const hasValue = value && value.length > 0
 
   const maxYear = new Date().getFullYear() - 6
-  const minYear = new Date().getFullYear - 150
+  const minYear = new Date().getFullYear() - 150
   const month = new Date().getMonth() + 1
   const day = new Date().getDate()
 
+  useEffect(() => {
+
+    if(value) {
+      setLabelColor({ color: "#BF94FF" })
+      setInputBorderColor({ borderColor: "#BF94FF" })
+    }
+
+  }, [])
 
   useEffect(() => {
     const handleFocus = () => {
@@ -60,9 +68,9 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
     if (isValidDate) {
       onChange(event)
     } else {
-        const updatedEvent = { ...event }
-        updatedEvent.target.value = ""
-        onChange(updatedEvent)
+      const updatedEvent = { ...event }
+      updatedEvent.target.value = ""
+      onChange(updatedEvent)
     }
   }
 
@@ -73,8 +81,7 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
       const maxDate = new Date(`${maxYear}-${month}-${day}`)
       const minDate = new Date(`${minYear}-${month}-${day}`)
 
-      if (inputDate > maxDate || (inputDate < minDate && String(yearInputDate).length === 4)) {
-        console.log("Entrei, pois sou minimo")
+      if ((inputDate > maxDate || inputDate < minDate) && String(yearInputDate).length === 4) {
         return false
       }
     }
@@ -87,12 +94,13 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
         className="input__control"
         type={inputType}
         value={value}
-        onChange={handleInputChange}
+        onChange={(e) => handleInputChange(e)}
         onClick={onClick}
         enable={enable}
         required={required}
         ref={ref}
         style={inputBorderColor}
+        placeholder={placeholder}
         name={name}
         max={type === "date" ? `${maxYear}-${month}-${day}` : undefined}
         min={type === "date" ? `${minYear}-${month}-${day}` : undefined}

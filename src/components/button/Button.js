@@ -7,7 +7,6 @@ import "./Button.css"
 // isActived: Um valor booleano indicando se o botão está ativo. Se definido como false, o botão será estilizado como inativo. O padrão é true.
 // principal: Um valor booleano indicando se o botão é o botão principal. O botão principal é estilizado de forma diferente dos outros botões. O padrão é true.
 // type: O tipo do botão, como "button", "submit" ou "reset". O padrão é "button".
-
 const Button = ({ label, onClick, isActived, principal, type }) => {
 
     const [style, setStyle] = useState({
@@ -32,6 +31,7 @@ const Button = ({ label, onClick, isActived, principal, type }) => {
             type={type}
             onClick={onClick}
             style={style}
+            aria-label={"Botão " + label}
         >{label}</button>
     )
 }
