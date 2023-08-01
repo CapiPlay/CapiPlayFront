@@ -8,8 +8,34 @@ import ProfileImage from '../../assets/image/CapiPlay.png'
 import HeaderSettings from './header/HeaderSettings'
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
+import UserService from './../../service/Index'
 
-const VideoDetails = () => {
+const VideoDetails = ({ usuario }) => {
+
+  const { id } = useParams();
+
+  function edit(event) {
+    event.preventDefault()
+    UserService.editar(id, user)
+    alert("Editado")
+  }
+
+  const editarUsuario = (event) => {
+    setCard({ ...card, [event.target.name]: event.target.value })
+  }
+
+  useEffect(() => {
+    const getCarta = async () => {
+      console.log(id)
+      await CardService.searchOne(id).then(response => {
+        setCard(response.data);
+      }).catch(error => {
+        console.error(error);
+      })
+    }
+    getCarta()
+  }, [id])
+
 
     const obj = {
         email: 'eeeee',
@@ -34,7 +60,7 @@ const VideoDetails = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-
+    
     const verifyScreen = () => {
         if (screenSize.width > 900) {
             return false
@@ -47,52 +73,46 @@ const VideoDetails = () => {
             {verifyScreen() ?
                 <div className='settings__container'>
                     <HeaderSettings />
-                    <div className="settings__form">
-                        <img src={ProfileImage} className='profile__settings' />
-                        <div className='settings__box__image__options'>
-                            <button className='settings__image__options__buttons'>Alterar</button>
-                            <button className='settings__image__options__buttons'>Remover</button>
-                        </div>
-                        <div class="settings__field">
-                            <Input
-                                placeholder={"Nome de usuário"}
-                                value={settingsData.nomeUsuario}
-                                onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
-                                type={"text"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        </div>
-                        <div class="settings__field">
-                            <Input
-                                placeholder={"Nome do canal"}
-                                value={settingsData.nomeCanal}
-                                onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
-                                type={"text"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        </div>
-                        <div class="settings__field">
-                            <Input
-                                placeholder={"Senha"}
-                                value={settingsData.senhaAtual}
-                                onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
-                                type={"password"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        </div>
-                        <div class="settings__field">
-                            <Input
-                                placeholder={"Descrição do canal"}
-                                value={settingsData.descricao}
-                                onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
-                                type={"text"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        </div>
+                    <div className="settings__form" >
+                        {usuarios.map((usuario) => (
+                            <div key={usuario.id} >
+                                <img src={ProfileImage} className='profile__settings' /><div className='settings__box__image__options'>
+                                    <button className='settings__image__options__buttons'>Alterar</button>
+                                    <button className='settings__image__options__buttons'>Remover</button>
+                                </div><div class="settings__field">
+                                    <Input
+                                        placeholder={"Nome de usuário"}
+                                        value={usuario.nome}
+                                        onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
+                                        type={"text"}
+                                        required={true}
+                                        className='settings__input' />
+                                </div><div class="settings__field">
+                                    <Input
+                                        placeholder={"Nome do canal"}
+                                        value={settingsData.nomeCanal}
+                                        onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
+                                        type={"text"}
+                                        required={true}
+                                        className='settings__input' />
+                                </div><div class="settings__field">
+                                    <Input
+                                        placeholder={"Senha"}
+                                        value={usuario.senha}
+                                        onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
+                                        type={"password"}
+                                        required={true}
+                                        className='settings__input' />
+                                </div><div class="settings__field">
+                                    <Input
+                                        placeholder={"Descrição do canal"}
+                                        value={settingsData.descricao}
+                                        onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
+                                        type={"text"}
+                                        required={true}
+                                        className='settings__input' />
+                                </div></div>
+                        ))}
                     </div>
                     <br />
                     <hr class="solid" />
@@ -110,58 +130,63 @@ const VideoDetails = () => {
                 <div className='settings__container__desktop'>
                     <HeaderSettings />
                     <div className="settings__form__desktop">
-                        <img src={ProfileImage} className='profile__settings__desktop' />
-                        <div className='settings__box__image__options__desktop'>
-                            <button className='settings__image__options__buttons__desktop'>Alterar</button>
-                            <button className='settings__image__options__buttons__desktop'>Remover</button>
-                        </div>
-                        <div className='settings__input__container__desktop'>
-                            <div className='settings__input__box'>
-                                <div class="settings__field__desktop">
-                                    <Input
-                                        placeholder={"Nome de usuário"}
-                                        value={settingsData.nomeUsuario}
-                                        onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
-                                        type={"text"}
-                                        required={true}
-                                        className='settings__input__desktop'
-                                    />
+                        {usuarios.map((usuario) => (
+                            <div key={usuario.id} >
+                                <img src={ProfileImage} className='profile__settings__desktop' />
+                                <div className='settings__box__image__options__desktop'>
+                                    <button className='settings__image__options__buttons__desktop'>Alterar</button>
+                                    <button className='settings__image__options__buttons__desktop'>Remover</button>
                                 </div>
-                                <div class="settings__field__desktop">
-                                    <Input
-                                        placeholder={"Nome do canal"}
-                                        value={settingsData.nomeCanal}
-                                        onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
-                                        type={"text"}
-                                        required={true}
-                                        className='settings__input__desktop'
-                                    />
+                                <div className='settings__input__container__desktop'>
+                                    <div className='settings__input__box'>
+                                        <div class="settings__field__desktop">
+                                            <Input
+                                                placeholder={"Nome de usuário"}
+                                                value={usuario.nome}
+                                                onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
+                                                type={"text"}
+                                                required={true}
+                                                className='settings__input__desktop'
+                                            />
+                                        </div>
+                                        <div class="settings__field__desktop">
+                                            <Input
+                                                placeholder={"Nome do canal"}
+                                                value={settingsData.nomeCanal}
+                                                onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
+                                                type={"text"}
+                                                required={true}
+                                                className='settings__input__desktop'
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className='settings__input__box'>
+                                        <div class="settings__field__desktop">
+                                            <Input
+                                                placeholder={"Senha"}
+                                                value={usuario.senha}
+                                                onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
+                                                type={"password"}
+                                                required={true}
+                                                className='settings__input__desktop'
+                                            />
+                                        </div>
+                                        <div class="settings__field__desktop">
+                                            <Input
+                                                placeholder={"Descrição do canal"}
+                                                value={settingsData.descricao}
+                                                onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
+                                                type={"text"}
+                                                required={true}
+                                                className='settings__input__desktop'
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className='settings__input__box'>
-                                <div class="settings__field__desktop">
-                                    <Input
-                                        placeholder={"Senha"}
-                                        value={settingsData.senhaAtual}
-                                        onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
-                                        type={"password"}
-                                        required={true}
-                                        className='settings__input__desktop'
-                                    />
-                                </div>
-                                <div class="settings__field__desktop">
-                                    <Input
-                                        placeholder={"Descrição do canal"}
-                                        value={settingsData.descricao}
-                                        onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
-                                        type={"text"}
-                                        required={true}
-                                        className='settings__input__desktop'
-                                    />
-                                </div>
-                            </div>
 
-                        </div>
+
+                            </div>
+                        ))}
                     </div>
                     <hr className="solid" />
                     <div className='settings__options__buttons__container'>

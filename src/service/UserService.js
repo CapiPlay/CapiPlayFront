@@ -8,7 +8,14 @@ const UserService = {
         } catch (err) {
             console.error(err)
         }
+    }, 
+    editar: function(id, credentialUser){
+        axios.put(url + '/' + credentialUser + '/' + id).then((response) => {
+            return response.data
+        })
     }
+
+
 }
 
 export default UserService 
