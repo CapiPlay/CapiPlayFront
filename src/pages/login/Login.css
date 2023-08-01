@@ -2,20 +2,19 @@
 /* Containers */
 .container__all__login {
     box-sizing: border-box;
-    width: 100%;
+    width: 100%;    
     background-color: var(--darkpurple);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 .container__login {
     width: 20rem;
-    height: 35rem;
     color: var(--whitesmoke);
+        
 
     display: flex;
     align-items: center;

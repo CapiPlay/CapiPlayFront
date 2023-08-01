@@ -15,6 +15,7 @@ import ChooseCategory from "./chooseCategory/ChooseCategory"
 
 const Register = () => {
 
+    const user = new FormData()
     const objRegister = {
         nome: "",
         senha: "",
@@ -26,11 +27,12 @@ const Register = () => {
     }
 
     const [registerData, setRegisterData] = useState(objRegister)
-    const [image, setImage] = useState()
+    const [image, setImage] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState("")
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
-
+    
     const [bPChooseCategory, setbPChooseCategory] = useState(false)
+    const [fileChanged, setFileChanged] = useState(false)
 
     useEffect(() => {
         const handleResize = () => {
@@ -52,20 +54,32 @@ const Register = () => {
         setbPChooseCategory(!bPChooseCategory)
     }
 
-    const register = () => {
+    const register = (e) => {
+        e.preventDefault()
         setRegisterData({ ...registerData, foto: image })
+        user.append("nome", registerData.nome)
+        user.append("senha", registerData.senha)
+        user.append("email", registerData.email)
+        user.append("perfil", registerData.perfil)
+        user.append("dataNascimento", registerData.dataNascimento)
+        user.append("descricao", registerData.descricao)
         nextStep()
-        console.log(registerData)
-        alert("")
     }
 
     const handleFileChange = (e) => {
         const file = e.target.files[0]
         if (file) {
-            const formData = new FormData()
-            formData.append("foto", file)
-            setImage(formData)
+            user.append("foto", file)
+            setFileChanged(true)
+            setImage(user)
         }
+    }
+
+    const handleRemoveFile = (e) => {
+        e.preventDefault()
+        user.delete("foto")
+        setFileChanged(!fileChanged)
+        setImage(null)
     }
 
     return (
@@ -119,7 +133,9 @@ const Register = () => {
                                 label={"Foto de perfil"}
                                 radius={"20px"}
                                 onChange={handleFileChange}
+                                removeFile={handleRemoveFile}
                                 file={image}
+                                key={fileChanged.toString()}
                             />
                         </form>
                         <div className="container__button__register">
@@ -137,7 +153,7 @@ const Register = () => {
                         </div>
                         <div className="container__other__register">
                             <div><FaFacebookF style={{ height: "1.5rem" }} /></div>
-                            <div><FaGoogle style={{ height: "2rem" }} /></div>
+                            <div><FaGoogle style={{ fontSize: "1.5rem" }} /></div>
                         </div>
                         <div className="container__login__register">
                             <span>Já possui uma conta?</span>

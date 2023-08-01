@@ -1,13 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
-import Header from './header/Header';
-import HeaderDesk from '../../components/header/Header';
+import Header from '../../components/header/Header';
 import './Home.css';
 import Slider from './slider/Slider';
 import Video_card from '../../components/video_card/Video_card';
 import Side_Bar from './side_bar/Side_Bar';
 import Slider_Category from './slider_category/Slider_Category';
-import Header_Tablet from './header_tablet/Header_Tablet';
 import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
 
 function Home() {
@@ -26,8 +24,9 @@ function Home() {
 
   const renderDesktopView = () => (
     <>
-      <HeaderDesk />
+      <Header />
       <Side_Bar />
+      <div className='container__header__home'></div>
       <div className='container__home'>
         <div className='container__slider__base__desk'>
           <Slider_Category />
@@ -54,7 +53,7 @@ function Home() {
 
   const renderTabletView = () => (
     <>
-      <Header_Tablet />
+      <Header />
       <div className='container__home'>
         <div className='container__slider__base__tablet'>
           <Slider_Category />

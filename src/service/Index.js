@@ -1,1 +1,2 @@
-export * from "./HistoricService";
+export * from "./HistoricService"
+export * from "./UserService"

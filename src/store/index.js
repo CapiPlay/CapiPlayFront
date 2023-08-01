@@ -1,11 +1,16 @@
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit"
 
-function reducer() {
-    return [
+// Slice
+import userSlice from "./features/user/userSlice"
+import engagementSlice from "./features/engagement/engagementSlice"
+import videoSlice from "./features/video/videoSlice"
 
-    ]
-}
-
-const store = createStore(reducer)
+const store = configureStore({
+  reducer: {
+    user: userSlice,
+    engagement: engagementSlice,
+    video: videoSlice
+  },
+})
 
 export default store
