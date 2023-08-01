@@ -11,6 +11,9 @@ const CommentsComponent = () => {
                 <span>Comentários</span>
                 <IoMdClose color="var(--white)" />
             </div>
+            <div>
+                
+            </div>
         </div>
     )
 
