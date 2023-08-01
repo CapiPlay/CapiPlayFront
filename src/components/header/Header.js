@@ -6,8 +6,9 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import './Header.css'
 import Modal_profile from './modal_profile/Modal_profile';
 
-
-function Header() {
+//imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
+//ser passada para o header para ser exibida 
+function Header({imageProfile}) {
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
