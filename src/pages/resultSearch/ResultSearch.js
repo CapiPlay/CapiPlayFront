@@ -18,17 +18,17 @@ const ResultSearch = () => {
             {
                 openFilter &&
                 <>
-                    <table>
+                    <div className="container__table__filter"></div>
+                    <table className="table__filters">
                         <tr className="table__header__filter">
+                            <th>Tipo</th>
                             <th>Data</th>
                             <th>Duração</th>
-                            <th>Tipo</th>
                         </tr>
                         <td>
-                            <tr>Hoje</tr>
-                            <tr>Esta semana</tr>
-                            <tr>Este mês</tr>
-                            <tr>Este ano</tr>
+                            <tr>Vídeo</tr>
+                            <tr>CapiShorts</tr>
+                            <tr>Canal</tr>
                         </td>
                         <td>
                             <tr>Hoje</tr>
@@ -37,10 +37,9 @@ const ResultSearch = () => {
                             <tr>Este ano</tr>
                         </td>
                         <td>
-                            <tr>Hoje</tr>
-                            <tr>Esta semana</tr>
-                            <tr>Este mês</tr>
-                            <tr>Este ano</tr>
+                            <tr>Menos de 5min.</tr>
+                            <tr>De 5 a 20min.</tr>
+                            <tr>Mais de 20min.</tr>
                         </td>
                     </table>
                 </>

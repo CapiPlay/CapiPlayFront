@@ -19,6 +19,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    user-select: none;
+    cursor: pointer;
 }
 
 .container__filter>span{
@@ -27,5 +30,31 @@
 
 .table__header__filter>th{
     text-align: justify;
-    width: 20rem;
+    min-width: 7.6rem;
+    color: var(--lightpurple);
+}
+
+.teste{
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+
+.table__filters{
+    margin: 5%;
+}
+
+.container__table__filter{
+    margin-top: -50px;
+    left: 0;
+    animation: expos__filter .5s forwards;
+}
+
+@keyframes expos__filter {
+    0%{
+        margin-top: -50px;
+    }
+    100%{
+        margin-top: 0; 
+    }
 }
