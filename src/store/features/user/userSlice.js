@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import UserService from "../../../service/UserService"
 
 // Estado inicial do usuário
 const initialState = {
@@ -42,7 +43,7 @@ const userSlice = createSlice({
 export const { login, logout, signup } = userSlice.actions // ações do usuário
 export default userSlice.reducer
 
-export const doLogin = (userCredentials) => async (dispatch) => {
+const doLogin = (userCredentials) => async (dispatch) => {
   try {
     const response = await _fakeLoginAPI(userCredentials)
     dispatch(login({ user: response.user, token: response.token }))
@@ -70,11 +71,18 @@ const _fakeLoginAPI = (userCredentials) => {
   })
 }
 
-export const doSignup = (newUser) => async (dispatch) => {
+const doSignup = (newUser) => async (dispatch) => {
   try {
-    const res = newUser
-    dispatch(signup({ user: res.value, token: res.token }))
+    const res = await UserService.criar(newUser)
+    console.log(res)
+    const user = res.data
+    dispatch(signup({ user: user, token: user.nome }))
   } catch (err) {
     console.error(err)
   }
+}
+
+export {
+  doSignup,
+  doLogin
 }

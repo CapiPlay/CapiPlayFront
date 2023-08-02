@@ -13,6 +13,10 @@ import { FaFacebookF } from 'react-icons/fa'
 import { FaGoogle } from 'react-icons/fa'
 import ChooseCategory from "./chooseCategory/ChooseCategory"
 
+// Lógica
+import { useDispatch } from "react-redux"
+import { doSignup } from "../../store/features/user/userSlice"
+
 const Register = () => {
 
     const user = new FormData()
@@ -30,9 +34,9 @@ const Register = () => {
     const [image, setImage] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState("")
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
-
     const [bPChooseCategory, setbPChooseCategory] = useState(false)
     const [fileChanged, setFileChanged] = useState(false)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const handleResize = () => {
@@ -56,14 +60,20 @@ const Register = () => {
 
     const register = (e) => {
         e.preventDefault()
-        alert("ENTREI NESSE CARALHO")
+        console.log("Entrei para registrar")
         setRegisterData({ ...registerData, foto: image })
         user.append("nome", registerData.nome)
         user.append("senha", registerData.senha)
         user.append("email", registerData.email)
         user.append("perfil", registerData.perfil)
         user.append("dataNascimento", registerData.dataNascimento)
-        user.append("descricao", registerData.descricao)
+
+        try {
+            const res = dispatch(doSignup(user))
+        } catch(err) {
+            console.error(err)
+        }
+
         // nextStep()
     }
 
