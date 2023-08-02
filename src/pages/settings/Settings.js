@@ -12,6 +12,8 @@ import UserService from './../../service/Index'
 
 const VideoDetails = ({ usuario }) => {
 
+    const [usuario, setUsuario] = useState({});
+
   const { id } = useParams();
 
   function edit(event) {
@@ -21,19 +23,19 @@ const VideoDetails = ({ usuario }) => {
   }
 
   const editarUsuario = (event) => {
-    setCard({ ...card, [event.target.name]: event.target.value })
+    setCard({ ...usuario, [event.target.name]: event.target.value })
   }
 
   useEffect(() => {
-    const getCarta = async () => {
+    const getUsuario = async () => {
       console.log(id)
-      await CardService.searchOne(id).then(response => {
-        setCard(response.data);
+      await Usuario.buscarUm(id).then(response => {
+        setUsuario(response.data);
       }).catch(error => {
         console.error(error);
       })
     }
-    getCarta()
+    getUsuario()
   }, [id])
 
 
