@@ -34,12 +34,6 @@
     color: var(--lightpurple);
 }
 
-.teste{
-    position: relative;
-    width: fit-content;
-    height: fit-content;
-}
-
 .table__filters{
     margin: 5%;
 }
