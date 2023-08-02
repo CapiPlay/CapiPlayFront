@@ -53,7 +53,7 @@ function Upload() {
                             <>
                                 <button className='upload_button_selected' type='button' onClick={handleVideoChange}>
                                     <div className='upload__icons__border'>
-                                        <HiUpload className='arrow__icon' color='var(--lightpurple)' fontSize={25} />
+                                        <HiUpload className='arrow__icon' color='var(--whitesmoke)' fontSize={25} />
                                     </div>
                                     Vídeo
                                 </button>
@@ -69,7 +69,7 @@ function Upload() {
                                     Vídeo
                                 </button>
                                 <button className='upload_button_selected' type='button' onClick={handleShortsChange}>
-                                    <BsFillFastForwardFill className='arrow__icon' color='var(--lightpurple)' fontSize={25} />                            CapiShorts
+                                    <BsFillFastForwardFill className='arrow__icon' color='var(--whitesmoke)' fontSize={25} />                            CapiShorts
                                 </button>
                             </>
                         }
