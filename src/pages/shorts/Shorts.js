@@ -60,7 +60,7 @@ const Shorts = ({ videoTitle }) => {
             }, 500);
         }
     };
-    
+
     const handlePreviousVideo = () => {
         if (!transitioning) {
             setTransitioning(true);
