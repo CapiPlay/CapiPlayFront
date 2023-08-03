@@ -1,6 +1,7 @@
 import Aos from 'aos';
 import './Modal_profile.css';
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 function Modal_profile() {
     const [openModal, setOpenModal] = useState(0)
@@ -35,9 +36,17 @@ function Modal_profile() {
                 <img onClick={() => setOpenModal(openModal + 1)} src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
             </div>
             {verify() &&
-                <div className="background" onClick={() => setOpenModal(openModal - 1)}>
-                    <div className='modal__profile__container'>
-                        A
+                <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
+                    <div className='modal__profile__container__desktop'>
+                        <div className='modal__profile__itens__desktop'>
+                            <Link to="/player" className='text__profile_modal'><p>Seu canal</p></Link>
+                            <div className='divider__profile__modal'></div>
+                            <Link to="" className='text__profile_modal'><p>Tema</p></Link>
+                            <div className='divider__profile__modal'></div>
+                            <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
+                            <div className='divider__profile__modal'></div>
+                            <Link to="" className='text__profile_modal'><p>Sair</p></Link>
+                        </div>
                     </div>
                 </div>
             }
@@ -50,9 +59,17 @@ function Modal_profile() {
                 <img src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
             </div>
             {verify() &&
-                <div className="background" onClick={() => setOpenModal(openModal - 1)}>
-                    <div className='modal__profile__container'>
-                        A
+                <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
+                    <div className='modal__profile__container__tablet'>
+                        <div className='modal__profile__itens__desktop'>
+                            <Link to="/player" className='text__profile_modal'><p>Seu canal</p></Link>
+                            <div className='divider__profile__modal'></div>
+                            <Link to="" className='text__profile_modal'><p>Tema</p></Link>
+                            <div className='divider__profile__modal'></div>
+                            <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
+                            <div className='divider__profile__modal'></div>
+                            <Link to="" className='text__profile_modal'><p>Sair</p></Link>
+                        </div>
                     </div>
                 </div>
             }
@@ -66,9 +83,17 @@ function Modal_profile() {
                 <img src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
             </div>
             {verify() &&
-                <div className="background" onClick={() => setOpenModal(openModal - 1)}>
-                    <div className='modal__profile__container'>
-                        A
+                <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
+                    <div className='modal__profile__container__mobile'>
+                        <div className='modal__profile__itens__desktop'>
+                            <Link to="/player" className='text__profile_modal'><p>Seu canal</p></Link>
+                            <div className='divider__profile__modal'></div>
+                            <Link to="" className='text__profile_modal'><p>Tema</p></Link>
+                            <div className='divider__profile__modal'></div>
+                            <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
+                            <div className='divider__profile__modal'></div>
+                            <Link to="" className='text__profile_modal'><p>Sair</p></Link>
+                        </div>
                     </div>
                 </div>
             }
@@ -85,7 +110,9 @@ function Modal_profile() {
         }
     };
 
-    return <>{getViewToRender()}</>;
+    return <>{
+        getViewToRender()
+    }</>;
 }
 
 export default Modal_profile
