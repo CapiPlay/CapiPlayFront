@@ -5,6 +5,7 @@ import logo from '../../assets/image/Logo.png'
 import { AiOutlineSearch } from 'react-icons/ai'
 import './Header.css'
 import Modal_profile from './modal_profile/Modal_profile';
+import { Link } from 'react-router-dom';
 
 //imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
 //ser passada para o header para ser exibida 
@@ -49,7 +50,7 @@ function Header({imageProfile}) {
             </div>
             <div className='header__info'>
                 <div>
-                    <TbUpload />
+                    <Link to="/upload" className='upload__icon__header' ><TbUpload /></Link>
                 </div>
                 <div>
                     <Modal_profile />
