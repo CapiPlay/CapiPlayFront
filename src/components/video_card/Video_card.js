@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Video_card.css'
 
 import img_miniatura from "../../assets/image/img_base_miniatura.png"
  
 function Video_card(video) {
-    const id = "d7f5a8a4-6231-44e5-9dc9-4f3b1a4574b8"
+    const id = "aa"
     return (
 
         <div className='box__video__card'>
