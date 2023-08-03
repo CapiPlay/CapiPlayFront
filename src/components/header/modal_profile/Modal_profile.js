@@ -39,11 +39,11 @@ function Modal_profile() {
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
                     <div className='modal__profile__container__desktop'>
                         <div className='modal__profile__itens__desktop'>
-                            <Link to="/player" className='text__profile_modal'><p>Seu canal</p></Link>
+                            <Link to="/profile" className='text__profile_modal'><p>Seu canal</p></Link>
                             <div className='divider__profile__modal'></div>
                             <Link to="" className='text__profile_modal'><p>Tema</p></Link>
                             <div className='divider__profile__modal'></div>
-                            <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
+                            <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
                             <div className='divider__profile__modal'></div>
                             <Link to="" className='text__profile_modal'><p>Sair</p></Link>
                         </div>

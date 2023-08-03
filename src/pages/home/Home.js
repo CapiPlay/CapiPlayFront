@@ -7,16 +7,20 @@ import Video_card from '../../components/video_card/Video_card';
 import Side_Bar from './side_bar/Side_Bar';
 import Slider_Category from './slider_category/Slider_Category';
 import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
+import PlayerService from '../../service/PlayerService';
 import Aos from 'aos'
 
 function Home() {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+  const [videos, setVideos] = useState([])
+  const [currentPage, setCurrentPage] = useState(0);
 
   Aos.init({
     duration: 200
   });
 
   useEffect(() => {
+    getVideos()
     function handleResize() {
       setScreenSize({ width: window.innerWidth, height: window.innerHeight });
     }
@@ -25,7 +29,11 @@ function Home() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, []); 
+
+  const getVideos = () => {
+    setVideos(PlayerService.buscarVideosResumidos(1))
+  }
 
   const renderDesktopView = () => (
     <>
@@ -40,9 +48,9 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__desk'>
-          {Array.from({ length: 6 }, (_, index) => (
-            <Video_card key={index} />
-          ))}
+        {/* {videos.map((video) => (
+            <Video_card video={video} />
+        ))} */}
         </div>
         <div className='container__shorts__cards__desk'>
           <Slider_Shorts />

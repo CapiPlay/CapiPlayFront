@@ -153,3 +153,8 @@
     display: flex;
     z-index: 100;
 }
+
+.upload__icon__header {
+    text-decoration: none;
+    color: var(--lightpurple);
+}
