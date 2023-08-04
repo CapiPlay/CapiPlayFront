@@ -12,9 +12,10 @@ import Header from '../../components/header/Header'
 import CommentsComponent from '../../components/commentsComponent/CommentsComponent'
 
 //icons
-import { BiLike, BiDislike, BiCommentDetail } from "react-icons/bi"
+import { BiLike, BiDislike, BiCommentDetail, BiSolidLike, BiSolidDislike } from "react-icons/bi"
 import { BsFillArrowUpSquareFill } from "react-icons/bs"
 import { BsFillArrowDownSquareFill } from "react-icons/bs"
+import { BsArrowLeftShort } from "react-icons/bs"
 
 const Shorts = ({ videoTitle }) => {
 
@@ -52,7 +53,9 @@ const Shorts = ({ videoTitle }) => {
 
     const [transitioning, setTransitioning] = useState(false)
 
-    const [openModalComments, setOpenModalComments] = useState(true)
+    const [openModalComments, setOpenModalComments] = useState(false)
+    const [likeShort, setLikeShort] = useState(false)
+    const [dislikeShort, setDislikeShort] = useState(false)
 
     const handleNextVideo = () => {
         if (!transitioning) {
@@ -112,45 +115,81 @@ const Shorts = ({ videoTitle }) => {
         setHeaderAppearing(windowWidth >= 576)
     }, [windowWidth])
 
+    const funcOpenModalComments = () => {
+        setOpenModalComments(!openModalComments)
+    }
+
+    const funcLikeShorts = () => {
+        setLikeShort(!likeShort)
+        setDislikeShort(false)
+    }
+
+    const funcDislikeShorts = () => {
+        setDislikeShort(!dislikeShort)
+        setLikeShort(false)
+    }
+
     return (
         <div
             className='container__all__shorts'
-            style={{ minHeight: `${windowHeight}px` }}
-            onWheel={handleScrollUp}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
+            style={{
+                minHeight: `${windowHeight}px`
+            }}
+            onWheel={openModalComments ? null : handleScrollUp}
+            onTouchStart={openModalComments ? null : handleTouchStart}
+            onTouchMove={openModalComments ? null : handleTouchMove}
         >
-            {headerAppearing && <Header />}
-            {headerAppearing && (
-                <div className='container__button__pass__shorts'>
-                    <button
-                        id='voltar'
-                        aria-label='Botão Voltar'
-                        onClick={handlePreviousVideo}
-                        style={currentVideoIndex === 0 ? { pointerEvents: 'none' } : {}}
-                    >
-                        <BsFillArrowUpSquareFill />
-                    </button>
-                    <button
-                        id='proximo'
-                        aria-label='Botão Próximo'
-                        onClick={handleNextVideo}
-                        style={currentVideoIndex === videos.length - 1 ? { pointerEvents: 'none' } : {}}
-                    >
-                        <BsFillArrowDownSquareFill />
-                    </button>
-                </div>
-            )}
+            {
+                headerAppearing && <Header />
+            }
+            {
+                headerAppearing && (
+                    <div className='container__button__pass__shorts'>
+                        <button
+                            id='voltar'
+                            aria-label='Botão Voltar'
+                            onClick={openModalComments ? null : handlePreviousVideo}
+                            style={currentVideoIndex === 0 ? { pointerEvents: 'none' } : {}}
+                        >
+                            <BsFillArrowUpSquareFill />
+                        </button>
+                        <button
+                            id='proximo'
+                            aria-label='Botão Próximo'
+                            onClick={openModalComments ? null : handleNextVideo}
+                            style={currentVideoIndex === videos.length - 1 ? { pointerEvents: 'none' } : {}}
+                        >
+                            <BsFillArrowDownSquareFill />
+                        </button>
+                    </div>
+                )
+            }
             <div className={`container__video ${transitioning ? 'transitioning' : ''}`}>
                 <img src={videos[currentVideoIndex].image} alt='Imagem shorts' />
+                <div className='header__shorts'>
+                    <BsArrowLeftShort />
+                    <span>Capishorts</span>
+                </div>
                 <div className='container__icons__shorts'>
-                    <div>
-                        <BiLike />
+                    <div onClick={funcLikeShorts}>
+                        {
+                            likeShort ? (
+                                <BiSolidLike />
+                            ) : (
+                                <BiLike />
+                            )
+                        }
                         <span>{videos[currentVideoIndex].likes}</span>
                     </div>
                     <div>
-                        <BiDislike />
-                        <BiCommentDetail />
+                        {
+                            dislikeShort ? (
+                                <BiSolidDislike onClick={funcDislikeShorts} />
+                            ) : (
+                                <BiDislike onClick={funcDislikeShorts} />
+                            )
+                        }
+                        <BiCommentDetail onClick={funcOpenModalComments} />
                     </div>
                 </div>
                 <div className='container__informations__video'>
@@ -162,16 +201,19 @@ const Shorts = ({ videoTitle }) => {
                             <img src={imagePerfil} alt='Imagem de Perfil' />
                             <span>{videos[currentVideoIndex].profile}</span>
                         </div>
-                        <div className='button__submit__shorts'>
-                            <ButtonSubmit label={'Inscrever-se'} onClick={null} />
+                        <div className='button__submit__shorts' style={openModalComments ? { display: "none" } : {}}>
+                            <ButtonSubmit
+                                label={'Inscrever-se'}
+                                onClick={null}
+                            />
                         </div>
                     </div>
                 </div>
+                {
+                    openModalComments &&
+                    <CommentsComponent func={funcOpenModalComments} />
+                }
             </div>
-            {
-                openModalComments &&
-                <CommentsComponent />
-            }
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './Comments.css'
+import '../comments/Comments.css'
 import { BiSolidDownArrow, BiSolidUpArrow, BiDislike, BiLike } from 'react-icons/bi'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
@@ -16,38 +16,59 @@ function Comments(video) {
 
     const toggleShowMore = () => {
         setShowMore(!showMore);
-      };
+    };
 
-  return (
-    <>
-    <div className='comment'>
-        <div className='user__icon__container'>
-            <img src={user_image} className='user__icon'/>
-        </div>
-        <div className='comment__content'>
-            <div className='comment__user__username'>
-                @{username}<span className='ball'></span> há {comment_date} dias
+    return (
+        <div className='comment'>
+            <div className='user__icon__container'>
+                <img src={user_image} />
             </div>
-            <p>{showMore ? comment : `${comment.slice(0, 50)}...`}
-            <div>
-                <button onClick={() => toggleShowMore()} className='description__moreORless'>{!showMore ? <p className='selection'>Mostrar mais <p className='selection__icon'><BiSolidDownArrow/></p></p>: <p className='selection'>Mostrar menos <p className='selection__icon'><BiSolidUpArrow/></p></p>}</button>
+            <div className='comment__content'>
+                <div>
+                    <span>
+                        @{username} há 
+                        <div className='ball__comments'></div>
+                        {comment_date} dias
+                    </span>
+                </div>
+                <div>
+                    <p>
+                        {
+                            showMore ? comment : `${comment.slice(0, 50)}...`
+                        }
+                    </p>
+                    <div>
+                        <button onClick={() => toggleShowMore()} className='description__moreORless'>
+                            {
+                                !showMore ? (
+                                    <div className='selection__more'>
+                                        <p>
+                                            Mostrar mais
+                                        </p>
+                                        <BiSolidDownArrow />
+                                    </div>
+                                ) : (
+                                    <div className='selection__more'>
+                                        <p>
+                                            Mostrar menos
+                                        </p>
+                                        <BiSolidUpArrow />
+                                    </div>
+                                )
+                            }
+                        </button>
+                    </div>
+                </div>
+                <div className='comment__interactions'>
+                    <div>
+                        <BiLike />
+                        <p>{comment_likes}</p>
+                    </div>
+                    <BiDislike />
+                    <p>(5) Respostas</p>
+                </div>
             </div>
-            </p>
-            <div className='comment__interactions'>
-                <div className='likes'>
-                    <BiLike size={'1rem'}/>{comment_likes}
-                </div>
-                <div className='dislikes'>
-                    <BiDislike/>
-                </div>
-                <div className='answers'>
-                    (5) Respostas
-                </div>
-            </div>
-        </div>
-    </div>
-    </>
-  )
+        </div >
+    )
 }
-
 export default Comments

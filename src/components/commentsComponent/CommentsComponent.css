@@ -1,3 +1,99 @@
 .container__comments__component {
     position: absolute;
+
+    width: 100%;
+    height: 25rem;
+
+    background-color: var(--darkblue);
+
+    bottom: 0;
+    border-radius: 20px 20px 0 0;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container__comments__component>div:first-of-type {
+    width: 90%;
+    height: 15%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container__comments__component>div:first-of-type span,
+.container__comments__component>div:first-of-type svg {
+    color: var(--lightpurple);
+}
+
+.container__comments__component>div:first-of-type svg {
+    width: 1.2rem;
+    height: 1.2rem;
+
+    cursor: pointer;
+}
+
+.container__comments__component>div:nth-child(2) {
+    width: 100%;
+    height: 80%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+
+    overflow-y: auto;
+}
+
+.container__comments__component>div::-webkit-scrollbar {
+    width: 0.4rem;
+}
+
+.container__comments__component>div::-webkit-scrollbar-thumb {
+    background-color: var(--lightpurple);
+    border-radius: 20px;
+}
+
+.container__comments__component>div:nth-child(3) {
+    width: 100%;
+    height: 10%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container__comments__component>div:nth-child(3) input {
+    width: 90%;
+    height: 90%;
+
+    margin-bottom: 1rem;
+
+    border-radius: 20px;
+    border: none;
+    padding-left: 0.5rem;
+}
+
+.container__comments__component>div:nth-child(3) svg {
+    position: absolute;
+
+    width: 1.2rem;
+    height: 1.2rem;
+
+    margin-bottom: 1rem;
+
+    right: 1.5rem;
+
+    transition: .3s ease-in-out;
+    color: var(--purple);
+    cursor: pointer;
+}
+
+.container__comments__component>div:nth-child(3) svg:hover {
+    color: var(--lightpurple);
 }

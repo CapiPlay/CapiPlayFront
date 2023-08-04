@@ -2,18 +2,25 @@ import Comments from '../../pages/player/comments/Comments'
 import '../commentsComponent/CommentsComponent.css'
 
 //icons
-import { IoMdClose } from 'react-icons/io'
+import { IoMdClose, IoMdSend } from 'react-icons/io'
 
-const CommentsComponent = () => {
+const CommentsComponent = ({ func }) => {
 
     return (
         <div className='container__comments__component'>
             <div>
                 <span>Comentários</span>
-                <IoMdClose color="var(--white)" />
+                <IoMdClose onClick={func} />
             </div>
             <div>
                 <Comments />
+                <Comments />
+                <Comments />
+                <Comments />
+            </div>
+            <div>
+                <input type="text" />
+                <IoMdSend />
             </div>
         </div>
     )
