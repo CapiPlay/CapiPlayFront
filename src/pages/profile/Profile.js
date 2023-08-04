@@ -13,7 +13,7 @@ const Profile = ({ usuario }) => {
     const [usuarios, setUsuarios] = useState([]);
 
     useEffect(() => {
-        UserService.findAll()
+        UserService.listar()
             .then((data) => setUsuarios(data))
             .catch((error) => console.error('Erro ao buscar produtos:', error));
     }, []);
