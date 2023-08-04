@@ -5,11 +5,11 @@ import Mobile_player from './player_screen_methods/player_mobile/Mobile_player'
 import Tablet_player from './player_screen_methods/player_tablet/Tablet_player'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import PlayerService from '../../service/PlayerService'
 
 function Player() {
   const [video, setVideo] = useState();
   const { videoId } = useParams();
-  const url = "http://localhost:8082/api"
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -24,16 +24,8 @@ function Player() {
     };
   }, []);
 
-  const buscarVideo = (videoId) => {
-    //let vid;
-    //axios.get(url + '/video/'+ videoId).then((response) => {
-    //  vid = response.data;
-    //});
-    //
-    //axios.get(url + '/static/'+ vid.caminhos[1]).then((response) => {
-    //  setVideo(response.data)
-    //});
-    //axios pra buscar o video
+  const buscarVideo = async (videoId) => {
+    setVideo(await PlayerService.buscarVideo(videoId))
   }
 
   const verifyDesktop = () => {

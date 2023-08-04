@@ -4,8 +4,13 @@ import './Video_card.css'
 
 import img_miniatura from "../../assets/image/img_base_miniatura.png"
  
-function Video_card(video) {
-    const id = "aa"
+function Video_card({video}) {
+    
+    if (!video) {
+        // Handle the case when the video is undefined or null
+        return <div>No Video Data</div>;
+      }
+
     return (
 
         <div className='box__video__card'>
