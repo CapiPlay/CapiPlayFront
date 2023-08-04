@@ -2,7 +2,6 @@ import './Upload.css'
 
 import { useState, useRef } from "react"
 import { HiUpload } from 'react-icons/hi';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BsFillFastForwardFill } from 'react-icons/bs';
 
 import HeaderUpload from './headerUpload/HeaderUpload';
@@ -48,28 +47,44 @@ function Upload() {
             <div className='upload__page'>
                 <HeaderUpload />
                 <div className='upload__container'>
-                    <div className='upload__buttons_box'>
+                    <div className='upload__buttons__box'>
                         {isVideo &&
                             <>
-                                <button className='upload_button_selected' type='button' onClick={handleVideoChange}>
-                                    <div className='upload__icons__border'>
-                                        <HiUpload className='arrow__icon' color='var(--whitesmoke)' fontSize={25} />
+                                <button className='upload__button__selected' type='button' onClick={handleVideoChange}>
+                                    <div className='upload__icons__box__selected'>
+                                        <div className='upload__icons__border__selected'>
+                                            <HiUpload color='var(--purple)' fontSize={25} />
+                                        </div>
                                     </div>
                                     Vídeo
                                 </button>
-                                <button className='upload_button' type='button' onClick={handleShortsChange}>
-                                    <BsFillFastForwardFill className='arrow__icon' color='var(--lightpurple)' fontSize={25} />                            CapiShorts
+                                <button className='upload__button' type='button' onClick={handleShortsChange}>
+                                    <div className='upload__icons__box'>
+                                        <div className='upload__icons__border'>
+                                            <BsFillFastForwardFill color='var(--whitesmoke)' fontSize={25} />
+                                        </div>
+                                    </div>
+                                    CapiShorts
                                 </button>
                             </>
                         }
                         {!isVideo &&
                             <>
-                                <button className='upload_button' type='button' onClick={handleVideoChange}>
-                                    <HiUpload className='arrow__icon' color='var(--lightpurple)' fontSize={25} />
+                                <button className='upload__button' type='button' onClick={handleVideoChange}>
+                                    <div className='upload__icons__box'>
+                                        <div className='upload__icons__border'>
+                                            <HiUpload color='var(--whitesmoke)' fontSize={25} />
+                                        </div>
+                                    </div>
                                     Vídeo
                                 </button>
-                                <button className='upload_button_selected' type='button' onClick={handleShortsChange}>
-                                    <BsFillFastForwardFill className='arrow__icon' color='var(--whitesmoke)' fontSize={25} />                            CapiShorts
+                                <button className='upload__button__selected' type='button' onClick={handleShortsChange}>
+                                    <div className='upload__icons__box__selected'>
+                                        <div className='upload__icons__border__selected'>
+                                            <BsFillFastForwardFill color='var(--purple)' fontSize={25} />
+                                        </div>
+                                    </div>
+                                    CapiShorts
                                 </button>
                             </>
                         }
@@ -137,7 +152,6 @@ function Upload() {
                                         />
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     }
