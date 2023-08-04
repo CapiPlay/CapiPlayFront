@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import '../comments/Comments.css'
-import { BiSolidDownArrow, BiSolidUpArrow, BiDislike, BiLike } from 'react-icons/bi'
+import {
+    BiSolidDownArrow, BiSolidUpArrow, BiDislike, BiLike,
+    BiSolidLike, BiSolidDislike
+} from 'react-icons/bi'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Comments(video) {
@@ -14,9 +17,23 @@ function Comments(video) {
     const comment_likes = 200
     const comment_answers = []
 
+    const [likeComments, setLikeComments] = useState(false)
+    const [dislikeComments, setDislikeComments] = useState(false)
+
     const toggleShowMore = () => {
-        setShowMore(!showMore);
-    };
+        setShowMore(!showMore)
+    }
+
+    const funcLikeComments = () => {
+        setLikeComments(!likeComments)
+        setDislikeComments(false)
+    }
+
+    const funcDislikeComments = () => {
+        setDislikeComments(!dislikeComments)
+        setLikeComments(false)
+    }
+    
 
     return (
         <div className='comment'>
@@ -24,12 +41,10 @@ function Comments(video) {
                 <img src={user_image} />
             </div>
             <div className='comment__content'>
-                <div>
-                    <span>
-                        @{username} há 
-                        <div className='ball__comments'></div>
-                        {comment_date} dias
-                    </span>
+                <div className='comment__text'>
+                    <span className='username'>@{username} há</span>
+                    <div className='ball__comments' />
+                    <span className='username'>{comment_date} dias</span>
                 </div>
                 <div>
                     <p>
@@ -60,11 +75,25 @@ function Comments(video) {
                     </div>
                 </div>
                 <div className='comment__interactions'>
-                    <div>
-                        <BiLike />
+                    <div onClick={funcLikeComments}>
+                        {
+                            likeComments ? (
+                                <BiSolidLike />
+                            ) :
+                                (
+                                    <BiLike />
+                                )
+                        }
                         <p>{comment_likes}</p>
                     </div>
-                    <BiDislike />
+                    {
+                        dislikeComments ? (
+                            <BiSolidDislike onClick={funcDislikeComments} />
+                        ) : (
+
+                            <BiDislike onClick={funcDislikeComments} />
+                        )
+                    }
                     <p>(5) Respostas</p>
                 </div>
             </div>

@@ -34,18 +34,19 @@
     flex-direction: column;
 }
 
-.comment__content>div:first-of-type {
-    width: 50%;
-
-    display: flex;
-    justify-content: flex-start;
-}
-
-.comment__content>div:first-of-type span {
+.comment__text {
     font-size: 12px;
 
     display: flex;
     align-items: center;
+
+    margin-left: -0.3rem;
+}
+
+.username {
+    font-size: 12px;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
 }
 
 .comment__content>div:nth-child(2) {
@@ -89,6 +90,8 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+
+    cursor: pointer;
 }
 
 .comment__interactions div p {
@@ -98,6 +101,8 @@
 .comment__interactions svg {
     width: 1rem;
     height: 1rem;
+
+    cursor: pointer;
 }
 
 .comment__interactions p {
@@ -109,51 +114,7 @@
 .ball__comments {
     width: 6px;
     height: 6px;
-    
+
     background-color: white;
     border-radius: 20px;
 }
-
-/* .comment__interactions {
-    margin-top: 8px;
-    display: flex;
-    gap: 0.3rem;
-}
-
-.likes {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.8rem;
-}
-
-.dislikes {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.ball {
-    width: 6px;
-    border: solid 1px;
-    height: 6px;
-    background-color: white;
-    border-radius: 20px;
-}
-
-.comment__user__username {
-    gap: 0.7rem;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    font-size: 0.7rem;
-    margin-bottom: 3px;
-}
-
-.answers {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    color: var(--lightpurple);
-} */
