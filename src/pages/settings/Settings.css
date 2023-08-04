@@ -226,7 +226,7 @@
 
 .settings__options__buttons__cancel__desktop {
     color: var(--white-smoke);
-    background-color: var(--lightpurple);
+    background-color: transparent !important;
     border: none;
     height: 2rem;
     width: 10rem;
