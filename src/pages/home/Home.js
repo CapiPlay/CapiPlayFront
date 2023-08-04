@@ -31,8 +31,9 @@ function Home() {
     };
   }, []); 
 
-  const getVideos = () => {
-    setVideos(PlayerService.buscarVideosResumidos(1))
+  const getVideos = async () => {
+    console.log(await PlayerService.buscarVideosResumidos(1))
+    setVideos(await PlayerService.buscarVideosResumidos(1))
   }
 
   const renderDesktopView = () => (
@@ -48,9 +49,9 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__desk'>
-        {/* {videos.map((video) => (
+        {videos.map((video) => (
             <Video_card video={video} />
-        ))} */}
+        ))}
         </div>
         <div className='container__shorts__cards__desk'>
           <Slider_Shorts />

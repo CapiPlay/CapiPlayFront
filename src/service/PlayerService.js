@@ -15,7 +15,7 @@ const PlayerService = {
         let size = 10
         try {
             const response = await axios.get("/video?page="+page+"&size="+size);
-            return response;
+            return response.data;
         } catch (error) {
             console.error(error);
         }
