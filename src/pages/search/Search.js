@@ -2,19 +2,21 @@ import "./Search.css"
 import { useNavigate } from "react-router-dom";
 
 // ícones
-import { IoMdArrowBack } from "react-icons/io"
 import { MdRestartAlt } from "react-icons/md"
 import { BiSearchAlt2 } from "react-icons/bi"
 
 // componentes
-import InputSearch from "../../components/inputSearch/InputSearch";
 import { useState } from "react";
 import ResultSearch from "../../components/tagsCarousel/TagsCarousel";
+import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 
 const Search = () => {
 
     const nav = useNavigate();
     const sizeIcon = 20;
+    const colorIcon = "var(--whitesmoke)";
+    
+    const [back, setBack] = useState(false); 
 
     const [lastSearches, setLastSearches] = useState(([
         "Benefícios da meditação para a saúde",
@@ -52,7 +54,7 @@ const Search = () => {
                 <>
                     {lastSearches && lastSearches.map((lastSearch) => (
                         <div className="search__box">
-                            <MdRestartAlt size={sizeIcon} color="var(--whitesmoke)" />
+                            <MdRestartAlt size={sizeIcon} color={colorIcon} />
                             <span>{lastSearch}</span>
                         </div>
                     ))}
@@ -63,7 +65,7 @@ const Search = () => {
                 <>
                     {searches && searches.map((search) => (
                         <div className="search__box">
-                            <BiSearchAlt2 size={sizeIcon} color="var(--whitesmoke)" />
+                            <BiSearchAlt2 size={sizeIcon} color={colorIcon} />
                             <span>{search}</span>
                         </div>
                     ))}
@@ -73,13 +75,8 @@ const Search = () => {
     }
 
     return (
-        <div className="container__search">
-            <div className="header__search">
-                <IoMdArrowBack size={sizeIcon} color="var(--lightpurple)" onClick={handleClick} />
-                <InputSearch
-                    value={valueInput}
-                    handleChange={handleChange} />
-            </div>
+        <div className="container__search" style={{ "display": back ? "none" : "block" }}>
+            <HeaderSearch valueInput={valueInput} handleChange={handleChange}/>
             {renderSearch()}
         </div>
     )

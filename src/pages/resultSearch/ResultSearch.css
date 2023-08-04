@@ -2,11 +2,10 @@
     width: 100%;
     height: 100vh;
     background-color: var(--darkpurple);
-    overflow: hidden;
 }
 
 .tags__carousel__search{
-    margin-top: 10%;
+    margin-top: 2%;
 }
 
 .container__filter{
@@ -30,18 +29,38 @@
 
 .table__header__filter>th{
     text-align: justify;
-    min-width: 7.6rem;
     color: var(--lightpurple);
 }
 
+.table__filters>td:nth-child(3){
+    width: 50%;
+}
+
+.table__filters>td:nth-child(2){
+    width: 40%;
+}
+
 .table__filters{
-    margin: 5%;
+    margin: 2% 8%;
+}
+
+.table__filters>td{
+    font-size: 12px;
 }
 
 .container__table__filter{
     margin-top: -50px;
     left: 0;
     animation: expos__filter .5s forwards;
+}
+
+.container__videos__result{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 @keyframes expos__filter {

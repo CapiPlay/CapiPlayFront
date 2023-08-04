@@ -6,11 +6,11 @@ import { useState } from "react";
 
 const InputSearch = ({ value, handleChange }) => {
 
-    // const [researched, setResearched] = useState(false); 
+    const nav = useNavigate(); 
 
     const enter = (e) => {
         if (e.key === 'Enter'){
-            alert('enter')
+            nav("/result-search")
         }
     }
 
@@ -23,7 +23,6 @@ const InputSearch = ({ value, handleChange }) => {
                 onKeyPress={enter}/>
             <BiSearchAlt2
                 className="icon__search"
-                
             />
         </div>
     )
