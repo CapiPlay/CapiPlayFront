@@ -4,7 +4,6 @@ import React from 'react'
 import { useState, useRef } from "react"
 import { HiUpload } from 'react-icons/hi';
 
-import Input from "../../components/input/Input";
 import InputFile from "../../components/inputFile/InputFile";
 import HeaderUpload from '../upload/headerUpload/HeaderUpload';
 import Button from '../../components/button/Button';
