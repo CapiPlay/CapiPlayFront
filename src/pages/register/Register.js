@@ -65,11 +65,12 @@ const Register = () => {
         user.append("nome", registerData.nome)
         user.append("senha", registerData.senha)
         user.append("email", registerData.email)
-        user.append("perfil", registerData.perfil)
+        user.append("perfil", registerData.nome)
         user.append("dataNascimento", registerData.dataNascimento)
+        user.append("foto", registerData.foto)
 
         try {
-            const res = dispatch(doSignup(user))
+            const res = dispatch(doSignup(user, image))
         } catch(err) {
             console.error(err)
         }

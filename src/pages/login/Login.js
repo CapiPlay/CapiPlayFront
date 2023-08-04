@@ -14,7 +14,7 @@ import Button from "../../components/button/Button"
 import { FaFacebookF } from 'react-icons/fa'
 import { FaGoogle } from 'react-icons/fa'
 
-const Login = ({ }) => {
+const Login = ({}) => {
 
     const [loginData, setLoginData] = useState({ email: '', senha: '' })
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
@@ -33,20 +33,17 @@ const Login = ({ }) => {
     }, [])
 
     const login = () => {
-
-        console.log("Entrei nesse caralho")
-
-        // try {
-        //     // const res = dispatch(doLogin(loginData))
-        //     // console.log(res)
-        // } catch (err) {
-        //     console.log("Deu erro")
-        // }
+        try {
+            const res = dispatch(doLogin(loginData))
+            console.log(res)
+        } catch (err) {
+            console.log("Deu erro")
+        }
     }
 
     return (
         <div className="container__all__login" style={{ minHeight: `${windowHeight}px` }} >
-            <form className="container__login">
+            <div className="container__login">
                 <h1>Login</h1>
                 <h2>
                     O Mundo dos Vídeos ao seu Alcance!
@@ -99,7 +96,7 @@ const Login = ({ }) => {
                         </Link>
                     </span>
                 </div>
-            </form>
+            </div>
         </div>
     )
 }
