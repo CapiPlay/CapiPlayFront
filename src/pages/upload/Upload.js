@@ -3,6 +3,7 @@ import './Upload.css'
 import { useState, useRef } from "react"
 import { HiUpload } from 'react-icons/hi';
 import { BsFillFastForwardFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 import HeaderUpload from './headerUpload/HeaderUpload';
 import Button from "../../components/button/Button";
@@ -112,12 +113,14 @@ function Upload() {
                                     type={"submit"}
                                     principal={false}
                                 />
-                                <Button
-                                    label={"Próximo"}
-                                    // onClick={}
-                                    type={"submit"}
-                                    principal={true}
-                                />
+                                <Link className='upload__next__button__link' to="/upload-video">
+                                    <Button
+                                        label={"Próximo"}
+                                        // onClick={}
+                                        type={"submit"}
+                                        principal={true}
+                                    />
+                                </Link>
                             </div>
                         </div>
                     }

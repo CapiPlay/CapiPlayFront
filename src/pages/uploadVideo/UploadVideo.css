@@ -168,3 +168,9 @@
     align-items: center;
     gap: 1rem;
 }
+
+.upload__video_preview {
+    max-width: 50%; 
+    height: 10rem;
+    border-radius: 10px;
+}

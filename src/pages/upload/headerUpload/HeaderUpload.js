@@ -1,11 +1,14 @@
+import { Link } from 'react-router-dom';
 import './HeaderUpload.css'
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 
-const HeaderUpload = () => {
+const HeaderUpload = (caminho) => {
     return (
         <>
             <div className='header__upload__box'>
-                <AiOutlineArrowLeft className='arrow__icon' color='var(--lightpurple)' fontSize={25} />
+                <Link to={caminho}>
+                    <AiOutlineArrowLeft className='arrow__icon' color='var(--lightpurple)' fontSize={25} />
+                </Link>
                 <p>Upload</p>
             </div>
         </>

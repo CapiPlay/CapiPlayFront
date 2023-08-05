@@ -143,3 +143,9 @@
     width: 100%;
     gap: 1rem;
 }
+
+.upload__next__button__link {
+    width: 100%;
+    text-decoration: none;
+    color: var(--whitesmoke);
+}
