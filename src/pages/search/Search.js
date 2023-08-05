@@ -12,11 +12,11 @@ import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 
 const Search = () => {
 
-    const nav = useNavigate();
     const sizeIcon = 20;
     const colorIcon = "var(--whitesmoke)";
-    
-    const [back, setBack] = useState(false); 
+    const nav = useNavigate();
+
+    const [back, setBack] = useState(false);
 
     const [lastSearches, setLastSearches] = useState(([
         "Benefícios da meditação para a saúde",
@@ -39,10 +39,6 @@ const Search = () => {
     ]));
 
     const [valueInput, setValueInput] = useState("");
-
-    const handleClick = () => {
-        nav("/");
-    }
 
     const handleChange = (e) => {
         setValueInput(e.target.value);
@@ -76,7 +72,10 @@ const Search = () => {
 
     return (
         <div className="container__search" style={{ "display": back ? "none" : "block" }}>
-            <HeaderSearch valueInput={valueInput} handleChange={handleChange}/>
+            <HeaderSearch 
+            valueInput={valueInput} 
+            handleChange={handleChange} 
+            functionBack={()=>setBack(!back)}/>
             {renderSearch()}
         </div>
     )
