@@ -1,30 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit"
+import Cookies from "js-cookie"
 import UserService from "../../../service/UserService"
+
+const token = Cookies.get("token")
 
 // Estado inicial do usuário
 const initialState = {
-  isAuthenticated: false,
-  token: null,
-  user: {
-    id: "",
-    nome: "",
-    senha: "",
-    email: "",
-    perfil: "",
-    foto: "",
-    dataNascimento: "",
-    descricao: ""
-  }
+  isAuthenticated: !!token,
+  token: token || null
 }
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    login: (state, action) => {
+    login: async (state, action) => {
+      const { token } = action.payload
+      Cookies.set("token", token)
       state.isAuthenticated = true
-      state.value = action.payload.user
-      state.token = action.payload.token
+      state.token = token
+      console.log(initialState)
     },
     logout: (state) => {
       state.isAuthenticated = false
@@ -39,14 +34,13 @@ const userSlice = createSlice({
 })
 
 
-export const { login, logout, signup } = userSlice.actions // ações do usuário
+export const { login, logout, signup } = userSlice.actions
 export default userSlice.reducer
 
 const doLogin = (credentials) => async (dispatch) => {
   try {
     const res = await UserService.login(credentials)
-    // dispatch(login({ user: res.user, token: res.token }))
-    // alert(res)
+    dispatch(login({ token: res.data }))
     return res
   } catch (err) {
     console.error(err)
@@ -56,7 +50,6 @@ const doLogin = (credentials) => async (dispatch) => {
 const doSignup = (newUser, photo) => async (dispatch) => {
   try {
     const res = await UserService.criar(newUser, photo)
-    console.log(res)
     const user = res.data
     dispatch(signup({ user: user, token: user.nome }))
   } catch (err) {
@@ -64,7 +57,17 @@ const doSignup = (newUser, photo) => async (dispatch) => {
   }
 }
 
+const doLogout = () => async (dispatch) => {
+  try {
+
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export {
   doSignup,
-  doLogin
+  doLogin,
+  doLogout,
+  initialState
 }

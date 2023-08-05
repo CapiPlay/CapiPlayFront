@@ -13,8 +13,9 @@ import Button from "../../components/button/Button"
 // Icons
 import { FaFacebookF } from 'react-icons/fa'
 import { FaGoogle } from 'react-icons/fa'
+import axiosInstance from "../../service/AxiosConfig"
 
-const Login = ({}) => {
+const Login = ({ }) => {
 
     const [loginData, setLoginData] = useState({ email: '', senha: '' })
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
@@ -34,8 +35,7 @@ const Login = ({}) => {
 
     const login = () => {
         try {
-            const res = dispatch(doLogin(loginData))
-            console.log(res)
+            dispatch(doLogin(loginData))
         } catch (err) {
             console.log("Deu erro")
         }
