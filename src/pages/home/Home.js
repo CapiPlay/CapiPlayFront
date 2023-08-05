@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/header/Header';
 import './Home.css';
@@ -9,7 +8,6 @@ import Slider_Category from './slider_category/Slider_Category';
 import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
 import PlayerService from '../../service/PlayerService';
 import Aos from 'aos'
-import { vi } from 'date-fns/locale';
 
 function Home() {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -30,10 +28,10 @@ function Home() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []); 
+  }, []);
 
   const getVideos = async () => {
-    setVideos(await PlayerService.buscarVideosResumidos(0))
+    setVideos(await PlayerService.buscarVideosHome(0))
   }
 
   const renderDesktopView = () => (
@@ -49,17 +47,17 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__desk'>
-        {videos.map((video) => (
+          {videos.map((video) => (
             <Video_card key={video.uuid} video={video} />
-        ))}
+          ))}
         </div>
         <div className='container__shorts__cards__desk'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards__desk'>
-        {videos.map((video) => (
+          {videos.map((video) => (
             <Video_card key={video.uuid} video={video} />
-        ))}
+          ))}
         </div>
       </div>
     </>
@@ -76,17 +74,17 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__tablet'>
-        {videos.map((video) => (
+          {videos.map((video) => (
             <Video_card key={video.uuid} video={video} />
-        ))}
+          ))}
         </div>
         <div className='container__shorts__cards__tablet'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards__tablet'>
-        {videos.map((video) => (
+          {videos.map((video) => (
             <Video_card key={video.uuid} video={video} />
-        ))}
+          ))}
         </div>
       </div>
     </>
@@ -100,17 +98,17 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards'>
-        {videos.map((video) => (
+          {videos.map((video) => (
             <Video_card key={video.uuid} video={video} />
-        ))}
+          ))}
         </div>
         <div className='container__shorts__cards__mobile'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards'>
-        {videos.map((video) => (
+          {videos.map((video) => (
             <Video_card key={video.uuid} video={video} />
-        ))}
+          ))}
         </div>
       </div>
     </>
