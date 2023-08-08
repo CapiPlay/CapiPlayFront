@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useParams } from 'react'
+import axios from 'axios';
 import './Settings.css'
 
 //imagem
@@ -8,20 +9,45 @@ import ProfileImage from '../../assets/image/CapiPlay.png'
 import HeaderSettings from './header/HeaderSettings'
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
+import UserService from './../../service/UserService'
 
-const VideoDetails = () => {
+const Settings = ({ userId }) => {
 
-    const obj = {
-        email: '',
+    userId = "d033e1ec-d22e-4df6-a250-0b3672da4b59";
+
+    const [settingsData, setSettingsData] = useState({
         nomeUsuario: '',
         nomeCanal: '',
-        dataNascimento: '',
         senhaAtual: '',
-        senhaNova: '',
         descricao: ''
-    }
+    });
 
-    const [settingsData, setSettingsData] = useState(obj)
+    useEffect(() => {
+        axios.get(`/api/usuario/${userId}`)
+            .then(response => {
+                const userData = response.data;
+                setSettingsData({
+                    nomeUsuario: userData.nomeUsuario,
+                    nomeCanal: userData.nomeCanal,
+                    senhaAtual: '',
+                    descricao: userData.descricao
+                });
+            })
+            .catch(error => {
+                console.error('Erro ao obter dados do usuário:', error);
+            });
+    }, [userId]);
+
+    const handleUpdateUser = () => {
+        axios.put(`/api/usuario/${userId}`, settingsData)
+            .then(response => {
+                console.log('Usuário atualizado com sucesso!', response.data);
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar o usuário:', error);
+            });
+    };
+
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
@@ -35,136 +61,217 @@ const VideoDetails = () => {
         };
     }, []);
 
-    const verifyScreen = () => {
-        if (screenSize.width > 900) {
-            return false
-        } else {
-            return true
-        }
-    }
-    return (
-        <><HeaderSettings />
-            {verifyScreen() ?
-                <div className='settings__container'>
-                    <div className="settings__form">
-                        <img src={ProfileImage} className='profile__settings' />
-                        <div className='settings__box__image__options'>
-                            <button className='settings__image__options__buttons'>Alterar</button>
-                            <button className='settings__image__options__buttons'>Remover</button>
-                        </div>
-                        <div class="settings__field">
-                            <Input
-                                placeholder={"Nome de usuário"}
-                                value={settingsData.nomeUsuario}
-                                onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
-                                type={"text"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        </div>
-                        <div class="settings__field">
-                            <Input
-                                placeholder={"Nome do canal"}
-                                value={settingsData.nomeCanal}
-                                onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
-                                type={"text"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        </div>
-                        <div class="settings__field">
-                            <Input
-                                value={settingsData.dataNascimento}
-                                onChange={(e) => setSettingsData({ ...settingsData, dataNascimento: e.target.value })}
-                                type={"date"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        </div>
-                        <div class="settings__field">
-                            <Input
-                                placeholder={"Senha"}
-                                value={settingsData.senhaAtual}
-                                onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
-                                type={"password"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        </div>
-                        <div class="settings__field">
-                            <Input
-                                placeholder={"Descrição do canal"}
-                                value={settingsData.descricao}
-                                onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
-                                type={"text"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        </div>
+    const renderMobileView = () => (
+        <>
+            <div className='settings__container'>
+                <HeaderSettings />
+                <div className="settings__form">
+                    <img src={ProfileImage} className='profile__settings' />
+                    <div className='settings__box__image__options'>
+                        <button className='settings__image__options__buttons'>Alterar</button>
+                        <button className='settings__image__options__buttons'>Remover</button>
                     </div>
-                    <hr class="solid" />
-                    <div className='settings__options__buttons__delete_div'>
-                        <button className='settings__options__buttons__delete'>Deletar perfil</button>
+                    <div className="settings__field">
+                        <Input
+                            placeholder={"Nome de usuário"}
+                            value={settingsData.nomeUsuario}
+                            onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
+                            type={"text"}
+                            required={true}
+                            className='settings__input'
+                        />
                     </div>
-                    <div className='settings__options__buttons__div'>
-                        <Button label={"cancelar"} className='settings__options__buttons__cancel'
-                            principal={true} />
-                        <Button label={"confirmar"} className='settings__options__buttons__confirm'
-                            principal={false} />
+                    <div className="settings__field">
+                        <Input
+                            placeholder={"Nome do canal"}
+                            value={settingsData.nomeCanal}
+                            onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
+                            type={"text"}
+                            required={true}
+                            className='settings__input'
+                        />
+                    </div>
+                    <div className="settings__field">
+                        <Input
+                            placeholder={"Senha"}
+                            value={settingsData.senhaAtual}
+                            onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
+                            type={"password"}
+                            required={true}
+                            className='settings__input'
+                        />
+                    </div>
+                    <div className="settings__field">
+                        <Input
+                            placeholder={"Descrição do canal"}
+                            value={settingsData.descricao}
+                            onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
+                            type={"text"}
+                            required={true}
+                            className='settings__input'
+                        />
                     </div>
                 </div>
-                :
-                <div className='settings__container__desktop'>
-                    <div className="settings__form__desktop">
-                        <img src={ProfileImage} className='profile__settings__desktop' />
-                        <div className='settings__box__image__options__desktop'>
-                            <button className='settings__image__options__buttons__desktop'>Alterar</button>
-                            <button className='settings__image__options__buttons__desktop'>Remover</button>
-                        </div>
-                        <div className='settings__field_container__desktop'>
-                            <div className="settings__field__desktop">
-                                <label>E-mail</label>
-                                <input type="email" className='settings__input__desktop' placeholder='E-mail' />
-                            </div>
-                            <div class="settings__field__desktop">
-                                <label>Nome de usuario</label>
-                                <input type="text" className='settings__input__desktop' placeholder='Nome de usuário' />
-                            </div>
-                            <div class="settings__field__desktop">
-                                <label>Nome do canal</label>
-                                <input type="text" className='settings__input__desktop' placeholder='Nome do canal' />
-                            </div>
-                            <div class="settings__field__desktop">
-                                <label>Data de nascimento</label>
-                                <input type="date" className='settings__input__desktop' />
-                            </div>
-                            <div class="settings__field__desktop">
-                                <label>Senha atual</label>
-                                <input type="password" className='settings__input__desktop' placeholder='Senha atual' />
-                            </div>
-                            <div class="settings__field__desktop">
-                                <label>Senha nova</label>
-                                <input type="password" className='settings__input__desktop' placeholder='Senha nova' />
-                            </div>
-                            <div class="settings__field__textarea__desktop">
-                                <label>Descrição do canal</label>
-                                <textarea className='settings__field__textarea__input__desktop' placeholder='Descrição' ></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="solid" />
-                    <div className='settings__options__buttons__container'>
-                        <button className='settings__options__buttons__delete__desktop'>Deletar perfil</button>
-                        <div className='settings__options__buttons__div__desktop'>
-                            <Button label={"cancelar"} className='settings__options__buttons__cancel__desktop'
-                                principal={true} />
-                            <Button label={"confirmar"} className='settings__options__buttons__confirm__desktop'
-                                principal={true} />
-                        </div>
-                    </div>
+                <br />
+                <hr className="solid" />
+                <div className='settings__options__buttons__delete_div'>
+                    <button className='settings__options__buttons__delete'>Deletar perfil</button>
                 </div>
-            }
+                <div className='settings__options__buttons__div'>
+                    <Button onClick={handleUpdateUser} label={"Cancelar"} className='settings__options__buttons__cancel' principal={true} />
+                    <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm' principal={false} />
+                </div>
+            </div>
         </>
     )
+    const renderDesktopView = () => (
+        <>
+            <div className='settings__container__desktop'>
+                <HeaderSettings />
+                <div className="settings__form__desktop">
+                    <img src={ProfileImage} className='profile__settings__desktop' />
+                    <div className='settings__box__image__options__desktop'>
+                        <button className='settings__image__options__buttons__desktop'>Alterar</button>
+                        <button className='settings__image__options__buttons__desktop'>Remover</button>
+                    </div>
+                    <div className='settings__input__container__desktop'>
+                        <div className='settings__input__box'>
+                            <div className="settings__field__desktop">
+                                <Input
+                                    placeholder={"Nome de usuário"}
+                                    value={settingsData.nomeUsuario}
+                                    onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
+                                    type={"text"}
+                                    required={true}
+                                    className='settings__input__desktop'
+                                />
+                            </div>
+                            <div className="settings__field__desktop">
+                                <Input
+                                    placeholder={"Nome do canal"}
+                                    value={settingsData.nomeCanal}
+                                    onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
+                                    type={"text"}
+                                    required={true}
+                                    className='settings__input__desktop'
+                                />
+                            </div>
+                        </div>
+                        <div className='settings__input__box'>
+                            <div className="settings__field__desktop">
+                                <Input
+                                    placeholder={"Senha"}
+                                    value={settingsData.senhaAtual}
+                                    onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
+                                    type={"password"}
+                                    required={true}
+                                    className='settings__input__desktop'
+                                />
+                            </div>
+                            <div className="settings__field__desktop">
+                                <Input
+                                    placeholder={"Descrição do canal"}
+                                    value={settingsData.descricao}
+                                    onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
+                                    type={"text"}
+                                    required={true}
+                                    className='settings__input__desktop'
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <hr className="solid" />
+                <div className='settings__options__buttons__container'>
+                    <button className='settings__options__buttons__delete__desktop'>Deletar perfil</button>
+                    <div className='settings__options__buttons__div__desktop'>
+                        <Button onClick={handleUpdateUser} label={"Cancelar"} className='settings__options__buttons__cancel__desktop' principal={false} />
+                        <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm__desktop' principal={true} />
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+    const renderTabletView = () => (
+        <>
+            <div className='settings__container__tablet'>
+                <HeaderSettings />
+                <div className="settings__form__tablet">
+                    <img src={ProfileImage} className='profile__settings__tablet' />
+                    <div className='settings__box__image__options__tablet'>
+                        <button className='settings__image__options__buttons__tablet'>Alterar</button>
+                        <button className='settings__image__options__buttons__tablet'>Remover</button>
+                    </div>
+                    <div className='settings__input__container__tablet'>
+                        <div className='settings__input__box'>
+                            <div className="settings__field__tablet">
+                                <Input
+                                    placeholder={"Nome de usuário"}
+                                    value={settingsData.nomeUsuario}
+                                    onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
+                                    type={"text"}
+                                    required={true}
+                                    className='settings__input__tablet'
+                                />
+                            </div>
+                            <div className="settings__field__tablet">
+                                <Input
+                                    placeholder={"Nome do canal"}
+                                    value={settingsData.nomeCanal}
+                                    onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
+                                    type={"text"}
+                                    required={true}
+                                    className='settings__input__tablet'
+                                />
+                            </div>
+                        </div>
+                        <div className='settings__input__box'>
+                            <div className="settings__field__tablet">
+                                <Input
+                                    placeholder={"Senha"}
+                                    value={settingsData.senhaAtual}
+                                    onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
+                                    type={"password"}
+                                    required={true}
+                                    className='settings__input___tablet'
+                                />
+                            </div>
+                            <div className="settings__field__tablet">
+                                <Input
+                                    placeholder={"Descrição do canal"}
+                                    value={settingsData.descricao}
+                                    onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
+                                    type={"text"}
+                                    required={true}
+                                    className='settings__input__tablet'
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr className="solid" />
+                <div className='settings__options__buttons__tablet'>
+                    <button className='settings__options__buttons__delete__tablet'>Deletar perfil</button>
+                    <div className='settings__options__buttons__div__tablet'>
+                        <Button onClick={handleUpdateUser} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
+                        <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                    </div>
+                </div>
+            </div>
+                    </>
+    )
+
+    const getViewToRender = () => {
+        if (screenSize.width > 900) {
+            return renderDesktopView();
+        } else if (screenSize.width < 900 && screenSize.width > 500) {
+            return renderTabletView();
+        } else {
+            return renderMobileView();
+        }
+    };
+    return <>{getViewToRender()}</>;
 }
-export default VideoDetails
+export default Settings
