@@ -9,6 +9,7 @@ import { useEffect } from "react";
 const ResultSearch = () => {
 
     const [openFilter, setOpenFilter] = useState(false);
+    const [defaultFilter, setDefaultFilter] = useState(false);
     const [height, setHeight] = useState("0");
 
     const nav = useNavigate();
@@ -20,15 +21,15 @@ const ResultSearch = () => {
             <div className="tags__carousel__search">
                 <TagsCarousel />
             </div>
-            <div className="container__filter" onClick={() => setOpenFilter(!openFilter)}>
+            <div className="container__filter" onClick={() => { setOpenFilter(!openFilter); setDefaultFilter(true) }}>
                 <span>Filtros</span>
                 <FiFilter />
             </div>
             <div className="container__table__filter"
                 style={openFilter ?
-                    { animation: "open-filter .5s forwards ease-out"}
+                    { animation: "open-filter .5s forwards ease-out" }
                     :
-                    { animation: "close-filter .5s forwards ease-out"}}>
+                    defaultFilter ? { animation: "close-filter .5s forwards ease-out" } : {}}>
                 <table className="table__filters">
                     <tr className="table__header__filter">
                         <th>Data</th>

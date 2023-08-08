@@ -49,6 +49,10 @@
     font-size: 12px;
 }
 
+.container__table__filter{
+    max-height: 0;
+}
+
 .container__videos__result{
     display: flex;
     flex-direction: column;
