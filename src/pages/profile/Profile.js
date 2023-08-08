@@ -52,7 +52,7 @@ const Profile = ({ }) => {
                             <img className="profile__pic" src={ProfilePicture} />
                             <h2 className='profile__name'>{usuario.nomeCanal}</h2>
                             <button className='profile__subscribe__button'>Inscrever-se</button>
-                            <p className='profile__id'>{usuario.nomePerfil}</p>
+                            <p className='profile__id'>@{usuario.nomePerfil}</p>
                             <div className='profile__details'>
                                 <p>{usuario.quantidadeInscritos} inscritos</p>
                             </div>
@@ -88,7 +88,7 @@ const Profile = ({ }) => {
                                     <h2 className='profile__name__desktop'>{usuario.nomeCanal}</h2>
                                     <button className='profile__subscribe__button__desktop'>Inscrever-se</button>
                                 </div>
-                                <p className='profile__id__desktop'>{usuario.nomePerfil}</p>
+                                <p className='profile__id__desktop'>@{usuario.nomePerfil}</p>
                                 <div className='profile__details__desktop'>
                                     <p>{usuario.quantidadeInscritos} inscritos</p>
                                 </div>
