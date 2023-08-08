@@ -22,16 +22,9 @@ const PlayerService = {
     },
 
     buscarVideosHome: async (page) => {
-        let randomPaginationPart = Math.floor(Math.random() * 2) + 1
-        let randomPaginationComp = Math.floor(Math.random() * 2) + 1
-        let size = 0
-        if (randomPaginationPart === 1 || randomPaginationPart === 2) {
-            size = 6
-        } else if (randomPaginationComp === 2 || randomPaginationComp === 1) {
-            size = 9
-        }
+        const randomPageSize = [6, 9, 12][Math.floor(Math.random() * 3)];
         try {
-            const response = await axios.get("/video/buscar-resumido?page=" + page + "&size=" + size);
+            const response = await axios.get(`/video/buscar-resumido?page=${page}&size=${randomPageSize}`);
             return response.data.content;
         } catch (error) {
             console.error(error);
