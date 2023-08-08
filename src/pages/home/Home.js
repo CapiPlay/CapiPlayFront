@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/header/Header';
 import './Home.css';
@@ -29,10 +28,10 @@ function Home() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []); 
+  }, []);
 
-  const getVideos = () => {
-    setVideos(PlayerService.buscarVideosResumidos(1))
+  const getVideos = async () => {
+    setVideos(await PlayerService.buscarVideosHome(0))
   }
 
   const renderDesktopView = () => (
@@ -48,16 +47,16 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__desk'>
-        {/* {videos.map((video) => (
-            <Video_card video={video} />
-        ))} */}
+          {videos.map((video) => (
+            <Video_card key={video.uuid} video={video} />
+          ))}
         </div>
         <div className='container__shorts__cards__desk'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards__desk'>
-          {Array.from({ length: 6 }, (_, index) => (
-            <Video_card key={index} />
+          {videos.map((video) => (
+            <Video_card key={video.uuid} video={video} />
           ))}
         </div>
       </div>
@@ -75,16 +74,16 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__tablet'>
-          {Array.from({ length: 4 }, (_, index) => (
-            <Video_card key={index} />
+          {videos.map((video) => (
+            <Video_card key={video.uuid} video={video} />
           ))}
         </div>
         <div className='container__shorts__cards__tablet'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards__tablet'>
-          {Array.from({ length: 6 }, (_, index) => (
-            <Video_card key={index} />
+          {videos.map((video) => (
+            <Video_card key={video.uuid} video={video} />
           ))}
         </div>
       </div>
@@ -99,16 +98,16 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards'>
-          {Array.from({ length: 2 }, (_, index) => (
-            <Video_card key={index} />
+          {videos.map((video) => (
+            <Video_card key={video.uuid} video={video} />
           ))}
         </div>
         <div className='container__shorts__cards__mobile'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards'>
-          {Array.from({ length: 2 }, (_, index) => (
-            <Video_card key={index} />
+          {videos.map((video) => (
+            <Video_card key={video.uuid} video={video} />
           ))}
         </div>
       </div>
