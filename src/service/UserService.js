@@ -1,43 +1,12 @@
 import axios from "axios";
 
-const url = 'http://localhost:8081/user'
+const url = 'http://localhost:8084/api/engajamento/usuario'
 
 export const UserService = {
-
-  create: function (Usuario) {
-    console.log(Usuario)
-    axios.post(url, Usuario).then((response) => {
+  findOne: function (usuarioId) {
+    return axios.get(url + '/' + usuarioId).then((response) => {
       return response.data;
     });
-  },
-
-  findAll: function () {
-    return new Promise((resolve, reject) => {
-      axios.get(url)
-        .then((response) => {
-          resolve(response.data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  },
-
-  findOne: function (id) {
-    axios.get(url + '/' + id).then((response) => {
-      return response.data;
-    });
-  },
-  edit: function (id, user) {
-    axios.patch(url + '/' + id, user).then((response) => {
-      return response.data
-    })
-  },
-  delete: function(id){
-    axios.delete(url + '/'+ id).then((response) => {
-        return response.data;
-      });
-}
-
+  }
 }
 export default UserService;
