@@ -3,6 +3,7 @@ import './Upload.css'
 import { useState, useRef } from "react"
 import { HiUpload } from 'react-icons/hi';
 import { BsFillFastForwardFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 import HeaderUpload from './headerUpload/HeaderUpload';
 import Button from "../../components/button/Button";
@@ -45,7 +46,7 @@ function Upload() {
     return (
         <>
             <div className='upload__page'>
-                <HeaderUpload />
+            <HeaderUpload caminho={"/"} />
                 <div className='upload__container'>
                     <div className='upload__buttons__box'>
                         {isVideo &&
@@ -112,12 +113,14 @@ function Upload() {
                                     type={"submit"}
                                     principal={false}
                                 />
-                                <Button
-                                    label={"Próximo"}
-                                    // onClick={}
-                                    type={"submit"}
-                                    principal={true}
-                                />
+                                <Link className='upload__next__button__link' to="/upload-video">
+                                    <Button
+                                        label={"Próximo"}
+                                        // onClick={}
+                                        type={"submit"}
+                                        principal={true}
+                                    />
+                                </Link>
                             </div>
                         </div>
                     }
@@ -144,12 +147,14 @@ function Upload() {
                                             type={"submit"}
                                             principal={false}
                                         />
-                                        <Button
-                                            label={"Próximo"}
-                                            // onClick={}
-                                            type={"submit"}
-                                            principal={true}
-                                        />
+                                        <Link className='upload__next__button__link' to="/upload-shorts">
+                                            <Button
+                                                label={"Próximo"}
+                                                // onClick={}
+                                                type={"submit"}
+                                                principal={true}
+                                            />
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

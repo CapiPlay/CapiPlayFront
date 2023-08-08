@@ -1,14 +1,15 @@
 import './UploadVideo.css'
 
-import React from 'react'
-import { useState, useRef } from "react"
 import { HiUpload } from 'react-icons/hi';
+import React, { useState, useEffect, useRef } from "react";
 
+import Button from '../../components/button/Button';
 import InputFile from "../../components/inputFile/InputFile";
 import HeaderUpload from '../upload/headerUpload/HeaderUpload';
-import Button from '../../components/button/Button';
 
 function UploadVideo() {
+
+  const [videoSrc, setVideoSrc] = useState(null)
 
   const [image, setImage] = useState()
   const imagePreviewRef = useRef(null)
@@ -20,7 +21,8 @@ function UploadVideo() {
     thumbnail: "",
     tags: [],
     kids: "",
-    video: ""
+    video: "",
+    ehVideo: ""
   })
 
   const handleInputChange = (e) => {
@@ -45,6 +47,8 @@ function UploadVideo() {
       };
 
       reader.readAsDataURL(file);
+
+      setVideoSrc(URL.createObjectURL(file));
     }
   }
 
@@ -59,7 +63,7 @@ function UploadVideo() {
   return (
     <>
       <div className='upload__video__page'>
-        <HeaderUpload />
+        <HeaderUpload caminho={"/upload"} />
         <div className='upload__video__container'>
           <p>Informações do vídeo</p>
           <div className='upload__video__container__rows'>
@@ -115,11 +119,11 @@ function UploadVideo() {
                     />
                   </div>
                 </div>
-                <img
-                  id="upload__video__preview"
-                  ref={imagePreviewRef}
-                  src="#"
-                  alt="Preview da Imagem" />
+                {videoSrc && (
+                  <video className='upload__video_preview' controls src={videoSrc} width="320" height="240">
+                    Seu navegador não suporta o elemento de vídeo.
+                  </video>
+                )}
               </div>
               <div className='upload__video__box__tags'>
                 <input
