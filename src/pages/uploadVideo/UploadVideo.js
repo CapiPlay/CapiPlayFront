@@ -1,11 +1,11 @@
 import './UploadVideo.css'
 
-import React, { useState, useEffect, useRef } from "react";
 import { HiUpload } from 'react-icons/hi';
+import React, { useState, useEffect, useRef } from "react";
 
+import Button from '../../components/button/Button';
 import InputFile from "../../components/inputFile/InputFile";
 import HeaderUpload from '../upload/headerUpload/HeaderUpload';
-import Button from '../../components/button/Button';
 
 function UploadVideo() {
 
@@ -21,7 +21,8 @@ function UploadVideo() {
     thumbnail: "",
     tags: [],
     kids: "",
-    video: ""
+    video: "",
+    ehVideo: ""
   })
 
   const handleInputChange = (e) => {
