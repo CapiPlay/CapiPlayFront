@@ -46,7 +46,7 @@ function Upload() {
     return (
         <>
             <div className='upload__page'>
-            <HeaderUpload caminho={"/"} />
+                <HeaderUpload caminho={"/"} />
                 <div className='upload__container'>
                     <div className='upload__buttons__box'>
                         {isVideo &&

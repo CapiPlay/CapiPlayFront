@@ -4,9 +4,9 @@ import React from 'react'
 import { useState, useRef } from "react"
 import { HiUpload } from 'react-icons/hi';
 
+import Button from '../../components/button/Button';
 import InputFile from "../../components/inputFile/InputFile";
 import HeaderUpload from '../upload/headerUpload/HeaderUpload';
-import Button from '../../components/button/Button';
 
 function UploadShorts() {
 
@@ -15,11 +15,13 @@ function UploadShorts() {
 
   const [video, setVideo] = useState({
     titulo: "",
-    categoria: "",
-    thumbnail: "",
+    descricao: null,
     tags: [],
-    kids: "",
-    video: ""
+    categoria: "",
+    ehReels: true,
+    video: "",
+    miniatura: "",
+    kids: ""
   })
 
   const handleInputChange = (e) => {
