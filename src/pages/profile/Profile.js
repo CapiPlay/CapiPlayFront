@@ -18,7 +18,6 @@ const Profile = ({ }) => {
 
     const [usuario, setUsuario] = useState({});
     const { usuarioId } = useParams();
-    console.log(usuarioId);
 
     useEffect(() => {
         UserService.findOne(usuarioId)
