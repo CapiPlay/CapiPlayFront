@@ -4,6 +4,7 @@ import '../commentsComponent/CommentsComponent.css'
 //icons
 import { IoMdClose, IoMdSend } from 'react-icons/io'
 
+//func: função utilizada para abrir  e fechar o componente de comentário
 const CommentsComponent = ({ func }) => {
 
     return (

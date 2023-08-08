@@ -20,23 +20,28 @@ function Comments(video) {
     const [likeComments, setLikeComments] = useState(false)
     const [dislikeComments, setDislikeComments] = useState(false)
 
+    //mostrar todo o comentário
     const toggleShowMore = () => {
         setShowMore(!showMore)
     }
 
+    //dar like no comentário
     const funcLikeComments = () => {
         setLikeComments(!likeComments)
         setDislikeComments(false)
     }
 
+    //dar dislike no comentário
     const funcDislikeComments = () => {
         setDislikeComments(!dislikeComments)
         setLikeComments(false)
     }
-    
+
 
     return (
-        <div className='comment'>
+        <div className='comment' style={showMore ?
+            { animation: "open-filter .5s forwards ease" }
+            : {}}>
             <div className='user__icon__container'>
                 <img src={user_image} />
             </div>

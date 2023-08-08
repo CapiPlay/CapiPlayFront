@@ -19,6 +19,7 @@ import { BsArrowLeftShort } from "react-icons/bs"
 
 const Shorts = ({ videoTitle }) => {
 
+    //imagens utilizadas para fazer a página (temporário)
     const videos = [
         {
             id: 1,
@@ -51,32 +52,36 @@ const Shorts = ({ videoTitle }) => {
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
     const [startY, setStartY] = useState(0)
 
+    //transição entre os vídeos
     const [transitioning, setTransitioning] = useState(false)
 
     const [openModalComments, setOpenModalComments] = useState(false)
     const [likeShort, setLikeShort] = useState(false)
     const [dislikeShort, setDislikeShort] = useState(false)
 
+    //para passar para próximo vídeo (utilizando o botão)
     const handleNextVideo = () => {
         if (!transitioning) {
-            setTransitioning(true);
+            setTransitioning(true)
             setTimeout(() => {
-                setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
-                setTransitioning(false);
-            }, 500);
+                setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length)
+                setTransitioning(false)
+            }, 500)
         }
-    };
+    }
 
+    //para retornar para o vídeo anterior (utilizando o botão)
     const handlePreviousVideo = () => {
         if (!transitioning) {
-            setTransitioning(true);
+            setTransitioning(true)
             setTimeout(() => {
-                setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length);
-                setTransitioning(false);
-            }, 500);
+                setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length)
+                setTransitioning(false)
+            }, 500)
         }
-    };
+    }
 
+    ///para passar para e retornar vídeo (utilizando o scroll)
     const handleScrollUp = (event) => {
         if (event.deltaY < 0 && currentVideoIndex !== 0) {
             handlePreviousVideo()
@@ -86,19 +91,20 @@ const Shorts = ({ videoTitle }) => {
     }
 
     const handleTouchStart = (event) => {
-        setStartY(event.touches[0].clientY);
-        setTransitioning(false); // Adicione esta linha para evitar problemas de transição
-    };
+        setStartY(event.touches[0].clientY)
+        setTransitioning(false)
+    }
 
     const handleTouchMove = (event) => {
-        const deltaY = event.touches[0].clientY - startY;
+        const deltaY = event.touches[0].clientY - startY
         if (deltaY > -50 && currentVideoIndex !== 0) {
-            handlePreviousVideo();
+            handlePreviousVideo()
         } else if (deltaY < 50 && currentVideoIndex !== videos.length - 1) {
-            handleNextVideo();
+            handleNextVideo()
         }
-    };
+    }
 
+    //responsividade automática da tela
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth)
@@ -107,23 +113,27 @@ const Shorts = ({ videoTitle }) => {
         window.addEventListener('resize', handleResize)
 
         return () => {
-            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', handleResize)
         }
     }, [])
 
+    //fazer o header aparecer ou não
     useEffect(() => {
         setHeaderAppearing(windowWidth >= 576)
     }, [windowWidth])
 
+    //abrir componente de comentários
     const funcOpenModalComments = () => {
         setOpenModalComments(!openModalComments)
     }
 
+    //dar like no shorts
     const funcLikeShorts = () => {
         setLikeShort(!likeShort)
         setDislikeShort(false)
     }
 
+    //dar dislike no shorts
     const funcDislikeShorts = () => {
         setDislikeShort(!dislikeShort)
         setLikeShort(false)
