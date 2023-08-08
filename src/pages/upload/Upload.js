@@ -147,12 +147,14 @@ function Upload() {
                                             type={"submit"}
                                             principal={false}
                                         />
-                                        <Button
-                                            label={"Próximo"}
-                                            // onClick={}
-                                            type={"submit"}
-                                            principal={true}
-                                        />
+                                        <Link className='upload__next__button__link' to="/upload-shorts">
+                                            <Button
+                                                label={"Próximo"}
+                                                // onClick={}
+                                                type={"submit"}
+                                                principal={true}
+                                            />
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
