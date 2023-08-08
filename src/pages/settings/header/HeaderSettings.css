@@ -7,3 +7,8 @@
 .container__header__Settings{
     padding: 3rem;
 }
+
+.header__settings__button{
+    width: 10%;
+    height: 10%;
+}

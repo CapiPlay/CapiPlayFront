@@ -29,7 +29,7 @@ const Settings = ({ userId }) => {
                 setSettingsData({
                     nomeUsuario: userData.nomeUsuario,
                     nomeCanal: userData.nomeCanal,
-                    senhaAtual: '', 
+                    senhaAtual: '',
                     descricao: userData.descricao
                 });
             })
@@ -61,17 +61,9 @@ const Settings = ({ userId }) => {
         };
     }, []);
 
-    const verifyScreen = () => {
-        if (screenSize.width > 900) {
-            return false
-        } else {
-            return true
-        }
-    }
-    return (
+    const renderMobileView = () => (
         <>
-            {verifyScreen() ?
-                <div className='settings__container'>
+            <div className='settings__container'>
                 <HeaderSettings />
                 <div className="settings__form">
                     <img src={ProfileImage} className='profile__settings' />
@@ -130,8 +122,11 @@ const Settings = ({ userId }) => {
                     <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm' principal={false} />
                 </div>
             </div>
-                :
-                <div className='settings__container__desktop'>
+        </>
+    )
+    const renderDesktopView = () => (
+        <>
+            <div className='settings__container__desktop'>
                 <HeaderSettings />
                 <div className="settings__form__desktop">
                     <img src={ProfileImage} className='profile__settings__desktop' />
@@ -187,7 +182,7 @@ const Settings = ({ userId }) => {
                     </div>
                 </div>
 
-                
+
                 <hr className="solid" />
                 <div className='settings__options__buttons__container'>
                     <button className='settings__options__buttons__delete__desktop'>Deletar perfil</button>
@@ -197,8 +192,86 @@ const Settings = ({ userId }) => {
                     </div>
                 </div>
             </div>
-            }
         </>
     )
+    const renderTabletView = () => (
+        <>
+            <div className='settings__container__tablet'>
+                <HeaderSettings />
+                <div className="settings__form__tablet">
+                    <img src={ProfileImage} className='profile__settings__tablet' />
+                    <div className='settings__box__image__options__tablet'>
+                        <button className='settings__image__options__buttons__tablet'>Alterar</button>
+                        <button className='settings__image__options__buttons__tablet'>Remover</button>
+                    </div>
+                    <div className='settings__input__container__tablet'>
+                        <div className='settings__input__box'>
+                            <div className="settings__field__tablet">
+                                <Input
+                                    placeholder={"Nome de usuário"}
+                                    value={settingsData.nomeUsuario}
+                                    onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
+                                    type={"text"}
+                                    required={true}
+                                    className='settings__input__tablet'
+                                />
+                            </div>
+                            <div className="settings__field__tablet">
+                                <Input
+                                    placeholder={"Nome do canal"}
+                                    value={settingsData.nomeCanal}
+                                    onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
+                                    type={"text"}
+                                    required={true}
+                                    className='settings__input__tablet'
+                                />
+                            </div>
+                        </div>
+                        <div className='settings__input__box'>
+                            <div className="settings__field__tablet">
+                                <Input
+                                    placeholder={"Senha"}
+                                    value={settingsData.senhaAtual}
+                                    onChange={(e) => setSettingsData({ ...settingsData, senhaAtual: e.target.value })}
+                                    type={"password"}
+                                    required={true}
+                                    className='settings__input___tablet'
+                                />
+                            </div>
+                            <div className="settings__field__tablet">
+                                <Input
+                                    placeholder={"Descrição do canal"}
+                                    value={settingsData.descricao}
+                                    onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
+                                    type={"text"}
+                                    required={true}
+                                    className='settings__input__tablet'
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr className="solid" />
+                <div className='settings__options__buttons__tablet'>
+                    <button className='settings__options__buttons__delete__tablet'>Deletar perfil</button>
+                    <div className='settings__options__buttons__div__tablet'>
+                        <Button onClick={handleUpdateUser} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
+                        <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                    </div>
+                </div>
+            </div>
+                    </>
+    )
+
+    const getViewToRender = () => {
+        if (screenSize.width > 900) {
+            return renderDesktopView();
+        } else if (screenSize.width < 900 && screenSize.width > 500) {
+            return renderTabletView();
+        } else {
+            return renderMobileView();
+        }
+    };
+    return <>{getViewToRender()}</>;
 }
 export default Settings
