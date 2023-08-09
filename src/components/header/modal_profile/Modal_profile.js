@@ -41,7 +41,7 @@ function Modal_profile() {
                         <div className='modal__profile__itens__desktop'>
                             <Link to="/profile" className='text__profile_modal'><p>Seu canal</p></Link>
                             <div className='divider__profile__modal'></div>
-                            <Link to="" className='text__profile_modal'><p>Tema</p></Link>
+                            <Link to="" className='text__profile_modal'><p >Tema</p></Link>
                             <div className='divider__profile__modal'></div>
                             <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
                             <div className='divider__profile__modal'></div>
@@ -64,7 +64,7 @@ function Modal_profile() {
                         <div className='modal__profile__itens__desktop'>
                             <Link to="/player" className='text__profile_modal'><p>Seu canal</p></Link>
                             <div className='divider__profile__modal'></div>
-                            <Link to="" className='text__profile_modal'><p>Tema</p></Link>
+                            <p>Tema</p>
                             <div className='divider__profile__modal'></div>
                             <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
                             <div className='divider__profile__modal'></div>

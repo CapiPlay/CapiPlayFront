@@ -12,8 +12,8 @@ import Video_card from '../../../../components/video_card/Video_card'
 import Header from '../../../../components/header/Header'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
-function Desktop_player(video) {
-
+function Desktop_player({video}) {
+    console.log(video)
      //são apenas variáveis de exemplo, elas vão vir com o objeto 
     const video_title_var = 'Pingu.'
     const video_views_var = '57k'

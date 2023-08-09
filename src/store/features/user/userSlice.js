@@ -63,7 +63,7 @@ const doSignup = (newUser, photo) => async (dispatch) => {
 
 const doLogout = () => async (dispatch) => {
   try {
-
+    dispatch(logout())
   } catch (err) {
     console.error(err)
   }

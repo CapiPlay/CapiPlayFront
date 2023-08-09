@@ -4,12 +4,17 @@ import './Video_card.css'
 
 import img_miniatura from "../../assets/image/img_base_miniatura.png"
  
-function Video_card(video) {
-    const id = "aa"
+function Video_card({video}) {
+    
+    if (!video) {
+        // Handle the case when the video is undefined or null
+        return <div>No Video Data</div>;
+      }
+
     return (
 
         <div className='box__video__card'>
-            <Link to={`/player/${id}`}>
+            <Link to={`/player/${video.uuid}`}>
                 <div className='container__video__image'>
                     <img src="https://i.ytimg.com/vi/1Ne1hqOXKKI/maxresdefault.jpg" className='container__video__card__image' />
                 </div>

@@ -1,9 +1,8 @@
-.arrow__icon {
-    position :absolute;
-    left: 1rem;
-    top: 1rem;
+.container__header__Settings{
+    padding: 3rem;
 }
 
-.container__header__Settings{
-    padding: 2rem;
+.header__settings__button{
+    width: 10%;
+    height: 10%;
 }
