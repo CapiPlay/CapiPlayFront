@@ -6,6 +6,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Button from '../../components/button/Button';
 import InputFile from "../../components/inputFile/InputFile";
 import HeaderUpload from '../upload/headerUpload/HeaderUpload';
+import VideoService from '../../service/VideoService';
 
 function UploadVideo() {
 
@@ -24,7 +25,7 @@ function UploadVideo() {
     categoria: "",
     ehReels: false,
     video: "",
-    miniatura: "",
+    miniatura: localStorage.getItem("thumbnail"),
     kids: ""
   })
 
@@ -55,13 +56,21 @@ function UploadVideo() {
 
       reader.readAsDataURL(file);
 
+      const videoURL = URL.createObjectURL(file);
+      setVideoSrc(videoURL);
+
       setVideoSrc(URL.createObjectURL(file));
     }
   }
 
   const enviarVideo = (event) => {
     event.preventDefault()
-    // CardService.cadastrar(card)
+
+    setVideo((prevVideo) => ({
+      ...prevVideo,
+      video: videoSrc // Usa o valor atualizado de videoSrc
+    }));
+    // VideoService.criar(video)
     // alert("Cadastro efetuado!")
     console.log(video)
     // window.location.reload()

@@ -23,12 +23,12 @@ function Upload() {
     }
 
     const handleFileChange = (e) => {
+        localStorage.setItem("thumbnail", image)
         const file = e.target.files[0]
         if (file) {
             const formData = new FormData()
             formData.append("foto", file)
             setImage(formData)
-            localStorage.setItem("foto", formData)
 
             const reader = new FileReader();
 
