@@ -1,29 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit"
+import Cookies from "js-cookie"
+import UserService from "../../../service/UserService"
+
+const token = Cookies.get("token")
 
 // Estado inicial do usuário
 const initialState = {
-  isAuthenticated: false,
-  token: null,
-  user: {
-    id: "",
-    nome: "",
-    senha: "",
-    email: "",
-    perfil: "",
-    foto: "",
-    dataNascimento: "",
-    descricao: ""
-  }
+  isAuthenticated: !!token,
+  token: token || null,
+  user: {}
 }
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    login: (state, action) => {
+    login: async (state, action) => {
+      const { token } = action.payload
+      Cookies.set("token", token)
       state.isAuthenticated = true
-      state.value = action.payload.user
-      state.token = action.payload.token
+      state.token = token
+      console.log(initialState)
     },
     logout: (state) => {
       state.isAuthenticated = false
@@ -33,48 +30,47 @@ const userSlice = createSlice({
     signup: (state, action) => {
       state.isAuthenticated = true
       state.user = action.payload.user
-      state.token = action.payload.token
     }
   }
 })
 
-
-export const { login, logout, signup } = userSlice.actions // ações do usuário
+export const { login, logout, signup } = userSlice.actions
 export default userSlice.reducer
 
-export const doLogin = (userCredentials) => async (dispatch) => {
+const doLogin = (credentials) => async (dispatch) => {
   try {
-    const response = await fakeLoginAPI(userCredentials)
-    dispatch(login({ user: response.user, token: response.token }))
-    return response
-  } catch (error) {
-    throw new Error("Credenciais inválidas")
-  }
-}
+    const res = await UserService.login(credentials)
+    await dispatch(login({ token: res.data }))
 
-const fakeLoginAPI = (userCredentials) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (userCredentials.email === "user@example.com" && userCredentials.senha === "123456") {
-        resolve({
-          user: {
-            nome: "Nome do Usuário",
-            email: "user@example.com"
-          },
-          token: "token_de_acesso_gerado_pelo_backend"
-        })
-      } else {
-        reject(new Error("Credenciais inválidas"))
-      }
-    }, 1000)
-  })
-}
+    const userDetails = await UserService.detalhes()
+    Cookies.set("user", JSON.stringify(userDetails.data))
 
-export const doSignup = (newUser) => async (dispatch) => {
-  try {
-    const res = newUser
-    dispatch(signup({ user: res.value, token: res.token }))
+    return res
   } catch (err) {
     console.error(err)
   }
+}
+
+const doSignup = (newUser, photo) => async (dispatch) => {
+  try {
+    const res = await UserService.criar(newUser, photo)
+    const user = res.data
+    dispatch(signup({ user: user, token: user.nome }))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+const doLogout = () => async (dispatch) => {
+  try {
+
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export {
+  doSignup,
+  doLogin,
+  doLogout
 }
