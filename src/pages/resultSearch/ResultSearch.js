@@ -4,19 +4,29 @@ import { FiFilter } from "react-icons/fi"
 import { useState } from "react";
 import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 import Video_card from "../../components/video_card/Video_card";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 const ResultSearch = () => {
 
     const [openFilter, setOpenFilter] = useState(false);
     const [defaultFilter, setDefaultFilter] = useState(false);
-    const [height, setHeight] = useState("0");
 
     const nav = useNavigate();
+    const location = useLocation();
+
+    const urlSearchParams = new URLSearchParams(location.search);
+    const [searchValue, setSearchValue] = useState("");
+    const searchParams = urlSearchParams.get("search");
+
+    useEffect(() => {
+        setSearchValue(searchParams);
+    }, [searchParams])
+
 
     return (
         <div className="container__result__search">
             <HeaderSearch
+                valueInput={searchValue}
                 functionBack={() => nav("/")} />
             <div className="tags__carousel__search">
                 <TagsCarousel />

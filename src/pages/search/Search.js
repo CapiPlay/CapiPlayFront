@@ -1,5 +1,5 @@
 import "./Search.css"
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // ícones
 import { MdRestartAlt } from "react-icons/md"
@@ -7,7 +7,6 @@ import { BiSearchAlt2 } from "react-icons/bi"
 
 // componentes
 import { useState } from "react";
-import ResultSearch from "../../components/tagsCarousel/TagsCarousel";
 import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 
 const Search = () => {
@@ -15,6 +14,12 @@ const Search = () => {
     const sizeIcon = 20;
     const colorIcon = "var(--whitesmoke)";
     const nav = useNavigate();
+    const location = useLocation();
+
+    const urlSearchParams = new URLSearchParams(location.search);
+    const searchParams = urlSearchParams.get("q");
+    const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : "");
+    console.log(valueInput);
 
     const [back, setBack] = useState(false);
 
@@ -38,10 +43,14 @@ const Search = () => {
         "Como fazer uma torta de abacaxi com calda de côco?"
     ]));
 
-    const [valueInput, setValueInput] = useState("");
 
     const handleChange = (e) => {
         setValueInput(e.target.value);
+    }
+
+    const handleSearch = () => {
+        nav(`/result-search?search=${encodeURIComponent(valueInput)}`);
+        console.log("search: ")
     }
 
     const renderSearch = () => {
@@ -72,10 +81,11 @@ const Search = () => {
 
     return (
         <div className="container__search" style={{ "display": back ? "none" : "block" }}>
-            <HeaderSearch 
-            valueInput={valueInput} 
-            handleChange={handleChange} 
-            functionBack={()=>setBack(!back)}/>
+            <HeaderSearch
+                handleSearch={handleSearch}
+                valueInput={valueInput}
+                handleChange={handleChange}
+                functionBack={() => setBack(!back)} />
             {renderSearch()}
         </div>
     )

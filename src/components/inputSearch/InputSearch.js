@@ -4,13 +4,18 @@ import { useNavigate } from "react-router-dom"
 import ResultSearch from "../tagsCarousel/TagsCarousel";
 import { useState } from "react";
 
-const InputSearch = ({ value, handleChange }) => {
+// PROPS: 
+// - handleChange = usado para setar o valor do input com event.target.value 
+// - value = utilizado para guardar o valor que será passado pelo input 
+// - handleSearch = usado para realizar a lógica de busca e direcionar aos resultados encontrados
 
-    const nav = useNavigate(); 
+// *todos os props utilizados serão repassados ao HeaderSearch, e, posteriormente, setados pelo Search
 
-    const enter = (e) => {
-        if (e.key === 'Enter'){
-            nav("/result-search")
+const InputSearch = ({ value, handleChange, handleSearch }) => {
+
+    const verifyKeyPress = (e) =>{
+        if(e.key === 'Enter'){
+            handleSearch();
         }
     }
 
@@ -19,8 +24,8 @@ const InputSearch = ({ value, handleChange }) => {
             <input
                 type="text"
                 value={value}
-                onChange={handleChange} 
-                onKeyPress={enter}/>
+                onChange={handleChange}
+                onKeyPress={verifyKeyPress}/>
             <BiSearchAlt2
                 className="icon__search"
             />

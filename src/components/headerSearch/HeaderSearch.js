@@ -7,17 +7,18 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 // PROPS: 
-//  - valueInput e handleInput = utilizados para realizar verificações de interação do usuário com o input (InputSearch e Search)
-//  - functionBack = utilizado para as outras páginas definirem a rota de volta do botão 
+// todos os props do HeaderSearch tem apenas a função de repassar as informações que serão setadas pelo Search/ResultSearch
 
-const HeaderSearch = ({ valueInput, handleChange, functionBack }) => {
+const HeaderSearch = ({ valueInput, handleChange, functionBack, handleSearch }) => {
 
     return (
         <div className="header__search">
             <IoMdArrowBack size={20} color="var(--lightpurple)" onClick={functionBack} />
             <InputSearch
                 value={valueInput}
-                handleChange={handleChange} />
+                handleChange={handleChange}
+                handleSearch={handleSearch}
+            />
         </div>
     )
 }
