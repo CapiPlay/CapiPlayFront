@@ -10,6 +10,7 @@ import imagePerfil from "../../assets/imagemPerfil.png"
 import ButtonSubmit from '../../components/buttonSubmit/ButtonSubmit'
 import Header from '../../components/header/Header'
 import CommentsComponent from '../../components/commentsComponent/CommentsComponent'
+import ShortsService from '../../service/ShortsService'
 
 //icons
 import { BiLike, BiDislike, BiCommentDetail, BiSolidLike, BiSolidDislike } from "react-icons/bi"
@@ -58,6 +59,8 @@ const Shorts = ({ videoTitle }) => {
     const [openModalComments, setOpenModalComments] = useState(false)
     const [likeShort, setLikeShort] = useState(false)
     const [dislikeShort, setDislikeShort] = useState(false)
+
+    const [shortsArray, setShortsArray] = useState([])
 
     //para passar para próximo vídeo (utilizando o botão)
     const handleNextVideo = () => {
@@ -139,6 +142,11 @@ const Shorts = ({ videoTitle }) => {
         setLikeShort(false)
     }
 
+    //renderização de vídeo
+    for (let i = 0; i < 4; i++) {
+        setShortsArray(ShortsService.buscar())
+    }
+
     return (
         <div
             className='container__all__shorts'
@@ -175,6 +183,15 @@ const Shorts = ({ videoTitle }) => {
                 )
             }
             <div className={`container__video ${transitioning ? 'transitioning' : ''}`}>
+                <div>
+                    {
+                        shortsArray && (
+                           shortsArray.map((shorts) => {
+                            console.log(shorts)
+                           })
+                        )
+                    }
+                </div>
                 <img src={videos[currentVideoIndex].image} alt='Imagem shorts' />
                 <div className='header__shorts'>
                     <BsArrowLeftShort />
