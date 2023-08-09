@@ -1,6 +1,7 @@
 import "./ShortCard.css"
 import numeral from "numeral";
 import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 
 const Shortcard = ({ short }) => {
 
@@ -25,7 +26,9 @@ const Shortcard = ({ short }) => {
 
     const renderMobileView = () => (
         <div className="container__short__card">
-            <img className="short__image" src={short.img} />
+            <Link to={`/player/${short.uuid}`}>
+                <img className="short__image" src={short.img} />
+            </Link>
             <div className="container__informations__shorts">
                 <span>{short.title}</span>
                 {short.views > 999
@@ -44,7 +47,9 @@ const Shortcard = ({ short }) => {
 
     const renderDesktopView = () => (
         <div className="container__short__card__desk">
-            <img className="short__image" src={short.img} />
+            <Link to={`/player/${short.uuid}`}>
+                <img className="short__image" src={short.img} />
+            </Link>
             <div className="container__informations__shorts">
                 <span>{short.title}</span>
                 {short.views > 999
@@ -63,7 +68,9 @@ const Shortcard = ({ short }) => {
 
     const renderTabletView = () => (
         <div className="container__short__card__tablet">
-            <img className="short__image" src={short.img} />
+            <Link to={`/player/${short.uuid}`}>
+                <img className="short__image" src={short.img} />
+            </Link>
             <div className="container__informations__shorts">
                 <span>{short.title}</span>
                 {short.views > 999

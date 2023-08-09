@@ -1,3 +1,4 @@
+
 .like__dislike__btns{
     display: flex;
     justify-content: end;
@@ -48,6 +49,7 @@
 
 .video__player__mobile{
     margin: 0;
+    top: 0;
     width: 100%;
     height: 20rem;
 }
@@ -56,8 +58,9 @@
     width: max-content;
 }
 
-.comments__container{
+.comments__container__mobile{
     margin: 1rem;
+    cursor: pointer;
 }
 
 .total__comments{
@@ -83,8 +86,23 @@
     display: flex;
     align-items: center;
     color: white;
-    margin: 1rem;
+    margin-left: 1rem;
     gap: 0.5rem;
+}
+
+.close__comments{
+    margin: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--lightpurple);
+    font-size: 1.3rem;
+}
+
+.comments__scroll__modal{
+    max-height: 29rem;
+    height: max-content;
+    overflow-y: scroll;
 }
 
 .comments{
@@ -98,4 +116,39 @@
 .videos{
     display: grid;
     grid-template-columns: 50% 50%;
+}
+
+.send__icon{
+    color: var(--purple);
+    font-size: 1.5rem;
+    position: absolute;
+    float: right;
+    right: 0;
+    margin-right: 2rem;
+}
+
+.comments__input__container{
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comments__input{
+    width: 100%;
+    height: 2rem;
+    border-radius: 0.6rem;
+    padding-left: 1rem;
+    font-size: 15px;
+}
+
+.comments__modal{
+    z-index: 999;
+    position: absolute;
+    height: max-content;
+    background-color: var(--darkpurple);
+}
+
+.teste{
+    display: none;
 }
