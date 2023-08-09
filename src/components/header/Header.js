@@ -5,13 +5,21 @@ import logo from '../../assets/image/Logo.png'
 import { AiOutlineSearch } from 'react-icons/ai'
 import './Header.css'
 import Modal_profile from './modal_profile/Modal_profile';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';    
 
 //imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
 //ser passada para o header para ser exibida 
 function Header({ userProfile }) {
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+
+    const verifyToken = () => {
+        if (userProfile) {
+            return userProfile;
+        } else {
+            return false;
+        }
+    }
 
     useEffect(() => {
         function handleResize() {
@@ -50,10 +58,12 @@ function Header({ userProfile }) {
             </div>
             <div className='header__info'>
                 <div>
-                    <Link to="/upload" className='upload__icon__header' ><TbUpload /></Link>
+                    {verifyToken() &&
+                        <Link to="/upload" className='upload__icon__header' ><TbUpload /></Link>
+                    }
                 </div>
                 <div>
-                    <Modal_profile profile={userProfile} />
+                    < Modal_profile profile={userProfile} />
                 </div>
             </div>
         </div>
