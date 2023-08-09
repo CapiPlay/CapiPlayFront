@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Desktop_player.css'
 import Like from '../../player_components/like_btn/Like_btn'
 import Dislike from '../../player_components/dislike_btn/Dislike_btn'
@@ -11,15 +11,20 @@ import Comments_component from '../../player_components/comments_componet/Commen
 import Video_card from '../../../../components/video_card/Video_card'
 import Header from '../../../../components/header/Header'
 import EngajamentoService from '../../../../service/EngajamentoService'
+import PlayerService from '../../../../service/PlayerService'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Desktop_player({video}) {
-    console.log(video)
     // const videoReactions = EngajamentoService.buscarTodasReacoesPorVideo(video.uuid)
     //são apenas variáveis de exemplo, elas vão vir com o objeto 
-    const video_title_var = video.titulo
+    
     const video_views_var = '57k'
     const video_likes_var = '57k' //videoReactions.size
+    let video_var;
+
+    useEffect(() => {
+        video_var = PlayerService.buscarVideo(video.caminhos[5])
+    }, [])
 
     return (
         <><Header></Header>
@@ -28,11 +33,11 @@ function Desktop_player({video}) {
                 <div>
                     <div>
                         <video controls className='video__player__desktop'>
-                            <source src={video.caminhos[5]} type="video/mp4" />
+                            <source src={video_var} type="video/mp4" />
                         </video>
                     </div>
                     <div className='video__title'>
-                        <p>{video_title_var}</p>
+                        <p>{video.titulo}</p>
                     </div>
                     <div className='interaction'>
                         <div className='interaction__info'>

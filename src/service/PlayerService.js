@@ -5,6 +5,7 @@ const PlayerService = {
     buscarVideo: async (videoId) => {
         try {
             const response = await axios.get("/video/buscar-completo/" + videoId);
+            console.log(response.data)
             return response.data;
         } catch (error) {
             console.error(error);
