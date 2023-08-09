@@ -2,6 +2,8 @@ import Aos from 'aos';
 import './Modal_profile.css';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import notFound from '../../../assets/image/404_NotFound.png'
+
 
 function Modal_profile({ profile }) {
     const [openModal, setOpenModal] = useState(0)
@@ -27,6 +29,14 @@ function Modal_profile({ profile }) {
         }
     }
 
+    function verifyProfileImage() {
+        if (profile) {
+            return profile.image
+        } else {
+            return notFound
+        }
+    }
+
     useEffect(() => {
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
@@ -41,7 +51,7 @@ function Modal_profile({ profile }) {
     const renderDesktopView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img onClick={() => setOpenModal(openModal + 1)} src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
+                <img src={verifyProfileImage()} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
@@ -79,7 +89,7 @@ function Modal_profile({ profile }) {
     const renderTabletView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
+                <img src={verifyProfileImage()} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
@@ -117,7 +127,7 @@ function Modal_profile({ profile }) {
     const renderMobileView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
+                <img src={verifyProfileImage()} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>

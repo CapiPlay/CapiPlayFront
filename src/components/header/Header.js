@@ -28,7 +28,7 @@ function Header({ userProfile }) {
         <div className='container__header'>
             <div className='box__header'>
                 <div className='modal__menu' >
-                    <Modal_menu profile={userProfile} />
+                    <Modal_menu />
                 </div>
                 <div className='container__logo'>
                     <img src={logo} className='container__logo' />
@@ -36,7 +36,7 @@ function Header({ userProfile }) {
             </div>
             <div className='box__header'>
                 <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
-                <Modal_profile />
+                <Modal_profile profile={userProfile} />
             </div>
         </div>
     );
@@ -53,7 +53,7 @@ function Header({ userProfile }) {
                     <Link to="/upload" className='upload__icon__header' ><TbUpload /></Link>
                 </div>
                 <div>
-                    <Modal_profile />
+                    <Modal_profile profile={userProfile} />
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@ function Header({ userProfile }) {
             </div>
             <div className='box__header'>
                 <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
-                <Modal_profile />
+                <Modal_profile profile={userProfile} />
             </div>
         </div>
     );
