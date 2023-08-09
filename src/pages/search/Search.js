@@ -80,7 +80,7 @@ const Search = () => {
     }
 
     return (
-        <div className="container__search" style={{ "display": back ? "none" : "block" }}>
+        <div className="container__search">
             <HeaderSearch
                 handleSearch={handleSearch}
                 valueInput={valueInput}

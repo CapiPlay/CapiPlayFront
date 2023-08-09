@@ -14,8 +14,17 @@
 }
 
 .search__box>span {
+    font-size: 12px;
     width: 100%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+/* Responsividade  */
+
+@media screen AND (min-width: 760px){
+    .search__box>span{
+        font-size: 18px;
+    }
 }

@@ -9,16 +9,43 @@
     background-color: var(--lightpurple);
     border-radius: 25px;
     text-align: center;
-    height: 1.4rem;
-    min-width: 6rem; 
-    max-width: 8rem;
+    min-width: 5rem; 
+    max-width: 7.5rem;
 
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    padding: .3rem;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
 }
 
 .tags__search>span {
-    padding: 5%;
     font-size: 12px;
+}
+
+/* Responsividade  */
+
+@media screen AND (min-width: 760px){
+    .tags__search{
+        max-width: 18rem;
+    }
+
+    .tags__search>span{
+        font-size: 18px;
+    }
+}
+
+@media screen AND (min-width: 1000px){
+    .tags__search{
+        max-width: 28rem;
+    }
+
+    .tags__search>span{
+        font-size: 22px;
+    }
 }

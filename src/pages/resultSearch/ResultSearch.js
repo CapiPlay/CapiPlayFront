@@ -29,8 +29,8 @@ const ResultSearch = () => {
                 valueInput={searchValue}
                 functionBack={() => nav("/")} />
             <div className="tags__carousel__search">
-                <TagsCarousel />
             </div>
+                <TagsCarousel />
             <div className="container__filter" onClick={() => { setOpenFilter(!openFilter); setDefaultFilter(true) }}>
                 <span>Filtros</span>
                 <FiFilter />
