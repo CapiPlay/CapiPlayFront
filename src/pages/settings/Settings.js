@@ -260,7 +260,7 @@ const Settings = ({ userId }) => {
                     </div>
                 </div>
             </div>
-                    </>
+        </>
     )
 
     const getViewToRender = () => {
