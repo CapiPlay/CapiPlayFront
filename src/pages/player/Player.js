@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './Player.css'
+
+//item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
+function Player(video) {
+  
 import Desktop_player from './player_screen_methods/player_desktop/Desktop_player'
 import Mobile_player from './player_screen_methods/player_mobile/Mobile_player'
 import Tablet_player from './player_screen_methods/player_tablet/Tablet_player'
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import PlayerService from '../../service/PlayerService'
 
 function Player() {
@@ -36,6 +39,12 @@ function Player() {
     }
   }
 
+
+  //são apenas variáveis de exemplo, elas vão vir com o objeto 
+  const video_title_var = 'Pingu.'
+  const video_views_var = '57k'
+  const video_likes_var = '57k'
+  
   const verifyTablet = () => {
     if (screenSize.width < 900 && screenSize.width > 450) {
       return true
