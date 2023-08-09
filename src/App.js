@@ -17,6 +17,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Upload from './pages/upload/Upload';
 import UploadVideo from './pages/uploadVideo/UploadVideo';
 import UploadShorts from './pages/uploadShorts/UploadShorts';
+import NotFound from './pages/notFound/NotFound';
 
 function App() {
   return (
@@ -35,6 +36,11 @@ function App() {
           <Route path="/upload" element={<Upload />} />
           <Route path="/upload-video" element={<UploadVideo />} />
           <Route path="/upload-shorts" element={<UploadShorts />} />
+<<<<<<< Updated upstream
+=======
+          <Route path="/settings" element={<Settings />} />
+          <Route path="*" element={<NotFound />} />
+>>>>>>> Stashed changes
         </Routes>
       </BrowserRouter>
     </div>
