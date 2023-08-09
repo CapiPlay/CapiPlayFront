@@ -4,7 +4,6 @@ import Desktop_player from './player_screen_methods/player_desktop/Desktop_playe
 import Mobile_player from './player_screen_methods/player_mobile/Mobile_player'
 import Tablet_player from './player_screen_methods/player_tablet/Tablet_player'
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import PlayerService from '../../service/PlayerService'
 
 function Player() {

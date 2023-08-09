@@ -10,14 +10,16 @@ import Divider_component from '../../player_components/divider_component/Divider
 import Comments_component from '../../player_components/comments_componet/Comments_component'
 import Video_card from '../../../../components/video_card/Video_card'
 import Header from '../../../../components/header/Header'
+import EngajamentoService from '../../../../service/EngajamentoService'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Desktop_player({video}) {
     console.log(video)
-     //são apenas variáveis de exemplo, elas vão vir com o objeto 
-    const video_title_var = 'Pingu.'
+    // const videoReactions = EngajamentoService.buscarTodasReacoesPorVideo(video.uuid)
+    //são apenas variáveis de exemplo, elas vão vir com o objeto 
+    const video_title_var = video.titulo
     const video_views_var = '57k'
-    const video_likes_var = '57k'
+    const video_likes_var = '57k' //videoReactions.size
 
     return (
         <><Header></Header>
@@ -26,7 +28,7 @@ function Desktop_player({video}) {
                 <div>
                     <div>
                         <video controls className='video__player__desktop'>
-                            <source src={pingu} type="video/mp4" />
+                            <source src={video.caminhos[5]} type="video/mp4" />
                         </video>
                     </div>
                     <div className='video__title'>
@@ -42,8 +44,8 @@ function Desktop_player({video}) {
                             </div>
                         </div>
                         <div className='like__dislike__btns'>
-                            <Like />
-                            <Dislike />
+                            <Like video={video}/>
+                            <Dislike video={video}/>
                         </div>
                     </div>
                     <div>
