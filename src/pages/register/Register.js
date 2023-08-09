@@ -61,35 +61,32 @@ const Register = () => {
     const register = (e) => {
         e.preventDefault()
         console.log("Entrei para registrar")
-        setRegisterData({ ...registerData, foto: image })
+        setRegisterData({ ...registerData, foto1: image })
         user.append("nome", registerData.nome)
         user.append("senha", registerData.senha)
         user.append("email", registerData.email)
         user.append("perfil", registerData.nome)
         user.append("dataNascimento", registerData.dataNascimento)
-        user.append("foto", registerData.foto)
+        user.append("foto1", image)
 
         try {
             const res = dispatch(doSignup(user, image))
+            // nextStep()
         } catch(err) {
             console.error(err)
         }
-
-        // nextStep()
     }
 
     const handleFileChange = (e) => {
         const file = e.target.files[0]
         if (file) {
-            user.append("foto", file)
             setFileChanged(true)
-            setImage(user)
+            setImage(file)
         }
     }
 
     const handleRemoveFile = (e) => {
         e.preventDefault()
-        user.delete("foto")
         setFileChanged(!fileChanged)
         setImage(null)
     }

@@ -13,7 +13,7 @@ import Button from "../../components/button/Button"
 // Icons
 import { FaFacebookF } from 'react-icons/fa'
 import { FaGoogle } from 'react-icons/fa'
-import axiosInstance from "../../service/AxiosConfig"
+import Cookies from "js-cookie"
 
 const Login = ({ }) => {
 
@@ -33,7 +33,7 @@ const Login = ({ }) => {
         }
     }, [])
 
-    const login = () => {
+    const login = async() => {
         try {
             dispatch(doLogin(loginData))
         } catch (err) {

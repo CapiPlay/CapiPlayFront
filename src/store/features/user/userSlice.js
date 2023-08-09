@@ -7,7 +7,8 @@ const token = Cookies.get("token")
 // Estado inicial do usuário
 const initialState = {
   isAuthenticated: !!token,
-  token: token || null
+  token: token || null,
+  user: {}
 }
 
 const userSlice = createSlice({
@@ -33,14 +34,17 @@ const userSlice = createSlice({
   }
 })
 
-
 export const { login, logout, signup } = userSlice.actions
 export default userSlice.reducer
 
 const doLogin = (credentials) => async (dispatch) => {
   try {
     const res = await UserService.login(credentials)
-    dispatch(login({ token: res.data }))
+    await dispatch(login({ token: res.data }))
+
+    const userDetails = await UserService.detalhes()
+    Cookies.set("user", JSON.stringify(userDetails.data))
+
     return res
   } catch (err) {
     console.error(err)
@@ -68,6 +72,5 @@ const doLogout = () => async (dispatch) => {
 export {
   doSignup,
   doLogin,
-  doLogout,
-  initialState
+  doLogout
 }
