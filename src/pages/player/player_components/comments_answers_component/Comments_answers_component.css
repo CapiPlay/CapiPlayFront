@@ -53,10 +53,22 @@
     margin-bottom: 3px;
 }
 
-.answers{
+.comment__total__answers{
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.7rem;
     color: var(--lightpurple);
+}
+
+.comment__like__btn{
+    cursor: pointer;
+}
+
+.comment__dislike__btn{
+    cursor: pointer;
+}
+
+.comment__answers{
+    margin-left: 3rem;
 }

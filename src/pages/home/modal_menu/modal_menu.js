@@ -139,7 +139,7 @@ function Modal_menu() {
                     </div>
                 </div>
             }
-            {verify() &&
+                  {verify() &&
                 <div className="background" onClick={() => setOpenModal(openModal - 1)}></div>
             }
         </>
