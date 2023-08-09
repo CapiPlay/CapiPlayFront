@@ -115,6 +115,9 @@ const Shorts = ({ videoTitle }) => {
 
         window.addEventListener('resize', handleResize)
 
+        const a = ShortsService.buscar()
+        console.log(a)
+
         return () => {
             window.removeEventListener('resize', handleResize)
         }
@@ -140,11 +143,6 @@ const Shorts = ({ videoTitle }) => {
     const funcDislikeShorts = () => {
         setDislikeShort(!dislikeShort)
         setLikeShort(false)
-    }
-
-    //renderização de vídeo
-    for (let i = 0; i < 4; i++) {
-        setShortsArray(ShortsService.buscar())
     }
 
     return (
@@ -183,7 +181,7 @@ const Shorts = ({ videoTitle }) => {
                 )
             }
             <div className={`container__video ${transitioning ? 'transitioning' : ''}`}>
-                <div>
+                {/* <div>
                     {
                         shortsArray && (
                            shortsArray.map((shorts) => {
@@ -191,7 +189,7 @@ const Shorts = ({ videoTitle }) => {
                            })
                         )
                     }
-                </div>
+                </div> */}
                 <img src={videos[currentVideoIndex].image} alt='Imagem shorts' />
                 <div className='header__shorts'>
                     <BsArrowLeftShort />
