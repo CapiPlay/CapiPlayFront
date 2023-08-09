@@ -3,7 +3,7 @@ import axios from 'axios';
 import './Settings.css'
 
 //imagem
-import ProfileImage from '../../assets/image/CapiPlay.png'
+import ProfileImage from '../../assets/image/img_base_miniatura.png'
 
 //componentes
 import HeaderSettings from './header/HeaderSettings'
