@@ -6,8 +6,13 @@
     top: 5%;
 }
 
+.settings__container , .settings__container__desktop {
+    height: 100%;
+}
+
 .settings__options__buttons__delete_div {
-    margin-bottom: 3.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .settings__form {
@@ -20,7 +25,7 @@
 
 .settings__box__image__options {
     margin-bottom: 2rem;
-    padding-top: 1rem;
+    margin-top: 2rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -81,11 +86,13 @@
 }
 
 .settings__options__buttons__div {
+    margin: auto;
+    width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
@@ -116,21 +123,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-bottom: 3rem;
 }
 
 .profile__settings__desktop {
-    width: 7rem;
-    height: 7rem;
+    width: 10rem;
+    height: 10rem;
     top: 5%;
 }
 
 .settings__box__image__options__desktop {
+    margin-bottom: 3rem;
     padding-top: 1rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 3rem;
 }
 
 .settings__image__options__buttons__desktop {
@@ -152,9 +161,9 @@
 }
 
 .settings__field__desktop {
+    margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
-    width: 45%;
     padding: 1rem;
     gap: 0.5rem;
 }
@@ -195,7 +204,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    margin: 3rem 0;
+    margin: 3.6rem 0;
     width: 100%;
 }
 
@@ -207,6 +216,7 @@
 }
 
 .settings__options__buttons__div__desktop {
+    width: 40%;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -216,7 +226,7 @@
 
 .settings__options__buttons__cancel__desktop {
     color: var(--white-smoke);
-    background-color: var(--lightpurple);
+    background-color: transparent !important;
     border: none;
     height: 2rem;
     width: 10rem;
@@ -229,5 +239,143 @@
     border: none;
     height: 2rem;
     width: 10rem;
+    border-radius: 0.5rem;
+}
+
+.settings__input__container__desktop {
+    width: 65%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings__input__box {
+    width: 80%;
+}
+
+/* TABLET */
+
+.settings__input__container__tablet{
+    width: 100%;
+    display: contents;
+}
+
+
+.profile__settings__tablet {
+    width: 12rem;
+    height: 12rem;
+    top: 5%;
+}
+
+.settings__container , .settings__container__desktop, .settings__container__tablet {
+    height: 100%;
+}
+
+.settings__options__buttons__delete_div__tablet {
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.settings__form__tablet{
+    margin: 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings__box__image__options__tablet {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.settings__image__options__buttons__tablet {
+    font-size: 20px;
+    background-color: transparent;
+    border: 0;
+    color: var(--white-smoke);
+    cursor: pointer;
+}
+
+.settings__field__tablet {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+    gap: 0.5rem;
+}
+
+.settings__input__tablet {
+    color: rgb(77, 75, 75);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    border: 0;
+    width: 100%;
+}
+
+.settings__input__tablet:focus {
+    outline: 0;
+    border: 0;
+}
+
+.settings__field__textarea__input__tablet {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    height: 10rem !important;
+    border-radius: 0.5rem;
+}
+
+.settings__field__textarea__input__tablet:focus {
+    outline: 0;
+    border: 0;
+}
+
+.settings__options__buttons__delete__tablet {
+    font-size: 20px;
+    background-color: transparent;
+    border: 0;
+    color: var(--lightpurple);
+    cursor: pointer;
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+
+.settings__options__buttons__div__tablet {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.settings__options__buttons__cancel__tablet {
+    color: var(--white-smoke);
+    background-color: var(--lightpurple);
+    border: none;
+    height: 2rem;
+    width: 35%;
+    border-radius: 0.5rem;
+}
+
+.settings__options__buttons__confirm__tablet {
+    color: var(--white-smoke);
+    background-color: var(--purple);
+    border: none;
+    height: 2rem;
+    width: 35%;
     border-radius: 0.5rem;
 }

@@ -4,6 +4,8 @@ import { TbUpload } from 'react-icons/tb'
 import logo from '../../assets/image/Logo.png'
 import { AiOutlineSearch } from 'react-icons/ai'
 import './Header.css'
+import Modal_profile from './modal_profile/Modal_profile';
+import { Link } from 'react-router-dom';
 
 //imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
 //ser passada para o header para ser exibida 
@@ -34,7 +36,7 @@ function Header({imageProfile}) {
             </div>
             <div className='box__header'>
                 <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
-                <img src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
+                <Modal_profile />
             </div>
         </div>
     );
@@ -48,10 +50,10 @@ function Header({imageProfile}) {
             </div>
             <div className='header__info'>
                 <div>
-                    <TbUpload />
+                    <Link to="/upload" className='upload__icon__header' ><TbUpload /></Link>
                 </div>
                 <div>
-                    <img src='https://yt3.ggpht.com/PFRD_rpPwAIY-FC2t6Ob0GpJe2udeEaXNwug4Dx8v7zxxda6ZKHU1aKBX-XoWvYh2H4Ow6TtBDk=s176-c-k-c0x00ffffff-no-rj-mo' alt='Imagem de Perfil' />
+                    <Modal_profile />
                 </div>
             </div>
         </div>
@@ -66,7 +68,7 @@ function Header({imageProfile}) {
             </div>
             <div className='box__header'>
                 <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
-                <img src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
+                <Modal_profile />
             </div>
         </div>
     );

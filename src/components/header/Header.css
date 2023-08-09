@@ -90,10 +90,7 @@
 
 .header__info div {
     padding-right: 2rem;
-
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
 }
 
 .header__info div svg {
@@ -106,10 +103,10 @@
 }
 
 .header__info div svg:hover {
-    padding: .5rem .5rem .5rem .5rem;
+    padding-bottom: 0.5rem;
 
     background-color: var(--darkpurplebackground);
-    border-radius: 50%;
+    border-radius: 50px;
 }
 
 .header__info img {
@@ -155,4 +152,9 @@
 .modal__menu {
     display: flex;
     z-index: 100;
+}
+
+.upload__icon__header {
+    text-decoration: none;
+    color: var(--lightpurple);
 }

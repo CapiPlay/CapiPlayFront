@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import Like from './like_btn/Like_btn'
-import Dislike from './dislike_btn/Dislike_btn'
-import { AiFillEye, AiFillHeart } from 'react-icons/ai'
-import pingu from '../../assets/image/pingu.mp4'
 import './Player.css'
-import Channel_component from './channel_component/Channel_component'
-import Description_component from './description_component/Description_component'
-import Divider_component from './divider_component/Divider_component'
-import Comments_component from './comments/Comments'
-import Video_card from '../../components/video_card/Video_card'
-import { BiArrowBack } from 'react-icons/bi'
-import Header from '../../components/header/Header'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Player(video) {
+  
+import Desktop_player from './player_screen_methods/player_desktop/Desktop_player'
+import Mobile_player from './player_screen_methods/player_mobile/Mobile_player'
+import Tablet_player from './player_screen_methods/player_tablet/Tablet_player'
+import { useParams } from 'react-router-dom';
+import PlayerService from '../../service/PlayerService'
 
+function Player() {
+  const [video, setVideo] = useState();
+  const { videoId } = useParams();
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
+    buscarVideo(videoId)
     function handleResize() {
       setScreenSize({ width: window.innerWidth, height: window.innerHeight });
     }
@@ -28,154 +27,49 @@ function Player(video) {
     };
   }, []);
 
-  const verifyScreen = () => {
-    if (screenSize.width > 900) {
+  const buscarVideo = async (videoId) => {
+    setVideo(await PlayerService.buscarVideo(videoId))
+  }
+
+  const verifyDesktop = () => {
+    if (screenSize.width >= 900) {
       return false
     } else {
       return true
     }
   }
 
+
   //são apenas variáveis de exemplo, elas vão vir com o objeto 
   const video_title_var = 'Pingu.'
   const video_views_var = '57k'
   const video_likes_var = '57k'
+  
+  const verifyTablet = () => {
+    if (screenSize.width < 900 && screenSize.width > 450) {
+      return true
+    } else {
+      return false
+    }
+  }
 
   return (
     <>
-      {verifyScreen() ?
+      {verifyTablet() ?
         <div>
-          <div className='return__btn'><BiArrowBack color='var(--lightpurple)' />Voltar</div>
-          <div>
-            <video controls className='video__player'>
-              <source src={pingu} type="video/mp4" />
-            </video>
-          </div>
-          <div className='video__title'>
-            <p>{video_title_var}</p>
-          </div>
-          <div className='interaction'>
-            <div className='interaction__info'>
-              <div className='views__div'>
-                <AiFillEye size={'1.3rem'} /> {video_views_var} de Visualizações
-              </div>
-              <div className='likes__div'>
-                <AiFillHeart size={'1.25rem'} /> {video_likes_var} de Likes
-              </div>
-            </div>
-            <div className='like__dislike__btns'>
-              <Like />
-              <Dislike />
-            </div>
-          </div>
-          <div>
-            <Channel_component />
-          </div>
-          <div>
-            <Description_component />
-          </div>
-          <div>
-            <Divider_component />
-          </div>
-          <div className='comments__container'>
-            <div className='total__comments'>
-              <p>Comentários</p>
-            </div>
-            <div>
-              <Comments_component />
-            </div>
-          </div>
-          <div>
-            <Divider_component />
-          </div>
-          <div>
-            <div className='video__card'>
-              <Video_card />
-            </div>
-            <div className='video__card'>
-              <Video_card />
-            </div>
-          </div>
+          <Tablet_player video={video}/>
         </div>
-
         :
-
         <div>
-          <Header></Header>
-          <div className='things'>
+          {verifyDesktop() ?
             <div>
-              <div>
-                <video controls className='video__player'>
-                  <source src={pingu} type="video/mp4" />
-                </video>
-              </div>
-              <div className='video__title'>
-                <p>Pingu.</p>
-              </div>
-              <div className='interaction'>
-                <div className='interaction__info'>
-                  <div className='views__div'>
-                    <AiFillEye size={'1.3rem'} /> 57k de Visualizações
-                  </div>
-                  <div className='likes__div'>
-                    <AiFillHeart size={'1.25rem'} /> 57k de Likes
-                  </div>
-                </div>
-                <div className='like__dislike__btns'>
-                  <Like />
-                  <Dislike />
-                </div>
-              </div>
-              <div>
-                <Channel_component />
-              </div>
-              <div>
-                <Description_component />
-              </div>
-              <div>
-                <Divider_component />
-              </div>
-              <div className='comments__container'>
-                <div className='total__comments'>
-                  <p>Comentários</p>
-                </div>
-                <div className='comments'>
-                  <div>
-                    <Comments_component />
-                  </div>
-                  <div>
-                    <Comments_component />
-                  </div>
-                  <div>
-                    <Comments_component />
-                  </div>
-                  <div>
-                    <Comments_component />
-                  </div>
-                  <div>
-                    <Comments_component />
-                  </div>
-                </div>
-              </div>
+              <Mobile_player video={video}/>
             </div>
+            :
             <div>
-              <div className='video__card'>
-                <Video_card />
-              </div>
-              <div className='video__card'>
-                <Video_card />
-              </div>
-              <div className='video__card'>
-                <Video_card />
-              </div>
-              <div className='video__card'>
-                <Video_card />
-              </div>
-              <div className='video__card'>
-                <Video_card />
-              </div>
+              <Desktop_player video={video}/>
             </div>
-          </div>
+          }
         </div>
       }
     </>
