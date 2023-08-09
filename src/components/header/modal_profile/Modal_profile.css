@@ -82,3 +82,7 @@
   color: var(--whitesmoke) !important;
   text-decoration: none;
 }
+
+.container__perfilImage {
+  background-color: var(--purple);
+}

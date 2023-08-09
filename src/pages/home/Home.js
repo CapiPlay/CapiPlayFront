@@ -8,6 +8,7 @@ import Slider_Category from './slider_category/Slider_Category';
 import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
 import PlayerService from '../../service/PlayerService';
 import Aos from 'aos'
+import Cookies from 'js-cookie';
 
 function Home() {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -20,6 +21,7 @@ function Home() {
 
   useEffect(() => {
     getVideos()
+    userProfile()
     function handleResize() {
       setScreenSize({ width: window.innerWidth, height: window.innerHeight });
     }
@@ -34,9 +36,23 @@ function Home() {
     setVideos(await PlayerService.buscarVideosHome(0))
   }
 
+  const userProfile = () => {
+    const user = Cookies.get('user');
+    if (user) {
+      const userLogin = JSON.parse(user);
+      if (userLogin) {
+        return userLogin
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
+  }
+
   const renderDesktopView = () => (
     <>
-      <Header />
+      <Header userLogin={userProfile} />
       <Side_Bar />
       <div className='container__header__home'></div>
       <div className='container__home'>

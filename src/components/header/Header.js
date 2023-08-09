@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 //imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
 //ser passada para o header para ser exibida 
-function Header({imageProfile}) {
+function Header({ userProfile }) {
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
@@ -36,7 +36,7 @@ function Header({imageProfile}) {
             </div>
             <div className='box__header'>
                 <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
-                <Modal_profile />
+                <Modal_profile profile={userProfile} />
             </div>
         </div>
     );
@@ -53,7 +53,7 @@ function Header({imageProfile}) {
                     <Link to="/upload" className='upload__icon__header' ><TbUpload /></Link>
                 </div>
                 <div>
-                    <Modal_profile />
+                    <Modal_profile profile={userProfile} />
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@ function Header({imageProfile}) {
             </div>
             <div className='box__header'>
                 <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
-                <Modal_profile />
+                <Modal_profile profile={userProfile} />
             </div>
         </div>
     );
