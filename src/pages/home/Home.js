@@ -35,7 +35,8 @@ function Home() {
     setVideos(await PlayerService.buscarVideosHome(0))
   }
 
-  Cookies.get('user')
+  const user = Cookies.get('user')
+  const verify = JSON.parse(user)
 
   const renderDesktopView = () => (
     <>
