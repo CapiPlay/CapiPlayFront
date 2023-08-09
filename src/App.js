@@ -21,23 +21,25 @@ import UploadShorts from './pages/uploadShorts/UploadShorts';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/player" element={<Player />} />
-          <Route path="/historic" element={<Historic />} />
-          <Route path="/shorts" element={<Shorts />} />
-          <Route path="/video-details" element={<VideoDetails />} />
-          <Route path="/video-upload" element={<VideoUpload />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/upload" element={<Upload />} />
-          <Route path="/upload-video" element={<UploadVideo />} />
-          <Route path="/upload-shorts" element={<UploadShorts />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </BrowserRouter>
+      <Provider store={store} >
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/player" element={<Player />} />
+            <Route path="/historic" element={<Historic />} />
+            <Route path="/shorts" element={<Shorts />} />
+            <Route path="/video-details" element={<VideoDetails />} />
+            <Route path="/video-upload" element={<VideoUpload />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/upload" element={<Upload />} />
+            <Route path="/upload-video" element={<UploadVideo />} />
+            <Route path="/upload-shorts" element={<UploadShorts />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </div>
   )
 }
