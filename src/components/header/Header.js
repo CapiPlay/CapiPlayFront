@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 //imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
 //ser passada para o header para ser exibida 
-function Header({imageProfile}) {
+function Header({ userProfile }) {
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
@@ -28,7 +28,7 @@ function Header({imageProfile}) {
         <div className='container__header'>
             <div className='box__header'>
                 <div className='modal__menu' >
-                    <Modal_menu />
+                    <Modal_menu profile={userProfile} />
                 </div>
                 <div className='container__logo'>
                     <img src={logo} className='container__logo' />

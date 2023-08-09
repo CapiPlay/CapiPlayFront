@@ -21,6 +21,7 @@ function Home() {
 
   useEffect(() => {
     getVideos()
+    userProfile()
     function handleResize() {
       setScreenSize({ width: window.innerWidth, height: window.innerHeight });
     }
@@ -35,12 +36,23 @@ function Home() {
     setVideos(await PlayerService.buscarVideosHome(0))
   }
 
-  const user = Cookies.get('user')
-  const verify = JSON.parse(user)
+  const userProfile = () => {
+    const user = Cookies.get('user');
+    if (user) {
+      const userLogin = JSON.parse(user);
+      if (userLogin) {
+        return userLogin
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
+  }
 
   const renderDesktopView = () => (
     <>
-      <Header  />
+      <Header userLogin={userProfile} />
       <Side_Bar />
       <div className='container__header__home'></div>
       <div className='container__home'>
