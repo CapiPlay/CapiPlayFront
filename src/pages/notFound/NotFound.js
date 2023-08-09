@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import notFound from '../../assets/image/404_NotFound.png'
 import NotFoundGif from '../../assets/image/404_NotFound_gif.gif'
 import './NotFound.css'
+import { Link } from 'react-router-dom';
 
 function NotFound() {
 
@@ -23,8 +24,10 @@ function NotFound() {
             <div className='not__found__image__container'>
                 <div className='not__found__image__box'>
                     <p className='not__found__number'><span><b>404</b></span></p>
-                    <p className='not__found__text'>Página Não Encontrada</p>
-                    <p className='not__found__subtext'>Voltar para <b>Home</b></p>
+                    <div className='not__found__text__box'>
+                        <p className='not__found__text'>Página Não Encontrada</p>
+                        <p className='not__found__subtext'>Voltar para <b className='home__not__found'><Link to="/" className='home__not__found'>Home</Link></b></p>
+                    </div>
                 </div>
                 <img className='not__found__image' src={notFound} alt="404" />
             </div>
@@ -33,16 +36,30 @@ function NotFound() {
 
     const renderTabletView = () => (
         <>
-            <div>
-
+            <div className='not__found__image__container'>
+                <div className='not__found__image__box'>
+                    <p className='not__found__number'><span><b>404</b></span></p>
+                    <div className='not__found__text__box'>
+                        <p className='not__found__text'>Página Não Encontrada</p>
+                        <p className='not__found__subtext'>Voltar para <b className='home__not__found'><Link to="/" className='home__not__found'>Home</Link></b></p>
+                    </div>
+                </div>
+                <img className='not__found__image__tablet' src={notFound} alt="404" />
             </div>
         </>
     );
 
     const renderMobileView = () => (
         <>
-            <div>
-
+            <div className='not__found__image__container'>
+                <div className='not__found__image__box__mobile'>
+                    <p className='not__found__number'><span><b>404</b></span></p>
+                    <div className='not__found__text__box'>
+                        <p className='not__found__text'>Página Não Encontrada</p>
+                        <p className='not__found__subtext'>Voltar para <b className='home__not__found'><Link to="/" className='home__not__found'>Home</Link></b></p>
+                    </div>
+                </div>
+                <img className='not__found__image__mobile' src={notFound} alt="404" />
             </div>
         </>
     );

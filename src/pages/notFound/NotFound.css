@@ -1,5 +1,6 @@
 .not__found__image__container {
     display: flex;
+    gap: 5rem;
     justify-content: center;
     align-items: end;
     width: 100%;
@@ -8,8 +9,19 @@
 
 .not__found__image__box {
     position: absolute;
-    top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 15%;
     color: var(--white);
+}
+
+.not__found__text__box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .not__found__number {
@@ -28,6 +40,14 @@
     font-weight: 300;
 }
 
+.home__not__found {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--purple);
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .not__found__image {
     width: 25%;
 }
@@ -35,4 +55,23 @@
 .not__found__gif {
     width: 20%;
     rotate: 20deg;
+}
+
+.not__found__image__tablet {
+    width: 75%;
+}
+
+.not__found__image__mobile {
+    width: 100%;
+}
+
+.not__found__image__box__mobile {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 20%;
+    width: 50%;
+    height: 10vh;
+    color: var(--white);
 }

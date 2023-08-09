@@ -9,7 +9,7 @@ import HeaderSettings from './header/HeaderSettings'
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 
-const VideoDetails = () => {
+const Settings = () => {
 
     const obj = {
         email: '',
@@ -167,4 +167,4 @@ const VideoDetails = () => {
         </>
     )
 }
-export default VideoDetails
+export default Settings
