@@ -35,7 +35,7 @@ function Modal_profile() {
             <div onClick={() => setOpenModal(openModal + 1)}>
                 <img onClick={() => setOpenModal(openModal + 1)} src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
             </div>
-            {verify() &&
+            {verify() && 
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
                     <div className='modal__profile__container__desktop'>
                         <div className='modal__profile__itens__desktop'>
@@ -101,7 +101,7 @@ function Modal_profile() {
     );
 
     const getViewToRender = () => {
-        if (screenSize.width > 900) {
+        if (screenSize.width > 900 ) {
             return renderDesktopView();
         } else if (screenSize.width < 900 && screenSize.width > 500) {
             return renderTabletView();

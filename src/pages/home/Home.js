@@ -8,6 +8,7 @@ import Slider_Category from './slider_category/Slider_Category';
 import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
 import PlayerService from '../../service/PlayerService';
 import Aos from 'aos'
+import Cookies from 'js-cookie';
 
 function Home() {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -34,9 +35,11 @@ function Home() {
     setVideos(await PlayerService.buscarVideosHome(0))
   }
 
+  Cookies.get('user')
+
   const renderDesktopView = () => (
     <>
-      <Header />
+      <Header  />
       <Side_Bar />
       <div className='container__header__home'></div>
       <div className='container__home'>
