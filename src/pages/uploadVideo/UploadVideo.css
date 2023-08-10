@@ -151,7 +151,7 @@
     justify-content: space-evenly;
     align-items: center;
     border-radius: 1rem;
-    height: 6rem;
+    height: 8rem;
     background-color: var(--whitesmoke);
     color: black;
 }
