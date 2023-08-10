@@ -9,6 +9,7 @@ import InputFile from "../../components/inputFile/InputFile";
 import HeaderUpload from '../upload/headerUpload/HeaderUpload';
 
 import VideoService from '../../service/VideoService';
+import Select from '../../components/select/Select';
 
 function UploadVideo() {
 
@@ -24,6 +25,27 @@ function UploadVideo() {
 
   const [image, setImage] = useState()
   const imagePreviewRef = useRef(null)
+
+  const options = [
+    { label: "Artes e Cultura", value: "Artes e Cultura" },
+    { label: "Ciência e Tecnologia", value: "Ciência e Tecnologia" },
+    { label: "Culinária", value: "Culinária" },
+    { label: "Educação", value: "Educação" },
+    { label: "Esportes", value: "Esportes" },
+    { label: "Entretenimento", value: "Entretenimento" },
+    { label: "Documentários", value: "Documentários" },
+    { label: "Jogos", value: "Jogos" },
+    { label: "Lifestyle", value: "Lifestyle" },
+    { label: "Moda e Beleza", value: "Moda e Beleza" },
+    { label: "Música", value: "Música" },
+    { label: "Viagem e Turismo", value: "Viagem e Turismo" }
+  ];
+
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
 
   const [video, setVideo] = useState({
     titulo: "",
@@ -121,24 +143,15 @@ function UploadVideo() {
                   value={video.descricao}
                   required={true} />
               </div>
-              <div className='upload__video__box__input'>
-                <label className='upload__video__label'>Categoria do vídeo</label>
-                <select className='upload__video__select' onChange={handleInputChange} name='categoria' value={video.categoria}>
-                  <option defaultValue={''} disabled hidden value="">Selecione uma categoria</option>
-                  <option value="Artes e Cultura">Artes e Cultura</option>
-                  <option value="Ciência e Tecnologia">Ciência e Tecnologia</option>
-                  <option value="Culinária">Culinária</option>
-                  <option value="Educação">Educação</option>
-                  <option value="Entretenimento">Entretenimento</option>
-                  <option value="Esportes">Esportes</option>
-                  <option value="Documentários">Documentários</option>
-                  <option value="Jogos">Jogos</option>
-                  <option value="Lifestyle">Lifestyle</option>
-                  <option value="Moda e Beleza">Moda e Beleza</option>
-                  <option value="Música">Música</option>
-                  <option value="Viagem e Turismo">Viagem e Turismo</option>
-                </select>
-              </div>
+              <Select
+                options={options}
+                value={video.categoria}
+                placeholder="Categoria do vídeo"
+                onChange={handleInputChange}
+                name="categoria"
+                required={true}
+                enable={true}
+              />
             </div>
 
             <div className='upload__video__container__row'>
