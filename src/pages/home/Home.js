@@ -12,15 +12,22 @@ import Cookies from 'js-cookie';
 
 function Home() {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-  const [videos, setVideos] = useState([])
+  const [videosReu, setVideosReu] = useState([])
+  const [videosRec, setVideosRec] = useState([])
+  const [videosRet, setVideosRet] = useState([])
+  const [videosRev, setVideosRev] = useState([])
   const [currentPage, setCurrentPage] = useState(0);
+  const [loadingMoreVideos, setLoadingMoreVideos] = useState(false);
 
   Aos.init({
     duration: 200
   });
 
   useEffect(() => {
-    getVideos()
+    getVideosReu()
+    getVideosRec()
+    getVideosRet()
+    getVideosRev()
     userProfile()
     function handleResize() {
       setScreenSize({ width: window.innerWidth, height: window.innerHeight });
@@ -32,13 +39,71 @@ function Home() {
     };
   }, []);
 
-  const getVideos = async () => {
-    const videos = await PlayerService.buscarVideosHome(0)
+  const handleScroll = () => {
+    const scrolled = window.innerHeight + window.scrollY;
+    const totalHeight = document.documentElement.scrollHeight;
+
+    if (!loadingMoreVideos && scrolled >= totalHeight - 200) {
+      setLoadingMoreVideos(true);
+      getMoreVideos(currentPage + 1);
+    }
+  };
+
+  useEffect(() => {
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [currentPage, loadingMoreVideos]);
+
+  const getMoreVideos = async (page) => {
+    const moreVideos = await PlayerService.buscarVideosHomeReu(page);
+    if (moreVideos) {
+      setVideosReu((prevVideos) => [...prevVideos, ...moreVideos]);
+      setCurrentPage(page);
+    }
+    setLoadingMoreVideos(false);
+  };
+
+  const getVideosReu = async () => {
+    const videos = await PlayerService.buscarVideosHomeReu(0)
     console.log(videos)
       if (videos) {
-        setVideos(videos)
+        setVideosReu(videos)
       } else {
-        setVideos([])
+        setVideosReu([])
+      }
+  } 
+
+  const getVideosRec = async () => {
+    const videos = await PlayerService.buscarVideosHomeReu(0)
+    console.log(videos)
+      if (videos) {
+        setVideosRec(videos)
+      } else {
+        setVideosRec([])
+      }
+  }
+
+  const getVideosRet = async () => {
+    const videos = await PlayerService.buscarVideosHomeRet(0)
+    console.log(videos)
+      if (videos) {
+        setVideosRet(videos)
+      } else {
+        setVideosRet([])
+      }
+  }
+
+  const getVideosRev = async () => {
+    const videos = await PlayerService.buscarVideosHomeRev(0)
+    console.log(videos)
+      if (videos) {
+        setVideosRev(videos)
+      } else {
+        setVideosRev([])
       }
   }
 
@@ -69,7 +134,7 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__desk'>
-          {videos.map((video) => (
+          {videosRec.map((video) => (
             <Video_card key={video.uuid} video={video} />
           ))}
         </div>
@@ -77,9 +142,9 @@ function Home() {
           <Slider_Shorts />
         </div>
         <div className='container__video__cards__desk'>
-          {/* {videos.map((video) => (
+          {videosReu.map((video) => (
             <Video_card key={video.uuid} video={video} />
-          ))} */}
+          ))}
         </div>
       </div>
     </>
@@ -96,17 +161,17 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__tablet'>
-          {/* {videos.map((video) => (
+          {videosRev.map((video) => (
             <Video_card key={video.uuid} video={video} />
-          ))} */}
+          ))}
         </div>
         <div className='container__shorts__cards__tablet'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards__tablet'>
-          {/* {videos.map((video) => (
+          {videosReu.map((video) => (
             <Video_card key={video.uuid} video={video} />
-          ))} */}
+          ))}
         </div>
       </div>
     </>
@@ -120,17 +185,17 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards'>
-          {/* {videos.map((video) => (
+          {videosRet.map((video) => (
             <Video_card key={video.uuid} video={video} />
-          ))} */}
+          ))}
         </div>
         <div className='container__shorts__cards__mobile'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards'>
-          {/* {videos.map((video) => (
+          {videosReu.map((video) => (
             <Video_card key={video.uuid} video={video} />
-          ))} */}
+          ))}
         </div>
       </div>
     </>
