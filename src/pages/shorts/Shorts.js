@@ -3,22 +3,16 @@ import '../shorts/Shorts.css'
 //hooks
 import { useEffect, useState } from 'react'
 
-//imagens
-import imagePerfil from "../../assets/imagemPerfil.png"
-
 //componentes
-import ButtonSubmit from '../../components/buttonSubmit/ButtonSubmit'
 import Header from '../../components/header/Header'
-import CommentsComponent from '../../components/commentsComponent/CommentsComponent'
 import ShortsService from '../../service/ShortsService'
+import ShortsComponent from './shorts_component/ShortsComponent'
 
 //icons
-import { BiLike, BiDislike, BiCommentDetail, BiSolidLike, BiSolidDislike } from "react-icons/bi"
 import { BsFillArrowUpSquareFill } from "react-icons/bs"
 import { BsFillArrowDownSquareFill } from "react-icons/bs"
-import { BsArrowLeftShort } from "react-icons/bs"
 
-const Shorts = ({ videoTitle }) => {
+const Shorts = ({ initialShort }) => {
 
     //imagens utilizadas para fazer a página (temporário)
     const videos = [
@@ -45,6 +39,11 @@ const Shorts = ({ videoTitle }) => {
         },
     ]
 
+    //transição entre os vídeos
+    const [transitioning, setTransitioning] = useState(false)   
+
+    const [openModalComments, setOpenModalComments] = useState(false)
+
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
@@ -53,14 +52,8 @@ const Shorts = ({ videoTitle }) => {
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
     const [startY, setStartY] = useState(0)
 
-    //transição entre os vídeos
-    const [transitioning, setTransitioning] = useState(false)
+    const [shorts, setShorts] = useState([])
 
-    const [openModalComments, setOpenModalComments] = useState(false)
-    const [likeShort, setLikeShort] = useState(false)
-    const [dislikeShort, setDislikeShort] = useState(false)
-
-    const [shortsArray, setShortsArray] = useState([])
 
     //para passar para próximo vídeo (utilizando o botão)
     const handleNextVideo = () => {
@@ -115,8 +108,19 @@ const Shorts = ({ videoTitle }) => {
 
         window.addEventListener('resize', handleResize)
 
-        const a = ShortsService.buscar()
-        console.log(a)
+        const func = async () => {
+            const data = await ShortsService.buscar()
+            const newShorts = []
+
+            // newShorts.push(initialShort)
+
+            newShorts.push(data)
+
+            setShorts((prevShorts) => [...prevShorts, ...newShorts])
+            console.log(shorts)
+        }
+
+        func()
 
         return () => {
             window.removeEventListener('resize', handleResize)
@@ -127,23 +131,6 @@ const Shorts = ({ videoTitle }) => {
     useEffect(() => {
         setHeaderAppearing(windowWidth >= 576)
     }, [windowWidth])
-
-    //abrir componente de comentários
-    const funcOpenModalComments = () => {
-        setOpenModalComments(!openModalComments)
-    }
-
-    //dar like no shorts
-    const funcLikeShorts = () => {
-        setLikeShort(!likeShort)
-        setDislikeShort(false)
-    }
-
-    //dar dislike no shorts
-    const funcDislikeShorts = () => {
-        setDislikeShort(!dislikeShort)
-        setLikeShort(false)
-    }
 
     return (
         <div
@@ -180,65 +167,15 @@ const Shorts = ({ videoTitle }) => {
                     </div>
                 )
             }
-            <div className={`container__video ${transitioning ? 'transitioning' : ''}`}>
-                {/* <div>
-                    {
-                        shortsArray && (
-                           shortsArray.map((shorts) => {
-                            console.log(shorts)
-                           })
-                        )
-                    }
-                </div> */}
-                <img src={videos[currentVideoIndex].image} alt='Imagem shorts' />
-                <div className='header__shorts'>
+            {/* <div className='header__shorts'>
                     <BsArrowLeftShort />
                     <span>Capishorts</span>
-                </div>
-                <div className='container__icons__shorts'>
-                    <div onClick={funcLikeShorts}>
-                        {
-                            likeShort ? (
-                                <BiSolidLike />
-                            ) : (
-                                <BiLike />
-                            )
-                        }
-                        <span>{videos[currentVideoIndex].likes}</span>
-                    </div>
-                    <div>
-                        {
-                            dislikeShort ? (
-                                <BiSolidDislike onClick={funcDislikeShorts} />
-                            ) : (
-                                <BiDislike onClick={funcDislikeShorts} />
-                            )
-                        }
-                        <BiCommentDetail onClick={funcOpenModalComments} />
-                    </div>
-                </div>
-                <div className='container__informations__video'>
-                    <div className='title__short'>
-                        <span>{videos[currentVideoIndex].title}</span>
-                    </div>
-                    <div className='informations__profile__shorts'>
-                        <div className='profile__shorts'>
-                            <img src={imagePerfil} alt='Imagem de Perfil' />
-                            <span>{videos[currentVideoIndex].profile}</span>
-                        </div>
-                        <div className='button__submit__shorts' style={openModalComments ? { display: "none" } : {}}>
-                            <ButtonSubmit
-                                label={'Inscrever-se'}
-                                onClick={null}
-                            />
-                        </div>
-                    </div>
-                </div>
-                {
-                    openModalComments &&
-                    <CommentsComponent func={funcOpenModalComments} />
-                }
-            </div>
+                </div> */}
+
+            {
+                <ShortsComponent short={shorts[currentVideoIndex]} />
+
+            }
         </div>
     )
 }

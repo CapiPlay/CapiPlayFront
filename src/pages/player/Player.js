@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './Player.css'
 
-//item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
-function Player(video) {
-  
 import Desktop_player from './player_screen_methods/player_desktop/Desktop_player'
 import Mobile_player from './player_screen_methods/player_mobile/Mobile_player'
 import Tablet_player from './player_screen_methods/player_tablet/Tablet_player'
 import { useParams } from 'react-router-dom';
 import PlayerService from '../../service/PlayerService'
 
-function Player() {
+//item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
+function Player(video1) {
+  
   const [video, setVideo] = useState();
   const { videoId } = useParams();
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });

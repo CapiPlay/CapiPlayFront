@@ -20,11 +20,13 @@
     height: 100%;
 }
 
-.container__video>img:first-child {
+.container__video>video:first-child {
     width: 100%;
     height: 100%;
 
     object-fit: cover;
+
+    border-radius: 10px;
 }
 
 .container__button__pass__shorts {
