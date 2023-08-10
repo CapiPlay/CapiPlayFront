@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Like_btn.css'
-import { BiLike } from 'react-icons/bi'
+import { BiLike,  BiSolidLike } from 'react-icons/bi'
 import EngajamentoService from '../../../../service/EngajamentoService'
 
 function Like_btn({video}) {
 
+  const [like_btn, setLikeBtn] = useState(true);
+
   let curtido = false;
 
   const handleToggleLikeBtn = () => {
+    setLikeBtn(!like_btn);
   //   if(curtido){
   //     EngajamentoService.criar(
   //         {
@@ -41,9 +44,15 @@ function Like_btn({video}) {
   // }, [])
 
   return (
-    <div>
-      <button className='like__btn'><BiLike size={'1.6rem'} onClick={() => handleToggleLikeBtn()}/></button>
-    </div>
+    <div>{ like_btn ?
+      <button className='like__btn'>
+        <BiLike size={'1.6rem'} onClick={() => handleToggleLikeBtn()}/>
+      </button> 
+        : 
+      <button className='like__btn'>
+          <BiSolidLike size={'1.6rem'} onClick={() => handleToggleLikeBtn()}/>   
+      </button>
+    }</div>
   )
 }
 

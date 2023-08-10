@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Desktop_player.css'
 import Like from '../../player_components/like_btn/Like_btn'
 import Dislike from '../../player_components/dislike_btn/Dislike_btn'
@@ -10,30 +10,32 @@ import Divider_component from '../../player_components/divider_component/Divider
 import Comments_component from '../../player_components/comments_componet/Comments_component'
 import Video_card from '../../../../components/video_card/Video_card'
 import Header from '../../../../components/header/Header'
-import EngajamentoService from '../../../../service/EngajamentoService'
 import PlayerService from '../../../../service/PlayerService'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
-function Desktop_player({video}) {
+function Desktop_player({ video }) {
+    const [videos, setVideos] = useState([])
     // const videoReactions = EngajamentoService.buscarTodasReacoesPorVideo(video.uuid)
     //são apenas variáveis de exemplo, elas vão vir com o objeto 
-    
-    const video_views_var = '57k'
-    const video_likes_var = '57k' //videoReactions.size
-    let video_var;
 
     useEffect(() => {
-        video_var = PlayerService.buscarVideo(video.caminhos[5])
+        getVideos()
     }, [])
 
+    const getVideos = async () => {
+        setVideos(await PlayerService.buscarVideosHome(0))
+    }
+
+    const video_views_var = '57k'
+    const video_likes_var = '57k' //videoReactions.size
     return (
         <><Header></Header>
-        <div className='space'></div>
+            <div className='space'></div>
             <div className='things'>
                 <div>
                     <div>
-                        <video controls className='video__player__desktop'>
-                            <source src={video_var} type="video/mp4" />
+                        <video controls className='video__player__desktop' poster={"http://localhost:7000/api/video/static/" + video.caminhos[3]} autoPlay>
+                            <source src={"http://localhost:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
                         </video>
                     </div>
                     <div className='video__title'>
@@ -49,8 +51,8 @@ function Desktop_player({video}) {
                             </div>
                         </div>
                         <div className='like__dislike__btns'>
-                            <Like video={video}/>
-                            <Dislike video={video}/>
+                            <Like video={video} />
+                            <Dislike video={video} />
                         </div>
                     </div>
                     <div>
@@ -85,22 +87,10 @@ function Desktop_player({video}) {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div className='video__card'>
-                        <Video_card video={video} />
-                    </div>
-                    <div className='video__card'>
-                        <Video_card video={video} />
-                    </div>
-                    <div className='video__card'>
-                        <Video_card video={video} />
-                    </div>
-                    <div className='video__card'>
-                        <Video_card video={video} />
-                    </div>
-                    <div className='video__card'>
-                        <Video_card video={video} />
-                    </div>
+                <div className='videos'>
+                    {videos.map((video) => (
+                        <Video_card key={video.uuid} video={video} />
+                    ))}
                 </div>
             </div>
         </>

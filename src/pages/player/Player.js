@@ -12,7 +12,7 @@ function Player() {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    buscarVideo(videoId)
+    buscarVideo(videoId);
     function handleResize() {
       setScreenSize({ width: window.innerWidth, height: window.innerHeight });
     }
@@ -21,12 +21,11 @@ function Player() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [videoId]);
 
-
-  const buscarVideo = (videoId) => {
-    PlayerService.buscarVideo(videoId).then(response => {setVideo(response);console.log(response)})
-    console.log(video)
+  const buscarVideo = async (videoId) => {
+    const fetchedVideo = await PlayerService.buscarVideoObject(videoId);
+    setVideo(fetchedVideo);
   }
 
   const verifyDesktop = () => {
@@ -44,28 +43,31 @@ function Player() {
       return false
     }
   }
-
   return (
     <>
-      {/* {verifyTablet() ?
-        <div>
-          <Tablet_player video={video}/>
-        </div>
-        :
-        <div>
-          {verifyDesktop() ?
+      {video && Object.keys(video).length > 0 && ( // Check if video data is available
+        <>
+          {verifyTablet() ? (
             <div>
-              <Mobile_player video={video}/>
+              <Tablet_player video={video} />
             </div>
-            :
+          ) : (
             <div>
-              <Desktop_player video={video}/>
+              {verifyDesktop() ? (
+                <div>
+                  <Mobile_player video={video} />
+                </div>
+              ) : (
+                <div>
+                  <Desktop_player video={video} />
+                </div>
+              )}
             </div>
-          }
-        </div>
-      } */}
+          )}
+        </>
+      )}
     </>
-  )
+  );
 }
 
-export default Player
+export default Player;

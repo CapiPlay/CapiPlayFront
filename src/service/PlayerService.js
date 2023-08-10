@@ -2,10 +2,19 @@ import axios from "./AxiosConfig";
 
 const PlayerService = {
 
-    buscarVideo: async (videoId) => {
+    buscarVideoObject: async (videoId) => {
         try {
             const response = await axios.get("/video/buscar-completo/" + videoId);
-            console.log(response.data)
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    buscarVideo: async (caminho) => {
+        try {
+            const response = await axios.get("/video/static/" + caminho);
+            console.log(response)
             return response.data;
         } catch (error) {
             console.error(error);

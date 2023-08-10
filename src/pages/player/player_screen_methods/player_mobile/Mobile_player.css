@@ -73,10 +73,10 @@ background: linear-gradient(180deg, rgba(31,29,43,1) 0%, rgba(49,37,79,1) 88%);
 
 .video__card{
     margin-top: 5%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr;
     color: white;
+    margin: 5%;
 }
 
 .things{
@@ -115,11 +115,6 @@ background: linear-gradient(180deg, rgba(31,29,43,1) 0%, rgba(49,37,79,1) 88%);
 
 .player__page{
     margin: 1rem;
-}
-
-.videos{
-    display: grid;
-    grid-template-columns: 50% 50%;
 }
 
 .send__icon{
