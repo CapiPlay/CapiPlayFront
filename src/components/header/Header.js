@@ -1,15 +1,28 @@
+
+import React, { useState } from 'react'
+
 import React, { useEffect, useState } from 'react';
 import Modal_menu from '../../pages/home/modal_menu/modal_menu';
 import { TbUpload } from 'react-icons/tb'
 import logo from '../../assets/image/Logo.png'
 import { AiOutlineSearch } from 'react-icons/ai'
 import './Header.css'
+
+import Search from '../../pages/search/Search'
+
 import Modal_profile from './modal_profile/Modal_profile';
 import { Link } from 'react-router-dom';    
+
 
 //imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
 //ser passada para o header para ser exibida 
 function Header({ userProfile }) {
+
+
+    const [search, setSearch] = useState(false);
+    const handleClick = () => {
+        setSearch(!search);
+    }
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
@@ -97,4 +110,4 @@ function Header({ userProfile }) {
 
 }
 
-export default Header
+export default Header;
