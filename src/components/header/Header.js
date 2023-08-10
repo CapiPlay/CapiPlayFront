@@ -1,6 +1,3 @@
-
-import React, { useState } from 'react'
-
 import React, { useEffect, useState } from 'react';
 import Modal_menu from '../../pages/home/modal_menu/modal_menu';
 import { TbUpload } from 'react-icons/tb'

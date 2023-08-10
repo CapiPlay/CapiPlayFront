@@ -10,26 +10,26 @@ import './Player.css'
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Player(video) {
 
-function Player() {
-  const [video, setVideo] = useState();
-  const { videoId } = useParams();
-  const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+  function Player() {
+    const [video, setVideo] = useState();
+    const { videoId } = useParams();
+    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
-  useEffect(() => {
-    buscarVideo(videoId)
-    function handleResize() {
-      setScreenSize({ width: window.innerWidth, height: window.innerHeight });
+    useEffect(() => {
+      buscarVideo(videoId)
+      function handleResize() {
+        setScreenSize({ width: window.innerWidth, height: window.innerHeight });
+      }
+      window.addEventListener('resize', handleResize);
+      handleResize();
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+
+    const buscarVideo = async (videoId) => {
+      setVideo(await PlayerService.buscarVideo(videoId))
     }
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  const buscarVideo = async (videoId) => {
-    setVideo(await PlayerService.buscarVideo(videoId))
-  }
 
     const verifyDesktop = () => {
       if (screenSize.width >= 900) {
@@ -39,38 +39,38 @@ function Player() {
       }
     }
 
-  const verifyTablet = () => {
-    if (screenSize.width < 900 && screenSize.width > 450) {
-      return true
-    } else {
-      return false
+    const verifyTablet = () => {
+      if (screenSize.width < 900 && screenSize.width > 450) {
+        return true
+      } else {
+        return false
+      }
     }
+    return (
+      <>
+        {video && Object.keys(video).length > 0 && ( // Check if video data is available
+          <>
+            {verifyTablet() ? (
+              <div>
+                <Tablet_player video={video} />
+              </div>
+            ) : (
+              <div>
+                {verifyDesktop() ? (
+                  <div>
+                    <Mobile_player video={video} />
+                  </div>
+                ) : (
+                  <div>
+                    <Desktop_player video={video} />
+                  </div>
+                )}
+              </div>
+            )}
+          </>
+        )}
+      </>
+    );
   }
-  return (
-    <>
-      {video && Object.keys(video).length > 0 && ( // Check if video data is available
-        <>
-          {verifyTablet() ? (
-            <div>
-              <Tablet_player video={video} />
-            </div>
-          ) : (
-            <div>
-              {verifyDesktop() ? (
-                <div>
-                  <Mobile_player video={video} />
-                </div>
-              ) : (
-                <div>
-                  <Desktop_player video={video} />
-                </div>
-              )}
-            </div>
-          )}
-        </>
-      )}
-    </>
-  );
 }
-
 export default Player;
