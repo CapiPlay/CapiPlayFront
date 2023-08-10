@@ -57,7 +57,7 @@
 .header__input__container input {
     width: 100%;
     height: 60%;
-    padding: 0 1rem 0 1rem;
+    padding: 0 2.5rem 0 1rem;
 
     border-radius: 10px;
     border: none;
@@ -90,10 +90,7 @@
 
 .header__info div {
     padding-right: 2rem;
-
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
 }
 
 .header__info div svg {
@@ -106,10 +103,10 @@
 }
 
 .header__info div svg:hover {
-    padding: .5rem .5rem .5rem .5rem;
+    padding-bottom: 0.5rem;
 
     background-color: var(--darkpurplebackground);
-    border-radius: 50%;
+    border-radius: 50px;
 }
 
 .header__info img {
@@ -121,52 +118,43 @@
     cursor: pointer;
 }
 
-@media (max-width: 575.98px) {
-    .header__input__container input {
-        display: none;
-    }
+/* Desktop/Tablet  */
 
-    .header__container {
-        height: 3rem;
-    }
+.container__header {
+    width: 100%;
+    height: 4rem;
+    z-index: 100;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--darkpurple);
+}
 
+.box__header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 3%;
+}
 
-    .header__input__container {
-        justify-content: flex-end;
-    }
+.container__logo {
+    height: 2rem;
+    border-radius: 10px;
+}
 
-    .header__input__container svg {
-        transform: translate(1rem);
-    }
+.container__perfilImage {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 100%;
+}
 
-    .header__input__container svg:hover {
-        padding: .3rem .2rem .3rem .2rem;
+.modal__menu {
+    display: flex;
+    z-index: 100;
+}
 
-        background-color: var(--darkpurplebackground);
-        border-radius: 50%;
-        color: var(--lightpurple);
-        transform: none;
-
-    }
-
-    .header__info div svg {
-        display: none;
-    }
-
-    .header__menu__icon {
-        justify-content: flex-start;
-
-        padding-left: .5rem;
-    }
-
-    .header__menu__icon svg {
-        width: 50%;
-        height: 1.5rem;
-    }
-
-    .header__info img {
-        width: 2rem;
-        height: 2rem;
-    }
-
+.upload__icon__header {
+    text-decoration: none;
+    color: var(--lightpurple);
 }

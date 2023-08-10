@@ -13,6 +13,10 @@ import { FaFacebookF } from 'react-icons/fa'
 import { FaGoogle } from 'react-icons/fa'
 import ChooseCategory from "./chooseCategory/ChooseCategory"
 
+// Lógica
+import { useDispatch } from "react-redux"
+import { doSignup } from "../../store/features/user/userSlice"
+
 const Register = () => {
 
     const user = new FormData()
@@ -27,11 +31,12 @@ const Register = () => {
     }
 
     const [registerData, setRegisterData] = useState(objRegister)
-    const [image, setImage] = useState()
+    const [image, setImage] = useState(null)
     const [confirmPassword, setConfirmPassword] = useState("")
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
-
     const [bPChooseCategory, setbPChooseCategory] = useState(false)
+    const [fileChanged, setFileChanged] = useState(false)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const handleResize = () => {
@@ -53,33 +58,47 @@ const Register = () => {
         setbPChooseCategory(!bPChooseCategory)
     }
 
-    const register = () => {
-        setRegisterData({ ...registerData, foto: image })
+    const register = (e) => {
+        e.preventDefault()
+        console.log("Entrei para registrar")
+        setRegisterData({ ...registerData, foto1: image })
         user.append("nome", registerData.nome)
         user.append("senha", registerData.senha)
         user.append("email", registerData.email)
-        user.append("perfil", registerData.perfil)
+        user.append("perfil", registerData.nome)
         user.append("dataNascimento", registerData.dataNascimento)
-        user.append("descricao", registerData.descricao)
-        nextStep()
+        user.append("foto1", image)
+
+        try {
+            const res = dispatch(doSignup(user, image))
+            // nextStep()
+        } catch(err) {
+            console.error(err)
+        }
     }
 
     const handleFileChange = (e) => {
         const file = e.target.files[0]
         if (file) {
-            user.append("foto", file)
-            setImage(user)
+            setFileChanged(true)
+            setImage(file)
         }
+    }
+
+    const handleRemoveFile = (e) => {
+        e.preventDefault()
+        setFileChanged(!fileChanged)
+        setImage(null)
     }
 
     return (
         <>
             {!bPChooseCategory &&
                 <div className="container__all__register" style={{ height: `${windowHeight}px` }}>
-                    <div className="container__register">
+                    <form className="container__register">
                         <h1>Cadastro</h1>
                         <h2>O Mundo dos Videos ao seu Alcance</h2>
-                        <form className="container__inputs__register">
+                        <div className="container__inputs__register">
                             <Input
                                 placeholder={"E-mail"}
                                 type={"email"}
@@ -123,12 +142,15 @@ const Register = () => {
                                 label={"Foto de perfil"}
                                 radius={"20px"}
                                 onChange={handleFileChange}
+                                removeFile={handleRemoveFile}
                                 file={image}
+                                key={fileChanged.toString()}
                             />
-                        </form>
+                        </div>
                         <div className="container__button__register">
                             <Button
                                 label={"Cadastrar"}
+                                type={"submit"}
                                 principal={true}
                                 isActived={false}
                                 onClick={register}
@@ -141,7 +163,7 @@ const Register = () => {
                         </div>
                         <div className="container__other__register">
                             <div><FaFacebookF style={{ height: "1.5rem" }} /></div>
-                            <div><FaGoogle style={{ height: "2rem" }} /></div>
+                            <div><FaGoogle style={{ fontSize: "1.5rem" }} /></div>
                         </div>
                         <div className="container__login__register">
                             <span>Já possui uma conta?</span>
@@ -151,7 +173,7 @@ const Register = () => {
                                 </Link>
                             </span>
                         </div>
-                    </div>
+                    </form>
                 </div>
             }
             {bPChooseCategory &&

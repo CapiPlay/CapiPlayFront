@@ -16,7 +16,7 @@
     border: none;
     padding: 0 13px;
     outline: none;
-    border: 1px solid transparent;
+    border: 1px solid var(--darkblue);
     border-radius: 10px;
     transition: 0.2s ease-out;
 
@@ -33,6 +33,23 @@
     transform: translateY(-170%);
     font-size: 16px;
     color: var(--lightpurple);
+}
+
+.input__control::placeholder {
+    color: transparent;
+}
+
+.input__control[title]::after {
+    content: attr("Drogaaaaa");
+    color: #fff;
+    background-color: black !important;
+    padding: 4px 8px;
+    border-radius: 4px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
 }
 
 .active {

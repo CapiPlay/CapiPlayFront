@@ -1,3 +1,7 @@
+.upload__page {
+    height: 100vh;
+}
+
 .container__home {
     background-color: var(--darkpurple);
 }

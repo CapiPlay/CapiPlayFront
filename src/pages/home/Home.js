@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/header/Header';
 import './Home.css';
@@ -6,13 +5,23 @@ import Slider from './slider/Slider';
 import Video_card from '../../components/video_card/Video_card';
 import Side_Bar from './side_bar/Side_Bar';
 import Slider_Category from './slider_category/Slider_Category';
-import Header_Tablet from './header_tablet/Header_Tablet';
 import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
+import PlayerService from '../../service/PlayerService';
+import Aos from 'aos'
+import Cookies from 'js-cookie';
 
 function Home() {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+  const [videos, setVideos] = useState([])
+  const [currentPage, setCurrentPage] = useState(0);
+
+  Aos.init({
+    duration: 200
+  });
 
   useEffect(() => {
+    getVideos()
+    userProfile()
     function handleResize() {
       setScreenSize({ width: window.innerWidth, height: window.innerHeight });
     }
@@ -23,10 +32,29 @@ function Home() {
     };
   }, []);
 
+  const getVideos = async () => {
+    setVideos(await PlayerService.buscarVideosHome(0))
+  }
+
+  const userProfile = () => {
+    const user = Cookies.get('user');
+    if (user) {
+      const userLogin = JSON.parse(user);
+      if (userLogin) {
+        return userLogin
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
+  }
+
   const renderDesktopView = () => (
     <>
-      <Header />
+      <Header userLogin={userProfile} />
       <Side_Bar />
+      <div className='container__header__home'></div>
       <div className='container__home'>
         <div className='container__slider__base__desk'>
           <Slider_Category />
@@ -35,17 +63,17 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__desk'>
-          {Array.from({ length: 6 }, (_, index) => (
-            <Video_card key={index} />
-          ))}
+          {/* {videos.map((video) => (
+            <Video_card key={video.uuid} video={video} />
+          ))} */}
         </div>
         <div className='container__shorts__cards__desk'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards__desk'>
-          {Array.from({ length: 6 }, (_, index) => (
-            <Video_card key={index} />
-          ))}
+          {/* {videos.map((video) => (
+            <Video_card key={video.uuid} video={video} />
+          ))} */}
         </div>
       </div>
     </>
@@ -62,17 +90,17 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__tablet'>
-          {Array.from({ length: 4 }, (_, index) => (
-            <Video_card key={index} />
-          ))}
+          {/* {videos.map((video) => (
+            <Video_card key={video.uuid} video={video} />
+          ))} */}
         </div>
         <div className='container__shorts__cards__tablet'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards__tablet'>
-          {Array.from({ length: 6 }, (_, index) => (
-            <Video_card key={index} />
-          ))}
+          {/* {videos.map((video) => (
+            <Video_card key={video.uuid} video={video} />
+          ))} */}
         </div>
       </div>
     </>
@@ -86,17 +114,17 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards'>
-          {Array.from({ length: 2 }, (_, index) => (
-            <Video_card key={index} />
-          ))}
+          {/* {videos.map((video) => (
+            <Video_card key={video.uuid} video={video} />
+          ))} */}
         </div>
         <div className='container__shorts__cards__mobile'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards'>
-          {Array.from({ length: 2 }, (_, index) => (
-            <Video_card key={index} />
-          ))}
+          {/* {videos.map((video) => (
+            <Video_card key={video.uuid} video={video} />
+          ))} */}
         </div>
       </div>
     </>

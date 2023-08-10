@@ -27,4 +27,6 @@
     margin-left: auto;
     color: var(--lightpurple);
     margin-bottom: 3px;
+    font-size: 0.8rem;
+    width: max-content;
 }

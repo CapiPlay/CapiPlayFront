@@ -1,52 +1,112 @@
+
 import React, { useState } from 'react'
+
+import React, { useEffect, useState } from 'react';
+import Modal_menu from '../../pages/home/modal_menu/modal_menu';
 import { TbUpload } from 'react-icons/tb'
-import { GiHamburgerMenu } from 'react-icons/gi'
+import logo from '../../assets/image/Logo.png'
 import { AiOutlineSearch } from 'react-icons/ai'
 import './Header.css'
+
 import Search from '../../pages/search/Search'
 
-function Header() {
+import Modal_profile from './modal_profile/Modal_profile';
+import { Link } from 'react-router-dom';    
+
+
+//imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
+//ser passada para o header para ser exibida 
+function Header({ userProfile }) {
+
 
     const [search, setSearch] = useState(false);
     const handleClick = () => {
         setSearch(!search);
     }
 
-    // const renderSearch = () => {
-    //     return (
-    //         <>
+    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
-    //         </>
-    //     )
-    // }
+    const verifyToken = () => {
+        if (userProfile) {
+            return userProfile;
+        } else {
+            return false;
+        }
+    }
 
-    return (
-        <>
-            <div className='header__container'>
-                <div className='header__menu__icon'>
-                    <GiHamburgerMenu />
+    useEffect(() => {
+        function handleResize() {
+            setScreenSize({ width: window.innerWidth, height: window.innerHeight });
+        }
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    const renderMobileView = () => (
+        <div className='container__header'>
+            <div className='box__header'>
+                <div className='modal__menu' >
+                    <Modal_menu />
                 </div>
-                <div className='header__input__container' onClick={handleClick}>
-                    <input placeholder='Pesquisar' />
-                    <AiOutlineSearch />
-                </div>
-                <div className='header__info'>
-                    <div>
-                        <TbUpload />
-                    </div>
-                    <div>
-                        <img src='https://yt3.ggpht.com/PFRD_rpPwAIY-FC2t6Ob0GpJe2udeEaXNwug4Dx8v7zxxda6ZKHU1aKBX-XoWvYh2H4Ow6TtBDk=s176-c-k-c0x00ffffff-no-rj-mo' />
-                    </div>
+                <div className='container__logo'>
+                    <img src={logo} className='container__logo' />
                 </div>
             </div>
-            <div className="render__container">
-                {search&&
-                    <Search/>
-                }
+            <div className='box__header'>
+                <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
+                <Modal_profile profile={userProfile} />
             </div>
+        </div>
+    );
 
-        </>
-    )
+    const renderDesktopView = () => (
+        <div className='header__container'>
+            <div></div>
+            <div className='header__input__container'>
+                <input className='header__input__text__search' placeholder='Pesquisar' />
+                <AiOutlineSearch />
+            </div>
+            <div className='header__info'>
+                <div>
+                    {verifyToken() &&
+                        <Link to="/upload" className='upload__icon__header' ><TbUpload /></Link>
+                    }
+                </div>
+                <div>
+                    < Modal_profile profile={userProfile} />
+                </div>
+            </div>
+        </div>
+    );
+
+    const renderTabletView = () => (
+        <div className='container__header'>
+            <div className='box__header'>
+                <div className='modal__menu'>
+                    <Modal_menu />
+                </div>
+            </div>
+            <div className='box__header'>
+                <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
+                <Modal_profile profile={userProfile} />
+            </div>
+        </div>
+    );
+
+    const getViewToRender = () => {
+        if (screenSize.width > 900) {
+            return renderDesktopView();
+        } else if (screenSize.width < 900 && screenSize.width > 500) {
+            return renderTabletView();
+        } else {
+            return renderMobileView();
+        }
+    };
+
+    return <>{getViewToRender()}</>;
 
 }
 

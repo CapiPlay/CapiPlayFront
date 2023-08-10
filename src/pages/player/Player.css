@@ -1,8 +1,3 @@
-body{
-    background: rgb(31,29,43);
-background: linear-gradient(180deg, rgba(31,29,43,1) 0%, rgba(49,37,79,1) 88%);
-}
-
 .like__dislike__btns{
     display: flex;
     justify-content: end;
@@ -45,7 +40,13 @@ background: linear-gradient(180deg, rgba(31,29,43,1) 0%, rgba(49,37,79,1) 88%);
     gap: 0.5rem;
 }
 
-.video__player{
+.video__player__desktop{
+    margin: 0;
+    width: 100%;
+    height: 28rem;
+}
+
+.video__player__mobile{
     margin: 0;
     width: 100%;
     height: 20rem;
@@ -74,6 +75,7 @@ background: linear-gradient(180deg, rgba(31,29,43,1) 0%, rgba(49,37,79,1) 88%);
 .things{
     display: grid;
     grid-template-columns: 70% 30%;
+    margin: 2.5rem;
 }
 
 .return__btn{
@@ -91,4 +93,9 @@ background: linear-gradient(180deg, rgba(31,29,43,1) 0%, rgba(49,37,79,1) 88%);
 
 .player__page{
     margin: 1rem;
+}
+
+.videos{
+    display: grid;
+    grid-template-columns: 50% 50%;
 }
