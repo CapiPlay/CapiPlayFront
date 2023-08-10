@@ -33,7 +33,7 @@ function Home() {
   }, []);
 
   const getVideos = async () => {
-    setVideos(await PlayerService.buscarVideosHome(0))
+    setVideos(await PlayerService.buscarVideo(0))
   }
 
   const userProfile = () => {
@@ -63,9 +63,9 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__desk'>
-          {/* {videos.map((video) => (
+          {videos.map((video) => (
             <Video_card key={video.uuid} video={video} />
-          ))} */}
+          ))}
         </div>
         <div className='container__shorts__cards__desk'>
           <Slider_Shorts />
