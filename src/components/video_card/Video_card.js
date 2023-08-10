@@ -12,13 +12,9 @@ function Video_card({video}) {
         return <div>No Video Data</div>;
       }
 
-      const reload = () => {
-        window.location.reload()
-      }
-
     return (
 
-        <div className='box__video__card' onClick={() => reload()}>
+        <div className='box__video__card'>
             <Link to={`/video/${video.uuid}`}>
                 <div className='container__video__image'>
                     <img src={"http://localhost:7000/api/video/static/" + video.caminhos[4]} className='container__video__card__image' />

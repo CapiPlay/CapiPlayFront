@@ -15,6 +15,7 @@ import PlayerService from '../../../../service/PlayerService'
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Desktop_player({ video }) {
     const [videos, setVideos] = useState([])
+    const [videoSource, setVideoSource] = useState(null);
     // const videoReactions = EngajamentoService.buscarTodasReacoesPorVideo(video.uuid)
     //são apenas variáveis de exemplo, elas vão vir com o objeto 
 
@@ -34,7 +35,7 @@ function Desktop_player({ video }) {
             <div className='things'>
                 <div>
                     <div>
-                        <video controls className='video__player__desktop' poster={"http://localhost:7000/api/video/static/" + video.caminhos[3]} autoPlay>
+                        <video controls className='video__player__desktop' poster={"http://localhost:7000/api/video/static/" + video.caminhos[3]} autoPlay key={video.uuid}>
                             <source src={"http://localhost:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
                         </video>
                     </div>
