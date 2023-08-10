@@ -1,5 +1,6 @@
 import './UploadVideo.css'
 
+import { useLocation } from "react-router-dom";
 import { HiUpload } from 'react-icons/hi';
 import React, { useState, useEffect, useRef } from "react";
 
@@ -7,7 +8,15 @@ import Button from '../../components/button/Button';
 import InputFile from "../../components/inputFile/InputFile";
 import HeaderUpload from '../upload/headerUpload/HeaderUpload';
 
+import VideoService from '../../service/VideoService';
+import Select from '../../components/select/Select';
+
 function UploadVideo() {
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const miniaturaUrl = searchParams.get("miniatura");
+  // ----------------------------
 
   const [videoSrc, setVideoSrc] = useState(null)
 
@@ -17,6 +26,27 @@ function UploadVideo() {
   const [image, setImage] = useState()
   const imagePreviewRef = useRef(null)
 
+  const options = [
+    { label: "Artes e Cultura", value: "Artes e Cultura" },
+    { label: "Ciência e Tecnologia", value: "Ciência e Tecnologia" },
+    { label: "Culinária", value: "Culinária" },
+    { label: "Educação", value: "Educação" },
+    { label: "Esportes", value: "Esportes" },
+    { label: "Entretenimento", value: "Entretenimento" },
+    { label: "Documentários", value: "Documentários" },
+    { label: "Jogos", value: "Jogos" },
+    { label: "Lifestyle", value: "Lifestyle" },
+    { label: "Moda e Beleza", value: "Moda e Beleza" },
+    { label: "Música", value: "Música" },
+    { label: "Viagem e Turismo", value: "Viagem e Turismo" }
+  ];
+
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
   const [video, setVideo] = useState({
     titulo: "",
     descricao: "",
@@ -24,7 +54,7 @@ function UploadVideo() {
     categoria: "",
     ehReels: false,
     video: "",
-    miniatura: "",
+    miniatura: miniaturaUrl,
     kids: ""
   })
 
@@ -42,7 +72,6 @@ function UploadVideo() {
       const formData = new FormData()
       formData.append("foto", file)
       setImage(formData)
-      localStorage.setItem("foto", formData)
 
       const reader = new FileReader();
 
@@ -55,13 +84,21 @@ function UploadVideo() {
 
       reader.readAsDataURL(file);
 
+      const videoURL = URL.createObjectURL(file);
+      setVideoSrc(videoURL);
+
       setVideoSrc(URL.createObjectURL(file));
     }
   }
 
   const enviarVideo = (event) => {
     event.preventDefault()
-    // CardService.cadastrar(card)
+
+    setVideo((prevVideo) => ({
+      ...prevVideo,
+      video: videoSrc // Usa o valor atualizado de videoSrc
+    }));
+    VideoService.criar(video)
     // alert("Cadastro efetuado!")
     console.log(video)
     // window.location.reload()
@@ -106,24 +143,15 @@ function UploadVideo() {
                   value={video.descricao}
                   required={true} />
               </div>
-              <div className='upload__video__box__input'>
-                <label className='upload__video__label'>Categoria do vídeo</label>
-                <select className='upload__video__select' onChange={handleInputChange} name='categoria' value={video.categoria}>
-                  <option defaultValue={''} disabled hidden value="">Selecione uma categoria</option>
-                  <option value="Artes e Cultura">Artes e Cultura</option>
-                  <option value="Ciência e Tecnologia">Ciência e Tecnologia</option>
-                  <option value="Culinária">Culinária</option>
-                  <option value="Educação">Educação</option>
-                  <option value="Entretenimento">Entretenimento</option>
-                  <option value="Esportes">Esportes</option>
-                  <option value="Documentários">Documentários</option>
-                  <option value="Jogos">Jogos</option>
-                  <option value="Lifestyle">Lifestyle</option>
-                  <option value="Moda e Beleza">Moda e Beleza</option>
-                  <option value="Música">Música</option>
-                  <option value="Viagem e Turismo">Viagem e Turismo</option>
-                </select>
-              </div>
+              <Select
+                options={options}
+                value={video.categoria}
+                placeholder="Categoria do vídeo"
+                onChange={handleInputChange}
+                name="categoria"
+                required={true}
+                enable={true}
+              />
             </div>
 
             <div className='upload__video__container__row'>
@@ -168,11 +196,13 @@ function UploadVideo() {
                     </button>
                   </div>
                 </div>
-                <div className='upload__video__tags__scroll'>
-                  {tags.map((tag, index) => (
-                    <div className='upload__video__tag' key={index}>{tag}</div>
-                  ))}
-                </div>
+                {tags.length != 0 &&
+                  <div className='upload__video__tags__scroll'>
+                    {tags.map((tag, index) => (
+                      <div className='upload__video__tag' key={index}>{tag}</div>
+                    ))}
+                  </div>
+                }
               </div>
 
               <div className='upload__video__child__friendly_box'>

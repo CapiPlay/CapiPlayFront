@@ -149,3 +149,14 @@
     text-decoration: none;
     color: var(--whitesmoke);
 }
+
+.upload__inputfile__box {
+    background-color: var(--lightpurple);
+    border-radius: 10px;
+    border: 0;
+    height: 3rem;
+}
+
+.upload__inputfile {
+    
+}
