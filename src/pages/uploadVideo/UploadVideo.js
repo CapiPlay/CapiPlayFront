@@ -196,11 +196,13 @@ function UploadVideo() {
                     </button>
                   </div>
                 </div>
-                <div className='upload__video__tags__scroll'>
-                  {tags.map((tag, index) => (
-                    <div className='upload__video__tag' key={index}>{tag}</div>
-                  ))}
-                </div>
+                {tags.length != 0 &&
+                  <div className='upload__video__tags__scroll'>
+                    {tags.map((tag, index) => (
+                      <div className='upload__video__tag' key={index}>{tag}</div>
+                    ))}
+                  </div>
+                }
               </div>
 
               <div className='upload__video__child__friendly_box'>
