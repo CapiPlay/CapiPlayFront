@@ -1,6 +1,3 @@
-
-import React, { useState } from 'react'
-
 import React, { useEffect, useState } from 'react';
 import Modal_menu from '../../pages/home/modal_menu/modal_menu';
 import { TbUpload } from 'react-icons/tb'
@@ -11,8 +8,7 @@ import './Header.css'
 import Search from '../../pages/search/Search'
 
 import Modal_profile from './modal_profile/Modal_profile';
-import { Link } from 'react-router-dom';    
-
+import { Link } from 'react-router-dom';
 
 //imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
 //ser passada para o header para ser exibida 
@@ -56,9 +52,14 @@ function Header({ userProfile }) {
                 </div>
             </div>
             <div className='box__header'>
-                <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
+                <div className='header__input__container' onClick={handleClick}>
+                    <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
+                </div>
                 <Modal_profile profile={userProfile} />
             </div>
+            {search &&
+                <Search />
+            }
         </div>
     );
 
@@ -90,9 +91,12 @@ function Header({ userProfile }) {
                 </div>
             </div>
             <div className='box__header'>
-                <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
+                <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} onClick={handleClick} />
                 <Modal_profile profile={userProfile} />
             </div>
+            {search &&
+                <Search />
+            }
         </div>
     );
 

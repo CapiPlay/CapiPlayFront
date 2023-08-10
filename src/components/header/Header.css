@@ -70,13 +70,13 @@
     cursor: pointer;
 
     transition: 0.3s ease-in-out;
-    transform: translate(-2rem);
+    transform: translate(1rem);
 }
 
 .header__input__container svg:hover {
     color: var(--darkpurple);
 
-    transform: translate(-2.2rem);
+    transform: translate(-1rem);
 }
 
 .header__info {
