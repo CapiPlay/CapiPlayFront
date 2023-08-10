@@ -33,7 +33,7 @@ function Home() {
   }, []);
 
   const getVideos = async () => {
-    setVideos(await PlayerService.buscarVideosResumidos(0))
+    setVideos(await PlayerService.buscarVideo(0))
   }
 
   const userProfile = () => {
