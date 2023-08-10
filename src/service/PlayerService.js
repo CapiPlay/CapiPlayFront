@@ -14,7 +14,7 @@ const PlayerService = {
     buscarVideosResumidos: async (page) => {
         let size = 10
         try {
-            const response = await axios.get("/video/buscar-resumido?page=" + page + "&size=" + size);
+            const response = await axios.get("/video/buscar-resumido/?page=" + page + "&size=" + size);
             return response.data.content;
         } catch (error) {
             console.error(error);
