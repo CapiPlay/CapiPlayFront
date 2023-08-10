@@ -1,5 +1,6 @@
 import './UploadVideo.css'
 
+import { useLocation } from "react-router-dom";
 import { HiUpload } from 'react-icons/hi';
 import React, { useState, useEffect, useRef } from "react";
 
@@ -9,6 +10,11 @@ import HeaderUpload from '../upload/headerUpload/HeaderUpload';
 import VideoService from '../../service/VideoService';
 
 function UploadVideo() {
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const miniaturaUrl = searchParams.get("miniatura");
+  // ----------------------------
 
   const [videoSrc, setVideoSrc] = useState(null)
 
@@ -25,7 +31,7 @@ function UploadVideo() {
     categoria: "",
     ehReels: false,
     video: "",
-    miniatura: localStorage.getItem("thumbnail"),
+    miniatura: miniaturaUrl,
     kids: ""
   })
 
@@ -43,7 +49,6 @@ function UploadVideo() {
       const formData = new FormData()
       formData.append("foto", file)
       setImage(formData)
-      localStorage.setItem("foto", formData)
 
       const reader = new FileReader();
 
