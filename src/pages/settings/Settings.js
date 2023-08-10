@@ -4,12 +4,16 @@ import './Settings.css'
 
 //imagem
 import ProfileImage from '../../assets/image/CapiPlay.png'
+import Capivara from '../../assets/image/CapivaraModal.png'
 
 //componentes
+import Home from '../home/Home'
 import HeaderSettings from './header/HeaderSettings'
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import UserService from './../../service/UserService'
+import { Link } from 'react-router-dom';
+import TextArea from '../../components/inputTextArea/InputTextArea';
 
 const Settings = ({ userId }) => {
 
@@ -21,6 +25,16 @@ const Settings = ({ userId }) => {
         senhaAtual: '',
         descricao: ''
     });
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
 
     useEffect(() => {
         axios.get(`/api/usuario/${userId}`)
@@ -102,20 +116,33 @@ const Settings = ({ userId }) => {
                         />
                     </div>
                     <div className="settings__field">
-                        <Input
+                        <TextArea
                             placeholder={"Descrição do canal"}
                             value={settingsData.descricao}
                             onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
-                            type={"text"}
                             required={true}
-                            className='settings__input'
+                            className="settings__input"
                         />
                     </div>
                 </div>
                 <br />
-                <hr className="solid" />
+                <hr className="solid"/>
                 <div className='settings__options__buttons__delete_div'>
-                    <button className='settings__options__buttons__delete'>Deletar perfil</button>
+                    <button className='settings__options__buttons__delete' onClick={openModal}>Deletar perfil</button>
+                    {isModalOpen && (
+                        <>
+                            <div className='modal__overlay_mobile'>
+                                <div className='modal__content'>
+                                    <p className='text'>Tem certeza que deseja deletar o perfil?</p>
+                                    <div className='modal__buttons'>
+                                        <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
+                                        <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='background'></div>
+                        </>
+                    )}
                 </div>
                 <div className='settings__options__buttons__div'>
                     <Button onClick={handleUpdateUser} label={"Cancelar"} className='settings__options__buttons__cancel' principal={true} />
@@ -156,8 +183,6 @@ const Settings = ({ userId }) => {
                                     className='settings__input__desktop'
                                 />
                             </div>
-                        </div>
-                        <div className='settings__input__box'>
                             <div className="settings__field__desktop">
                                 <Input
                                     placeholder={"Senha"}
@@ -168,24 +193,37 @@ const Settings = ({ userId }) => {
                                     className='settings__input__desktop'
                                 />
                             </div>
+                        </div>
                             <div className="settings__field__desktop">
-                                <Input
+                                <TextArea
                                     placeholder={"Descrição do canal"}
                                     value={settingsData.descricao}
                                     onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
-                                    type={"text"}
                                     required={true}
-                                    className='settings__input__desktop'
+                                    className="settings__input"
                                 />
                             </div>
-                        </div>
                     </div>
                 </div>
 
 
                 <hr className="solid" />
                 <div className='settings__options__buttons__container'>
-                    <button className='settings__options__buttons__delete__desktop'>Deletar perfil</button>
+                    <button className='settings__options__buttons__delete__desktop' onClick={openModal}>Deletar perfil</button>
+                    {isModalOpen && (
+                        <>
+                            <div className='modal__overlay'>
+                                <div className='modal__content'>
+                                    <p className='text'>Tem certeza que deseja deletar o perfil?</p>
+                                    <div className='modal__buttons'>
+                                        <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
+                                        <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='background'></div>
+                        </>
+                    )}
                     <div className='settings__options__buttons__div__desktop'>
                         <Button onClick={handleUpdateUser} label={"Cancelar"} className='settings__options__buttons__cancel__desktop' principal={false} />
                         <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm__desktop' principal={true} />
@@ -239,13 +277,12 @@ const Settings = ({ userId }) => {
                                 />
                             </div>
                             <div className="settings__field__tablet">
-                                <Input
+                                <TextArea
                                     placeholder={"Descrição do canal"}
                                     value={settingsData.descricao}
                                     onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
-                                    type={"text"}
                                     required={true}
-                                    className='settings__input__tablet'
+                                    className="settings__input"
                                 />
                             </div>
                         </div>
@@ -253,14 +290,28 @@ const Settings = ({ userId }) => {
                 </div>
                 <hr className="solid" />
                 <div className='settings__options__buttons__tablet'>
-                    <button className='settings__options__buttons__delete__tablet'>Deletar perfil</button>
+                    <button className='settings__options__buttons__delete__tablet' onClick={openModal}>Deletar perfil</button>
+                    {isModalOpen && (
+                        <>
+                            <div className='modal__overlay_tablet'>
+                                <div className='modal__content'>
+                                    <p className='text'>Tem certeza que deseja deletar o perfil?</p>
+                                    <div className='modal__buttons'>
+                                        <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
+                                        <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='background'></div>
+                        </>
+                    )}
                     <div className='settings__options__buttons__div__tablet'>
                         <Button onClick={handleUpdateUser} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
                         <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
                     </div>
                 </div>
             </div>
-                    </>
+        </>
     )
 
     const getViewToRender = () => {
