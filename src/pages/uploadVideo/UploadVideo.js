@@ -7,6 +7,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Button from '../../components/button/Button';
 import InputFile from "../../components/inputFile/InputFile";
 import HeaderUpload from '../upload/headerUpload/HeaderUpload';
+
 import VideoService from '../../service/VideoService';
 
 function UploadVideo() {
@@ -75,7 +76,7 @@ function UploadVideo() {
       ...prevVideo,
       video: videoSrc // Usa o valor atualizado de videoSrc
     }));
-    // VideoService.criar(video)
+    VideoService.criar(video)
     // alert("Cadastro efetuado!")
     console.log(video)
     // window.location.reload()
