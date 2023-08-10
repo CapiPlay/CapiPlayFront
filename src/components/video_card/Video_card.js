@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './Video_card.css'
 
 import img_miniatura from "../../assets/image/img_base_miniatura.png"
+import PlayerService from '../../service/PlayerService';
  
 function Video_card({video}) {
     
@@ -11,18 +12,22 @@ function Video_card({video}) {
         return <div>No Video Data</div>;
       }
 
+      const reload = () => {
+        window.location.reload()
+      }
+
     return (
 
-        <div className='box__video__card'>
-            <Link to={`/player/${video.uuid}`}>
+        <div className='box__video__card' onClick={() => reload()}>
+            <Link to={`/video/${video.uuid}`}>
                 <div className='container__video__image'>
-                    <img src="https://i.ytimg.com/vi/1Ne1hqOXKKI/maxresdefault.jpg" className='container__video__card__image' />
+                    <img src={"http://localhost:7000/api/video/static/" + video.caminhos[4]} className='container__video__card__image' />
                 </div>
             </Link>
             <div className='container__video__info'>
                 <img src="https://1.bp.blogspot.com/_i5HYEqTAi9w/SfkWb4gS0jI/AAAAAAAABXE/8BEdz7gYctA/s280/Pingu1.jpg" className='container__video__perfilImage' />
                 <div className='container__video__info__text'>
-                    <h5 className='container__video__title__text'>Título do vídeo</h5>
+                    <h5 className='container__video__title__text'>{video.titulo}</h5>
                     <div>
                         <h5 className='container__video__perfilName'>Nome do Canal</h5>
                         <h6 className='container__video__views'>10K de visualizações  ---  57K de Likes</h6>

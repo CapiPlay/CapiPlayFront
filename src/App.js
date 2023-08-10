@@ -11,6 +11,7 @@ import VideoUpload from './pages/videoUpload/VideoUpload'
 import Search from './pages/search/Search'
 import { Provider } from 'react-redux'
 import store from './store'
+import Video_player_contructor from './pages/player/video_player_contructor/Video_player_contructor';
 import ResultSearch from './pages/resultSearch/ResultSearch';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Upload from './pages/upload/Upload';
@@ -28,7 +29,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/player" element={<Player />} />
+            <Route path="/video/:videoId" element={<Player />} />
+            <Route path="/video" element={<Player />} />
             <Route path="/historic" element={<Historic />} />
             <Route path="/shorts" element={<Shorts />} />
             <Route path="/video-details" element={<VideoDetails />} />
@@ -42,6 +44,7 @@ function App() {
             <Route path="/upload-shorts" element={<UploadShorts />} />
             <Route path="/settings" element={<Settings />} />
 
+            <Route path="/teste" element={<Video_player_contructor />} />
           </Routes>
         </BrowserRouter>
       </Provider>

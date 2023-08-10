@@ -69,12 +69,10 @@
     color: var(--lightpurple);
 }
 
-.video__card{
-    margin-top: 5%;
+.teste{
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: white;
+    align-items: center;
 }
 
 .things{
@@ -101,6 +99,11 @@
 }
 
 .videos{
-    display: grid;
-    grid-template-columns: 50% 50%;
+    margin-top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 2%;
 }

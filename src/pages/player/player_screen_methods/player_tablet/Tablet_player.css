@@ -68,10 +68,10 @@
 
 .video__card{
     margin-top: 5%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr;
     color: white;
+    margin: 5%;
 }
 
 .things{
@@ -95,9 +95,4 @@
 
 .player__page{
     margin: 1rem;
-}
-
-.videos{
-    display: grid;
-    grid-template-columns: 50% 50%;
 }
