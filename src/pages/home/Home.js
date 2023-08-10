@@ -33,7 +33,8 @@ function Home() {
   }, []);
 
   const getVideos = async () => {
-    const videos = await PlayerService.buscarVideosResumidos(0)
+    const videos = await PlayerService.buscarVideosHome(0)
+    console.log(videos)
       if (videos) {
         setVideos(videos)
       } else {
