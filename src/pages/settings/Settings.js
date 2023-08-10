@@ -202,7 +202,7 @@ const Settings = ({ userId }) => {
                                     required={true}
                                     className="settings__input"
                                 />
-                            </div>
+                        </div>
                     </div>
                 </div>
 

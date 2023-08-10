@@ -6,7 +6,8 @@
     top: 5%;
 }
 
-.settings__container , .settings__container__desktop {
+.settings__container,
+.settings__container__desktop {
     height: 100%;
 }
 
@@ -161,7 +162,8 @@
 }
 
 .settings__field__desktop {
-    margin-bottom: 1rem;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     padding: 0.2rem;
@@ -185,7 +187,8 @@
     gap: 0.5rem;
 }
 
-.settings__input__desktop:focus, .settings__field__textarea__input__desktop:focus {
+.settings__input__desktop:focus,
+.settings__field__textarea__input__desktop:focus {
     outline: 0;
     border: 0;
 }
@@ -243,7 +246,8 @@
 }
 
 .settings__input__container__desktop {
-    width: 65%;
+    gap: 3rem;
+    width: 53%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -251,12 +255,12 @@
 }
 
 .settings__input__box {
-    width: 48%;
+    width: 100%;
 }
 
 /* TABLET */
 
-.settings__input__container__tablet{
+.settings__input__container__tablet {
     width: 100%;
     display: contents;
 }
@@ -268,7 +272,9 @@
     top: 5%;
 }
 
-.settings__container , .settings__container__desktop, .settings__container__tablet {
+.settings__container,
+.settings__container__desktop,
+.settings__container__tablet {
     height: 100%;
 }
 
@@ -277,7 +283,7 @@
     margin-bottom: 2.5rem;
 }
 
-.settings__form__tablet{
+.settings__form__tablet {
     margin: 0 1.5rem;
     display: flex;
     flex-direction: column;
@@ -397,7 +403,7 @@
     z-index: 2;
 }
 
-.background{
+.background {
     width: 100%;
     height: 100vh;
     backdrop-filter: blur(2px);
@@ -456,7 +462,7 @@
 }
 
 
-.background{
+.background {
     width: 100%;
     height: 100vh;
     backdrop-filter: blur(2px);
