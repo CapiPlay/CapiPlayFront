@@ -45,17 +45,12 @@ background: linear-gradient(180deg, rgba(31,29,43,1) 0%, rgba(49,37,79,1) 88%);
     gap: 0.5rem;
 }
 
-.video__player__desktop{
+.video__player__tablet{
     margin: 0;
     width: 100%;
-    height: 28rem;
+    height: 100%;
 }
 
-.video__player__mobile{
-    margin: 0;
-    width: 100%;
-    height: 20rem;
-}
 
 .channel{
     width: max-content;
@@ -67,14 +62,6 @@ background: linear-gradient(180deg, rgba(31,29,43,1) 0%, rgba(49,37,79,1) 88%);
 
 .total__comments{
     color: var(--lightpurple);
-}
-
-.video__card{
-    margin-top: 5%;
-    display: grid;
-    grid-template-columns: 1fr;
-    color: white;
-    margin: 5%;
 }
 
 .things{
@@ -98,4 +85,16 @@ background: linear-gradient(180deg, rgba(31,29,43,1) 0%, rgba(49,37,79,1) 88%);
 
 .player__page{
     margin: 1rem;
+}
+
+.videos__tablet{
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.videos__tablet__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
