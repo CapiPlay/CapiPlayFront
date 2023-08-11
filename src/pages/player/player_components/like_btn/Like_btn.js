@@ -7,8 +7,6 @@ function Like_btn({video}) {
 
   const [like_btn, setLikeBtn] = useState(true);
 
-  let curtido = false;
-
   const handleToggleLikeBtn = () => {
     setLikeBtn(!like_btn);
   //   if(curtido){
