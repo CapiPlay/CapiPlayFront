@@ -93,8 +93,7 @@ function Home() {
 
     if (videos) {
       const filteredVideos = videos.filter(video => video.shorts === false);
-
-      if (filteredVideos.length > 0) {
+      if (filteredVideos.length === 6) {
         setVideosRec(filteredVideos);
       } else {
         setVideosRec([]);
@@ -126,7 +125,9 @@ function Home() {
     if (videos) {
       const filteredVideos = videos.filter(video => video.shorts === false);
 
-      if (filteredVideos.length > 0) {
+      if (filteredVideos.length === 9) {
+        setVideosRev(filteredVideos);
+      } else if (filteredVideos.length === 6) {
         setVideosRev(filteredVideos);
       } else {
         setVideosRev([]);
