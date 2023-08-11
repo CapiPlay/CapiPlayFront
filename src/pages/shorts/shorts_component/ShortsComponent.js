@@ -11,45 +11,24 @@ import CommentsComponent from '../../../components/commentsComponent/CommentsCom
 import { BiLike, BiDislike, BiCommentDetail, BiSolidLike, BiSolidDislike } from "react-icons/bi"
 
 //hooks
-import { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { useEffect } from 'react'
 
 
 const ShortsComponent = ({ short }) => {
 
-    const videos = [
-        {
-            id: 1,
-            title: 'Título do Vídeo 1',
-            image: 'https://s2.glbimg.com/kmbgBzKPL0URISIQenPiAKo4ORI=/e.glbimg.com/og/ed/f/original/2017/08/23/5c147f01-dff6-4952-98a0-9394c88361c2.jpg',
-            profile: '@user1',
-            likes: '10K',
-        },
-        {
-            id: 2,
-            title: 'Título do Vídeo 2',
-            image: 'https://i2.wp.com/gatinhobranco.com/wp-content/uploads/2020/04/vitrine-do-bem-gatos-Photo-by-Stratman.jpg?fit=800%2C515&ssl=1',
-            profile: '@user2',
-            likes: '20K',
-        },
-        {
-            id: 3,
-            title: 'Título do Vídeo 3',
-            image: 'https://i0.wp.com/gatinhobranco.com/wp-content/uploads/2020/04/adotar-gatinho-lista-de-ongs-brasil-Photo-by-Pikabum.jpg?fit=800%2C515&ssl=1',
-            profile: '@user3',
-            likes: '30K',
-        },
-    ]
+    console.log(short)
 
+    const targetRef = useRef(null)
     //transição entre os vídeos
-    // const [transitioning, setTransitioning] = useState(false)
+    const [transitioning, setTransitioning] = useState(false)
 
     const [openModalComments, setOpenModalComments] = useState(false)
     const [likeShort, setLikeShort] = useState(false)
     const [dislikeShort, setDislikeShort] = useState(false)
+    const [isVideoInView, setIsVideoInView] = useState(false);
 
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
-
-    const [shorts, setShorts] = useState([])
 
     //abrir componente de comentários
     const funcOpenModalComments = () => {
@@ -74,17 +53,50 @@ const ShortsComponent = ({ short }) => {
         setIsMuted(!isMuted);
     }
 
+    useEffect(() => {
+        const options = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 1
+        }
+
+        const callback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setIsVideoInView(true)
+                    setTimeout(() => {
+                        entry.target.play()
+                    }, 500)
+                } else {
+                    setIsVideoInView(false)
+                    entry.target.pause()
+                }
+            })
+        }
+
+        const observer = new IntersectionObserver(callback, options)
+
+        if (targetRef.current) {
+            observer.observe(targetRef.current)
+        }
+        return () => {
+            if (targetRef.current) {
+                observer.unobserve(targetRef.current)
+            }
+        }
+    }, [])
+
     // Metodos que irão para slice
 
     const getPathShorts = (currentPath) => {
-        return "http://localhost:7000/api/video/static/" + currentPath
+        const path = "http://localhost:7000/api/video/static/" + currentPath
+        return path
     }
 
     return (
-        // <div className={`container__video ${transitioning ? 'transitioning' : ''}`}>
-            <div className={`container__video`}>
+        <div className={`container__video`} >
+            <video src={getPathShorts(short)} ref={targetRef} loop muted={isMuted} {...(isVideoInView && { autoPlay: true })} />
 
-            <video src={getPathShorts(short.caminhos[5])} loop autoPlay muted={isMuted} />
             {/* <button
                     onClick={toggleMute}
                     style={{
@@ -110,7 +122,7 @@ const ShortsComponent = ({ short }) => {
                             <BiLike />
                         )
                     }
-                    <span>{videos[currentVideoIndex].likes}</span>
+                    <span>32K</span>
                 </div>
                 <div>
                     {
@@ -125,12 +137,12 @@ const ShortsComponent = ({ short }) => {
             </div>
             <div className='container__informations__video'>
                 <div className='title__short'>
-                    <span>{shorts[currentVideoIndex].titulo}</span>
+                    <span>{short.titulo}</span>
                 </div>
                 <div className='informations__profile__shorts'>
                     <div className='profile__shorts'>
                         <img src={imagePerfil} alt='Imagem de Perfil' />
-                        <span>{videos[currentVideoIndex].profile}</span>
+                        <span>{short.profile}</span>
                     </div>
                     <div className='button__submit__shorts' style={openModalComments ? { display: "none" } : {}}>
                         <ButtonSubmit
@@ -146,6 +158,5 @@ const ShortsComponent = ({ short }) => {
             }
         </div>
     )
-
 }
 export default ShortsComponent

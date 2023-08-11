@@ -1,7 +1,7 @@
 import '../shorts/Shorts.css'
 
 //hooks
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 //componentes
 import Header from '../../components/header/Header'
@@ -9,40 +9,15 @@ import ShortsService from '../../service/ShortsService'
 import ShortsComponent from './shorts_component/ShortsComponent'
 
 //icons
-import { BsFillArrowUpSquareFill } from "react-icons/bs"
+import { BsArrowLeftShort, BsFillArrowUpSquareFill } from "react-icons/bs"
 import { BsFillArrowDownSquareFill } from "react-icons/bs"
 
-const Shorts = ({ initialShort }) => {
-
-    //imagens utilizadas para fazer a página (temporário)
-    const videos = [
-        {
-            id: 1,
-            title: 'Título do Vídeo 1',
-            image: 'https://s2.glbimg.com/kmbgBzKPL0URISIQenPiAKo4ORI=/e.glbimg.com/og/ed/f/original/2017/08/23/5c147f01-dff6-4952-98a0-9394c88361c2.jpg',
-            profile: '@user1',
-            likes: '10K',
-        },
-        {
-            id: 2,
-            title: 'Título do Vídeo 2',
-            image: 'https://i2.wp.com/gatinhobranco.com/wp-content/uploads/2020/04/vitrine-do-bem-gatos-Photo-by-Stratman.jpg?fit=800%2C515&ssl=1',
-            profile: '@user2',
-            likes: '20K',
-        },
-        {
-            id: 3,
-            title: 'Título do Vídeo 3',
-            image: 'https://i0.wp.com/gatinhobranco.com/wp-content/uploads/2020/04/adotar-gatinho-lista-de-ongs-brasil-Photo-by-Pikabum.jpg?fit=800%2C515&ssl=1',
-            profile: '@user3',
-            likes: '30K',
-        },
-    ]
+const Shorts = () => {
 
     //transição entre os vídeos
-    const [transitioning, setTransitioning] = useState(false)   
+    const [transitioning, setTransitioning] = useState(false)
 
-    const [openModalComments, setOpenModalComments] = useState(false)
+    const [isAnimating, setIsAnimating] = useState(false);
 
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -54,34 +29,28 @@ const Shorts = ({ initialShort }) => {
 
     const [shorts, setShorts] = useState([])
 
+    const [currentShortIndex, setCurrentShortIndex] = useState(0)
 
-    //para passar para próximo vídeo (utilizando o botão)
-    const handleNextVideo = () => {
-        if (!transitioning) {
-            setTransitioning(true)
-            setTimeout(() => {
-                setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length)
-                setTransitioning(false)
-            }, 500)
-        }
-    }
+
 
     //para retornar para o vídeo anterior (utilizando o botão)
     const handlePreviousVideo = () => {
-        if (!transitioning) {
-            setTransitioning(true)
-            setTimeout(() => {
-                setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length)
-                setTransitioning(false)
-            }, 500)
-        }
+        // if (!transitioning) {
+        //     setTransitioning(true)
+        //     setTimeout(() => {
+        //         setCurrentVideoIndex((prevIndex) => (prevIndex - 1 + shorts.length) % shorts.length)
+        //         setTransitioning(false)
+        //     }, 500)
+        // }
+
+        setCurrentShortIndex((prevIndex) => (prevIndex - 1 + shorts.length) % shorts.length);
     }
 
     ///para passar para e retornar vídeo (utilizando o scroll)
     const handleScrollUp = (event) => {
         if (event.deltaY < 0 && currentVideoIndex !== 0) {
             handlePreviousVideo()
-        } else if (event.deltaY > 0 && currentVideoIndex !== videos.length - 1) {
+        } else if (event.deltaY > 0 && currentVideoIndex !== shorts.length - 1) {
             handleNextVideo()
         }
     }
@@ -95,10 +64,11 @@ const Shorts = ({ initialShort }) => {
         const deltaY = event.touches[0].clientY - startY
         if (deltaY > -50 && currentVideoIndex !== 0) {
             handlePreviousVideo()
-        } else if (deltaY < 50 && currentVideoIndex !== videos.length - 1) {
+        } else if (deltaY < 50 && currentVideoIndex !== shorts.length - 1) {
             handleNextVideo()
         }
     }
+
 
     //responsividade automática da tela
     useEffect(() => {
@@ -108,16 +78,17 @@ const Shorts = ({ initialShort }) => {
 
         window.addEventListener('resize', handleResize)
 
+
         const func = async () => {
             const data = await ShortsService.buscar()
+            console.log(data)
             const newShorts = []
 
-            // newShorts.push(initialShort)
-
-            newShorts.push(data)
+            newShorts.push(data.caminhos[5]) // voltar a ter apenas data
+            newShorts.push("9dec9e17-6e80-483d-8a51-d6b32c8914d8/video_17998318922429127514.mp4")
+            console.log(newShorts)
 
             setShorts((prevShorts) => [...prevShorts, ...newShorts])
-            console.log(shorts)
         }
 
         func()
@@ -132,26 +103,49 @@ const Shorts = ({ initialShort }) => {
         setHeaderAppearing(windowWidth >= 576)
     }, [windowWidth])
 
+
+    //para passar para próximo vídeo (utilizando o botão)
+    const handleNextVideo = () => {
+        // if (!transitioning) {
+        //     setTransitioning(true)
+        //     setTimeout(() => {
+        //         setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % shorts.length)
+        //         setTransitioning(false)
+        //     }, 500)
+        // }
+
+        if (!isAnimating) {
+            setIsAnimating(true);
+            setTimeout(() => {
+                setCurrentShortIndex((prevIndex) => (prevIndex + 1) % shorts.length);
+                setIsAnimating(false);
+            }, 500);
+        }
+    }
+
+
+
     return (
         <div
             className='container__all__shorts'
             style={{
                 minHeight: `${windowHeight}px`
-            }}
-            onWheel={openModalComments ? null : handleScrollUp}
-            onTouchStart={openModalComments ? null : handleTouchStart}
-            onTouchMove={openModalComments ? null : handleTouchMove}
-        >
+            }}>
             {
                 headerAppearing && <Header />
             }
+            <div className={`container__shorts ${isAnimating ? 'transition-in' : ''}`}>
+                {shorts.length > 0 && currentShortIndex > 0 && <ShortsComponent short={shorts[currentShortIndex - 1]} />}
+                {shorts.length > 0 && <ShortsComponent short={shorts[currentShortIndex]} />}
+                {shorts.length > 0 && <ShortsComponent short={shorts[currentShortIndex + 1]} />}
+            </div>
             {
                 headerAppearing && (
                     <div className='container__button__pass__shorts'>
                         <button
                             id='voltar'
                             aria-label='Botão Voltar'
-                            onClick={openModalComments ? null : handlePreviousVideo}
+                            onClick={handlePreviousVideo}
                             style={currentVideoIndex === 0 ? { pointerEvents: 'none' } : {}}
                         >
                             <BsFillArrowUpSquareFill />
@@ -159,23 +153,15 @@ const Shorts = ({ initialShort }) => {
                         <button
                             id='proximo'
                             aria-label='Botão Próximo'
-                            onClick={openModalComments ? null : handleNextVideo}
-                            style={currentVideoIndex === videos.length - 1 ? { pointerEvents: 'none' } : {}}
+                            onClick={handleNextVideo}
+                        // style={currentVideoIndex === videos.length - 1 ? { pointerEvents: 'none' } : {}}
                         >
                             <BsFillArrowDownSquareFill />
                         </button>
                     </div>
                 )
             }
-            {/* <div className='header__shorts'>
-                    <BsArrowLeftShort />
-                    <span>Capishorts</span>
-                </div> */}
 
-            {
-                <ShortsComponent short={shorts[currentVideoIndex]} />
-
-            }
         </div>
     )
 }
