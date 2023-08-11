@@ -25,7 +25,7 @@ function Header({ userProfile }) {
 
     const verifyToken = () => {
         if (userProfile) {
-            return userProfile;
+            return true;
         } else {
             return false;
         }

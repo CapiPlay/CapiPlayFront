@@ -60,51 +60,80 @@ function Home() {
 
   const getMoreVideos = async (page) => {
     const moreVideos = await PlayerService.buscarVideosHomeReu(page);
+
     if (moreVideos) {
-      setVideosReu((prevVideos) => [...prevVideos, ...moreVideos]);
-      setCurrentPage(page);
+      const filteredVideos = moreVideos.filter(video => video.shorts === false);
+      if (filteredVideos.length > 0) {
+        setVideosReu((prevVideos) => [...prevVideos, ...filteredVideos]);
+        setCurrentPage(page);
+      }
     }
+
     setLoadingMoreVideos(false);
   };
 
   const getVideosReu = async () => {
-    const videos = await PlayerService.buscarVideosHomeReu(0)
-    console.log(videos)
-      if (videos) {
-        setVideosReu(videos)
+    const videos = await PlayerService.buscarVideosHomeReu(0);
+
+    if (videos) {
+      const filteredVideos = videos.filter(video => video.shorts === false);
+
+      if (filteredVideos.length > 0) {
+        setVideosReu(filteredVideos);
       } else {
-        setVideosReu([])
+        setVideosReu([]);
       }
-  } 
+    } else {
+      setVideosReu([]);
+    }
+  };
 
   const getVideosRec = async () => {
-    const videos = await PlayerService.buscarVideosHomeReu(0)
-    console.log(videos)
-      if (videos) {
-        setVideosRec(videos)
+    const videos = await PlayerService.buscarVideosHomeRec(0);
+
+    if (videos) {
+      const filteredVideos = videos.filter(video => video.shorts === false);
+
+      if (filteredVideos.length > 0) {
+        setVideosRec(filteredVideos);
       } else {
-        setVideosRec([])
+        setVideosRec([]);
       }
-  }
+    } else {
+      setVideosRec([]);
+    }
+  };
 
   const getVideosRet = async () => {
-    const videos = await PlayerService.buscarVideosHomeRet(0)
-    console.log(videos)
-      if (videos) {
-        setVideosRet(videos)
+    const videos = await PlayerService.buscarVideosHomeRet(0);
+
+    if (videos) {
+      const filteredVideos = videos.filter(video => video.shorts === false);
+
+      if (filteredVideos.length > 0) {
+        setVideosRet(filteredVideos);
       } else {
-        setVideosRet([])
+        setVideosRet([]);
       }
+    } else {
+      setVideosRet([]);
+    }
   }
 
   const getVideosRev = async () => {
-    const videos = await PlayerService.buscarVideosHomeRev(0)
-    console.log(videos)
-      if (videos) {
-        setVideosRev(videos)
+    const videos = await PlayerService.buscarVideosHomeRev(0);
+
+    if (videos) {
+      const filteredVideos = videos.filter(video => video.shorts === false);
+
+      if (filteredVideos.length > 0) {
+        setVideosRev(filteredVideos);
       } else {
-        setVideosRev([])
+        setVideosRev([]);
       }
+    } else {
+      setVideosRev([]);
+    }
   }
 
   const userProfile = () => {

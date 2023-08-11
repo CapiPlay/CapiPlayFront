@@ -16,7 +16,16 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 
 function Side_Bar() {
 
+    const [openModal, setOpenModal] = useState(0)
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+
+    function verify() {
+        if (openModal !== 0) {
+            return true
+        } else {
+            return false
+        }
+    }
 
     useEffect(() => {
         function handleResize() {

@@ -31,7 +31,7 @@ function Modal_profile({ profile }) {
 
     function verifyProfileImage() {
         if (profile) {
-            return profile.image
+            return profile.foto
         } else {
             return notFound
         }
