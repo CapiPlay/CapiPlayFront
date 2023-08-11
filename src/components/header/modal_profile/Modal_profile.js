@@ -2,8 +2,10 @@ import Aos from 'aos';
 import './Modal_profile.css';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+import notFound from '../../../assets/image/404_NotFound.png'
 
-function Modal_profile() {
+
+function Modal_profile({ profile }) {
     const [openModal, setOpenModal] = useState(0)
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
@@ -16,6 +18,22 @@ function Modal_profile() {
             return true
         } else {
             return false
+        }
+    }
+
+    function verifyProfile() {
+        if (profile) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    function verifyProfileImage() {
+        if (profile) {
+            return profile.image
+        } else {
+            return notFound
         }
     }
 
@@ -33,21 +51,36 @@ function Modal_profile() {
     const renderDesktopView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img onClick={() => setOpenModal(openModal + 1)} src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
+                <img src={verifyProfileImage()} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
-                    <div className='modal__profile__container__desktop'>
-                        <div className='modal__profile__itens__desktop'>
-                            <Link to="/profile" className='text__profile_modal'><p>Seu canal</p></Link>
-                            <div className='divider__profile__modal'></div>
-                            <Link to="" className='text__profile_modal'><p >Tema</p></Link>
-                            <div className='divider__profile__modal'></div>
-                            <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
-                            <div className='divider__profile__modal'></div>
-                            <Link to="" className='text__profile_modal'><p>Sair</p></Link>
+                    {verifyProfile() ? (
+                        <div className='modal__profile__container__desktop'>
+                            <div className='modal__profile__itens__desktop'>
+                                <Link to="/profile" className='text__profile_modal'><p>Seu canal</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="" className='text__profile_modal'><p >Tema</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="" className='text__profile_modal'><p>Sair</p></Link>
+                            </div>
                         </div>
-                    </div>
+                    ) : (
+                        <div className='modal__profile__container__desktop'>
+                            <div className='modal__profile__itens__desktop'>
+                                <Link to="/register" className='text__profile_modal'><p>Fazer Cadastro</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="/search" className='text__profile_modal'><p>Pesquisar</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="" className='text__profile_modal'><p>Tema</p></Link>
+                            </div>
+                        </div>
+                    )
+                    }
                 </div>
             }
         </>
@@ -56,21 +89,35 @@ function Modal_profile() {
     const renderTabletView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
+                <img src={verifyProfileImage()} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
-                    <div className='modal__profile__container__tablet'>
-                        <div className='modal__profile__itens__desktop'>
-                            <Link to="/player" className='text__profile_modal'><p>Seu canal</p></Link>
-                            <div className='divider__profile__modal'></div>
-                            <p>Tema</p>
-                            <div className='divider__profile__modal'></div>
-                            <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
-                            <div className='divider__profile__modal'></div>
-                            <Link to="" className='text__profile_modal'><p>Sair</p></Link>
+                    {verifyProfile() ? (
+                        <div className='modal__profile__container__tablet'>
+                            <div className='modal__profile__itens__desktop'>
+                                <Link to="/player" className='text__profile_modal'><p>Seu canal</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <p>Tema</p>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="" className='text__profile_modal'><p>Sair</p></Link>
+                            </div>
                         </div>
-                    </div>
+                    ) : (
+                        <div className='modal__profile__container__tablet'>
+                            <div className='modal__profile__itens__desktop'>
+                                <Link to="/register" className='text__profile_modal'><p>Fazer Cadastro</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="/search" className='text__profile_modal'><p>Pesquisar</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="" className='text__profile_modal'><p>Tema</p></Link>
+                            </div>
+                        </div>
+                    )}
                 </div>
             }
 
@@ -80,21 +127,35 @@ function Modal_profile() {
     const renderMobileView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img src="https://inte.upc.edu/en/shared/img/pingu.jpeg/@@images/898e6d56-4779-44f8-904b-8c1878a7a264.jpeg" className='container__perfilImage' />
+                <img src={verifyProfileImage()} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
-                    <div className='modal__profile__container__mobile'>
-                        <div className='modal__profile__itens__desktop'>
-                            <Link to="/player" className='text__profile_modal'><p>Seu canal</p></Link>
-                            <div className='divider__profile__modal'></div>
-                            <Link to="" className='text__profile_modal'><p>Tema</p></Link>
-                            <div className='divider__profile__modal'></div>
-                            <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
-                            <div className='divider__profile__modal'></div>
-                            <Link to="" className='text__profile_modal'><p>Sair</p></Link>
+                    {verifyProfile() ? (
+                        <div className='modal__profile__container__mobile'>
+                            <div className='modal__profile__itens__desktop'>
+                                <Link to="/player" className='text__profile_modal'><p>Seu canal</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="" className='text__profile_modal'><p>Tema</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="" className='text__profile_modal'><p>Sair</p></Link>
+                            </div>
                         </div>
-                    </div>
+                    ) : (
+                        <div className='modal__profile__container__mobile'>
+                            <div className='modal__profile__itens__desktop'>
+                                <Link to="/register" className='text__profile_modal'><p>Fazer Cadastro</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="/search" className='text__profile_modal'><p>Pesquisar</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="" className='text__profile_modal'><p>Tema</p></Link>
+                            </div>
+                        </div>
+                    )}
                 </div>
             }
         </>
