@@ -1,12 +1,13 @@
-.select__group {
+.radio__group {
     position: relative;
     
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
-.select__control {
+.radio__control {
     height: 3rem;
     width: 100%;
     font-size: 16px;
@@ -24,27 +25,27 @@
     justify-content: center;
 }
 
-.select__control:focus {
+.radio__control:focus {
     border-color: var(--purple);
 }
 
-.select__control:focus+label {
+.radio__control:focus+label {
     transform: translateY(-200%);
     font-size: 16px;
     color: var(--lightpurple);
 }
 
-.select__control::placeholder {
+.radio__control::placeholder {
     color: transparent;
 }
 
-.select__active {
+.radio__active {
     transform: translateY(-200%);
     font-size: 16px;
     color: var(--lightpurple);
 }
 
-.select__label__input {
+.radio__label__input {
     position: absolute;
     left: 0;
     font-size: 16px;
