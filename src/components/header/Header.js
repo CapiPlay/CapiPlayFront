@@ -140,7 +140,7 @@ function Header({ userProfile }) {
                             <>
                                 {lastSearches.map((lastSearch) => (
                                     <div className="searches__hitoric__container">
-                                        <MdRestartAlt className='icons__search__desktop'/>
+                                        <MdRestartAlt className='icons__search__desktop' />
                                         <span>{lastSearch}</span>
                                     </div>
                                 ))}
@@ -149,7 +149,7 @@ function Header({ userProfile }) {
                             <>
                                 {searches.map((search) => (
                                     <div className="searches__hitoric__container">
-                                        <BiSearchAlt2 className='icons__search__desktop'/>
+                                        <BiSearchAlt2 className='icons__search__desktop' />
                                         <span>{search}</span>
                                     </div>
                                 ))}

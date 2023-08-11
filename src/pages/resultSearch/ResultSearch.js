@@ -22,6 +22,20 @@ const ResultSearch = () => {
         setSearchValue(searchParams);
     }, [searchParams])
 
+    // está sendo feita 
+    
+    // const videos = [
+        
+    // ]
+
+    // const renderVideosDesktop = () => {
+    //     return (
+    //         <div className="container__videos__result">
+    //             <div></div>
+    //             <div></div>
+    //         </div>
+    //     )
+    // }
 
     return (
         <div className="container__result__search">
@@ -30,7 +44,7 @@ const ResultSearch = () => {
                 functionBack={() => nav("/")} />
             <div className="tags__carousel__search">
             </div>
-                <TagsCarousel />
+            <TagsCarousel />
             <div className="container__filter" onClick={() => { setOpenFilter(!openFilter); setDefaultFilter(true) }}>
                 <span>Filtros</span>
                 <FiFilter />
@@ -65,9 +79,9 @@ const ResultSearch = () => {
                 </table>
             </div>
             <div className="container__videos__result">
-                <Video_card />
-                <Video_card />
-                <Video_card />
+                <Video_card/>
+                <Video_card/>
+                <Video_card/>
             </div>
         </div>
     )
