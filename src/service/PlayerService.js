@@ -32,7 +32,7 @@ const PlayerService = {
     }, 
 
     buscarVideosHomeReu: async (page) => {
-        const randomPageSize = [6, 9][Math.floor(Math.random() * 3)];
+        const randomPageSize = [6, 9][Math.floor(Math.random() * 2)];
         try {
             const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" +randomPageSize);
             return response.data.content;
