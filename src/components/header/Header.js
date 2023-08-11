@@ -3,24 +3,75 @@ import Modal_menu from '../../pages/home/modal_menu/modal_menu';
 import { TbUpload } from 'react-icons/tb'
 import logo from '../../assets/image/Logo.png'
 import { AiOutlineSearch } from 'react-icons/ai'
+import { MdRestartAlt } from "react-icons/md"
 import './Header.css'
 
 import Search from '../../pages/search/Search'
 
+
 import Modal_profile from './modal_profile/Modal_profile';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 //imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
 //ser passada para o header para ser exibida 
 function Header({ userProfile }) {
 
-
     const [search, setSearch] = useState(false);
+    const [searchDesktop, setSearchDesktop] = useState(false);
+    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+
+    // Campo de pesquisa em Desktop
+    const nav = useNavigate();
+    const location = useLocation();
+    const urlSearchParams = new URLSearchParams(location.search);
+    const searchParams = urlSearchParams.get("q");
+    const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : "");
+
     const handleClick = () => {
         setSearch(!search);
     }
 
-    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+    const handleSearch = () => {
+        nav(`/result-search?search=${encodeURIComponent(valueInput)}`);
+        console.log("search: ")
+    }
+
+    const verifyKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    }
+
+    const handleChange = (e) => {
+        setValueInput(e.target.value);
+    }
+
+    // listas temporárias
+    const [lastSearches, setLastSearches] = useState(([
+        "Benefícios da meditação para a saúde",
+        "Receita de bolo de cenoura com cobertura de chocolate",
+        "Principais destinos turísticos na Europa",
+        "História da America Latina",
+        "Receita de pão de queijo",
+        "Livros românticos",
+        "Eu a patroa e as criancas",
+        "React icons como funciona",
+        "Torta de frango receita",
+        "Livros de aventura 2023",
+    ]));
+
+    const [searches, setSearches] = useState(([
+        "Filme como treinar seu dragão é bom?",
+        "Pica - Pau completo dublado",
+        "Como fazer uma torta de abacaxi com calda de côco?",
+        "História da America Latina",
+        "Receita de pão de queijo",
+        "Livros românticos",
+        "Eu a patroa e as criancas",
+        "React icons como funciona",
+        "Torta de frango receita",
+        "Livros de aventura 2023"
+    ]));
 
     const verifyToken = () => {
         if (userProfile) {
@@ -64,11 +115,28 @@ function Header({ userProfile }) {
     );
 
     const renderDesktopView = () => (
-        <div className='header__container'>
+        <div className='header__container' >
             <div></div>
             <div className='header__input__container'>
-                <input className='header__input__text__search' placeholder='Pesquisar' />
+                <input
+                    className='header__input__text__search'
+                    placeholder='Pesquisar'
+                    onFocus={() => setSearchDesktop(true)}
+                    onBlur={() => setSearchDesktop(false)}
+                    value={valueInput}
+                    onKeyPress={verifyKeyPress}
+                    onChange={handleChange} />
                 <AiOutlineSearch />
+                {searchDesktop &&
+                    <div className="container__search__desktop">
+                        {lastSearches.map((search) => (
+                            <div className="searches__hitoric__container">
+                                <MdRestartAlt size={18} color={"var(--darkblue)"} opacity={.6} />
+                                <span>{search}</span>
+                            </div>
+                        ))}
+                    </div>
+                }
             </div>
             <div className='header__info'>
                 <div>

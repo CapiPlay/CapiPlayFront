@@ -35,7 +35,7 @@
 
     cursor: pointer;
 
-    transition: .3s ease-in-out;
+    /* transition: .3s ease-in-out; */
 }
 
 .header__menu__icon svg:hover {
@@ -46,12 +46,14 @@
 }
 
 .header__input__container {
+    position: relative;
     width: 100%;
     height: 100%;
 
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 5%;
 }
 
 .header__input__container input {
@@ -61,6 +63,11 @@
 
     border-radius: 10px;
     border: none;
+    background-color: var(--whitesmoke);
+}
+
+.header__input__container>input:focus {
+    outline: var(--lightpurple) 2px solid;
 }
 
 .header__input__container svg {
@@ -69,15 +76,15 @@
 
     cursor: pointer;
 
-    transition: 0.3s ease-in-out;
-    transform: translate(1rem);
+    /* transition: 0.3s ease-in-out;
+    transform: translate(1rem); */
 }
 
-.header__input__container svg:hover {
+/* .header__input__container svg:hover {
     color: var(--darkpurple);
 
     transform: translate(-1rem);
-}
+} */
 
 .header__info {
     width: 100%;
@@ -97,7 +104,7 @@
     width: 2rem;
     height: 1.5rem;
 
-    transition: .3s ease-in-out;
+    /* transition: .3s ease-in-out; */
 
     cursor: pointer;
 }
@@ -157,4 +164,34 @@
 .upload__icon__header {
     text-decoration: none;
     color: var(--lightpurple);
+}
+
+/* Campo de pesquisa em Desktop */
+.container__search__desktop {
+    position: absolute;
+    top: 90%;
+    left: 0;
+    z-index: 200;
+    width: 91%;
+    height: 20rem;
+    background-color: var(--whitesmoke);
+    border-radius: 10px;
+}
+
+.searches__hitoric__container{
+    margin: 1.2%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.searches__hitoric__container:hover{
+    background-color: var(--beige);
+}
+
+.searches__hitoric__container>span{
+    margin-left: 1%;
+    font-size: 14px;
+    color: var(--darkpurple);
+    user-select: none;
 }

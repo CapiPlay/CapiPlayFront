@@ -19,7 +19,6 @@ const Search = () => {
     const urlSearchParams = new URLSearchParams(location.search);
     const searchParams = urlSearchParams.get("q");
     const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : "");
-    console.log(valueInput);
 
     const [back, setBack] = useState(false);
 
