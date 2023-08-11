@@ -78,7 +78,7 @@ function Home() {
   } 
 
   const getVideosRec = async () => {
-    const videos = await PlayerService.buscarVideosHomeReu(0)
+    const videos = await PlayerService.buscarVideosHomeRec(0)
     console.log(videos)
       if (videos) {
         setVideosRec(videos)
