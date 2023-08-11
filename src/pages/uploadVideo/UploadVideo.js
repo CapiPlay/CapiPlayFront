@@ -141,7 +141,6 @@ function UploadVideo() {
                 onChange={handleInputChange}
                 name="categoria"
                 required={true}
-                enable={true}
               />
             </div>
 

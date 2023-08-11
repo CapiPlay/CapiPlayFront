@@ -1,19 +1,25 @@
+// style
 import './Upload.css'
 
+// react
+import { Link } from 'react-router-dom';
 import { useState, useRef } from "react"
 import { HiUpload } from 'react-icons/hi';
 import { BsFillFastForwardFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 
-import HeaderUpload from './headerUpload/HeaderUpload';
+// componentes
 import Button from "../../components/button/Button";
+import HeaderUpload from './headerUpload/HeaderUpload';
 import InputFile from '../../components/inputFile/InputFile';
+
+// imagens
+import Preview from '../../assets/image/preview_video.png'
 
 function Upload() {
 
     const [isVideo, setIsVideo] = useState(true)
     const [image, setImage] = useState()
-    const imagePreviewRef = useRef(null)
+    const imagePreviewRef = useRef(Preview)
 
     const [miniatura, setMiniatura] = useState()
 
@@ -100,7 +106,7 @@ function Upload() {
                                 <img
                                     id="upload__image__preview"
                                     ref={imagePreviewRef}
-                                    src="#"
+                                    src={Preview}
                                     alt="Preview da Imagem" />
                                 <InputFile
                                     label={"Selecionar arquivo"}

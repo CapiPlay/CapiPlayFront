@@ -98,6 +98,7 @@
     background-color: var(--purple);
     color: var(--whitesmoke);
     margin-bottom: 25px;
+    cursor: pointer;
 }
 
 .upload__video__tags__scroll {

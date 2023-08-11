@@ -68,7 +68,6 @@
 }
 
 #upload__image__preview {
-    display: none;
     width: 45vw; 
     height: 50vhvh;
     border-radius: 1rem;
@@ -155,8 +154,4 @@
     border-radius: 10px;
     border: 0;
     height: 3rem;
-}
-
-.upload__inputfile {
-    
 }
