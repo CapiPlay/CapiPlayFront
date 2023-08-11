@@ -195,3 +195,8 @@
     color: var(--darkpurple);
     user-select: none;
 }
+
+.icons__search__desktop{
+    color: var(--darkblue);
+    opacity: .6;
+}

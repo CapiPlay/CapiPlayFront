@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
+
+// componentes
 import Modal_menu from '../../pages/home/modal_menu/modal_menu';
-import { TbUpload } from 'react-icons/tb'
 import logo from '../../assets/image/Logo.png'
+import Search from '../../pages/search/Search'
+
+// ícones
+import { TbUpload } from 'react-icons/tb'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { MdRestartAlt } from "react-icons/md"
+import { BiSearchAlt2 } from "react-icons/bi"
+
 import './Header.css'
 
-import Search from '../../pages/search/Search'
 
 
 import Modal_profile from './modal_profile/Modal_profile';
@@ -129,12 +135,26 @@ function Header({ userProfile }) {
                 <AiOutlineSearch />
                 {searchDesktop &&
                     <div className="container__search__desktop">
-                        {lastSearches.map((search) => (
-                            <div className="searches__hitoric__container">
-                                <MdRestartAlt size={18} color={"var(--darkblue)"} opacity={.6} />
-                                <span>{search}</span>
-                            </div>
-                        ))}
+                        {valueInput.trim() === ''
+                            ?
+                            <>
+                                {lastSearches.map((lastSearch) => (
+                                    <div className="searches__hitoric__container">
+                                        <MdRestartAlt className='icons__search__desktop'/>
+                                        <span>{lastSearch}</span>
+                                    </div>
+                                ))}
+                            </>
+                            :
+                            <>
+                                {searches.map((search) => (
+                                    <div className="searches__hitoric__container">
+                                        <BiSearchAlt2 className='icons__search__desktop'/>
+                                        <span>{search}</span>
+                                    </div>
+                                ))}
+                            </>
+                        }
                     </div>
                 }
             </div>
