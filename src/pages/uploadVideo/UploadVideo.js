@@ -97,7 +97,18 @@ function UploadVideo() {
       setVideo({ ...video, tags: updatedTags })
       setTag("")
     }
-  };
+  }
+
+  const deletarTag = (index) => {
+    const updatedTags = [...tags];
+    updatedTags.splice(index, 1);
+    setTags(updatedTags);
+
+    setVideo((prevVideo) => ({
+      ...prevVideo,
+      tags: updatedTags,
+    }))
+  }
 
   const enviarVideo = (event) => {
     event.preventDefault()
@@ -189,7 +200,10 @@ function UploadVideo() {
                 {tags.length != 0 &&
                   <div className='upload__video__tags__scroll'>
                     {tags.map((tag, index) => (
-                      <div className='upload__video__tag' key={index}>{tag}</div>
+                      <div className='upload__video__tag' key={index}>
+                        {tag}
+                        <button className='upload__video__tag__button__delete' onClick={() => deletarTag(index)}>x</button>
+                      </div>
                     ))}
                   </div>
                 }

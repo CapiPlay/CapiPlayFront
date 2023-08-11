@@ -90,13 +90,24 @@ function UploadShorts() {
   }
 
   const renderizarNovaTag = () => {
-    if (tag !== "") {
+    if (tag.trim() !== "") {
       setTags([...tags, tag])
       const updatedTags = [...video.tags, tag]
       setVideo({ ...video, tags: updatedTags })
       setTag("")
     }
-  };
+  }
+
+  const deletarTag = (index) => {
+    const updatedTags = [...tags];
+    updatedTags.splice(index, 1);
+    setTags(updatedTags);
+
+    setVideo((prevVideo) => ({
+      ...prevVideo,
+      tags: updatedTags,
+    }))
+  }
 
   const enviarShorts = (event) => {
     event.preventDefault()
@@ -110,10 +121,17 @@ function UploadShorts() {
     // window.location.reload()
   }
 
+  const handleEnterPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      renderizarNovaTag();
+    }
+  };
+
   return (
     <>
       <div className='upload__shorts__page'>
-      <HeaderUpload caminho={"/upload"} />
+        <HeaderUpload caminho={"/upload"} />
         <div className='upload__shorts__container'>
           <p>Informações do shorts</p>
           <div className='upload__shorts__container__rows'>
@@ -145,6 +163,7 @@ function UploadShorts() {
                         type={"text"}
                         value={tag}
                         onChange={handleTagChange}
+                        onKeyDown={handleEnterPress}
                         name='tag'
                         required={true}
                       />
@@ -160,7 +179,10 @@ function UploadShorts() {
                 {tags.length != 0 &&
                   <div className='upload__shorts__tags__scroll'>
                     {tags.map((tag, index) => (
-                      <div className='upload__shorts__tag' key={index}>{tag}</div>
+                      <div className='upload__shorts__tag' key={index}>
+                        {tag}
+                        <button className='upload__shorts__tag__button__delete' onClick={() => deletarTag(index)}>x</button>
+                      </div>
                     ))}
                   </div>
                 }

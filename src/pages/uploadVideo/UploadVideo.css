@@ -124,6 +124,11 @@
 }
 
 .upload__video__tag {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.5rem;
     width: auto;
     height: 1rem;
     padding: 0.7rem;
@@ -131,6 +136,13 @@
     text-align: center;
     border-radius: 20px;
     background-color: var(--purple);
+}
+
+.upload__video__tag__button__delete {
+    background-color: transparent;
+    color: var(--darkpurple);
+    cursor: pointer;
+    border: 0;
 }
 
 .upload__video__child__friendly__box {
