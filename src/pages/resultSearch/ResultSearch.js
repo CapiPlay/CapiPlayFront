@@ -6,6 +6,7 @@ import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 import Video_card from "../../components/video_card/Video_card";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { vi } from "date-fns/locale";
 const ResultSearch = () => {
 
     const [openFilter, setOpenFilter] = useState(false);
@@ -24,9 +25,13 @@ const ResultSearch = () => {
 
     // está sendo feita 
     
-    // const videos = [
-        
-    // ]
+    const videos = [
+        {
+            caminhos: "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R230X388_15816350250600018926.png", 
+            titulo: "titulo", 
+            uuid: "1"
+        }
+    ]
 
     // const renderVideosDesktop = () => {
     //     return (
@@ -79,9 +84,9 @@ const ResultSearch = () => {
                 </table>
             </div>
             <div className="container__videos__result">
-                <Video_card/>
-                <Video_card/>
-                <Video_card/>
+                {videos.map((video) => (
+                    <Video_card video={video}/>
+                ))}
             </div>
         </div>
     )
