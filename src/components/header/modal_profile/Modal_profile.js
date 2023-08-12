@@ -22,7 +22,7 @@ function Modal_profile({ profile }) {
     }
 
     function verifyProfile() {
-        if (profile) {
+        if (profile !== undefined) {
             return true
         } else {
             return false
@@ -30,8 +30,8 @@ function Modal_profile({ profile }) {
     }
 
     function verifyProfileImage() {
-        if (profile) {
-            return profile.foto
+        if (profile !== undefined) {
+            return notFound
         } else {
             return notFound
         }

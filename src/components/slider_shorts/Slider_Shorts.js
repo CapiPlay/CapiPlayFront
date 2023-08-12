@@ -118,7 +118,7 @@ function Slider_Shorts() {
     const renderDesktopView = () => (
         <Slider {...settingsDesk}>
             {videosRec.map((video) => (
-                <Shortcard key={video.uuid} />
+                <Shortcard key={video.uuid} short={video} />
             ))}
         </Slider>
     );
@@ -126,7 +126,7 @@ function Slider_Shorts() {
     const renderTabletView = () => (
         <Slider {...settingsTablet}>
             {videosRec.map((video) => (
-                <Shortcard key={video.uuid} />
+                <Shortcard key={video.uuid} short={video} />
             ))}
         </Slider>
     );
@@ -134,7 +134,7 @@ function Slider_Shorts() {
     const renderMobileView = () => (
         <Slider {...settingsMobile}>
             {videosRec.map((video) => (
-                <Shortcard key={video.uuid} />
+                <Shortcard key={video.uuid} short={video} />
             ))}
         </Slider>
     );

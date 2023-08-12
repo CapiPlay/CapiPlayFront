@@ -25,6 +25,12 @@ const Shortcard = ({ short }) => {
         return <div>No Video Data</div>;
     }
 
+    short = {
+        img: "https://i0.wp.com/techwek.com/wp-content/uploads/2021/12/fotos-de-papel-de-parede-para-celular-masculino-3d.png?fit=512%2C1024&ssl=1",
+        title: "O que é ReactJS? #HipstersPontoTube",
+        views: 1000
+    }
+
     const renderMobileView = () => (
         <div className="container__short__card">
             <Link to={`/player/${short.uuid}`}>
