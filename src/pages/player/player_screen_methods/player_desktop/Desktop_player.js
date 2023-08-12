@@ -10,6 +10,7 @@ import Comments_component from '../../player_components/comments_componet/Commen
 import Video_card from '../../../../components/video_card/Video_card'
 import Header from '../../../../components/header/Header'
 import PlayerService from '../../../../service/PlayerService'
+import Video_player_contructor from '../../video_player_contructor/Video_player_contructor'
 
 function Desktop_player({ video }) {
     const [videos, setVideos] = useState([])
@@ -27,10 +28,8 @@ function Desktop_player({ video }) {
             <div className='space'></div>
             <div className='things'>
                 <div>
-                    <div className='video__container'>
-                        <video controls className='video__player__desktop' poster={"http://localhost:7000/api/video/static/" + video.caminhos[3]}  key={video.uuid}>
-                            <source src={"http://localhost:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
-                        </video>
+                    <div>
+                        <Video_player_contructor video={video}/>
                     </div>
                     <div className='video__title'>
                         <p>{video.titulo}</p>

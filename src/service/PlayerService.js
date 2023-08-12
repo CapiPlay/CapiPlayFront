@@ -25,6 +25,7 @@ const PlayerService = {
         let size = 10
         try {
             const response = await axios.get("/video/buscar-resumido?page=" + page + "&size=" + size);
+            console.log(response.data.content)
             return response.data.content;
         } catch (error) {
             console.error(error);
@@ -42,7 +43,8 @@ const PlayerService = {
         }
         try {
             const response = await axios.get("/video/buscar-resumido?page=" + page + "&size=" + size);
-            return response.data.content;
+            console.log(response.data)
+            return response.data;
         } catch (error) {
             console.error(error);
         }

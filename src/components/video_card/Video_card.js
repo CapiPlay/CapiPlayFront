@@ -6,7 +6,7 @@ import img_miniatura from "../../assets/image/img_base_miniatura.png"
 import PlayerService from '../../service/PlayerService';
  
 function Video_card({video}) {
-    
+
     if (!video) {
         // Handle the case when the video is undefined or null
         return <div>No Video Data</div>;
