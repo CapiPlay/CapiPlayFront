@@ -8,14 +8,6 @@ const ShortsService = {
         } catch (err) {
             console.error(err)
         }
-    },
-    buscarShorts: async (shorts) => {
-        try {
-            const response = await axios.get("/api/video/static/" + shorts)
-            return response.data
-        } catch (err) {
-            console.error(err)
-        }
     }
 }
 

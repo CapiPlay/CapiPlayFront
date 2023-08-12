@@ -11,15 +11,16 @@ import CommentsComponent from '../../../components/commentsComponent/CommentsCom
 import { BiLike, BiDislike, BiCommentDetail, BiSolidLike, BiSolidDislike } from "react-icons/bi"
 
 //hooks
-import React, { useRef, useState } from 'react'
-import { useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+import { useSelector, useDispatch } from "react-redux"
+import { setListShorts } from "../../../store/features/shorts/shortsSlice"
 
-
-const ShortsComponent = ({ short }) => {
-
-    console.log(short)
+const ShortsComponent = ({ short, isClicking, isScrolling }) => {
 
     const targetRef = useRef(null)
+    const dispatch = useDispatch()
+    const shorts = useSelector((state) => state.shorts.listShorts)
+
     //transição entre os vídeos
     const [transitioning, setTransitioning] = useState(false)
 
@@ -63,6 +64,9 @@ const ShortsComponent = ({ short }) => {
         const callback = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+
+                    dispatch(setListShorts(short.uuid, null, shorts))
+
                     setIsVideoInView(true)
                     setTimeout(() => {
                         entry.target.play()
@@ -94,8 +98,8 @@ const ShortsComponent = ({ short }) => {
     }
 
     return (
-        <div className={`container__video`} >
-            <video src={getPathShorts(short)} ref={targetRef} loop muted={isMuted} {...(isVideoInView && { autoPlay: true })} />
+        <div className={`container__video slide`} >
+            <video src={getPathShorts(short.caminhos[5])} ref={targetRef} loop muted={isMuted} {...(isVideoInView && { autoPlay: true })} />
 
             {/* <button
                     onClick={toggleMute}
