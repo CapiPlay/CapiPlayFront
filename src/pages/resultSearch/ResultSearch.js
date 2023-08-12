@@ -89,9 +89,9 @@ const ResultSearch = () => {
                 </table>
             </div>
             <div className="container__videos__result">
-                {videos.map((video) => (
-                    <Video_card video={video} />
-                ))}
+                {/* {videos.map((video) => (
+                    ))} */}
+                    <Video_card video={videos[0]} />
             </div>
         </div>
     )
