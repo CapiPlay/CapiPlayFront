@@ -28,9 +28,19 @@ function Desktop_player({ video }) {
             <div className='space'></div>
             <div className='things'>
                 <div>
-                    <div>
-                        <Video_player_contructor video={video}/>
+                    <div className='video__container'>
+                        <video 
+                            src={"http://localhost:7000/api/video/static/" + video.caminhos[5]} 
+                            type="video/mp4" 
+                            className='video__player__desktop'
+                            poster={"http://localhost:7000/api/video/static/" + video.caminhos[3]}  
+                            key={video.uuid}
+                            controls
+                        />
                     </div>
+                    {/* <div>
+                        <Video_player_contructor video={video}/>
+                    </div> */}
                     <div className='video__title'>
                         <p>{video.titulo}</p>
                     </div>
