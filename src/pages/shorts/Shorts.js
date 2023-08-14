@@ -93,7 +93,6 @@ const Shorts = () => {
                 newShorts.push(data)
             }
 
-            // setShorts((prevShorts) => [...prevShorts, ...newShorts])
             dispatch(setListShorts(null, newShorts))
         }
 
