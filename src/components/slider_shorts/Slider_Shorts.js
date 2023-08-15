@@ -42,6 +42,30 @@ function Slider_Shorts() {
         slidesToShow: 5,
         slidesToScroll: 1,
         swipeToSlide: true,
+        autoplay: true,
+        dots: true,
+        appendDots: dots => (
+            <div
+              style={{
+                backgroundColor: "#ddd",
+                borderRadius: "10px",
+                padding: "10px"
+              }}
+            >
+              <ul style={{ margin: "0px" }}> {dots} </ul>
+            </div>
+          ),
+          customPaging: i => (
+            <div
+              style={{
+                width: "30px",
+                color: "blue",
+                border: "1px blue solid"
+              }}
+            >
+              {i + 1}
+            </div>
+          ),
         infinite: true,
         arrows: false,
         responsive: [
