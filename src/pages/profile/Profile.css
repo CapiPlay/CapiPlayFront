@@ -13,20 +13,22 @@
 .container__video__cards {
     padding-top: 4rem;
     align-items: center;
+}
+/* Mobile */
+.profile__container__picture {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    align-items: center;
+    padding-bottom: 2rem;
+    gap: 1rem;
 }
 
 .profile__pic {
     margin: 0 auto;
 }
 
-.container__picture__profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+.profile__name {
+    color: var(--lightpurple);
 }
 
 .profile__subscribe__button {
@@ -37,50 +39,60 @@
     border-radius: 1rem;
 }
 
-.id__profile {
+.profile__id {
     font-size: 13px;
     color: var(--lightpurple);
 }
 
-.profile__name {
-    color: var(--lightpurple);
-}
-
-.details__profile {
+.profile__details {
     display: flex;
     flex-direction: row;
     gap: 1rem;
     font-size: 13px;
 }
-.description__profile{
+
+.profile__description {
     width: 83%;
     text-align: justify;
     font-size: 13px;
+    display: contents;
 }
 
-/* Desktop */
-
-.container__slider__base__desktop {
-    padding-top: 4rem;
-}
-
-.container__video__cards__desktop {
-    padding-top: 4rem;
-    align-items: center;
+.profile__box__videos {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 2rem;
     gap: 2rem;
 }
 
-.profile__pic__desktop {
-    margin: 0 auto;
+/* Desktop */
+.profile__container__picture__desktop {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10rem;
+    padding-bottom: 2rem;
+    gap: 2rem;
 }
 
-.container__picture__profile__desktop {
+
+
+.profile__box__desktop {
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+}
+
+.profile__box__name_subscribe__desktop {
+    display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 1rem;
+}
+
+.profile__name__desktop {
+    color: var(--lightpurple);
 }
 
 .profile__subscribe__button__desktop {
@@ -91,23 +103,29 @@
     border-radius: 1rem;
 }
 
-.id__profile__desktop {
+.profile__id__desktop {
     font-size: 13px;
     color: var(--lightpurple);
 }
 
-.profile__name__desktop {
-    color: var(--lightpurple);
-}
-
-.details__profile__desktop {
+.profile__details__desktop {
     display: flex;
     flex-direction: row;
     gap: 1rem;
     font-size: 13px;
 }
-.description__profile__desktop {
+
+.profile__description__desktop {
     width: 83%;
     text-align: justify;
     font-size: 13px;
+}
+
+.profile__box__videos__desktop {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding-top: 2rem;
+    padding-left: 10%;
+    gap: 2rem;
 }
