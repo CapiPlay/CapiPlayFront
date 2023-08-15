@@ -38,7 +38,7 @@ function UploadShorts() {
     shorts: true,
     video: "",
     miniatura: miniaturaUrl,
-    kids: ""
+    restrito: ""
   })
 
   const categorias = [
@@ -192,11 +192,11 @@ function UploadShorts() {
                 <p>Este shorts é destinado para crianças?</p>
                 <div className='upload__shorts__child__friendly__options'>
                   <div className='upload__shorts__child__friendly__option'>
-                    <input type='radio' name='kids' value={true} required={true} onChange={handleInputChange} />
+                    <input type='radio' name='restrito' value={false} required={true} onChange={handleInputChange} />
                     <label>Sim, é destinado para crianças</label>
                   </div>
                   <div className='upload__shorts__child__friendly__option'>
-                    <input type='radio' name='kids' value={false} required={true} onChange={handleInputChange} />
+                    <input type='radio' name='restrito' value={true} required={true} onChange={handleInputChange} />
                     <label>Não é destinado para crianças</label>
                   </div>
                 </div>
