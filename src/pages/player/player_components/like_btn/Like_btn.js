@@ -9,23 +9,18 @@ function Like_btn({video}) {
 
   const handleToggleLikeBtn = () => {
     setLikeBtn(!like_btn);
-  //   if(curtido){
-  //     EngajamentoService.criar(
-  //         {
-  //             usuarioId: 1, // usuarioId
-  //             // videoId: video.uuid,
-  //             curtida: 1
-  //         }
-  //     )
-  // }else{
-  //     EngajamentoService.criar(
-  //         {
-  //             usuarioId: 1, // usuarioId
-  //             // videoId: video.uuid,
-  //             curtida: 0
-  //         }
-  //     )
-  // }
+    if(like_btn){
+      EngajamentoService.criar(
+        {
+            usuarioId: 1, // usuarioId
+            videoId: video.uuid,
+            curtida: true
+        }
+      )
+    }else{
+      EngajamentoService.criar(null)
+    }
+    
   } 
 
   // useEffect(() => {

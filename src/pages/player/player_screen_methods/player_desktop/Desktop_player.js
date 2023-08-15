@@ -10,7 +10,7 @@ import Comments_component from '../../player_components/comments_componet/Commen
 import Video_card from '../../../../components/video_card/Video_card'
 import Header from '../../../../components/header/Header'
 import PlayerService from '../../../../service/PlayerService'
-import Video_player_contructor from '../../video_player_contructor/Video_player_contructor'
+// import Video_player_contructor from '../../video_player_contructor/Video_player_contructor'
 
 function Desktop_player({ video }) {
     const [videos, setVideos] = useState([])
