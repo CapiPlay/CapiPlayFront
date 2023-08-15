@@ -31,7 +31,7 @@ function Upload() {
     }
 
     const handleFileChange = (e) => {
-        // localStorage.setItem("thumbnail", image)
+
         setMiniatura(e.target.files[0])
         const file = e.target.files[0]
         if (file) {
@@ -118,14 +118,12 @@ function Upload() {
                             <div className='upload__next__buttons__box'>
                                 <Button
                                     label={"Cancelar"}
-                                    // onClick={}
                                     type={"submit"}
                                     principal={false}
                                 />
                                 <Link className='upload__next__button__link' to={`/upload-video?miniatura=${encodeURIComponent(miniatura)}`}>
                                     <Button
                                         label={"Próximo"}
-                                        // onClick={}
                                         type={"submit"}
                                         principal={true}
                                     />
@@ -143,19 +141,6 @@ function Upload() {
                                     alt="Preview da Imagem" />
 
                                 <div className='upload__box__all__buttons__shorts'>
-                                    {/* <div className='upload__inputfile__box'>
-                                        <label htmlFor="upload__inputfile">Selecione um arquivo:</label>
-                                        <input
-                                            id='upload__inputfile'
-                                            className='upload__inputfile'
-                                            type="file"
-                                            onChange={handleFileChange}
-                                            label={"lala arquivo"}
-                                            name="video"
-                                            file={image}
-                                            accept="image/png" />
-                                    </div> */}
-
                                     <InputFile
                                         label={"Selecionar arquivo"}
                                         radius={"10px"}
@@ -165,14 +150,12 @@ function Upload() {
                                     <div className='upload__next__buttons__box__shorts'>
                                         <Button
                                             label={"Cancelar"}
-                                            // onClick={}
                                             type={"submit"}
                                             principal={false}
                                         />
                                         <Link className='upload__next__button__link' to={`/upload-shorts?miniatura=${encodeURIComponent(miniatura)}`}>
                                             <Button
                                                 label={"Próximo"}
-                                                // onClick={}
                                                 type={"submit"}
                                                 principal={true}
                                             />
@@ -184,7 +167,6 @@ function Upload() {
                     }
                 </div>
             </div>
-
         </>
     )
 }
