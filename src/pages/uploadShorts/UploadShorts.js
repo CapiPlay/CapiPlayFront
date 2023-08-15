@@ -151,7 +151,6 @@ function UploadShorts() {
                 onChange={handleInputChange}
                 name="categoria"
                 required={true}
-                enable={true}
               />
 
               <div className='upload__shorts__box__input'>
