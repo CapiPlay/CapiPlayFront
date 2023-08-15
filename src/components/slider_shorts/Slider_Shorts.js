@@ -2,10 +2,39 @@ import React, { useEffect, useState } from 'react'
 import './Slider_Shorts.css'
 import Slider from 'react-slick';
 import Shortcard from '../short_card/ShortCard';
+import PlayerService from '../../service/PlayerService';
 
 function Slider_Shorts() {
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+    const [videosRec, setVideosRec] = useState([])
+
+    useEffect(() => {
+        getVideosRec();
+        function handleResize() {
+            setScreenSize({ width: window.innerWidth, height: window.innerHeight });
+        }
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    const getVideosRec = async () => {
+        const videos = await PlayerService.buscarVideosHomeRec(0);
+        console.log(videos);
+        if (videos) {
+            const filteredVideos = videos.filter(video => video.shorts === true);
+            if (filteredVideos.length > 0) {
+                setVideosRec(filteredVideos);
+            } else {
+                setVideosRec([]);
+            }
+        } else {
+            setVideosRec([]);
+        }
+    };
 
     const settingsDesk = {
         slidesToShow: 5,
@@ -86,45 +115,26 @@ function Slider_Shorts() {
         ]
     };
 
-    useEffect(() => {
-        function handleResize() {
-            setScreenSize({ width: window.innerWidth, height: window.innerHeight });
-        }
-        window.addEventListener('resize', handleResize);
-        handleResize();
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    const numbers = [1, 2, 3, 4, 5, 6, 7]; // Números para exibir nos slides
-
     const renderDesktopView = () => (
         <Slider {...settingsDesk}>
-            {numbers.map((number, index) => (
-                <div key={number}>
-                    <Shortcard />
-                </div>
+            {videosRec.map((video) => (
+                <Shortcard key={video.uuid} short={video} />
             ))}
         </Slider>
     );
 
     const renderTabletView = () => (
         <Slider {...settingsTablet}>
-            {numbers.map((number, index) => (
-                <div key={number}>
-                    <Shortcard />
-                </div>
+            {videosRec.map((video) => (
+                <Shortcard key={video.uuid} short={video} />
             ))}
         </Slider>
     );
 
     const renderMobileView = () => (
         <Slider {...settingsMobile}>
-            {numbers.map((number, index) => (
-                <div key={number}>
-                    <Shortcard />
-                </div>
+            {videosRec.map((video) => (
+                <Shortcard key={video.uuid} short={video} />
             ))}
         </Slider>
     );

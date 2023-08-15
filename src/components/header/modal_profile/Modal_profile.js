@@ -2,7 +2,8 @@ import Aos from 'aos';
 import './Modal_profile.css';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import notFound from '../../../assets/image/404_NotFound.png'
+import notFound from '../../../assets/image/404_NotFound.png' 
+import channel from '../../../assets/image/channel_profile.png'
 
 
 function Modal_profile({ profile }) {
@@ -22,7 +23,7 @@ function Modal_profile({ profile }) {
     }
 
     function verifyProfile() {
-        if (profile) {
+        if (profile === true) {
             return true
         } else {
             return false
@@ -30,8 +31,8 @@ function Modal_profile({ profile }) {
     }
 
     function verifyProfileImage() {
-        if (profile) {
-            return profile.foto
+        if (profile === true) {
+            return channel
         } else {
             return notFound
         }

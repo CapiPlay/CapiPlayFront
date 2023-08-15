@@ -93,8 +93,7 @@ function Home() {
 
     if (videos) {
       const filteredVideos = videos.filter(video => video.shorts === false);
-
-      if (filteredVideos.length > 0) {
+      if (filteredVideos.length === 6) {
         setVideosRec(filteredVideos);
       } else {
         setVideosRec([]);
@@ -126,7 +125,9 @@ function Home() {
     if (videos) {
       const filteredVideos = videos.filter(video => video.shorts === false);
 
-      if (filteredVideos.length > 0) {
+      if (filteredVideos.length === 9) {
+        setVideosRev(filteredVideos);
+      } else if (filteredVideos.length === 6) {
         setVideosRev(filteredVideos);
       } else {
         setVideosRev([]);
@@ -137,22 +138,30 @@ function Home() {
   }
 
   const userProfile = () => {
-    const user = Cookies.get('user');
-    if (user) {
-      const userLogin = JSON.parse(user);
-      if (userLogin) {
-        return userLogin
-      } else {
-        return false
-      }
+    const userToken = Cookies.get('token');
+    if (userToken) {
+        try {
+            const tokenPayload = userToken.split('.')[1];
+            const decodedPayload = atob(tokenPayload);
+            const userLogin = JSON.parse(decodedPayload);   
+            console.log(userLogin)
+            if (userLogin) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error("Erro ao analisar o token:", error);
+            return false;
+        }
     } else {
-      return false
+        return false;
     }
   }
 
   const renderDesktopView = () => (
     <>
-      <Header userLogin={userProfile} />
+      <Header userLogin={userProfile()} />
       <Side_Bar />
       <div className='container__header__home'></div>
       <div className='container__home'>
@@ -168,7 +177,7 @@ function Home() {
           ))}
         </div>
         <div className='container__shorts__cards__desk'>
-          <Slider_Shorts />
+          {/* <Slider_Shorts /> */}
         </div>
         <div className='container__video__cards__desk'>
           {videosReu.map((video) => (

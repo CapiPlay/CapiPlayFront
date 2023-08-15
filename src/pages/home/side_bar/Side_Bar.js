@@ -16,7 +16,6 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 
 function Side_Bar() {
 
-    const [openModal, setOpenModal] = useState(0)
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     const [isSideBarOpen, setIsSideBarOpen] = useState(false);
