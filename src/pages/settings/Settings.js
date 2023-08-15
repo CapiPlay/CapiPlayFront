@@ -9,6 +9,7 @@ import ProfileImage from '../../assets/image/img_base_miniatura.png'
 import Home from '../home/Home'
 import HeaderSettings from './header/HeaderSettings'
 import Input from "../../components/input/Input";
+import InputDisabled from "../../components/inputDisabled/InputDisabled"
 import Button from "../../components/button/Button";
 import UserService from './../../service/UserService'
 import { Link } from 'react-router-dom';
@@ -85,7 +86,16 @@ const Settings = ({ userId }) => {
                         <button className='settings__image__options__buttons'>Remover</button>
                     </div>
                     <div className="settings__field">
+                    <InputDisabled
+                            placeholder={"Nome de usuário"}
+                            value={settingsData.nomeUsuario}
+                            onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
+                            type={"text"}
+                            required={true}
+                            className='settings__input'
+                        />
                         <Input
+                        enable={true}
                             placeholder={"Nome de usuário"}
                             value={settingsData.nomeUsuario}
                             onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
