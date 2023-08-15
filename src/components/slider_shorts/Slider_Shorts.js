@@ -23,9 +23,10 @@ function Slider_Shorts() {
 
     const getVideosRec = async () => {
         const videos = await PlayerService.buscarVideosHomeRec(0);
-        console.log(videos);
+        
         if (videos) {
             const filteredVideos = videos.filter(video => video.shorts === true);
+            console.log(filteredVideos);
             if (filteredVideos.length > 0) {
                 setVideosRec(filteredVideos);
             } else {

@@ -177,7 +177,7 @@ function Home() {
           ))}
         </div>
         <div className='container__shorts__cards__desk'>
-          {/* <Slider_Shorts /> */}
+          <Slider_Shorts />
         </div>
         <div className='container__video__cards__desk'>
           {videosReu.map((video) => (
