@@ -113,6 +113,7 @@ function Upload() {
                                     radius={"10px"}
                                     onChange={handleFileChange}
                                     file={image}
+                                    accept={".png"}
                                 />
                             </div>
                             <div className='upload__next__buttons__box'>
@@ -146,6 +147,7 @@ function Upload() {
                                         radius={"10px"}
                                         onChange={handleFileChange}
                                         file={image}
+                                        accept={".png"}
                                     />
                                     <div className='upload__next__buttons__box__shorts'>
                                         <Button
