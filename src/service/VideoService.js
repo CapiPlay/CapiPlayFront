@@ -3,9 +3,9 @@ import axios from "./AxiosConfig"
 const videoApiUrl = 'http://7000/api/video';
 
 const VideoService = {
-    criar: async (userId) => {
+    criar: async (videoData) => {
         try {
-            const response = await axios.post(videoApiUrl);
+            const response = await axios.post(`${videoApiUrl}/criar`, videoData);
             return response.data;
         } catch (err) {
             console.error(err);
