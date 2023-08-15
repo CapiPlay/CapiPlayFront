@@ -214,6 +214,7 @@ function UploadShorts() {
                       name='video'
                       onChange={handleFileChange}
                       value={video.video}
+                      accept={".mp4"}
                     />
                   </div>
                 </div>

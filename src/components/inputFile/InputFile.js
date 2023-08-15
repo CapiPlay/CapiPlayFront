@@ -10,7 +10,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 // file (File ou null, obrigatória): O arquivo selecionado pelo componente. 
 // removeFile (função, obrigatória): Recebe o evento do JavaScript relacionado ao clique como parâmetro.
 
-const InputFile = ({ onChange, radius, label, file, removeFile }) => {
+const InputFile = ({ onChange, radius, label, file, removeFile, accept }) => {
 
   return (
     <div className="file-input__container">
@@ -24,7 +24,7 @@ const InputFile = ({ onChange, radius, label, file, removeFile }) => {
           label
         }
       </label>
-      <input id="file-input" className="file-input__input" type="file" onChange={onChange} />
+      <input id="file-input" className="file-input__input" type="file" onChange={onChange} accept={accept} />
     </div>
   )
 }
