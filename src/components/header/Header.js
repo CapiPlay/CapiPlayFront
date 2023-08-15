@@ -24,8 +24,7 @@ function Header({ userLogin }) {
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     const verifyToken = () => {
-        console.log(userLogin)
-        if (userLogin !== undefined) {
+        if (userLogin === true) {
             return true;
         } else {
             return false;

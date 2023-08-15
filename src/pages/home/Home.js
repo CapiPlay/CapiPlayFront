@@ -138,22 +138,30 @@ function Home() {
   }
 
   const userProfile = () => {
-    const user = Cookies.get('user');
-    if (user !== undefined) {
-      const userLogin = JSON.parse(user);
-      if (userLogin !== undefined) {
-        return userLogin
-      } else {
-        return false
-      }
+    const userToken = Cookies.get('token');
+    if (userToken) {
+        try {
+            const tokenPayload = userToken.split('.')[1];
+            const decodedPayload = atob(tokenPayload);
+            const userLogin = JSON.parse(decodedPayload);   
+            console.log(userLogin)
+            if (userLogin) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error("Erro ao analisar o token:", error);
+            return false;
+        }
     } else {
-      return false
+        return false;
     }
   }
 
   const renderDesktopView = () => (
     <>
-      <Header userLogin={userProfile} />
+      <Header userLogin={userProfile()} />
       <Side_Bar />
       <div className='container__header__home'></div>
       <div className='container__home'>
