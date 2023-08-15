@@ -40,18 +40,6 @@
     gap: 0.5rem;
 }
 
-.video__player__desktop{
-    margin: 0;
-    width: 100%;
-    height: 28rem;
-}
-
-.video__player__mobile{
-    margin: 0;
-    width: 100%;
-    height: 20rem;
-}
-
 .channel{
     width: max-content;
 }
@@ -93,9 +81,4 @@
 
 .player__page{
     margin: 1rem;
-}
-
-.videos{
-    display: grid;
-    grid-template-columns: 50% 50%;
 }

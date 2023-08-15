@@ -1,0 +1,131 @@
+.videoWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.controls{
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,1) 13%, rgba(255,255,255,0) 100%);
+    position: absolute;
+    display: flex;
+    width: 100%;
+    bottom: 0;
+    justify-content: center;
+    gap: 3%;
+}
+
+.video__player{
+    position: relative;
+}
+
+.video__player__contructor__title{
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,1) 13%, rgba(255,255,255,0) 100%);
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 1;
+}
+
+.video__player__contructor__title > h2{
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.video__volume__controller{
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    margin-right: 1rem;
+    z-index: 1;
+    background-color: var(--purple);
+    border-radius: 20px;
+    width: 2rem;
+    height: 2rem;
+}
+
+.video__volume__controller > input[type=range]{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    rotate: 270deg;
+    z-index: 1;
+    background-color: var(--purple);
+    border-radius: 20px;
+    margin-bottom: 11rem;
+    margin-right: -3rem;
+}
+
+.barra__progressao{
+    width: 100%;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.barra__progressao > input[type=range]{
+    width: 100%;
+    appearance: none;
+    background-color: rgb(175, 175, 175);
+    border-radius: 1rem;
+}
+
+.barra__progressao > input[type=range]::-webkit-slider-thumb{
+    width: 100%;
+    appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 2rem;
+    background-color: var(--purple);
+    margin: -0.5%;
+    border: solid 2px var(--purple);
+    cursor: pointer;
+}
+
+.barra__progressao > input[type=range]::-webkit-slider-runnable-track{
+    width: 1rem;
+    height: 1rem;
+    border-radius: 2rem;
+    background-color: rgba(255, 255, 255, 0.295);
+}
+
+.pause{
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.maximise{
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.maximise > button{
+    cursor: pointer;
+    background-color: var(--purple);
+    border: none;
+    border-radius: 0.5rem;
+    width: 35px;
+    height: 35px;
+}
+
+.pause > button{
+    cursor: pointer;
+    background-color: var(--purple);
+    border: none;
+    border-radius: 0.5rem;
+    height: 35px;
+}

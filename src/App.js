@@ -30,7 +30,6 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/video/:videoId" element={<Player />} />
-            <Route path="/video" element={<Player />} />
             <Route path="/historic" element={<Historic />} />
             <Route path="/shorts" element={<Shorts />} />
             <Route path="/video-details" element={<VideoDetails />} />
