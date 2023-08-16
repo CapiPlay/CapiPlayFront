@@ -13,13 +13,18 @@ import { BiLike, BiDislike, BiCommentDetail, BiSolidLike, BiSolidDislike } from 
 //hooks
 import React, { useRef, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { setListShorts } from "../../../store/features/shorts/shortsSlice"
+import { setListShorts, setActualShorts } from "../../../store/features/shorts/shortsSlice"
+import { useNavigate, useParams } from 'react-router-dom'
+import ShortsService from '../../../service/ShortsService'
 
-const ShortsComponent = ({ short, isClicking, isScrolling }) => {
+const ShortsComponent = ({ short }) => {
 
+    const navigate = useNavigate();
     const targetRef = useRef(null)
     const dispatch = useDispatch()
     const shorts = useSelector((state) => state.shorts.listShorts)
+
+    const { id } = useParams()
 
     //transição entre os vídeos
     const [transitioning, setTransitioning] = useState(false)
@@ -61,11 +66,21 @@ const ShortsComponent = ({ short, isClicking, isScrolling }) => {
             threshold: 1
         }
 
+        const getUUID = async () => {
+            const short = await ShortsService.buscarUUID(id)
+            dispatch(setActualShorts(short))
+        }
+
         const callback = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
 
-                    dispatch(setListShorts(short.uuid, null, shorts))
+                    const shortUuid = short.uuid
+                    if (shortUuid !== id) {
+                        getUUID()
+                        dispatch(setListShorts(short.uuid, null, shorts))
+                        navigate(`/shorts/${shortUuid}`)
+                    }
 
                     setIsVideoInView(true)
                     setTimeout(() => {

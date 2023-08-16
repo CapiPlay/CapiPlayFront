@@ -15,6 +15,7 @@ import { BsFillArrowDownSquareFill } from "react-icons/bs"
 // shorts
 import { useSelector, useDispatch } from "react-redux"
 import { setListShorts } from '../../store/features/shorts/shortsSlice'
+import { useParams } from 'react-router-dom'
 
 const Shorts = () => {
 
@@ -86,14 +87,16 @@ const Shorts = () => {
         scrollContainer.addEventListener('scroll', handleScroll)
 
         const func = async () => {
-            const newShorts = []
+
             
+
+            const newShorts = []
             for(let i = 0; i < 5; i++) {
                 const data = await ShortsService.buscar()
                 newShorts.push(data)
             }
 
-            dispatch(setListShorts(null, newShorts))
+            dispatch(setListShorts(null, newShorts, null))
         }
 
         func()
@@ -122,7 +125,7 @@ const Shorts = () => {
                 minHeight: `${windowHeight}px`
             }}>
             {
-                headerAppearing && <Header />
+                // headerAppearing && <Header />
             }
             <div className={"container__shorts"} ref={scrollRef} >
                 {
