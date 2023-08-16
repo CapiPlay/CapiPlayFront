@@ -29,7 +29,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/player" element={<Player />} />
             <Route path="/historic" element={<Historic />} />
-            <Route path="/shorts" element={<Shorts />} />
+            <Route path="/shorts/:id" element={<Shorts />} />
             <Route path="/video-details" element={<VideoDetails />} />
             <Route path="/video-upload" element={<VideoUpload />} />
             <Route path="/profile" element={<Profile />} />
