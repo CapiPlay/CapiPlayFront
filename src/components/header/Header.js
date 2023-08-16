@@ -4,14 +4,32 @@ import { TbUpload } from 'react-icons/tb'
 import logo from '../../assets/image/Logo.png'
 import { AiOutlineSearch } from 'react-icons/ai'
 import './Header.css'
+
+import Search from '../../pages/search/Search'
+
 import Modal_profile from './modal_profile/Modal_profile';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';    
+
 
 //imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
 //ser passada para o header para ser exibida 
-function Header({imageProfile}) {
+function Header({ userProfile }) {
+
+
+    const [search, setSearch] = useState(false);
+    const handleClick = () => {
+        setSearch(!search);
+    }
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+
+    const verifyToken = () => {
+        if (userProfile) {
+            return userProfile;
+        } else {
+            return false;
+        }
+    }
 
     useEffect(() => {
         function handleResize() {
@@ -36,7 +54,7 @@ function Header({imageProfile}) {
             </div>
             <div className='box__header'>
                 <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
-                <Modal_profile />
+                <Modal_profile profile={userProfile} />
             </div>
         </div>
     );
@@ -50,10 +68,12 @@ function Header({imageProfile}) {
             </div>
             <div className='header__info'>
                 <div>
-                    <Link to="/upload" className='upload__icon__header' ><TbUpload /></Link>
+                    {verifyToken() &&
+                        <Link to="/upload" className='upload__icon__header' ><TbUpload /></Link>
+                    }
                 </div>
                 <div>
-                    <Modal_profile />
+                    < Modal_profile profile={userProfile} />
                 </div>
             </div>
         </div>
@@ -68,7 +88,7 @@ function Header({imageProfile}) {
             </div>
             <div className='box__header'>
                 <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
-                <Modal_profile />
+                <Modal_profile profile={userProfile} />
             </div>
         </div>
     );
@@ -87,4 +107,4 @@ function Header({imageProfile}) {
 
 }
 
-export default Header
+export default Header;

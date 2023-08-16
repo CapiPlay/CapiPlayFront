@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import notFound from '../../assets/image/404_NotFound.png'
-import NotFoundGif from '../../assets/image/404_NotFound_gif.gif'
 import './NotFound.css'
 import { Link } from 'react-router-dom';
 

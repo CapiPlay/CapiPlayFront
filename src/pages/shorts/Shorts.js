@@ -87,9 +87,6 @@ const Shorts = () => {
         scrollContainer.addEventListener('scroll', handleScroll)
 
         const func = async () => {
-
-            
-
             const newShorts = []
             for(let i = 0; i < 5; i++) {
                 const data = await ShortsService.buscar()

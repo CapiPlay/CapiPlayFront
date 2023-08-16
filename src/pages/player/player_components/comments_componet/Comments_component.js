@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import './Comments_component.css'
 import { BiSolidDownArrow, BiSolidUpArrow, BiDislike, BiLike, BiSolidLike } from 'react-icons/bi'
 import Comments_answers_component from '../comments_answers_component/Comments_answers_component'
+import EngajamentoService from '../../../../service/EngajamentoService'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
-function Comments_component(video) {
+function Comments_component({video}) {
     const [showMore, setShowMore] = useState(false);
     const [like_btn, setLikeBtn] = useState(true);
     const [commentsAnswer, setCommentsAnswer] = useState(false);
@@ -34,6 +35,23 @@ function Comments_component(video) {
     };
 
     const toggleLikeBtn = () => {
+        // if(like_btn){
+        //     EngajamentoService.criar(
+        //         {
+        //             usuarioId: 1, // usuarioId
+        //             videoId: video.uuid,
+        //             curtida: 1
+        //         }
+        //     )
+        // }else{
+        //     EngajamentoService.criar(
+        //         {
+        //             usuarioId: 1, // usuarioId
+        //             videoId: video.uuid,
+        //             curtida: 0
+        //         }
+        //     )
+        // }
         setLikeBtn(!like_btn);
     };
 
