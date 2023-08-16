@@ -207,7 +207,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    margin: 3.6rem 0;
+    margin: 3rem 0;
     width: 100%;
 }
 
@@ -246,8 +246,8 @@
 }
 
 .settings__input__container__desktop {
-    gap: 3rem;
-    width: 53%;
+    gap: 7rem;
+    width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -364,7 +364,7 @@
     justify-content: space-around;
     align-items: center;
     gap: 1.5rem;
-    margin-top: 2rem;
+    margin-top: 4rem;
     margin-bottom: 2rem;
 }
 
