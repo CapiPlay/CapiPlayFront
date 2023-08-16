@@ -32,12 +32,12 @@ function Upload() {
 
     const handleFileChange = (e) => {
 
-        setMiniatura(e.target.files[0])
         const file = e.target.files[0]
         if (file) {
             const formData = new FormData()
             formData.append("foto", file)
             setImage(formData)
+            setMiniatura(formData)
 
             const reader = new FileReader();
 

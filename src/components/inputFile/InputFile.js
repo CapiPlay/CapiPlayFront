@@ -9,6 +9,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 // label (string, obrigatória): O texto ou componente React que será exibido como rótulo do componente quando nenhum arquivo for selecionado.
 // file (File ou null, obrigatória): O arquivo selecionado pelo componente. 
 // removeFile (função, obrigatória): Recebe o evento do JavaScript relacionado ao clique como parâmetro.
+// accept (string, obrigatória): Recebe que tipo de arquivo é aceito pelo input.
 
 const InputFile = ({ onChange, radius, label, file, removeFile, accept }) => {
 
