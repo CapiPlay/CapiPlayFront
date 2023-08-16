@@ -7,9 +7,6 @@ import PlayerService from '../../service/PlayerService'
 
 import './Player.css'
 
-//item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
-function Player(video) {
-
   function Player() {
     const [video, setVideo] = useState();
     const { videoId } = useParams();
@@ -28,7 +25,7 @@ function Player(video) {
     }, []);
 
     const buscarVideo = async (videoId) => {
-      setVideo(await PlayerService.buscarVideo(videoId))
+      setVideo(await PlayerService.buscarVideoObject(videoId))
     }
 
     const verifyDesktop = () => {
@@ -72,5 +69,4 @@ function Player(video) {
       </>
     );
   }
-}
 export default Player;

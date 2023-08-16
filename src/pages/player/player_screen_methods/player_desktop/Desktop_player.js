@@ -19,8 +19,10 @@ function Desktop_player({ video }) {
         getVideos()
     }, [])
 
+    
+
     const getVideos = async () => {
-        setVideos(await PlayerService.buscarVideosHome(0))
+        setVideos(await PlayerService.buscarVideosHomeReu(0))
     }
 
     return (
