@@ -2,15 +2,15 @@
 import './Upload.css'
 
 // react
-import { Link } from 'react-router-dom';
-import { useState, useRef } from "react"
-import { HiUpload } from 'react-icons/hi';
-import { BsFillFastForwardFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom'
+import { useState, useRef } from 'react'
+import { HiUpload } from 'react-icons/hi'
+import { BsFillFastForwardFill } from 'react-icons/bs'
 
 // componentes
-import Button from "../../components/button/Button";
-import HeaderUpload from './headerUpload/HeaderUpload';
-import InputFile from '../../components/inputFile/InputFile';
+import Button from '../../components/button/Button'
+import HeaderUpload from './headerUpload/HeaderUpload'
+import InputFile from '../../components/inputFile/InputFile'
 
 // imagens
 import Preview from '../../assets/image/preview_video.png'
