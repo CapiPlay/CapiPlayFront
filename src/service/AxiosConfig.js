@@ -1,11 +1,7 @@
 import axios from "axios"
 import Cookies from "js-cookie"
 
-<<<<<<< Updated upstream
-const URL = "http://localhost:7000/api"
-=======
 const URL = "http://10.4.96.74:7000"
->>>>>>> Stashed changes
 
 const axiosInstance = axios.create({
     baseURL: URL
