@@ -1,3 +1,9 @@
+.profile__container_desktop{
+    margin-top: 7rem;
+}
+.profile__container_mobile{
+    margin-top: 3rem;
+}
 .upload__page {
     height: 100vh;
 }

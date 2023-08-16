@@ -27,6 +27,14 @@ const EngajamentoService = {
         } catch (error) {
             console.error(error);
         }
+    },
+    buscarUm: async (idUsuario) => {
+        try {
+            const response = await axios.get("/api/engajamento/usuario/" + idUsuario);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 }

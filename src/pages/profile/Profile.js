@@ -7,34 +7,33 @@ import Side_Bar from '../home/side_bar/Side_Bar'
 import { useParams } from 'react-router-dom';
 import Video_card from '../../components/video_card/Video_card'
 import Header from '../../components/header/Header'
-import UserService from '../../service/UserService'; 
-
+import EngajamentoService from '../../service/EngajamentoService'; 
 
 import ProfilePicture from '../../assets/image/channel_profile.png'
-
-
 
 
 const Profile = ({ }) => {
 
     const [usuario, setUsuario] = useState({});
-    const { usuarioId } = useParams();
+    const { idUsuario } = useParams();
+    console.log(idUsuario)
+    console.log(usuario.nomeCanal)
 
     useEffect(() => {
-        UserService.findOne(usuarioId)
+        EngajamentoService.buscarUm(idUsuario)
             .then((data) => setUsuario(data))
             .catch((error) => console.error('Erro ao buscar usuario:', error));
-    }, [usuarioId]);
+    }, [idUsuario]);
 
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-    const [usuarios, setUsuarios] = useState([]);
+    // const [usuarios, setUsuarios] = useState([]);
 
-    useEffect(() => {
-        UserService.listar()
-            .then((data) => setUsuarios(data))
-            .catch((error) => console.error('Erro ao buscar produtos:', error));
-    }, []);
+    // useEffect(() => {
+    //     UserService.listar()
+    //         .then((data) => setUsuarios(data))
+    //         .catch((error) => console.error('Erro ao buscar produtos:', error));
+    // }, []);
 
     useEffect(() => {
         function handleResize() {
@@ -54,7 +53,7 @@ const Profile = ({ }) => {
             <HeaderProfile />
             <div>
                 <div key={usuario.idUsuario}  >
-                    <div className='profile__container'>
+                    <div className='profile__container_mobile'>
                         <div className='profile__container__picture' key={usuario.idUsuario}>
                             <img className="profile__pic" src={ProfilePicture} />
                             <h2 className='profile__name'>{usuario.nomeCanal}</h2>
@@ -85,9 +84,9 @@ const Profile = ({ }) => {
         <>
             <Side_Bar />
             <Header />
-            <div>
+            <div>  
                 <div key={usuario.idUsuario}  >
-                    <div className='profile__container_'>
+                    <div className='profile__container_desktop'>
                         <div className='profile__container__picture__desktop'>
                             <img className="profile__pic__desktop" src={ProfilePicture} />
                             <div className='profile__box__desktop'>
