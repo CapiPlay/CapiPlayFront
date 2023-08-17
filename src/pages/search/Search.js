@@ -19,7 +19,6 @@ const Search = () => {
     const urlSearchParams = new URLSearchParams(location.search);
     const searchParams = urlSearchParams.get("q");
     const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : "");
-    console.log(valueInput);
 
     const [back, setBack] = useState(false);
 
@@ -80,7 +79,7 @@ const Search = () => {
     }
 
     return (
-        <div className="container__search">
+        <div className="container__search" style={{display:back?"none":"block"}}>
             <HeaderSearch
                 handleSearch={handleSearch}
                 valueInput={valueInput}

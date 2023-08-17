@@ -1,3 +1,15 @@
+/* .container__header__search__desktop{
+    position: absolute;
+    top: 0;
+    left: 0;
+} */
+
+.container__tags__search__desktop{
+    margin: 8% 4%;
+    width: 100%;
+}
+
+
 .container__result__search {
     width: 100%;
     height: 100vh;
@@ -55,10 +67,14 @@
 
 .container__videos__result {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 20px;
+}
+
+.video__result__search{
+    width: 28%;
 }
 
 @keyframes open-filter {
@@ -90,6 +106,12 @@
     .table__filters>td,
     .table__filters>tr {
         font-size: 18px;
+    }
+
+    .container__filter{
+        width: 10%;
+        height: 2%;
+        margin-left: 15%;
     }
 }
 

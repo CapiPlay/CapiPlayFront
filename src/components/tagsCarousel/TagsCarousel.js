@@ -39,11 +39,11 @@ const TagsCarousel = () => {
     return (
         <DraggableCore axis="x" onDrag={handleDrag}>
             <Slider ref={sliderRef}{...settings}>
-                    {tags && tags.map((tag) => (
-                        <div className="tags__search">
-                            <span>{tag}</span>
-                        </div>
-                    ))}
+                {tags && tags.map((tag) => (
+                    <div className="tags__search">
+                        <span>{tag}</span>
+                    </div>
+                ))}
             </Slider>
         </DraggableCore>
     )
