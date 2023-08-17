@@ -7,14 +7,7 @@ import { useParams } from 'react-router-dom';
 import PlayerService from '../../service/PlayerService'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
-function Player(video1) {
-  
-  const [video, setVideo] = useState();
-  const { videoId } = useParams();
-  const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-
-
-  function Player() {
+function Player() {
     const [video, setVideo] = useState();
     const { videoId } = useParams();
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -40,12 +33,13 @@ function Player(video1) {
   const video_views_var = '57k'
   const video_likes_var = '57k'
   
-  const verifyTablet = () => {
+  const verifyDesktop = () => {
     if (screenSize.width < 900 && screenSize.width > 450) {
       return true
     } else {
       return false
     }
+  }
 
     const verifyTablet = () => {
       if (screenSize.width < 900 && screenSize.width > 450) {
