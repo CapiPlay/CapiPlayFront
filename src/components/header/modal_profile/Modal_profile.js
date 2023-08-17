@@ -77,7 +77,7 @@ function Modal_profile({ profile }) {
                     ) : (
                         <div className='modal__profile__container__desktop'>
                             <div className='modal__profile__itens__desktop'>
-                                <Link to="/register" className='text__profile_modal'><p>Fazer Cadastro</p></Link>
+                                <Link to="/register" className='text__profile_modal'><p>Acessar Conta</p></Link>
                                 <div className='divider__profile__modal'></div>
                                 <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
                                 <div className='divider__profile__modal'></div>
