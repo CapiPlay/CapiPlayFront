@@ -19,23 +19,21 @@ const ResultSearch = () => {
     const [searchValue, setSearchValue] = useState("");
     const searchParams = urlSearchParams.get("search");
 
-    useEffect(() => {
-        setSearchValue(searchParams);
-    }, [searchParams])
 
     const videos = [
         {
+            
             caminhos: [
-                "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R154X268_9164846223788002675.png",
-                "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R200X348_13358526845566702011.png",
-                "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R230X388_15816350250600018926.png",
-                "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R340X193_6524793299455106252.png",
-                "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R380X193_14437519966982145443.png",
-                "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\video_4269096256195136619.mp4"
+                "0c3bf232-6412-4e6c-a6b3-16c37c5c0540/miniatura_R154X268_9164846223788002675.png",
+                "0c3bf232-6412-4e6c-a6b3-16c37c5c0540/miniatura_R200X348_13358526845566702011.png",
+                "0c3bf232-6412-4e6c-a6b3-16c37c5c0540/miniatura_R230X388_15816350250600018926.png",
+                "0c3bf232-6412-4e6c-a6b3-16c37c5c0540/miniatura_R340X193_6524793299455106252.png",
+                "0c3bf232-6412-4e6c-a6b3-16c37c5c0540/miniatura_R380X193_14437519966982145443.png",
+                "0c3bf232-6412-4e6c-a6b3-16c37c5c0540/video_4269096256195136619.mp4"
             ],
             titulo: "titulo",
             uuid: "2"
-        }, 
+        },
         // {
         //     caminhos: [
         //         "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R154X268_9164846223788002675.png",
@@ -49,6 +47,11 @@ const ResultSearch = () => {
         //     uuid: "2"
         // }
     ]
+
+    useEffect(() => {
+        setSearchValue(searchParams);
+        console.log(videos[0].caminhos[4])
+    }, [searchParams])
 
     // const renderVideosDesktop = () => {
     //     return (
