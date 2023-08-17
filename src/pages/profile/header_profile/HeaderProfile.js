@@ -2,8 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import './HeaderProfile.css'
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { FiSettings } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { FiSettings } from 'react-icons/fi'
 
 
 

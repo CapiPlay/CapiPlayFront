@@ -112,7 +112,7 @@ function Header({ userLogin }) {
                 <div className='header__input__container' onClick={handleClick}>
                     <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
                 </div>
-                <Modal_profile profile={userProfile} />
+                <Modal_profile profile={userLogin} />
                   
             </div>
             {search &&
@@ -182,7 +182,7 @@ function Header({ userLogin }) {
             <div className='box__header'>
 
                 <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} onClick={handleClick} />
-                <Modal_profile profile={userProfile} />
+                <Modal_profile profile={userLogin} />
 
                 <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
                 <Modal_profile profile={userLogin} />
