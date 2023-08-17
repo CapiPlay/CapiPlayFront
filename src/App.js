@@ -34,15 +34,12 @@ function App() {
             <Route path="/shorts/:id" element={<Shorts />} />
             <Route path="/video-details" element={<VideoDetails />} />
             <Route path="/video-upload" element={<VideoUpload />} />
-            <Route path="/profile" element={<Profile />} />
-
+            <Route path="/profile/:usuarioId" element={<Profile />} />
             <Route path="/result-search" element={<ResultSearch />} />
-
             <Route path="/upload" element={<Upload />} />
             <Route path="/upload-video" element={<UploadVideo />} />
             <Route path="/upload-shorts" element={<UploadShorts />} />
             <Route path="/settings" element={<Settings />} />
-
             <Route path="/teste" element={<Video_player_contructor />} />
           </Routes>
         </BrowserRouter>
