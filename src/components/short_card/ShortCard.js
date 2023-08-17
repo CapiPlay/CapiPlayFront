@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Shortcard = ({ short }) => {
 
-    
+
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
@@ -25,23 +25,17 @@ const Shortcard = ({ short }) => {
         return <div>No Video Data</div>;
     }
 
-    short = {
-        img: "https://i0.wp.com/techwek.com/wp-content/uploads/2021/12/fotos-de-papel-de-parede-para-celular-masculino-3d.png?fit=512%2C1024&ssl=1",
-        title: "O que é ReactJS? #HipstersPontoTube",
-        views: 1000
-    }
-
     const renderMobileView = () => (
         <div className="container__short__card">
             <Link to={`/player/${short.uuid}`}>
-                <img className="short__image" src={"http://localhost:7000/api/video/static/" + short.caminhos[4]} />
+                <img className="short__image" src={"http://localhost:7000/api/video/static/" + short.caminhos[1]} />
             </Link>
             <div className="container__informations__shorts">
                 <span>{short.titulo}</span>
                 {short.views > 999
                     ?
                     <span>
-                        {numeral(short.views).format('0.0a')} de visualizações
+                        {numeral(short.visualizacoes).format('0.0a')} de visualizações
                     </span>
                     :
                     <span>
@@ -55,10 +49,10 @@ const Shortcard = ({ short }) => {
     const renderDesktopView = () => (
         <div className="container__short__card__desk">
             <Link to={`/player/${short.uuid}`}>
-                <img className="short__image" src={short.img} />
+                <img className="short__image" src={"http://localhost:7000/api/video/static/" + short.caminhos[1]} />
             </Link>
             <div className="container__informations__shorts">
-                <span>{short.title}</span>
+                <span>{short.titulo}</span>
                 {short.views > 999
                     ?
                     <span>

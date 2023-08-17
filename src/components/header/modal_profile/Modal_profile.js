@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import notFound from '../../../assets/image/404_NotFound.png' 
 import channel from '../../../assets/image/channel_profile.png'
+import Cookies from 'js-cookie';
 
 
 function Modal_profile({ profile }) {
@@ -38,6 +39,11 @@ function Modal_profile({ profile }) {
         }
     }
 
+    function Logout() {
+        Cookies.remove('token');
+        window.location.reload(false);
+    }
+
     useEffect(() => {
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
@@ -65,7 +71,7 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
                                 <div className='divider__profile__modal'></div>
-                                <Link to="" className='text__profile_modal'><p>Sair</p></Link>
+                                <p onClick={Logout()} className='text__profile_modal'>Sair</p>
                             </div>
                         </div>
                     ) : (

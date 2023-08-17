@@ -62,7 +62,7 @@ const PlayerService = {
     },
 
     buscarVideosHomeRec: async (page) => {
-        const size = 6;
+        const size = 50;
         try {
             const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" + size);
             return response.data;
