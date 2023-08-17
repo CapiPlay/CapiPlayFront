@@ -20,7 +20,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 //imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
 //ser passada para o header para ser exibida 
-function Header({ userProfile }) {
+function Header({ userLogin }) {
 
     const [search, setSearch] = useState(false);
     const [searchDesktop, setSearchDesktop] = useState(false);
@@ -80,8 +80,8 @@ function Header({ userProfile }) {
     ]));
 
     const verifyToken = () => {
-        if (userProfile) {
-            return userProfile;
+        if (userLogin === true) {
+            return true;
         } else {
             return false;
         }
@@ -113,6 +113,7 @@ function Header({ userProfile }) {
                     <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
                 </div>
                 <Modal_profile profile={userProfile} />
+                  
             </div>
             {search &&
                 <Search />
@@ -165,7 +166,7 @@ function Header({ userProfile }) {
                     }
                 </div>
                 <div>
-                    < Modal_profile profile={userProfile} />
+                    < Modal_profile profile={userLogin} />
                 </div>
             </div>
         </div>
@@ -179,8 +180,13 @@ function Header({ userProfile }) {
                 </div>
             </div>
             <div className='box__header'>
+
                 <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} onClick={handleClick} />
                 <Modal_profile profile={userProfile} />
+
+                <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
+                <Modal_profile profile={userLogin} />
+
             </div>
             {search &&
                 <Search />

@@ -5,11 +5,7 @@ import { Link } from "react-router-dom";
 
 const Shortcard = ({ short }) => {
 
-    short = {
-        img: "https://i0.wp.com/techwek.com/wp-content/uploads/2021/12/fotos-de-papel-de-parede-para-celular-masculino-3d.png?fit=512%2C1024&ssl=1",
-        title: "O que é ReactJS? #HipstersPontoTube",
-        views: 1000
-    }
+    
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
@@ -24,13 +20,24 @@ const Shortcard = ({ short }) => {
         };
     }, []);
 
+    if (!short) {
+        // Handle the case when the video is undefined or null
+        return <div>No Video Data</div>;
+    }
+
+    short = {
+        img: "https://i0.wp.com/techwek.com/wp-content/uploads/2021/12/fotos-de-papel-de-parede-para-celular-masculino-3d.png?fit=512%2C1024&ssl=1",
+        title: "O que é ReactJS? #HipstersPontoTube",
+        views: 1000
+    }
+
     const renderMobileView = () => (
         <div className="container__short__card">
             <Link to={`/player/${short.uuid}`}>
-                <img className="short__image" src={short.img} />
+                <img className="short__image" src={"http://localhost:7000/api/video/static/" + short.caminhos[4]} />
             </Link>
             <div className="container__informations__shorts">
-                <span>{short.title}</span>
+                <span>{short.titulo}</span>
                 {short.views > 999
                     ?
                     <span>

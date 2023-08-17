@@ -45,11 +45,12 @@
     gap: 0.5rem;
     justify-content: start;
     color: var(--white);
+
+    width: 100%;
 }
 
 .icon__category__side {
     width: 1.1rem;
-
 }
 
 .icon__category__area__side {
@@ -64,5 +65,43 @@
 
 .icon__category__area__side:hover {
     background-color: var(--purple);
+    cursor: pointer;
+}
+
+/* ----------------------------------------------- */
+
+.label__category__side {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+}
+
+.openModal__side {
+    width: 12.9rem !important;
+}
+
+.openBoxes__side {
+    margin-top: 2.1rem;
+}
+
+.openItem__side {
+    width: 100% !important;
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.open__side {
+    visibility: visible !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+.icon__hamburguer__side:hover {
+    color: var(--whitesmoke) !important;
+    transition: 0.3s;
+    transform: translateY(-1.5px);
     cursor: pointer;
 }

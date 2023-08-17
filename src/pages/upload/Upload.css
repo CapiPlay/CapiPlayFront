@@ -22,7 +22,7 @@
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    height: 5rem;
+    height: 6rem;
     color: var(--whitesmoke);
     padding-left: 1rem;
     border-radius: 1rem;
@@ -68,10 +68,10 @@
 }
 
 #upload__image__preview {
-    display: none;
     width: 45vw; 
-    height: 50vhvh;
+    height: 20rem;
     border-radius: 1rem;
+    background-color: var(--darkblue);
 }
 
 .upload__next__buttons__box {
@@ -148,4 +148,11 @@
     width: 100%;
     text-decoration: none;
     color: var(--whitesmoke);
+}
+
+.upload__inputfile__box {
+    background-color: var(--lightpurple);
+    border-radius: 10px;
+    border: 0;
+    height: 3rem;
 }

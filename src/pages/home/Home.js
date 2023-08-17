@@ -12,15 +12,22 @@ import Cookies from 'js-cookie';
 
 function Home() {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-  const [videos, setVideos] = useState([])
+  const [videosReu, setVideosReu] = useState([])
+  const [videosRec, setVideosRec] = useState([])
+  const [videosRet, setVideosRet] = useState([])
+  const [videosRev, setVideosRev] = useState([])
   const [currentPage, setCurrentPage] = useState(0);
+  const [loadingMoreVideos, setLoadingMoreVideos] = useState(false);
 
   Aos.init({
     duration: 200
   });
 
   useEffect(() => {
-    getVideos()
+    getVideosReu()
+    getVideosRec()
+    getVideosRet()
+    getVideosRev()
     userProfile()
     function handleResize() {
       setScreenSize({ width: window.innerWidth, height: window.innerHeight });
@@ -32,27 +39,129 @@ function Home() {
     };
   }, []);
 
-  const getVideos = async () => {
-    setVideos(await PlayerService.buscarVideosHome(0))
+  const handleScroll = () => {
+    const scrolled = window.innerHeight + window.scrollY;
+    const totalHeight = document.documentElement.scrollHeight;
+
+    if (!loadingMoreVideos && scrolled >= totalHeight - 100) {
+      setLoadingMoreVideos(true);
+      getMoreVideos(currentPage + 1);
+    }
+  };
+
+  useEffect(() => {
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [currentPage, loadingMoreVideos]);
+
+  const getMoreVideos = async (page) => {
+    const moreVideos = await PlayerService.buscarVideosHomeReu(page);
+
+    if (moreVideos) {
+      const filteredVideos = moreVideos.filter(video => video.shorts === false);
+      if (filteredVideos.length > 0) {
+        setVideosReu((prevVideos) => [...prevVideos, ...filteredVideos]);
+        setCurrentPage(page);
+      }
+    }
+
+    setLoadingMoreVideos(false);
+  };
+
+  const getVideosReu = async () => {
+    const videos = await PlayerService.buscarVideosHomeReu(0);
+
+    if (videos) {
+      const filteredVideos = videos.filter(video => video.shorts === false);
+
+      if (filteredVideos.length > 0) {
+        setVideosReu(filteredVideos);
+      } else {
+        setVideosReu([]);
+      }
+    } else {
+      setVideosReu([]);
+    }
+  };
+
+  const getVideosRec = async () => {
+    const videos = await PlayerService.buscarVideosHomeRec(0);
+
+    if (videos) {
+      const filteredVideos = videos.filter(video => video.shorts === false);
+      if (filteredVideos.length === 6) {
+        setVideosRec(filteredVideos);
+      } else {
+        setVideosRec([]);
+      }
+    } else {
+      setVideosRec([]);
+    }
+  };
+
+  const getVideosRet = async () => {
+    const videos = await PlayerService.buscarVideosHomeRet(0);
+
+    if (videos) {
+      const filteredVideos = videos.filter(video => video.shorts === false);
+
+      if (filteredVideos.length > 0) {
+        setVideosRet(filteredVideos);
+      } else {
+        setVideosRet([]);
+      }
+    } else {
+      setVideosRet([]);
+    }
+  }
+
+  const getVideosRev = async () => {
+    const videos = await PlayerService.buscarVideosHomeRev(0);
+
+    if (videos) {
+      const filteredVideos = videos.filter(video => video.shorts === false);
+
+      if (filteredVideos.length === 9) {
+        setVideosRev(filteredVideos);
+      } else if (filteredVideos.length === 6) {
+        setVideosRev(filteredVideos);
+      } else {
+        setVideosRev([]);
+      }
+    } else {
+      setVideosRev([]);
+    }
   }
 
   const userProfile = () => {
-    const user = Cookies.get('user');
-    if (user) {
-      const userLogin = JSON.parse(user);
-      if (userLogin) {
-        return userLogin
-      } else {
-        return false
-      }
+    const userToken = Cookies.get('token');
+    if (userToken) {
+        try {
+            const tokenPayload = userToken.split('.')[1];
+            const decodedPayload = atob(tokenPayload);
+            const userLogin = JSON.parse(decodedPayload);   
+            console.log(userLogin)
+            if (userLogin) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error("Erro ao analisar o token:", error);
+            return false;
+        }
     } else {
-      return false
+        return false;
     }
   }
 
   const renderDesktopView = () => (
     <>
-      <Header userLogin={userProfile} />
+      <Header userLogin={userProfile()} />
       <Side_Bar />
       <div className='container__header__home'></div>
       <div className='container__home'>
@@ -63,17 +172,17 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__desk'>
-          {/* {videos.map((video) => (
+          {videosRec.map((video) => (
             <Video_card key={video.uuid} video={video} />
-          ))} */}
+          ))}
         </div>
         <div className='container__shorts__cards__desk'>
-          <Slider_Shorts />
+          {/* <Slider_Shorts /> */}
         </div>
         <div className='container__video__cards__desk'>
-          {/* {videos.map((video) => (
+          {videosReu.map((video) => (
             <Video_card key={video.uuid} video={video} />
-          ))} */}
+          ))}
         </div>
       </div>
     </>
@@ -90,17 +199,17 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards__tablet'>
-          {/* {videos.map((video) => (
+          {videosRev.map((video) => (
             <Video_card key={video.uuid} video={video} />
-          ))} */}
+          ))}
         </div>
         <div className='container__shorts__cards__tablet'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards__tablet'>
-          {/* {videos.map((video) => (
+          {videosReu.map((video) => (
             <Video_card key={video.uuid} video={video} />
-          ))} */}
+          ))}
         </div>
       </div>
     </>
@@ -114,17 +223,17 @@ function Home() {
           <Slider />
         </div>
         <div className='container__video__cards'>
-          {/* {videos.map((video) => (
+          {videosRet.map((video) => (
             <Video_card key={video.uuid} video={video} />
-          ))} */}
+          ))}
         </div>
         <div className='container__shorts__cards__mobile'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards'>
-          {/* {videos.map((video) => (
+          {videosReu.map((video) => (
             <Video_card key={video.uuid} video={video} />
-          ))} */}
+          ))}
         </div>
       </div>
     </>

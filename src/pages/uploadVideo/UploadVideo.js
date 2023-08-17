@@ -1,13 +1,27 @@
+// style
 import './UploadVideo.css'
 
-import { HiUpload } from 'react-icons/hi';
-import React, { useState, useEffect, useRef } from "react";
+// react
+import { HiUpload } from 'react-icons/hi'
+import { useLocation } from 'react-router-dom'
+import React, { useState, useRef } from 'react'
 
-import Button from '../../components/button/Button';
-import InputFile from "../../components/inputFile/InputFile";
-import HeaderUpload from '../upload/headerUpload/HeaderUpload';
+// componentes
+import Input from '../../components/input/Input'
+import Select from '../../components/select/Select'
+import Button from '../../components/button/Button'
+import InputFile from '../../components/inputFile/InputFile'
+import HeaderUpload from '../upload/headerUpload/HeaderUpload'
+import InputTextArea from '../../components/inputTextArea/InputTextArea'
+
+// service
+import VideoService from '../../service/VideoService'
 
 function UploadVideo() {
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const miniaturaUrl = searchParams.get("miniatura");
 
   const [videoSrc, setVideoSrc] = useState(null)
 
@@ -22,11 +36,26 @@ function UploadVideo() {
     descricao: "",
     tags: [],
     categoria: "",
-    ehReels: false,
+    shorts: false,
     video: "",
-    miniatura: "",
-    kids: ""
+    miniatura: miniaturaUrl,
+    restrito: ""
   })
+
+  const categorias = [
+    { label: "Artes e Cultura", value: "Artes e Cultura" },
+    { label: "Ciência e Tecnologia", value: "Ciência e Tecnologia" },
+    { label: "Culinária", value: "Culinária" },
+    { label: "Educação", value: "Educação" },
+    { label: "Esportes", value: "Esportes" },
+    { label: "Entretenimento", value: "Entretenimento" },
+    { label: "Documentários", value: "Documentários" },
+    { label: "Jogos", value: "Jogos" },
+    { label: "Lifestyle", value: "Lifestyle" },
+    { label: "Moda e Beleza", value: "Moda e Beleza" },
+    { label: "Música", value: "Música" },
+    { label: "Viagem e Turismo", value: "Viagem e Turismo" }
+  ];
 
   const handleInputChange = (e) => {
     setVideo({ ...video, [e.target.name]: e.target.value })
@@ -42,7 +71,6 @@ function UploadVideo() {
       const formData = new FormData()
       formData.append("foto", file)
       setImage(formData)
-      localStorage.setItem("foto", formData)
 
       const reader = new FileReader();
 
@@ -55,26 +83,44 @@ function UploadVideo() {
 
       reader.readAsDataURL(file);
 
+      const videoURL = URL.createObjectURL(file);
+      setVideoSrc(videoURL);
+
       setVideoSrc(URL.createObjectURL(file));
     }
   }
 
+  const renderizarNovaTag = () => {
+    if (tag !== "") {
+      setTags([...tags, tag])
+      const updatedTags = [...video.tags, tag]
+      setVideo({ ...video, tags: updatedTags })
+      setTag("")
+    }
+  }
+
+  const deletarTag = (index) => {
+    const updatedTags = [...tags];
+    updatedTags.splice(index, 1);
+    setTags(updatedTags);
+
+    setVideo((prevVideo) => ({
+      ...prevVideo,
+      tags: updatedTags,
+    }))
+  }
+
   const enviarVideo = (event) => {
     event.preventDefault()
-    // CardService.cadastrar(card)
-    // alert("Cadastro efetuado!")
+
+    setVideo((prevVideo) => ({
+      ...prevVideo,
+      video: videoSrc
+    }));
+    // VideoService.criar(video)
     console.log(video)
     // window.location.reload()
   }
-
-  const renderNewTag = () => {
-    if (tag !== "") {
-      setTags([...tags, tag]);
-      const updatedTags = [...video.tags, tag]; // Adicionar a nova tag à cópia das tags existentes
-      setVideo({ ...video, tags: updatedTags }); // Atualizar o estado video com a nova lista de tags
-      setTag(""); // Limpar a entrada de tag
-    }
-  };
 
   return (
     <>
@@ -84,46 +130,29 @@ function UploadVideo() {
           <p>Informações do vídeo</p>
           <div className='upload__video__container__rows'>
             <div className='upload__video__container__row'>
-              <div className='upload__video__box__input'>
-                <label className='upload__video__label'>Título do vídeo</label>
-                <input
-                  className='upload__video__input'
-                  placeholder={"Título do vídeo"}
-                  type={"text"}
-                  required={true}
-                  onChange={handleInputChange}
-                  name='titulo'
-                  value={video.titulo}
-                />
-              </div>
-              <div className='upload__video__box__input'>
-                <label className='upload__video__label'>Descrição do vídeo</label>
-                <textarea
-                  className='upload__video__descricao'
-                  placeholder='Descrição do vídeo'
-                  onChange={handleInputChange}
-                  name='descricao'
-                  value={video.descricao}
-                  required={true} />
-              </div>
-              <div className='upload__video__box__input'>
-                <label className='upload__video__label'>Categoria do vídeo</label>
-                <select className='upload__video__select' onChange={handleInputChange} name='categoria' value={video.categoria}>
-                  <option defaultValue={''} disabled hidden value="">Selecione uma categoria</option>
-                  <option value="Artes e Cultura">Artes e Cultura</option>
-                  <option value="Ciência e Tecnologia">Ciência e Tecnologia</option>
-                  <option value="Culinária">Culinária</option>
-                  <option value="Educação">Educação</option>
-                  <option value="Entretenimento">Entretenimento</option>
-                  <option value="Esportes">Esportes</option>
-                  <option value="Documentários">Documentários</option>
-                  <option value="Jogos">Jogos</option>
-                  <option value="Lifestyle">Lifestyle</option>
-                  <option value="Moda e Beleza">Moda e Beleza</option>
-                  <option value="Música">Música</option>
-                  <option value="Viagem e Turismo">Viagem e Turismo</option>
-                </select>
-              </div>
+              <Input
+                placeholder={"Título do vídeo"}
+                type={"text"}
+                value={video.titulo}
+                onChange={handleInputChange}
+                name='titulo'
+                required={true}
+              />
+              <InputTextArea
+                placeholder={'Descrição do vídeo'}
+                value={video.descricao}
+                onChange={handleInputChange}
+                name='descricao'
+                required={true}
+              />
+              <Select
+                options={categorias}
+                value={video.categoria}
+                placeholder="Categoria do vídeo"
+                onChange={handleInputChange}
+                name="categoria"
+                required={true}
+              />
             </div>
 
             <div className='upload__video__container__row'>
@@ -142,48 +171,52 @@ function UploadVideo() {
                   </div>
                 </div>
                 {videoSrc && (
-                  <video className='upload__video_preview' controls src={videoSrc} width="320" height="240">
+                  <video className='upload__video__preview' controls src={videoSrc} width="320" height="240">
                     Seu navegador não suporta o elemento de vídeo.
                   </video>
                 )}
               </div>
               <div className='upload__video__box__input'>
                 <div className='upload__video__box__input'>
-                  <label className='upload__video__label'>Categoria do vídeo</label>
                   <div className='upload__video__box__tags'>
-                    <input
-                      className="upload__video__tags__input"
-                      placeholder={"Escreva suas tags"}
-                      type={"text"}
-                      required={true}
-                      name='tag'
-                      onChange={handleTagChange}
-                      value={tag}
-                    />
+                    <div className='upload__video__tags__input'>
+                      <Input
+                        placeholder={"Tags do vídeo"}
+                        type={"text"}
+                        value={tag}
+                        onChange={handleTagChange}
+                        name='tag'
+                        required={true}
+                      />
+                    </div>
                     <button
                       className='upload__video__tags__button'
-                      onClick={renderNewTag}
+                      onClick={renderizarNovaTag}
                       type='button'>
                       Enviar
                     </button>
                   </div>
                 </div>
-                <div className='upload__video__tags__scroll'>
-                  {tags.map((tag, index) => (
-                    <div className='upload__video__tag' key={index}>{tag}</div>
-                  ))}
-                </div>
+                {tags.length != 0 &&
+                  <div className='upload__video__tags__scroll'>
+                    {tags.map((tag, index) => (
+                      <div className='upload__video__tag' key={index}>
+                        {tag}
+                        <button className='upload__video__tag__button__delete' onClick={() => deletarTag(index)}>x</button>
+                      </div>
+                    ))}
+                  </div>
+                }
               </div>
-
-              <div className='upload__video__child__friendly_box'>
+              <div className='upload__video__child__friendly__box'>
                 <p>Este vídeo é destinado para crianças?</p>
-                <div className='upload__video__child__friendly_options'>
-                  <div className='upload__video__child__friendly_option'>
-                    <input type='radio' name='kids' value={true} required={true} onChange={handleInputChange} />
+                <div className='upload__video__child__friendly__options'>
+                  <div className='upload__video__child__friendly__option'>
+                    <input type='radio' name='restrito' value={false} required={true} onChange={handleInputChange} />
                     <label>Sim, é destinado para crianças</label>
                   </div>
-                  <div className='upload__video__child__friendly_option'>
-                    <input type='radio' name='kids' value={false} required={true} onChange={handleInputChange} />
+                  <div className='upload__video__child__friendly__option'>
+                    <input type='radio' name='restrito' value={true} required={true} onChange={handleInputChange} />
                     <label>Não é destinado para crianças</label>
                   </div>
                 </div>

@@ -1,19 +1,27 @@
+// style
 import './Upload.css'
 
+// react
+import { Link } from 'react-router-dom';
 import { useState, useRef } from "react"
 import { HiUpload } from 'react-icons/hi';
 import { BsFillFastForwardFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 
-import HeaderUpload from './headerUpload/HeaderUpload';
+// componentes
 import Button from "../../components/button/Button";
+import HeaderUpload from './headerUpload/HeaderUpload';
 import InputFile from '../../components/inputFile/InputFile';
+
+// imagens
+import Preview from '../../assets/image/preview_video.png'
 
 function Upload() {
 
     const [isVideo, setIsVideo] = useState(true)
     const [image, setImage] = useState()
-    const imagePreviewRef = useRef(null)
+    const imagePreviewRef = useRef(Preview)
+
+    const [miniatura, setMiniatura] = useState()
 
     const handleVideoChange = () => {
         setIsVideo(true)
@@ -23,12 +31,13 @@ function Upload() {
     }
 
     const handleFileChange = (e) => {
+
+        setMiniatura(e.target.files[0])
         const file = e.target.files[0]
         if (file) {
             const formData = new FormData()
             formData.append("foto", file)
             setImage(formData)
-            localStorage.setItem("foto", formData)
 
             const reader = new FileReader();
 
@@ -97,7 +106,7 @@ function Upload() {
                                 <img
                                     id="upload__image__preview"
                                     ref={imagePreviewRef}
-                                    src="#"
+                                    src={Preview}
                                     alt="Preview da Imagem" />
                                 <InputFile
                                     label={"Selecionar arquivo"}
@@ -109,14 +118,12 @@ function Upload() {
                             <div className='upload__next__buttons__box'>
                                 <Button
                                     label={"Cancelar"}
-                                    // onClick={}
                                     type={"submit"}
                                     principal={false}
                                 />
-                                <Link className='upload__next__button__link' to="/upload-video">
+                                <Link className='upload__next__button__link' to={`/upload-video?miniatura=${encodeURIComponent(miniatura)}`}>
                                     <Button
                                         label={"Próximo"}
-                                        // onClick={}
                                         type={"submit"}
                                         principal={true}
                                     />
@@ -143,14 +150,12 @@ function Upload() {
                                     <div className='upload__next__buttons__box__shorts'>
                                         <Button
                                             label={"Cancelar"}
-                                            // onClick={}
                                             type={"submit"}
                                             principal={false}
                                         />
-                                        <Link className='upload__next__button__link' to="/upload-shorts">
+                                        <Link className='upload__next__button__link' to={`/upload-shorts?miniatura=${encodeURIComponent(miniatura)}`}>
                                             <Button
                                                 label={"Próximo"}
-                                                // onClick={}
                                                 type={"submit"}
                                                 principal={true}
                                             />
@@ -162,7 +167,6 @@ function Upload() {
                     }
                 </div>
             </div>
-
         </>
     )
 }

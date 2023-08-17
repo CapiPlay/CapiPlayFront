@@ -23,7 +23,7 @@ const UserService = {
 
     detalhes : async () => {
         try {
-            const res = await axios.get("/api/usuario/detalhes")
+            const res = await axios.get("/api/usuario")
             return res
         } catch (err) {
             console.error(err)
