@@ -14,9 +14,6 @@ function Player(video1) {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
 
-//item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
-function Player(video) {
-
   function Player() {
     const [video, setVideo] = useState();
     const { videoId } = useParams();
@@ -35,7 +32,7 @@ function Player(video) {
     }, []);
 
     const buscarVideo = async (videoId) => {
-      setVideo(await PlayerService.buscarVideo(videoId))
+      setVideo(await PlayerService.buscarVideoObject(videoId))
     }
 
   //são apenas variáveis de exemplo, elas vão vir com o objeto 
@@ -83,5 +80,4 @@ function Player(video) {
       </>
     );
   }
-}
 export default Player;

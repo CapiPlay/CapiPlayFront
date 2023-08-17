@@ -1,14 +1,31 @@
+// style
 import './UploadShorts.css'
 
-import React from 'react'
-import { useState, useRef } from "react"
-import { HiUpload } from 'react-icons/hi';
+// react
+import { HiUpload } from 'react-icons/hi'
+import { useLocation } from 'react-router-dom'
+import React, { useState, useRef } from "react"
 
-import Button from '../../components/button/Button';
-import InputFile from "../../components/inputFile/InputFile";
-import HeaderUpload from '../upload/headerUpload/HeaderUpload';
+// componentes
+import Input from '../../components/input/Input'
+import Select from '../../components/select/Select'
+import Button from '../../components/button/Button'
+import InputFile from '../../components/inputFile/InputFile'
+import HeaderUpload from '../upload/headerUpload/HeaderUpload'
+
+// service
+import VideoService from '../../service/VideoService'
 
 function UploadShorts() {
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const miniaturaUrl = searchParams.get("miniatura");
+
+  const [videoSrc, setVideoSrc] = useState(null)
+
+  const [tag, setTag] = useState("");
+  const [tags, setTags] = useState([]);
 
   const [image, setImage] = useState()
   const imagePreviewRef = useRef(null)
@@ -18,15 +35,34 @@ function UploadShorts() {
     descricao: null,
     tags: [],
     categoria: "",
-    ehReels: true,
+    shorts: true,
     video: "",
-    miniatura: "",
-    kids: ""
+    miniatura: miniaturaUrl,
+    restrito: ""
   })
+
+  const categorias = [
+    { label: "Artes e Cultura", value: "Artes e Cultura" },
+    { label: "Ciência e Tecnologia", value: "Ciência e Tecnologia" },
+    { label: "Culinária", value: "Culinária" },
+    { label: "Educação", value: "Educação" },
+    { label: "Esportes", value: "Esportes" },
+    { label: "Entretenimento", value: "Entretenimento" },
+    { label: "Documentários", value: "Documentários" },
+    { label: "Jogos", value: "Jogos" },
+    { label: "Lifestyle", value: "Lifestyle" },
+    { label: "Moda e Beleza", value: "Moda e Beleza" },
+    { label: "Música", value: "Música" },
+    { label: "Viagem e Turismo", value: "Viagem e Turismo" }
+  ];
 
   const handleInputChange = (e) => {
     setVideo({ ...video, [e.target.name]: e.target.value })
   }
+
+  const handleTagChange = (e) => {
+    setTag(e.target.value);
+  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
@@ -34,7 +70,6 @@ function UploadShorts() {
       const formData = new FormData()
       formData.append("foto", file)
       setImage(formData)
-      localStorage.setItem("foto", formData)
 
       const reader = new FileReader();
 
@@ -46,71 +81,124 @@ function UploadShorts() {
       };
 
       reader.readAsDataURL(file);
+
+      const videoURL = URL.createObjectURL(file);
+      setVideoSrc(videoURL);
+
+      setVideoSrc(URL.createObjectURL(file));
     }
   }
 
-  const enviarVideo = (event) => {
+  const renderizarNovaTag = () => {
+    if (tag.trim() !== "") {
+      setTags([...tags, tag])
+      const updatedTags = [...video.tags, tag]
+      setVideo({ ...video, tags: updatedTags })
+      setTag("")
+    }
+  }
+
+  const deletarTag = (index) => {
+    const updatedTags = [...tags];
+    updatedTags.splice(index, 1);
+    setTags(updatedTags);
+
+    setVideo((prevVideo) => ({
+      ...prevVideo,
+      tags: updatedTags,
+    }))
+  }
+
+  const enviarShorts = (event) => {
     event.preventDefault()
-    // CardService.cadastrar(card)
-    // alert("Cadastro efetuado!")
+
+    setVideo((prevVideo) => ({
+      ...prevVideo,
+      video: videoSrc
+    }));
+    // VideoService.criar(video)
     console.log(video)
     // window.location.reload()
   }
 
+  const handleEnterPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      renderizarNovaTag();
+    }
+  };
+
   return (
     <>
       <div className='upload__shorts__page'>
-        <HeaderUpload />
+        <HeaderUpload caminho={"/upload"} />
         <div className='upload__shorts__container'>
-          <p>Informações do vídeo</p>
+          <p>Informações do shorts</p>
           <div className='upload__shorts__container__rows'>
             <div className='upload__shorts__container__row'>
-              <label className='upload__shorts__label'>Título do vídeo</label>
-              <input
-                className='upload__shorts__input'
-                placeholder={"Título do vídeo"}
+              <Input
+                placeholder={"Título do shorts"}
                 type={"text"}
-                required={true}
+                value={video.titulo}
                 onChange={handleInputChange}
                 name='titulo'
-                value={video.titulo}
+                required={true}
               />
-              <label className='upload__shorts__label'>Categoria do vídeo</label>
-              <select className='upload__shorts__select' onChange={handleInputChange} name='categoria' value={video.categoria}>
-                <option defaultValue={''} disabled hidden value="">Selecione uma categoria</option>
-                <option value="Artes e Cultura">Artes e Cultura</option>
-                <option value="Ciência e Tecnologia">Ciência e Tecnologia</option>
-                <option value="Culinária">Culinária</option>
-                <option value="Educação">Educação</option>
-                <option value="Entretenimento">Entretenimento</option>
-                <option value="Esportes">Esportes</option>
-                <option value="Documentários">Documentários</option>
-                <option value="Jogos">Jogos</option>
-                <option value="Lifestyle">Lifestyle</option>
-                <option value="Moda e Beleza">Moda e Beleza</option>
-                <option value="Música">Música</option>
-                <option value="Viagem e Turismo">Viagem e Turismo</option>
-              </select>
+              <Select
+                options={categorias}
+                value={video.categoria}
+                placeholder="Categoria do shorts"
+                onChange={handleInputChange}
+                name="categoria"
+                required={true}
+              />
 
-              <div className='upload__shorts__box__tags'>
-                <input
-                  className="upload__shorts__tags__input"
-                  placeholder={"Escreva suas tags"}
-                  type={"text"}
-                  required={true}
-                  name='tags'
-                  onChange={handleInputChange}
-                  value={video.tags}
-                />
-                <button
-                  className='upload__shorts__tags__button'
-                  // onClick={}
-                  type='button'>Enviar</button>
+              <div className='upload__shorts__box__input'>
+                <div className='upload__shorts__box__input'>
+                  <div className='upload__shorts__box__tags'>
+                    <div className='upload__shorts__tags__input'>
+                      <Input
+                        placeholder={"Tags do shorts"}
+                        type={"text"}
+                        value={tag}
+                        onChange={handleTagChange}
+                        onKeyDown={handleEnterPress}
+                        name='tag'
+                        required={true}
+                      />
+                    </div>
+                    <button
+                      className='upload__shorts__tags__button'
+                      onClick={renderizarNovaTag}
+                      type='button'>
+                      Enviar
+                    </button>
+                  </div>
+                </div>
+                {tags.length != 0 &&
+                  <div className='upload__shorts__tags__scroll'>
+                    {tags.map((tag, index) => (
+                      <div className='upload__shorts__tag' key={index}>
+                        {tag}
+                        <button className='upload__shorts__tag__button__delete' onClick={() => deletarTag(index)}>x</button>
+                      </div>
+                    ))}
+                  </div>
+                }
               </div>
-              <div className='upload__shorts__tags__scroll'>
-                <div className='upload__shorts__tag'>Lifestyle</div>
-                <div className='upload__shorts__tag'>Ciência e Tecnologia</div>
-                <div className='upload__shorts__tag'>Entretenimento</div>
+
+              <div className='upload__shorts__child__friendly__box'>
+                <p>Este shorts é destinado para crianças?</p>
+                <div className='upload__shorts__child__friendly__options'>
+                  <div className='upload__shorts__child__friendly__option'>
+                    <input type='radio' name='restrito' value={false} required={true} onChange={handleInputChange} />
+                    <label>Sim, é destinado para crianças</label>
+                  </div>
+                  <div className='upload__shorts__child__friendly__option'>
+                    <input type='radio' name='restrito' value={true} required={true} onChange={handleInputChange} />
+                    <label>Não é destinado para crianças</label>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -129,33 +217,18 @@ function UploadShorts() {
                     />
                   </div>
                 </div>
-                <img
-                  id="upload__shorts__preview"
-                  ref={imagePreviewRef}
-                  src="#"
-                  alt="Preview da Imagem" />
-              </div>
-
-
-              <div className='upload__shorts__child__friendly_box'>
-                <p>Este vídeo é destinado para crianças?</p>
-                <div className='upload__shorts__child__friendly_options'>
-                  <div className='upload__shorts__child__friendly_option'>
-                    <input type='radio' name='kids' value={video.kids} required={true} />
-                    <label>Sim, é destinado para crianças</label>
-                  </div>
-                  <div className='upload__shorts__child__friendly_option'>
-                    <input type='radio' name='kids' value={video.kids} required={true} />
-                    <label>Não é destinado para crianças</label>
-                  </div>
-                </div>
+                {videoSrc && (
+                  <video className='upload__shorts__preview' controls src={videoSrc} width="200" height="600">
+                    Seu navegador não suporta o elemento de vídeo.
+                  </video>
+                )}
               </div>
             </div>
           </div>
           <div className='upload__shorts__button__submit'>
             <Button
               label={"Criar"}
-              onClick={enviarVideo}
+              onClick={enviarShorts}
               type={"submit"}
               principal={true} />
           </div>

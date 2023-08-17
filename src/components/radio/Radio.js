@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from "react";
 import "./Radio.css"; // Certifique-se de importar o estilo correto
 
-const RadioInput = ({ options, selectedValue, onChange, name }) => {
+const Radio = ({ options, value, onChange, name }) => {
   const [labelColor, setLabelColor] = useState({});
-  const hasValue = selectedValue && selectedValue.length > 0;
+  const hasValue = value !== undefined && value !== "";
 
   useEffect(() => {
-    if (selectedValue) {
+    if (value) {
       setLabelColor({ color: "#BF94FF" });
     }
-  }, [selectedValue]);
+  }, [value]);
 
   const handleRadioChange = (event) => {
-    onChange(event);
+    onChange(event.target.value);
   };
 
   return (
-    <div className="input__group">
-      <div className="radio__options">
+    <div className="radio__group">
+      <div className="radio__control">
         {options.map((option) => (
           <label key={option.value} className="radio__label">
             <input
               type="radio"
               name={name}
               value={option.value}
-              checked={selectedValue === option.value}
+              checked={value === option.value}
               onChange={handleRadioChange}
             />
             <span className="radio__custom"></span>
-            <span className={`label__input ${selectedValue === option.value ? "active" : ""}`} style={labelColor}>
+            <span className={`radio__label__input ${hasValue ? "radio__active" : ""}`} style={labelColor}>
               {option.label}
             </span>
           </label>
@@ -38,4 +38,4 @@ const RadioInput = ({ options, selectedValue, onChange, name }) => {
   );
 };
 
-export default RadioInput;
+export default Radio;

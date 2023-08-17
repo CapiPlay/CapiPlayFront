@@ -11,6 +11,7 @@
 
 .container__home {
     background-color: var(--darkpurple);
+    margin-bottom: 5rem;
 }
 
 .container__slider__base_desk {
