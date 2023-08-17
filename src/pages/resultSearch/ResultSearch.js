@@ -110,7 +110,7 @@ const ResultSearch = () => {
             titulo: "titulo",
             uuid: "2"
         }
-    ]
+    ];
 
     const renderDesktop = () => {
         return (
