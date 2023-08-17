@@ -4,20 +4,20 @@ import './Video_card.css'
 
 import img_miniatura from "../../assets/image/img_base_miniatura.png"
 import PlayerService from '../../service/PlayerService';
- 
-function Video_card({video}) {
-    
+
+function Video_card({ video }) {
+
     if (!video) {
         // Handle the case when the video is undefined or null
         return <div>No Video Data</div>;
-      }
+    }
 
     return (
 
         <div className='box__video__card'>
             <Link to={`/video/${video.uuid}`}>
                 <div className='container__video__image'>
-                    <img src={"http://localhost:7000/api/video/static/" + video.caminhos[4]} className='container__video__card__image' />
+                    <img src={"http://10.4.96.74:7000/api/video/static/" + video.caminhos[4]} className='container__video__card__image' />
                 </div>
             </Link>
             <div className='container__video__info'>
