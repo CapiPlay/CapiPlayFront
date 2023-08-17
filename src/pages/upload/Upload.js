@@ -2,15 +2,15 @@
 import './Upload.css'
 
 // react
-import { Link } from 'react-router-dom';
-import { useState, useRef } from "react"
-import { HiUpload } from 'react-icons/hi';
-import { BsFillFastForwardFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom'
+import { useState, useRef } from 'react'
+import { HiUpload } from 'react-icons/hi'
+import { BsFillFastForwardFill } from 'react-icons/bs'
 
 // componentes
-import Button from "../../components/button/Button";
-import HeaderUpload from './headerUpload/HeaderUpload';
-import InputFile from '../../components/inputFile/InputFile';
+import Button from '../../components/button/Button'
+import HeaderUpload from './headerUpload/HeaderUpload'
+import InputFile from '../../components/inputFile/InputFile'
 
 // imagens
 import Preview from '../../assets/image/preview_video.png'
@@ -32,12 +32,12 @@ function Upload() {
 
     const handleFileChange = (e) => {
 
-        setMiniatura(e.target.files[0])
         const file = e.target.files[0]
         if (file) {
             const formData = new FormData()
             formData.append("foto", file)
             setImage(formData)
+            setMiniatura(formData)
 
             const reader = new FileReader();
 
@@ -113,6 +113,7 @@ function Upload() {
                                     radius={"10px"}
                                     onChange={handleFileChange}
                                     file={image}
+                                    accept={".png"}
                                 />
                             </div>
                             <div className='upload__next__buttons__box'>
@@ -146,6 +147,7 @@ function Upload() {
                                         radius={"10px"}
                                         onChange={handleFileChange}
                                         file={image}
+                                        accept={".png"}
                                     />
                                     <div className='upload__next__buttons__box__shorts'>
                                         <Button

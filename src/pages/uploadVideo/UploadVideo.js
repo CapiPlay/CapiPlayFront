@@ -69,7 +69,7 @@ function UploadVideo() {
     const file = e.target.files[0]
     if (file) {
       const formData = new FormData()
-      formData.append("foto", file)
+      formData.append("video", file)
       setImage(formData)
 
       const reader = new FileReader();
@@ -117,6 +117,7 @@ function UploadVideo() {
       ...prevVideo,
       video: videoSrc
     }));
+
     // VideoService.criar(video)
     console.log(video)
     // window.location.reload()
@@ -167,6 +168,7 @@ function UploadVideo() {
                       name='video'
                       onChange={handleFileChange}
                       value={video.video}
+                      accept={".mp4"}
                     />
                   </div>
                 </div>

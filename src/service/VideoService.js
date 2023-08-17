@@ -11,24 +11,6 @@ const VideoService = {
             console.error(err);
             throw err;
         }
-    },
-    editar: async (videoId, videoData) => {
-        try {
-            const response = await axios.put(`${videoApiUrl}/${videoId}`, videoData);
-            return response.data;
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
-    },
-    listar: async () => {
-        try {
-            const response = await axios.get(videoApiUrl);
-            return response.data;
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
     }
 };
 

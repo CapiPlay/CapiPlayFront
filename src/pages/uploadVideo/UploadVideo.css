@@ -36,9 +36,9 @@
 .upload__video__box__inputfile {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    gap: 1rem;
+    gap: 5rem;
 }
 
 .upload__video__inputfile {

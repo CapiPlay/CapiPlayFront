@@ -4,7 +4,7 @@ import './UploadShorts.css'
 // react
 import { HiUpload } from 'react-icons/hi'
 import { useLocation } from 'react-router-dom'
-import React, { useState, useRef } from "react"
+import React, { useState, useRef } from 'react'
 
 // componentes
 import Input from '../../components/input/Input'
@@ -214,6 +214,7 @@ function UploadShorts() {
                       name='video'
                       onChange={handleFileChange}
                       value={video.video}
+                      accept={".mp4"}
                     />
                   </div>
                 </div>
