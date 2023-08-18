@@ -17,11 +17,11 @@ function Description_component(video) {
 
   return (
     <>
-        <div className='description__container'>
-            <div className='description__date'><p>{description_date}</p></div>
-            <div className='description__content'><p>{showMore ? description : `${description.slice(0, 100)}...`}</p></div>
-            <div><button onClick={() => toggleShowMore()} className='description__moreORless'>{!showMore ? <p className='selection'>Mostrar mais <p className='selection__icon'><BiSolidDownArrow/></p></p>: <p className='selection'>Mostrar menos <p className='selection__icon'><BiSolidUpArrow/></p></p>}</button></div>
-        </div>
+      <div className='description__container'>
+        <div className='description__date'><p>{description_date}</p></div>
+        <div className='description__content'><p>{showMore ? description : `${description.slice(0, 100)}...`}</p></div>
+        <div><button onClick={() => toggleShowMore()} className='description__moreORless'>{!showMore ? <p className='selection'>Mostrar mais <p className='selection__icon'><BiSolidDownArrow /></p></p> : <p className='selection'>Mostrar menos <p className='selection__icon'><BiSolidUpArrow /></p></p>}</button></div>
+      </div>
     </>
   )
 }

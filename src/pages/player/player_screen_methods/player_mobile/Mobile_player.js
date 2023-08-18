@@ -9,10 +9,10 @@ import Divider_component from '../../player_components/divider_component/Divider
 import Comments_component from '../../player_components/comments_componet/Comments_component'
 import Video_card from '../../../../components/video_card/Video_card'
 import { BiArrowBack } from 'react-icons/bi'
-import {VscSend} from 'react-icons/vsc'
+import { VscSend } from 'react-icons/vsc'
 import PlayerService from '../../../../service/PlayerService'
 
-function Mobile_player({video}) {
+function Mobile_player({ video }) {
 
     const [showComments, setShowComments] = useState(false);
 
@@ -37,8 +37,8 @@ function Mobile_player({video}) {
     return (
         <>
             {!showComments && <div className='return__btn'><BiArrowBack color='var(--lightpurple)' />Voltar</div>}
-            
-            <video controls className='video__player__mobile' poster={"http://localhost:7000/api/video/static/" + video.caminhos[3]}  key={video.uuid}>
+
+            <video controls className='video__player__mobile' poster={"http://localhost:7000/api/video/static/" + video.caminhos[3]} key={video.uuid}>
                 <source src={"http://localhost:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
             </video>
             {!showComments && <>
@@ -83,8 +83,8 @@ function Mobile_player({video}) {
 
                 <div className='videos__mobile'>
                     {videos.map((video) => (
-                            <Video_card key={video.uuid} video={video} />
-                        ))}
+                        <Video_card key={video.uuid} video={video} />
+                    ))}
                 </div>
             </>
             }
@@ -113,7 +113,7 @@ function Mobile_player({video}) {
                         <div><Comments_component /></div>
                         <div><Comments_component /></div>
                     </div>
-                    <div className='comments__input__container'><input className='comments__input' placeholder='Escreva um comentário'/><VscSend className='send__icon'/></div>
+                    <div className='comments__input__container'><input className='comments__input' placeholder='Escreva um comentário' /><VscSend className='send__icon' /></div>
                 </div>
             }
         </>

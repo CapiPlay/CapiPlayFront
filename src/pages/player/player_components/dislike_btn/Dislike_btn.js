@@ -8,24 +8,24 @@ function Dislike_btn() {
 
   const handleToggleLikeBtn = () => {
     setDislikeBtn(!dislike_btn);
-  //   if(curtido){
-  //     EngajamentoService.criar(
-  //         {
-  //             usuarioId: 1, // usuarioId
-  //             // videoId: video.uuid,
-  //             curtida: 1
-  //         }
-  //     )
-  // }else{
-  //     EngajamentoService.criar(
-  //         {
-  //             usuarioId: 1, // usuarioId
-  //             // videoId: video.uuid,
-  //             curtida: 0
-  //         }
-  //     )
-  // }
-  } 
+    //   if(curtido){
+    //     EngajamentoService.criar(
+    //         {
+    //             usuarioId: 1, // usuarioId
+    //             // videoId: video.uuid,
+    //             curtida: 1
+    //         }
+    //     )
+    // }else{
+    //     EngajamentoService.criar(
+    //         {
+    //             usuarioId: 1, // usuarioId
+    //             // videoId: video.uuid,
+    //             curtida: 0
+    //         }
+    //     )
+    // }
+  }
 
   // useEffect(() => {
   //   curtido = EngajamentoService.buscarReacao(
@@ -43,10 +43,10 @@ function Dislike_btn() {
 
   return (
     <div>
-      { dislike_btn ?
-      <button className='dislike__btn'><BiDislike size={'1.6rem'} onClick={() => handleToggleLikeBtn()}/></button>
-      :
-      <button className='dislike__btn'><BiSolidDislike size={'1.6rem'} onClick={() => handleToggleLikeBtn()}/></button>
+      {dislike_btn ?
+        <button className='dislike__btn'><BiDislike size={'1.6rem'} onClick={() => handleToggleLikeBtn()} /></button>
+        :
+        <button className='dislike__btn'><BiSolidDislike size={'1.6rem'} onClick={() => handleToggleLikeBtn()} /></button>
       }
     </div>
   )

@@ -11,7 +11,7 @@ import Video_card from '../../../../components/video_card/Video_card'
 import { BiArrowBack } from 'react-icons/bi'
 import PlayerService from '../../../../service/PlayerService'
 
-function Tablet_player({video}) {
+function Tablet_player({ video }) {
     const [videos, setVideos] = useState([])
 
     useEffect(() => {
@@ -67,11 +67,11 @@ function Tablet_player({video}) {
                 <Divider_component />
             </div>
             <div className='videos__tablet__container'>
-                    <div className='videos__tablet'>
-                        {videos.map((video) => (
-                            <Video_card key={video.uuid} video={video} />
-                        ))}
-                    </div>
+                <div className='videos__tablet'>
+                    {videos.map((video) => (
+                        <Video_card key={video.uuid} video={video} />
+                    ))}
+                </div>
             </div></>
     )
 }
