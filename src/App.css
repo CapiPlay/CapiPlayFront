@@ -38,3 +38,26 @@ body::-webkit-scrollbar-thumb {
   --lightpurple: #BF94FF;
   --darkpurplebackground: #2f2858cc;
 }
+
+
+/* //Themes// */
+
+.dark-mode {
+  --whitesmoke: #F5F5F5;
+  --beige: #EBEBEB;
+  --darkpurple: #1F1D2B;
+  --darkblue: #141317;
+  --purple: #772CE8;
+  --lightpurple: #BF94FF;
+  --darkpurplebackground: #2f2858cc;
+}
+
+.light-mode {
+  --whitesmoke: #F5F5F5;
+  --beige: #EBEBEB;
+  --darkpurple: #F5F5F5;
+  --darkblue: #EBEBEB;
+  --purple: #772CE8;
+  --lightpurple: #BF94FF;
+  --darkpurplebackground: #FFFFFF;
+}

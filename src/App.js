@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useState } from 'react'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import Register from './pages/register/Register'
@@ -19,9 +20,18 @@ import UploadVideo from './pages/uploadVideo/UploadVideo';
 import UploadShorts from './pages/uploadShorts/UploadShorts';
 import NotFound from './pages/notFound/NotFound';
 import Settings from './pages/settings/Settings';
+import ThemeToggle from '../src/components/header/theme_toggle/ThemeToggle';
 
 function App() {
+
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(prevMode => !prevMode);
+  };
+
   return (
+    <div className={darkMode ? 'dark-mode' : 'light-mode'}>
     <div className="App">
       <Provider store={store} >
         <BrowserRouter>
@@ -43,7 +53,9 @@ function App() {
             <Route path="/teste" element={<Video_player_contructor />} />
           </Routes>
         </BrowserRouter>
+        <ThemeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </Provider>
+    </div>
     </div>
   )
 }
