@@ -41,6 +41,7 @@ function App() {
             <Route path="/upload-shorts" element={<UploadShorts />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/teste" element={<Video_player_contructor />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </Provider>
