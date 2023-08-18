@@ -13,6 +13,7 @@ import Button from '../../components/button/Button'
 import InputFile from '../../components/inputFile/InputFile'
 import HeaderUpload from '../upload/headerUpload/HeaderUpload'
 import InputTextArea from '../../components/inputTextArea/InputTextArea'
+import InputFileUpload from '../../components/inputFileUpload/InputFileUpload'
 
 // service
 import VideoService from '../../service/VideoService'
@@ -130,7 +131,7 @@ function UploadVideo() {
         <div className='upload__video__container'>
           <p>Informações do vídeo</p>
           <div className='upload__video__container__rows'>
-            <div className='upload__video__container__row'>
+            <div className='upload__video__container__first__row'>
               <Input
                 placeholder={"Título do vídeo"}
                 type={"text"}
@@ -156,8 +157,19 @@ function UploadVideo() {
               />
             </div>
 
-            <div className='upload__video__container__row'>
+            <div className='upload__video__container__first__row'>
               <div className='upload__video__box__inputfile'>
+                {/* <div className='testetetetet'>
+                  <InputFileUpload
+                    label={"Selecionar arquivo"}
+                    radius={"10px"}
+                    file={image}
+                    name='video'
+                    onChange={handleFileChange}
+                    value={video.video}
+                    accept={".mp4"}
+                  />
+                </div> */}
                 <div className='upload__video__inputfile'>
                   <div className='upload__video__inputfile__border'>
                     <HiUpload color='var(--whitesmoke)' fontSize={40} />
