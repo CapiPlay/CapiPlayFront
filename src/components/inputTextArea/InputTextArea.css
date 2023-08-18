@@ -1,4 +1,5 @@
 .input__group__textArea {
+    margin-top: 2rem;
     margin-bottom: 2rem;
     position: relative;
     display: flex;
@@ -21,7 +22,6 @@
     align-items: start;
     justify-content: start;
     padding: 0.5rem;
-    margin-bottom: 25px;
 }
 
 .input__control__textArea:focus {

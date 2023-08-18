@@ -204,9 +204,6 @@ const Settings = ({ userId }) => {
                                 required={true}
                                 className='settings__input__desktop'
                             />
-                        </div>
-                        <div className='settings__input__box'>
-
                             <div className="settings__field__desktop">
                                 <Input
                                     placeholder={"Nome do canal"}
@@ -217,6 +214,8 @@ const Settings = ({ userId }) => {
                                     className='settings__input__desktop'
                                 />
                             </div>
+                        </div>
+                        <div className='settings__input__box__description'>
                             <div className="settings__field__desktop">
                                 <Input
                                     placeholder={"Senha"}
