@@ -19,7 +19,7 @@ import ShortsService from '../../../service/ShortsService'
 
 const ShortsComponent = ({ short }) => {
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const targetRef = useRef(null)
     const dispatch = useDispatch()
     const shorts = useSelector((state) => state.shorts.listShorts)
@@ -32,7 +32,7 @@ const ShortsComponent = ({ short }) => {
     const [openModalComments, setOpenModalComments] = useState(false)
     const [likeShort, setLikeShort] = useState(false)
     const [dislikeShort, setDislikeShort] = useState(false)
-    const [isVideoInView, setIsVideoInView] = useState(false);
+    const [isVideoInView, setIsVideoInView] = useState(false)
 
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
 
@@ -53,10 +53,10 @@ const ShortsComponent = ({ short }) => {
         setLikeShort(false)
     }
 
-    const [isMuted, setIsMuted] = useState(true);
+    const [isMuted, setIsMuted] = useState(true)
 
     const toggleMute = () => {
-        setIsMuted(!isMuted);
+        setIsMuted(!isMuted)
     }
 
     useEffect(() => {
