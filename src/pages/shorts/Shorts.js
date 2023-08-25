@@ -83,6 +83,8 @@ const Shorts = () => {
             setIsScrolling(true)
         }
 
+        
+
         const scrollContainer = scrollRef.current
         scrollContainer.addEventListener('scroll', handleScroll)
 
@@ -91,7 +93,10 @@ const Shorts = () => {
             for(let i = 0; i < 5; i++) {
                 const data = await ShortsService.buscar()
                 newShorts.push(data)
+                console.log(data)
             }
+
+            console.log(shorts)
 
             dispatch(setListShorts(null, newShorts, null))
         }

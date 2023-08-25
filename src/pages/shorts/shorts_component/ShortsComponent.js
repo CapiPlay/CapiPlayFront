@@ -25,6 +25,7 @@ const ShortsComponent = ({ short }) => {
     const shorts = useSelector((state) => state.shorts.listShorts)
 
     const { id } = useParams()
+    console.log(id)
 
     //transição entre os vídeos
     const [transitioning, setTransitioning] = useState(false)
@@ -68,6 +69,7 @@ const ShortsComponent = ({ short }) => {
 
         const getUUID = async () => {
             const short = await ShortsService.buscarUUID(id)
+            console.log(short)
             dispatch(setActualShorts(short))
         }
 
