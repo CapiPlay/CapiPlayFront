@@ -180,13 +180,8 @@ function Header({ userLogin }) {
                 </div>
             </div>
             <div className='box__header'>
-
-                <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} onClick={handleClick} />
-                <Modal_profile profile={userLogin} />
-
                 <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
                 <Modal_profile profile={userLogin} />
-
             </div>
             {search &&
                 <Search />
