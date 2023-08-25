@@ -1,5 +1,7 @@
 import axios from "./AxiosConfig"
 
+// import axios from "axios"
+
 const userApiUrl = 'http://7000/api/usuario';
 
 const UserService = {
@@ -45,6 +47,15 @@ const UserService = {
         } catch (err) {
             console.error(err);
             throw err;
+        }
+    }, 
+    getTokenAnonimo: async () => {
+        try {
+            const response = await axios.post("/api/usuario/anonimo")
+            console.log(response.data)
+            return response.data
+        } catch (err) {
+            console.error(err)
         }
     }
 };
