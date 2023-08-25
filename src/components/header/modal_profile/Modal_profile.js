@@ -1,14 +1,21 @@
-import Aos from 'aos';
+// styles
 import './Modal_profile.css';
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import notFound from '../../../assets/image/404_NotFound.png' 
-import channel from '../../../assets/image/channel_profile.png'
+
+// cookies
 import Cookies from 'js-cookie';
+
+// react
+import Aos from 'aos';
+import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
 import ThemeToggle from '../theme_toggle/ThemeToggle'
 
+// images
+import notFound from '../../../assets/image/404_NotFound.png' 
+import channel from '../../../assets/image/channel_profile.png'
 
 function Modal_profile({ profile }) {
+    
     const [openModal, setOpenModal] = useState(0)
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 

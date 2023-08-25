@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from 'react'
+// styles
 import './Side_Bar.css'
-import art from '../../../assets/image/palette.png'
-import science from '../../../assets/image/science.png'
-import school from '../../../assets/image/school.png'
-import interactive_space from '../../../assets/image/interactive_space.png'
-import flightsmode from '../../../assets/image/flightsmode.png'
-import video_file from '../../../assets/image/video_file.png'
-import kayaking from '../../../assets/image/kayaking.png'
-import oven_gen from '../../../assets/image/oven_gen.png'
-import sports_esports from '../../../assets/image/sports_esports.png'
-import psychiatry from '../../../assets/image/psychiatry.png'
-import music_note from '../../../assets/image/music_note.png'
-import styler from '../../../assets/image/styler.png'
+
+// react
+import React, { useEffect, useState } from 'react'
+
+// react icons
+import { TbMovie } from 'react-icons/tb';
+import { TbPlant } from 'react-icons/tb';
+import { SlPlane } from 'react-icons/sl';
+import { TbSchool } from 'react-icons/tb';
+import { TbHanger2 } from 'react-icons/tb';
+import { PiPalette } from 'react-icons/pi';
+import { TbChefHat } from 'react-icons/tb';
+import { LuGamepad2 } from 'react-icons/lu';
+import { PiTelevision } from 'react-icons/pi';
 import { GiHamburgerMenu } from 'react-icons/gi';
+import { MdOutlineScience } from 'react-icons/md';
+import { HiOutlineMusicNote } from 'react-icons/hi';
+import { MdOutlineSportsVolleyball } from 'react-icons/md';
 
 function Side_Bar() {
 
@@ -53,77 +58,77 @@ function Side_Bar() {
                 <div className={`container__side__bar ${isSideBarOpen ? 'openModal__side' : ''}`}>
                     <div className={`category__box ${isSideBarOpen ? 'openBoxes__side' : ''}`}>
                         <div className='modal__category__item__side' >
-                            <GiHamburgerMenu color='var(--lightpurple)' onClick={handleSideBar} size={'2rem'} className='icon__hamburguer__side'/>
+                            <GiHamburgerMenu color='var(--lightpurple)' onClick={handleSideBar} size={'2rem'} className='icon__hamburguer__side' />
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
-                                <img className='icon__category__side' src={art} />
+                                <PiPalette color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
                                 <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Artes e cultura</p>
                             </div>
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
-                                <img className='icon__category__side' src={science} />
+                                <MdOutlineScience color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
                                 <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Ciências e tecnologia</p>
                             </div>
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
-                                <img className='icon__category__side' src={oven_gen} />
+                                <TbChefHat color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
                                 <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Culinária</p>
                             </div>
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
-                                <img className='icon__category__side' src={school} />
+                                <TbSchool color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
                                 <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Educação</p>
                             </div>
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
-                                <img className='icon__category__side' src={interactive_space} />
+                                <MdOutlineSportsVolleyball color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
                                 <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Esportes</p>
                             </div>
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
-                                <img className='icon__category__side' src={kayaking} />
+                                <PiTelevision color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
                                 <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Entretenimento</p>
                             </div>
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
-                                <img className='icon__category__side' src={video_file} />
+                                <TbMovie color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
                                 <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Documentário</p>
                             </div>
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
-                                <img className='icon__category__side' src={sports_esports} />
+                                <LuGamepad2 color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
                                 <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Jogos</p>
                             </div>
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
-                                <img className='icon__category__side' src={psychiatry} />
+                                <TbPlant color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
                                 <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Lifestyle</p>
                             </div>
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
-                                <img className='icon__category__side' src={styler} />
+                                <TbHanger2 color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
                                 <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Moda e beleza</p>
                             </div>
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
-                                <img className='icon__category__side' src={music_note} />
+                                <HiOutlineMusicNote color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
                                 <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Música</p>
                             </div>
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
-                                <img className='icon__category__side' src={flightsmode} />
+                                <SlPlane color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
                                 <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Viagem e turismo</p>
                             </div>
                         </div>
