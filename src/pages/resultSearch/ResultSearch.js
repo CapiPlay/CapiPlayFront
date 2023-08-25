@@ -55,11 +55,11 @@ const ResultSearch = () => {
     {
         caminhos: [
             "83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R154X268_1148387358269743337.png",
-			"83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R200X348_1815036189906823964.png",
-			"83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R230X388_3533859505980465547.png",
-			"83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R340X193_5072361480399494154.png",
-			"83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R380X193_95036715129770923.png",
-			"83332fb0-7a8f-4b26-b2b8-58a719d07152\\video_14988957158581530481.mp4"
+            "83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R200X348_1815036189906823964.png",
+            "83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R230X388_3533859505980465547.png",
+            "83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R340X193_5072361480399494154.png",
+            "83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R380X193_95036715129770923.png",
+            "83332fb0-7a8f-4b26-b2b8-58a719d07152\\video_14988957158581530481.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
@@ -67,11 +67,11 @@ const ResultSearch = () => {
     {
         caminhos: [
             "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R154X268_7478500415072241355.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R200X348_5866358373415366753.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R230X388_15903921073760648855.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R340X193_11053981639284794552.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R380X193_15551205469361886336.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\video_16496170581419065986.mp4"
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R200X348_5866358373415366753.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R230X388_15903921073760648855.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R340X193_11053981639284794552.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R380X193_15551205469361886336.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\video_16496170581419065986.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
@@ -79,11 +79,11 @@ const ResultSearch = () => {
     {
         caminhos: [
             "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R154X268_7478500415072241355.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R200X348_5866358373415366753.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R230X388_15903921073760648855.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R340X193_11053981639284794552.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R380X193_15551205469361886336.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\video_16496170581419065986.mp4"
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R200X348_5866358373415366753.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R230X388_15903921073760648855.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R340X193_11053981639284794552.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R380X193_15551205469361886336.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\video_16496170581419065986.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
@@ -91,11 +91,11 @@ const ResultSearch = () => {
     {
         caminhos: [
             "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R154X268_7478500415072241355.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R200X348_5866358373415366753.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R230X388_15903921073760648855.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R340X193_11053981639284794552.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R380X193_15551205469361886336.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\video_16496170581419065986.mp4"
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R200X348_5866358373415366753.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R230X388_15903921073760648855.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R340X193_11053981639284794552.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R380X193_15551205469361886336.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\video_16496170581419065986.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
@@ -103,11 +103,11 @@ const ResultSearch = () => {
     {
         caminhos: [
             "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R154X268_7478500415072241355.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R200X348_5866358373415366753.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R230X388_15903921073760648855.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R340X193_11053981639284794552.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R380X193_15551205469361886336.png",
-			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\video_16496170581419065986.mp4"
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R200X348_5866358373415366753.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R230X388_15903921073760648855.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R340X193_11053981639284794552.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R380X193_15551205469361886336.png",
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\video_16496170581419065986.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
@@ -122,14 +122,14 @@ const ResultSearch = () => {
                     <Header />
                 </div>
                 <div className="container__tags__search__desktop">
-                    <Slider_Category/>
+                    <Slider_Category />
                 </div>
-                <div className="container__filter" onClick={() => { setOpenFilter(!openFilter); setDefaultFilter(true) }}>
+                <div className="container__filter__desktop" onClick={() => { setOpenFilter(!openFilter); setDefaultFilter(true) }}>
                     <span>Filtros</span>
                     <FiFilter />
                 </div>
                 {renderFilter}
-                <div className="container__videos__result">
+                <div className="container__videos__result__desktop">
                     {videos.map((video) => (
                         <div className="video__result__search">
                             <Video_card video={video} />
@@ -146,12 +146,12 @@ const ResultSearch = () => {
                 <HeaderSearch
                     valueInput={searchValue}
                     functionBack={() => nav("/")} />
-                <div className="tags__carousel__search">
+                <div className="container__tags__search">
+                    <TagsCarousel/>
                 </div>
-                <TagsCarousel />
                 <div className="container__filter" onClick={() => { setOpenFilter(true); setDefaultFilter(true); }}>
-                <span>Filtros</span>
-                <FiFilter />
+                    <span>Filtros</span>
+                    <FiFilter />
                 </div>
                 {renderFilter}
                 <div className="container__videos__result">

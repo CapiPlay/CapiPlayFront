@@ -1,23 +1,15 @@
-.container__header__search__desktop{
-    position: absolute;
-    top: 0;
-    left: 0;
-}
 
-.container__tags__search__desktop{
-    margin: 5%;
+/* ---------- Mobile & Tablet ---------- */
+
+.container__tags__search {
+    margin-top: 2%;
     width: 100%;
 }
-
 
 .container__result__search {
     width: 100%;
     height: 100vh;
     background-color: var(--darkpurple);
-}
-
-.tags__carousel__search {
-    margin-top: 2%;
 }
 
 .container__filter {
@@ -75,12 +67,51 @@
     gap: 20px;
 }
 
-.video__result__search{
-    width: 28%;
+.video__result__search {
+    width: 21.3rem;
     display: flex;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
 }
+
+/* ---------- Desktop ---------- */
+
+.container__tags__search__desktop {
+    margin-top: 5%;
+    width: 100%;
+}
+
+.container__filter__desktop {
+    width: 5%;
+    height: .2vh;
+    margin: 2% 82%;
+    gap: 5%;
+    padding: 1.5%;
+    border: solid 2px var(--purple);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.container__filter__desktop>span {
+    font-size: 14px;
+}
+
+.container__videos__result__desktop {
+    margin-left: 5%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+}
+
+/* Animações do filtro */
 
 @keyframes open-filter {
     0% {
@@ -113,16 +144,11 @@
         font-size: 16px;
     }
 
-    .container__filter{
-        width: 10%;
-        margin-left: 15%;
-    }
-}
-
-@media screen and (min-width: 1000px) {
     .container__filter {
-        width: 5%;
-        margin-left: 82%;
-        height: .2vh;
+        width: 15%;
+    }
+
+    .container__videos__result {
+        margin: 0;
     }
 }
