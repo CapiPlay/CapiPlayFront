@@ -20,8 +20,8 @@ const Settings = ({ userId }) => {
     userId = "d033e1ec-d22e-4df6-a250-0b3672da4b59";
 
     const [settingsData, setSettingsData] = useState({
-        email: 'aaaaaaaaaaaaaa',
-        dataNascimento: 'aaaaaaaaaaaaaaaaa',
+        email: '',
+        dataNascimento: '',
         nomeUsuario: '',
         nomeCanal: '',
         senhaAtual: '',
