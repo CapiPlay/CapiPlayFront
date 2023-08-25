@@ -14,9 +14,17 @@ const getAuthHeaders = (token) => {
     return {}
 }
 
+const getToken = () => {
+    const userToken = Cookies.get("token")
+    if(userToken) {
+        return userToken
+    }
+    return Cookies.get("anonimo")
+}
+
 axiosInstance.interceptors.request.use(
     (config) => {
-        const token = Cookies.get("token")
+        const token = getToken()
         const authHeaders = getAuthHeaders(token)
         config.headers = { ...config.headers, ...authHeaders }
         return config
@@ -27,9 +35,9 @@ axiosInstance.interceptors.request.use(
 )
 
 axiosInstance.interceptors.response.use((response) => {
-    return response;
+    return response
 }, (error) => {
-    return Promise.reject(error);
-});
+    return Promise.reject(error)
+})
 
 export default axiosInstance

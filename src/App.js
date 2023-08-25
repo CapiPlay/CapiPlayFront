@@ -23,21 +23,14 @@ import TopLoadingBar from 'react-top-loading-bar'
 import { useRef, useState } from 'react'
 import axiosInstance from "./service/AxiosConfig"
 import { useEffect } from 'react'
-import UserService from './service/UserService'
-import Cookies from 'js-cookie'
+import { getTokenAnonimous } from './store/features/user/userSlice'
 
 function App() {
   const [loading, setLoading] = useState(false)
   const loadingBarRef = useRef(null)
 
-  const generateTokenAnonimous = async () => {
-    const tokenAnonimo = await UserService.getTokenAnonimo()
-    console.log(tokenAnonimo)
-    Cookies.set("anonimo", tokenAnonimo)
-  }
-
   useEffect(() => {
-    generateTokenAnonimous()
+    getTokenAnonimous()
     axiosInstance.interceptors.request.use(
       (config) => {
         setLoading(true)
