@@ -46,6 +46,14 @@ const UserService = {
             console.error(err);
             throw err;
         }
+    }, 
+    getTokenAnonimo: async () => {
+        try {
+            const response = await axios.get("/api/usuario/anonimo")
+            return response.data
+        } catch (err) {
+            console.error(err)
+        }
     }
 };
 

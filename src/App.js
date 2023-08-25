@@ -19,8 +19,14 @@ import UploadVideo from './pages/uploadVideo/UploadVideo';
 import UploadShorts from './pages/uploadShorts/UploadShorts';
 import NotFound from './pages/notFound/NotFound';
 import Settings from './pages/settings/Settings';
+import { useEffect } from 'react';
 
 function App() {
+
+  useEffect(() => {
+
+  })
+
   return (
     <div className="App">
       <Provider store={store} >
