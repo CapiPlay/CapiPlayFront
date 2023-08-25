@@ -9,12 +9,12 @@ import { useEffect } from "react";
 import { vi } from "date-fns/locale";
 import Header from "../../components/header/Header";
 import Side_Bar from "../home/side_bar/Side_Bar";
+import Slider_Category from "../home/slider_category/Slider_Category";
 const ResultSearch = () => {
 
     const [openFilter, setOpenFilter] = useState(false);
     const [defaultFilter, setDefaultFilter] = useState(false);
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-
 
     const nav = useNavigate();
     const location = useLocation();
@@ -35,82 +35,135 @@ const ResultSearch = () => {
         };
     }, []);
 
-
-
     useEffect(() => {
         setSearchValue(searchParams);
         console.log(videos[0].caminhos[4])
     }, [searchParams])
 
-    // const renderVideosDesktop = () => {
-    //     return (
-    //         <div className="container__videos__result">
-    //             <div></div>
-    //             <div></div>
-    //         </div>
-    //     )
-    // }
     const videos = [{
         caminhos: [
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R154X268_9164846223788002675.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R200X348_13358526845566702011.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R230X388_15816350250600018926.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R340X193_6524793299455106252.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R380X193_14437519966982145443.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\video_4269096256195136619.mp4"
+            "1704d203-5b34-4ed9-9283-c57158bacbf8\\miniatura_R154X268_11697125657336416341.png",
+            "1704d203-5b34-4ed9-9283-c57158bacbf8\\miniatura_R200X348_6878981770652736747.png",
+            "1704d203-5b34-4ed9-9283-c57158bacbf8\\miniatura_R230X388_9361341031213374615.png",
+            "1704d203-5b34-4ed9-9283-c57158bacbf8\\miniatura_R340X193_9219148671596789975.png",
+            "1704d203-5b34-4ed9-9283-c57158bacbf8\\miniatura_R380X193_12581456805505636758.png",
+            "1704d203-5b34-4ed9-9283-c57158bacbf8\\video_2578350259357151491.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
     },
     {
         caminhos: [
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R154X268_9164846223788002675.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R200X348_13358526845566702011.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R230X388_15816350250600018926.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R340X193_6524793299455106252.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R380X193_14437519966982145443.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\video_4269096256195136619.mp4"
+            "83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R154X268_1148387358269743337.png",
+			"83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R200X348_1815036189906823964.png",
+			"83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R230X388_3533859505980465547.png",
+			"83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R340X193_5072361480399494154.png",
+			"83332fb0-7a8f-4b26-b2b8-58a719d07152\\miniatura_R380X193_95036715129770923.png",
+			"83332fb0-7a8f-4b26-b2b8-58a719d07152\\video_14988957158581530481.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
     },
     {
         caminhos: [
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R154X268_9164846223788002675.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R200X348_13358526845566702011.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R230X388_15816350250600018926.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R340X193_6524793299455106252.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R380X193_14437519966982145443.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\video_4269096256195136619.mp4"
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R154X268_7478500415072241355.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R200X348_5866358373415366753.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R230X388_15903921073760648855.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R340X193_11053981639284794552.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R380X193_15551205469361886336.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\video_16496170581419065986.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
     },
     {
         caminhos: [
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R154X268_9164846223788002675.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R200X348_13358526845566702011.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R230X388_15816350250600018926.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R340X193_6524793299455106252.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R380X193_14437519966982145443.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\video_4269096256195136619.mp4"
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R154X268_7478500415072241355.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R200X348_5866358373415366753.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R230X388_15903921073760648855.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R340X193_11053981639284794552.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R380X193_15551205469361886336.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\video_16496170581419065986.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
     },
     {
         caminhos: [
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R154X268_9164846223788002675.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R200X348_13358526845566702011.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R230X388_15816350250600018926.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R340X193_6524793299455106252.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\miniatura_R380X193_14437519966982145443.png",
-            "0c3bf232-6412-4e6c-a6b3-16c37c5c0540\\video_4269096256195136619.mp4"
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R154X268_7478500415072241355.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R200X348_5866358373415366753.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R230X388_15903921073760648855.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R340X193_11053981639284794552.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R380X193_15551205469361886336.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\video_16496170581419065986.mp4"
+        ],
+        titulo: "titulo",
+        uuid: "2"
+    },
+    {
+        caminhos: [
+            "e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R154X268_7478500415072241355.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R200X348_5866358373415366753.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R230X388_15903921073760648855.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R340X193_11053981639284794552.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\miniatura_R380X193_15551205469361886336.png",
+			"e0f83cbf-277d-477e-b81f-d578bcae8dc5\\video_16496170581419065986.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
     }
     ];
+
+    const renderDesktop = () => {
+        return (
+            <>
+                <Side_Bar />
+                <div className="container__header__search__desktop">
+                    <Header />
+                </div>
+                <div className="container__tags__search__desktop">
+                    <Slider_Category/>
+                </div>
+                <div className="container__filter" onClick={() => { setOpenFilter(!openFilter); setDefaultFilter(true) }}>
+                    <span>Filtros</span>
+                    <FiFilter />
+                </div>
+                {renderFilter}
+                <div className="container__videos__result">
+                    {videos.map((video) => (
+                        <div className="video__result__search">
+                            <Video_card video={video} />
+                        </div>
+                    ))}
+                </div>
+            </>
+        )
+    }
+
+    const renderTabletMobileView = () => {
+        return (
+            <div className="container__result__search">
+                <HeaderSearch
+                    valueInput={searchValue}
+                    functionBack={() => nav("/")} />
+                <div className="tags__carousel__search">
+                </div>
+                <TagsCarousel />
+                <div className="container__filter" onClick={() => { setOpenFilter(true); setDefaultFilter(true); }}>
+                <span>Filtros</span>
+                <FiFilter />
+                </div>
+                {renderFilter}
+                <div className="container__videos__result">
+                    {videos.map((video) => (
+                        <div className="video__result__search">
+                            <Video_card video={video} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    }
 
     const renderFilter = () => {
         return (
@@ -146,64 +199,11 @@ const ResultSearch = () => {
         )
     }
 
-    const renderDesktop = () => {
-        return (
-            <>
-                <Side_Bar />
-                <div className="container__header__search__desktop">
-                    <Header />
-                </div>
-                <div className="container__tags__search__desktop">
-                    <TagsCarousel />
-                </div>
-                <div className="container__filter" onClick={() => { setOpenFilter(!openFilter); setDefaultFilter(true) }}>
-                    <span>Filtros</span>
-                    <FiFilter />
-                </div>
-                {renderFilter}
-                <div className="container__videos__result">
-                    {videos.map((video) => (
-                        <div className="video__result__search">
-                            <Video_card video={video} />
-                        </div>
-                    ))}
-                </div>
-            </>
-
-        )
-    }
-
-    const renderTabletView = () => {
-        return (
-            <div className="container__result__search">
-                <HeaderSearch
-                    valueInput={searchValue}
-                    functionBack={() => nav("/")} />
-                <div className="tags__carousel__search">
-                </div>
-                <TagsCarousel />
-                <div className="container__filter" onClick={() => { setOpenFilter(!openFilter); setDefaultFilter(true) }}>
-                    <span>Filtros</span>
-                    <FiFilter />
-                </div>
-                {renderFilter}
-                <div className="container__videos__result">
-                    {videos.map((video) => (
-                        <div className="video__result__search">
-                            <Video_card video={video} />
-                        </div>
-                    ))}
-                </div>
-            </div>
-        )
-    }
-
-
     const getViewToRender = () => {
         if (screenSize.width > 900) {
             return renderDesktop();
         } else {
-            return renderTabletView();
+            return renderTabletMobileView();
         }
     };
 

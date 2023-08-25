@@ -1,11 +1,11 @@
-/* .container__header__search__desktop{
+.container__header__search__desktop{
     position: absolute;
     top: 0;
     left: 0;
-} */
+}
 
 .container__tags__search__desktop{
-    margin: 8% 4%;
+    margin: 5%;
     width: 100%;
 }
 
@@ -21,8 +21,9 @@
 }
 
 .container__filter {
-    margin: 5%;
     width: 20%;
+    height: 2vh;
+    margin: 5%;
     gap: 5%;
     padding: 2%;
     border: solid 2px var(--purple);
@@ -66,6 +67,7 @@
 }
 
 .container__videos__result {
+    margin-left: 5%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,6 +77,9 @@
 
 .video__result__search{
     width: 28%;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
 }
 
 @keyframes open-filter {
@@ -99,28 +104,25 @@
 
 /* Responsividade  */
 
-@media screen AND (min-width: 760px) {
+@media screen and (min-width: 760px) {
 
     .container__input__search>input,
     .container__filter>span,
     .table__filters>td,
     .table__filters>tr {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .container__filter{
         width: 10%;
-        height: 2%;
         margin-left: 15%;
     }
 }
 
-@media screen AND (min-width: 1000px) {
-
-    .container__input__search>input,
-    .container__filter>span,
-    .table__filters>td,
-    .table__filters>tr {
-        font-size: 24px;
+@media screen and (min-width: 1000px) {
+    .container__filter {
+        width: 5%;
+        margin-left: 82%;
+        height: .2vh;
     }
 }
