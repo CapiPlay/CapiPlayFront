@@ -22,35 +22,46 @@ import Settings from './pages/settings/Settings'
 import TopLoadingBar from 'react-top-loading-bar'
 import { useRef, useState } from 'react'
 import axiosInstance from "./service/AxiosConfig"
+import { useEffect } from 'react'
+import UserService from './service/UserService'
+import Cookies from 'js-cookie'
 
 function App() {
-
   const [loading, setLoading] = useState(false)
   const loadingBarRef = useRef(null)
 
-  axiosInstance.interceptors.request.use(
-    (config) => {
-      setLoading(true)
-      loadingBarRef.current.continuousStart()
-      return config
-    },
-    (error) => {
-      return Promise.reject(error)
-    }
-  )
+  const generateTokenAnonimous = async () => {
+    const tokenAnonimo = await UserService.getTokenAnonimo()
+    console.log(tokenAnonimo)
+    Cookies.set("anonimo", tokenAnonimo)
+  }
 
-  axiosInstance.interceptors.response.use(
-    (response) => {
-      setLoading(false)
-      loadingBarRef.current.complete()
-      return response
-    },
-    (error) => {
-      setLoading(false)
-      loadingBarRef.current.complete()
-      return Promise.reject(error)
-    }
-  )
+  useEffect(() => {
+    generateTokenAnonimous()
+    axiosInstance.interceptors.request.use(
+      (config) => {
+        setLoading(true)
+        loadingBarRef.current.continuousStart()
+        return config
+      },
+      (error) => {
+        return Promise.reject(error)
+      }
+    )
+  
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        setLoading(false)
+        loadingBarRef.current.complete()
+        return response
+      },
+      (error) => {
+        setLoading(false)
+        loadingBarRef.current.complete()
+        return Promise.reject(error)
+      }
+    )
+  }, [])
 
   return (
     <div className="App">

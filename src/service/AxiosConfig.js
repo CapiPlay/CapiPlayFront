@@ -27,7 +27,6 @@ axiosInstance.interceptors.request.use(
 )
 
 axiosInstance.interceptors.response.use((response) => {
-    // Configurar a lógica do interceptor de resposta
     return response;
 }, (error) => {
     return Promise.reject(error);
