@@ -1,37 +1,41 @@
-import './App.css';
-import React, { useState } from 'react'
+import './App.css'
+
+import { Provider } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
+import store from './store'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
-import Register from './pages/register/Register'
 import Player from './pages/player/Player'
-import Profile from './pages/profile/Profile'
-import Historic from './pages/historic/Historic'
 import Shorts from './pages/shorts/Shorts'
-import VideoDetails from './pages/videoDetails/VideoDetails'
-import VideoUpload from './pages/videoUpload/VideoUpload'
 import Search from './pages/search/Search'
-import { Provider } from 'react-redux'
-import store from './store'
-import Video_player_contructor from './pages/player/video_player_contructor/Video_player_contructor';
-import ResultSearch from './pages/resultSearch/ResultSearch';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Upload from './pages/upload/Upload';
-import UploadVideo from './pages/uploadVideo/UploadVideo';
-import UploadShorts from './pages/uploadShorts/UploadShorts';
-import NotFound from './pages/notFound/NotFound';
-import Settings from './pages/settings/Settings';
-import ThemeToggle from '../src/components/header/theme_toggle/ThemeToggle';
+import Profile from './pages/profile/Profile'
+import Register from './pages/register/Register'
+import Historic from './pages/historic/Historic'
+import Settings from './pages/settings/Settings'
+import NotFound from './pages/notFound/NotFound'
+import VideoUpload from './pages/videoUpload/VideoUpload'
+import VideoDetails from './pages/videoDetails/VideoDetails'
+import ResultSearch from './pages/resultSearch/ResultSearch'
+import UploadVideo from './pages/uploadVideo/UploadVideo'
+import UploadShorts from './pages/uploadShorts/UploadShorts'
+import Video_player_contructor from './pages/player/video_player_contructor/Video_player_contructor'
 
 function App() {
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [isLightMode] = useState(localStorage.getItem('lightTheme') === 'true');
 
-  const toggleDarkMode = () => {
-    setDarkMode(prevMode => !prevMode);
-  };
+  useEffect(() => {
+    if (isLightMode == true) {
+      document.body.classList.add("light__mode");
+    } else {
+      document.body.classList.remove("light__mode");
+    }
+  });
 
   return (
-    <div className={darkMode ? 'dark-mode' : 'light-mode'}>
     <div className="App">
       <Provider store={store} >
         <BrowserRouter>
@@ -53,9 +57,7 @@ function App() {
             <Route path="/teste" element={<Video_player_contructor />} />
           </Routes>
         </BrowserRouter>
-        <ThemeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </Provider>
-    </div>
     </div>
   )
 }

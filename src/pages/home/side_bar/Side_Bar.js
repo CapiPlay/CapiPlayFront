@@ -58,7 +58,7 @@ function Side_Bar() {
                 <div className={`container__side__bar ${isSideBarOpen ? 'openModal__side' : ''}`}>
                     <div className={`category__box ${isSideBarOpen ? 'openBoxes__side' : ''}`}>
                         <div className='modal__category__item__side' >
-                            <GiHamburgerMenu color='var(--lightpurple)' onClick={handleSideBar} size={'2rem'} className='icon__hamburguer__side' />
+                            <GiHamburgerMenu color='var(--purple)' onClick={handleSideBar} size={'2rem'} className='icon__hamburguer__side' />
                         </div>
                         <div className='modal__category__item__side' >
                             <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
