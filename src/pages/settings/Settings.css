@@ -439,6 +439,13 @@
     text-align: center;
 }
 
+.page__settings {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .modal__overlay_mobile {
     display: flex;
     flex-direction: row;

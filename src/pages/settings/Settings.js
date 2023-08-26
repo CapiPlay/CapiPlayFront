@@ -146,22 +146,22 @@ const Settings = ({ userId }) => {
                 <hr className="solid" />
                 <div className='settings__options__buttons__div'>
                     <Button onClick={openModal} label={"Cancelar"} className='settings__options__buttons__cancel' principal={true} />
-                    {isModalOpen && (
-                        <>
-                            <div className='modal__overlay_tablet'>
-                                <div className='modal__content'>
-                                    <p className='text'>Tem certeza que deseja cancelar?</p>
-                                    <div className='modal__buttons'>
-                                        <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                        <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='background'></div>
-                        </>
-                    )}
                     <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm' principal={false} />
                 </div>
+                {isModalOpen && (
+                    <>
+                        <div className='modal__overlay_mobile'>
+                            <div className='modal__content'>
+                                <p className='text'>Tem certeza que deseja cancelar?</p>
+                                <div className='modal__buttons'>
+                                    <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
+                                    <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className='background'></div>
+                    </>
+                )}
             </div>
         </>
     )
@@ -245,22 +245,23 @@ const Settings = ({ userId }) => {
             <div className='settings__options__buttons__container'>
                 <div className='settings__options__buttons__div__desktop'>
                     <Button onClick={openModal} label={"Cancelar"} className='settings__options__buttons__cancel__desktop' principal={false} />
-                    {isModalOpen && (
-                        <>
-                            <div className='modal__overlay_tablet'>
-                                <div className='modal__content'>
-                                    <p className='text'>Tem certeza que deseja cancelar?</p>
-                                    <div className='modal__buttons'>
-                                        <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                        <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='background'></div>
-                        </>
-                    )}
                     <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm__desktop' principal={true} />
                 </div>
+                {isModalOpen && (
+                    <>
+                        <div className='modal__overlay'>
+                            <div className='modal__content'>
+                                <p className='text'>Tem certeza que deseja cancelar?</p>
+                                <div className='modal__buttons'>
+                                    <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
+                                    <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className='background'></div>
+                    </>
+                )}
+
             </div>
         </>
     )
