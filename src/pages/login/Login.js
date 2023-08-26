@@ -13,7 +13,6 @@ import Button from "../../components/button/Button"
 // Icons
 import { FaFacebookF } from 'react-icons/fa'
 import { FaGoogle } from 'react-icons/fa'
-import Cookies from "js-cookie"
 
 const Login = ({ }) => {
 

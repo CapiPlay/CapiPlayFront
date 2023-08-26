@@ -26,6 +26,7 @@ axiosInstance.interceptors.request.use(
     (config) => {
         const token = getToken()
         const authHeaders = getAuthHeaders(token)
+        console.log(authHeaders)
         config.headers = { ...config.headers, ...authHeaders }
         return config
     },

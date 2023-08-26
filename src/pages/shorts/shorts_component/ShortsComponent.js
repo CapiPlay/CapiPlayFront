@@ -25,7 +25,7 @@ const ShortsComponent = ({ short }) => {
     const shorts = useSelector((state) => state.shorts.listShorts)
 
     const { id } = useParams()
-    console.log(id)
+    console.log(short)
 
     //transição entre os vídeos
     const [transitioning, setTransitioning] = useState(false)

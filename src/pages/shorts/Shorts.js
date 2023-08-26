@@ -26,6 +26,9 @@ const Shorts = () => {
     const dispatch = useDispatch()
     const scrollRef = useRef(null)
 
+    const { id } = useParams()
+    console.log(id)
+
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
@@ -69,6 +72,7 @@ const Shorts = () => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth)
         }
+
         window.addEventListener('resize', handleResize)
 
         return () => {
@@ -83,18 +87,23 @@ const Shorts = () => {
             setIsScrolling(true)
         }
 
-        
-
         const scrollContainer = scrollRef.current
         scrollContainer.addEventListener('scroll', handleScroll)
 
         const func = async () => {
             const newShorts = []
-            for(let i = 0; i < 5; i++) {
-                const data = await ShortsService.buscar()
-                newShorts.push(data)
-                console.log(data)
+            const getFirstShort = async() => {
+                const short = await ShortsService.buscarUUID(id)
+                newShorts.push(short)
+                console.log(short)
             }
+    
+            getFirstShort()
+            // for(let i = 0; i < 5; i++) {
+            //     const data = await ShortsService.buscar()
+            //     newShorts.push(data)
+            //     console.log(data)
+            // }
 
             console.log(shorts)
 

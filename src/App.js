@@ -23,37 +23,50 @@ import TopLoadingBar from 'react-top-loading-bar'
 import { useRef, useState } from 'react'
 import axiosInstance from "./service/AxiosConfig"
 import { useEffect } from 'react'
-import { getTokenAnonimous } from './store/features/user/userSlice'
+import UserService from './service/UserService'
+import Cookies from 'js-cookie'
 
 function App() {
+
   const [loading, setLoading] = useState(false)
   const loadingBarRef = useRef(null)
 
+  const generateTokenAnonimous = async () => {
+    const userToken = Cookies.get("token")
+    const existAnonimoToken = Cookies.get("anonimo")
+    if (userToken || existAnonimoToken) {
+      return
+    }
+    const tokenAnonimo = await UserService.getTokenAnonimo()
+    Cookies.set("anonimo", tokenAnonimo)
+  }
+
   useEffect(() => {
-    getTokenAnonimous()
+    generateTokenAnonimous()
+    
     axiosInstance.interceptors.request.use(
-      (config) => {
-        setLoading(true)
-        loadingBarRef.current.continuousStart()
-        return config
-      },
-      (error) => {
-        return Promise.reject(error)
-      }
-    )
-  
-    axiosInstance.interceptors.response.use(
-      (response) => {
-        setLoading(false)
-        loadingBarRef.current.complete()
-        return response
-      },
-      (error) => {
-        setLoading(false)
-        loadingBarRef.current.complete()
-        return Promise.reject(error)
-      }
-    )
+    (config) => {
+      setLoading(true)
+      loadingBarRef.current.continuousStart()
+      return config
+    },
+    (error) => {
+      return Promise.reject(error)
+    }
+  )
+
+  axiosInstance.interceptors.response.use(
+    (response) => {
+      setLoading(false)
+      loadingBarRef.current.complete()
+      return response
+    },
+    (error) => {
+      setLoading(false)
+      loadingBarRef.current.complete()
+      return Promise.reject(error)
+    }
+  )
   }, [])
 
   return (
