@@ -84,7 +84,7 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
                                 <div className='divider__profile__modal'></div>
-                                <p onClick={Logout()} className='text__profile_modal'>Sair</p>
+                                <p onClick={Logout} className='text__profile_modal'>Sair</p>
                             </div>
                         </div>
                     ) : (

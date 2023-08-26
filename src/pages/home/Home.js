@@ -121,14 +121,12 @@ function Home() {
 
   const getVideosRev = async () => {
     const videos = await PlayerService.buscarVideosHomeRev(0);
-
     if (videos) {
       const filteredVideos = videos.filter(video => video.shorts === false);
-
-      if (filteredVideos.length === 9) {
-        setVideosRev(filteredVideos);
-      } else if (filteredVideos.length === 6) {
-        setVideosRev(filteredVideos);
+      if (filteredVideos.length > 6) {
+        filteredVideos.sort((a, b) => b.pontuacao - a.pontuacao);
+        const top6Videos = filteredVideos.slice(0, 6);
+        setVideosRev(top6Videos);
       } else {
         setVideosRev([]);
       }
@@ -140,22 +138,22 @@ function Home() {
   const userProfile = () => {
     const userToken = Cookies.get('token');
     if (userToken) {
-        try {
-            const tokenPayload = userToken.split('.')[1];
-            const decodedPayload = atob(tokenPayload);
-            const userLogin = JSON.parse(decodedPayload);   
-            console.log(userLogin)
-            if (userLogin) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (error) {
-            console.error("Erro ao analisar o token:", error);
-            return false;
+      try {
+        const tokenPayload = userToken.split('.')[1];
+        const decodedPayload = atob(tokenPayload);
+        const userLogin = JSON.parse(decodedPayload);
+        console.log(userLogin)
+        if (userLogin) {
+          return true;
+        } else {
+          return false;
         }
-    } else {
+      } catch (error) {
+        console.error("Erro ao analisar o token:", error);
         return false;
+      }
+    } else {
+      return false;
     }
   }
 
