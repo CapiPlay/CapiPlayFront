@@ -26,6 +26,9 @@ const Shorts = () => {
     const dispatch = useDispatch()
     const scrollRef = useRef(null)
 
+    const { id } = useParams()
+    console.log(id)
+
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
@@ -33,7 +36,6 @@ const Shorts = () => {
 
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
 
-    // const [shorts, setShorts] = useState([])
     const shorts = useSelector((state) => state.shorts.listShorts)
 
     const [currentShortIndex, setCurrentShortIndex] = useState(0)
@@ -69,6 +71,7 @@ const Shorts = () => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth)
         }
+
         window.addEventListener('resize', handleResize)
 
         return () => {
@@ -83,24 +86,26 @@ const Shorts = () => {
             setIsScrolling(true)
         }
 
-        
-
         const scrollContainer = scrollRef.current
         scrollContainer.addEventListener('scroll', handleScroll)
 
         const func = async () => {
             const newShorts = []
-            for(let i = 0; i < 5; i++) {
-                const data = await ShortsService.buscar()
-                newShorts.push(data)
-                console.log(data)
+            const getFirstShort = async() => {
+                const short = await ShortsService.buscarUUID(id)
+                return short
             }
-
-            console.log(shorts)
-
+    
+            newShorts.push(getFirstShort())
+            // for(let i = 0; i < 5; i++) {
+            //     const data = await ShortsService.buscar()
+            //     newShorts.push(data)
+            //     console.log(data)
+            // }
             dispatch(setListShorts(null, newShorts, null))
         }
-
+        
+        console.log(shorts)
         func()
 
         return () => {
@@ -134,10 +139,6 @@ const Shorts = () => {
                     shorts &&
                     shorts.map((short, i) => <ShortsComponent key={i} short={short} />)
                 }
-
-                {/* {shorts.length > 0 && currentShortIndex > 0 && <ShortsComponent short={shorts[currentShortIndex - 1]} isScrolling={isScrolling} isClicking={isClicking} />}
-                {shorts.length > 0 && <ShortsComponent ref={scrollRef} short={shorts[currentShortIndex]} isScrolling={isScrolling} isClicking={isClicking} />}
-                {shorts.length > 0 && <ShortsComponent short={shorts[currentShortIndex + 1]} isScrolling={isScrolling} isClicking={isClicking} />} */}
             </div>
             {
                 headerAppearing && (

@@ -1,7 +1,7 @@
 import axios from "axios"
 import Cookies from "js-cookie"
 
-const URL = "http://10.4.96.77:7000"
+const URL = "http://10.4.96.74:7000"
 
 const axiosInstance = axios.create({
     baseURL: URL
@@ -26,6 +26,7 @@ axiosInstance.interceptors.request.use(
     (config) => {
         const token = getToken()
         const authHeaders = getAuthHeaders(token)
+        console.log(authHeaders)
         config.headers = { ...config.headers, ...authHeaders }
         return config
     },
