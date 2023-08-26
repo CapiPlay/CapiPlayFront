@@ -36,7 +36,6 @@ const Shorts = () => {
 
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
 
-    // const [shorts, setShorts] = useState([])
     const shorts = useSelector((state) => state.shorts.listShorts)
 
     const [currentShortIndex, setCurrentShortIndex] = useState(0)
@@ -94,22 +93,19 @@ const Shorts = () => {
             const newShorts = []
             const getFirstShort = async() => {
                 const short = await ShortsService.buscarUUID(id)
-                newShorts.push(short)
-                console.log(short)
+                return short
             }
     
-            getFirstShort()
+            newShorts.push(getFirstShort())
             // for(let i = 0; i < 5; i++) {
             //     const data = await ShortsService.buscar()
             //     newShorts.push(data)
             //     console.log(data)
             // }
-
-            console.log(shorts)
-
             dispatch(setListShorts(null, newShorts, null))
         }
-
+        
+        console.log(shorts)
         func()
 
         return () => {
@@ -143,10 +139,6 @@ const Shorts = () => {
                     shorts &&
                     shorts.map((short, i) => <ShortsComponent key={i} short={short} />)
                 }
-
-                {/* {shorts.length > 0 && currentShortIndex > 0 && <ShortsComponent short={shorts[currentShortIndex - 1]} isScrolling={isScrolling} isClicking={isClicking} />}
-                {shorts.length > 0 && <ShortsComponent ref={scrollRef} short={shorts[currentShortIndex]} isScrolling={isScrolling} isClicking={isClicking} />}
-                {shorts.length > 0 && <ShortsComponent short={shorts[currentShortIndex + 1]} isScrolling={isScrolling} isClicking={isClicking} />} */}
             </div>
             {
                 headerAppearing && (

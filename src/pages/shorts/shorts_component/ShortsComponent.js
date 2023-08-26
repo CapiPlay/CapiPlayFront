@@ -25,7 +25,7 @@ const ShortsComponent = ({ short }) => {
     const shorts = useSelector((state) => state.shorts.listShorts)
 
     const { id } = useParams()
-    console.log(short)
+    
 
     //transição entre os vídeos
     const [transitioning, setTransitioning] = useState(false)
@@ -95,6 +95,8 @@ const ShortsComponent = ({ short }) => {
             })
         }
 
+        console.log(short)
+
         const observer = new IntersectionObserver(callback, options)
 
         if (targetRef.current) {
@@ -116,7 +118,7 @@ const ShortsComponent = ({ short }) => {
 
     return (
         <div className={`container__video slide`} >
-            <video src={getPathShorts(short.caminhos[5])} ref={targetRef} loop muted={isMuted} {...(isVideoInView && { autoPlay: true })} />
+            <video src={getPathShorts(short?.caminhos[5])} ref={targetRef} loop muted={isMuted} {...(isVideoInView && { autoPlay: true })} />
 
             {/* <button
                     onClick={toggleMute}
