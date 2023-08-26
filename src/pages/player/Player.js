@@ -13,7 +13,7 @@ function Player() {
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
-      buscarVideo(videoId)
+      buscarVideo(videoId)  
       function handleResize() {
         setScreenSize({ width: window.innerWidth, height: window.innerHeight });
       }
