@@ -40,6 +40,11 @@ const ResultSearch = () => {
         console.log(videos[0].caminhos[4])
     }, [searchParams])
 
+    useEffect(() => {
+        setDefaultFilter(false);
+    }, [openFilter]);
+
+
     const videos = [{
         caminhos: [
             "1704d203-5b34-4ed9-9283-c57158bacbf8\\miniatura_R154X268_11697125657336416341.png",
@@ -114,6 +119,8 @@ const ResultSearch = () => {
     }
     ];
 
+
+
     const renderDesktop = () => {
         return (
             <>
@@ -124,11 +131,11 @@ const ResultSearch = () => {
                 <div className="container__tags__search__desktop">
                     <Slider_Category />
                 </div>
-                <div className="container__filter__desktop" onClick={() => { setOpenFilter(!openFilter); setDefaultFilter(true) }}>
+                <div className="container__filter__desktop" onClick={() => { setOpenFilter(!openFilter); }}>
                     <span>Filtros</span>
                     <FiFilter />
                 </div>
-                {renderFilter}
+                {renderFilter()}
                 <div className="container__videos__result__desktop">
                     {videos.map((video) => (
                         <div className="video__result__search">
@@ -147,13 +154,13 @@ const ResultSearch = () => {
                     valueInput={searchValue}
                     functionBack={() => nav("/")} />
                 <div className="container__tags__search">
-                    <TagsCarousel/>
+                    <TagsCarousel />
                 </div>
-                <div className="container__filter" onClick={() => { setOpenFilter(true); setDefaultFilter(true); }}>
+                <div className="container__filter" onClick={() => { setOpenFilter(!openFilter); }}>
                     <span>Filtros</span>
                     <FiFilter />
                 </div>
-                {renderFilter}
+                {renderFilter()}
                 <div className="container__videos__result">
                     {videos.map((video) => (
                         <div className="video__result__search">
@@ -171,7 +178,7 @@ const ResultSearch = () => {
                 style={openFilter ?
                     { animation: "open-filter .5s forwards ease-out" }
                     :
-                    defaultFilter ? { animation: "close-filter .5s forwards ease-out" } : { opacity: 0 }}>
+                    { opacity: 0 }}>
                 <table className="table__filters">
                     <tr className="table__header__filter">
                         <th>Data</th>
