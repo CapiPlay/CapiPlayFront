@@ -1,11 +1,16 @@
-import './App.css'
+import './App.css';
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
-import Register from './pages/register/Register'
 import Player from './pages/player/Player'
-import Profile from './pages/profile/Profile'
-import Historic from './pages/historic/Historic'
 import Shorts from './pages/shorts/Shorts'
+import Search from './pages/search/Search'
+import Upload from './pages/upload/Upload';
+import Profile from './pages/profile/Profile'
+import Register from './pages/register/Register'
+import Historic from './pages/historic/Historic'
+import Settings from './pages/settings/Settings'
+import NotFound from './pages/notFound/NotFound'
+import VideoUpload from './pages/videoUpload/VideoUpload'
 import VideoDetails from './pages/videoDetails/VideoDetails'
 import VideoUpload from './pages/videoUpload/VideoUpload'
 import Search from './pages/search/Search'
@@ -28,8 +33,17 @@ import Cookies from 'js-cookie'
 
 function App() {
 
+  const [isLightMode] = useState(localStorage.getItem('lightTheme') === 'true')
   const [loading, setLoading] = useState(false)
   const loadingBarRef = useRef(null)
+
+  useEffect(() => {
+    if (isLightMode == true) {
+      document.body.classList.add("light__mode")
+    } else {
+      document.body.classList.remove("light__mode")
+    }
+  })
 
   const generateTokenAnonimous = async () => {
     const userToken = Cookies.get("token")

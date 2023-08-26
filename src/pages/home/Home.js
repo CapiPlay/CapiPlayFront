@@ -10,7 +10,7 @@ import PlayerService from '../../service/PlayerService';
 import Aos from 'aos'
 import Cookies from 'js-cookie';
 
-function Home() {
+function Home(darkMode ) {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
   const [videosReu, setVideosReu] = useState([])
   const [videosRec, setVideosRec] = useState([])
@@ -159,6 +159,7 @@ function Home() {
 
   const renderDesktopView = () => (
     <>
+     <div className={`home-component ${darkMode ? 'dark-mode' : 'light-mode'}`}>
       <Header userLogin={userProfile()} />
       <Side_Bar />
       <div className='container__header__home'></div>
@@ -183,7 +184,9 @@ function Home() {
           ))}
         </div>
       </div>
+      </div>
     </>
+    
   );
 
   const renderTabletView = () => (
