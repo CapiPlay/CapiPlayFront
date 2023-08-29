@@ -25,8 +25,8 @@ function Tablet_player({ video }) {
     return (
         <><div className='return__btn'><BiArrowBack color='var(--lightpurple)' />Voltar</div>
             <div>
-                <video controls className='video__player__tablet' poster={"http://localhost:7000/api/video/static/" + video.caminhos[3]} key={video.uuid}>
-                    <source src={"http://localhost:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
+                <video controls className='video__player__tablet' poster={"http://10.4.96.74:7000/api/video/static/" + video.caminhos[3]} key={video.uuid}>
+                    <source src={"http://10.4.96.74:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
                 </video>
             </div>
             <div className='video__title'>

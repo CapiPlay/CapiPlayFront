@@ -38,8 +38,8 @@ function Mobile_player({ video }) {
         <>
             {!showComments && <div className='return__btn'><BiArrowBack color='var(--lightpurple)' />Voltar</div>}
 
-            <video controls className='video__player__mobile' poster={"http://localhost:7000/api/video/static/" + video.caminhos[3]} key={video.uuid}>
-                <source src={"http://localhost:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
+            <video controls className='video__player__mobile' poster={"http://10.4.96.74:7000/api/video/static/" + video.caminhos[3]} key={video.uuid}>
+                <source src={"http://10.4.96.74:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
             </video>
             {!showComments && <>
                 <div className='video__title'>

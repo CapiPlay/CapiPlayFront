@@ -32,10 +32,10 @@ function Desktop_player({ video }) {
                 <div>
                     <div className='video__container'>
                         <video
-                            src={"http://localhost:7000/api/video/static/" + video.caminhos[5]}
+                            src={"http://10.4.96.74:7000/api/video/static/" + video.caminhos[5]}
                             type="video/mp4"
                             className='video__player__desktop'
-                            poster={"http://localhost:7000/api/video/static/" + video.caminhos[3]}
+                            poster={"http://10.4.96.74:7000/api/video/static/" + video.caminhos[3]}
                             key={video.uuid}
                             controls
                         />
