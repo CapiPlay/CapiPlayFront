@@ -77,7 +77,6 @@ function Home(darkMode ) {
 
     if (videos) {
       const filteredVideos = videos.filter(video => video.shorts === false);
-
       if (filteredVideos.length > 0) {
         setVideosReu(filteredVideos);
       } else {
