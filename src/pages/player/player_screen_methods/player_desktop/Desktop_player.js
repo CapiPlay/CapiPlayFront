@@ -17,6 +17,7 @@ function Desktop_player({ video }) {
 
     useEffect(() => {
         getVideos()
+        console.log(video)
     }, [])
 
 

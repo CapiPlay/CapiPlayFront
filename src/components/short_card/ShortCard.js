@@ -28,7 +28,7 @@ const Shortcard = ({ short }) => {
     const renderMobileView = () => (
         <div className="container__short__card">
             <Link to={`/player/${short.uuid}`}>
-                <img className="short__image" src={"http://localhost:7000/api/video/static/" + short.caminhos[1]} />
+                <img className="short__image" src={"http://10.4.96.50:7000/api/video/static/" + short.caminhos[1]} />
             </Link>
             <div className="container__informations__shorts">
                 <span>{short.titulo}</span>
@@ -49,7 +49,7 @@ const Shortcard = ({ short }) => {
     const renderDesktopView = () => (
         <div className="container__short__card__desk">
             <Link to={`/player/${short.uuid}`}>
-                <img className="short__image" src={"http://localhost:7000/api/video/static/" + short.caminhos[1]} />
+                <img className="short__image" src={"http://10.4.96.50:7000/api/video/static/" + short.caminhos[1]} />
             </Link>
             <div className="container__informations__shorts">
                 <span>{short.titulo}</span>
