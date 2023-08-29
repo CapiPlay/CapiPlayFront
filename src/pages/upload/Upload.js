@@ -66,7 +66,7 @@ function Upload() {
                                             <HiUpload color='var(--purple)' fontSize={25} />
                                         </div>
                                     </div>
-                                    Vídeo
+                                    <p className='upload__button__selected__text'>Vídeo</p>
                                 </button>
                                 <button className='upload__button' type='button' onClick={handleShortsChange}>
                                     <div className='upload__icons__box'>
@@ -74,7 +74,7 @@ function Upload() {
                                             <BsFillFastForwardFill color='var(--whitesmoke)' fontSize={25} />
                                         </div>
                                     </div>
-                                    CapiShorts
+                                    <p className='upload__button__text'>CapiShorts</p>
                                 </button>
                             </>
                         }
@@ -86,7 +86,7 @@ function Upload() {
                                             <HiUpload color='var(--whitesmoke)' fontSize={25} />
                                         </div>
                                     </div>
-                                    Vídeo
+                                    <p className='upload__button__text'>Vídeo</p>
                                 </button>
                                 <button className='upload__button__selected' type='button' onClick={handleShortsChange}>
                                     <div className='upload__icons__box__selected'>
@@ -94,7 +94,7 @@ function Upload() {
                                             <BsFillFastForwardFill color='var(--purple)' fontSize={25} />
                                         </div>
                                     </div>
-                                    CapiShorts
+                                    <p className='upload__button__selected__text'>CapiShorts</p>
                                 </button>
                             </>
                         }

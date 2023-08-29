@@ -40,6 +40,9 @@ body::-webkit-scrollbar-thumb {
   --backgroundInput: #F5F5F5;
   --placeholderInput: #141317;
   --whiteBlack: #F5F5F5;
+  --whiteToLightpurple: #F5F5F5;
+  --whiteToPurple: #F5F5F5;
+  --gray: #141317;
 }
 
 /* //Themes// */
@@ -54,4 +57,7 @@ body::-webkit-scrollbar-thumb {
   --backgroundInput: #EBEBEB;
   --placeholderInput: #141317;
   --whiteBlack: #000000;
+  --whiteToLightpurple: #BF94FF;
+  --whiteToPurple: #772CE8;
+  --gray: #4E4E4E;
 }

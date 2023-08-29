@@ -10,3 +10,8 @@
     left: 1rem;
     top: 1rem;
 }
+
+.header__upload__text {
+    color: var(--whiteToLightpurple);
+    font-weight: bolder;
+}
