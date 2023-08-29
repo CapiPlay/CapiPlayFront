@@ -202,3 +202,10 @@
     color: var(--darkblue);
     opacity: .6;
 }
+
+.header__logo__home {
+    display: flex;
+    padding-left: 1rem;
+    align-items: center
+
+}
