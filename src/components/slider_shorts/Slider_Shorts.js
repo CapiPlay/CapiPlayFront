@@ -28,7 +28,7 @@ function Slider_Shorts() {
         if (videos) {
             const filteredVideos = videos.filter(video => video.shorts === true);
             console.log(filteredVideos);
-            if (filteredVideos.length > 6) {
+            if (filteredVideos.length >= 6) {
                 setVideosRec(filteredVideos);
             } else {
                 setVideosRec([]);
