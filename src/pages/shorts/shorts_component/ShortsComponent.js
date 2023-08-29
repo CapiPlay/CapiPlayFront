@@ -24,6 +24,8 @@ const ShortsComponent = ({ short }) => {
     const dispatch = useDispatch()
     const shorts = useSelector((state) => state.shorts.listShorts)
 
+    console.log("Shorts: " + short)
+
     const { id } = useParams()
 
     const [openModalComments, setOpenModalComments] = useState(false)
