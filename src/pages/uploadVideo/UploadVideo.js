@@ -118,8 +118,7 @@ function UploadVideo() {
       ...prevVideo,
       video: videoSrc
     }));
-
-    // VideoService.criar(video)
+    VideoService.criar(video)
     console.log(video)
     // window.location.reload()
   }
