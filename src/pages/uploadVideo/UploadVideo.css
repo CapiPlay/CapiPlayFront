@@ -152,8 +152,8 @@
     align-items: center;
     border-radius: 1rem;
     height: 8rem;
-    background-color: var(--whitesmoke);
-    color: black;
+    background-color: var(--whiteToLightpurple);
+    color: var(--blackToWhite);
 }
 
 .upload__video__child__friendly__options {
