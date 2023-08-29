@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import Cookies from "js-cookie"
+import { act } from "react-dom/test-utils"
 import UserService from "../../../service/UserService"
 
 const token = Cookies.get("token")

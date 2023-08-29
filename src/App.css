@@ -37,4 +37,21 @@ body::-webkit-scrollbar-thumb {
   --purple: #772CE8;
   --lightpurple: #BF94FF;
   --darkpurplebackground: #2f2858cc;
+  --backgroundInput: #F5F5F5;
+  --placeholderInput: #141317;
+  --whiteBlack: #F5F5F5;
+}
+
+/* //Themes// */
+.light__mode {
+  --whitesmoke: #F5F5F5;
+  --beige: #EBEBEB;
+  --darkpurple: #F5F5F5;
+  --darkblue: #EBEBEB;
+  --purple: #772CE8;
+  --lightpurple: #BF94FF;
+  --darkpurplebackground: #FFFFFF;
+  --backgroundInput: #EBEBEB;
+  --placeholderInput: #141317;
+  --whiteBlack: #000000;
 }

@@ -1,6 +1,8 @@
 import axios from "./AxiosConfig"
 
-const userApiUrl = 'http://7000/api/usuario';
+// import axios from "axios"
+
+const userApiUrl = 'http://7000/api/usuario'
 
 const UserService = {
     criar: async (credentialUser) => {
@@ -31,22 +33,30 @@ const UserService = {
     },
     editar: async (userId, userData) => {
         try {
-            const response = await axios.put(`${userApiUrl}/${userId}`, userData);
-            return response.data;
+            const response = await axios.put(`${userApiUrl}/${userId}`, userData)
+            return response.data
         } catch (err) {
-            console.error(err);
-            throw err;
+            console.error(err)
+            throw err
         }
     },
     listar: async () => {
         try {
-            const response = await axios.get(userApiUrl);
-            return response.data;
+            const response = await axios.get(userApiUrl)
+            return response.data
         } catch (err) {
-            console.error(err);
-            throw err;
+            console.error(err)
+            throw err
+        }
+    }, 
+    getTokenAnonimo: async () => {
+        try {
+            const response = await axios.post("/api/usuario/anonimo")
+            return response.data
+        } catch (err) {
+            console.error(err)
         }
     }
-};
+}
 
-export default UserService;
+export default UserService

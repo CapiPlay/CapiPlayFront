@@ -1,13 +1,21 @@
-import Aos from 'aos';
+// styles
 import './Modal_profile.css';
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import notFound from '../../../assets/image/404_NotFound.png' 
-import channel from '../../../assets/image/channel_profile.png'
+
+// cookies
 import Cookies from 'js-cookie';
 
+// react
+import Aos from 'aos';
+import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import ThemeToggle from '../theme_toggle/ThemeToggle'
+
+// images
+import notFound from '../../../assets/image/404_NotFound.png' 
+import channel from '../../../assets/image/channel_profile.png'
 
 function Modal_profile({ profile }) {
+    
     const [openModal, setOpenModal] = useState(0)
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
@@ -69,22 +77,12 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <div className='text__profile_modal'>
                                     <p>Tema</p>
-                                    <div
-                                        className="checkbox-wrapper-54"
-                                        onClick={(e) => e.stopPropagation()}>
-                                        <label className="switch">
-                                            <input
-                                                type="checkbox"
-                                                defaultChecked={true}
-                                            />
-                                            <span className="slider"></span>
-                                        </label>
-                                    </div>
+                                   <ThemeToggle/>
                                 </div>
                                 <div className='divider__profile__modal'></div>
                                 <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
                                 <div className='divider__profile__modal'></div>
-                                <p onClick={Logout()} className='text__profile_modal'>Sair</p>
+                                <p onClick={Logout} className='text__profile_modal'>Sair</p>
                             </div>
                         </div>
                     ) : (
@@ -98,17 +96,7 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <div className='text__profile_modal'>
                                     <p>Tema</p>
-                                    <div
-                                        className="checkbox-wrapper-54"
-                                        onClick={(e) => e.stopPropagation()}>
-                                        <label className="switch">
-                                            <input
-                                                type="checkbox"
-                                                defaultChecked={true}
-                                            />
-                                            <span className="slider"></span>
-                                        </label>
-                                    </div>
+                                    <ThemeToggle/>
                                 </div>
                             </div>
                         </div>
@@ -133,17 +121,7 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <div className='text__profile_modal_tablet'>
                                     <p>Tema</p>
-                                    <div
-                                        className="checkbox-wrapper-54"
-                                        onClick={(e) => e.stopPropagation()}>
-                                        <label className="switch">
-                                            <input
-                                                type="checkbox"
-                                                defaultChecked={true}
-                                            />
-                                            <span className="slider"></span>
-                                        </label>
-                                    </div>
+                                    <ThemeToggle/>
                                 </div>
                                 <div className='divider__profile__modal'></div>
                                 <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
@@ -162,17 +140,7 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <div className='text__profile_modal_tablet'>
                                     <p>Tema</p>
-                                    <div
-                                        className="checkbox-wrapper-54"
-                                        onClick={(e) => e.stopPropagation()}>
-                                        <label className="switch">
-                                            <input
-                                                type="checkbox"
-                                                defaultChecked={true}
-                                            />
-                                            <span className="slider"></span>
-                                        </label>
-                                    </div>
+                                    <ThemeToggle/>
                                 </div>
                             </div>
                         </div>
@@ -197,17 +165,7 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <div className='text__profile_modal_mobile'>
                                     <p>Tema</p>
-                                    <div
-                                        className="checkbox-wrapper-54"
-                                        onClick={(e) => e.stopPropagation()}>
-                                        <label className="switch">
-                                            <input
-                                                type="checkbox"
-                                                defaultChecked={true}
-                                            />
-                                            <span className="slider"></span>
-                                        </label>
-                                    </div>
+                                    <ThemeToggle/>
                                 </div>
                                 <div className='divider__profile__modal'></div>
                                 <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
@@ -226,17 +184,7 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <div className='text__profile_modal_mobile'>
                                     <p>Tema</p>
-                                    <div
-                                        className="checkbox-wrapper-54"
-                                        onClick={(e) => e.stopPropagation()}>
-                                        <label className="switch">
-                                            <input
-                                                type="checkbox"
-                                                defaultChecked={true}
-                                            />
-                                            <span className="slider"></span>
-                                        </label>
-                                    </div>
+                                    <ThemeToggle/>
                                 </div>
                             </div>
                         </div>
