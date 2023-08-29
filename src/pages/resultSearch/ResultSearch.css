@@ -82,7 +82,7 @@
 .container__filter__desktop {
     width: 5%;
     height: .2vh;
-    margin: 2% 10%;
+    margin: 2% 8%;
     gap: 5%;
     padding: 1.5%;
     border: solid 2px var(--purple);
@@ -128,7 +128,7 @@
     .container__filter>span,
     .table__filters>td,
     .table__filters>tr {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .container__filter {
