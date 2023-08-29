@@ -25,10 +25,6 @@ const ShortsComponent = ({ short }) => {
     const shorts = useSelector((state) => state.shorts.listShorts)
 
     const { id } = useParams()
-    
-
-    //transição entre os vídeos
-    const [transitioning, setTransitioning] = useState(false)
 
     const [openModalComments, setOpenModalComments] = useState(false)
     const [likeShort, setLikeShort] = useState(false)
