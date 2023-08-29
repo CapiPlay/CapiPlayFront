@@ -31,15 +31,15 @@ function Mobile_player({ video }) {
     }, [])
 
     const getVideos = async () => {
-        setVideos(await PlayerService.buscarVideosHome(0))
+        setVideos(await PlayerService.buscarVideosHomeReu(0))
     }
 
     return (
         <>
             {!showComments && <div className='return__btn'><BiArrowBack color='var(--lightpurple)' />Voltar</div>}
 
-            <video controls className='video__player__mobile' poster={"http://10.4.96.74:7000/api/video/static/" + video.caminhos[3]} key={video.uuid}>
-                <source src={"http://10.4.96.74:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
+            <video controls className='video__player__mobile' poster={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[3]} key={video.uuid}>
+                <source src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
             </video>
             {!showComments && <>
                 <div className='video__title'>
