@@ -43,6 +43,7 @@ body::-webkit-scrollbar-thumb {
   --whiteToLightpurple: #F5F5F5;
   --whiteToPurple: #F5F5F5;
   --gray: #141317;
+  --blackToWhite: #000000;
 }
 
 /* //Themes// */
@@ -60,4 +61,5 @@ body::-webkit-scrollbar-thumb {
   --whiteToLightpurple: #BF94FF;
   --whiteToPurple: #772CE8;
   --gray: #4E4E4E;
+  --blackToWhite: #F5F5F5;
 }
