@@ -16,6 +16,7 @@
     padding: 0 13px;
     outline: none;
     border: 1px solid var(--darkblue);
+    background-color: var(--backgroundInput);
     border-radius: 10px;
     transition: 0.2s ease-out;
 
@@ -48,7 +49,7 @@
     position: absolute;
     left: 0;
     font-size: 16px;
-    color: var(--darkblue);
+    color: var(--placeholderInput);
     transition: 0.2s ease-out;
     pointer-events: none;
     box-sizing: border-box;

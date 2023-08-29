@@ -33,11 +33,13 @@
 .not__found__text {
     font-size: 50px;
     font-weight: 500;
+    color: var(--whiteBlack);
 }
 
 .not__found__subtext {
     font-size: 20px;
     font-weight: 300;
+    color: var(--whiteBlack);
 }
 
 .home__not__found {
