@@ -13,6 +13,7 @@ import Button from "../../components/button/Button"
 // Icons
 import { FaFacebookF } from 'react-icons/fa'
 import { FaGoogle } from 'react-icons/fa'
+import { ToastContainer, toast } from "react-toastify"
 
 const Login = ({ }) => {
 
@@ -36,6 +37,7 @@ const Login = ({ }) => {
         try {
             dispatch(doLogin(loginData))
         } catch (err) {
+            toast("E-mail ou senha inválido")
             console.log("Deu erro")
         }
     }
@@ -96,6 +98,7 @@ const Login = ({ }) => {
                     </span>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     )
 }
