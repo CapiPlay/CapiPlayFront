@@ -5,21 +5,21 @@ import Comments_answers_component from '../comments_answers_component/Comments_a
 import EngajamentoService from '../../../../service/EngajamentoService'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
-function Comments_component({video}) {
+function Comments_component({ video }) {
     const [showMore, setShowMore] = useState(false);
     const [like_btn, setLikeBtn] = useState(true);
     const [commentsAnswer, setCommentsAnswer] = useState(false);
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
-      function handleResize() {
-        setScreenSize({ width: window.innerWidth, height: window.innerHeight });
-      }
-      window.addEventListener('resize', handleResize);
-      handleResize();
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
+        function handleResize() {
+            setScreenSize({ width: window.innerWidth, height: window.innerHeight });
+        }
+        window.addEventListener('resize', handleResize);
+        handleResize();
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     //são apenas variáveis de exemplo, elas vão vir com o objeto
@@ -61,11 +61,11 @@ function Comments_component({video}) {
 
     const verifyDesktop = () => {
         if (screenSize.width < 600) {
-          return false
+            return false
         } else {
-          return true
+            return true
         }
-      }
+    }
 
     return (
         <>
@@ -78,7 +78,7 @@ function Comments_component({video}) {
                         @{username}<span className='ball'></span> há {comment_date} dias
                     </div>
                     <p>{showMore ? comment : `${comment.slice(0, 50)}...`}
-                        {!showMore &&<div>
+                        {!showMore && <div>
                             <button onClick={() => toggleShowMore()} className='description__moreORless'> <p className='selection'>Mostrar mais <p className='selection__icon'><BiSolidDownArrow /></p></p></button>
                         </div>}
                     </p>
@@ -98,13 +98,13 @@ function Comments_component({video}) {
                             <BiDislike className='comment__dislike__btn' />
                         </div>
                         {verifyDesktop() ?
-                        <div className='comment__total__answers' onClick={() => toggleCommentsAnswers()}>
-                            <div>({comment_answers.length}) Respostas </div>
-                        </div>
-                        : 
-                        <div className='comment__total__answers'>
-                            <div>({comment_answers.length}) Respostas </div>
-                        </div>
+                            <div className='comment__total__answers' onClick={() => toggleCommentsAnswers()}>
+                                <div>({comment_answers.length}) Respostas </div>
+                            </div>
+                            :
+                            <div className='comment__total__answers'>
+                                <div>({comment_answers.length}) Respostas </div>
+                            </div>
                         }
                     </div>
                 </div>
@@ -112,7 +112,7 @@ function Comments_component({video}) {
             <div className='comment__answers'>
                 {commentsAnswer &&
                     <div>
-                        <Comments_answers_component/>
+                        <Comments_answers_component />
                     </div>}
             </div>
         </>
