@@ -1,14 +1,15 @@
-import './App.css'
+import './App.css';
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
-import Register from './pages/register/Register'
 import Player from './pages/player/Player'
-import Profile from './pages/profile/Profile'
-import Historic from './pages/historic/Historic'
 import Shorts from './pages/shorts/Shorts'
-import VideoDetails from './pages/videoDetails/VideoDetails'
+import Profile from './pages/profile/Profile'
+import Register from './pages/register/Register'
+import Historic from './pages/historic/Historic'
+import Settings from './pages/settings/Settings'
+import NotFound from './pages/notFound/NotFound'
 import VideoUpload from './pages/videoUpload/VideoUpload'
-import Search from './pages/search/Search'
+import VideoDetails from './pages/videoDetails/VideoDetails'
 import { Provider } from 'react-redux'
 import store from './store'
 import Video_player_contructor from './pages/player/video_player_contructor/Video_player_contructor'
@@ -17,43 +18,63 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Upload from './pages/upload/Upload'
 import UploadVideo from './pages/uploadVideo/UploadVideo'
 import UploadShorts from './pages/uploadShorts/UploadShorts'
-import NotFound from './pages/notFound/NotFound'
-import Settings from './pages/settings/Settings'
 import TopLoadingBar from 'react-top-loading-bar'
 import { useRef, useState } from 'react'
 import axiosInstance from "./service/AxiosConfig"
 import { useEffect } from 'react'
-import { getTokenAnonimous } from './store/features/user/userSlice'
+import UserService from './service/UserService'
+import Cookies from 'js-cookie'
 
 function App() {
+
+  const [isLightMode] = useState(localStorage.getItem('lightTheme') === 'true')
   const [loading, setLoading] = useState(false)
   const loadingBarRef = useRef(null)
 
   useEffect(() => {
-    getTokenAnonimous()
+    if (isLightMode == true) {
+      document.body.classList.add("light__mode")
+    } else {
+      document.body.classList.remove("light__mode")
+    }
+  })
+
+  const generateTokenAnonimous = async () => {
+    const userToken = Cookies.get("token")
+    const existAnonimoToken = Cookies.get("anonimo")
+    if (userToken || existAnonimoToken) {
+      return
+    }
+    const tokenAnonimo = await UserService.getTokenAnonimo()
+    Cookies.set("anonimo", tokenAnonimo)
+  }
+
+  useEffect(() => {
+    generateTokenAnonimous()
+    
     axiosInstance.interceptors.request.use(
-      (config) => {
-        setLoading(true)
-        loadingBarRef.current.continuousStart()
-        return config
-      },
-      (error) => {
-        return Promise.reject(error)
-      }
-    )
-  
-    axiosInstance.interceptors.response.use(
-      (response) => {
-        setLoading(false)
-        loadingBarRef.current.complete()
-        return response
-      },
-      (error) => {
-        setLoading(false)
-        loadingBarRef.current.complete()
-        return Promise.reject(error)
-      }
-    )
+    (config) => {
+      setLoading(true)
+      loadingBarRef.current.continuousStart()
+      return config
+    },
+    (error) => {
+      return Promise.reject(error)
+    }
+  )
+
+  axiosInstance.interceptors.response.use(
+    (response) => {
+      setLoading(false)
+      loadingBarRef.current.complete()
+      return response
+    },
+    (error) => {
+      setLoading(false)
+      loadingBarRef.current.complete()
+      return Promise.reject(error)
+    }
+  )
   }, [])
 
   return (

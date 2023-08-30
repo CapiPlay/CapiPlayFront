@@ -10,7 +10,7 @@ import PlayerService from '../../service/PlayerService';
 import Aos from 'aos'
 import Cookies from 'js-cookie';
 
-function Home() {
+function Home(darkMode ) {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
   const [videosReu, setVideosReu] = useState([])
   const [videosRec, setVideosRec] = useState([])
@@ -43,7 +43,7 @@ function Home() {
     const scrolled = window.innerHeight + window.scrollY;
     const totalHeight = document.documentElement.scrollHeight;
 
-    if (!loadingMoreVideos && scrolled >= totalHeight - 100) {
+    if (!loadingMoreVideos && scrolled >= totalHeight - 200) {
       setLoadingMoreVideos(true);
       getMoreVideos(currentPage + 1);
     }
@@ -77,7 +77,6 @@ function Home() {
 
     if (videos) {
       const filteredVideos = videos.filter(video => video.shorts === false);
-
       if (filteredVideos.length > 0) {
         setVideosReu(filteredVideos);
       } else {
@@ -121,14 +120,12 @@ function Home() {
 
   const getVideosRev = async () => {
     const videos = await PlayerService.buscarVideosHomeRev(0);
-
     if (videos) {
       const filteredVideos = videos.filter(video => video.shorts === false);
-
-      if (filteredVideos.length === 9) {
-        setVideosRev(filteredVideos);
-      } else if (filteredVideos.length === 6) {
-        setVideosRev(filteredVideos);
+      if (filteredVideos.length > 6) {
+        filteredVideos.sort((a, b) => b.pontuacao - a.pontuacao);
+        const top6Videos = filteredVideos.slice(0, 6);
+        setVideosRev(top6Videos);
       } else {
         setVideosRev([]);
       }
@@ -140,27 +137,27 @@ function Home() {
   const userProfile = () => {
     const userToken = Cookies.get('token');
     if (userToken) {
-        try {
-            const tokenPayload = userToken.split('.')[1];
-            const decodedPayload = atob(tokenPayload);
-            const userLogin = JSON.parse(decodedPayload);   
-            console.log(userLogin)
-            if (userLogin) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (error) {
-            console.error("Erro ao analisar o token:", error);
-            return false;
+      try {
+        const tokenPayload = userToken.split('.')[1];
+        const decodedPayload = atob(tokenPayload);
+        const userLogin = JSON.parse(decodedPayload);
+        if (userLogin) {
+          return true;
+        } else {
+          return false;
         }
-    } else {
+      } catch (error) {
+        console.error("Erro ao analisar o token:", error);
         return false;
+      }
+    } else {
+      return false;
     }
   }
 
   const renderDesktopView = () => (
     <>
+     <div className={`home-component ${darkMode ? 'dark-mode' : 'light-mode'}`}>
       <Header userLogin={userProfile()} />
       <Side_Bar />
       <div className='container__header__home'></div>
@@ -185,7 +182,9 @@ function Home() {
           ))}
         </div>
       </div>
+      </div>
     </>
+    
   );
 
   const renderTabletView = () => (

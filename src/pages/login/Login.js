@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { doLogin } from "../../store/features/user/userSlice"
 
@@ -13,12 +13,13 @@ import Button from "../../components/button/Button"
 // Icons
 import { FaFacebookF } from 'react-icons/fa'
 import { FaGoogle } from 'react-icons/fa'
-import Cookies from "js-cookie"
+import { ToastContainer, toast } from "react-toastify"
 
 const Login = ({ }) => {
 
     const [loginData, setLoginData] = useState({ email: '', senha: '' })
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -36,7 +37,9 @@ const Login = ({ }) => {
     const login = async() => {
         try {
             dispatch(doLogin(loginData))
+            navigate('/')
         } catch (err) {
+            toast("E-mail ou senha inválido")
             console.log("Deu erro")
         }
     }
@@ -97,6 +100,7 @@ const Login = ({ }) => {
                     </span>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     )
 }

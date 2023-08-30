@@ -31,28 +31,22 @@ const userSlice = createSlice({
     signup: (state, action) => {
       state.isAuthenticated = true
       state.user = action.payload.user
-    },
-    anonimous: (state, action) => {
-      const { token } = action.payload
-      state.token = token
     }
   }
 })
 
-export const { login, logout, signup, anonimous } = userSlice.actions
+export const { login, logout, signup } = userSlice.actions
 export default userSlice.reducer
 
 const doLogin = (credentials) => async (dispatch) => {
-  try {
-    const res = await UserService.login(credentials)
+  const res = await UserService.login(credentials)
+  if (res) {
     await dispatch(login({ token: res.data }))
-
+    
     const userDetails = await UserService.detalhes()
     Cookies.set("user", JSON.stringify(userDetails.data))
-
+    
     return res
-  } catch (err) {
-    console.error(err)
   }
 }
 
@@ -74,27 +68,8 @@ const doLogout = () => async (dispatch) => {
   }
 }
 
-const getTokenAnonimous = () => async (dispatch) => {
-  try {
-    const userToken = Cookies.get("token")
-    if (userToken) {
-      return
-    }
-    const tokenAnonimous = generateTokenAnonimous()
-    dispatch({ token: tokenAnonimous })
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-const generateTokenAnonimous = async () => {
-  const tokenAnonimo = await UserService.getTokenAnonimo()
-  Cookies.set("anonimo", tokenAnonimo)
-}
-
 export {
   doSignup,
   doLogin,
-  doLogout,
-  getTokenAnonimous
+  doLogout
 }

@@ -11,7 +11,7 @@ const HeaderUpload = ({ caminho }) => {
                 <Link to={caminho}>
                     <AiOutlineArrowLeft className='arrow__icon' color='var(--lightpurple)' fontSize={25} />
                 </Link>
-                <p>Upload</p>
+                <p className='header__upload__text'>Upload</p>
             </div>
         </>
     )

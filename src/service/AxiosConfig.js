@@ -19,13 +19,15 @@ const getToken = () => {
     if(userToken) {
         return userToken
     }
-    return Cookies.get("anonimo")
+    const tokenAnonimo = Cookies.get("anonimo")
+    return tokenAnonimo
 }
 
 axiosInstance.interceptors.request.use(
     (config) => {
         const token = getToken()
         const authHeaders = getAuthHeaders(token)
+        console.log(authHeaders)
         config.headers = { ...config.headers, ...authHeaders }
         return config
     },

@@ -134,7 +134,11 @@ function Header({ userLogin, searchValue }) {
 
     const renderDesktopView = () => (
         <div className='header__container' >
-            <div></div>
+            <div className='header__logo__home'>
+                <Link to='/'>
+                    <img src={logo} className='container__logo' />
+                </Link>
+            </div>
             <div className='header__input__container'>
                 <input
                     className='header__input__text__search'

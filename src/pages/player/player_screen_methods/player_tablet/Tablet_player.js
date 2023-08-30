@@ -11,7 +11,7 @@ import Video_card from '../../../../components/video_card/Video_card'
 import { BiArrowBack } from 'react-icons/bi'
 import PlayerService from '../../../../service/PlayerService'
 
-function Tablet_player({video}) {
+function Tablet_player({ video }) {
     const [videos, setVideos] = useState([])
 
     useEffect(() => {
@@ -19,14 +19,14 @@ function Tablet_player({video}) {
     }, [])
 
     const getVideos = async () => {
-        setVideos(await PlayerService.buscarVideosHome(0))
+        setVideos(await PlayerService.buscarVideosHomeReu(0))
     }
 
     return (
         <><div className='return__btn'><BiArrowBack color='var(--lightpurple)' />Voltar</div>
             <div>
-                <video controls className='video__player__tablet' poster={"http://localhost:7000/api/video/static/" + video.caminhos[3]} key={video.uuid}>
-                    <source src={"http://localhost:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
+                <video controls className='video__player__tablet' poster={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[3]} key={video.uuid}>
+                    <source src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
                 </video>
             </div>
             <div className='video__title'>
@@ -67,11 +67,11 @@ function Tablet_player({video}) {
                 <Divider_component />
             </div>
             <div className='videos__tablet__container'>
-                    <div className='videos__tablet'>
-                        {videos.map((video) => (
-                            <Video_card key={video.uuid} video={video} />
-                        ))}
-                    </div>
+                <div className='videos__tablet'>
+                    {videos.map((video) => (
+                        <Video_card key={video.uuid} video={video} />
+                    ))}
+                </div>
             </div></>
     )
 }
