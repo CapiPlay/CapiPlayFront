@@ -109,6 +109,6 @@
 .text__profile__modal {
   color: var(--whiteBlack) !important;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-left: 8rem;
+  gap: 4rem;
 }
