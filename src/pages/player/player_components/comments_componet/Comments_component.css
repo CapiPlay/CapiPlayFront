@@ -73,3 +73,8 @@
 .comment__answers{
     margin-left: 3rem;
 }
+
+/* ----- for light mode ----- */
+.comment__content {
+    color: var(--whiteBlack);
+}
