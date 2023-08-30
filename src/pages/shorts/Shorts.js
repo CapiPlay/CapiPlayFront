@@ -79,6 +79,11 @@ const Shorts = () => {
         }
     }, [])
 
+    // const getFirstShort = async () => {
+        
+    //     return short
+    // }
+
     //animações para passar de shorts
     useEffect(() => {
 
@@ -91,21 +96,11 @@ const Shorts = () => {
 
         const func = async () => {
             const newShorts = []
-            const getFirstShort = async() => {
-                const short = await ShortsService.buscarUUID(id)
-                return short
-            }
-    
-            newShorts.push(getFirstShort())
-            // for(let i = 0; i < 5; i++) {
-            //     const data = await ShortsService.buscar()
-            //     newShorts.push(data)
-            //     console.log(data)
-            // }
+
+            const firstShort = await ShortsService.buscarUUID(id)
+            newShorts.push(firstShort.data)
             dispatch(setListShorts(null, newShorts, null))
         }
-        
-        console.log(shorts)
         func()
 
         return () => {
