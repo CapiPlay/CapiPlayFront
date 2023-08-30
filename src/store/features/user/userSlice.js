@@ -41,13 +41,17 @@ export default userSlice.reducer
 const doLogin = (credentials) => async (dispatch) => {
   const res = await UserService.login(credentials)
   if (res) {
-    await dispatch(login({ token: res.data }))
-    
-    const userDetails = await UserService.detalhes()
-    Cookies.set("user", JSON.stringify(userDetails.data))
-    
-    return res
+    try {
+      await dispatch(login({ token: res.data }))
+      
+      const userDetails = await UserService.detalhes()
+      Cookies.set("user", JSON.stringify(userDetails.data))
+      return res
+    } catch(err) {
+      console.log(err)
+    }
   }
+  return res
 }
 
 const doSignup = (newUser, photo) => async (dispatch) => {

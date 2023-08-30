@@ -1,10 +1,11 @@
 
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { doLogin } from "../../store/features/user/userSlice"
 
 import "./Login.css"
+import 'react-toastify/dist/ReactToastify.css';
 
 // Componentes
 import Input from "../../components/input/Input"
@@ -14,13 +15,15 @@ import Button from "../../components/button/Button"
 import { FaFacebookF } from 'react-icons/fa'
 import { FaGoogle } from 'react-icons/fa'
 import { ToastContainer, toast } from "react-toastify"
+import Cookies from "js-cookie"
 
 const Login = ({ }) => {
+    const navigate = useNavigate();
 
     const [loginData, setLoginData] = useState({ email: '', senha: '' })
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
-    const navigate = useNavigate()
     const dispatch = useDispatch()
+    const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
 
     useEffect(() => {
         const handleResize = () => {
@@ -34,13 +37,22 @@ const Login = ({ }) => {
         }
     }, [])
 
-    const login = async() => {
-        try {
-            dispatch(doLogin(loginData))
-            navigate('/')
-        } catch (err) {
-            toast("E-mail ou senha inválido")
-            console.log("Deu erro")
+    const login = async () => {
+        if (loginData.email && loginData.senha) {
+            try {
+                const res = dispatch(doLogin(loginData))
+                console.log(res)
+
+                if (isAuthenticated) {
+                    // navigate("/");
+                } else {
+                    toast.error("E-mail ou senha inválido")
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        } else {
+            toast.error("Preencha todos os campos")
         }
     }
 
@@ -100,7 +112,17 @@ const Login = ({ }) => {
                     </span>
                 </div>
             </div>
-            <ToastContainer />
+            <ToastContainer position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                toastClassName={"toast"}
+                theme="colored" />
         </div>
     )
 }
