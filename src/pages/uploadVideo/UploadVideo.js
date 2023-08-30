@@ -5,6 +5,7 @@ import './UploadVideo.css'
 import { HiUpload } from 'react-icons/hi'
 import { useLocation } from 'react-router-dom'
 import React, { useState, useRef } from 'react'
+import Cookies from 'js-cookie';
 
 // componentes
 import Input from '../../components/input/Input'
@@ -67,29 +68,34 @@ function UploadVideo() {
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     if (file) {
-      const formData = new FormData()
-      formData.append("video", file)
-      setImage(formData)
-
+      const videoURL = URL.createObjectURL(file);
+  
       const reader = new FileReader();
-
+      const formData = new FormData();
+      formData.append('video', file);
+  
       reader.onload = function (event) {
         if (imagePreviewRef.current) {
           imagePreviewRef.current.src = event.target.result;
           imagePreviewRef.current.style.display = 'block';
         }
       };
-
       reader.readAsDataURL(file);
-
-      const videoURL = URL.createObjectURL(file);
+  
+      setVideo((prevVideo) => ({
+        ...prevVideo,
+        video: videoURL,
+        miniatura: file,
+      }));
+  
       setVideoSrc(videoURL);
-
-      setVideoSrc(URL.createObjectURL(file));
+      setImage(formData);
     }
-  }
+  };
+  
+
 
   const renderizarNovaTag = () => {
     if (tag !== "") {
@@ -111,17 +117,32 @@ function UploadVideo() {
     }))
   }
 
-  const enviarVideo = (event) => {
-    event.preventDefault()
+  
+const enviarVideo = async (event) => {
+  event.preventDefault();
 
-    setVideo((prevVideo) => ({
-      ...prevVideo,
-      video: videoSrc
-    }));
-    VideoService.criar(video)
-    console.log(video)
-    // window.location.reload()
+  const formData = new FormData();
+  formData.append('video', videoSrc);
+
+  const usuarioId = Cookies.get('user') ? JSON.parse(Cookies.get('user')).uuid : null;
+
+  if (!usuarioId) {
+    console.error('usuarioId not found in cookies');
+    return;
   }
+
+  try {
+    const response = await VideoService.criar(formData, usuarioId);
+    console.log(response.data); // Handle successful response
+  } catch (error) {
+    console.error('API Error:', error); // Handle error response
+  }
+
+  console.log(video);
+
+  // window.location.reload()
+};
+  
 
   return (
     <>
