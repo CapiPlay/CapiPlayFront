@@ -13,25 +13,22 @@ import { BiSearchAlt2 } from "react-icons/bi"
 
 import './Header.css'
 
-
-
 import Modal_profile from './modal_profile/Modal_profile';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 //imageProfile: a partir do back-end, do token recebido, será mandado a imagem do usuário, que deve 
 //ser passada para o header para ser exibida 
-function Header({ userLogin }) {
+function Header({ userLogin, searchValue }) {
 
+    const location = useLocation()
     const [search, setSearch] = useState(false);
     const [searchDesktop, setSearchDesktop] = useState(false);
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     // Campo de pesquisa em Desktop
     const nav = useNavigate();
-    const location = useLocation();
-    const urlSearchParams = new URLSearchParams(location.search);
-    const searchParams = urlSearchParams.get("q");
-    const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : "");
+
+    const [valueInput, setValueInput] = useState(searchValue);
 
     const handleClick = () => {
         setSearch(!search);
@@ -51,6 +48,14 @@ function Header({ userLogin }) {
     const handleChange = (e) => {
         setValueInput(e.target.value);
     }
+
+    useEffect(() => {
+        if (valueInput === null) {
+            const urlSearchParams = new URLSearchParams(location.search);
+            const searchParams = urlSearchParams.get("q");
+            setValueInput(searchParams)
+        }
+    }, [])
 
     // listas temporárias
     const [lastSearches, setLastSearches] = useState(([
@@ -87,6 +92,12 @@ function Header({ userLogin }) {
         }
     }
 
+    const handleSelection = (lastSearch) => {
+        setValueInput(lastSearch)
+        setSearchDesktop(false);
+        nav(`/result-search?search=${lastSearch}`)
+    }
+
     useEffect(() => {
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
@@ -113,7 +124,7 @@ function Header({ userLogin }) {
                     <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
                 </div>
                 <Modal_profile profile={userLogin} />
-                  
+
             </div>
             {search &&
                 <Search />
@@ -129,18 +140,17 @@ function Header({ userLogin }) {
                     className='header__input__text__search'
                     placeholder='Pesquisar'
                     onFocus={() => setSearchDesktop(true)}
-                    onBlur={() => setSearchDesktop(false)}
                     value={valueInput}
                     onKeyPress={verifyKeyPress}
                     onChange={handleChange} />
                 <AiOutlineSearch />
                 {searchDesktop &&
                     <div className="container__search__desktop">
-                        {valueInput.trim() === ''
+                        {valueInput && valueInput.trim() === ''
                             ?
                             <>
-                                {lastSearches.map((lastSearch) => (
-                                    <div className="searches__hitoric__container">
+                                {lastSearches && lastSearches.map((lastSearch) => (
+                                    <div className="searches__hitoric__container" onClick={() => handleSelection(lastSearch)}>
                                         <MdRestartAlt className='icons__search__desktop' />
                                         <span>{lastSearch}</span>
                                     </div>
@@ -148,8 +158,8 @@ function Header({ userLogin }) {
                             </>
                             :
                             <>
-                                {searches.map((search) => (
-                                    <div className="searches__hitoric__container">
+                                {searches && searches.map((search) => (
+                                    <div className="searches__hitoric__container" onClick={() => handleSelection(search)}>
                                         <BiSearchAlt2 className='icons__search__desktop' />
                                         <span>{search}</span>
                                     </div>

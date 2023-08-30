@@ -4,9 +4,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 // ícones
 import { MdRestartAlt } from "react-icons/md"
 import { BiSearchAlt2 } from "react-icons/bi"
+import { IoMdArrowBack } from "react-icons/io"
 
 // componentes
 import { useState } from "react";
+import { useDebugValue } from "react";
 import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 
 const Search = () => {
@@ -17,7 +19,7 @@ const Search = () => {
     const location = useLocation();
 
     const urlSearchParams = new URLSearchParams(location.search);
-    const searchParams = urlSearchParams.get("q");
+    const searchParams = urlSearchParams.get("search");
     const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : "");
 
     const [back, setBack] = useState(false);
@@ -44,11 +46,12 @@ const Search = () => {
 
 
     const handleChange = (e) => {
+        console.log(e)
         setValueInput(e.target.value);
     }
 
-    const handleSearch = () => {
-        nav(`/result-search?search=${encodeURIComponent(valueInput)}`);
+    const handleSearch = (value) => {
+        nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : valueInput)}`);
         console.log("search: ")
     }
 
@@ -57,7 +60,7 @@ const Search = () => {
             return (
                 <>
                     {lastSearches && lastSearches.map((lastSearch) => (
-                        <div className="search__box">
+                        <div className="search__box" onClick={() => handleSearch(lastSearch)}>
                             <MdRestartAlt size={sizeIcon} color={colorIcon} />
                             <span>{lastSearch}</span>
                         </div>
@@ -68,7 +71,7 @@ const Search = () => {
             return (
                 <>
                     {searches && searches.map((search) => (
-                        <div className="search__box">
+                        <div className="search__box" onClick={() => handleSearch(search)}>
                             <BiSearchAlt2 size={sizeIcon} color={colorIcon} />
                             <span>{search}</span>
                         </div>
@@ -78,13 +81,33 @@ const Search = () => {
         }
     }
 
+    const verifyKeyPress = (e) => {
+        console.log(e)
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    }
+
     return (
-        <div className="container__search" style={{display:back?"none":"block"}}>
+        <div className="container__search" style={{ display: back ? "none" : "block" }}>
             <HeaderSearch
                 handleSearch={handleSearch}
                 valueInput={valueInput}
                 handleChange={handleChange}
                 functionBack={() => setBack(!back)} />
+            {/* <div className="header__search">
+                <IoMdArrowBack className="icon__search" onClick={() => setBack(!back)} />
+                <div className="container__input__search">
+                    <input
+                        type="text"
+                        value={valueInput}
+                        onChange={handleChange}
+                        onKeyPress={verifyKeyPress} />
+                    <BiSearchAlt2
+                        className="icon__search"
+                    />
+                </div>
+            </div> */}
             {renderSearch()}
         </div>
     )

@@ -126,7 +126,7 @@ const ResultSearch = () => {
             <>
                 <Side_Bar />
                 <div className="container__header__search__desktop">
-                    <Header />
+                    <Header searchValue={searchValue} />
                 </div>
                 <div className="container__tags__search__desktop">
                     <Slider_Category />
@@ -147,11 +147,23 @@ const ResultSearch = () => {
         )
     }
 
+    const handleChange = (e) => {
+        console.log(e)
+        setSearchValue(e.target.value);
+    }
+
+    const handleSearch = (value) => {
+        nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : searchValue)}`);
+        console.log("search: ")
+    }
+
     const renderTabletMobileView = () => {
         return (
             <div className="container__result__search">
                 <HeaderSearch
+                    handleSearch={handleSearch}
                     valueInput={searchValue}
+                    handleChange={handleChange}
                     functionBack={() => nav("/")} />
                 <div className="container__tags__search">
                     <TagsCarousel />
