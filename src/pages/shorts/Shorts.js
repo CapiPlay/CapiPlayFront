@@ -98,17 +98,9 @@ const Shorts = () => {
             const newShorts = []
 
             const firstShort = await ShortsService.buscarUUID(id)
-            console.log("short" + firstShort) 
-            newShorts.push(firstShort)
-            // for(let i = 0; i < 5; i++) {
-            //     const data = await ShortsService.buscar()
-            //     newShorts.push(data)
-            //     console.log(data)
-            // }
-            // dispatch(setListShorts(null, newShorts, null))
+            newShorts.push(firstShort.data)
+            dispatch(setListShorts(null, newShorts, null))
         }
-
-        console.log(shorts)
         func()
 
         return () => {
