@@ -1,4 +1,4 @@
-import Comments from '../../pages/player/comments/Comments'
+import Comments from '../../pages/player/player_components/comments_componet/Comments_component'
 import '../commentsComponent/CommentsComponent.css'
 
 //icons

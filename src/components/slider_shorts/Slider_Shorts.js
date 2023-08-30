@@ -23,12 +23,11 @@ function Slider_Shorts() {
 
     const getVideosRec = async () => {
         const videos = await PlayerService.buscarVideosHomeRec(0);
-        console.log(videos);
         
         if (videos) {
             const filteredVideos = videos.filter(video => video.shorts === true);
             console.log(filteredVideos);
-            if (filteredVideos.length > 2) {
+            if (filteredVideos.length >= 6) {
                 setVideosRec(filteredVideos);
             } else {
                 setVideosRec([]);
@@ -43,6 +42,7 @@ function Slider_Shorts() {
         slidesToScroll: 1,
         swipeToSlide: true,
         autoplay: true,
+        autoplaySpeed: 5000,
         dots: true,
         infinite: true,
         arrows: false,

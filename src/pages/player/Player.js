@@ -21,7 +21,7 @@ function Player() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [videoId]);
 
   const buscarVideo = async (videoId) => {
     setVideo(await PlayerService.buscarVideoObject(videoId))

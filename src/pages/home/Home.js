@@ -43,7 +43,7 @@ function Home(darkMode ) {
     const scrolled = window.innerHeight + window.scrollY;
     const totalHeight = document.documentElement.scrollHeight;
 
-    if (!loadingMoreVideos && scrolled >= totalHeight - 100) {
+    if (!loadingMoreVideos && scrolled >= totalHeight - 200) {
       setLoadingMoreVideos(true);
       getMoreVideos(currentPage + 1);
     }
@@ -77,7 +77,6 @@ function Home(darkMode ) {
 
     if (videos) {
       const filteredVideos = videos.filter(video => video.shorts === false);
-
       if (filteredVideos.length > 0) {
         setVideosReu(filteredVideos);
       } else {
@@ -142,7 +141,6 @@ function Home(darkMode ) {
         const tokenPayload = userToken.split('.')[1];
         const decodedPayload = atob(tokenPayload);
         const userLogin = JSON.parse(decodedPayload);
-        console.log(userLogin)
         if (userLogin) {
           return true;
         } else {
