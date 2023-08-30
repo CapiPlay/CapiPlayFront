@@ -11,11 +11,11 @@ import React, { useEffect, useState } from 'react'
 import ThemeToggle from '../theme_toggle/ThemeToggle'
 
 // images
-import notFound from '../../../assets/image/404_NotFound.png' 
+import notFound from '../../../assets/image/404_NotFound.png'
 import channel from '../../../assets/image/channel_profile.png'
 
 function Modal_profile({ profile }) {
-    
+
     const [openModal, setOpenModal] = useState(0)
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
@@ -77,7 +77,7 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <div className='text__profile_modal'>
                                     <p>Tema</p>
-                                   <ThemeToggle/>
+                                    <ThemeToggle />
                                 </div>
                                 <div className='divider__profile__modal'></div>
                                 <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
@@ -94,9 +94,13 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <Link to="/search" className='text__profile_modal'><p>Pesquisar</p></Link>
                                 <div className='divider__profile__modal'></div>
-                                <div className='text__profile_modal'>
-                                    <p>Tema</p>
-                                    <ThemeToggle/>
+                                <div className='text__profile__modal'>
+                                    <div>
+                                        <p>Tema</p>
+                                    </div>
+                                    <div>
+                                        <ThemeToggle />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +125,7 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <div className='text__profile_modal_tablet'>
                                     <p>Tema</p>
-                                    <ThemeToggle/>
+                                    <ThemeToggle />
                                 </div>
                                 <div className='divider__profile__modal'></div>
                                 <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
@@ -140,7 +144,7 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <div className='text__profile_modal_tablet'>
                                     <p>Tema</p>
-                                    <ThemeToggle/>
+                                    <ThemeToggle />
                                 </div>
                             </div>
                         </div>
@@ -165,7 +169,7 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <div className='text__profile_modal_mobile'>
                                     <p>Tema</p>
-                                    <ThemeToggle/>
+                                    <ThemeToggle />
                                 </div>
                                 <div className='divider__profile__modal'></div>
                                 <Link to="" className='text__profile_modal'><p>Histórico</p></Link>
@@ -184,7 +188,7 @@ function Modal_profile({ profile }) {
                                 <div className='divider__profile__modal'></div>
                                 <div className='text__profile_modal_mobile'>
                                     <p>Tema</p>
-                                    <ThemeToggle/>
+                                    <ThemeToggle />
                                 </div>
                             </div>
                         </div>

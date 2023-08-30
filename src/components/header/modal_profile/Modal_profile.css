@@ -105,3 +105,10 @@
 .container__perfilImage {
   background-color: var(--purple);
 }
+
+.text__profile__modal {
+  color: var(--whiteBlack) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

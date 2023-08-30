@@ -98,6 +98,7 @@
 .header__info div {
     padding-right: 2rem;
     display: flex;
+    justify-content: center;
 }
 
 .header__info div svg {
