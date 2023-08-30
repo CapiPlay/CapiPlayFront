@@ -90,7 +90,7 @@ function App() {
             <Route path="/shorts/:id" element={<Shorts />} />
             <Route path="/video-details" element={<VideoDetails />} />
             <Route path="/video-upload" element={<VideoUpload />} />
-            <Route path="/profile/:usuarioId" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/result-search" element={<ResultSearch />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/upload-video" element={<UploadVideo />} />

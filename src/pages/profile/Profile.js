@@ -12,10 +12,10 @@ import EngajamentoService from '../../service/EngajamentoService';
 import ProfilePicture from '../../assets/image/channel_profile.png'
 
 
-const Profile = ({ }) => {
+const Profile = () => {
 
     const [usuario, setUsuario] = useState({});
-    const { idUsuario } = useParams();
+    const { idUsuario } = useState("22b7d2ef70-5cf1-4e09-86b6-63947f4af247");
     console.log(idUsuario)
     console.log(usuario.nomeCanal)
 
