@@ -1,13 +1,12 @@
 .input__group__disabled {
     position: relative;
-    margin-bottom: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .input__control__disabled {
-    background-color: transparent;
+    background-color: var(--backgroundInput);
     color: var(--whitesmoke) !important;
     height: 3rem;
     width: 100%;
@@ -58,7 +57,7 @@
     position: absolute;
     left: 0;
     font-size: 16px;
-    color: var(--whitesmoke);
+    color: var(--whiteBlack);
     transition: 0.2s ease-out;
     pointer-events: none;
     box-sizing: border-box;

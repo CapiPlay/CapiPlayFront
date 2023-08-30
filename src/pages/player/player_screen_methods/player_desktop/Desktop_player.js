@@ -17,9 +17,10 @@ function Desktop_player({ video }) {
 
     useEffect(() => {
         getVideos()
+        console.log(video)
     }, [])
 
-    
+
 
     const getVideos = async () => {
         setVideos(await PlayerService.buscarVideosHomeReu(0))
@@ -31,11 +32,11 @@ function Desktop_player({ video }) {
             <div className='things'>
                 <div>
                     <div className='video__container'>
-                        <video 
-                            src={"http://localhost:7000/api/video/static/" + video.caminhos[5]} 
-                            type="video/mp4" 
+                        <video
+                            src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[5]}
+                            type="video/mp4"
                             className='video__player__desktop'
-                            poster={"http://localhost:7000/api/video/static/" + video.caminhos[3]}  
+                            poster={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[3]}
                             key={video.uuid}
                             controls
                         />

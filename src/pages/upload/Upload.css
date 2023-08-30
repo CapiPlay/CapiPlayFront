@@ -36,12 +36,22 @@
 
 .upload__button {
     background-color: transparent;
-    border: 2px solid var(--whitesmoke);
+    border: 2px solid var(--whiteToPurple);
 }
 
 .upload__button__selected:hover,
 .upload__button:hover {
     cursor: pointer;
+}
+
+.upload__button__selected__text {
+    font-weight: bolder;
+    color: var(--whitesmoke);
+}
+
+.upload__button__text {
+    font-weight: bolder;
+    color: var(--whiteToPurple);
 }
 
 .upload__divider {
@@ -71,7 +81,7 @@
     width: 45vw; 
     height: 20rem;
     border-radius: 1rem;
-    background-color: var(--darkblue);
+    background-color: var(--gray);
 }
 
 .upload__next__buttons__box {

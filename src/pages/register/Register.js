@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./Register.css"
 
 // Componentes
@@ -36,6 +36,7 @@ const Register = () => {
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const [bPChooseCategory, setbPChooseCategory] = useState(false)
     const [fileChanged, setFileChanged] = useState(false)
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -71,6 +72,7 @@ const Register = () => {
 
         try {
             const res = dispatch(doSignup(user, image))
+            navigate('/login')
             // nextStep()
         } catch(err) {
             console.error(err)

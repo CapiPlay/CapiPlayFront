@@ -63,7 +63,7 @@
 
     border-radius: 10px;
     border: none;
-    background-color: var(--whitesmoke);
+    background-color: var(--backgroundInput);
 }
 
 .header__input__container>input:focus {
@@ -121,6 +121,8 @@
     height: 2.5rem;
 
     border-radius: 50%;
+
+    border: solid 3px var(--purple);
 
     cursor: pointer;
 }
@@ -199,4 +201,11 @@
 .icons__search__desktop{
     color: var(--darkblue);
     opacity: .6;
+}
+
+.header__logo__home {
+    display: flex;
+    padding-left: 1rem;
+    align-items: center
+
 }
