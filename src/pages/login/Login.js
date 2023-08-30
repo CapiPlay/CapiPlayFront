@@ -44,7 +44,7 @@ const Login = ({ }) => {
                 console.log(res)
 
                 if (isAuthenticated) {
-                    // navigate("/");
+                    navigate("/");
                 } else {
                     toast.error("E-mail ou senha inválido")
                 }
