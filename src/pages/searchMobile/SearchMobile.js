@@ -4,26 +4,34 @@ import { useLocation, useNavigate } from "react-router-dom";
 // ícones
 import { MdRestartAlt } from "react-icons/md"
 import { BiSearchAlt2 } from "react-icons/bi"
-import { IoMdArrowBack } from "react-icons/io"
 
 // componentes
 import { useState } from "react";
-import { useDebugValue } from "react";
 import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 
 const Search = () => {
 
     const sizeIcon = 20;
     const colorIcon = "var(--whitesmoke)";
-    const nav = useNavigate();
-    const location = useLocation();
 
+    const nav = useNavigate();
+    const [back, setBack] = useState(false);
+
+    const location = useLocation();
     const urlSearchParams = new URLSearchParams(location.search);
     const searchParams = urlSearchParams.get("search");
     const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : "");
 
-    const [back, setBack] = useState(false);
+    const handleChange = (e) => {
+        console.log(e)
+        setValueInput(e.target.value);
+    }
 
+    const handleSearch = (value) => {
+        nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : valueInput)}`);
+    }
+
+    // utilizado temporariamente para simular histórico de pesquisa/sugestões de pesquisa 
     const [lastSearches, setLastSearches] = useState(([
         "Benefícios da meditação para a saúde",
         "Receita de bolo de cenoura com cobertura de chocolate",
@@ -43,17 +51,6 @@ const Search = () => {
         "Pica - Pau completo dublado",
         "Como fazer uma torta de abacaxi com calda de côco?"
     ]));
-
-
-    const handleChange = (e) => {
-        console.log(e)
-        setValueInput(e.target.value);
-    }
-
-    const handleSearch = (value) => {
-        nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : valueInput)}`);
-        console.log("search: ")
-    }
 
     const renderSearch = () => {
         if (valueInput.trim() === '') {
@@ -81,13 +78,6 @@ const Search = () => {
         }
     }
 
-    const verifyKeyPress = (e) => {
-        console.log(e)
-        if (e.key === 'Enter') {
-            handleSearch();
-        }
-    }
-
     return (
         <div className="container__search" style={{ display: back ? "none" : "block" }}>
             <HeaderSearch
@@ -95,19 +85,6 @@ const Search = () => {
                 valueInput={valueInput}
                 handleChange={handleChange}
                 functionBack={() => setBack(!back)} />
-            {/* <div className="header__search">
-                <IoMdArrowBack className="icon__search" onClick={() => setBack(!back)} />
-                <div className="container__input__search">
-                    <input
-                        type="text"
-                        value={valueInput}
-                        onChange={handleChange}
-                        onKeyPress={verifyKeyPress} />
-                    <BiSearchAlt2
-                        className="icon__search"
-                    />
-                </div>
-            </div> */}
             {renderSearch()}
         </div>
     )

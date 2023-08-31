@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 // componentes
 import Modal_menu from '../../pages/home/modal_menu/modal_menu';
 import logo from '../../assets/image/Logo.png'
-import Search from '../../pages/search/Search'
+import Search from '../../pages/searchMobile/SearchMobile'
 
 // ícones
 import { TbUpload } from 'react-icons/tb'
@@ -23,6 +23,7 @@ function Header({ userLogin, searchValue }) {
     const location = useLocation()
     const [search, setSearch] = useState(false);
     const [searchDesktop, setSearchDesktop] = useState(false);
+    const [verifyClicked, setVerifyClicked] = useState(false);
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     // Campo de pesquisa em Desktop
@@ -54,6 +55,12 @@ function Header({ userLogin, searchValue }) {
             const urlSearchParams = new URLSearchParams(location.search);
             const searchParams = urlSearchParams.get("q");
             setValueInput(searchParams)
+        }
+
+        if (verifyClicked) {
+            setSearchDesktop(true)
+        } else {
+            setSearchDesktop(false)
         }
     }, [])
 
@@ -92,19 +99,31 @@ function Header({ userLogin, searchValue }) {
         }
     }
 
-    const handleSelection = (lastSearch) => {
-        setValueInput(lastSearch)
-        setSearchDesktop(false);
-        nav(`/result-search?search=${lastSearch}`)
+    const handleSelection = (searchSelected) => {
+        setValueInput(searchSelected)
+        setVerifyClicked(true)
+        nav(`/result-search?search=${searchSelected}`)
     }
 
     useEffect(() => {
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
+
+        function handleClick(e) {
+            const element = e.target.offsetParent;
+            if (element == null || !element.classList.contains("header__input__container")) {
+                setSearchDesktop(false);
+            }
+
+        }
+
         window.addEventListener('resize', handleResize);
+        document.addEventListener("click", handleClick)
+
         handleResize();
         return () => {
+            document.removeEventListener("click", handleClick)
             window.removeEventListener('resize', handleResize);
         };
     }, []);

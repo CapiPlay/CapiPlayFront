@@ -1,15 +1,19 @@
 import "./ResultSearch.css"
-import TagsCarousel from "../../components/tagsCarousel/TagsCarousel";
-import { FiFilter } from "react-icons/fi"
 import { useState } from "react";
-import HeaderSearch from "../../components/headerSearch/HeaderSearch";
-import Video_card from "../../components/video_card/Video_card";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { vi } from "date-fns/locale";
+
+// components
+import TagsCarousel from "../../components/tagsCarousel/TagsCarousel";
+import HeaderSearch from "../../components/headerSearch/HeaderSearch";
+import Video_card from "../../components/video_card/Video_card";
 import Header from "../../components/header/Header";
 import Side_Bar from "../home/side_bar/Side_Bar";
 import Slider_Category from "../home/slider_category/Slider_Category";
+
+// icons
+import { FiFilter } from "react-icons/fi"
+
 const ResultSearch = () => {
 
     const [openFilter, setOpenFilter] = useState(false);
@@ -45,81 +49,66 @@ const ResultSearch = () => {
     }, [openFilter]);
 
 
+    const handleChange = (e) => {
+        console.log(e)
+        setSearchValue(e.target.value);
+    }
+
+    const handleSearch = (value) => {
+        nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : searchValue)}`);
+        console.log("search: ")
+    }
+
+    // usado apenas para simular vídeos criados
     const videos = [{
         caminhos: [
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R154X268_16007316079386702043.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R200X348_8034148744957898250.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R230X388_3532971991782170780.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R340X193_7523822937632451934.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R380X193_9789993892227719100.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\video_13072447084527919513.mp4"
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R154X268_12274321535252966226.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R200X348_12298039738819693576.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R230X388_11546781998646356009.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R340X193_320004629004798342.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R380X193_15989669518116379324.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\video_6373942157941823133.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
     },
     {
         caminhos: [
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R154X268_16007316079386702043.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R200X348_8034148744957898250.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R230X388_3532971991782170780.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R340X193_7523822937632451934.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R380X193_9789993892227719100.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\video_13072447084527919513.mp4"
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R154X268_12274321535252966226.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R200X348_12298039738819693576.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R230X388_11546781998646356009.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R340X193_320004629004798342.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R380X193_15989669518116379324.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\video_6373942157941823133.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
     },
     {
         caminhos: [
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R154X268_16007316079386702043.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R200X348_8034148744957898250.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R230X388_3532971991782170780.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R340X193_7523822937632451934.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R380X193_9789993892227719100.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\video_13072447084527919513.mp4"
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R154X268_12274321535252966226.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R200X348_12298039738819693576.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R230X388_11546781998646356009.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R340X193_320004629004798342.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R380X193_15989669518116379324.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\video_6373942157941823133.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
     },
     {
         caminhos: [
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R154X268_16007316079386702043.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R200X348_8034148744957898250.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R230X388_3532971991782170780.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R340X193_7523822937632451934.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R380X193_9789993892227719100.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\video_13072447084527919513.mp4"
-        ],
-        titulo: "titulo",
-        uuid: "2"
-    },
-    {
-        caminhos: [
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R154X268_16007316079386702043.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R200X348_8034148744957898250.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R230X388_3532971991782170780.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R340X193_7523822937632451934.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R380X193_9789993892227719100.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\video_13072447084527919513.mp4"
-        ],
-        titulo: "titulo",
-        uuid: "2"
-    },
-    {
-        caminhos: [
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R154X268_16007316079386702043.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R200X348_8034148744957898250.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R230X388_3532971991782170780.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R340X193_7523822937632451934.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\miniatura_R380X193_9789993892227719100.png",
-            "075ca30e-96df-42a2-aaf8-7e2a63a7a98b\\video_13072447084527919513.mp4"
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R154X268_12274321535252966226.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R200X348_12298039738819693576.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R230X388_11546781998646356009.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R340X193_320004629004798342.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R380X193_15989669518116379324.png",
+            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\video_6373942157941823133.mp4"
         ],
         titulo: "titulo",
         uuid: "2"
     }
     ];
-
-
 
     const renderDesktop = () => {
         return (
@@ -145,16 +134,6 @@ const ResultSearch = () => {
                 </div>
             </>
         )
-    }
-
-    const handleChange = (e) => {
-        console.log(e)
-        setSearchValue(e.target.value);
-    }
-
-    const handleSearch = (value) => {
-        nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : searchValue)}`);
-        console.log("search: ")
     }
 
     const renderTabletMobileView = () => {
