@@ -14,6 +14,7 @@ const ShortsComponent = ({ short }) => {
     const navigate = useNavigate()
     const targetRef = useRef(null)
     const dispatch = useDispatch()
+
     const shorts = useSelector((state) => state.shorts.listShorts)
 
     const { id } = useParams()
@@ -27,22 +28,24 @@ const ShortsComponent = ({ short }) => {
     useEffect(() => {
         const options = {
             root: null,
-            rootMargin: '0px',
-            threshold: 1,
+            rootMargin: "0px",
+            threshold: 1
         }
 
         const getUUID = async () => {
             const short = await ShortsService.buscarUUID(id)
+            console.log(short)
             dispatch(setActualShorts(short))
         }
 
-        const callback = (entries) => {
-            entries.forEach((entry) => {
+        const callback = (entries, observer) => {
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
+
+                    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
                     const shortUuid = short.uuid
-
                     console.log(shortUuid)
-
                     if (shortUuid !== id) {
                         getUUID()
                         dispatch(setListShorts(short.uuid, null, shorts))
@@ -50,11 +53,9 @@ const ShortsComponent = ({ short }) => {
                     }
 
                     setIsVideoInView(true)
-
                     setTimeout(() => {
                         entry.target.play()
                     }, 500)
-
                 } else {
                     setIsVideoInView(false)
                     entry.target.pause()
@@ -64,8 +65,9 @@ const ShortsComponent = ({ short }) => {
 
         const observer = new IntersectionObserver(callback, options)
 
-        observer.observe(targetRef.current)
-
+        if (targetRef.current) {
+            observer.observe(targetRef.current)
+        }
         return () => {
             if (targetRef.current) {
                 observer.unobserve(targetRef.current)
