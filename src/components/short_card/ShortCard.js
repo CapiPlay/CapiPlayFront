@@ -48,7 +48,7 @@ const Shortcard = ({ short }) => {
 
     const renderDesktopView = () => (
         <div className="container__short__card__desk">
-            <Link to={`/player/${short.uuid}`}>
+            <Link to={`/shorts/${short.uuid}`}>
                 <img className="short__image" src={"http://10.4.96.50:7000/api/video/static/" + short.caminhos[1]} />
             </Link>
             <div className="container__informations__shorts">

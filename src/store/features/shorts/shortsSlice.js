@@ -31,6 +31,8 @@ const setListShorts = (shortUUID, list, listShorts) => async (dispatch) => {
       // const index = listShorts.findIndex((prevShorts) => prevShorts.uuid === shortUUID)
       // const sizeListShorts = listShorts.length
       // console.log("index:" + index)
+
+      console.log("Entrei para adicionar mais dois videos")
       const newShorts = []
       for (let i = 0; i < 2; i++) {
         const data = await ShortsService.buscar()

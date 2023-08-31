@@ -13,7 +13,7 @@ const ShortsService = {
     buscarUUID: async (uuid) => {
         try {
             const response = await axios.get("/api/video/buscar-completo/" + uuid)
-            return response.data
+            return response
         } catch (err) {
             console.error(err)
         }
