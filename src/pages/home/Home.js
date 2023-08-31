@@ -60,7 +60,6 @@ function Home(darkMode) {
 
   const getMoreVideos = async (page) => {
     const moreVideos = await PlayerService.buscarVideosHomeReu(page);
-
     if (moreVideos) {
       if (moreVideos.length > 0) {
         setVideosReu((prevVideos) => [...prevVideos, ...moreVideos]);
