@@ -6,7 +6,7 @@
 }
 
 .input__control__disabled {
-    background-color: var(--backgroundInput);
+    background-color: transparent;
     color: var(--whitesmoke) !important;
     height: 3rem;
     width: 100%;
