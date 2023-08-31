@@ -84,8 +84,8 @@ const Shorts = () => {
             const firstShort = await VideoService.buscarCompleto(id)
             newShorts.push(firstShort.data)
 
-            const segundo = await ShortsService.buscar()
-            const terceiro = await ShortsService.buscar()
+            const segundo = await VideoService.buscarShorts()
+            const terceiro = await VideoService.buscarShorts()
 
             newShorts.push(segundo)
             newShorts.push(terceiro)
