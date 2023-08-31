@@ -133,14 +133,11 @@ const enviarVideo = async (event) => {
 
   try {
     const response = await VideoService.criar(formData, usuarioId);
-    console.log(response.data); // Handle successful response
+    console.log(response.data);
   } catch (error) {
     console.error('API Error:', error); // Handle error response
   }
-
   console.log(video);
-
-  // window.location.reload()
 };
   
 
