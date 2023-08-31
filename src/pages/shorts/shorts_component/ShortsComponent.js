@@ -41,6 +41,8 @@ const ShortsComponent = ({ short }) => {
                 if (entry.isIntersecting) {
                     const shortUuid = short.uuid
 
+                    console.log(shortUuid)
+
                     if (shortUuid !== id) {
                         getUUID()
                         dispatch(setListShorts(short.uuid, null, shorts))
@@ -62,15 +64,14 @@ const ShortsComponent = ({ short }) => {
 
         const observer = new IntersectionObserver(callback, options)
 
-        if (targetRef.current) {
-            observer.observe(targetRef.current)
-        }
+        observer.observe(targetRef.current)
+
         return () => {
             if (targetRef.current) {
                 observer.unobserve(targetRef.current)
             }
         }
-    }, [id, dispatch, navigate, short, shorts])
+    }, [])
 
     const toggleMute = () => {
         setIsMuted(!isMuted)
