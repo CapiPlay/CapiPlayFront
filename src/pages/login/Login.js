@@ -40,16 +40,13 @@ const Login = ({ }) => {
     const login = async () => {
         if (loginData.email && loginData.senha) {
             try {
-                const res = dispatch(doLogin(loginData))
+                const res = await dispatch(doLogin(loginData))
                 console.log(res)
-
-                if (isAuthenticated) {
-                    navigate("/");
-                } else {
-                    toast.error("E-mail ou senha inválido")
+                if (res !== "") {
+                    navigate("/")
                 }
             } catch (err) {
-                console.log(err)
+                toast.error("E-mail ou senha inválido")
             }
         } else {
             toast.error("Preencha todos os campos")
