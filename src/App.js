@@ -24,6 +24,7 @@ import axiosInstance from "./service/AxiosConfig"
 import { useEffect } from 'react'
 import UserService from './service/UserService'
 import Cookies from 'js-cookie'
+import Category from './pages/category/Category';
 
 function App() {
 
@@ -98,6 +99,7 @@ function App() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/teste" element={<Video_player_contructor />} />
             <Route path='*' element={<NotFound />} />
+            <Route path='/category' element={<Category />} />
           </Routes>
         </BrowserRouter>
       </Provider>

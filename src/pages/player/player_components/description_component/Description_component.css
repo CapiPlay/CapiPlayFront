@@ -30,3 +30,8 @@
     font-size: 0.8rem;
     width: max-content;
 }
+
+/* ----- for light mode ----- */
+.description__content {
+    color: var(--whiteBlack);
+}
