@@ -62,7 +62,6 @@ function Home(darkMode ) {
     const moreVideos = await PlayerService.buscarVideosHomeReu(page);
 
     if (moreVideos) {
-      const filteredVideos = moreVideos.filter(video => video.shorts === false);
       if (filteredVideos.length > 0) {
         setVideosReu((prevVideos) => [...prevVideos, ...filteredVideos]);
         setCurrentPage(page);
@@ -76,7 +75,6 @@ function Home(darkMode ) {
     const videos = await PlayerService.buscarVideosHomeReu(0);
 
     if (videos) {
-      const filteredVideos = videos.filter(video => video.shorts === false);
       if (filteredVideos.length > 0) {
         setVideosReu(filteredVideos);
       } else {
@@ -91,7 +89,6 @@ function Home(darkMode ) {
     const videos = await PlayerService.buscarVideosHomeRec(0);
 
     if (videos) {
-      const filteredVideos = videos.filter(video => video.shorts === false);
       if (filteredVideos.length === 6) {
         setVideosRec(filteredVideos);
       } else {
@@ -106,7 +103,6 @@ function Home(darkMode ) {
     const videos = await PlayerService.buscarVideosHomeRet(0);
 
     if (videos) {
-      const filteredVideos = videos.filter(video => video.shorts === false);
 
       if (filteredVideos.length > 0) {
         setVideosRet(filteredVideos);
@@ -121,7 +117,6 @@ function Home(darkMode ) {
   const getVideosRev = async () => {
     const videos = await PlayerService.buscarVideosHomeRev(0);
     if (videos) {
-      const filteredVideos = videos.filter(video => video.shorts === false);
       if (filteredVideos.length > 6) {
         filteredVideos.sort((a, b) => b.pontuacao - a.pontuacao);
         const top6Videos = filteredVideos.slice(0, 6);
