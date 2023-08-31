@@ -6,8 +6,10 @@ import Slider_Category from '../home/slider_category/Slider_Category';
 import Cookies from 'js-cookie';
 import PlayerService from '../../service/PlayerService';
 import Video_card from '../../components/video_card/Video_card';
+import { useParams } from 'react-router-dom';
 
 function Category() {
+
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
     const [videosReu, setVideosReu] = useState([])
