@@ -64,3 +64,5 @@ const ReacaoRespostaService = {
     }
   },
 };
+
+export default ReacaoRespostaService;

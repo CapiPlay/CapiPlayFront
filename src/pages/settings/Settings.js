@@ -11,7 +11,6 @@ import HeaderSettings from './header/HeaderSettings'
 import Input from "../../components/input/Input";
 import InputDisabled from "../../components/inputDisabled/InputDisabled"
 import Button from "../../components/button/Button";
-import UserService from './../../service/UserService'
 import { Link } from 'react-router-dom';
 import TextArea from '../../components/inputTextArea/InputTextArea';
 

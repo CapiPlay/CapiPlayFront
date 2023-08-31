@@ -64,3 +64,5 @@ const ReacaoComentarioService = {
     }
   },
 };
+
+export default ReacaoComentarioService;

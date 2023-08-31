@@ -1,6 +1,7 @@
 import axios from "../AxiosConfig";
 
-const UsuarioService = {
+const UsuarioEngajamentoService = {
+  
   /**
    *
    * @param {*} idUsuario String
@@ -18,3 +19,5 @@ const UsuarioService = {
     }
   },
 };
+
+export default UsuarioEngajamentoService;

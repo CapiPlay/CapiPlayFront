@@ -87,3 +87,5 @@ const HistoricoService = {
     }
   },
 };
+
+export default HistoricoService;

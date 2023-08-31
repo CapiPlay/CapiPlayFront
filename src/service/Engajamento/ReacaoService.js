@@ -62,3 +62,5 @@ const ReacaoService = {
     }
   },
 };
+
+export default ReacaoService;

@@ -45,3 +45,5 @@ const InscricaoService = {
     }
   },
 };
+
+export default InscricaoService;
