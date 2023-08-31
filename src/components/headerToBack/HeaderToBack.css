@@ -15,7 +15,8 @@
 }
 
 .button__text__back>span {
-    color: var(--whitesmoke);
+    color: var(--whiteToLightpurple);
+    font-weight: bolder;
     font-size: 14px;
 }
 
