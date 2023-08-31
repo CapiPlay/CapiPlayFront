@@ -4,8 +4,7 @@ import '../shorts/Shorts.css'
 import { useEffect, useRef, useState } from 'react'
 
 //componentes
-import Header from '../../components/header/Header'
-import ShortsService from '../../service/ShortsService'
+import VideoService from '../../service/Video/VideoService'
 import ShortsComponent from './shorts_component/ShortsComponent'
 
 //icons
@@ -97,7 +96,7 @@ const Shorts = () => {
         const func = async () => {
             const newShorts = []
 
-            const firstShort = await ShortsService.buscarUUID(id)
+            const firstShort = await VideoService.buscarCompleto(id)
             newShorts.push(firstShort.data)
             dispatch(setListShorts(null, newShorts, null))
         }

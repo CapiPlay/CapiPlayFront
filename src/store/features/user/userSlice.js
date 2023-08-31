@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import Cookies from "js-cookie"
 import { act } from "react-dom/test-utils"
-import UserService from "../../../service/UserService"
+import UsuarioService from "../../../service/Usuario/UsuarioService"
 
 const token = Cookies.get("token")
 
@@ -39,11 +39,11 @@ export const { login, logout, signup } = userSlice.actions
 export default userSlice.reducer
 
 const doLogin = (credentials) => async (dispatch) => {
-  const res = await UserService.login(credentials)
+  const res = await UsuarioService.login(credentials)
   if (res) {
     await dispatch(login({ token: res.data }))
     
-    const userDetails = await UserService.detalhes()
+    const userDetails = await UsuarioService.detalhes()
     Cookies.set("user", JSON.stringify(userDetails.data))
     
     return res
@@ -52,7 +52,7 @@ const doLogin = (credentials) => async (dispatch) => {
 
 const doSignup = (newUser, photo) => async (dispatch) => {
   try {
-    const res = await UserService.criar(newUser, photo)
+    const res = await UsuarioService.criar(newUser, photo)
     const user = res.data
     dispatch(signup({ user: user, token: user.nome }))
   } catch (err) {

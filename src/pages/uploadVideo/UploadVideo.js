@@ -17,7 +17,7 @@ import InputTextArea from '../../components/inputTextArea/InputTextArea'
 import InputFileUpload from '../../components/inputFileUpload/InputFileUpload'
 
 // service
-import VideoService from '../../service/VideoService'
+import VideoService from '../../service/Video/VideoService'
 
 function UploadVideo() {
 
