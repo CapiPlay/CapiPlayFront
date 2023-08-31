@@ -31,6 +31,16 @@ const PlayerService = {
         }
     }, 
 
+    buscarVideosHomeShorts: async (page) => {
+        const size = 6;
+        try {
+            const response = await axios.get("/api/video/buscar-todos-shorts?page=" + page + "&size=" + size);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }, 
+
     buscarVideosHomeReu: async (page) => {
         const size = 6;
         try {

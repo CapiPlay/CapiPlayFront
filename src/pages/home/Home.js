@@ -62,8 +62,8 @@ function Home(darkMode ) {
     const moreVideos = await PlayerService.buscarVideosHomeReu(page);
 
     if (moreVideos) {
-      if (filteredVideos.length > 0) {
-        setVideosReu((prevVideos) => [...prevVideos, ...filteredVideos]);
+      if (moreVideos.length > 0) {
+        setVideosReu((prevVideos) => [...prevVideos, ...moreVideos]);
         setCurrentPage(page);
       }
     }
@@ -75,8 +75,8 @@ function Home(darkMode ) {
     const videos = await PlayerService.buscarVideosHomeReu(0);
 
     if (videos) {
-      if (filteredVideos.length > 0) {
-        setVideosReu(filteredVideos);
+      if (videos.length > 0) {
+        setVideosReu(videos);
       } else {
         setVideosReu([]);
       }
@@ -89,8 +89,8 @@ function Home(darkMode ) {
     const videos = await PlayerService.buscarVideosHomeRec(0);
 
     if (videos) {
-      if (filteredVideos.length === 6) {
-        setVideosRec(filteredVideos);
+      if (videos.length === 6) {
+        setVideosRec(videos);
       } else {
         setVideosRec([]);
       }
@@ -103,9 +103,8 @@ function Home(darkMode ) {
     const videos = await PlayerService.buscarVideosHomeRet(0);
 
     if (videos) {
-
-      if (filteredVideos.length > 0) {
-        setVideosRet(filteredVideos);
+      if (videos.length > 0) {
+        setVideosRet(videos);
       } else {
         setVideosRet([]);
       }
@@ -117,9 +116,9 @@ function Home(darkMode ) {
   const getVideosRev = async () => {
     const videos = await PlayerService.buscarVideosHomeRev(0);
     if (videos) {
-      if (filteredVideos.length > 6) {
-        filteredVideos.sort((a, b) => b.pontuacao - a.pontuacao);
-        const top6Videos = filteredVideos.slice(0, 6);
+      if (videos.length > 6) {
+        videos.sort((a, b) => b.pontuacao - a.pontuacao);
+        const top6Videos = videos.slice(0, 6);
         setVideosRev(top6Videos);
       } else {
         setVideosRev([]);
