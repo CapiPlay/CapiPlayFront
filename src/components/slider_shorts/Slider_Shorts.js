@@ -22,7 +22,7 @@ function Slider_Shorts() {
     }, []);
 
     const getVideosRec = async () => {
-        const videos = await PlayerService.buscarVideosHomeRec(0);
+        const videos = await PlayerService.buscarVideosHomeShorts(0);
         
         if (videos) {
             const filteredVideos = videos.filter(video => video.shorts === true);

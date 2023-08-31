@@ -1,17 +1,22 @@
 import axios from "./AxiosConfig"
 
-const videoApiUrl = 'http://7000/api/video';
 
 const VideoService = {
-    criar: async (videoData) => {
-        try {
-            const response = await axios.post(`${videoApiUrl}/criar`, videoData);
-            return response.data;
-        } catch (err) {
-            console.error(err);
-            throw err;
-        }
+  criar: async (video, usuarioId) => {
+    try {
+      const header = {
+        usuarioId: usuarioId,
+      };
+      const response = await axios.post(
+        "/api/video/criar",
+        video,
+        { header }
+      );
+      return response;
+    } catch (err) {
+      console.error(err);
     }
+  },
 };
 
 export default VideoService;
