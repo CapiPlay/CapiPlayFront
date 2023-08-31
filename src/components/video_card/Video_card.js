@@ -18,7 +18,6 @@ function Video_card({ video }) {
             <Link to={`/video/${video.uuid}`}>
                 <div className='container__video__image'>
                     <img src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[4]} className='container__video__card__image' />
-
                 </div>
             </Link>
             <div className='container__video__info'>
