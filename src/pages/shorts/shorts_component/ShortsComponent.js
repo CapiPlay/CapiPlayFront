@@ -29,7 +29,7 @@ const ShortsComponent = ({ short }) => {
         const options = {
             root: null,
             rootMargin: "0px",
-            threshold: 1
+            threshold: 0.95
         }
 
         const getUUID = async () => {
