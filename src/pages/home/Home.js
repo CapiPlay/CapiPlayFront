@@ -43,7 +43,7 @@ function Home(darkMode ) {
     const scrolled = window.innerHeight + window.scrollY;
     const totalHeight = document.documentElement.scrollHeight;
 
-    if (!loadingMoreVideos && scrolled >= totalHeight - 200) {
+    if (!loadingMoreVideos && scrolled >= totalHeight - 100) {
       setLoadingMoreVideos(true);
       getMoreVideos(currentPage + 1);
     }

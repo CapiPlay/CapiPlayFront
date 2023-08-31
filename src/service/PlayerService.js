@@ -34,7 +34,7 @@ const PlayerService = {
     buscarVideosHomeReu: async (page) => {
         const size = 6;
         try {
-            const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" +size);
+            const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" + size);
             return response.data;
         } catch (error) {
             console.error(error);
