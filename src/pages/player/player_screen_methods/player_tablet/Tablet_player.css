@@ -32,7 +32,7 @@
 }
 
 .video__title{
-    color: #fff;
+    color: var(--whiteBlack);
     margin: 1rem;
     font-size: 2rem;
 }

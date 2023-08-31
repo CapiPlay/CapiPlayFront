@@ -12,7 +12,7 @@
 }
 
 .channel__info{
-    color: aliceblue;
+    color: var(--whiteBlack);
     width: max-content;
     display: flex;
     align-items: center;
