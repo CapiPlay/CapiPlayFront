@@ -21,6 +21,7 @@ const Login = ({ }) => {
     const navigate = useNavigate();
 
     const [loginData, setLoginData] = useState({ email: '', senha: '' })
+    const [keepLoggedIn, setKeepLoggedIn] = useState(false)
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const dispatch = useDispatch()
     const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
@@ -43,6 +44,10 @@ const Login = ({ }) => {
                 const res = await dispatch(doLogin(loginData))
                 console.log(res)
                 if (res !== "") {
+                    if (keepLoggedIn) {
+                        Cookies.set("accessToken", res.accessToken, { expires: res.accessTokenExpiration })
+                        Cookies.set("refreshToken", res.refreshToken, { expires: res.refreshTokenExpiration })
+                    }
                     navigate("/")
                 }
             } catch (err) {
@@ -109,6 +114,7 @@ const Login = ({ }) => {
                     </span>
                 </div>
             </div>
+
             <ToastContainer position="top-right"
                 autoClose={5000}
                 hideProgressBar={false}
@@ -120,6 +126,7 @@ const Login = ({ }) => {
                 pauseOnHover
                 toastClassName={"toast"}
                 theme="colored" />
+
         </div>
     )
 }

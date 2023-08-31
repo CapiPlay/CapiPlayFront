@@ -56,10 +56,10 @@ const doLogin = (credentials) => async (dispatch) => {
 const doSignup = (newUser, photo) => async (dispatch) => {
   try {
     const res = await UserService.criar(newUser, photo)
-    const user = res.data
-    dispatch(signup({ user: user, token: user.nome }))
+    const user = res
+    dispatch(signup({ user: user}))
   } catch (err) {
-    console.error(err)
+    console.error("erro" + err)
   }
 }
 
