@@ -25,13 +25,13 @@ function Category() {
     }, []);
 
     const getMoreVideos = async (page) => {
-        const moreVideos = await PlayerService.buscarVideosHomeReu(page);
+        const moreVideos = await PlayerService.buscarVideoCategoria(page);
         if (moreVideos) {
-          if (moreVideos.length > 0) {
-            setVideosReu((prevVideos) => [...prevVideos, ...moreVideos]);
-          }
+            if (moreVideos.length > 0) {
+                setVideosReu((prevVideos) => [...prevVideos, ...moreVideos]);
+            }
         }
-      };
+    };
 
     const userProfile = () => {
         const userToken = Cookies.get('token');
@@ -71,6 +71,8 @@ function Category() {
                                 <Video_card key={video.uuid} video={video} />
                             ))}
                         </div>
+                    </div>
+                    <div>
                     </div>
                 </div>
             </div>
