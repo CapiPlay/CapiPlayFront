@@ -26,25 +26,18 @@ const Shorts = () => {
     const scrollRef = useRef(null)
 
     const { id } = useParams()
-    console.log(id)
 
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-
     const [headerAppearing, setHeaderAppearing] = useState(window.innerWidth >= 768)
-
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
-
     const shorts = useSelector((state) => state.shorts.listShorts)
-
     const [currentShortIndex, setCurrentShortIndex] = useState(0)
 
-    //fazer o header aparecer ou não
     useEffect(() => {
         setHeaderAppearing(windowWidth >= 576)
     }, [windowWidth])
 
-    //para passar para próximo vídeo (utilizando o botão)
     const handleNextVideo = () => {
         if (!isAnimating) {
             setTimeout(() => {
@@ -55,7 +48,6 @@ const Shorts = () => {
         }
     }
 
-    //para retornar para o vídeo anterior (utilizando o botão)
     const handlePreviousVideo = () => {
 
         setCurrentShortIndex((prevIndex) => (prevIndex - 1 + shorts.length) % shorts.length)
@@ -65,7 +57,6 @@ const Shorts = () => {
         }, 500)
     }
 
-    //responsividade automática da tela
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth)
@@ -78,12 +69,6 @@ const Shorts = () => {
         }
     }, [])
 
-    // const getFirstShort = async () => {
-        
-    //     return short
-    // }
-
-    //animações para passar de shorts
     useEffect(() => {
 
         const handleScroll = () => {
@@ -98,9 +83,21 @@ const Shorts = () => {
 
             const firstShort = await VideoService.buscarCompleto(id)
             newShorts.push(firstShort.data)
+
+            const segundo = await ShortsService.buscar()
+            const terceiro = await ShortsService.buscar()
+
+            newShorts.push(segundo)
+            newShorts.push(terceiro)
+
+            console.log(newShorts)
+
             dispatch(setListShorts(null, newShorts, null))
         }
+
         func()
+
+        console.log(shorts)
 
         return () => {
             scrollContainer.removeEventListener('scroll', handleScroll)
