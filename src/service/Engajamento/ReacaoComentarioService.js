@@ -3,19 +3,14 @@ import axios from "../AxiosConfig";
 const ReacaoComentarioService = {
   /**
    *
-   * @param {*} idUsuario String
    * @param {*} criarReacaoComentarioCommand ( String idUsuario, String idComentario, Boolean curtida)
    * @returns void
    */
-  criar: async (idUsuario, criarReacaoComentarioCommand) => {
+  criar: async (criarReacaoComentarioCommand) => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
       const response = await axios.post(
         "/engajamento/reacaoComentario",
-        criarReacaoComentarioCommand,
-        { header }
+        criarReacaoComentarioCommand
       );
       return response;
     } catch (err) {
@@ -25,21 +20,16 @@ const ReacaoComentarioService = {
 
   /**
    *
-   * @param {*} idUsuario String
    * @param {*} buscarUmReacaoComentarioCommand ( String idUsuario, String idComentario)
    * @returns ReacaoComentario ( String idUsuario, String idComentario, Boolean curtida)
    */
-  buscarUm: async (idUsuario, buscarUmReacaoComentarioCommand) => {
+  buscarUm: async (buscarUmReacaoComentarioCommand) => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
       const response = await axios.get(
         "/engajamento/reacaoComentario",
-        buscarUmReacaoComentarioCommand,
-        { header }
+        buscarUmReacaoComentarioCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -58,7 +48,7 @@ const ReacaoComentarioService = {
         "/engajamento/reacaoComentario/buscar-todos-por-comentario",
         buscarTodosPorComentarioReacaoComentarioCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }

@@ -4,7 +4,7 @@ import Desktop_player from './player_screen_methods/player_desktop/Desktop_playe
 import Mobile_player from './player_screen_methods/player_mobile/Mobile_player'
 import Tablet_player from './player_screen_methods/player_tablet/Tablet_player'
 import { useParams } from 'react-router-dom';
-import PlayerService from '../../service/PlayerService'
+import VideoService from '../../service/Video/VideoService'
 
 function Player() {
   const [video, setVideo] = useState();
@@ -24,7 +24,10 @@ function Player() {
   }, [videoId]);
 
   const buscarVideo = async (videoId) => {
-    setVideo(await PlayerService.buscarVideoObject(videoId))
+    // if(){
+
+    // }
+    // setVideo(await VideoService.buscarCompleto(videoId))
   }
 
   const verifyDesktop = () => {

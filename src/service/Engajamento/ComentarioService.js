@@ -3,23 +3,16 @@ import axios from "../AxiosConfig";
 const ComentarioService = {
   /**
    *
-   * @param {*} idUsuario String
    * @param {*} criarComentarioCommand (String idVideo, String texto)
    * @returns Comentario
    */
-  criar: async (idUsuario, criarComentarioCommand) => {
+  criar: async (criarComentarioCommand) => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
       const response = await axios.post(
         "/engajamento/comentario",
-        criarComentarioCommand,
-        {
-          header,
-        }
+        criarComentarioCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -36,7 +29,7 @@ const ComentarioService = {
         "/engajamento/comentario",
         buscarUmComentarioCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -54,7 +47,7 @@ const ComentarioService = {
         "/engajamento/comentario/buscar-todos-por-video/" + page,
         buscarTodosPorVideoComentarioCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -72,7 +65,7 @@ const ComentarioService = {
         "/engajamento/comentario/buscar-todos-por-data/" + page,
         buscarTodosPorDataComentarioCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -92,7 +85,7 @@ const ComentarioService = {
         "/engajamento/comentario/buscar-quantidade-respostas",
         buscarQuantidadeRepostasComentarioCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -100,21 +93,16 @@ const ComentarioService = {
 
   /**
    *
-   * @param {*} idUsuario String
    * @param {*} deletarComentarioCommand (String idComentario, String idUsuario;)
    * @returns void
    */
-  deletar: async (idUsuario, deletarComentarioCommand) => {
+  deletar: async (deletarComentarioCommand) => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
       const response = await axios.delete(
         "/engajamento/comentario/",
-        deletarComentarioCommand,
-        { header }
+        deletarComentarioCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }

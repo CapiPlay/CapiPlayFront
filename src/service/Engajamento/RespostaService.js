@@ -4,20 +4,15 @@ const RespostaService = {
   /**
    *
    * @param {*} criarRespostaCommand ( String idUsuario, String idComentario, String texto)
-   * @param {*} idUsuario String
    * @returns Resposta (String idResposta, String texto, ZonedDateTime dataHora, Usuario idUsuario, Comentario idComentario)
    */
-  criar: async (idUsuario, criarRespostaCommand) => {
+  criar: async (criarRespostaCommand) => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
       const response = await axios.post(
         "/engajamento/resposta",
-        criarRespostaCommand,
-        { header }
+        criarRespostaCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -35,7 +30,7 @@ const RespostaService = {
         "/engajamento/resposta",
         buscarUmaRespostaCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -56,7 +51,7 @@ const RespostaService = {
         "/engajamento/resposta/buscar-todos-por-comentario/" + page,
         buscarTodosPorComentarioRespostaCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -65,20 +60,15 @@ const RespostaService = {
   /**
    *
    * @param {*} deletarRespostaCommand (String idUsuario, String idResposta)
-   * @param {*} idUsuario String
    * @returns void
    */
-  deletar: async (deletarRespostaCommand, idUsuario) => {
+  deletar: async (deletarRespostaCommand) => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
       const response = await axios.get(
         "/engajamento/resposta",
-        deletarRespostaCommand,
-        { header }
+        deletarRespostaCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }

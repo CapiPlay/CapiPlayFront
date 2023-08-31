@@ -4,16 +4,12 @@ const UsuarioEngajamentoService = {
   
   /**
    *
-   * @param {*} idUsuario String
    * @returns Usuario (String idUsuario, String nomePerfil, String nomeCanal, String foto, int quantidadeInscritos, String descricao)
    */
-  buscarUm: async (idUsuario) => {
+  buscarUm: async () => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
-      const response = await axios.get("/engajamento/usuario", { header });
-      return response;
+      const response = await axios.get("/engajamento/usuario");
+      return response.data;
     } catch (err) {
       console.error(err);
     }

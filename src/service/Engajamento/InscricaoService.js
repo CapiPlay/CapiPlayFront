@@ -3,21 +3,16 @@ import axios from "../AxiosConfig";
 const InscricaoService = {
   /**
    *
-   * @param {*} idUsuario String
    * @param {*} criarInscricaoCommand (String idUsuario, String canal)
    * @returns void
    */
-  criar: async (idUsuario, criarInscricaoCommand) => {
+  criar: async (criarInscricaoCommand) => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
       const response = await axios.post(
         "/engajamento/inscricao",
-        criarInscricaoCommand,
-        { header }
+        criarInscricaoCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -25,21 +20,16 @@ const InscricaoService = {
 
   /**
    *
-   * @param {*} idUsuario String
    * @param {*} buscarUmInscricaoCommand (String idUsuario, String idCanal)
    * @returns Inscricao (Usuario idUsuario, Usuario idCanal)
    */
-  buscarUm: async (idUsuario, buscarUmInscricaoCommand) => {
+  buscarUm: async (buscarUmInscricaoCommand) => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
       const response = await axios.get(
         "/engajamento/inscricao",
-        buscarUmInscricaoCommand,
-        { header }
+        buscarUmInscricaoCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }

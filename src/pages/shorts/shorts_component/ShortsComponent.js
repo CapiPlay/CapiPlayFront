@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setListShorts, setActualShorts } from '../../../store/features/shorts/shortsSlice'
 import { useNavigate, useParams } from 'react-router-dom'
-import ShortsService from '../../../service/ShortsService'
+import VideoService from '../../../service/Video/VideoService'
 import { BiLike, BiDislike, BiCommentDetail, BiSolidLike, BiSolidDislike } from 'react-icons/bi'
 import imagePerfil from '../../../assets/imagemPerfil.png'
 import ButtonSubmit from '../../../components/buttonSubmit/ButtonSubmit'
@@ -32,7 +32,7 @@ const ShortsComponent = ({ short }) => {
         }
 
         const getUUID = async () => {
-            const short = await ShortsService.buscarUUID(id)
+            const short = await VideoService.buscarCompleto(id)
             dispatch(setActualShorts(short))
         }
 

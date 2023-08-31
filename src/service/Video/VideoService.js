@@ -9,21 +9,18 @@ const VideoService = {
    * Boolean shorts, MultipartFile video,MultipartFile miniatura,Boolean restrito,String usuarioId))
    * @returns void
    */
-  criar: async (video, usuarioId) => {
+  criar: async (video) => {
     try {
-      const header = {
-        usuarioId: usuarioId,
-      };
       const response = await axios.post(
         "/api/video/criar",
-        video,
-        { header }
+        video
       );
       return response;
     } catch (err) {
       console.error(err);
     }
   },
+
   /**
    *
    * @param {*} usuarioId String
@@ -32,20 +29,17 @@ const VideoService = {
    * List<String> getCaminhos(),List<Tag> getTags(), Long getQtdComentarios(), String getCategoria(),
    * Long getVisualizacoes(), Long getCurtidas();)
    */
-  buscarUm: async (usuarioId, uuid) => {
+  buscarCompleto: async (uuid) => {
     try {
-      const header = {
-        usuarioId: usuarioId,
-      };
       const response = await axios.get(
-       `/api/video/buscar-completo/${uuid}`,
-        { header }
+       `/api/video/buscar-completo/${uuid}`
       );
       return response;
     } catch (err) {
       console.error(err);
     }
   },
+
   /**
    *
    * @param {*} usuarioId String
@@ -55,98 +49,76 @@ const VideoService = {
    * Long getDuracao(), LocalDate getPublicacao(), Long getVisualizacoes(), Long getCurtidas(),String getCategoria(),
    * String getCaminho(), List<String> getCaminhos()
    */
-  buscarHistorico: async (usuarioId, size, page) => {
+  buscarHistorico: async (size, page) => {
     try {
-      const header = {
-        usuarioId: usuarioId,
-      };
       const response = await axios.get(
-        `/api/video/buscar-historico?size=${size}&page=${page}`,
-        { header }
+        `/api/video/buscar-historico?size=${size}&page=${page}`
       );
       return response;
     } catch (err) {
       console.error(err);
     }
   },
-  buscarTodos: async (usuarioId, size, page) => {
+
+  buscarTodos: async (size, page, shorts) => {
     try {
-      const header = {
-        usuarioId: usuarioId,
-      };
       const response = await axios.get(
-        `/api/video/buscar-resumido?size=${size}&page=${page}`,
-        { header }
+        `/api/video/buscar-resumido?size=${size}&page=${page}&shorts=${shorts}`
       );
       return response;
     } catch (err) {
       console.error(err);
     }
   },
-  buscarTodosShorts: async (usuarioId, size, page) => {
+
+  buscarTodosShorts: async (size, page) => {
     try {
-      const header = {
-        usuarioId: usuarioId,
-      };
       const response = await axios.get(
-        `/api/video/buscar-todos-shorts?size=${size}&page=${page}`,
-        { header }
+        `/api/video/buscar-todos-shorts?size=${size}&page=${page}`
       );
       return response;
     } catch (err) {
       console.error(err);
     }
   },
-  buscarPorCategoria: async (usuarioId, size, page) => {
+
+  buscarPorCategoria: async (categoria, size, page) => {
     try {
-      const header = {
-        usuarioId: usuarioId,
-      };
       const response = await axios.get(
-        `/api/video/buscar-por-categoria?size=${size}&page=${page}`,
-        { header }
+        `/api/video/buscar-por-categoria?categoria=${categoria}&size=${size}&page=${page}`
       );
       return response;
     } catch (err) {
       console.error(err);
     }
   },
-  buscarShorts: async (usuarioId) => {
+
+  buscarShorts: async () => {
     try {
-      const header = {
-        usuarioId: usuarioId,
-      };
       const response = await axios.get(
-        "/api/video/buscar-shorts",
-        { header }
+        "/api/video/buscar-shorts"
       );
       return response;
     } catch (err) {
       console.error(err);
     }
   },
-  buscarUploads: async (donoCanalId, size, page) => {
+
+  buscarUploads: async (size, page) => {
     try {
-      const header = {
-        usuarioId: donoCanalId,
-      };
       const response = await axios.get(
-        `/api/video/buscar-videos-canal?size=${size}&page=${page}`,
-        { header }
+        `/api/video/buscar-videos-canal?size=${size}&page=${page}`
       );
       return response;
     } catch (err) {
       console.error(err);
     }
   },
-  filtrarVideos: async (usuarioId, size, page, filtro, pesquisa) => {
+  
+  filtrarVideos: async (size, page, filtro, pesquisa) => {
     try {
-      const header = {
-        usuarioId: usuarioId,
-      };
       const response = await axios.get(
-        `/api/video/filtro/${pesquisa}?size=${size}&page=${page}`, filtro,
-        { header }
+        `/api/video/filtro/${pesquisa}?size=${size}&page=${page}`, filtro
       );
       return response;
     } catch (err) {

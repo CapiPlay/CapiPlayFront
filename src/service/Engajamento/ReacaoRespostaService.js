@@ -3,21 +3,16 @@ import axios from "../AxiosConfig";
 const ReacaoRespostaService = {
   /**
    *
-   * @param {*} idUsuario String
    * @param {*} criarReacaoRespostaCommand ( String idUsuario, String idResposta, Boolean curtida)
    * @returns void
    */
-  criar: async (idUsuario, criarReacaoRespostaCommand) => {
+  criar: async (criarReacaoRespostaCommand) => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
       const response = await axios.post(
         "/engajamento/reacaoResposta",
-        criarReacaoRespostaCommand,
-        { header }
+        criarReacaoRespostaCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -25,21 +20,16 @@ const ReacaoRespostaService = {
 
   /**
    *
-   * @param {*} idUsuario String
    * @param {*} buscarUmReacaoRespostaCommand ( String idUsuario, String idResposta)
    * @returns ReacaoResposta ( String idUsuario, String idResposta, Boolean curtida)
    */
-  buscarUm: async (idUsuario, buscarUmReacaoRespostaCommand) => {
+  buscarUm: async (buscarUmReacaoRespostaCommand) => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
       const response = await axios.get(
         "/engajamento/reacaoResposta",
-        buscarUmReacaoRespostaCommand,
-        { header }
+        buscarUmReacaoRespostaCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -58,7 +48,7 @@ const ReacaoRespostaService = {
         "/engajamento/reacaoResposta/buscar-todos-por-Resposta",
         buscarTodosPorComentarioReacaoRespostaCommand
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }

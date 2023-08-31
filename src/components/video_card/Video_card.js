@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import './Video_card.css'
 
 import img_miniatura from "../../assets/image/img_base_miniatura.png"
-import PlayerService from '../../service/PlayerService';
 
 function Video_card({ video }) {
 

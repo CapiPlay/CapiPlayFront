@@ -34,15 +34,11 @@ const UserService = {
 
   /**
    *
-   * @param {*} String idUsuario 
    * @returns DetalhesUsuarioProjection (String nome, String email, String perfil(Apelido), String foto, Date dataNascimento)
    */
-  detalhes: async (idUsuario) => {
+  detalhes: async () => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
-      const response = await axios.get("/api/usuario", {header});
+      const response = await axios.get("/api/usuario");
       return response.data;
     } catch (error) {
       console.error(error);
@@ -51,18 +47,14 @@ const UserService = {
 
   /**
    *
-   * @param {*} String idUsuario 
    * @param {*} editarUsuarioCommand (String id, String nome, String perfil(Apelido), 
    * String senha, String descrição, Byte[] foto)
    * @param {*} MultipartFile foto1 (foto principal) 
    * @returns void
    */
-  editar: async (idUsuario, editarUsuarioCommand, foto1) => {
+  editar: async ( editarUsuarioCommand, foto1) => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
-      const response = await axios.put(`/api/usuario`, { header }, editarUsuarioCommand, foto1);
+      const response = await axios.put(`/api/usuario`, editarUsuarioCommand, foto1);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -70,16 +62,11 @@ const UserService = {
   },
 
   /**
-   *
-   * @param {*} String idUsuario 
    * @returns void
    */
-  deletar: async (idUsuario) => {
+  deletar: async () => {
     try {
-      const header = {
-        usuarioId: idUsuario,
-      };
-      const response = await axios.delete("api/usuario", {header});
+      const response = await axios.delete("api/usuario");
       return response.data;
     } catch (error) {
       console.error(error);
