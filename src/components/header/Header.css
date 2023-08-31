@@ -194,12 +194,12 @@
 .searches__hitoric__container>span{
     margin-left: 1%;
     font-size: 14px;
-    color: var(--darkpurple);
+    color: var(--darkpurpleToo);
     user-select: none;
 }
 
 .icons__search__desktop{
-    color: var(--darkblue);
+    color: var(--darkpurpleToo);
     opacity: .6;
 }
 
