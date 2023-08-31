@@ -37,7 +37,7 @@ function App() {
     } else {
       document.body.classList.remove("light__mode")
     }
-  })
+  }, [isLightMode])
 
   const generateTokenAnonimous = async () => {
     const userToken = Cookies.get("token")
