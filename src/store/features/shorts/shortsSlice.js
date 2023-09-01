@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import ShortsService from "../../../service/ShortsService"
+import VideoService from "../../../service/Video/VideoService"
 
 const initialState = {
   listShorts: [],
@@ -36,8 +36,8 @@ const setListShorts = (shortUUID, list, listShorts) => async (dispatch) => {
       console.log("Entrei para adicionar mais dois videos")
       const newShorts = []
       for (let i = 0; i < 2; i++) {
-        const data = await ShortsService.buscar()
-        newShorts.push(data.data)
+        const data = await VideoService.buscarShorts()
+        newShorts.push(data)
       }
 
       dispatch(modifyListShorts({ list: newShorts }))

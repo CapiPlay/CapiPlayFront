@@ -9,7 +9,7 @@ import Divider_component from '../../player_components/divider_component/Divider
 import Comments_component from '../../player_components/comments_componet/Comments_component'
 import Video_card from '../../../../components/video_card/Video_card'
 import Header from '../../../../components/header/Header'
-import PlayerService from '../../../../service/PlayerService'
+import VideoService from '../../../../service/Video/VideoService'
 // import Video_player_contructor from '../../video_player_contructor/Video_player_contructor'
 
 function Desktop_player({ video }) {
@@ -23,7 +23,7 @@ function Desktop_player({ video }) {
 
 
     const getVideos = async () => {
-        setVideos(await PlayerService.buscarVideosHomeReu(0))
+        setVideos(await VideoService.buscarCompleto(6, 0, false))
     }
 
     return (

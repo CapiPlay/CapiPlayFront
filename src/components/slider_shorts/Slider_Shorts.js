@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Slider_Shorts.css'
 import Slider from 'react-slick';
 import Shortcard from '../short_card/ShortCard';
-import PlayerService from '../../service/PlayerService';
+import VideoService from '../../service/Video/VideoService';
 
 function Slider_Shorts() {
 
@@ -22,7 +22,7 @@ function Slider_Shorts() {
     }, []);
 
     const getVideosRec = async () => {
-        const videos = await PlayerService.buscarVideosHomeShorts(0);
+        const videos = await VideoService.buscarVideosHomeShorts(0);
         
         if (videos) {
             const filteredVideos = videos.filter(video => video.shorts === true);
