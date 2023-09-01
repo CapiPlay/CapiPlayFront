@@ -15,8 +15,6 @@ import TextArea from '../../components/inputTextArea/InputTextArea';
 
 const Settings = ({ userId }) => {
 
-    userId = "d033e1ec-d22e-4df6-a250-0b3672da4b59";
-
     const [settingsData, setSettingsData] = useState({
         email: '',
         dataNascimento: '',
@@ -51,14 +49,29 @@ const Settings = ({ userId }) => {
     };
 
     useEffect(() => {
-        axios.get(`/api/usuario/${userId}`)
+        // axios.get(`/api/usuario/${userId}`)
+        //     .then(response => {
+        //         const userData = response.data;
+        //         setSettingsData({
+        //             nomeUsuario: userData.nomeUsuario,
+        //             nomeCanal: userData.nomeCanal,
+        //             senhaAtual: '',
+        //             descricao: userData.descricao
+        //         });
+        //     })
+        //     .catch(error => {
+        //         console.error('Erro ao obter dados do usuário:', error);
+        //     });
+        axios.get(`/api/usuario/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjYXBpcGxheSIsInVzdWFyaW9JZCI6IjE4ZTlhOTMyLWJhMDUtNDRiNC1hNDExLTY5ZGUxZTM5YmVkNiIsImFub25pbW8iOmZhbHNlLCJleHAiOjE2OTQxMzE1MjR9.AJQlJKNssobODI0UnIv4RNJaX38r2t9avk6z99mPjHI`)
             .then(response => {
+                console.log(response.data)
                 const userData = response.data;
                 setSettingsData({
-                    nomeUsuario: userData.nomeUsuario,
-                    nomeCanal: userData.nomeCanal,
-                    senhaAtual: '',
-                    descricao: userData.descricao
+                    nomeUsuario: userData.nome,
+                    senha: userData.senha,
+                    descricao: userData.descricao,
+                    dataNascimento: userData.dataNascimento,
+                    email: userData.email
                 });
             })
             .catch(error => {
