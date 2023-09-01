@@ -10,7 +10,7 @@ import PlayerService from '../../service/PlayerService';
 import Aos from 'aos'
 import Cookies from 'js-cookie';
 
-function Home(darkMode ) {
+function Home(darkMode) {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
   const [videosReu, setVideosReu] = useState([])
   const [videosRec, setVideosRec] = useState([])

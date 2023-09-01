@@ -13,15 +13,25 @@ const Search = () => {
 
     const sizeIcon = 20;
     const colorIcon = "var(--whitesmoke)";
+
     const nav = useNavigate();
-    const location = useLocation();
-
-    const urlSearchParams = new URLSearchParams(location.search);
-    const searchParams = urlSearchParams.get("q");
-    const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : "");
-
     const [back, setBack] = useState(false);
 
+    const location = useLocation();
+    const urlSearchParams = new URLSearchParams(location.search);
+    const searchParams = urlSearchParams.get("search");
+    const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : "");
+
+    const handleChange = (e) => {
+        console.log(e)
+        setValueInput(e.target.value);
+    }
+
+    const handleSearch = (value) => {
+        nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : valueInput)}`);
+    }
+
+    // utilizado temporariamente para simular histórico de pesquisa/sugestões de pesquisa 
     const [lastSearches, setLastSearches] = useState(([
         "Benefícios da meditação para a saúde",
         "Receita de bolo de cenoura com cobertura de chocolate",
@@ -42,22 +52,12 @@ const Search = () => {
         "Como fazer uma torta de abacaxi com calda de côco?"
     ]));
 
-
-    const handleChange = (e) => {
-        setValueInput(e.target.value);
-    }
-
-    const handleSearch = () => {
-        nav(`/result-search?search=${encodeURIComponent(valueInput)}`);
-        console.log("search: ")
-    }
-
     const renderSearch = () => {
         if (valueInput.trim() === '') {
             return (
                 <>
                     {lastSearches && lastSearches.map((lastSearch) => (
-                        <div className="search__box">
+                        <div className="search__box" onClick={() => handleSearch(lastSearch)}>
                             <MdRestartAlt size={sizeIcon} color={colorIcon} />
                             <span>{lastSearch}</span>
                         </div>
@@ -68,7 +68,7 @@ const Search = () => {
             return (
                 <>
                     {searches && searches.map((search) => (
-                        <div className="search__box">
+                        <div className="search__box" onClick={() => handleSearch(search)}>
                             <BiSearchAlt2 size={sizeIcon} color={colorIcon} />
                             <span>{search}</span>
                         </div>
@@ -79,7 +79,7 @@ const Search = () => {
     }
 
     return (
-        <div className="container__search" style={{display:back?"none":"block"}}>
+        <div className="container__search" style={{ display: back ? "none" : "block" }}>
             <HeaderSearch
                 handleSearch={handleSearch}
                 valueInput={valueInput}

@@ -67,7 +67,7 @@
 }
 
 .header__input__container>input:focus {
-    outline: var(--lightpurple) 2px solid;
+    outline: var(--lightpurple) 1px solid;
 }
 
 .header__input__container svg {
@@ -171,7 +171,7 @@
 /* Campo de pesquisa em Desktop */
 .container__search__desktop {
     position: absolute;
-    top: 90%;
+    top: 85%;
     left: 0;
     z-index: 200;
     width: 91%;
@@ -181,7 +181,7 @@
 }
 
 .searches__hitoric__container{
-    margin: 1.2%;
+    margin: 1%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -194,12 +194,12 @@
 .searches__hitoric__container>span{
     margin-left: 1%;
     font-size: 14px;
-    color: var(--darkpurple);
+    color: var(--darkpurpleToo);
     user-select: none;
 }
 
 .icons__search__desktop{
-    color: var(--darkblue);
+    color: var(--darkpurpleToo);
     opacity: .6;
 }
 

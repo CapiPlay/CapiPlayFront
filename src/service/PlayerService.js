@@ -24,7 +24,7 @@ const PlayerService = {
     buscarVideosResumidos: async (page) => {
         let size = 10
         try {
-            const response = await axios.get("/api/video/buscar-resumido/?page=" + page + "&size=" + size);
+            const response = await axios.get("/api/video/buscar-resumido/?page=" + page + "&size=" + size + "&shorts=false");
             return response.data;
         } catch (error) {
             console.error(error);
@@ -34,7 +34,7 @@ const PlayerService = {
     buscarVideosHomeShorts: async (page) => {
         const size = 6;
         try {
-            const response = await axios.get("/api/video/buscar-todos-shorts?page=" + page + "&size=" + size);
+            const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" + size  + "&shorts=true");
             return response.data;
         } catch (error) {
             console.error(error);
@@ -44,7 +44,7 @@ const PlayerService = {
     buscarVideosHomeReu: async (page) => {
         const size = 6;
         try {
-            const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" + size);
+            const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" + size + "&shorts=false");
             return response.data;
         } catch (error) {
             console.error(error);
@@ -54,7 +54,7 @@ const PlayerService = {
     buscarVideosHomeRet: async (page) => {
         const randomPageSize = [1, 2][Math.floor(Math.random() * 2)];
         try {
-            const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" +randomPageSize);
+            const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" +randomPageSize + "&shorts=false");
             return response.data;
         } catch (error) {
             console.error(error);
@@ -64,7 +64,7 @@ const PlayerService = {
     buscarVideosHomeRev: async (page) => {
         const randomPageSize = 15;
         try {
-            const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" +randomPageSize);
+            const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" +randomPageSize + "&shorts=false");
             return response.data;
         } catch (error) {
             console.error(error);
@@ -74,7 +74,7 @@ const PlayerService = {
     buscarVideosHomeRec: async (page) => {
         const size = 15;
         try {
-            const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" + size);
+            const response = await axios.get("/api/video/buscar-resumido?page=" + page + "&size=" + size + "&shorts=false");
             return response.data;
         } catch (error) {
             console.error(error);

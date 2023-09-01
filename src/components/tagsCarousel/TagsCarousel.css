@@ -36,16 +36,16 @@
     }
 
     .tags__search>span{
-        font-size: 18px;
+        font-size: 16px;
     }
 }
 
 @media screen AND (min-width: 1000px){
     .tags__search{
-        max-width: 28rem;
+        max-width: 25rem;
     }
 
     .tags__search>span{
-        font-size: 22px;
+        font-size: 16px;
     }
 }

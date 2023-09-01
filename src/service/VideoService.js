@@ -2,12 +2,20 @@ import axios from "./AxiosConfig"
 
 
 const VideoService = {
-  criar: async (formData, usuarioId) => {
-    return await axios.post('/api/video/criar', formData, {
-      headers: {
-        'usuarioId': usuarioId,
-      },
-    });
+  criar: async (video, usuarioId) => {
+    try {
+      const header = {
+        usuarioId: usuarioId,
+      };
+      const response = await axios.post(
+        "/api/video/criar",
+        video,
+        { header }
+      );
+      return response;
+    } catch (err) {
+      console.error(err);
+    }
   },
 };
 
