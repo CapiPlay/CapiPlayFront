@@ -23,6 +23,10 @@
     text-overflow: ellipsis;
 }
 
+.icons__search {
+    color: var(--lightpurple);
+}
+
 /* Responsividade  */
 
 @media screen AND (min-width: 760px) {
@@ -36,7 +40,7 @@
         position: absolute;
         top: 85%;
         width: 91%;
-        height: 40vh;
+        height: 41vh;
         background-color: var(--whitesmoke);
         border-radius: 10px;
     }
@@ -65,5 +69,10 @@
         font-size: 14px;
         color: var(--darkpurpleToo);
         user-select: none;
+    }
+
+    .icons__search {
+        color: var(--darkpurpleToo);
+        opacity: .6;
     }
 }

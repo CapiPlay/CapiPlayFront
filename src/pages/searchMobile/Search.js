@@ -65,7 +65,7 @@ const Search = () => {
                 <>
                     {lastSearches && lastSearches.map((lastSearch) => (
                         <div className="search__box" onClick={() => handleSearch(lastSearch)}>
-                            <MdRestartAlt size={sizeIcon} color={colorIcon} />
+                            <MdRestartAlt className="icons__search" />
                             <span>{lastSearch}</span>
                         </div>
                     ))}
@@ -76,7 +76,7 @@ const Search = () => {
                 <>
                     {searches && searches.map((search) => (
                         <div className="search__box" onClick={() => handleSearch(search)}>
-                            <BiSearchAlt2 size={sizeIcon} color={colorIcon} />
+                            <BiSearchAlt2 className="icons__search" />
                             <span>{search}</span>
                         </div>
                     ))}
@@ -87,7 +87,7 @@ const Search = () => {
 
     // REFATORACAO
 
-    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+    // const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     // useEffect(() => {
     // function handleClick(e) {
@@ -153,7 +153,7 @@ const Search = () => {
 
     return (
         <div className="container__search" style={{ display: back ? "none" : "block" }}>
-            {screenSize.width < 900
+            {window.innerWidth < 900
                 &&
                 <HeaderSearch
                     handleSearch={handleSearch}
