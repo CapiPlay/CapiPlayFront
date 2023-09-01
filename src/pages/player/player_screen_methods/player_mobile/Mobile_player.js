@@ -113,7 +113,7 @@ function Mobile_player({ video }) {
                         <div><Comments_component /></div>
                         <div><Comments_component /></div>
                     </div>
-                    <div className='comments__input__container'><input className='comments__input' placeholder='Escreva um comentário' /><VscSend className='send__icon' /></div>
+                    <div className='comments__input__mobile__container'><input className='comments__input__mobile' placeholder='Escreva um comentário' /><VscSend className='send__icon' /></div>
                 </div>
             }
         </>

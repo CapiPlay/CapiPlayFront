@@ -10,20 +10,44 @@ import Comments_component from '../../player_components/comments_componet/Commen
 import Video_card from '../../../../components/video_card/Video_card'
 import Header from '../../../../components/header/Header'
 import VideoService from '../../../../service/Video/VideoService'
+import { IoMdSend } from 'react-icons/io'
+import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
+
 // import Video_player_contructor from '../../video_player_contructor/Video_player_contructor'
 
 function Desktop_player({ video }) {
     const [videos, setVideos] = useState([])
+    const [comment, setComments] = useState(false)
+    const [commentText, setCommentText] = useState('');
+    const [allComments, setAllComments] = useState()
 
-    useEffect(() => {
+    useEffect( () => {
+        buscarComments()
         getVideos()
-        console.log(video)
     }, [])
 
 
+    const toggleComment = () => {
+        setComments(!comment)
+    }
 
     const getVideos = async () => {
         setVideos(await VideoService.buscarCompleto(6, 0, false))
+    }
+
+    const handleNewComment = () => {
+        console.log(video)
+        if (commentText.trim() !== '') {
+            // .sendComment({
+            //     texto: commentText,
+            //     idVideo: video.uuid
+            // })
+            setCommentText('');
+        }
+    }
+
+    const buscarComments = async () => {
+        // setComments(await EngajamentoService.buscarTodosComentarios({idVideo: video.uuid}, 0))
     }
 
     return (
@@ -33,10 +57,10 @@ function Desktop_player({ video }) {
                 <div>
                     <div className='video__container'>
                         <video
-                            src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[5]}
+                            // src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[5]}
                             type="video/mp4"
                             className='video__player__desktop'
-                            poster={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[3]}
+                            // poster={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[3]}
                             key={video.uuid}
                             controls
                         />
@@ -73,30 +97,37 @@ function Desktop_player({ video }) {
                     <div className='comments__container'>
                         <div className='total__comments'>
                             <p>Comentários</p>
+                            <div className='toggleComment' onClick={toggleComment}>
+                                Comentar
+                                { comment ?
+                                    <BiSolidUpArrow/>:
+                                    <BiSolidDownArrow/>
+                                }
+                            </div>
                         </div>
+                        { comment &&
+                                <div className='comments__input'>
+                                    <input
+                                      type='text'
+                                      value={commentText}
+                                      onChange={(e) => setCommentText(e.target.value)}
+                                    />
+                                    <div className='send__comments__icon' onClick={handleNewComment}>
+                                      <IoMdSend size={'2rem'} />
+                                    </div>
+                                </div>
+                            }
                         <div className='comments'>
                             <div>
-                                <Comments_component video={video} />
-                            </div>
-                            <div>
-                                <Comments_component video={video} />
-                            </div>
-                            <div>
-                                <Comments_component video={video} />
-                            </div>
-                            <div>
-                                <Comments_component video={video} />
-                            </div>
-                            <div>
-                                <Comments_component video={video} />
+                                    <Comments_component video={video} />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className='videos__desktop'>
-                    {videos.map((video) => (
+                    {/* {videos.map((video) => (
                         <Video_card key={video.uuid} video={video} />
-                    ))}
+                    ))} */}
                 </div>
             </div>
         </>
