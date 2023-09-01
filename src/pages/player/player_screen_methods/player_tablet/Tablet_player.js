@@ -9,7 +9,7 @@ import Divider_component from '../../player_components/divider_component/Divider
 import Comments_component from '../../player_components/comments_componet/Comments_component'
 import Video_card from '../../../../components/video_card/Video_card'
 import { BiArrowBack } from 'react-icons/bi'
-import PlayerService from '../../../../service/PlayerService'
+import VideoService from '../../../../service/Video/VideoService'
 
 function Tablet_player({ video }) {
     const [videos, setVideos] = useState([])
@@ -19,7 +19,7 @@ function Tablet_player({ video }) {
     }, [])
 
     const getVideos = async () => {
-        setVideos(await PlayerService.buscarVideosHomeReu(0))
+        setVideos(await VideoService.buscarTodos(6, 0, false))
     }
 
     return (

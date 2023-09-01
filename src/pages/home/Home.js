@@ -6,11 +6,11 @@ import Video_card from '../../components/video_card/Video_card';
 import Side_Bar from './side_bar/Side_Bar';
 import Slider_Category from './slider_category/Slider_Category';
 import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
-import PlayerService from '../../service/PlayerService';
+import VideoService from '../../service/Video/VideoService';
 import Aos from 'aos'
 import Cookies from 'js-cookie';
 
-function Home(darkMode ) {
+function Home(darkMode) {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
   const [videosReu, setVideosReu] = useState([])
   const [videosRec, setVideosRec] = useState([])
@@ -43,7 +43,7 @@ function Home(darkMode ) {
     const scrolled = window.innerHeight + window.scrollY;
     const totalHeight = document.documentElement.scrollHeight;
 
-    if (!loadingMoreVideos && scrolled >= totalHeight - 200) {
+    if (!loadingMoreVideos && scrolled >= totalHeight - 100) {
       setLoadingMoreVideos(true);
       getMoreVideos(currentPage + 1);
     }
@@ -59,26 +59,24 @@ function Home(darkMode ) {
   }, [currentPage, loadingMoreVideos]);
 
   const getMoreVideos = async (page) => {
-    const moreVideos = await PlayerService.buscarVideosHomeReu(page);
+
+    const moreVideos = await VideoService.buscarTodos(6, page, false);
 
     if (moreVideos) {
-      const filteredVideos = moreVideos.filter(video => video.shorts === false);
-      if (filteredVideos.length > 0) {
-        setVideosReu((prevVideos) => [...prevVideos, ...filteredVideos]);
+      if (moreVideos.length > 0) {
+        setVideosReu((prevVideos) => [...prevVideos, ...moreVideos]);
         setCurrentPage(page);
       }
     }
-
     setLoadingMoreVideos(false);
   };
 
   const getVideosReu = async () => {
-    const videos = await PlayerService.buscarVideosHomeReu(0);
+    const videos = await VideoService.buscarVideosHomeReu(0);
 
     if (videos) {
-      const filteredVideos = videos.filter(video => video.shorts === false);
-      if (filteredVideos.length > 0) {
-        setVideosReu(filteredVideos);
+      if (videos.length > 0) {
+        setVideosReu(videos);
       } else {
         setVideosReu([]);
       }
@@ -88,12 +86,11 @@ function Home(darkMode ) {
   };
 
   const getVideosRec = async () => {
-    const videos = await PlayerService.buscarVideosHomeRec(0);
+    const videos = await VideoService.buscarVideosHomeRec(0);
 
     if (videos) {
-      const filteredVideos = videos.filter(video => video.shorts === false);
-      if (filteredVideos.length === 6) {
-        setVideosRec(filteredVideos);
+      if (videos.length === 6) {
+        setVideosRec(videos);
       } else {
         setVideosRec([]);
       }
@@ -103,13 +100,11 @@ function Home(darkMode ) {
   };
 
   const getVideosRet = async () => {
-    const videos = await PlayerService.buscarVideosHomeRet(0);
+    const videos = await VideoService.buscarVideosHomeRet(0);
 
     if (videos) {
-      const filteredVideos = videos.filter(video => video.shorts === false);
-
-      if (filteredVideos.length > 0) {
-        setVideosRet(filteredVideos);
+      if (videos.length > 0) {
+        setVideosRet(videos);
       } else {
         setVideosRet([]);
       }
@@ -119,12 +114,11 @@ function Home(darkMode ) {
   }
 
   const getVideosRev = async () => {
-    const videos = await PlayerService.buscarVideosHomeRev(0);
+    const videos = await VideoService.buscarVideosHomeRev(0);
     if (videos) {
-      const filteredVideos = videos.filter(video => video.shorts === false);
-      if (filteredVideos.length > 6) {
-        filteredVideos.sort((a, b) => b.pontuacao - a.pontuacao);
-        const top6Videos = filteredVideos.slice(0, 6);
+      if (videos.length > 6) {
+        videos.sort((a, b) => b.pontuacao - a.pontuacao);
+        const top6Videos = videos.slice(0, 6);
         setVideosRev(top6Videos);
       } else {
         setVideosRev([]);

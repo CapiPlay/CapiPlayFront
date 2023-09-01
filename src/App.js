@@ -22,8 +22,9 @@ import TopLoadingBar from 'react-top-loading-bar'
 import { useRef, useState } from 'react'
 import axiosInstance from "./service/AxiosConfig"
 import { useEffect } from 'react'
-import UserService from './service/UserService'
+import UsuarioService from './service/Usuario/UsuarioService'
 import Cookies from 'js-cookie'
+import Category from './pages/category/Category';
 
 function App() {
 
@@ -37,7 +38,7 @@ function App() {
     } else {
       document.body.classList.remove("light__mode")
     }
-  })
+  }, [isLightMode])
 
   const generateTokenAnonimous = async () => {
     const userToken = Cookies.get("token")
@@ -45,7 +46,7 @@ function App() {
     if (userToken || existAnonimoToken) {
       return
     }
-    const tokenAnonimo = await UserService.getTokenAnonimo()
+    const tokenAnonimo = await UsuarioService.getTokenAnonimo()
     Cookies.set("anonimo", tokenAnonimo)
   }
 
@@ -98,6 +99,7 @@ function App() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/teste" element={<Video_player_contructor />} />
             <Route path='*' element={<NotFound />} />
+            <Route path='/category' element={<Category />} />
           </Routes>
         </BrowserRouter>
       </Provider>

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './Comments_component.css'
 import { BiSolidDownArrow, BiSolidUpArrow, BiDislike, BiLike, BiSolidLike } from 'react-icons/bi'
 import Comments_answers_component from '../comments_answers_component/Comments_answers_component'
-import EngajamentoService from '../../../../service/EngajamentoService'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Comments_component({ video }) {
