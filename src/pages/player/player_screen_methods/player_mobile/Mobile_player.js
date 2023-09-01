@@ -10,7 +10,7 @@ import Comments_component from '../../player_components/comments_componet/Commen
 import Video_card from '../../../../components/video_card/Video_card'
 import { BiArrowBack } from 'react-icons/bi'
 import { VscSend } from 'react-icons/vsc'
-import PlayerService from '../../../../service/PlayerService'
+import VideoService from '../../../../service/Video/VideoService'
 
 function Mobile_player({ video }) {
 
@@ -31,7 +31,7 @@ function Mobile_player({ video }) {
     }, [])
 
     const getVideos = async () => {
-        setVideos(await PlayerService.buscarVideosHomeReu(0))
+        setVideos(await VideoService.buscarCompleto(6, 0, false))
     }
 
     return (

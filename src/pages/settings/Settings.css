@@ -46,7 +46,7 @@
     flex-direction: column;
     width: 100%;
     padding: 0.2rem;
-    gap: 0.5rem;
+    gap: 1.5rem;
 }
 
 .settings__input {
@@ -134,7 +134,7 @@
 }
 
 .settings__box__image__options__desktop {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     padding-top: 1rem;
     display: flex;
     flex-direction: row;
@@ -166,7 +166,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1.5rem;
 }
 
 .settings__input__desktop {
@@ -303,7 +303,7 @@
 }
 
 .settings__box__image__options__tablet {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     margin-top: 2rem;
     display: flex;
     flex-direction: row;
@@ -407,7 +407,7 @@
     border-radius: 10px;
     width: fit-content;
     display: flex;
-    height: 8rem;
+    height: 8.5rem;
     top: 39%;
     background-color: var(--beige);
     position: absolute;

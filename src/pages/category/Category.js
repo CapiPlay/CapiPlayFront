@@ -4,7 +4,7 @@ import Header from '../../components/header/Header';
 import Side_Bar from '../home/side_bar/Side_Bar';
 import Slider_Category from '../home/slider_category/Slider_Category';
 import Cookies from 'js-cookie';
-import PlayerService from '../../service/PlayerService';
+import VideoService from '../../service/Video/VideoService';
 import Video_card from '../../components/video_card/Video_card';
 
 function Category() {
@@ -25,13 +25,13 @@ function Category() {
     }, []);
 
     const getMoreVideos = async (page) => {
-        const moreVideos = await PlayerService.buscarVideosHomeReu(page);
+        const moreVideos = await VideoService.buscarPorCategoria(page);
         if (moreVideos) {
-          if (moreVideos.length > 0) {
-            setVideosReu((prevVideos) => [...prevVideos, ...moreVideos]);
-          }
+            if (moreVideos.length > 0) {
+                setVideosReu((prevVideos) => [...prevVideos, ...moreVideos]);
+            }
         }
-      };
+    };
 
     const userProfile = () => {
         const userToken = Cookies.get('token');
@@ -71,6 +71,8 @@ function Category() {
                                 <Video_card key={video.uuid} video={video} />
                             ))}
                         </div>
+                    </div>
+                    <div>
                     </div>
                 </div>
             </div>

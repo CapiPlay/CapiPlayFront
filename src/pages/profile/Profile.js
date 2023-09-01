@@ -7,7 +7,7 @@ import Side_Bar from '../home/side_bar/Side_Bar'
 import { useParams } from 'react-router-dom';
 import Video_card from '../../components/video_card/Video_card'
 import Header from '../../components/header/Header'
-import EngajamentoService from '../../service/EngajamentoService'; 
+import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajamentoService'; 
 
 import ProfilePicture from '../../assets/image/channel_profile.png'
 
@@ -20,7 +20,7 @@ const Profile = ({ }) => {
     console.log(usuario.nomeCanal)
 
     useEffect(() => {
-        EngajamentoService.buscarUm(idUsuario)
+        UsuarioEngajamentoService.buscarUm(idUsuario)
             .then((data) => setUsuario(data))
             .catch((error) => console.error('Erro ao buscar usuario:', error));
     }, [idUsuario]);

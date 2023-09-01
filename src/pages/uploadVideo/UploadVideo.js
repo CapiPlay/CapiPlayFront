@@ -17,13 +17,17 @@ import InputTextArea from '../../components/inputTextArea/InputTextArea'
 import InputFileUpload from '../../components/inputFileUpload/InputFileUpload'
 
 // service
-import VideoService from '../../service/VideoService'
+import VideoService from '../../service/Video/VideoService'
 
 function UploadVideo() {
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const miniaturaUrl = searchParams.get("miniatura");
+  const encodedMiniaturaDataURL = searchParams.get('miniatura');
+
+  // Decode the data URL and set it as the miniatura
+  const miniaturaUrl = decodeURIComponent(encodedMiniaturaDataURL);
+
 
   const [videoSrc, setVideoSrc] = useState(null)
 
@@ -94,8 +98,6 @@ function UploadVideo() {
     }
   };
   
-
-
   const renderizarNovaTag = () => {
     if (tag !== "") {
       setTags([...tags, tag])
@@ -122,23 +124,15 @@ function UploadVideo() {
     const videoFormData = new FormData();
     videoFormData.append('video', video.video); // Assuming 'video' is the actual video file
     videoFormData.append('miniatura', video.miniatura); // Assuming 'miniatura' is the thumbnail file
-
-    const usuarioId = Cookies.get('user') ? JSON.parse(Cookies.get('user')).uuid : null;
-
-    if (!usuarioId) {
-      console.error('usuarioId not found in cookies');
-      return;
-    }
-
+    console.log(videoFormData)
     try {
-      const response = await VideoService.criar(videoFormData, usuarioId);
+      const response = await VideoService.criar(videoFormData);
       console.log(response.data);
     } catch (error) {
       console.error('Error:', error);
     }
     console.log(video);
   };
-
 
   return (
     <>
