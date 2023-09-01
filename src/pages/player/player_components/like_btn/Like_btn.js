@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Like_btn.css'
 import { BiLike, BiSolidLike } from 'react-icons/bi'
-import EngajamentoService from '../../../../service/EngajamentoService'
+import ReacaoService from '../../../../service/Engajamento/ReacaoService'
 
 function Like_btn({ video }) {
 
@@ -10,7 +10,7 @@ function Like_btn({ video }) {
   const handleToggleLikeBtn = () => {
     setLikeBtn(!like_btn);
     if (like_btn) {
-      EngajamentoService.criar(
+      ReacaoService.criar(
         {
           usuarioId: 1, // usuarioId
           videoId: video.uuid,
@@ -18,7 +18,7 @@ function Like_btn({ video }) {
         }
       )
     } else {
-      EngajamentoService.criar(null)
+      ReacaoService.criar(null)
     }
 
   }

@@ -1,14 +1,9 @@
-/* .container__header__search__desktop{
-    position: absolute;
-    top: 0;
-    left: 0;
-} */
+/* ---------- Mobile & Tablet ---------- */
 
-.container__tags__search__desktop{
-    margin: 8% 4%;
+.container__tags__search {
+    margin-top: 2%;
     width: 100%;
 }
-
 
 .container__result__search {
     width: 100%;
@@ -16,13 +11,10 @@
     background-color: var(--darkpurple);
 }
 
-.tags__carousel__search {
-    margin-top: 2%;
-}
-
 .container__filter {
-    margin: 5%;
     width: 20%;
+    height: 2vh;
+    margin: 5%;
     gap: 5%;
     padding: 2%;
     border: solid 2px var(--purple);
@@ -73,9 +65,50 @@
     gap: 20px;
 }
 
-.video__result__search{
-    width: 28%;
+.video__result__search {
+    width: 21.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+/* ---------- Desktop ---------- */
+
+.container__tags__search__desktop {
+    margin-top: 5%;
+    width: 100%;
+}
+
+.container__filter__desktop {
+    width: 5%;
+    height: .2vh;
+    margin: 2% 8%;
+    gap: 5%;
+    padding: 1.5%;
+    border: solid 2px var(--purple);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.container__filter__desktop>span {
+    font-size: 14px;
+}
+
+.container__videos__result__desktop {
+    margin-left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+}
+
+/* Animações do filtro */
 
 @keyframes open-filter {
     0% {
@@ -87,40 +120,34 @@
     }
 }
 
-@keyframes close-filter {
-    0% {
-        max-height: 15%;
-    }
-
-    100% {
-        max-height: 0;
-    }
-}
-
 /* Responsividade  */
 
-@media screen AND (min-width: 760px) {
+@media screen and (min-width: 760px) {
 
     .container__input__search>input,
     .container__filter>span,
     .table__filters>td,
     .table__filters>tr {
-        font-size: 18px;
+        font-size: 14px;
     }
 
-    .container__filter{
-        width: 10%;
-        height: 2%;
-        margin-left: 15%;
+    .container__filter {
+        width: 15%;
+    }
+
+    .container__videos__result {
+        margin: 0;
     }
 }
 
-@media screen AND (min-width: 1000px) {
+@media screen and (min-width: 1000px) {
 
-    .container__input__search>input,
-    .container__filter>span,
-    .table__filters>td,
-    .table__filters>tr {
-        font-size: 24px;
+    .table__filters>td:nth-child(3) {
+        width: 50%;
     }
+    
+    .table__filters>td:nth-child(2) {
+        width: 35%;
+    }
+    
 }
