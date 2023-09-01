@@ -24,11 +24,11 @@ function Home(darkMode) {
   });
 
   useEffect(() => {
-    getVideosReu()
-    getVideosRec()
-    getVideosRet()
-    getVideosRev()
-    userProfile()
+    userProfile();
+    getVideosRec();
+    getVideosRet();
+    getVideosRev();
+    getVideosReu();
     function handleResize() {
       setScreenSize({ width: window.innerWidth, height: window.innerHeight });
     }
@@ -59,73 +59,57 @@ function Home(darkMode) {
   }, [currentPage, loadingMoreVideos]);
 
   const getMoreVideos = async (page) => {
-
-    const moreVideos = await VideoService.buscarTodos(6, page, false);
-
-    if (moreVideos) {
-      if (moreVideos.length > 0) {
-        setVideosReu((prevVideos) => [...prevVideos, ...moreVideos]);
-        setCurrentPage(page);
-      }
+    const moreVideos = await VideoService.buscarTodos(50, 0, false);
+    const videos = moreVideos.content;
+    if (videosReu.length == 0) {
+      setVideosReu((prevVideos) => [...prevVideos, ...videos]);
+      setCurrentPage(page);
     }
     setLoadingMoreVideos(false);
   };
 
   const getVideosReu = async () => {
-    const videos = await VideoService.buscarVideosHomeReu(0);
-
-    if (videos) {
-      if (videos.length > 0) {
-        setVideosReu(videos);
-      } else {
-        setVideosReu([]);
-      }
+    const pageable = await VideoService.buscarTodos(6, 0, false);
+    const videos = pageable.content;
+    if (videosReu.length == 0) {
+      setVideosReu(videos);
     } else {
       setVideosReu([]);
     }
   };
 
   const getVideosRec = async () => {
-    const videos = await VideoService.buscarVideosHomeRec(0);
-
-    if (videos) {
-      if (videos.length === 6) {
-        setVideosRec(videos);
-      } else {
-        setVideosRec([]);
-      }
+    const pageable = await VideoService.buscarTodos(6, 0, false);
+    const videos = pageable.content;
+    if (videos.length === 6) {
+      setVideosRec(videos);
     } else {
       setVideosRec([]);
     }
+    setVideosRec([]);
   };
 
   const getVideosRet = async () => {
-    const videos = await VideoService.buscarVideosHomeRet(0);
-
-    if (videos) {
-      if (videos.length > 0) {
-        setVideosRet(videos);
-      } else {
-        setVideosRet([]);
-      }
+    const pageable = await VideoService.buscarTodos(6, 0, false);
+    const videos = pageable.content;
+    if (videos.length > 0) {
+      setVideosRet(videos);
     } else {
       setVideosRet([]);
     }
+    setVideosRet([]);
   }
 
   const getVideosRev = async () => {
-    const videos = await VideoService.buscarVideosHomeRev(0);
-    if (videos) {
-      if (videos.length > 6) {
-        videos.sort((a, b) => b.pontuacao - a.pontuacao);
-        const top6Videos = videos.slice(0, 6);
-        setVideosRev(top6Videos);
-      } else {
-        setVideosRev([]);
-      }
+    const videos = await VideoService.buscarTodos(6, 0, false);
+    if (videos.length > 6) {
+      videos.sort((a, b) => b.pontuacao - a.pontuacao);
+      const top6Videos = videos.slice(0, 6);
+      setVideosRev(top6Videos.content);
     } else {
       setVideosRev([]);
     }
+    setVideosRev([]);
   }
 
   const userProfile = () => {
@@ -151,34 +135,34 @@ function Home(darkMode) {
 
   const renderDesktopView = () => (
     <>
-     <div className={`home-component ${darkMode ? 'dark-mode' : 'light-mode'}`}>
-      <Header userLogin={userProfile()} />
-      <Side_Bar />
-      <div className='container__header__home'></div>
-      <div className='container__home'>
-        <div className='container__slider__base__desk'>
-          <Slider_Category />
+      <div className={`home-component ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+        <Header userLogin={userProfile()} />
+        <Side_Bar />
+        <div className='container__header__home'></div>
+        <div className='container__home'>
+          <div className='container__slider__base__desk'>
+            <Slider_Category />
+          </div>
+          <div className='container__slider__base__desk'>
+            <Slider />
+          </div>
+          <div className='container__video__cards__desk'>
+            {videosRev.map((video) => (
+              <Video_card key={video.uuid} video={video} />
+            ))}
+          </div>
+          <div className='container__shorts__cards__desk'>
+            <Slider_Shorts />
+          </div>
+          <div className='container__video__cards__desk'>
+            {videosReu.map((video) => (
+              <Video_card key={video.uuid} video={video} />
+            ))}
+          </div>
         </div>
-        <div className='container__slider__base__desk'>
-          <Slider />
-        </div>
-        <div className='container__video__cards__desk'>
-          {videosRev.map((video) => (
-            <Video_card key={video.uuid} video={video} />
-          ))}
-        </div>
-        <div className='container__shorts__cards__desk'>
-          <Slider_Shorts />
-        </div>
-        <div className='container__video__cards__desk'>
-          {videosReu.map((video) => (
-            <Video_card key={video.uuid} video={video} />
-          ))}
-        </div>
-      </div>
       </div>
     </>
-    
+
   );
 
   const renderTabletView = () => (

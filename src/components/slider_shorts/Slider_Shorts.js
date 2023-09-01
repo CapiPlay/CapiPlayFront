@@ -22,19 +22,14 @@ function Slider_Shorts() {
     }, []);
 
     const getVideosRec = async () => {
-        const videos = await VideoService.buscarVideosHomeShorts(0);
-        
-        if (videos) {
-            const filteredVideos = videos.filter(video => video.shorts === true);
-            console.log(filteredVideos);
-            if (filteredVideos.length >= 6) {
-                setVideosRec(filteredVideos);
-            } else {
-                setVideosRec([]);
-            }
+        const pageable = await VideoService.buscarTodos(12, 0, true);
+        const videos = pageable.content;
+        if (videos.length >= 6) {
+            setVideosRec(videos);
         } else {
             setVideosRec([]);
         }
+        setVideosRec([]);
     };
 
     const settingsDesk = {
