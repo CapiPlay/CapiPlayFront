@@ -10,7 +10,6 @@ import HeaderSettings from './header/HeaderSettings'
 import Input from "../../components/input/Input";
 import InputDisabled from "../../components/inputDisabled/InputDisabled"
 import Button from "../../components/button/Button";
-import UsuarioService from './../../service/Usuario/UsuarioService'
 import TextArea from '../../components/inputTextArea/InputTextArea';
 
 const Settings = ({ userId }) => {
