@@ -31,7 +31,6 @@ function Upload() {
     }
 
     const handleFileChange = (e) => {
-
         const file = e.target.files[0]
         if (file) {
             const formData = new FormData()
@@ -47,8 +46,8 @@ function Upload() {
                     imagePreviewRef.current.style.display = 'block';
                 }
             };
-
             reader.readAsDataURL(file);
+            console.log(formData)
         }
     }
 
@@ -122,7 +121,13 @@ function Upload() {
                                     type={"submit"}
                                     principal={false}
                                 />
-                                <Link className='upload__next__button__link' to={`/upload-video?miniatura=${encodeURIComponent(miniatura)}`}>
+                                <Link
+                                    className='upload__next__button__link'
+                                    to={{
+                                        pathname: '/upload-video',
+                                        state: { miniatura: miniatura }
+                                    }}
+                                >
                                     <Button
                                         label={"Próximo"}
                                         type={"submit"}
@@ -155,7 +160,7 @@ function Upload() {
                                             type={"submit"}
                                             principal={false}
                                         />
-                                        <Link className='upload__next__button__link' to={`/upload-shorts?miniatura=${encodeURIComponent(miniatura)}`}>
+                                        <Link className='upload__next__button__link' to={`/upload-shorts`}>
                                             <Button
                                                 label={"Próximo"}
                                                 type={"submit"}

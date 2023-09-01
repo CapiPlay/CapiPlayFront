@@ -12,6 +12,7 @@ const VideoService = {
           'Content-Type': 'multipart/form-data'
         }}
       );
+      console.log(response.data);
       return response;
     } catch (err) {
       console.error(err);

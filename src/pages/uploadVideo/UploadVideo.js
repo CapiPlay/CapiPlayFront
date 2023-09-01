@@ -22,12 +22,7 @@ import VideoService from '../../service/VideoService'
 function UploadVideo() {
 
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const encodedMiniaturaDataURL = searchParams.get('miniatura');
-
-  // Decode the data URL and set it as the miniatura
-  const miniaturaUrl = decodeURIComponent(encodedMiniaturaDataURL);
-
+  const { miniatura } = location.state || {};
 
   const [videoSrc, setVideoSrc] = useState(null)
 
@@ -44,7 +39,7 @@ function UploadVideo() {
     categoria: "",
     shorts: false,
     video: "",
-    miniatura: miniaturaUrl,
+    miniatura: miniatura,
     restrito: ""
   })
 
@@ -73,12 +68,18 @@ function UploadVideo() {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const videoURL = URL.createObjectURL(file);
-  
+      const videoFormData = new FormData();
+      const miniaturaFormData = new FormData();
+      videoFormData.append("video", file);
+      miniaturaFormData.append("miniatura", miniatura);
+
+      setVideo((prevVideo) => ({
+        ...prevVideo,
+        video: videoFormData, // Assign the video file
+        miniatura: miniaturaFormData, // Assign the thumbnail URL
+      }));
+
       const reader = new FileReader();
-      const formData = new FormData();
-      formData.append('video', file);
-  
       reader.onload = function (event) {
         if (imagePreviewRef.current) {
           imagePreviewRef.current.src = event.target.result;
@@ -86,18 +87,10 @@ function UploadVideo() {
         }
       };
       reader.readAsDataURL(file);
-  
-      setVideo((prevVideo) => ({
-        ...prevVideo,
-        video: file, // Assign the video file
-        miniatura: videoURL, // Assign the thumbnail URL
-      }));
-  
-      setVideoSrc(videoURL);
-      setImage(formData);
+
     }
   };
-  
+
   const renderizarNovaTag = () => {
     if (tag !== "") {
       setTags([...tags, tag])
@@ -120,18 +113,13 @@ function UploadVideo() {
 
   const enviarVideo = async (event) => {
     event.preventDefault();
-
-    const videoFormData = new FormData();
-    videoFormData.append('video', video.video); // Assuming 'video' is the actual video file
-    videoFormData.append('miniatura', video.miniatura); // Assuming 'miniatura' is the thumbnail file
-    console.log(videoFormData)
     try {
-      const response = await VideoService.criar(videoFormData);
-      console.log(response.data);
+      const response = await VideoService.criar(video);
+    
     } catch (error) {
       console.error('Error:', error);
     }
-    console.log(video);
+
   };
 
   return (
