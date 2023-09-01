@@ -74,8 +74,7 @@ const Register = () => {
         try {
             await dispatch(doSignup(user, image))
             console.log("entrei")
-            // navigate('/login')
-            // nextStep()
+            nextStep()
         } catch (err) {
             toast.error("Erro ao realizar o cadastro")
         }
