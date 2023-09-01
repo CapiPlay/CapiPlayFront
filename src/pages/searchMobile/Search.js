@@ -6,7 +6,7 @@ import { MdRestartAlt } from "react-icons/md"
 import { BiSearchAlt2 } from "react-icons/bi"
 
 // componentes
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 
 const Search = () => {
@@ -49,7 +49,14 @@ const Search = () => {
     const [searches, setSearches] = useState(([
         "Filme como treinar seu dragão é bom?",
         "Pica - Pau completo dublado",
-        "Como fazer uma torta de abacaxi com calda de côco?"
+        "Como fazer uma torta de abacaxi com calda de côco?",
+        "História da America Latina",
+        "Receita de pão de queijo",
+        "Livros românticos",
+        "Eu a patroa e as criancas",
+        "React icons como funciona",
+        "Torta de frango receita",
+        "Livros de aventura 2023"
     ]));
 
     const renderSearch = () => {
@@ -78,15 +85,85 @@ const Search = () => {
         }
     }
 
+    // REFATORACAO
+
+    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+
+    // useEffect(() => {
+    // function handleClick(e) {
+    //     const element = e.target.offsetParent;
+    //     if (element == null || !element.classList.contains("header__input__container")) {
+    //         setSearch(false);
+    //     }
+
+    // }
+
+    // if (valueInput === null) {
+    //     const urlSearchParams = new URLSearchParams(location.search);
+    //     const searchParams = urlSearchParams.get("q");
+    //     setValueInput(searchParams)
+    // }
+
+    // if (verifyClicked) {
+    //     setSearchDesktop(true)
+    // } else {
+    //     setSearchDesktop(false)
+    // }
+
+    // function handleResize() {
+    //     setScreenSize({ width: window.innerWidth, height: window.innerHeight });
+    // }
+    // window.addEventListener('resize', handleResize);
+    // handleResize();
+    // return () => {
+    //     window.removeEventListener('resize', handleResize);
+    // };
+    // }, []);
+
+    // const nav = useNavigate();
+
+    // const [valueInput, setValueInput] = useState(searchValue);
+
+    // const handleClick = () => {
+    //     setSearch(!search);
+    // }
+
+    // const handleSearch = () => {
+    //     nav(`/result-search?search=${encodeURIComponent(valueInput)}`);
+    //     console.log("search: ")
+    // }
+
+    // const verifyKeyPress = (e) => {
+    //     if (e.key === 'Enter') {
+    //         handleSearch();
+    //     }
+    // }
+
+    // const handleChange = (e) => {
+    //     setValueInput(e.target.value);
+
+
+    const [verifyClicked, setVerifyClicked] = useState(false);
+
+    const handleSelection = (searchSelected) => {
+        setValueInput(searchSelected)
+        setVerifyClicked(true)
+        nav(`/result-search?search=${searchSelected}`)
+    }
+
     return (
         <div className="container__search" style={{ display: back ? "none" : "block" }}>
-            <HeaderSearch
-                handleSearch={handleSearch}
-                valueInput={valueInput}
-                handleChange={handleChange}
-                functionBack={() => setBack(!back)} />
+            {screenSize.width < 900
+                &&
+                <HeaderSearch
+                    handleSearch={handleSearch}
+                    valueInput={valueInput}
+                    handleChange={handleChange}
+                    functionBack={() => setBack(!back)} />
+            }
             {renderSearch()}
         </div>
     )
+
 }
 export default Search; 

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 // componentes
 import Modal_menu from '../../pages/home/modal_menu/modal_menu';
 import logo from '../../assets/image/Logo.png'
-import Search from '../../pages/searchMobile/SearchMobile'
+import Search from '../../pages/searchMobile/Search'
 
 // ícones
 import { TbUpload } from 'react-icons/tb'
@@ -168,28 +168,29 @@ function Header({ userLogin, searchValue }) {
                     onChange={handleChange} />
                 <AiOutlineSearch />
                 {searchDesktop &&
-                    <div className="container__search__desktop">
-                        {valueInput && valueInput.trim() === ''
-                            ?
-                            <>
-                                {lastSearches && lastSearches.map((lastSearch) => (
-                                    <div className="searches__hitoric__container" onClick={() => handleSelection(lastSearch)}>
-                                        <MdRestartAlt className='icons__search__desktop' />
-                                        <span>{lastSearch}</span>
-                                    </div>
-                                ))}
-                            </>
-                            :
-                            <>
-                                {searches && searches.map((search) => (
-                                    <div className="searches__hitoric__container" onClick={() => handleSelection(search)}>
-                                        <BiSearchAlt2 className='icons__search__desktop' />
-                                        <span>{search}</span>
-                                    </div>
-                                ))}
-                            </>
-                        }
-                    </div>
+                <Search/>
+                    // <div className="container__search__desktop">
+                    //     {valueInput && valueInput.trim() === ''
+                    //         ?
+                    //         <>
+                    //             {lastSearches && lastSearches.map((lastSearch) => (
+                    //                 <div className="searches__hitoric__container" onClick={() => handleSelection(lastSearch)}>
+                    //                     <MdRestartAlt className='icons__search__desktop' />
+                    //                     <span>{lastSearch}</span>
+                    //                 </div>
+                    //             ))}
+                    //         </>
+                    //         :
+                    //         <>
+                    //             {searches && searches.map((search) => (
+                    //                 <div className="searches__hitoric__container" onClick={() => handleSelection(search)}>
+                    //                     <BiSearchAlt2 className='icons__search__desktop' />
+                    //                     <span>{search}</span>
+                    //                 </div>
+                    //             ))}
+                    //         </>
+                    //     }
+                    // </div>
                 }
             </div>
             <div className='header__info'>
@@ -213,7 +214,9 @@ function Header({ userLogin, searchValue }) {
                 </div>
             </div>
             <div className='box__header'>
-                <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
+                <div className='header__input__container' onClick={handleClick}>
+                    <AiOutlineSearch className='menu__icon' color='var(--lightpurple)' fontSize={25} />
+                </div>
                 <Modal_profile profile={userLogin} />
             </div>
             {search &&
