@@ -15,8 +15,6 @@ const ShortsComponent = ({ short }) => {
     const targetRef = useRef(null)
     const dispatch = useDispatch()
 
-    const shorts = useSelector((state) => state.shorts.listShorts)
-
     const { id } = useParams()
 
     const [openModalComments, setOpenModalComments] = useState(false)
@@ -32,28 +30,10 @@ const ShortsComponent = ({ short }) => {
             threshold: 0.95
         }
 
-        const getUUID = async () => {
-            const short = await VideoService.buscarCompleto(id)
-
-            console.log(short)
-
-            dispatch(setActualShorts(short))
-        }
-
         const callback = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-
-                    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-
-                    const shortUuid = short.uuid
-                    console.log(shortUuid)
-                    if (shortUuid !== id) {
-                        getUUID()
-                        dispatch(setListShorts(short.uuid, null, shorts))
-                        navigate(`/shorts/${shortUuid}`)
-                    }
-
+                    updateListShorts()
                     setIsVideoInView(true)
                     setTimeout(() => {
                         entry.target.play()
@@ -75,7 +55,27 @@ const ShortsComponent = ({ short }) => {
                 observer.unobserve(targetRef.current)
             }
         }
-    }, [])
+    }, [id, dispatch])
+
+    const getUUID = async () => {
+        const short = await VideoService.buscarCompleto(id)
+        dispatch(setActualShorts(short))
+    }
+
+    const updateListShorts = async() => {
+        const shortUuid = short.uuid
+        if (shortUuid !== id) {
+            try {
+                await getUUID()
+                const newShort = await VideoService.buscarShorts();
+                const newShortsList = [newShort];
+                dispatch(setListShorts(newShortsList));
+                navigate(`/shorts/${shortUuid}`);
+            } catch (error) {
+                console.error("Error fetching new short:", error);
+            }
+        }
+    }
 
     const toggleMute = () => {
         setIsMuted(!isMuted)

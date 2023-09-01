@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import VideoService from "../../../service/Video/VideoService"
 
 const initialState = {
   listShorts: [],
@@ -12,12 +11,15 @@ const shortsSlice = createSlice({
   reducers: {
     modifyListShorts: (state, action) => {
       const { list } = action.payload
-      state.listShorts = [...state.listShorts, ...list]
+      if (list) {
+        state.listShorts = [...state.listShorts, ...list]
+      }
     },
     modifyActualShorts: (state, action) => {
       const { short } = action.payload
-      state.actualShorts = {...short}
-      console.log(state.actualShorts)
+      if (short) {
+        state.actualShorts = { ...short }
+      }
     }
   }
 })
@@ -25,30 +27,11 @@ const shortsSlice = createSlice({
 export const { modifyListShorts, modifyActualShorts } = shortsSlice.actions
 export default shortsSlice.reducer
 
-const setListShorts = (shortUUID, list, listShorts) => async (dispatch) => {
-  console.log("Entrei nesse coisa")
+const setListShorts = (list) => async (dispatch) => {
   try {
-    if (shortUUID) {
-      // const index = listShorts.findIndex((prevShorts) => prevShorts.uuid === shortUUID)
-      // const sizeListShorts = listShorts.length
-      // console.log("index:" + index)
-
-      console.log("Entrei para adicionar mais dois videos")
-      const newShorts = []
-      for (let i = 0; i < 2; i++) {
-        const data = await VideoService.buscarShorts()
-        newShorts.push(data)
-      }
-
-      dispatch(modifyListShorts({ list: newShorts }))
-      return
-    } 
-
     if (list) {
-      console.log("Entrei aqui")
       dispatch(modifyListShorts({ list: list }))
     }
-    
   } catch (err) {
     console.error(err)
   }
