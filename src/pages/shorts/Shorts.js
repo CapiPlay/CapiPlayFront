@@ -82,17 +82,17 @@ const Shorts = () => {
             const newShorts = []
 
             const firstShort = await VideoService.buscarCompleto(id)
-            newShorts.push(firstShort.data)
+            newShorts.push(firstShort?.data)
 
             const segundo = await VideoService.buscarShorts()
             const terceiro = await VideoService.buscarShorts()
 
-            newShorts.push(segundo)
-            newShorts.push(terceiro)
+            newShorts.push(segundo.data)
+            newShorts.push(terceiro.data)
 
             console.log(newShorts)
 
-            dispatch(setListShorts(null, newShorts, null))
+            dispatch(setListShorts(newShorts))
         }
 
         func()

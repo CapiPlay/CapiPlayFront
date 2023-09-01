@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setListShorts, setActualShorts } from '../../../store/features/shorts/shortsSlice'
 import { useNavigate, useParams } from 'react-router-dom'
 import VideoService from '../../../service/Video/VideoService'
@@ -59,7 +59,7 @@ const ShortsComponent = ({ short }) => {
 
     const getUUID = async () => {
         const short = await VideoService.buscarCompleto(id)
-        dispatch(setActualShorts(short))
+        dispatch(setActualShorts(short.data))
     }
 
     const updateListShorts = async() => {
@@ -67,12 +67,12 @@ const ShortsComponent = ({ short }) => {
         if (shortUuid !== id) {
             try {
                 await getUUID()
-                const newShort = await VideoService.buscarShorts();
-                const newShortsList = [newShort];
-                dispatch(setListShorts(newShortsList));
-                navigate(`/shorts/${shortUuid}`);
-            } catch (error) {
-                console.error("Error fetching new short:", error);
+                const newShort = await VideoService.buscarShorts()
+                const newShortsList = [newShort.data]
+                dispatch(setListShorts(newShortsList))
+                navigate(`/shorts/${shortUuid}`)
+            } catch (err) {
+                console.error(err)
             }
         }
     }
