@@ -149,3 +149,7 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.toast {
+    background: var(--red) !important;
+}

@@ -39,24 +39,27 @@ export const { login, logout, signup } = userSlice.actions
 export default userSlice.reducer
 
 const doLogin = (credentials) => async (dispatch) => {
-  const res = await UsuarioService.login(credentials)
-  if (res) {
-    await dispatch(login({ token: res.data }))
-    
+
+  try {
+    const data = await UsuarioService.login(credentials)
+    dispatch(login({ token: data }))
+
     const userDetails = await UsuarioService.detalhes()
-    Cookies.set("user", JSON.stringify(userDetails.data))
-    
-    return res
+    Cookies.set("user", userDetails)
+
+    return data
+  } catch (err) {
+    throw err
   }
 }
 
 const doSignup = (newUser, photo) => async (dispatch) => {
   try {
     const res = await UsuarioService.criar(newUser, photo)
-    const user = res.data
-    dispatch(signup({ user: user, token: user.nome }))
+    const user = res
+    dispatch(signup({ user: user}))
   } catch (err) {
-    console.error(err)
+    console.error("erro" + err)
   }
 }
 
