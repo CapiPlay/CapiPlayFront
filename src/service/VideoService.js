@@ -2,15 +2,15 @@ import axios from "./AxiosConfig"
 
 
 const VideoService = {
-  criar: async (video, usuarioId) => {
+  criar: async (video) => {
     try {
-      const header = {
-        usuarioId: usuarioId,
-      };
       const response = await axios.post(
         "/api/video/criar",
         video,
-        { header }
+        {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }}
       );
       return response;
     } catch (err) {
