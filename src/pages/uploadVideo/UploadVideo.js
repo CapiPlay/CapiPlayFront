@@ -66,7 +66,6 @@ function UploadVideo() {
   const handleTagChange = (e) => {
     setTag(e.target.value);
   };
-
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -86,8 +85,8 @@ function UploadVideo() {
   
       setVideo((prevVideo) => ({
         ...prevVideo,
-        video: videoURL,
-        miniatura: file,
+        video: file, // Assign the video file
+        miniatura: videoURL, // Assign the thumbnail URL
       }));
   
       setVideoSrc(videoURL);
@@ -117,29 +116,29 @@ function UploadVideo() {
     }))
   }
 
-  
-const enviarVideo = async (event) => {
-  event.preventDefault();
+  const enviarVideo = async (event) => {
+    event.preventDefault();
 
-  const formData = new FormData();
-  formData.append('video', videoSrc);
+    const videoFormData = new FormData();
+    videoFormData.append('video', video.video); // Assuming 'video' is the actual video file
+    videoFormData.append('miniatura', video.miniatura); // Assuming 'miniatura' is the thumbnail file
 
-  const usuarioId = Cookies.get('user') ? JSON.parse(Cookies.get('user')).uuid : null;
+    const usuarioId = Cookies.get('user') ? JSON.parse(Cookies.get('user')).uuid : null;
 
-  if (!usuarioId) {
-    console.error('usuarioId not found in cookies');
-    return;
-  }
+    if (!usuarioId) {
+      console.error('usuarioId not found in cookies');
+      return;
+    }
 
-  try {
-    const response = await VideoService.criar(formData, usuarioId);
-    console.log(response.data);
-  } catch (error) {
-    console.error('API Error:', error); // Handle error response
-  }
-  console.log(video);
-};
-  
+    try {
+      const response = await VideoService.criar(videoFormData, usuarioId);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    console.log(video);
+  };
+
 
   return (
     <>
@@ -176,17 +175,6 @@ const enviarVideo = async (event) => {
 
             <div className='upload__video__container__first__row'>
               <div className='upload__video__box__inputfile'>
-                {/* <div className='testetetetet'>
-                  <InputFileUpload
-                    label={"Selecionar arquivo"}
-                    radius={"10px"}
-                    file={image}
-                    name='video'
-                    onChange={handleFileChange}
-                    value={video.video}
-                    accept={".mp4"}
-                  />
-                </div> */}
                 <div className='upload__video__inputfile'>
                   <div className='upload__video__inputfile__border'>
                     <HiUpload color='var(--whitesmoke)' fontSize={40} />
