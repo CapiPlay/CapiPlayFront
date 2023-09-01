@@ -13,6 +13,9 @@ import Button from "../../components/button/Button";
 import { Link } from 'react-router-dom';
 import TextArea from '../../components/inputTextArea/InputTextArea';
 
+//Service
+import UserService from '../../service/Usuario/UsuarioService';
+
 const Settings = ({ userId }) => {
 
     const [settingsData, setSettingsData] = useState({
@@ -62,7 +65,7 @@ const Settings = ({ userId }) => {
         //     .catch(error => {
         //         console.error('Erro ao obter dados do usuário:', error);
         //     });
-        axios.get(`/api/usuario/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJjYXBpcGxheSIsInVzdWFyaW9JZCI6IjE4ZTlhOTMyLWJhMDUtNDRiNC1hNDExLTY5ZGUxZTM5YmVkNiIsImFub25pbW8iOmZhbHNlLCJleHAiOjE2OTQxMzE1MjR9.AJQlJKNssobODI0UnIv4RNJaX38r2t9avk6z99mPjHI`)
+        axios.get(`/api/usuario/${userId}`)
             .then(response => {
                 console.log(response.data)
                 const userData = response.data;
@@ -110,21 +113,21 @@ const Settings = ({ userId }) => {
                     <img src={ProfileImage} className='profile__settings' />
                     <div className='settings__box__image__options'>
                         <button className='settings__image__options__buttons'>Alterar</button>
-                        <button className='settings__image__options__buttons'>Remover</button>
+                        <button className='settings__image__options__buttons' onClick={openImageModal}>Remover</button>
                         {isModalImageOpen && (
-                    <>
-                        <div className='modal__overlay_mobile'>
-                            <div className='modal__content'>
-                                <p className='text'>Tem certeza que deseja remover sua foto?</p>
-                                <div className='modal__buttons'>
-                                    <Button onClick={closeImageModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                    <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                            <>
+                                <div className='modal__overlay_mobile'>
+                                    <div className='modal__content'>
+                                        <p className='text'>Tem certeza que deseja remover sua foto?</p>
+                                        <div className='modal__buttons'>
+                                            <Button onClick={closeImageModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
+                                            <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div className='background'></div>
-                    </>
-                )}
+                                <div className='background'></div>
+                            </>
+                        )}
                     </div>
                     <div className="settings__field">
                         <InputDisabled
@@ -239,7 +242,21 @@ const Settings = ({ userId }) => {
                     <img src={ProfileImage} className='profile__settings__desktop' />
                     <div className='settings__box__image__options__desktop'>
                         <button className='settings__image__options__buttons__desktop'>Alterar</button>
-                        <button className='settings__image__options__buttons__desktop'>Remover</button>
+                        <button className='settings__image__options__buttons__desktop' onClick={openImageModal}>Remover</button>
+                        {isModalImageOpen && (
+                            <>
+                                <div className='modal__overlay'>
+                                    <div className='modal__content'>
+                                        <p className='text'>Tem certeza que deseja remover sua foto de perfil?</p>
+                                        <div className='modal__buttons'>
+                                            <Button onClick={closeImageModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
+                                            <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='background'></div>
+                            </>
+                        )}
                     </div>
                     <div className='settings__input__container__desktop'>
                         <div className='settings__input__box'>
@@ -365,7 +382,21 @@ const Settings = ({ userId }) => {
                     <img src={ProfileImage} className='profile__settings__tablet' />
                     <div className='settings__box__image__options__tablet'>
                         <button className='settings__image__options__buttons__tablet'>Alterar</button>
-                        <button className='settings__image__options__buttons__tablet'>Remover</button>
+                        <button className='settings__image__options__buttons__tablet' onClick={openImageModal}>Remover</button>
+                        {isModalImageOpen && (
+                            <>
+                                <div className='modal__overlay_tablet'>
+                                    <div className='modal__content'>
+                                        <p className='text'>Tem certeza que deseja remover sua foto de perfil?</p>
+                                        <div className='modal__buttons'>
+                                            <Button onClick={closeImageModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
+                                            <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='background'></div>
+                            </>
+                        )}
                     </div>
                     <div className='settings__input__container__tablet'>
                         <div className='settings__input__box'>
