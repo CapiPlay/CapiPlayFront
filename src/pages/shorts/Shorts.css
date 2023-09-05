@@ -235,6 +235,8 @@
     max-width: 25rem;
     height: 40rem;
 
+    margin-top: 2rem;
+
     overflow: scroll;
     scroll-snap-type: y mandatory;
     -ms-overflow-style: none;
@@ -250,6 +252,10 @@
 .slide {
     scroll-snap-align: start;
 }
+
+/* .animate {
+    transform: translateY(-30rem);
+} */
 
 /* Responsividade */
 
