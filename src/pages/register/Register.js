@@ -77,7 +77,6 @@ const Register = () => {
                 nextStep()
             }
         } catch (err) {
-            console.log(err.response.data.error)
             toast.error(err.response.data.error)
         }
     }
