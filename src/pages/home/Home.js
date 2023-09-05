@@ -13,7 +13,6 @@ import Cookies from 'js-cookie';
 function Home(darkMode) {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
   const [videosReu, setVideosReu] = useState([])
-  const [videosRec, setVideosRec] = useState([])
   const [videosRet, setVideosRet] = useState([])
   const [videosRev, setVideosRev] = useState([])
   const [currentPage, setCurrentPage] = useState(0);
@@ -25,7 +24,6 @@ function Home(darkMode) {
 
   useEffect(() => {
     userProfile();
-    getVideosRec();
     getVideosRet();
     getVideosRev();
     getVideosReu();
@@ -59,9 +57,9 @@ function Home(darkMode) {
   }, [currentPage, loadingMoreVideos]);
 
   const getMoreVideos = async (page) => {
-    const moreVideos = await VideoService.buscarTodos(50, 0, false);
-    const videos = moreVideos.content;
-    if (videosReu.length == 0) {
+    const moreVideos = await VideoService.buscarTodos(50, 0, false);  
+    const videos = moreVideos.content  
+    if (videosReu?.length == 0) {
       setVideosReu((prevVideos) => [...prevVideos, ...videos]);
       setCurrentPage(page);
     }
@@ -70,30 +68,19 @@ function Home(darkMode) {
 
   const getVideosReu = async () => {
     const pageable = await VideoService.buscarTodos(6, 0, false);
-    const videos = pageable.content;
-    if (videosReu.length == 0) {
+    const videos = pageable.content
+    if (videosReu?.length == 0) {
       setVideosReu(videos);
     } else {
       setVideosReu([]);
     }
   };
 
-  const getVideosRec = async () => {
-    const pageable = await VideoService.buscarTodos(6, 0, false);
-    const videos = pageable.content;
-    if (videos.length === 6) {
-      setVideosRec(videos);
-    } else {
-      setVideosRec([]);
-    }
-    setVideosRec([]);
-  };
 
   const getVideosRet = async () => {
     const pageable = await VideoService.buscarTodos(6, 0, false);
-    const videos = pageable.content;
-    if (videos.length > 0) {
-      setVideosRet(videos);
+    if (pageable?.length > 0) {
+      setVideosRet(pageable);
     } else {
       setVideosRet([]);
     }
@@ -102,10 +89,10 @@ function Home(darkMode) {
 
   const getVideosRev = async () => {
     const videos = await VideoService.buscarTodos(6, 0, false);
-    if (videos.length > 6) {
+    if (videos?.length > 6) {
       videos.sort((a, b) => b.pontuacao - a.pontuacao);
       const top6Videos = videos.slice(0, 6);
-      setVideosRev(top6Videos.content);
+      setVideosRev(top6Videos);
     } else {
       setVideosRev([]);
     }

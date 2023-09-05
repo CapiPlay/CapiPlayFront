@@ -15,7 +15,7 @@ const VideoService = {
         "/api/video/criar",
         video
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -34,7 +34,7 @@ const VideoService = {
       const response = await axios.get(
         `/api/video/buscar-completo/${uuid}`
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -54,7 +54,7 @@ const VideoService = {
       const response = await axios.get(
         `/api/video/buscar-historico?size=${size}&page=${page}`
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -63,14 +63,9 @@ const VideoService = {
   buscarTodos: async (size, page, shorts) => {
     try {
       const response = await axios.get(
-        "/api/video/buscar-resumido", {
-        params: {
-          size: size,
-          page: page,
-          shorts: shorts
-        }
-      }
+        `/api/video/buscar-resumido?size=${size}&page=${page}&shorts=${shorts}`
       );
+      console.log("aaaaaaaaaaaaaaaa" + response.data)
       return response.data;
     } catch (err) {
       console.error(err);
@@ -83,7 +78,7 @@ const VideoService = {
       const response = await axios.get(
         `/api/video/buscar-por-categoria?categoria=${categoria}&size=${size}&page=${page}`
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -100,10 +95,10 @@ const VideoService = {
     }
   },
 
-  buscarUploads: async (size, page) => {
+  buscarUploads: async (size, page, donoCanalId) => {
     try {
       const response = await axios.get(
-        `/api/video/buscar-videos-canal?size=${size}&page=${page}`
+        `/api/video/buscar-videos-canal?size=${size}&page=${page}&donoCanalId${donoCanalId}`
       );
       return response.data;
     } catch (err) {

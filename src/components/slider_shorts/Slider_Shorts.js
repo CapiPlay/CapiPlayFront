@@ -23,7 +23,7 @@ function Slider_Shorts() {
 
     const getVideosRec = async () => {
         const pageable = await VideoService.buscarTodos(12, 0, true);
-        const videos = pageable.content;
+        const videos = pageable;
         if (videos.length >= 6) {
             setVideosRec(videos);
         } else {
