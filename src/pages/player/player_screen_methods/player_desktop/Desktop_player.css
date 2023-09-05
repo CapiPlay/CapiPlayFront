@@ -67,6 +67,9 @@
 
 .total__comments{
     color: var(--lightpurple);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .teste{
@@ -103,4 +106,49 @@
     flex-direction: column; 
     align-items: center;
     gap: 2%;
+}
+
+.toggleComment{
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.comments__input{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 10px;
+}
+
+.comments__input > input {
+    outline: none;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    height: 0.6rem;
+    padding: 0.7rem;
+    font-weight: bolder;
+}
+
+.comments__input >input:focus{
+    border: solid var(--lightpurple) 2.5px;
+}
+
+.send__comments__icon{
+    background-color: var(--purple);
+    border: solid var(--purple);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.send__comments__icon:hover{
+    background-color: var(--purplehover);
+    border: solid var(--purplehover);
 }
