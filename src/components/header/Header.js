@@ -8,8 +8,6 @@ import Search from '../../pages/searchMobile/Search'
 // ícones
 import { TbUpload } from 'react-icons/tb'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { MdRestartAlt } from "react-icons/md"
-import { BiSearchAlt2 } from "react-icons/bi"
 
 import './Header.css'
 
@@ -63,33 +61,6 @@ function Header({ userLogin, searchValue }) {
             setSearchDesktop(false)
         }
     }, [])
-
-    // listas temporárias
-    const [lastSearches, setLastSearches] = useState(([
-        "Benefícios da meditação para a saúde",
-        "Receita de bolo de cenoura com cobertura de chocolate",
-        "Principais destinos turísticos na Europa",
-        "História da America Latina",
-        "Receita de pão de queijo",
-        "Livros românticos",
-        "Eu a patroa e as criancas",
-        "React icons como funciona",
-        "Torta de frango receita",
-        "Livros de aventura 2023",
-    ]));
-
-    const [searches, setSearches] = useState(([
-        "Filme como treinar seu dragão é bom?",
-        "Pica - Pau completo dublado",
-        "Como fazer uma torta de abacaxi com calda de côco?",
-        "História da America Latina",
-        "Receita de pão de queijo",
-        "Livros românticos",
-        "Eu a patroa e as criancas",
-        "React icons como funciona",
-        "Torta de frango receita",
-        "Livros de aventura 2023"
-    ]));
 
     const verifyToken = () => {
         if (userLogin === true) {
@@ -168,29 +139,7 @@ function Header({ userLogin, searchValue }) {
                     onChange={handleChange} />
                 <AiOutlineSearch />
                 {searchDesktop &&
-                <Search/>
-                    // <div className="container__search__desktop">
-                    //     {valueInput && valueInput.trim() === ''
-                    //         ?
-                    //         <>
-                    //             {lastSearches && lastSearches.map((lastSearch) => (
-                    //                 <div className="searches__hitoric__container" onClick={() => handleSelection(lastSearch)}>
-                    //                     <MdRestartAlt className='icons__search__desktop' />
-                    //                     <span>{lastSearch}</span>
-                    //                 </div>
-                    //             ))}
-                    //         </>
-                    //         :
-                    //         <>
-                    //             {searches && searches.map((search) => (
-                    //                 <div className="searches__hitoric__container" onClick={() => handleSelection(search)}>
-                    //                     <BiSearchAlt2 className='icons__search__desktop' />
-                    //                     <span>{search}</span>
-                    //                 </div>
-                    //             ))}
-                    //         </>
-                    //     }
-                    // </div>
+                    <Search />
                 }
             </div>
             <div className='header__info'>
