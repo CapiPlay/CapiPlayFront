@@ -74,7 +74,7 @@ function Modal_profile({ profile }) {
                     {verifyProfile() ? (
                         <div className='modal__profile__container__desktop'>
                             <div className='modal__profile__itens__desktop'>
-                                <Link to={'/profile/'} className='text__profile_modal'><p>Seu canal</p></Link>
+                                <Link to={'/profile/4342df17-9d89-4757-96a7-5b13eace726a'} className='text__profile_modal'><p>Seu canal</p></Link>
                                 <div className='divider__profile__modal'></div>
                                 <div className='text__profile_modal'>
                                     <p>Tema</p>
