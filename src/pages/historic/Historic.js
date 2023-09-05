@@ -7,11 +7,12 @@ import { format } from 'date-fns';
 import HeaderToBack from "../../components/headerToBack/HeaderToBack"
 import Video_card from "../../components/video_card/Video_card"
 import Slider_Shorts from "../../components/slider_shorts/Slider_Shorts";
+import HistoricoService from "../../service/Engajamento/HistoricoService";
 
 const Historic = () => {
 
     // videos que vão vir da HistoricService 
-    const [videoHistoric, setVideoHistoric] = useState([]);
+    const [videoHistoric, setVideoHistoric] = useState({});
 
     // shorts que vão vir da HistoricService 
     // *pode haver mudanças em como o short será renderizado
@@ -25,6 +26,12 @@ const Historic = () => {
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
+        HistoricoService.buscarTodosPorUsuario().then((res) => {
+            setVideoHistoric(res.data);
+            console.log(videoHistoric)
+            console.log(res.data)
+        })
+
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
@@ -33,6 +40,7 @@ const Historic = () => {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
+
     }, []);
 
     const renderMobileView = () => (
