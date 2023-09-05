@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { doLogin } from "../../store/features/user/userSlice"
 
 import "./Login.css"
@@ -24,7 +24,6 @@ const Login = ({ }) => {
     const [keepLoggedIn, setKeepLoggedIn] = useState(false)
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const dispatch = useDispatch()
-    const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
 
     useEffect(() => {
         const handleResize = () => {

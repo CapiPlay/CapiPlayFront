@@ -24,10 +24,7 @@ function Player() {
   }, [videoId]);
 
   const buscarVideo = async (videoId) => {
-    // if(){
-
-    // }
-    // setVideo(await VideoService.buscarCompleto(videoId))
+    setVideo(await VideoService.buscarCompleto(videoId))
   }
 
   const verifyDesktop = () => {

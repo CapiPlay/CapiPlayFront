@@ -14,7 +14,7 @@ const UserService = {
       const response = await axios.post("/api/usuario/cadastro", usuarioDto, foto1);
       return response.data;
     } catch (error) {
-      console.error(error);
+      throw error
     }
   },
 

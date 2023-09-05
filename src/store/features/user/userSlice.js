@@ -45,7 +45,7 @@ const doLogin = (credentials) => async (dispatch) => {
     dispatch(login({ token: data }))
 
     const userDetails = await UsuarioService.detalhes()
-    Cookies.set("user", userDetails)
+    Cookies.set("user", JSON.stringify(userDetails))
 
     return data
   } catch (err) {
@@ -59,7 +59,7 @@ const doSignup = (newUser, photo) => async (dispatch) => {
     const user = res
     dispatch(signup({ user: user}))
   } catch (err) {
-    console.error("erro" + err)
+    throw err
   }
 }
 
