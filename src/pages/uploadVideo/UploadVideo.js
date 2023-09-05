@@ -41,18 +41,18 @@ function UploadVideo() {
   })
 
   const categorias = [
-    { label: "Artes e Cultura", value: "Artes e Cultura" },
-    { label: "Ciência e Tecnologia", value: "Ciência e Tecnologia" },
-    { label: "Culinária", value: "Culinária" },
-    { label: "Educação", value: "Educação" },
-    { label: "Esportes", value: "Esportes" },
-    { label: "Entretenimento", value: "Entretenimento" },
-    { label: "Documentários", value: "Documentários" },
-    { label: "Jogos", value: "Jogos" },
-    { label: "Lifestyle", value: "Lifestyle" },
-    { label: "Moda e Beleza", value: "Moda e Beleza" },
-    { label: "Música", value: "Música" },
-    { label: "Viagem e Turismo", value: "Viagem e Turismo" }
+    { label: "Artes e Cultura", value: "ARTESECULTURA" },
+    { label: "Ciência e Tecnologia", value: "CIENCIAETECNOLOGIA" },
+    { label: "Culinária", value: "CULINARIA" },
+    { label: "Educação", value: "EDUCACAO" },
+    { label: "Esportes", value: "ESPORTES" },
+    { label: "Entretenimento", value: "ENTRETERIMENTO" },
+    { label: "Documentários", value: "DOCUMENTARIO" },
+    { label: "Jogos", value: "JOGOS" },
+    { label: "Lifestyle", value: "LIFESTYLE" },
+    { label: "Moda e Beleza", value: "MODAEBELEZA" },
+    { label: "Música", value: "MUSICA" },
+    { label: "Viagem e Turismo", value: "VIAGEMETURISMO" }
   ];
 
   const handleInputChange = (e) => {
