@@ -49,7 +49,7 @@ function Modal_profile({ profile }) {
 
     function Logout() {
         Cookies.remove('token');
-        window.location.reload(false);
+        Cookies.remove('user');
     }
 
     useEffect(() => {
