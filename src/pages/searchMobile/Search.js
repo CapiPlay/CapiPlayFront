@@ -8,6 +8,7 @@ import { BiSearchAlt2 } from "react-icons/bi"
 // componentes
 import { useEffect, useState } from "react";
 import HeaderSearch from "../../components/headerSearch/HeaderSearch";
+import VideoService from "../../service/Video/VideoService";
 
 const Search = () => {
 
@@ -33,18 +34,26 @@ const Search = () => {
 
     // utilizado temporariamente para simular histórico de pesquisa/sugestões de pesquisa 
     const [lastSearches, setLastSearches] = useState(([
-        "Benefícios da meditação para a saúde",
-        "Receita de bolo de cenoura com cobertura de chocolate",
-        "Principais destinos turísticos na Europa",
-        "História da America Latina",
-        "Receita de pão de queijo",
-        "Livros românticos",
-        "Eu a patroa e as criancas",
-        "React icons como funciona",
-        "Torta de frango receita",
-        "Livros de aventura 2023",
-
+        // "Benefícios da meditação para a saúde",
+        // "Receita de bolo de cenoura com cobertura de chocolate",
+        // "Principais destinos turísticos na Europa",
+        // "História da America Latina",
+        // "Receita de pão de queijo",
+        // "Livros românticos",
+        // "Eu a patroa e as criancas",
+        // "React icons como funciona",
+        // "Torta de frango receita",
+        // "Livros de aventura 2023",
     ]));
+
+    useEffect(() => {
+        VideoService.buscarHistorico(10, 0).then(
+            (res) => {
+                setLastSearches(res.data);
+                console.log(res.data)
+            }
+        )
+    }, [])
 
     const [searches, setSearches] = useState(([
         "Filme como treinar seu dragão é bom?",
@@ -84,64 +93,6 @@ const Search = () => {
             )
         }
     }
-
-    // REFATORACAO
-
-    // const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-
-    // useEffect(() => {
-    // function handleClick(e) {
-    //     const element = e.target.offsetParent;
-    //     if (element == null || !element.classList.contains("header__input__container")) {
-    //         setSearch(false);
-    //     }
-
-    // }
-
-    // if (valueInput === null) {
-    //     const urlSearchParams = new URLSearchParams(location.search);
-    //     const searchParams = urlSearchParams.get("q");
-    //     setValueInput(searchParams)
-    // }
-
-    // if (verifyClicked) {
-    //     setSearchDesktop(true)
-    // } else {
-    //     setSearchDesktop(false)
-    // }
-
-    // function handleResize() {
-    //     setScreenSize({ width: window.innerWidth, height: window.innerHeight });
-    // }
-    // window.addEventListener('resize', handleResize);
-    // handleResize();
-    // return () => {
-    //     window.removeEventListener('resize', handleResize);
-    // };
-    // }, []);
-
-    // const nav = useNavigate();
-
-    // const [valueInput, setValueInput] = useState(searchValue);
-
-    // const handleClick = () => {
-    //     setSearch(!search);
-    // }
-
-    // const handleSearch = () => {
-    //     nav(`/result-search?search=${encodeURIComponent(valueInput)}`);
-    //     console.log("search: ")
-    // }
-
-    // const verifyKeyPress = (e) => {
-    //     if (e.key === 'Enter') {
-    //         handleSearch();
-    //     }
-    // }
-
-    // const handleChange = (e) => {
-    //     setValueInput(e.target.value);
-
 
     const [verifyClicked, setVerifyClicked] = useState(false);
 
