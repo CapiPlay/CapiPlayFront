@@ -6,6 +6,8 @@ import { HiUpload } from 'react-icons/hi'
 import { useLocation } from 'react-router-dom'
 import React, { useState, useRef } from 'react'
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+
 
 // componentes
 import Input from '../../components/input/Input'
@@ -15,19 +17,19 @@ import InputFile from '../../components/inputFile/InputFile'
 import HeaderUpload from '../upload/headerUpload/HeaderUpload'
 import InputTextArea from '../../components/inputTextArea/InputTextArea'
 import InputFileUpload from '../../components/inputFileUpload/InputFileUpload'
+import { getImageData } from '../../pages/upload/imageDataStore';
 
 // service
 import VideoService from '../../service/Video/VideoService'
 
 function UploadVideo() {
-
+  const navigate = useNavigate();
   const location = useLocation();
   const { miniatura } = location.state || {};
-
   const [videoSrc, setVideoSrc] = useState(null)
-
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
+  const image = getImageData();
 
   const [video, setVideo] = useState({
     titulo: "",
@@ -36,9 +38,10 @@ function UploadVideo() {
     categoria: "",
     shorts: false,
     video: "",
-    miniatura: miniatura,
+
     restrito: ""
   })
+
 
   const categorias = [
     { label: "Artes e Cultura", value: "ARTESECULTURA" },
@@ -55,58 +58,56 @@ function UploadVideo() {
     { label: "Viagem e Turismo", value: "VIAGEMETURISMO" }
   ];
 
-  const handleInputChange = (e) => {
-    setVideo({ ...video, [e.target.name]: e.target.value })
-  }
+  const imageHandler = (event) => {
+    const selectedVideo = event.target.files[0];
+    console.log("aaa")
+    setVideo({ ...video, video: selectedVideo });
+}
+  const handleInputChange = (event) => {
+    const { name, value, files } = event.target;
+      setVideo({ ...video, [name]: value });
+    
+  };
+
 
   const handleTagChange = (e) => {
     setTag(e.target.value);
   };
   const [imagem, setImagem] = useState(null);
   const imagePreviewRef = useRef(null);
-  
+
   // ...
-  
+
   const handleFileChange = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-          const videoFormData = new FormData();
-          const miniaturaFormData = new FormData();
-          const imagemFormData = new FormData(); // Adicione um novo FormData para a imagem
-          videoFormData.append("video", file);
-          miniaturaFormData.append("miniatura", miniatura);
-  
-          setVideo((prevVideo) => ({
-              ...prevVideo,
-              video: videoFormData,
-              miniatura: miniaturaFormData,
-          }));
-          setImagem(imagemFormData); // Configurar o estado da imagem
-  
-          const reader = new FileReader();
-          reader.onload = function (event) {
-              if (imagePreviewRef.current) {
-                  imagePreviewRef.current.src = event.target.result;
-                  imagePreviewRef.current.style.display = 'block';
-              }
-          };
-          reader.readAsDataURL(file);
-      }
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        if (imagePreviewRef.current) {
+          imagePreviewRef.current.src = event.target.result;
+          imagePreviewRef.current.style.display = 'block';
+        }
+      };
+      reader.readAsDataURL(file);
+    }
   }
-  
+
   const renderizarNovaTag = () => {
     if (tag !== "") {
       setTags([...tags, tag])
       const updatedTags = [...video.tags, tag]
       setVideo({ ...video, tags: updatedTags })
-      setTag("")
+      console.log(updatedTags)
+      // setTag("")
     }
   }
+
 
   const deletarTag = (index) => {
     const updatedTags = [...tags];
     updatedTags.splice(index, 1);
     setTags(updatedTags);
+
 
     setVideo((prevVideo) => ({
       ...prevVideo,
@@ -114,18 +115,34 @@ function UploadVideo() {
     }))
   }
 
- const enviarVideo = async (event) => {
+
+  const enviarVideo = async (event) => {
     event.preventDefault();
     try {
-        const response = await VideoService.criar({
-            ...video,
-            imagem: imagem, // Incluir a imagem no objeto enviado para a API
-        });
+      const videoFormData = new FormData();
+      videoFormData.append("titulo", video.titulo);
+      videoFormData.append("descricao", video.descricao);
+      videoFormData.append("tags", video.tags);
+      videoFormData.append("categoria", video.categoria);
+      videoFormData.append("shorts", video.shorts);
+      videoFormData.append("video", video.video);
+      videoFormData.append("miniatura", image);
+      videoFormData.append("restrito", video.restrito);
+      console.log("Conteúdo do videoFormData:");
+      for (let pair of videoFormData.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+      }
+      console.log(videoFormData)
+      const response = await VideoService.criar(videoFormData);
+      alert("video cadastrado")
+      navigate('/')
     } catch (error) {
       console.error('Error:', error);
     }
 
+
   };
+
 
   return (
     <>
@@ -159,7 +176,6 @@ function UploadVideo() {
                 required={true}
               />
             </div>
-
             <div className='upload__video__container__first__row'>
               <div className='upload__video__box__inputfile'>
                 <div className='upload__video__inputfile'>
@@ -169,10 +185,10 @@ function UploadVideo() {
                       label={"Selecionar arquivo"}
                       radius={"10px"}
                       file={imagem}
-                      name='video'
-                      onChange={handleFileChange}
+                      name="video"
+                      onChange={imageHandler}
                       value={video.video}
-                      accept={".mp4"}
+                      accept={".MP4"}
                     />
                   </div>
                 </div>
@@ -241,5 +257,6 @@ function UploadVideo() {
     </>
   )
 }
+
 
 export default UploadVideo

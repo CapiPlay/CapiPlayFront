@@ -1,20 +1,23 @@
 // style
 import './Upload.css'
 
+
 // react
 import { Link } from 'react-router-dom'
 import { useState, useRef } from 'react'
 import { HiUpload } from 'react-icons/hi'
 import { BsFillFastForwardFill } from 'react-icons/bs'
 
+
 // componentes
 import Button from '../../components/button/Button'
 import HeaderUpload from './headerUpload/HeaderUpload'
 import InputFile from '../../components/inputFile/InputFile'
+import { setImageData } from './imageDataStore';
+
 
 // imagens
 import Preview from '../../assets/image/preview_video.png'
-
 
 
 function Upload() {
@@ -29,17 +32,12 @@ function Upload() {
     const handleShortsChange = () => {
         setIsVideo(false);
     }
-    
-    // Correção: Renomeie 'image' para 'imagem'
-    const [imagem, setImagem] = useState();
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            const formData = new FormData();
-            formData.append("foto", file);
-            setImagem(formData); // Correção: Use 'setImagem' em vez de 'setImage'
-
+            setMiniatura(file);
+            setImageData(file);
             const reader = new FileReader();
             reader.onload = function (event) {
                 if (imagePreviewRef.current) {
@@ -48,11 +46,8 @@ function Upload() {
                 }
             };
             reader.readAsDataURL(file);
-            console.log(formData);
         }
     }
-
-    
 
     return (
         <>
@@ -114,7 +109,7 @@ function Upload() {
                                     label={"Selecionar arquivo"}
                                     radius={"10px"}
                                     onChange={handleFileChange}
-                                    file={imagem}
+                                    file={miniatura}
                                     accept={".png"}
                                 />
                             </div>
@@ -149,12 +144,13 @@ function Upload() {
                                     src="#"
                                     alt="Preview da Imagem" />
 
+
                                 <div className='upload__box__all__buttons__shorts'>
                                     <InputFile
                                         label={"Selecionar arquivo"}
                                         radius={"10px"}
                                         onChange={handleFileChange}
-                                        file={imagem}
+                                        file={miniatura}
                                         accept={".png"}
                                     />
                                     <div className='upload__next__buttons__box__shorts'>
@@ -180,5 +176,6 @@ function Upload() {
         </>
     )
 }
+
 
 export default Upload
