@@ -29,9 +29,6 @@ function UploadVideo() {
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
 
-  const [image, setImage] = useState()
-  const imagePreviewRef = useRef(null)
-
   const [video, setVideo] = useState({
     titulo: "",
     descricao: "",
@@ -65,32 +62,38 @@ function UploadVideo() {
   const handleTagChange = (e) => {
     setTag(e.target.value);
   };
+  const [imagem, setImagem] = useState(null);
+  const imagePreviewRef = useRef(null);
+  
+  // ...
+  
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const videoFormData = new FormData();
-      const miniaturaFormData = new FormData();
-      videoFormData.append("video", file);
-      miniaturaFormData.append("miniatura", miniatura);
-
-      setVideo((prevVideo) => ({
-        ...prevVideo,
-        video: videoFormData, // Assign the video file
-        miniatura: miniaturaFormData, // Assign the thumbnail URL
-      }));
-
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        if (imagePreviewRef.current) {
-          imagePreviewRef.current.src = event.target.result;
-          imagePreviewRef.current.style.display = 'block';
-        }
-      };
-      reader.readAsDataURL(file);
-
-    }
-  };
-
+      const file = e.target.files[0];
+      if (file) {
+          const videoFormData = new FormData();
+          const miniaturaFormData = new FormData();
+          const imagemFormData = new FormData(); // Adicione um novo FormData para a imagem
+          videoFormData.append("video", file);
+          miniaturaFormData.append("miniatura", miniatura);
+  
+          setVideo((prevVideo) => ({
+              ...prevVideo,
+              video: videoFormData,
+              miniatura: miniaturaFormData,
+          }));
+          setImagem(imagemFormData); // Configurar o estado da imagem
+  
+          const reader = new FileReader();
+          reader.onload = function (event) {
+              if (imagePreviewRef.current) {
+                  imagePreviewRef.current.src = event.target.result;
+                  imagePreviewRef.current.style.display = 'block';
+              }
+          };
+          reader.readAsDataURL(file);
+      }
+  }
+  
   const renderizarNovaTag = () => {
     if (tag !== "") {
       setTags([...tags, tag])
@@ -111,11 +114,13 @@ function UploadVideo() {
     }))
   }
 
-  const enviarVideo = async (event) => {
+ const enviarVideo = async (event) => {
     event.preventDefault();
     try {
-      const response = await VideoService.criar(video);
-    
+        const response = await VideoService.criar({
+            ...video,
+            imagem: imagem, // Incluir a imagem no objeto enviado para a API
+        });
     } catch (error) {
       console.error('Error:', error);
     }
@@ -163,7 +168,7 @@ function UploadVideo() {
                     <InputFile
                       label={"Selecionar arquivo"}
                       radius={"10px"}
-                      file={image}
+                      file={imagem}
                       name='video'
                       onChange={handleFileChange}
                       value={video.video}

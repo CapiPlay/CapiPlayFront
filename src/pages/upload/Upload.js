@@ -15,31 +15,32 @@ import InputFile from '../../components/inputFile/InputFile'
 // imagens
 import Preview from '../../assets/image/preview_video.png'
 
+
+
 function Upload() {
+    const [isVideo, setIsVideo] = useState(true);
+    const imagePreviewRef = useRef(null);
 
-    const [isVideo, setIsVideo] = useState(true)
-    const [image, setImage] = useState()
-    const imagePreviewRef = useRef(Preview)
-
-    const [miniatura, setMiniatura] = useState()
+    const [miniatura, setMiniatura] = useState();
 
     const handleVideoChange = () => {
-        setIsVideo(true)
+        setIsVideo(true);
     }
     const handleShortsChange = () => {
-        setIsVideo(false)
+        setIsVideo(false);
     }
+    
+    // Correção: Renomeie 'image' para 'imagem'
+    const [imagem, setImagem] = useState();
 
     const handleFileChange = (e) => {
-        const file = e.target.files[0]
+        const file = e.target.files[0];
         if (file) {
-            const formData = new FormData()
-            formData.append("foto", file)
-            setImage(formData)
-            setMiniatura(formData)
+            const formData = new FormData();
+            formData.append("foto", file);
+            setImagem(formData); // Correção: Use 'setImagem' em vez de 'setImage'
 
             const reader = new FileReader();
-
             reader.onload = function (event) {
                 if (imagePreviewRef.current) {
                     imagePreviewRef.current.src = event.target.result;
@@ -47,9 +48,11 @@ function Upload() {
                 }
             };
             reader.readAsDataURL(file);
-            console.log(formData)
+            console.log(formData);
         }
     }
+
+    
 
     return (
         <>
@@ -111,7 +114,7 @@ function Upload() {
                                     label={"Selecionar arquivo"}
                                     radius={"10px"}
                                     onChange={handleFileChange}
-                                    file={image}
+                                    file={imagem}
                                     accept={".png"}
                                 />
                             </div>
@@ -151,7 +154,7 @@ function Upload() {
                                         label={"Selecionar arquivo"}
                                         radius={"10px"}
                                         onChange={handleFileChange}
-                                        file={image}
+                                        file={imagem}
                                         accept={".png"}
                                     />
                                     <div className='upload__next__buttons__box__shorts'>
