@@ -44,6 +44,11 @@
     cursor: pointer;
 }
 
+.subscribe__btn:hover{
+    border: solid var(--purplehover) 6px;
+    background-color: var(--purplehover);
+}
+
 .channel{
     display: flex;
     align-items: center;

@@ -71,6 +71,10 @@
 
 /* ----------------------------------------------- */
 
+.modal__category__item__side {
+    text-decoration: none;
+}
+
 .label__category__side {
     visibility: hidden;
     width: 0;

@@ -99,7 +99,7 @@ function App() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/teste" element={<Video_player_contructor />} />
             <Route path='*' element={<NotFound />} />
-            <Route path='/category' element={<Category />} />
+            <Route path='/category/:category' element={<Category />} />
           </Routes>
         </BrowserRouter>
       </Provider>
