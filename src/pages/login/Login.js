@@ -12,8 +12,6 @@ import Input from "../../components/input/Input"
 import Button from "../../components/button/Button"
 
 // Icons
-import { FaFacebookF } from 'react-icons/fa'
-import { FaGoogle } from 'react-icons/fa'
 import { ToastContainer, toast } from "react-toastify"
 import Cookies from "js-cookie"
 
@@ -92,10 +90,6 @@ const Login = ({ }) => {
                     <div></div>
                     <span>ou</span>
                     <div></div>
-                </div>
-                <div className="container__other__login">
-                    <div><FaFacebookF style={{ height: "1.5rem" }} /></div>
-                    <div><FaGoogle style={{ height: "2rem" }} /></div>
                 </div>
                 <div className="container__register__login">
                     <span>Novo aqui?</span>
