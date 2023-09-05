@@ -15,12 +15,15 @@ const Profile = ({  }) => {
 
     const [usuario, setUsuario] = useState({});
     const { idUsuario } = useParams();
-    console.log(idUsuario)
-    console.log(usuario.nomeCanal)
+    // console.log(idUsuario)
+    // console.log(usuario.nomeCanal)
 
     useEffect(() => {
-        UsuarioEngajamentoService.buscarUm(idUsuario)
-            .then((data) => setUsuario(data))
+        UsuarioEngajamentoService.buscarUm()
+            .then((data) => {
+                setUsuario(data)
+                console.log(data)
+            })
             .catch((error) => console.error('Erro ao buscar usuario:', error));
     }, [idUsuario]);
 
@@ -49,18 +52,18 @@ const Profile = ({  }) => {
         <>
             <HeaderProfile />
             <div>
-                <div key={usuario.idUsuario}  >
+                <div>
                     <div className='profile__container_mobile'>
-                        <div className='profile__container__picture' key={usuario.idUsuario}>
-                            <img className="profile__pic" src={ProfilePicture} />
-                            <h2 className='profile__name'>{usuario.nomeCanal}</h2>
+                        <div className='profile__container__picture'>
+                            {/* <img className="profile__pic" src={ProfilePicture} /> */}
+                            {/* <h2 className='profile__name'>{usuario.nomeCanal}</h2> */}
                             <button className='profile__subscribe__button'>Inscrever-se</button>
-                            <p className='profile__id'>@{usuario.nomePerfil}</p>
+                            {/* <p className='profile__id'>@{usuario.nomePerfil}</p> */}
                             <div className='profile__details'>
-                                <p>{usuario.quantidadeInscritos} inscritos</p>
+                                {/* <p>{usuario.quantidadeInscritos} inscritos</p> */}
                             </div>
                             <div className='profile__description'>
-                                <p>{usuario.descricao}</p>
+                                {/* <p>{usuario.descricao}</p> */}
                             </div>
                         </div>
                     </div>
@@ -82,21 +85,21 @@ const Profile = ({  }) => {
             <Side_Bar />
             <Header />
             <div>  
-                <div key={usuario.idUsuario}  >
+                <div>
                     <div className='profile__container_desktop'>
                         <div className='profile__container__picture__desktop'>
-                            <img className="profile__pic__desktop" src={ProfilePicture} />
+                            {/* <img className="profile__pic__desktop" src={ProfilePicture} /> */}
                             <div className='profile__box__desktop'>
                                 <div className='profile__box__name_subscribe__desktop'>
-                                    <h2 className='profile__name__desktop'>{usuario.nomeCanal}</h2>
+                                    {/* <h2 className='profile__name__desktop'>{usuario.nomeCanal}</h2> */}
                                     <button className='profile__subscribe__button__desktop'>Inscrever-se</button>
                                 </div>
-                                <p className='profile__id__desktop'>@{usuario.nomePerfil}</p>
+                                {/* <p className='profile__id__desktop'>@{usuario.nomePerfil}</p> */}
                                 <div className='profile__details__desktop'>
-                                    <p>{usuario.quantidadeInscritos} inscritos</p>
+                                    {/* <p>{usuario.quantidadeInscritos} inscritos</p> */}
                                 </div>
                                 <div className='profile__description__desktop'>
-                                    <p>{usuario.descricao}</p>
+                                    {/* <p>{usuario.descricao}</p> */}
                                 </div>
                             </div>
                         </div>
