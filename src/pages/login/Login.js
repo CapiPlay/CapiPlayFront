@@ -40,15 +40,8 @@ const Login = ({ }) => {
     const login = async () => {
         if (loginData.email && loginData.senha) {
             try {
-                const res = await dispatch(doLogin(loginData))
-                console.log(res)
-                if (res !== "") {
-                    if (keepLoggedIn) {
-                        Cookies.set("accessToken", res.accessToken, { expires: res.accessTokenExpiration })
-                        Cookies.set("refreshToken", res.refreshToken, { expires: res.refreshTokenExpiration })
-                    }
-                    navigate("/")
-                }
+                dispatch(doLogin(loginData))
+                navigate("/")
             } catch (err) {
                 toast.error("E-mail ou senha inválido")
             }

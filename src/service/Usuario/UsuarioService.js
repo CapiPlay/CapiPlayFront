@@ -39,6 +39,7 @@ const UserService = {
   detalhes: async () => {
     try {
       const response = await axios.get("/api/usuario");
+      console.log(response)
       return response.data;
     } catch (error) {
       console.error(error);
