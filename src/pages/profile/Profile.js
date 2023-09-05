@@ -8,11 +8,10 @@ import { useParams } from 'react-router-dom';
 import Video_card from '../../components/video_card/Video_card'
 import Header from '../../components/header/Header'
 import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajamentoService'; 
-
 import ProfilePicture from '../../assets/image/channel_profile.png'
 
 
-const Profile = ({ }) => {
+const Profile = ({  }) => {
 
     const [usuario, setUsuario] = useState({});
     const { idUsuario } = useParams();
@@ -45,8 +44,6 @@ const Profile = ({ }) => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-
-
 
     const renderMobileView = () => (
         <>
