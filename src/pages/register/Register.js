@@ -72,12 +72,13 @@ const Register = () => {
         user.append("foto1", image)
 
         try {
-            await dispatch(doSignup(user, image))
-            console.log("entrei")
-            // navigate('/login')
-            // nextStep()
+            const res = await dispatch(doSignup(user, image))
+            if (typeof res === {}) {
+                nextStep()
+            }
         } catch (err) {
-            toast.error("Erro ao realizar o cadastro")
+            console.log(err.response.data.error)
+            toast.error(err.response.data.error)
         }
     }
 

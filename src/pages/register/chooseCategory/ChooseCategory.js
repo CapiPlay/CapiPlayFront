@@ -66,7 +66,6 @@ const ChooseCategory = ({ back }) => {
     return (
         <div className="container__all__chooseCategory" style={{ height: `${windowHeight}px` }} >
             <div className="container__chooseCategory">
-                <h1>Cadastro</h1>
                 <h2>Selecione as categorias de seu interesse</h2>
                 <div className="chooseCategory">
                     {
