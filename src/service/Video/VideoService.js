@@ -71,7 +71,6 @@ const VideoService = {
     }
   },
 
-
   buscarPorCategoria: async (categoria, size, page) => {
     try {
       const response = await axios.get(
