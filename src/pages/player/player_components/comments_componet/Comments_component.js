@@ -4,7 +4,7 @@ import { BiSolidDownArrow, BiSolidUpArrow, BiDislike, BiLike, BiSolidLike } from
 import Comments_answers_component from '../comments_answers_component/Comments_answers_component'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
-function Comments_component({ video }) {
+function Comments_component({ commentVideo }) {
     const [showMore, setShowMore] = useState(false);
     const [like_btn, setLikeBtn] = useState(true);
     const [commentsAnswer, setCommentsAnswer] = useState(false);
@@ -22,6 +22,7 @@ function Comments_component({ video }) {
     }, []);
 
     //são apenas variáveis de exemplo, elas vão vir com o objeto
+    // const comment = commentVideo.texto;
     const comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget nunc justo. Interdum et malesuada fames ac ante ipsum primis in faucibus. ";
     const username = 'ChillBean'
     const comment_date = '4'

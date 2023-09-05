@@ -80,6 +80,7 @@
 
 .text__profile_modal_mobile {
   color: var(--whiteBlack) !important;
+  cursor: pointer;
   text-decoration: none;
   display: flex;
   gap: 17vw;
@@ -88,6 +89,7 @@
 
 .text__profile_modal_tablet {
   color: var(--whiteBlack) !important;
+  cursor: pointer;
   text-decoration: none;
   display: flex;
   gap: 4rem;
@@ -97,6 +99,7 @@
 .text__profile_modal {
   color: var(--whiteBlack) !important;
   text-decoration: none;
+  cursor: pointer;
   display: flex;
   gap: 5rem;
   flex-direction: row;

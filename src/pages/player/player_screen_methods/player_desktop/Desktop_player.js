@@ -12,6 +12,7 @@ import Header from '../../../../components/header/Header'
 import VideoService from '../../../../service/Video/VideoService'
 import { IoMdSend } from 'react-icons/io'
 import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
+import ComentarioService from '../../../../service/Engajamento/ComentarioService'
 
 // import Video_player_contructor from '../../video_player_contructor/Video_player_contructor'
 
@@ -33,22 +34,29 @@ function Desktop_player({ video }) {
     }
 
     const getVideos = async () => {
-        setVideos(await VideoService.buscarTodos(6, 0, false))
+        var videostemp = await VideoService.buscarTodos(6, 0, false)
+        setVideos(videostemp.content)
+
     }
 
     const handleNewComment = () => {
         console.log(video)
         if (commentText.trim() !== '') {
-            // .sendComment({
-            //     texto: commentText,
-            //     idVideo: video.uuid
-            // })
+            ComentarioService.criar({
+                texto: commentText,
+                idVideo: video.uuid
+            })
             setCommentText('');
         }
     }
 
     const buscarComments = async () => {
-        // setComments(await EngajamentoService.buscarTodosComentarios({idVideo: video.uuid}, 0))
+        var commentsTemp = await ComentarioService.buscarTodosPorVideo({idVideo: video.uuid}, 0)
+        if(commentsTemp == null || commentsTemp == undefined){
+            setAllComments(null)
+        }else{
+            setAllComments(commentsTemp.content)
+        }
     }
 
     return (
@@ -120,7 +128,18 @@ function Desktop_player({ video }) {
                             }
                         <div className='comments'>
                             <div>
-                                    <Comments_component video={video} />
+                                {allComments == null ?
+                                <div>
+                                    <p>Sem comentarios</p>
+                                </div>
+                                :
+                                <div>
+                                    {allComments.map((commentVideo) => (
+                                         <Comments_component commentVideo={commentVideo} />
+                                    ))}
+                                </div>
+                                }
+                                
                             </div>
                         </div>
                     </div>
