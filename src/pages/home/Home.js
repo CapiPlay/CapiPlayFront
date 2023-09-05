@@ -84,19 +84,16 @@ function Home(darkMode) {
     } else {
       setVideosRet([]);
     }
-    setVideosRet([]);
   }
 
   const getVideosRev = async () => {
     const videos = await VideoService.buscarTodos(6, 0, false);
-    if (videos?.length > 6) {
-      videos.sort((a, b) => b.pontuacao - a.pontuacao);
-      const top6Videos = videos.slice(0, 6);
-      setVideosRev(top6Videos);
+    const videosRev = videos.content;
+    if (videosRev?.length > 6) {
+      setVideosRev(videosRev);
     } else {
       setVideosRev([]);
     }
-    setVideosRev([]);
   }
 
   const userProfile = () => {
