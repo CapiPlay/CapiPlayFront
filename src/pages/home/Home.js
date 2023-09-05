@@ -6,7 +6,7 @@ import Video_card from '../../components/video_card/Video_card';
 import Side_Bar from './side_bar/Side_Bar';
 import Slider_Category from './slider_category/Slider_Category';
 import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
-import PlayerService from '../../service/PlayerService';
+import VideoService from '../../service/Video/VideoService';
 import Aos from 'aos'
 import Cookies from 'js-cookie';
 
@@ -59,7 +59,8 @@ function Home(darkMode) {
   }, [currentPage, loadingMoreVideos]);
 
   const getMoreVideos = async (page) => {
-    const moreVideos = await PlayerService.buscarVideosHomeReu(page);
+
+    const moreVideos = await VideoService.buscarTodos(6, page, false);
 
     if (moreVideos) {
       if (moreVideos.length > 0) {
@@ -67,12 +68,11 @@ function Home(darkMode) {
         setCurrentPage(page);
       }
     }
-
     setLoadingMoreVideos(false);
   };
 
   const getVideosReu = async () => {
-    const videos = await PlayerService.buscarVideosHomeReu(0);
+    const videos = await VideoService.buscarVideosHomeReu(0);
 
     if (videos) {
       if (videos.length > 0) {
@@ -86,7 +86,7 @@ function Home(darkMode) {
   };
 
   const getVideosRec = async () => {
-    const videos = await PlayerService.buscarVideosHomeRec(0);
+    const videos = await VideoService.buscarVideosHomeRec(0);
 
     if (videos) {
       if (videos.length === 6) {
@@ -100,7 +100,7 @@ function Home(darkMode) {
   };
 
   const getVideosRet = async () => {
-    const videos = await PlayerService.buscarVideosHomeRet(0);
+    const videos = await VideoService.buscarVideosHomeRet(0);
 
     if (videos) {
       if (videos.length > 0) {
@@ -114,7 +114,7 @@ function Home(darkMode) {
   }
 
   const getVideosRev = async () => {
-    const videos = await PlayerService.buscarVideosHomeRev(0);
+    const videos = await VideoService.buscarVideosHomeRev(0);
     if (videos) {
       if (videos.length > 6) {
         videos.sort((a, b) => b.pontuacao - a.pontuacao);

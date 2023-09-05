@@ -1,0 +1,39 @@
+import axios from "../AxiosConfig";
+
+const InscricaoService = {
+  /**
+   *
+   * @param {*} criarInscricaoCommand (String idUsuario, String canal)
+   * @returns void
+   */
+  criar: async (criarInscricaoCommand) => {
+    try {
+      const response = await axios.post(
+        "/engajamento/inscricao",
+        criarInscricaoCommand
+      );
+      return response.data;
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
+  /**
+   *
+   * @param {*} buscarUmInscricaoCommand (String idUsuario, String idCanal)
+   * @returns Inscricao (Usuario idUsuario, Usuario idCanal)
+   */
+  buscarUm: async (buscarUmInscricaoCommand) => {
+    try {
+      const response = await axios.get(
+        "/engajamento/inscricao",
+        buscarUmInscricaoCommand
+      );
+      return response.data;
+    } catch (err) {
+      console.error(err);
+    }
+  },
+};
+
+export default InscricaoService;

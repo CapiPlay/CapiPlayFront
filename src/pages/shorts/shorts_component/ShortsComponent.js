@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setListShorts, setActualShorts } from '../../../store/features/shorts/shortsSlice'
 import { useNavigate, useParams } from 'react-router-dom'
-import ShortsService from '../../../service/ShortsService'
+import VideoService from '../../../service/Video/VideoService'
 import { BiLike, BiDislike, BiCommentDetail, BiSolidLike, BiSolidDislike } from 'react-icons/bi'
 import imagePerfil from '../../../assets/imagemPerfil.png'
 import ButtonSubmit from '../../../components/buttonSubmit/ButtonSubmit'
@@ -14,6 +14,7 @@ const ShortsComponent = ({ short }) => {
     const navigate = useNavigate()
     const targetRef = useRef(null)
     const dispatch = useDispatch()
+
     const shorts = useSelector((state) => state.shorts.listShorts)
 
     const { id } = useParams()
@@ -27,20 +28,26 @@ const ShortsComponent = ({ short }) => {
     useEffect(() => {
         const options = {
             root: null,
-            rootMargin: '0px',
-            threshold: 1,
+            rootMargin: "0px",
+            threshold: 1
         }
 
         const getUUID = async () => {
-            const short = await ShortsService.buscarUUID(id)
+            const short = await VideoService.buscarCompleto(id)
+
+            console.log(short)
+
             dispatch(setActualShorts(short))
         }
 
-        const callback = (entries) => {
-            entries.forEach((entry) => {
+        const callback = (entries, observer) => {
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const shortUuid = short.uuid
 
+                    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+
+                    const shortUuid = short.uuid
+                    console.log(shortUuid)
                     if (shortUuid !== id) {
                         getUUID()
                         dispatch(setListShorts(short.uuid, null, shorts))
@@ -48,11 +55,9 @@ const ShortsComponent = ({ short }) => {
                     }
 
                     setIsVideoInView(true)
-
                     setTimeout(() => {
                         entry.target.play()
                     }, 500)
-
                 } else {
                     setIsVideoInView(false)
                     entry.target.pause()
@@ -70,7 +75,7 @@ const ShortsComponent = ({ short }) => {
                 observer.unobserve(targetRef.current)
             }
         }
-    }, [id, dispatch, navigate, short, shorts])
+    }, [])
 
     const toggleMute = () => {
         setIsMuted(!isMuted)

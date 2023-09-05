@@ -13,8 +13,6 @@ import Button from '../../components/button/Button'
 import InputFile from '../../components/inputFile/InputFile'
 import HeaderUpload from '../upload/headerUpload/HeaderUpload'
 
-// service
-import VideoService from '../../service/VideoService'
 
 function UploadShorts() {
 
