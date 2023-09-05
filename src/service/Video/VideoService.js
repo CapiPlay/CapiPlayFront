@@ -34,7 +34,7 @@ const VideoService = {
       const response = await axios.get(
        `/api/video/buscar-completo/${uuid}`
       );
-      return response;
+      return response.data;
     } catch (err) {
       console.error(err);
     }
@@ -65,7 +65,7 @@ const VideoService = {
       const response = await axios.get(
         `/api/video/buscar-resumido?size=${size}&page=${page}&shorts=${shorts}`
       );
-      return response;
+      return response.data.content;
     } catch (err) {
       console.error(err);
     }

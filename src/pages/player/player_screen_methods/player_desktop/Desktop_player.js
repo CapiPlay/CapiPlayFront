@@ -26,13 +26,14 @@ function Desktop_player({ video }) {
         getVideos()
     }, [])
 
+    console.log(video)
 
     const toggleComment = () => {
         setComments(!comment)
     }
 
     const getVideos = async () => {
-        setVideos(await VideoService.buscarCompleto(6, 0, false))
+        setVideos(await VideoService.buscarTodos(6, 0, false))
     }
 
     const handleNewComment = () => {
@@ -57,10 +58,10 @@ function Desktop_player({ video }) {
                 <div>
                     <div className='video__container'>
                         <video
-                            // src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[5]}
+                            src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[5]}
                             type="video/mp4"
                             className='video__player__desktop'
-                            // poster={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[3]}
+                            poster={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[3]}
                             key={video.uuid}
                             controls
                         />
@@ -125,9 +126,9 @@ function Desktop_player({ video }) {
                     </div>
                 </div>
                 <div className='videos__desktop'>
-                    {/* {videos.map((video) => (
+                    {videos.map((video) => (
                         <Video_card key={video.uuid} video={video} />
-                    ))} */}
+                    ))}
                 </div>
             </div>
         </>
