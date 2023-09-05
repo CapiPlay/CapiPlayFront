@@ -16,6 +16,7 @@ import ChooseCategory from "./chooseCategory/ChooseCategory"
 // Lógica
 import { useDispatch } from "react-redux"
 import { doSignup } from "../../store/features/user/userSlice"
+import { ToastContainer, toast } from "react-toastify"
 
 const Register = () => {
 
@@ -59,9 +60,9 @@ const Register = () => {
         setbPChooseCategory(!bPChooseCategory)
     }
 
-    const register = (e) => {
+    const register = async (e) => {
         e.preventDefault()
-        console.log("Entrei para registrar")
+
         setRegisterData({ ...registerData, foto1: image })
         user.append("nome", registerData.nome)
         user.append("senha", registerData.senha)
@@ -71,11 +72,12 @@ const Register = () => {
         user.append("foto1", image)
 
         try {
-            const res = dispatch(doSignup(user, image))
-            navigate('/login')
+            await dispatch(doSignup(user, image))
+            console.log("entrei")
+            // navigate('/login')
             // nextStep()
-        } catch(err) {
-            console.error(err)
+        } catch (err) {
+            toast.error("Erro ao realizar o cadastro")
         }
     }
 
@@ -176,11 +178,27 @@ const Register = () => {
                             </span>
                         </div>
                     </form>
+
+                    <ToastContainer position="top-right"
+                        autoClose={5000}
+                        hideProgressBar={false}
+                        newestOnTop={false}
+                        closeOnClick
+                        rtl={false}
+                        pauseOnFocusLoss
+                        draggable
+                        pauseOnHover
+                        toastClassName={"toast"}
+                        theme="colored" />
+
                 </div>
             }
-            {bPChooseCategory &&
+
+            {
+                bPChooseCategory &&
                 <ChooseCategory back={nextStep} />
             }
+
         </>
     )
 }
