@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
 import './Mobile_player.css'
-import Like from '../../player_components/like_btn/Like_btn'
-import Dislike from '../../player_components/dislike_btn/Dislike_btn'
 import { AiFillEye, AiFillHeart, AiOutlineClose } from 'react-icons/ai'
 import Channel_component from '../../player_components/channel_component/Channel_component'
 import Description_component from '../../player_components/description_component/Description_component'
@@ -11,6 +9,7 @@ import Video_card from '../../../../components/video_card/Video_card'
 import { BiArrowBack } from 'react-icons/bi'
 import { VscSend } from 'react-icons/vsc'
 import VideoService from '../../../../service/Video/VideoService'
+import LikeDislikeButtons from '../../player_components/feedbackButton/LikeDislikeButtons'
 
 function Mobile_player({ video }) {
 
@@ -55,8 +54,7 @@ function Mobile_player({ video }) {
                         </div>
                     </div>
                     <div className='like__dislike__btns'>
-                        <Like />
-                        <Dislike />
+                        <LikeDislikeButtons video={video} />
                     </div>
                 </div>
                 <div>

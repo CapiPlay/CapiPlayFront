@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './Desktop_player.css'
-import Like from '../../player_components/like_btn/Like_btn'
-import Dislike from '../../player_components/dislike_btn/Dislike_btn'
 import { AiFillEye, AiFillHeart } from 'react-icons/ai'
 import Channel_component from '../../player_components/channel_component/Channel_component'
 import Description_component from '../../player_components/description_component/Description_component'
@@ -13,6 +11,7 @@ import VideoService from '../../../../service/Video/VideoService'
 import { IoMdSend } from 'react-icons/io'
 import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import ComentarioService from '../../../../service/Engajamento/ComentarioService'
+import LikeDislikeButtons from '../../player_components/feedbackButton/LikeDislikeButtons'
 
 // import Video_player_contructor from '../../video_player_contructor/Video_player_contructor'
 
@@ -90,8 +89,7 @@ function Desktop_player({ video }) {
                             </div>
                         </div>
                         <div className='like__dislike__btns'>
-                            <Like video={video} />
-                            <Dislike video={video} />
+                            <LikeDislikeButtons video={video} />
                         </div>
                     </div>
                     <div>
