@@ -1,39 +1,58 @@
+//react e css
 import './Profile.css'
-
 import React, { useEffect, useState } from 'react'
-
-import HeaderProfile from '../profile/header_profile/HeaderProfile'
-import Side_Bar from '../home/side_bar/Side_Bar'
 import { useParams } from 'react-router-dom';
+
+//components
+import Side_Bar from '../home/side_bar/Side_Bar'
 import Video_card from '../../components/video_card/Video_card'
 import Header from '../../components/header/Header'
-import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajamentoService'; 
 
-import ProfilePicture from '../../assets/image/channel_profile.png'
+//service
+import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajamentoService';
+
+//cookies
+import Cookies from 'js-cookie';
 
 
-const Profile = ({ }) => {
+const Profile = ({  }) => {
 
     const [usuario, setUsuario] = useState({});
     const { idUsuario } = useParams();
-    console.log(idUsuario)
-    console.log(usuario.nomeCanal)
+
+    const userProfile = () => {
+        const userToken = Cookies.get('token');
+        if (userToken) {
+          try {
+            const tokenPayload = userToken.split('.')[1];
+            const decodedPayload = atob(tokenPayload);
+            const userLogin = JSON.parse(decodedPayload);
+            if (userLogin) {
+              return true;
+            } else {
+              return false;
+            }
+          } catch (error) {
+            console.error("Erro ao analisar o token:", error);
+            return false;
+          }
+        } else {
+          return false;
+        }
+      }
+
 
     useEffect(() => {
-        UsuarioEngajamentoService.buscarUm(idUsuario)
-            .then((data) => setUsuario(data))
+        UsuarioEngajamentoService.buscarUm()
+            .then((data) => {
+                setUsuario(data)
+                console.log(data)
+            })
             .catch((error) => console.error('Erro ao buscar usuario:', error));
     }, [idUsuario]);
 
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-    // const [usuarios, setUsuarios] = useState([]);
-
-    // useEffect(() => {
-    //     UserService.listar()
-    //         .then((data) => setUsuarios(data))
-    //         .catch((error) => console.error('Erro ao buscar produtos:', error));
-    // }, []);
 
     useEffect(() => {
         function handleResize() {
@@ -46,16 +65,14 @@ const Profile = ({ }) => {
         };
     }, []);
 
-
-
     const renderMobileView = () => (
         <>
-            <HeaderProfile />
+            <Header />
             <div>
-                <div key={usuario.idUsuario}  >
+                <div>
                     <div className='profile__container_mobile'>
-                        <div className='profile__container__picture' key={usuario.idUsuario}>
-                            <img className="profile__pic" src={ProfilePicture} />
+                        <div className='profile__container__picture'>
+                            <img className="profile__pic" src={"http://10.4.96.50:7000/api/usuario/static/" + usuario.foto} />
                             <h2 className='profile__name'>{usuario.nomeCanal}</h2>
                             <button className='profile__subscribe__button'>Inscrever-se</button>
                             <p className='profile__id'>@{usuario.nomePerfil}</p>
@@ -83,12 +100,12 @@ const Profile = ({ }) => {
     const renderDesktopView = () => (
         <>
             <Side_Bar />
-            <Header />
+            <Header userLogin={userProfile()} />
             <div>  
-                <div key={usuario.idUsuario}  >
+                <div>
                     <div className='profile__container_desktop'>
                         <div className='profile__container__picture__desktop'>
-                            <img className="profile__pic__desktop" src={ProfilePicture} />
+                            <img className="profile__pic__desktop" src={"http://10.4.96.50:7000/api/usuario/static/" + usuario.foto} />
                             <div className='profile__box__desktop'>
                                 <div className='profile__box__name_subscribe__desktop'>
                                     <h2 className='profile__name__desktop'>{usuario.nomeCanal}</h2>
