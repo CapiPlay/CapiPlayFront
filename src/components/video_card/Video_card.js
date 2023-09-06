@@ -36,11 +36,7 @@ function Video_card({ video }) {
                     <h5 className='container__video__title__text'>{video.titulo}</h5>
                     <div>
                         <h5 className='container__video__perfilName'>Nome do Canal</h5>
-<<<<<<< Updated upstream
-                        <h6 className='container__video__views'>10K de visualizações  ---  57K de Likes</h6>
-=======
                         <h6 className='container__video__views'>{video.visualizacoes} visualizações <span className='text__likes'>{video.curtidas} Likes</span></h6>
->>>>>>> Stashed changes
                     </div>
                 </div>
             </div>
