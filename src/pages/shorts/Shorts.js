@@ -19,8 +19,11 @@ import Header from '../../components/header/Header'
 
 const Shorts = () => {
 
-    const dispatch = useDispatch()    
-    
+    const dispatch = useDispatch()
+    const position = useSelector(state => state.shorts.position)
+
+    console.log(position)
+
     const scrollRef = useRef(null)
     const [isAnimate, setIsAnimate] = useState(false)
 
@@ -38,10 +41,20 @@ const Shorts = () => {
 
     const handleNextVideo = () => {
         setTimeout(() => {
-            const newIndex = (currentShortIndex + 1) % shorts.length
+            const scrollStep = window.innerHeight / 2
+            const newPosition = position + 1
+            const newIndex = newPosition >= 0 ? newPosition % shorts.length : 0
+
             setCurrentShortIndex(newIndex)
-            scrollToIndex(newIndex)
-        }, 500)
+            const containerShorts = scrollRef.current
+
+            if (containerShorts) {
+                containerShorts.scrollBy({
+                    top: scrollStep,
+                    behavior: 'smooth',
+                })
+            }
+        }, 200)
     }
 
     const handlePreviousVideo = () => {
@@ -84,10 +97,6 @@ const Shorts = () => {
 
     }, [])
 
-    // useEffect(() => {
-    //     scrollToIndex(currentShortIndex)
-    // }, [currentShortIndex])
-
     const scrollToIndex = (index) => {
         const scrollContainer = scrollRef.current
         if (scrollContainer) {
@@ -106,10 +115,10 @@ const Shorts = () => {
             {
                 headerAppearing && <Header />
             }
-            <div className={`container__shorts ${isAnimate ? "animate" : ""}`} ref={scrollRef} >
+            <div className="container__shorts" ref={scrollRef} >
                 {
                     shorts &&
-                    shorts.map((short, i) => <ShortsComponent key={i} short={short} />)
+                    shorts.map((short, i) => <ShortsComponent key={i} short={short} position={i} />)
                 }
             </div>
             {

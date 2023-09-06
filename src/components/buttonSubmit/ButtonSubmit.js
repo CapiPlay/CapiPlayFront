@@ -14,7 +14,7 @@ const ButtonSubmit = ({ label, onClick }) => {
 
   return (
     <div className={buttonClassName} onClick={handleClick}>
-      <span className="button-label">{buttonText}</span>
+      <span className="button__label">{buttonText}</span>
     </div>
   )
 }

@@ -101,7 +101,7 @@ const ShortsComponent = ({ short }) => {
     }
 
     return (
-        <div className={`container__video slide`} >
+        <div className="container__video slide" >
             <video src={getPathShorts(short?.caminhos[5])} ref={targetRef} loop muted={isMuted} {...(isVideoInView && { autoPlay: true })} />
 
             <div className='container__icons__shorts'>
