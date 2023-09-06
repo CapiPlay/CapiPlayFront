@@ -21,7 +21,9 @@ const userSlice = createSlice({
       Cookies.set("token", token)
       state.isAuthenticated = true
       state.token = token
-      console.log(initialState)
+
+      const userDetails = await UsuarioService.detalhes()
+      Cookies.set("user", JSON.stringify(userDetails))
     },
     logout: (state) => {
       state.isAuthenticated = false
@@ -44,8 +46,6 @@ const doLogin = (credentials) => async (dispatch) => {
     const data = await UsuarioService.login(credentials)
     dispatch(login({ token: data }))
 
-    const userDetails = await UsuarioService.detalhes()
-    Cookies.set("user", userDetails)
 
     return data
   } catch (err) {
@@ -59,7 +59,7 @@ const doSignup = (newUser, photo) => async (dispatch) => {
     const user = res
     dispatch(signup({ user: user}))
   } catch (err) {
-    console.error("erro" + err)
+    throw err
   }
 }
 

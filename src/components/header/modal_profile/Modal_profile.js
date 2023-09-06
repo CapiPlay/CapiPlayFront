@@ -48,8 +48,9 @@ function Modal_profile({ profile }) {
     }
 
     function Logout() {
-        Cookies.remove('token');
         window.location.reload(false);
+        Cookies.remove('token');
+        Cookies.remove('user');
     }
 
     useEffect(() => {
@@ -88,7 +89,7 @@ function Modal_profile({ profile }) {
                     ) : (
                         <div className='modal__profile__container__desktop'>
                             <div className='modal__profile__itens__desktop'>
-                                <Link to="/register" className='text__profile_modal'><p>Acessar Conta</p></Link>
+                                <Link to="/login" className='text__profile_modal'><p>Acessar Conta</p></Link>
                                 <div className='divider__profile__modal'></div>
                                 <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
                                 <div className='divider__profile__modal'></div>

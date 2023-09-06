@@ -9,8 +9,6 @@ import Button from "../../components/button/Button"
 import InputFile from "../../components/inputFile/InputFile"
 
 // Icons
-import { FaFacebookF } from 'react-icons/fa'
-import { FaGoogle } from 'react-icons/fa'
 import ChooseCategory from "./chooseCategory/ChooseCategory"
 
 // Lógica
@@ -72,12 +70,12 @@ const Register = () => {
         user.append("foto1", image)
 
         try {
-            await dispatch(doSignup(user, image))
-            console.log("entrei")
-            // navigate('/login')
-            // nextStep()
+            const res = await dispatch(doSignup(user, image))
+            if (typeof res === {}) {
+                nextStep()
+            }
         } catch (err) {
-            toast.error("Erro ao realizar o cadastro")
+            toast.error(err.response.data.error)
         }
     }
 
@@ -164,10 +162,6 @@ const Register = () => {
                             <div></div>
                             <span>ou</span>
                             <div></div>
-                        </div>
-                        <div className="container__other__register">
-                            <div><FaFacebookF style={{ height: "1.5rem" }} /></div>
-                            <div><FaGoogle style={{ fontSize: "1.5rem" }} /></div>
                         </div>
                         <div className="container__login__register">
                             <span>Já possui uma conta?</span>

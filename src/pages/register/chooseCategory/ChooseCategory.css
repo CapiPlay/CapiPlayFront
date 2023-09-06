@@ -26,16 +26,13 @@
 }
 
 /* Content chooseCategory */
-.container__chooseCategory h1 {
-    font-size: 24px;
-    color: var(--lightpurple);
-}
 
 .container__chooseCategory h2 {
     width: 70%;
-    margin: 2rem 0;
 
-    font-size: 16px;
+    margin-bottom: 2rem;
+
+    font-size: 18px;
     font-weight: 400;
     text-align: center;
     word-break: normal;

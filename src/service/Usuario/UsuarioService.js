@@ -11,10 +11,10 @@ const UserService = {
    */
   criar: async (usuarioDto, foto1) => {
     try {
-      const response = await axios.post("/api/usuario/cadastro", usuarioDto, foto1);
+      const response = await axios.post("/usuario/cadastro", usuarioDto, foto1);
       return response.data;
     } catch (error) {
-      console.error(error);
+      throw error
     }
   },
 
@@ -25,7 +25,7 @@ const UserService = {
    */
   login: async (loginDto) => {
     try {
-      const response = await axios.post("/api/usuario/login", loginDto);
+      const response = await axios.post("/usuario/login", loginDto);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -38,7 +38,7 @@ const UserService = {
    */
   detalhes: async () => {
     try {
-      const response = await axios.get("/api/usuario");
+      const response = await axios.get("/usuario");
       return response.data;
     } catch (error) {
       console.error(error);
@@ -54,7 +54,7 @@ const UserService = {
    */
   editar: async ( editarUsuarioCommand, foto1) => {
     try {
-      const response = await axios.put(`/api/usuario`, editarUsuarioCommand, foto1);
+      const response = await axios.put(`/usuario`, editarUsuarioCommand, foto1);
       return response.data;
     } catch (error) {
       console.error(error);
@@ -66,7 +66,7 @@ const UserService = {
    */
   deletar: async () => {
     try {
-      const response = await axios.delete("api/usuario");
+      const response = await axios.delete("/usuario");
       return response.data;
     } catch (error) {
       console.error(error);
@@ -79,7 +79,7 @@ const UserService = {
    */
   getTokenAnonimo: async () => {
     try {
-      const response = await axios.post("/api/usuario/anonimo");
+      const response = await axios.post("/usuario/anonimo");
       return response.data;
     } catch (error) {
       console.error(error);
