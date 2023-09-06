@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Comments_component.css'
 import { BiSolidDownArrow, BiSolidUpArrow, BiDislike, BiLike, BiSolidLike } from 'react-icons/bi'
 import Comments_answers_component from '../comments_answers_component/Comments_answers_component'
+import UsuarioService from '../../../../service/Usuario/UsuarioService'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Comments_component({ commentVideo }) {
@@ -9,6 +10,8 @@ function Comments_component({ commentVideo }) {
     const [like_btn, setLikeBtn] = useState(true);
     const [commentsAnswer, setCommentsAnswer] = useState(false);
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+    const [date, setDate] = useState();
+    const [formatoHora, setFormatoHora] = useState()
 
     useEffect(() => {
         function handleResize() {
@@ -21,14 +24,13 @@ function Comments_component({ commentVideo }) {
         };
     }, []);
 
-    //são apenas variáveis de exemplo, elas vão vir com o objeto
-    // const comment = commentVideo.texto;
-    const comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget nunc justo. Interdum et malesuada fames ac ante ipsum primis in faucibus. ";
-    const username = 'ChillBean'
+    useEffect(() => {
+        setDateComment()
+    }, [date])
+
     const comment_date = '4'
     const user_image = 'https://yt3.ggpht.com/PFRD_rpPwAIY-FC2t6Ob0GpJe2udeEaXNwug4Dx8v7zxxda6ZKHU1aKBX-XoWvYh2H4Ow6TtBDk=s176-c-k-c0x00ffffff-no-rj-mo'
     const comment_likes = 200
-    const comment_answers = [{}, {}, {}, {}, {}, {}]
 
     const toggleShowMore = () => {
         setShowMore(!showMore);
@@ -67,6 +69,45 @@ function Comments_component({ commentVideo }) {
         }
     }
 
+    const setDateComment = () => {
+        const dataHoraJSON = commentVideo.dataHora;
+        const dataHoraObj = new Date(dataHoraJSON);
+        const dataHoraAtual = new Date();
+        const diferencaEmMilissegundos = dataHoraAtual - dataHoraObj;
+        const diferencaEmSegundos = Math.floor(diferencaEmMilissegundos / 1000)
+        const diferencaEmMinutos = Math.floor(diferencaEmMilissegundos / (1000 * 60));
+        const diferencaEmHoras = Math.floor(diferencaEmMinutos / 60)
+        const diferencaEmDias = Math.floor(diferencaEmMilissegundos / (1000 * 60 * 60 * 24));
+        if(diferencaEmDias > 0){
+            if(diferencaEmDias == 1){
+                setFormatoHora("dia")
+            }else{
+                setFormatoHora("dias")
+            }
+        }else if(diferencaEmHoras > 0) {
+            if(diferencaEmHoras == 1){
+                setFormatoHora("hora")
+            }else{
+                setFormatoHora("horas")
+            }
+            setDate(diferencaEmHoras)
+        } else if(diferencaEmMinutos > 0){
+            if(diferencaEmMinutos == 1){
+                setFormatoHora("minuto")
+            }else{
+                setFormatoHora("minutos")
+            }
+            setDate(diferencaEmMinutos)
+        } else{
+            if(diferencaEmSegundos == 1){
+                setFormatoHora("segundo")
+            }else{
+                setFormatoHora("segundos")
+            }
+            setDate(diferencaEmSegundos)
+        }
+    }
+
     return (
         <>
             <div className='comment'>
@@ -74,10 +115,10 @@ function Comments_component({ commentVideo }) {
                     <img src={user_image} className='user__icon' />
                 </div>
                 <div className='comment__content'>
-                    <div className='comment__user__username'>
-                        @{username}<span className='ball'></span> há {comment_date} dias
+                    <div className='comment__user__username' >
+                        @{commentVideo.idUsuario.nomeCanal}<span className='ball'></span><p key={date}> há {date} {formatoHora}</p>
                     </div>
-                    <p>{showMore ? comment : `${comment.slice(0, 50)}...`}
+                    <p className='comment__text'>{showMore ? commentVideo.texto : `${commentVideo.texto.slice(0, 50)}...`}
                         {!showMore && <div>
                             <button onClick={() => toggleShowMore()} className='description__moreORless'> <p className='selection'>Mostrar mais <p className='selection__icon'><BiSolidDownArrow /></p></p></button>
                         </div>}
@@ -99,11 +140,15 @@ function Comments_component({ commentVideo }) {
                         </div>
                         {verifyDesktop() ?
                             <div className='comment__total__answers' onClick={() => toggleCommentsAnswers()}>
-                                <div>({comment_answers.length}) Respostas </div>
+                                {commentVideo.qtdRespostas == 0 ?
+                                    <div></div>
+                                    :
+                                    <div>({commentVideo.qtdRespostas}) Respostas </div>
+                                }
                             </div>
                             :
                             <div className='comment__total__answers'>
-                                <div>({comment_answers.length}) Respostas </div>
+                                <div>({commentVideo.qtdRespostas}) Respostas </div>
                             </div>
                         }
                     </div>

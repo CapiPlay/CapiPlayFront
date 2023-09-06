@@ -27,8 +27,6 @@ function Desktop_player({ video }) {
         getVideos()
     }, [])
 
-    console.log(video)
-
     const toggleComment = () => {
         setComments(!comment)
     }
@@ -51,7 +49,7 @@ function Desktop_player({ video }) {
     }
 
     const buscarComments = async () => {
-        var commentsTemp = await ComentarioService.buscarTodosPorVideo({idVideo: video.uuid}, 0)
+        var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, 0)
         if(commentsTemp == null || commentsTemp == undefined){
             setAllComments(null)
         }else{
