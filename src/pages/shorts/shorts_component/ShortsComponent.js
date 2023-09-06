@@ -15,6 +15,8 @@ const ShortsComponent = ({ short }) => {
     const targetRef = useRef(null)
     const dispatch = useDispatch()
 
+    console.log(short)
+
     const { id } = useParams()
 
     const [openModalComments, setOpenModalComments] = useState(false)
@@ -107,7 +109,7 @@ const ShortsComponent = ({ short }) => {
             <div className='container__icons__shorts'>
                 <div onClick={funcLikeShorts}>
                     {likeShort ? <BiSolidLike /> : <BiLike />}
-                    <span>32K</span>
+                    <span>{short?.likes}</span>
                 </div>
                 <div>
                     {dislikeShort ? <BiSolidDislike onClick={funcDislikeShorts} /> : <BiDislike onClick={funcDislikeShorts} />}
