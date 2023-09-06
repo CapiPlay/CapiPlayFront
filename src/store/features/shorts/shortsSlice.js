@@ -30,7 +30,6 @@ export default shortsSlice.reducer
 const setListShorts = (list) => async (dispatch) => {
   try {
     if (list) {
-      console.log(list)
       dispatch(modifyListShorts({ list: list }))
     }
   } catch (err) {

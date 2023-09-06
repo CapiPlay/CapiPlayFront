@@ -8,6 +8,7 @@ import imagePerfil from '../../../assets/imagemPerfil.png'
 import ButtonSubmit from '../../../components/buttonSubmit/ButtonSubmit'
 import CommentsComponent from '../../../components/commentsComponent/CommentsComponent'
 import '../Shorts.css'
+import ReacaoService from '../../../service/Engajamento/ReacaoService'
 
 const ShortsComponent = ({ short }) => {
 
@@ -85,14 +86,16 @@ const ShortsComponent = ({ short }) => {
         setOpenModalComments(!openModalComments)
     }
 
-    const funcLikeShorts = () => {
+    const funcLikeShorts = async() => {
         setLikeShort(!likeShort)
         setDislikeShort(false)
+        await ReacaoService.criar()
     }
 
-    const funcDislikeShorts = () => {
+    const funcDislikeShorts = async () => {
         setDislikeShort(!dislikeShort)
         setLikeShort(false)
+        await ReacaoService.criar()
     }
 
     const getPathShorts = (currentPath) => {
@@ -107,7 +110,7 @@ const ShortsComponent = ({ short }) => {
             <div className='container__icons__shorts'>
                 <div onClick={funcLikeShorts}>
                     {likeShort ? <BiSolidLike /> : <BiLike />}
-                    <span>32K</span>
+                    <span>{short?.curtidas}</span>
                 </div>
                 <div>
                     {dislikeShort ? <BiSolidDislike onClick={funcDislikeShorts} /> : <BiDislike onClick={funcDislikeShorts} />}
