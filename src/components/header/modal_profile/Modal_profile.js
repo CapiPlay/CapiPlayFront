@@ -70,7 +70,7 @@ function Modal_profile({ profile }) {
 
     function verifyProfileImage() {
         if (profile === true) {
-            return channel
+            return "http://10.4.96.50:7000/api/usuario/static/" + usuario.foto;
         } else {
             return notFound
         }
@@ -106,7 +106,7 @@ function Modal_profile({ profile }) {
     const renderDesktopView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img src={"http://10.4.96.50:7000/api/usuario/static/" + usuario.foto} className='container__perfilImage' />
+                <img src={verifyProfileImage()} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
@@ -150,6 +150,7 @@ function Modal_profile({ profile }) {
     );
 
     const renderTabletView = () => (
+       
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
                 <img src={verifyProfileImage()} className='container__perfilImage' />
