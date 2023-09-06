@@ -102,10 +102,17 @@ function Home(darkMode) {
 
   const getVideosRev = async () => {
     const videos = await VideoService.buscarTodos(6, 0, false);
+<<<<<<< Updated upstream
     if (videos.length > 6) {
       videos.sort((a, b) => b.pontuacao - a.pontuacao);
       const top6Videos = videos.slice(0, 6);
       setVideosRev(top6Videos.content);
+=======
+    const vidiozinho = videos.content;
+    console.log(vidiozinho);
+    if (vidiozinho.length >= 6) {
+      setVideosRev(vidiozinho);
+>>>>>>> Stashed changes
     } else {
       setVideosRev([]);
     }
@@ -143,9 +150,6 @@ function Home(darkMode) {
           <div className='container__slider__base__desk'>
             <Slider_Category />
           </div>
-          <div className='container__slider__base__desk'>
-            <Slider />
-          </div>
           <div className='container__video__cards__desk'>
             {videosRev.map((video) => (
               <Video_card key={video.uuid} video={video} />
@@ -171,9 +175,6 @@ function Home(darkMode) {
       <div className='container__home'>
         <div className='container__slider__base__tablet'>
           <Slider_Category />
-        </div>
-        <div className='container__slider__base__tablet'>
-          <Slider />
         </div>
         <div className='container__video__cards__tablet'>
           {videosRev.map((video) => (

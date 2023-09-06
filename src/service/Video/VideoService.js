@@ -78,10 +78,10 @@ const VideoService = {
   },
 
 
-  buscarPorCategoria: async (categoria, size, page) => {
+  buscarPorCategoria: async (categoria, page, size, shorts) => {
     try {
       const response = await axios.get(
-        `/api/video/buscar-por-categoria?categoria=${categoria}&size=${size}&page=${page}`
+        `/api/video/buscar-por-categoria?categoria=${categoria}&size=${size}&page=${page}&shorts=${shorts}`
       );
       return response;
     } catch (err) {

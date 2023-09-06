@@ -24,11 +24,10 @@ function Slider_Shorts() {
         const pageable = await VideoService.buscarTodos(12, 0, true);
         const videos = pageable.content;
         if (videos.length >= 6) {
-            setVideosRec(videos);
+            setVideosRec([...videos]);
         } else {
             setVideosRec([]);
         }
-        setVideosRec([]);
     };
 
     const settingsDesk = {

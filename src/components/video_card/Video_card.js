@@ -11,6 +11,16 @@ function Video_card({ video }) {
         return <div>No Video Data</div>;
     }
 
+
+
+    if (video.curtidas > 999999999) {
+        video.curtidas = (video.curtidas / 1000000000).toFixed(1) + 'B';
+    } else if (video.curtidas > 999999) {
+        video.curtidas = (video.curtidas / 1000000).toFixed(1) + 'M';
+    } else if (video.curtidas > 999) {
+        video.curtidas = (video.curtidas / 1000).toFixed(1) + 'K';
+    }
+
     return (
 
         <div className='box__video__card'>
@@ -26,7 +36,11 @@ function Video_card({ video }) {
                     <h5 className='container__video__title__text'>{video.titulo}</h5>
                     <div>
                         <h5 className='container__video__perfilName'>Nome do Canal</h5>
+<<<<<<< Updated upstream
                         <h6 className='container__video__views'>10K de visualizações  ---  57K de Likes</h6>
+=======
+                        <h6 className='container__video__views'>{video.visualizacoes} visualizações <span className='text__likes'>{video.curtidas} Likes</span></h6>
+>>>>>>> Stashed changes
                     </div>
                 </div>
             </div>
