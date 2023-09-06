@@ -59,7 +59,7 @@ const HistoricoService = {
   buscarTodosPorUsuario: async () => {
     try {
       const response = await axios.get(
-        "/engajamento/historico/buscar-todos-históricos-por-usuario"
+          "/engajamento/historico/buscar-todos-historicos-por-usuario"
       );
       return response.data;
     } catch (err) {
