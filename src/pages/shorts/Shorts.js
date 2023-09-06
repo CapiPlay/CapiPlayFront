@@ -22,8 +22,6 @@ const Shorts = () => {
     const dispatch = useDispatch()
     const position = useSelector(state => state.shorts.position)
 
-    console.log(position)
-
     const scrollRef = useRef(null)
     const [isAnimate, setIsAnimate] = useState(false)
 
@@ -59,9 +57,15 @@ const Shorts = () => {
 
     const handlePreviousVideo = () => {
         setTimeout(() => {
-            const newIndex = (currentShortIndex - 1) % shorts.length
-            setCurrentShortIndex(newIndex)
-            scrollToIndex(newIndex)
+            const scrollStep = -window.innerHeight / 2; // Scroll para cima (negativo)
+            const containerShorts = scrollRef.current;
+
+            if (containerShorts) {
+                containerShorts.scrollBy({
+                    top: scrollStep,
+                    behavior: 'smooth',
+                });
+            }
         }, 500)
     }
 
@@ -83,11 +87,11 @@ const Shorts = () => {
             const newShorts = []
 
             const firstShort = await VideoService.buscarCompleto(id)
-            newShorts.push(firstShort?.data)
+            newShorts.push(firstShort)
 
             for (let i = 0; i < 3; i++) {
                 const short = await VideoService.buscarShorts()
-                newShorts.push(short.data)
+                newShorts.push(short)
             }
 
             dispatch(setListShorts(newShorts))
