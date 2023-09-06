@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setListShorts, setActualShorts } from '../../../store/features/shorts/shortsSlice'
 import { useNavigate, useParams } from 'react-router-dom'
 import VideoService from '../../../service/Video/VideoService'
@@ -15,7 +15,7 @@ const ShortsComponent = ({ short }) => {
     const targetRef = useRef(null)
     const dispatch = useDispatch()
 
-    const shorts = useSelector((state) => state.shorts.listShorts)
+    console.log(short)
 
     const { id } = useParams()
 
@@ -29,31 +29,13 @@ const ShortsComponent = ({ short }) => {
         const options = {
             root: null,
             rootMargin: "0px",
-            threshold: 1
-        }
-
-        const getUUID = async () => {
-            const short = await VideoService.buscarCompleto(id)
-
-            console.log(short)
-
-            dispatch(setActualShorts(short))
+            threshold: 0.95
         }
 
         const callback = (entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-
-                    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-
-                    const shortUuid = short.uuid
-                    console.log(shortUuid)
-                    if (shortUuid !== id) {
-                        getUUID()
-                        dispatch(setListShorts(short.uuid, null, shorts))
-                        navigate(`/shorts/${shortUuid}`)
-                    }
-
+                    updateListShorts()
                     setIsVideoInView(true)
                     setTimeout(() => {
                         entry.target.play()
@@ -75,7 +57,27 @@ const ShortsComponent = ({ short }) => {
                 observer.unobserve(targetRef.current)
             }
         }
-    }, [])
+    }, [id, dispatch])
+
+    const getUUID = async () => {
+        const short = await VideoService.buscarCompleto(id)
+        dispatch(setActualShorts(short.data))
+    }
+
+    const updateListShorts = async() => {
+        const shortUuid = short.uuid
+        if (shortUuid !== id) {
+            try {
+                await getUUID()
+                const newShort = await VideoService.buscarShorts()
+                const newShortsList = [newShort.data]
+                dispatch(setListShorts(newShortsList))
+                navigate(`/shorts/${shortUuid}`)
+            } catch (err) {
+                console.error(err)
+            }
+        }
+    }
 
     const toggleMute = () => {
         setIsMuted(!isMuted)
@@ -101,13 +103,13 @@ const ShortsComponent = ({ short }) => {
     }
 
     return (
-        <div className={`container__video slide`} >
+        <div className="container__video slide" >
             <video src={getPathShorts(short?.caminhos[5])} ref={targetRef} loop muted={isMuted} {...(isVideoInView && { autoPlay: true })} />
 
             <div className='container__icons__shorts'>
                 <div onClick={funcLikeShorts}>
                     {likeShort ? <BiSolidLike /> : <BiLike />}
-                    <span>32K</span>
+                    <span>{short?.likes}</span>
                 </div>
                 <div>
                     {dislikeShort ? <BiSolidDislike onClick={funcDislikeShorts} /> : <BiDislike onClick={funcDislikeShorts} />}
