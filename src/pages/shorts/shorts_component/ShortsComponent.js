@@ -16,6 +16,8 @@ const ShortsComponent = ({ short }) => {
     const targetRef = useRef(null)
     const dispatch = useDispatch()
 
+    console.log(short)
+
     const { id } = useParams()
 
     const [openModalComments, setOpenModalComments] = useState(false)

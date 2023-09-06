@@ -5,12 +5,14 @@ import "./ChooseCategory.css"
 // Components
 import Button from "../../../components/button/Button";
 import categorys from './CategoryData.js';
+import { useNavigate } from "react-router-dom";
 
-const ChooseCategory = ({ back }) => {
+const ChooseCategory = ({ }) => {
 
     const [windowHeight, setWindowHeight] = useState(document.documentElement.scrollHeight)
     let defaultDesktopHeight = 0
     const [listChooseCategory, setListChooseCategory] = useState([])
+    const navigate = useNavigate();
     // const [chooseCategory, setChooseCategory] = useState([])
 
     useEffect(() => {
@@ -77,13 +79,14 @@ const ChooseCategory = ({ back }) => {
                 <div className="container__buttons__chooseCategory">
                     <div>
                         <Button
-                            onClick={() => back()}
+                            onClick={() => navigate("/login")}
                             label={"Pular"}
                             principal={false}
                         />
                     </div>
                     <div>
                         <Button
+                            onClick={() => navigate("/login")}
                             label={"Confirmar"}
                             principal={true}
                         />

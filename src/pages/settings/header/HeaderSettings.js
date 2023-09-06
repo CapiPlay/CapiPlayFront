@@ -7,7 +7,7 @@ const VideoDetails = () => {
         <>
             <div className='container__header__Settings'>
                 <div className='box__header__Settings'>
-                    <Link to={"/profile"}>
+                    <Link to={"/"}>
                         <AiOutlineArrowLeft className='arrow__icon' color='var(--lightpurple)' fontSize={25} />
                     </Link>
                 </div>

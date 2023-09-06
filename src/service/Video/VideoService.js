@@ -8,17 +8,13 @@ const VideoService = {
    * @param {*} video ( String titulo,String descricao,List<String> tags,String categoria,
    * Boolean shorts, MultipartFile video,MultipartFile miniatura,Boolean restrito,String usuarioId))
    * @returns void
-   */
-  criar: async (video) => {
-    try {
-      const response = await axios.post(
-        "/video/criar",
-        video
-      );
-      return response.data;
-    } catch (err) {
-      console.error(err);
-    }
+   */ 
+  criar: async (formData, usuarioId) => {
+    return await axios.post('/api/video/criar', formData, {
+      headers: {
+        'usuarioId': usuarioId,
+      },
+    });
   },
 
   /**

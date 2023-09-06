@@ -70,10 +70,9 @@ const Register = () => {
         user.append("foto1", image)
 
         try {
-            const res = await dispatch(doSignup(user, image))
-            if (typeof res === {}) {
-                nextStep()
-            }
+            await dispatch(doSignup(user, image))
+            nextStep()
+            
         } catch (err) {
             toast.error(err.response.data.error)
         }
@@ -190,7 +189,7 @@ const Register = () => {
 
             {
                 bPChooseCategory &&
-                <ChooseCategory back={nextStep} />
+                <ChooseCategory />
             }
 
         </>
