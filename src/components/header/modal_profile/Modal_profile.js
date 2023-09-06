@@ -23,34 +23,7 @@ function Modal_profile({ profile }) {
     const [usuario , setUsuario] = useState({})
     const [openModal, setOpenModal] = useState(0)
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-
-
-    const userProfile = () => {
-        const userToken = Cookies.get('token');
-        if (userToken) {
-          try {
-            const tokenPayload = userToken.split('.')[1];
-            const decodedPayload = atob(tokenPayload);
-            const userLogin = JSON.parse(decodedPayload);
-            if (userLogin) {
-              return true;
-            } else {
-              return false;
-            }
-          } catch (error) {
-            console.error("Erro ao analisar o token:", error);
-            return false;
-          }
-        } else {
-          return false;
-        }
-      }
-
-
-
-    Aos.init({
-        duration: 200
-    });
+    const [image, setImage] = useState(notFound)
 
     function verify() {
         if (openModal !== 0) {
@@ -103,10 +76,16 @@ function Modal_profile({ profile }) {
             .catch((error) => console.error('Erro ao buscar usuario:', error));
     }, []);
 
+    useEffect(() => {
+        if (usuario.foto) {
+            setImage("http://10.4.96.50:7000/api/usuario/static/" + usuario.foto)
+        }
+    }, [usuario])
+
     const renderDesktopView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img src={"http://10.4.96.50:7000/api/usuario/static/" + usuario.foto} className='container__perfilImage' />
+                <img src={image} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
@@ -152,7 +131,7 @@ function Modal_profile({ profile }) {
     const renderTabletView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img src={verifyProfileImage()} className='container__perfilImage' />
+                <img src={image} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
@@ -196,7 +175,7 @@ function Modal_profile({ profile }) {
     const renderMobileView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img src={verifyProfileImage()} className='container__perfilImage' />
+                <img src={image} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
