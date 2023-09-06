@@ -3,11 +3,8 @@ import './UploadVideo.css'
 
 // react
 import { HiUpload } from 'react-icons/hi'
-import { useLocation } from 'react-router-dom'
 import React, { useState, useRef } from 'react'
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-
 
 // componentes
 import Input from '../../components/input/Input'
@@ -16,20 +13,20 @@ import Button from '../../components/button/Button'
 import InputFile from '../../components/inputFile/InputFile'
 import HeaderUpload from '../upload/headerUpload/HeaderUpload'
 import InputTextArea from '../../components/inputTextArea/InputTextArea'
-import InputFileUpload from '../../components/inputFileUpload/InputFileUpload'
 import { getImageData } from '../../pages/upload/imageDataStore';
 
 // service
 import VideoService from '../../service/Video/VideoService'
 
 function UploadVideo() {
+
   const navigate = useNavigate();
-  const location = useLocation();
-  const { miniatura } = location.state || {};
   const [videoSrc, setVideoSrc] = useState(null)
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
   const image = getImageData();
+  const imagePreviewRef = useRef(null);
+  const [imagem, setImagem] = useState(null);
 
   const [video, setVideo] = useState({
     titulo: "",
@@ -38,10 +35,8 @@ function UploadVideo() {
     categoria: "",
     shorts: false,
     video: "",
-
     restrito: ""
   })
-
 
   const categorias = [
     { label: "Artes e Cultura", value: "ARTESECULTURA" },
@@ -58,63 +53,49 @@ function UploadVideo() {
     { label: "Viagem e Turismo", value: "VIAGEMETURISMO" }
   ];
 
-  const imageHandler = (event) => {
+  const handleVideoChange = (event) => {
     const selectedVideo = event.target.files[0];
-    console.log("aaa")
     setVideo({ ...video, video: selectedVideo });
-}
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      if (imagePreviewRef.current) {
+        imagePreviewRef.current.src = event.target.result;
+        imagePreviewRef.current.style.display = 'block';
+      }
+    }
+    reader.readAsDataURL(selectedVideo);
+    const videoURL = URL.createObjectURL(selectedVideo);
+    setVideoSrc(videoURL);
+
+    setVideoSrc(URL.createObjectURL(selectedVideo));
+  }
+
   const handleInputChange = (event) => {
     const { name, value, files } = event.target;
-      setVideo({ ...video, [name]: value });
-    
+    setVideo({ ...video, [name]: value });
   };
-
 
   const handleTagChange = (e) => {
     setTag(e.target.value);
   };
-  const [imagem, setImagem] = useState(null);
-  const imagePreviewRef = useRef(null);
-
-  // ...
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        if (imagePreviewRef.current) {
-          imagePreviewRef.current.src = event.target.result;
-          imagePreviewRef.current.style.display = 'block';
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  }
 
   const renderizarNovaTag = () => {
     if (tag !== "") {
       setTags([...tags, tag])
       const updatedTags = [...video.tags, tag]
       setVideo({ ...video, tags: updatedTags })
-      console.log(updatedTags)
-      // setTag("")
     }
   }
-
 
   const deletarTag = (index) => {
     const updatedTags = [...tags];
     updatedTags.splice(index, 1);
     setTags(updatedTags);
-
-
     setVideo((prevVideo) => ({
       ...prevVideo,
       tags: updatedTags,
     }))
   }
-
 
   const enviarVideo = async (event) => {
     event.preventDefault();
@@ -132,17 +113,14 @@ function UploadVideo() {
       for (let pair of videoFormData.entries()) {
         console.log(pair[0] + ": " + pair[1]);
       }
-      console.log(videoFormData)
       const response = await VideoService.criar(videoFormData);
-      alert("video cadastrado")
+      alert("Vídeo cadastrado")
       navigate('/')
     } catch (error) {
+      alert("Ocorreu um erro ao cadastrar o vídeo")
       console.error('Error:', error);
     }
-
-
   };
-
 
   return (
     <>
@@ -186,7 +164,7 @@ function UploadVideo() {
                       radius={"10px"}
                       file={imagem}
                       name="video"
-                      onChange={imageHandler}
+                      onChange={handleVideoChange}
                       value={video.video}
                       accept={".MP4"}
                     />
@@ -257,6 +235,5 @@ function UploadVideo() {
     </>
   )
 }
-
 
 export default UploadVideo

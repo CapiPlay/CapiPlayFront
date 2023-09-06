@@ -143,8 +143,6 @@ function Upload() {
                                     ref={imagePreviewRef}
                                     src="#"
                                     alt="Preview da Imagem" />
-
-
                                 <div className='upload__box__all__buttons__shorts'>
                                     <InputFile
                                         label={"Selecionar arquivo"}
