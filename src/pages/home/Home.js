@@ -121,7 +121,7 @@ function Home(darkMode) {
     <>
       <div className={`home-component ${darkMode ? 'dark-mode' : 'light-mode'}`}>
         <Header userLogin={userProfile()} />
-        <Side_Bar />
+        {/* <Side_Bar /> */}
         <div className='container__header__home'></div>
         <div className='container__home'>
           <div className='container__slider__base__desk'>
