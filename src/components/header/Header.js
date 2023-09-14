@@ -119,14 +119,14 @@ const Header = ({ userLogin, searchValue }) => {
                 }
             </div>
             <div className='header__info'>
-                <div>
+                <div className='info__from__header'>
                     {/* {
                         verifyToken() &&
                         <Link to="/upload" className='upload__icon__header'><TbUpload /></Link>
                     } */}
                     <TbUpload />
                 </div>
-                <div>
+                <div className='info__from__header'>
                     <img src={channel} onClick={handleOpenModalProfile} />
                 </div>
                 {

@@ -63,30 +63,25 @@ const Modal_profile = ({ profile }) => {
     }, [usuario])
 
     return (
-        <div className="background__modal__profile">
-            <div className='modal__profile__container'>
-                <div className='modal__profile__itens'>
-                    {
-                        verifyProfile() ? (
-                            <Link to="/profile"><p>Seu canal</p></Link>
-                        ) : (
-                            <Link to="/login" className='text__profile_modal'><p>Acessar Conta</p></Link>
-                        )
-                    }
-                    <div className='divider__profile__modal'></div>
-                    <div className='text__profile_modal'>
-                        <p>Tema</p>
-                        <ThemeToggle />
-                    </div>
-                    <div className='divider__profile__modal'></div>
-                    <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
-                    <div className='divider__profile__modal'></div>
-                    <Link to="/settings" className='text__profile_modal'><p>Settings</p></Link>
-                    <div className='divider__profile__modal'></div>
-                    <p onClick={Logout} className='text__profile_modal'>Sair</p>
-                </div>
+        <div className='modal__profile__container'>
+            {
+                verifyProfile() ? (
+                    <Link to="/profile"><p>Seu canal</p></Link>
+                ) : (
+                    <Link to="/login"><p>Acessar Conta</p></Link>
+                )
+            }
+            <div className='divider__profile__modal' />
+            <div id='change__theme'>
+                <p>Tema</p>
+                <ThemeToggle />
             </div>
-
+            <div className='divider__profile__modal'></div>
+            <Link to="/historic" ><p>Histórico</p></Link>
+            <div className='divider__profile__modal'></div>
+            <Link to="/settings" ><p>Settings</p></Link>
+            <div className='divider__profile__modal'></div>
+            <p onClick={Logout}>Sair</p>
         </div>
     )
 }
