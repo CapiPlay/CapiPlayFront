@@ -115,7 +115,7 @@ function UploadVideo() {
         console.log(pair[0] + ": " + pair[1]);
       }
       const response = await VideoService.criar(videoFormData);
-      alert("Vídeo cadastrado")
+      alert("Vídeo cadastrado!")
       navigate('/')
     } catch (error) {
       alert("Ocorreu um erro ao cadastrar o vídeo")
