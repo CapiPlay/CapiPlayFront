@@ -73,7 +73,7 @@ const VideoService = {
       const response = await axios.get(
         `/api/video/buscar-por-categoria?categoria=${categoria}&size=${size}&page=${page}&shorts=${shorts}`
       );
-      return response.data;
+      return response;
     } catch (err) {
       console.error(err);
     }

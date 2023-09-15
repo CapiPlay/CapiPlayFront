@@ -35,10 +35,6 @@ function Category() {
         };
     }, []);
 
-    const verifyCategory = () => {
-
-    }
-
     const getMoreVideos = async (page) => {
         const moreVideos = await VideoService.buscarPorCategoria(category, page, 50, false);
         if (moreVideos) {
