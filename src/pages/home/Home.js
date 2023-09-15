@@ -9,6 +9,8 @@ import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
 import VideoService from '../../service/Video/VideoService';
 import Aos from 'aos'
 import Cookies from 'js-cookie';
+// redux
+import { initialState } from "../../store/features/header/headerSlice"
 
 function Home(darkMode) {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -17,6 +19,7 @@ function Home(darkMode) {
   const [videosRev, setVideosRev] = useState([])
   const [currentPage, setCurrentPage] = useState(0);
   const [loadingMoreVideos, setLoadingMoreVideos] = useState(false);
+
 
   Aos.init({
     duration: 200
@@ -57,8 +60,8 @@ function Home(darkMode) {
   }, [currentPage, loadingMoreVideos]);
 
   const getMoreVideos = async (page) => {
-    const moreVideos = await VideoService.buscarTodos(50, 0, false);  
-    const videos = moreVideos.content  
+    const moreVideos = await VideoService.buscarTodos(50, 0, false);
+    const videos = moreVideos.content
     if (videosReu?.length == 0) {
       setVideosReu((prevVideos) => [...prevVideos, ...videos]);
       setCurrentPage(page);
@@ -122,6 +125,10 @@ function Home(darkMode) {
       <div className={`home-component ${darkMode ? 'dark-mode' : 'light-mode'}`}>
         <Header userLogin={userProfile()} />
         <Side_Bar />
+        {
+          initialState.isClicked &&
+          <alert>Deu certo!</alert>
+        }
         <div className='container__header__home'></div>
         <div className='container__home'>
           <div className='container__slider__base__desk'>

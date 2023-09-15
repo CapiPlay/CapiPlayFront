@@ -14,19 +14,30 @@ import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 // imagens
-import channel from '../../assets/image/channel_profile.png'
+import notFound from '../../assets/image/404_NotFound.png'
 
-const Header = ({ userLogin, searchValue }) => {
+// redux
+import { useDispatch } from 'react-redux'
+import { doIsClicked } from "../../store/features/header/headerSlice"
 
+// service
+import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajamentoService'
+
+const Header = ({ searchValue }) => {
+
+    const nav = useNavigate()
     const location = useLocation()
+
     const [search, setSearch] = useState(false)
     const [searchDesktop, setSearchDesktop] = useState(false)
     const [verifyClicked, setVerifyClicked] = useState(false)
-    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 })
-    const nav = useNavigate()
     const [valueInput, setValueInput] = useState(searchValue)
-
     const [openModalProfile, setOpenModalProfile] = useState(false)
+
+    const [image, setImage] = useState(notFound)
+    const [usuario, setUsuario] = useState({})
+
+    const dispatch = useDispatch()
 
     const handleClick = () => {
         setSearch(!search)
@@ -61,46 +72,48 @@ const Header = ({ userLogin, searchValue }) => {
         }
     }, [])
 
-    const verifyToken = () => {
-        return userLogin === true
-    }
-
     const handleSelection = (searchSelected) => {
         setValueInput(searchSelected)
         setVerifyClicked(true)
         nav(`/result-search?search=${searchSelected}`)
     }
 
-    useEffect(() => {
-        function handleResize() {
-            setScreenSize({ width: window.innerWidth, height: window.innerHeight })
-        }
+    // const handleClick = (e) => {
+    //     const element = e.target.offsetParent
+    //     if (element == null || !element.classList.contains("header__input__container")) {
+    //         setSearchDesktop(false)
+    //     }
+    // }
 
-        function handleClick(e) {
-            const element = e.target.offsetParent
-            if (element == null || !element.classList.contains("header__input__container")) {
-                setSearchDesktop(false)
-            }
-        }
 
-        window.addEventListener('resize', handleResize)
-        document.addEventListener("click", handleClick)
-
-        handleResize()
-        return () => {
-            document.removeEventListener("click", handleClick)
-            window.removeEventListener('resize', handleResize)
-        }
-    }, [])
 
     const handleOpenModalProfile = () => {
         setOpenModalProfile(!openModalProfile)
     }
 
+    const handleOpenSideBar = async () => {
+        dispatch(doIsClicked())
+    }
+
+    useEffect(() => {
+        UsuarioEngajamentoService.buscarUm()
+            .then((data) => {
+                if (data && data.foto) {
+                    setImage("http://10.4.96.50:7000/api/usuario/static/" + data.foto)
+                } else {
+                    setImage(notFound)
+                }
+                setUsuario(data)
+            })
+            .catch((error) => {
+                console.error('Erro ao buscar usuario: ', error)
+            })
+    }, [])
+
     return (
         <div className='header__container'>
             <div className='header__menu__icon'>
-                <IoMenu />
+                <IoMenu onClick={handleOpenSideBar} />
             </div>
             <div className='header__input__container'>
                 <div>
@@ -127,11 +140,11 @@ const Header = ({ userLogin, searchValue }) => {
                     <TbUpload />
                 </div>
                 <div className='info__from__header'>
-                    <img src={channel} onClick={handleOpenModalProfile} />
+                    <img src={image} onClick={handleOpenModalProfile} />
                 </div>
                 {
                     openModalProfile &&
-                    <Modal_profile profile={userLogin} />
+                    <Modal_profile />
                 }
             </div>
         </div>

@@ -1,4 +1,4 @@
-import axios from "../AxiosConfig";
+import axios from "../AxiosConfig"
 
 const UsuarioEngajamentoService = {
   
@@ -9,15 +9,13 @@ const UsuarioEngajamentoService = {
   buscarUm: async () => {
 
     try {
-      const response = await axios.get("/engajamento/usuario");
-      console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+      const response = await axios.get("/engajamento/usuario")
       console.log(response.data)
-      return response.data;
+      return response.data
     } catch (err) {
-      console.log("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC")
-      console.error(err);
+      console.error(err)
     }
   },
-};
+}
 
-export default UsuarioEngajamentoService;
+export default UsuarioEngajamentoService

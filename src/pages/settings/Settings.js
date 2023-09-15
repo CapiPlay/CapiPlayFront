@@ -2,9 +2,6 @@ import React, { useEffect, useState, useParams } from 'react'
 import axios from 'axios';
 import './Settings.css'
 
-//imagem
-import ProfileImage from '../../assets/image/img_base_miniatura.png'
-
 //componentes
 import HeaderSettings from './header/HeaderSettings'
 import Input from "../../components/input/Input";
@@ -109,7 +106,7 @@ const Settings = ({ userId }) => {
             <div className='settings__container'>
                 <HeaderSettings />
                 <div className="settings__form">
-                    <img src={ProfileImage} className='profile__settings' />
+                    {/* <img src={ProfileImage} className='profile__settings' /> */}
                     <div className='settings__box__image__options'>
                         <button className='settings__image__options__buttons'>Alterar</button>
                         <button className='settings__image__options__buttons' onClick={openImageModal}>Remover</button>
@@ -238,7 +235,7 @@ const Settings = ({ userId }) => {
             <div className='settings__container__desktop'>
                 <HeaderSettings />
                 <div className="settings__form__desktop">
-                    <img src={ProfileImage} className='profile__settings__desktop' />
+                    {/* <img src={ProfileImage} className='profile__settings__desktop' /> */}
                     <div className='settings__box__image__options__desktop'>
                         <button className='settings__image__options__buttons__desktop'>Alterar</button>
                         <button className='settings__image__options__buttons__desktop' onClick={openImageModal}>Remover</button>
@@ -378,7 +375,7 @@ const Settings = ({ userId }) => {
             <div className='settings__container__tablet'>
                 <HeaderSettings />
                 <div className="settings__form__tablet">
-                    <img src={ProfileImage} className='profile__settings__tablet' />
+                    {/* <img src={ProfileImage} className='profile__settings__tablet' /> */}
                     <div className='settings__box__image__options__tablet'>
                         <button className='settings__image__options__buttons__tablet'>Alterar</button>
                         <button className='settings__image__options__buttons__tablet' onClick={openImageModal}>Remover</button>
