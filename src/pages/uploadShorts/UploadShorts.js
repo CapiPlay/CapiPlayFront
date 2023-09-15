@@ -10,6 +10,7 @@ import React, { useState, useRef } from 'react'
 import Input from '../../components/input/Input'
 import Select from '../../components/select/Select'
 import Button from '../../components/button/Button'
+import InputTag from '../../components/inputTag/InputTag'
 import InputFile from '../../components/inputFile/InputFile'
 import HeaderUpload from '../upload/headerUpload/HeaderUpload'
 import { getImageData } from '../../pages/upload/imageDataStore';
@@ -25,7 +26,7 @@ function UploadShorts() {
   const [tags, setTags] = useState([]);
   const image = getImageData();
   const imagePreviewRef = useRef(null);
-  const [imagem, setImagem] = useState(null); 
+  const [imagem, setImagem] = useState(null);
 
   const [video, setVideo] = useState({
     titulo: "",
@@ -78,6 +79,12 @@ function UploadShorts() {
     setTag(e.target.value);
   };
 
+  const enterInputTag = (event) => {
+    if (event.key === "Enter") {
+      renderizarNovaTag()
+    }
+  }
+
   const renderizarNovaTag = () => {
     if (tag !== "") {
       setTags([...tags, tag])
@@ -120,7 +127,7 @@ function UploadShorts() {
       alert("Ocorreu um erro ao cadastrar o Shorts")
       console.error('Error:', error);
     }
-  };  
+  };
 
   return (
     <>
@@ -151,13 +158,14 @@ function UploadShorts() {
                 <div className='upload__shorts__box__input'>
                   <div className='upload__shorts__box__tags'>
                     <div className='upload__shorts__tags__input'>
-                      <Input
-                        placeholder={"Tags do shorts"}
+                      <InputTag
+                        placeholder={"Tags do vídeo"}
                         type={"text"}
                         value={tag}
                         onChange={handleTagChange}
                         name='tag'
                         required={true}
+                        onKeyDown={enterInputTag}
                       />
                     </div>
                     <button
