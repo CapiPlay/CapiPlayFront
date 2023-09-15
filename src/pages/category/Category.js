@@ -6,13 +6,22 @@ import Slider_Category from '../home/slider_category/Slider_Category';
 import Cookies from 'js-cookie';
 import VideoService from '../../service/Video/VideoService';
 import Video_card from '../../components/video_card/Video_card';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+import Slider from 'react-slick';
 
 function Category() {
 
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
     const [videosReu, setVideosReu] = useState([])
+    const category = useParams().category;
+    const location = useLocation();
+
+    useEffect(() => {
+        setVideosReu([]);
+        getMoreVideos(0);
+        console.log(location);
+    }, [location.pathname]);
 
     useEffect(() => {
         getMoreVideos(0);
@@ -26,8 +35,12 @@ function Category() {
         };
     }, []);
 
+    const verifyCategory = () => {
+
+    }
+
     const getMoreVideos = async (page) => {
-        const moreVideos = await VideoService.buscarPorCategoria(page);
+        const moreVideos = await VideoService.buscarPorCategoria(category, page, 50, false);
         if (moreVideos) {
             if (moreVideos.length > 0) {
                 setVideosReu((prevVideos) => [...prevVideos, ...moreVideos]);
@@ -69,6 +82,9 @@ function Category() {
                     </div>
                     <div className='contaoner__video__category'>
                         <div className='container__video__cards__desk'>
+
+                        </div>
+                        <div className='container__video__cards__desk'>
                             {videosReu.map((video) => (
                                 <Video_card key={video.uuid} video={video} />
                             ))}
@@ -86,16 +102,36 @@ function Category() {
         <>
             <Header />
             <div className='container__home'>
+                <div className='container__slider__base__tablet'>
+                    <Slider_Category />
+                </div>
+                <div className='container__shorts__cards__tablet'>
+                </div>
+                <div className='container__video__cards__tablet'>
+                    {videosReu.map((video) => (
+                        <Video_card key={video.uuid} video={video} />
+                    ))}
+                </div>
             </div>
         </>
     );
 
     const renderMobileView = () => (
         <>
-            <Header />
-            <div className='container__home'>
-            </div>
-        </>
+        <Header />
+        <div className='container__home'>
+          <div className='container__slider__base'>
+            <Slider />
+          </div>
+          <div className='container__shorts__cards__mobile'>
+          </div>
+          <div className='container__video__cards'>
+            {videosReu.map((video) => (
+              <Video_card key={video.uuid} video={video} />
+            ))}
+          </div>
+        </div>
+      </>
     );
 
     const getViewToRender = () => {

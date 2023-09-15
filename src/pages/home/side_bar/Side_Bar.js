@@ -19,6 +19,7 @@ import { MdOutlineScience } from 'react-icons/md';
 import { HiOutlineMusicNote } from 'react-icons/hi';
 import { MdOutlineSportsVolleyball } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import { BiHomeAlt2 } from 'react-icons/bi';
 
 function Side_Bar() {
 
@@ -61,6 +62,14 @@ function Side_Bar() {
                         <div className='modal__category__item__side' >
                             <GiHamburgerMenu color='var(--purple)' onClick={handleSideBar} size={'2rem'} className='icon__hamburguer__side' />
                         </div>
+                        <Link to='/' className='modal__category__item__side' >
+                            <div className='modal__category__item__side' >
+                                <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
+                                    <BiHomeAlt2 color='var(--whiteBlack)' size={'2rem'} className='icon__category__side' />
+                                    <p className={`label__category__side ${isSideBarOpen ? 'open__side' : ''}`}>Home</p>
+                                </div>
+                            </div>
+                        </Link>
                         <Link to='/category/ARTESECULTURA' className='modal__category__item__side' >
                             <div className='modal__category__item__side' >
                                 <div className={`icon__category__area__side ${isSideBarOpen ? 'openItem__side' : ''}`}>
