@@ -84,6 +84,7 @@ function UploadVideo() {
       setTags([...tags, tag])
       const updatedTags = [...video.tags, tag]
       setVideo({ ...video, tags: updatedTags })
+      setTag("")
     }
   }
 
