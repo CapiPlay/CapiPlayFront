@@ -28,7 +28,7 @@ function Player() {
   }
 
   const verifyDesktop = () => {
-    if (screenSize.width < 900 && screenSize.width > 450) {
+    if (screenSize.width > 900) {
       return true
     } else {
       return false
@@ -54,11 +54,11 @@ function Player() {
             <div>
               {verifyDesktop() ? (
                 <div>
-                  <Mobile_player video={video} />
+                  <Desktop_player video={video} />
                 </div>
               ) : (
                 <div>
-                  <Desktop_player video={video} />
+                  <Mobile_player video={video} />
                 </div>
               )}
             </div>
