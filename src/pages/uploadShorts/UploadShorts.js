@@ -113,7 +113,7 @@ function UploadShorts() {
         console.log(pair[0] + ": " + pair[1]);
       }
       const response = await VideoService.criar(shortsFormData);
-      alert("Shorts cadastrado")
+      alert("Shorts cadastrado!")
       navigate('/')
     } catch (error) {
       alert("Ocorreu um erro ao cadastrar o Shorts")
