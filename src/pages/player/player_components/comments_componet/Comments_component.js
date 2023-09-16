@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import './Comments_component.css'
-import { BiSolidDownArrow, BiSolidUpArrow, BiDislike, BiLike, BiSolidLike } from 'react-icons/bi'
+import { BiSolidDownArrow, BiSolidDislike, BiDislike, BiLike, BiSolidLike } from 'react-icons/bi'
 import Comments_answers_component from '../comments_answers_component/Comments_answers_component'
-import UsuarioService from '../../../../service/Usuario/UsuarioService'
+import ComentarioService from '../../../../service/Engajamento/ComentarioService'
+import ReacaoComentarioService from '../../../../service/Engajamento/ReacaoComentarioService'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Comments_component({ commentVideo }) {
     const [showMore, setShowMore] = useState(false);
     const [like_btn, setLikeBtn] = useState(true);
+    const [dislike_btn, setDislikeBtn] = useState(true);
     const [commentsAnswer, setCommentsAnswer] = useState(false);
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
     const [date, setDate] = useState();
     const [formatoHora, setFormatoHora] = useState()
+    const [curtidas, setCurtidas] = useState(0)
+    const [descurtidas, setDescurtidas] = useState(0)
 
     useEffect(() => {
+        setCommentLikes()
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
@@ -29,11 +34,23 @@ function Comments_component({ commentVideo }) {
     }, [date])
 
     const user_image = 'https://yt3.ggpht.com/PFRD_rpPwAIY-FC2t6Ob0GpJe2udeEaXNwug4Dx8v7zxxda6ZKHU1aKBX-XoWvYh2H4Ow6TtBDk=s176-c-k-c0x00ffffff-no-rj-mo'
-    const comment_likes = 200
 
     const toggleShowMore = () => {
         setShowMore(!showMore);
     };
+
+    const setCommentLikes = async () => {
+        // const commentsReactions = await ReacaoComentarioService.buscarTodosPorComentario({idComentario: commentVideo.idComentario});
+        // if(commentsReactions !== undefined){
+        //     commentsReactions.forEach(commentReaction => {
+        //         if(commentReaction.curtida){
+        //             setCurtidas(curtidas + 1)
+        //         } else {
+        //             setDescurtidas(descurtidas + 1)  
+        //         }
+        //     });
+        // }
+    }
 
     const toggleLikeBtn = () => {
         // if(like_btn){
@@ -54,6 +71,10 @@ function Comments_component({ commentVideo }) {
         //     )
         // }
         setLikeBtn(!like_btn);
+    };
+
+    const toggleDislikeBtn = () => {
+        setDislikeBtn(!dislike_btn);
     };
 
     const toggleCommentsAnswers = () => {
@@ -126,16 +147,24 @@ function Comments_component({ commentVideo }) {
                         <div className='likes'>
                             {like_btn ?
                                 <>
-                                    <BiLike size={'1rem'} className='comment__like__btn' onClick={() => toggleLikeBtn()} />{comment_likes}
+                                    <BiLike size={'1rem'} className='comment__like__btn' onClick={() => toggleLikeBtn()} />{curtidas}
                                 </>
                                 :
                                 <>
-                                    <BiSolidLike size={'1rem'} className='comment__like__btn' onClick={() => toggleLikeBtn()} />{comment_likes}
+                                    <BiSolidLike size={'1rem'} className='comment__like__btn' onClick={() => toggleLikeBtn()} />{curtidas}
                                 </>
                             }
                         </div>
                         <div className='dislikes'>
-                            <BiDislike className='comment__dislike__btn' />
+                            {dislike_btn ?
+                                <>
+                                    <BiDislike size={'1rem'} className='comment__dislike__btn' onClick={() => toggleDislikeBtn()}/>{descurtidas}
+                                </>
+                                :
+                                <>
+                                    <BiSolidDislike size={'1rem'} className='comment__dislike__btn' onClick={() => toggleDislikeBtn()}/>{descurtidas}
+                                </>
+                            }
                         </div>
                         {verifyDesktop() ?
                             <div className='comment__total__answers' onClick={() => toggleCommentsAnswers()}>
