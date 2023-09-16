@@ -1,37 +1,33 @@
 import '../shorts/Shorts.css'
 
-//hooks
+// hooks
 import { useEffect, useRef, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from "react-redux"
+import { setListShorts } from '../../store/features/shorts/shortsSlice'
 
-//componentes
-import VideoService from '../../service/Video/VideoService'
+// componentes
 import ShortsComponent from './shorts_component/ShortsComponent'
+import Header from '../../components/header/Header'
 
-//icons
+// icons
 import { BsFillArrowUpSquareFill } from "react-icons/bs"
 import { BsFillArrowDownSquareFill } from "react-icons/bs"
 
-// shorts
-import { useSelector, useDispatch } from "react-redux"
-import { setListShorts } from '../../store/features/shorts/shortsSlice'
-import { useParams } from 'react-router-dom'
-import Header from '../../components/header/Header'
+// service
+import VideoService from '../../service/Video/VideoService'
 
 const Shorts = () => {
 
     const dispatch = useDispatch()
-    const position = useSelector(state => state.shorts.position)
+    const shorts = useSelector((state) => state.shorts.listShorts)
 
     const scrollRef = useRef(null)
-    const [isAnimate, setIsAnimate] = useState(false)
-
     const { id } = useParams()
 
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const [headerAppearing, setHeaderAppearing] = useState(window.innerWidth >= 768)
-    const shorts = useSelector((state) => state.shorts.listShorts)
-    const [currentShortIndex, setCurrentShortIndex] = useState(0)
 
     useEffect(() => {
         setHeaderAppearing(windowWidth >= 576)
@@ -40,16 +36,12 @@ const Shorts = () => {
     const handleNextVideo = () => {
         setTimeout(() => {
             const scrollStep = window.innerHeight / 2
-            const newPosition = position + 1
-            const newIndex = newPosition >= 0 ? newPosition % shorts.length : 0
-
-            setCurrentShortIndex(newIndex)
             const containerShorts = scrollRef.current
 
             if (containerShorts) {
                 containerShorts.scrollBy({
                     top: scrollStep,
-                    behavior: 'smooth',
+                    behavior: 'smooth'
                 })
             }
         }, 200)
@@ -57,14 +49,14 @@ const Shorts = () => {
 
     const handlePreviousVideo = () => {
         setTimeout(() => {
-            const scrollStep = -window.innerHeight / 2; // Scroll para cima (negativo)
-            const containerShorts = scrollRef.current;
+            const scrollStep = -window.innerHeight / 2
+            const containerShorts = scrollRef.current
 
             if (containerShorts) {
                 containerShorts.scrollBy({
                     top: scrollStep,
                     behavior: 'smooth',
-                });
+                })
             }
         }, 500)
     }
@@ -82,33 +74,22 @@ const Shorts = () => {
     }, [])
 
     useEffect(() => {
-
-        const func = async () => {
+        const addShortsToList = async () => {
             const newShorts = []
 
             const firstShort = await VideoService.buscarCompleto(id)
             newShorts.push(firstShort)
 
-            for (let i = 0; i < 3; i++) {
-                const short = await VideoService.buscarShorts()
-                newShorts.push(short)
-            }
+            const promise = Array.from({ length: 3 }, () => VideoService.buscarShorts())
+            const otherShorts = await Promise.all(promise)
+            newShorts.push(...otherShorts)
 
             dispatch(setListShorts(newShorts))
         }
 
-        func()
-
+        addShortsToList()
     }, [])
 
-    const scrollToIndex = (index) => {
-        const scrollContainer = scrollRef.current
-        if (scrollContainer) {
-            const slideHeight = scrollContainer.scrollHeight / shorts.length
-            scrollContainer.scrollTop = index * slideHeight
-            setIsAnimate(true)
-        }
-    }
 
     return (
         <div
