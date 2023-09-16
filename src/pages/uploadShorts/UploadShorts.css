@@ -163,10 +163,6 @@
     background-color: transparent;
 }
 
-.upload__shorts__inputfile__border:hover {
-    cursor: pointer;
-}
-
 .upload__shorts__preview {
     width: 40%;
     height: 28rem;

@@ -33,14 +33,6 @@
     gap: 2rem;
 }
 
-/* .upload__video__container__second__row {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 50%;
-    gap: 2rem;
-} */
-
 .upload__video__box__inputfile {
     display: flex;
     flex-direction: row;
@@ -70,10 +62,6 @@
     border-radius: 0.5rem;
     border: 2px solid var(--whitesmoke);
     background-color: transparent;
-}
-
-.upload__video__inputfile__border:hover {
-    cursor: pointer;
 }
 
 .upload__video__preview {
