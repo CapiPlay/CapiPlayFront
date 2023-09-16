@@ -48,17 +48,17 @@ function Player() {
         <>
           {verifyTablet() ? (
             <div>
-              <Tablet_player video={video} />
+              <Tablet_player video={video} key={1} />
             </div>
           ) : (
             <div>
               {verifyDesktop() ? (
                 <div>
-                  <Desktop_player video={video} />
+                  <Desktop_player video={video} key={2} />
                 </div>
               ) : (
                 <div>
-                  <Mobile_player video={video} />
+                  <Mobile_player video={video} key={3}/>
                 </div>
               )}
             </div>
