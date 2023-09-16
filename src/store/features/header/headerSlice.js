@@ -8,9 +8,8 @@ const headerSlice = createSlice({
   name: "header",
   initialState,
   reducers: {
-    clickOpenSideBar: async (state, action) => {
+    clickOpenSideBar: (state, action) => {
       state.isClicked = !state.isClicked
-      console.log(state.isClicked)
     }
   }
 })
@@ -18,7 +17,7 @@ const headerSlice = createSlice({
 export const { clickOpenSideBar } = headerSlice.actions
 export default headerSlice.reducer
 
-const doIsClicked = () => async (dispatch) => {
+const doIsClicked = () => (dispatch) => {
   try {
     dispatch(clickOpenSideBar())
   } catch (err) {
@@ -27,6 +26,5 @@ const doIsClicked = () => async (dispatch) => {
 }
 
 export {
-  doIsClicked,
-  initialState
+  doIsClicked
 }

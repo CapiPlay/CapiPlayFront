@@ -39,9 +39,11 @@
     justify-content: center;
 
     transition: .3s ease-in-out;
+
+    text-decoration: none;
 }
 
-.modal__category__item__side > div {
+.modal__category__item__side>div {
     width: 100%;
     height: 100%;
 
@@ -50,7 +52,16 @@
     justify-content: center;
 }
 
-.modal__category__item__side > div > svg {
+.modal__category__item__side>div>div:first-of-type {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal__category__item__side>div>div:first-of-type>svg {
     width: 1.3rem;
     height: 2rem;
 
@@ -63,4 +74,44 @@
 
 .active__category {
     background-color: var(--purple);
+}
+
+/* Barra lateral aberta */
+.side__bar__open {
+    width: 15rem;
+}
+
+.open__item__container {
+    width: 20% !important;
+}
+
+.internal__side__bar__open {
+    width: 90%;
+    align-items: flex-start;
+
+    margin-left: 1rem;
+}
+
+.item__side__bar__open {
+    width: 90%;
+    height: 2.5rem;
+}
+
+.item__side__bar__open>div {
+    width: 100%;
+    justify-content: space-around;
+}
+
+.item__side__bar__open>div p {
+    color: var(--whitesmoke);
+    font-size: 14px;
+}
+
+.name__category__side__bar {
+    width: 80%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }

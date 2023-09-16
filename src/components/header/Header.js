@@ -27,20 +27,21 @@ const Header = ({ searchValue }) => {
 
     const nav = useNavigate()
     const location = useLocation()
+    const dispatch = useDispatch()
 
     const [search, setSearch] = useState(false)
     const [searchDesktop, setSearchDesktop] = useState(false)
     const [verifyClicked, setVerifyClicked] = useState(false)
     const [valueInput, setValueInput] = useState(searchValue)
-    const [openModalProfile, setOpenModalProfile] = useState(false)
-
+    
     const [image, setImage] = useState(notFound)
     const [usuario, setUsuario] = useState({})
+    const [widthPage, setWidthPage] = useState()
+    const [openModalProfile, setOpenModalProfile] = useState(false)
 
-    const dispatch = useDispatch()
-
+    // Search
     const handleClick = () => {
-        setSearch(!search)
+        setSearchDesktop(!searchDesktop)
     }
 
     const handleSearch = () => {
@@ -65,28 +66,34 @@ const Header = ({ searchValue }) => {
             setValueInput(searchParams)
         }
 
-        if (verifyClicked) {
-            setSearchDesktop(true)
-        } else {
-            setSearchDesktop(false)
+        const handleClick = (e) => {
+            const element = e.target.offsetParent
+            if (element == null || !element.classList.contains("header__input__container")) {
+                setSearchDesktop(false)
+            }
         }
+
+        // if(verifyClicked) {
+        //     setSearchDesktop(true)
+        // } else {
+        //     searchDesktop(false)
+        // }
+
+        document.addEventListener("click", handleClick) 
+        setWidthPage(window.innerWidth)
+
+        return (
+            document.removeEventListener("click", handleClick)
+        )
     }, [])
 
-    const handleSelection = (searchSelected) => {
-        setValueInput(searchSelected)
-        setVerifyClicked(true)
-        nav(`/result-search?search=${searchSelected}`)
-    }
-
-    // const handleClick = (e) => {
-    //     const element = e.target.offsetParent
-    //     if (element == null || !element.classList.contains("header__input__container")) {
-    //         setSearchDesktop(false)
-    //     }
+    // const handleSelection = (searchSelected) => {
+    //     setValueInput(searchSelected)
+    //     setVerifyClicked(true)
+    //     nav(`/result-search?search=${searchSelected}`)
     // }
 
-
-
+    //Ações de usuário
     const handleOpenModalProfile = () => {
         setOpenModalProfile(!openModalProfile)
     }
@@ -115,7 +122,7 @@ const Header = ({ searchValue }) => {
             <div className='header__menu__icon'>
                 <IoMenu onClick={handleOpenSideBar} />
             </div>
-            <div className='header__input__container'>
+            <div className='header__input__container' style={widthPage <= 900 ? {} : {position: "relative"}}>
                 <div>
                     <input
                         className='header__input__text__search'
@@ -124,7 +131,7 @@ const Header = ({ searchValue }) => {
                         value={valueInput}
                         onKeyPress={verifyKeyPress}
                         onChange={handleChange} />
-                    <AiOutlineSearch />
+                    <AiOutlineSearch onClick={handleClick} />
                 </div>
                 {
                     searchDesktop &&
@@ -133,11 +140,7 @@ const Header = ({ searchValue }) => {
             </div>
             <div className='header__info'>
                 <div className='info__from__header'>
-                    {/* {
-                        verifyToken() &&
-                        <Link to="/upload" className='upload__icon__header'><TbUpload /></Link>
-                    } */}
-                    <TbUpload />
+                    <Link to={"/upload"}><TbUpload /></Link>
                 </div>
                 <div className='info__from__header'>
                     <img src={image} onClick={handleOpenModalProfile} />

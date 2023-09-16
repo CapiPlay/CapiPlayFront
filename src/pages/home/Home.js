@@ -9,8 +9,6 @@ import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
 import VideoService from '../../service/Video/VideoService';
 import Aos from 'aos'
 import Cookies from 'js-cookie';
-// redux
-import { initialState } from "../../store/features/header/headerSlice"
 
 function Home(darkMode) {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -125,10 +123,6 @@ function Home(darkMode) {
       <div className={`home-component ${darkMode ? 'dark-mode' : 'light-mode'}`}>
         <Header userLogin={userProfile()} />
         <Side_Bar />
-        {
-          initialState.isClicked &&
-          <alert>Deu certo!</alert>
-        }
         <div className='container__header__home'></div>
         <div className='container__home'>
           <div className='container__slider__base__desk'>
