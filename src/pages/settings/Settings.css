@@ -119,6 +119,7 @@
 /* desktop */
 
 .settings__form__desktop {
+    padding-top: 7rem;
     margin: 0 1.5rem;
     display: flex;
     flex-direction: column;

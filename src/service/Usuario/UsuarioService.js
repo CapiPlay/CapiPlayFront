@@ -54,7 +54,7 @@ const UserService = {
    */
   editar: async ( editarUsuarioCommand, foto1) => {
     try {
-      const response = await axios.put(`/usuario`, editarUsuarioCommand, foto1);
+      const response = await axios.put("/usuario", editarUsuarioCommand, foto1);
       return response.data;
     } catch (error) {
       console.error(error);

@@ -1,30 +1,73 @@
-import React, { useEffect, useState, useParams } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './Settings.css'
+import { useNavigate } from 'react-router-dom';
 
 //imagem
 import ProfileImage from '../../assets/image/img_base_miniatura.png'
 
 //componentes
-import HeaderSettings from './header/HeaderSettings'
+import HeaderSettings from '../../components/header/Header'
 import Input from "../../components/input/Input";
 import InputDisabled from "../../components/inputDisabled/InputDisabled"
 import Button from "../../components/button/Button";
 import TextArea from '../../components/inputTextArea/InputTextArea';
+import Side_Bar from '../home/side_bar/Side_Bar'
 
 //Service
-import UserService from '../../service/Usuario/UsuarioService';
+import UsuarioService from '../../service/Usuario/UsuarioService';
 
-const Settings = ({ userId }) => {
+//cookies
+import Cookies from 'js-cookie';
+
+const Settings = ({ }) => {
+
+    const navigate = useNavigate();
 
     const [settingsData, setSettingsData] = useState({
         email: '',
         dataNascimento: '',
-        nomeUsuario: '',
-        nomeCanal: '',
-        senhaAtual: '123',
+        nome: '',
+        perfil: '',
+        senha: '',
         descricao: ''
     });
+
+    // const [usuario, setUsuario] = useState({});
+    const { idUsuario } = useParams();
+
+    const userProfile = () => {
+        const userToken = Cookies.get('token');
+        if (userToken) {
+            try {
+                const tokenPayload = userToken.split('.')[1];
+                const decodedPayload = atob(tokenPayload);
+                const userLogin = JSON.parse(decodedPayload);
+                if (userLogin) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (error) {
+                console.error("Erro ao analisar o token:", error);
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+
+    useEffect(() => {
+        UsuarioService.detalhes()
+            .then((data) => {
+                setSettingsData(data)
+                console.log(data)
+            })
+            .catch((error) => console.error('Erro ao buscar usuario:', error));
+    }, [idUsuario]);
+
 
     const [novaSenha, setNovaSenha] = useState("")
     const [senhaInformada, setSenhaInformada] = useState("")
@@ -50,45 +93,28 @@ const Settings = ({ userId }) => {
         setIsModalImageOpen(false);
     };
 
-    useEffect(() => {
-        // axios.get(`/api/usuario/${userId}`)
-        //     .then(response => {
-        //         const userData = response.data;
-        //         setSettingsData({
-        //             nomeUsuario: userData.nomeUsuario,
-        //             nomeCanal: userData.nomeCanal,
-        //             senhaAtual: '',
-        //             descricao: userData.descricao
-        //         });
-        //     })
-        //     .catch(error => {
-        //         console.error('Erro ao obter dados do usuário:', error);
-        //     });
-        axios.get(`/api/usuario/${userId}`)
-            .then(response => {
-                console.log(response.data)
-                const userData = response.data;
-                setSettingsData({
-                    nomeUsuario: userData.nome,
-                    senha: userData.senha,
-                    descricao: userData.descricao,
-                    dataNascimento: userData.dataNascimento,
-                    email: userData.email
-                });
-            })
-            .catch(error => {
-                console.error('Erro ao obter dados do usuário:', error);
-            });
-    }, [userId]);
-
     const handleUpdateUser = () => {
-        axios.put(`/api/usuario/${userId}`, settingsData)
-            .then(response => {
-                console.log('Usuário atualizado com sucesso!', response.data);
-            })
-            .catch(error => {
-                console.error('Erro ao atualizar o usuário:', error);
-            });
+        if(settingsData.senha.length >= 6 && settingsData.senha.length <= 20){
+            try {
+                const settings = new FormData();
+                settings.append("nome", settingsData.nome);
+                settings.append("perfil", settingsData.perfil);
+                settings.append("senha", settingsData.senha);
+                settings.append("descricao", settingsData.descricao);
+                console.log("Conteúdo do settingsData:");
+                for (let pair of settings.entries()) {
+                    console.log(pair[0] + ": " + pair[1]);
+                }
+                const response = UsuarioService.editar(settings);
+                alert("Usuario editado com sucesso")
+                window.location.reload();
+            } catch (error) {
+                alert("Ocorreu um erro ao editar o usuario")
+                console.error('Error:', error);
+            }
+        } else {
+            alert("A senha deve conter entre 6 e 20 caracteres, letra maiuscula, letra minuscula e ao menos 1 caracter especial");
+        }
     };
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -103,6 +129,7 @@ const Settings = ({ userId }) => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
 
     const renderMobileView = () => (
         <>
@@ -164,7 +191,7 @@ const Settings = ({ userId }) => {
                         />
                     </div>
                     <div className="settings__field">
-                        {senhaInformada != settingsData.senhaAtual ? (
+                        {senhaInformada != settingsData.senha ? (
                             <Input
                                 placeholder={"Senha antiga"}
                                 value={senhaInformada}
@@ -235,10 +262,11 @@ const Settings = ({ userId }) => {
     )
     const renderDesktopView = () => (
         <>
+            {/* <Side_Bar /> */}
+            <HeaderSettings userLogin={userProfile()} />
             <div className='settings__container__desktop'>
-                <HeaderSettings />
                 <div className="settings__form__desktop">
-                    <img src={ProfileImage} className='profile__settings__desktop' />
+                    <img src={ProfileImage} className='profile__settings' />
                     <div className='settings__box__image__options__desktop'>
                         <button className='settings__image__options__buttons__desktop'>Alterar</button>
                         <button className='settings__image__options__buttons__desktop' onClick={openImageModal}>Remover</button>
@@ -261,6 +289,7 @@ const Settings = ({ userId }) => {
                         <div className='settings__input__box'>
                             <div className="settings__field__desktop">
                                 <InputDisabled
+                                    name={"email"}
                                     placeholder={"E-mail"}
                                     value={settingsData.email}
                                     type={"text"}
@@ -270,6 +299,7 @@ const Settings = ({ userId }) => {
                             </div>
                             <div className="settings__field__desktop">
                                 <InputDisabled
+                                    name={"dataNascimento"}
                                     placeholder={"Data de Nascimento"}
                                     value={settingsData.dataNascimento}
                                     type={"date"}
@@ -280,8 +310,9 @@ const Settings = ({ userId }) => {
                             <div className="settings__field__desktop"></div>
                             <Input
                                 placeholder={"Nome de usuário"}
-                                value={settingsData.nomeUsuario}
-                                onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
+                                name={"nome"}
+                                value={settingsData.nome}
+                                onChange={(e) => setSettingsData({ ...settingsData, nome: e.target.value })}
                                 type={"text"}
                                 required={true}
                                 className='settings__input__desktop'
@@ -289,8 +320,9 @@ const Settings = ({ userId }) => {
                             <div className="settings__field__desktop">
                                 <Input
                                     placeholder={"Nome do canal"}
-                                    value={settingsData.nomeCanal}
-                                    onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
+                                    name={"perfil"}
+                                    value={settingsData.perfil}
+                                    onChange={(e) => setSettingsData({ ...settingsData, perfil: e.target.value })}
                                     type={"text"}
                                     required={true}
                                     className='settings__input__desktop'
@@ -299,7 +331,15 @@ const Settings = ({ userId }) => {
                         </div>
                         <div className='settings__input__box__description'>
                             <div className="settings__field__desktop">
-                                {senhaInformada != settingsData.senhaAtual ? (
+                                <Input
+                                    name={"senha"}
+                                    placeholder={"Senha nova"}
+                                    onChange={(e) => setSettingsData({ ...settingsData, senha: e.target.value })}
+                                    type={"password"}
+                                    required={true}
+                                    className='settings__input__desktop'
+                                />
+                                {/* {senhaInformada != settingsData.senhaAtual ? (
                                     <Input
                                         placeholder={"Senha antiga"}
                                         value={senhaInformada}
@@ -332,10 +372,11 @@ const Settings = ({ userId }) => {
                                         required={true}
                                         className='settings__input'
                                     />
-                                )}
+                                )} */}
                             </div>
                             <div className="settings__field__desktop">
                                 <TextArea
+                                    name={"descricao"}
                                     placeholder={"Descrição do canal"}
                                     value={settingsData.descricao}
                                     onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
@@ -362,7 +403,7 @@ const Settings = ({ userId }) => {
                                 <p className='text'>Tem certeza que deseja cancelar suas alterações?</p>
                                 <div className='modal__buttons'>
                                     <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                    <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
+                                    <Button onclick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
                                 </div>
                             </div>
                         </div>
