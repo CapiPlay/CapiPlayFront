@@ -25,10 +25,29 @@
     cursor: pointer;
 }
 
-.like__dislike__btns{
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    gap: 0.6rem;
-    float: right;
+.like__btnactive{
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: none;
+    background-color: var(--purple);
+    border: solid 1px var(--purple);
+    border-radius: 0.313rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.dislike__btnactive{
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: none;
+    background-color: var(--purple);
+    border: solid 1px var(--purple);
+    border-radius: 0.313rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    cursor: pointer;
 }

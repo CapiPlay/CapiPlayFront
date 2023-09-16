@@ -1,11 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LikeDislikeButtons.css';
 import { BiLike, BiSolidLike, BiDislike, BiSolidDislike } from 'react-icons/bi';
 import ReacaoService from '../../../../service/Engajamento/ReacaoService';
 
 function LikeDislikeButtons({ video }) {
+
   const [likeBtnActive, setLikeBtnActive] = useState(false);
   const [dislikeBtnActive, setDislikeBtnActive] = useState(false);
+
+  useEffect(() => {
+    const reacao = ReacaoService.buscarUm(
+      {
+        idVideo: video.uuid
+      });
+    console.log("Reação " + reacao.curtida);
+    if (reacao) {
+      if (reacao.curtida) {
+        setLikeBtnActive(true);
+      }else if (!reacao.curtida){
+        setDislikeBtnActive(true);
+      }else{
+        setLikeBtnActive(false);
+        setDislikeBtnActive(false);
+      }
+    }
+  }, [video.uuid]);
 
   const handleToggleLikeBtn = () => {
     if (!likeBtnActive && !dislikeBtnActive) {
@@ -55,10 +74,10 @@ function LikeDislikeButtons({ video }) {
 
   return (
     <div className="like-dislike-buttons"> 
-      <button className={`like__btn ${likeBtnActive ? 'active' : ''}`} onClick={handleToggleLikeBtn}>
+      <button className={`like__btn${likeBtnActive ? 'active' : ''}`} onClick={handleToggleLikeBtn}>
         {likeBtnActive ? <BiSolidLike size={'1.6rem'} /> : <BiLike size={'1.6rem'} />}
       </button>
-      <button className={`dislike__btn ${dislikeBtnActive ? 'active' : ''}`} onClick={handleToggleDislikeBtn}>
+      <button className={`dislike__btn${dislikeBtnActive ? 'active' : ''}`} onClick={handleToggleDislikeBtn}>
         {dislikeBtnActive ? <BiSolidDislike size={'1.6rem'} /> : <BiDislike size={'1.6rem'} />}
       </button>
     </div>
