@@ -1,19 +1,16 @@
-// styles
-import './Side_Bar.css'
-
-// hooks
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-// icons
-import { TbMovie, TbPlant, TbSchool, TbHanger2, TbChefHat } from 'react-icons/tb'
+import { TbMovie, TbPlant, TbSchool, TbHanger2, TbChefHat, } from 'react-icons/tb'
 import { MdOutlineScience, MdOutlineSportsVolleyball } from 'react-icons/md'
 import { IoColorPaletteOutline } from 'react-icons/io5'
 import { HiOutlineMusicNote } from 'react-icons/hi'
 import { PiTelevision } from 'react-icons/pi'
 import { LuGamepad2 } from 'react-icons/lu'
 import { SlPlane } from 'react-icons/sl'
-import { useSelector } from 'react-redux'
+
+import './Side_Bar.css'
 
 const categories = [
     { name: 'ARTESECULTURA', label: 'Artes e cultura', icon: <IoColorPaletteOutline /> },
@@ -31,17 +28,44 @@ const categories = [
 ]
 
 const Side_Bar = () => {
-
-    const openSideBar = useSelector(state => state.header.isClicked)
+    const openSideBar = useSelector((state) => state.header.isClicked)
     const [activeCategory, setActiveCategory] = useState('')
+    const [widthPage, setWidthPage] = useState(window.innerWidth)
+    const sideBarRef = useRef(null)
 
     const handleCategoryClick = (category) => {
         setActiveCategory(category)
     }
 
+    const handleClickOutside = (e) => {
+        if (
+            sideBarRef.current &&
+            !sideBarRef.current.contains(e.target) &&
+            widthPage <= 900
+        ) {
+            // Feche a barra lateral aqui (pode ser definindo o estado openSideBar como falso)
+            // Exemplo: dispatch({ type: 'SET_SIDEBAR_OPEN', payload: false });
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('click', handleClickOutside)
+        return () => {
+            window.removeEventListener('click', handleClickOutside)
+        }
+    }, [])
+
+    useEffect(() => {
+        setWidthPage(window.innerWidth)
+    }, [])
+
     return (
-        <div className={`container__side__bar ${openSideBar ? "side__bar__open" : ""}`}>
-            <div className={`category__box ${openSideBar ? "internal__side__bar__open" : ""}`}>
+        <div
+            ref={sideBarRef}
+            className={`container__side__bar ${openSideBar ? 'side__bar__open' : ''}`}
+            style={widthPage <= 900 && openSideBar !== true ? { display: 'none', height: '100%' } : {}}
+        >
+            <div className={`category__box ${openSideBar ? 'internal__side__bar__open' : ''}`}>
                 {
                     categories.map((category) => (
                         <Link
@@ -49,20 +73,20 @@ const Side_Bar = () => {
                             key={category.name}
                             className={`modal__category__item__side 
                             ${activeCategory === category.name ? 'active__category' : ''} 
-                            ${openSideBar ? "item__side__bar__open" : ""}`}
-                            onClick={() => handleCategoryClick(category.name)}>
+                            ${openSideBar ? 'item__side__bar__open' : ''}`}
+                            onClick={() => handleCategoryClick(category.name)
+                            }
+                        >
                             <div>
-                                <div className={openSideBar ? "open__item__container" : ""}>{category.icon}</div>
-                                {
-                                    openSideBar &&
+                                <div className={openSideBar ? 'open__item__container' : ''}>{category.icon}</div>
+                                {openSideBar && (
                                     <div className="name__category__side__bar">
                                         <p className="label__category__side">{category.label}</p>
                                     </div>
-                                }
+                                )}
                             </div>
                         </Link>
-                    ))
-                }
+                    ))}
             </div>
         </div>
     )

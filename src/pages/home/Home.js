@@ -153,6 +153,7 @@ function Home(darkMode) {
   const renderTabletView = () => (
     <>
       <Header />
+      <Side_Bar/>
       <div className='container__home'>
         <div className='container__slider__base__tablet'>
           <Slider_Category />
@@ -180,6 +181,7 @@ function Home(darkMode) {
   const renderMobileView = () => (
     <>
       <Header />
+      <Side_Bar/>
       <div className='container__home'>
         <div className='container__slider__base'>
           <Slider />

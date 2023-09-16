@@ -103,13 +103,24 @@ const Header = ({ searchValue }) => {
     }
 
     useEffect(() => {
-        const user = JSON.parse(Cookies.get("user"))
-        if (user && user.foto) {
-            setImage("http://10.4.96.50:7000/api/usuario/static/" + user.foto)
+        const userCookie = Cookies.get("user")
+
+        if (userCookie) {
+            try {
+                const user = JSON.parse(userCookie)
+                if (user && user.foto) {
+                    setImage("http://10.4.96.50:7000/api/usuario/static/" + user.foto)
+                } else {
+                    setImage(notFound)
+                }
+            } catch (error) {
+                setImage(notFound)
+            }
         } else {
             setImage(notFound)
         }
     }, [])
+
 
     return (
         <div className='header__container'>
