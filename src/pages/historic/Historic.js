@@ -26,22 +26,29 @@ const Historic = () => {
     // responsividade
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
     useEffect(() => {
-
-        HistoricoService.buscarTodosPorUsuario().then((res) => {
-            res.forEach((r1) => {
-                VideoService.buscarTodos(10, 0, false).then((resVideo) => {
-                    const arr = [];
-                    resVideo.content.forEach((video) => {
-                        if (video.uuid === r1.idVideo.id) {
-                            arr.push(video)
-                        }
-                    })
-                    setVideoHistoric([...arr])
+        const func = async () => {
+            const array = [];
+            await VideoService.buscarTodos(10, 0, false).then((res) => {
+                res.content.forEach((r) => {
+                    array.push(r)
                 })
             })
-        })
+            const ar = [];
+            await HistoricoService.buscarTodosPorUsuario().then((res) => {
+                res.forEach((r1) => {
+                    array.filter((r2) => {
+                        if (r1.idVideo.id === r2.uuid) {
+                            ar.push(r2)
+                        }
+                    })
+                })
+            })
+            setVideoHistoric([...ar]);
+            console.log(ar)
 
+        }
 
+        func()
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
