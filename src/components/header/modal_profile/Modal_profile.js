@@ -17,15 +17,17 @@ const Modal_profile = () => {
         Cookies.remove('user')
     }
 
+    const userExist = Cookies.get("token") 
+
     return (
         <div className='modal__profile__container'>
-            {/* {
-                isLoged ? (
+            {
+                userExist ? (
                     <Link to="/profile"><p>Seu canal</p></Link>
                 ) : (
                     <Link to="/login"><p>Acessar Conta</p></Link>
                 )
-            } */}
+            }
             <div className='divider__profile__modal' />
             <div id='change__theme'>
                 <p>Tema</p>

@@ -21,7 +21,7 @@ import { useDispatch } from 'react-redux'
 import { doIsClicked } from "../../store/features/header/headerSlice"
 
 // service
-import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajamentoService'
+import Cookies from 'js-cookie'
 
 const Header = ({ searchValue }) => {
 
@@ -33,7 +33,7 @@ const Header = ({ searchValue }) => {
     const [searchDesktop, setSearchDesktop] = useState(false)
     const [verifyClicked, setVerifyClicked] = useState(false)
     const [valueInput, setValueInput] = useState(searchValue)
-    
+
     const [image, setImage] = useState(notFound)
     const [usuario, setUsuario] = useState({})
     const [widthPage, setWidthPage] = useState()
@@ -79,7 +79,7 @@ const Header = ({ searchValue }) => {
         //     searchDesktop(false)
         // }
 
-        document.addEventListener("click", handleClick) 
+        document.addEventListener("click", handleClick)
         setWidthPage(window.innerWidth)
 
         return (
@@ -103,18 +103,12 @@ const Header = ({ searchValue }) => {
     }
 
     useEffect(() => {
-        UsuarioEngajamentoService.buscarUm()
-            .then((data) => {
-                if (data && data.foto) {
-                    setImage("http://10.4.96.50:7000/api/usuario/static/" + data.foto)
-                } else {
-                    setImage(notFound)
-                }
-                setUsuario(data)
-            })
-            .catch((error) => {
-                console.error('Erro ao buscar usuario: ', error)
-            })
+        const user = JSON.parse(Cookies.get("user"))
+        if (user && user.foto) {
+            setImage("http://10.4.96.50:7000/api/usuario/static/" + user.foto)
+        } else {
+            setImage(notFound)
+        }
     }, [])
 
     return (
@@ -122,7 +116,7 @@ const Header = ({ searchValue }) => {
             <div className='header__menu__icon'>
                 <IoMenu onClick={handleOpenSideBar} />
             </div>
-            <div className='header__input__container' style={widthPage <= 900 ? {} : {position: "relative"}}>
+            <div className='header__input__container' style={widthPage <= 900 ? {} : { position: "relative" }}>
                 <div>
                     <input
                         className='header__input__text__search'
