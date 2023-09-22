@@ -36,7 +36,7 @@ const Modal_profile = () => {
             <div className='divider__profile__modal'></div>
             <Link to="/historic" ><p>Histórico</p></Link>
             <div className='divider__profile__modal'></div>
-            <Link to="/settings" ><p>Settings</p></Link>
+            <Link to="/settings" ><p>Configuração</p></Link>
             <div className='divider__profile__modal'></div>
             <p onClick={Logout}>Sair</p>
         </div>
