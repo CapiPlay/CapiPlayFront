@@ -35,7 +35,7 @@ const Header = ({ searchValue }) => {
     const [valueInput, setValueInput] = useState(searchValue)
 
     const [image, setImage] = useState(notFound)
-    const [usuario, setUsuario] = useState({})
+    const [usuario, setUsuario] = useState(false)
     const [widthPage, setWidthPage] = useState()
     const [openModalProfile, setOpenModalProfile] = useState(false)
 
@@ -46,7 +46,6 @@ const Header = ({ searchValue }) => {
 
     const handleSearch = () => {
         nav(`/result-search?search=${encodeURIComponent(valueInput)}`)
-        console.log("search: ")
     }
 
     const verifyKeyPress = (e) => {
@@ -107,6 +106,7 @@ const Header = ({ searchValue }) => {
 
         if (userCookie) {
             try {
+                setUsuario(true)
                 const user = JSON.parse(userCookie)
                 if (user && user.foto) {
                     setImage("http://10.4.96.50:7000/api/usuario/static/" + user.foto)
@@ -145,7 +145,13 @@ const Header = ({ searchValue }) => {
             </div>
             <div className='header__info'>
                 <div className='info__from__header'>
-                    <Link to={"/upload"}><TbUpload /></Link>
+                    {
+                        usuario ? (
+                            <Link to={"/upload"}><TbUpload /></Link>
+                        ) : (
+                            <Link to={"/login"}><TbUpload /></Link>
+                        )
+                    }
                 </div>
                 <div className='info__from__header'>
                     <img src={image} onClick={handleOpenModalProfile} />

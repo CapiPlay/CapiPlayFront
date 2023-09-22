@@ -15,7 +15,7 @@ import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajame
 import Cookies from 'js-cookie';
 
 
-const Profile = ({  }) => {
+const Profile = () => {
 
     const [usuario, setUsuario] = useState({});
     const { idUsuario } = useParams();
