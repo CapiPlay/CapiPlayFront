@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import Input from '../../components/input/Input'
 import Select from '../../components/select/Select'
 import Button from '../../components/button/Button'
+import InputTag from '../../components/inputTag/InputTag'
 import InputFile from '../../components/inputFile/InputFile'
 import HeaderUpload from '../upload/headerUpload/HeaderUpload'
 import InputTextArea from '../../components/inputTextArea/InputTextArea'
@@ -79,11 +80,18 @@ function UploadVideo() {
     setTag(e.target.value);
   };
 
+  const enterInputTag = (event) => {
+    if (event.key === "Enter") {
+      renderizarNovaTag()
+    }
+  }
+
   const renderizarNovaTag = () => {
     if (tag !== "") {
       setTags([...tags, tag])
       const updatedTags = [...video.tags, tag]
       setVideo({ ...video, tags: updatedTags })
+      setTag("")
     }
   }
 
@@ -180,13 +188,14 @@ function UploadVideo() {
                 <div className='upload__video__box__input'>
                   <div className='upload__video__box__tags'>
                     <div className='upload__video__tags__input'>
-                      <Input
+                      <InputTag
                         placeholder={"Tags do vídeo"}
                         type={"text"}
                         value={tag}
                         onChange={handleTagChange}
                         name='tag'
                         required={true}
+                        onKeyDown={enterInputTag}
                       />
                     </div>
                     <button

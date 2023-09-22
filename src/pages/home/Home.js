@@ -18,6 +18,7 @@ function Home(darkMode) {
   const [currentPage, setCurrentPage] = useState(0);
   const [loadingMoreVideos, setLoadingMoreVideos] = useState(false);
 
+
   Aos.init({
     duration: 200
   });
@@ -57,8 +58,8 @@ function Home(darkMode) {
   }, [currentPage, loadingMoreVideos]);
 
   const getMoreVideos = async (page) => {
-    const moreVideos = await VideoService.buscarTodos(50, 0, false);  
-    const videos = moreVideos.content  
+    const moreVideos = await VideoService.buscarTodos(50, 0, false);
+    const videos = moreVideos.content
     if (videosReu?.length == 0) {
       setVideosReu((prevVideos) => [...prevVideos, ...videos]);
       setCurrentPage(page);
@@ -150,6 +151,7 @@ function Home(darkMode) {
   const renderTabletView = () => (
     <>
       <Header />
+      <Side_Bar/>
       <div className='container__home'>
         <div className='container__slider__base__tablet'>
           <Slider_Category />
@@ -174,6 +176,7 @@ function Home(darkMode) {
   const renderMobileView = () => (
     <>
       <Header />
+      <Side_Bar/>
       <div className='container__home'>
         <div className='container__slider__base'>
           <Slider />

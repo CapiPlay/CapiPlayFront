@@ -4,9 +4,6 @@ import axios from 'axios';
 import './Settings.css'
 import { useNavigate } from 'react-router-dom';
 
-//imagem
-import ProfileImage from '../../assets/image/img_base_miniatura.png'
-
 //componentes
 import HeaderSettings from '../../components/header/Header'
 import Input from "../../components/input/Input";
@@ -96,7 +93,8 @@ const Settings = ({ }) => {
     const handleUpdateUser = () => {
         if(settingsData.senha.length >= 6 && settingsData.senha.length <= 20){
             try {
-                const settings = new FormData();
+                const settings = new,
+                 FormData();
                 settings.append("nome", settingsData.nome);
                 settings.append("perfil", settingsData.perfil);
                 settings.append("senha", settingsData.senha);
@@ -136,7 +134,7 @@ const Settings = ({ }) => {
             <div className='settings__container'>
                 <HeaderSettings />
                 <div className="settings__form">
-                    <img src={ProfileImage} className='profile__settings' />
+                    {/* <img src={ProfileImage} className='profile__settings' /> */}
                     <div className='settings__box__image__options'>
                         <button className='settings__image__options__buttons'>Alterar</button>
                         <button className='settings__image__options__buttons' onClick={openImageModal}>Remover</button>
@@ -419,7 +417,7 @@ const Settings = ({ }) => {
             <div className='settings__container__tablet'>
                 <HeaderSettings />
                 <div className="settings__form__tablet">
-                    <img src={ProfileImage} className='profile__settings__tablet' />
+                    {/* <img src={ProfileImage} className='profile__settings__tablet' /> */}
                     <div className='settings__box__image__options__tablet'>
                         <button className='settings__image__options__buttons__tablet'>Alterar</button>
                         <button className='settings__image__options__buttons__tablet' onClick={openImageModal}>Remover</button>

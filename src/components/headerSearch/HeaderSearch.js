@@ -1,10 +1,7 @@
 import "./HeaderSearch.css"
 
 import { IoMdArrowBack } from "react-icons/io"
-import { BiSearchAlt2 } from "react-icons/bi"
-
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai"
 
 // PROPS: 
 // - valueInput = valor que vai representar o que o usuário digitar na pesquisa
@@ -24,16 +21,14 @@ const HeaderSearch = ({ valueInput, handleChange, functionBack, handleSearch }) 
 
     return (
         <div className="header__search">
-            <IoMdArrowBack className="icon__search" onClick={functionBack} />
+            <IoMdArrowBack className="icon__search__back" onClick={functionBack} />
             <div className="container__input__search">
                 <input
                     type="text"
                     value={valueInput}
                     onChange={handleChange}
                     onKeyPress={verifyKeyPress} />
-                <BiSearchAlt2
-                    className="icon__search"
-                />
+                <AiOutlineSearch className="icon__search"/>
             </div>
         </div>
     )
