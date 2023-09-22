@@ -34,6 +34,10 @@
     margin: 0 auto;
 }
 
+.profile__pic__desktop{
+    border-radius: 100px;
+}
+
 .profile__name {
     color: var(--lightpurple);
 }

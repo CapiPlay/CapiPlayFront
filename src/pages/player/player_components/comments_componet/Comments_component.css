@@ -8,6 +8,7 @@
     margin-top: 4%;
     color: white;
     display: flex;
+    width: 100%;
     
 }
 
@@ -28,12 +29,15 @@
     justify-content: center;
     align-items: center;
     font-size: 0.8rem;
+    gap: 5px;
 }
 
 .dislikes{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 0.8rem;
+    gap: 5px;
 }
 
 .ball{
@@ -51,6 +55,11 @@
     justify-content: flex-start;
     font-size: 0.7rem;
     margin-bottom: 3px;
+}
+
+.comment__text{
+    word-wrap: break-word;
+    width: 100%;
 }
 
 .comment__total__answers{
@@ -77,4 +86,5 @@
 /* ----- for light mode ----- */
 .comment__content {
     color: var(--whiteBlack);
+    width: 80%;
 }
