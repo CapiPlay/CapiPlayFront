@@ -8,25 +8,30 @@ function LikeDislikeButtons({ video }) {
   const [likeBtnActive, setLikeBtnActive] = useState(false);
   const [dislikeBtnActive, setDislikeBtnActive] = useState(false);
 
+  async function getReacao() {
+    const temp = await ReacaoService.buscarUm(video.uuid);
+    return await temp;
+    };
+  
   useEffect(() => {
-    const reacao = ReacaoService.buscarUm(
-      {
-        idVideo: video.uuid
-      });
-    console.log("Reação " + reacao.curtida);
+    getReacao();
+    console.log(reacao);
     if (reacao) {
-      if (reacao.curtida) {
-        setLikeBtnActive(true);
-      }else if (!reacao.curtida){
-        setDislikeBtnActive(true);
-      }else{
+      if (reacao == null) {
         setLikeBtnActive(false);
         setDislikeBtnActive(false);
+        return;
+      } else if (!reacao) {
+        setDislikeBtnActive(true);
+        return;
+      } else if (reacao) {
+        setLikeBtnActive(true);
+        return;
       }
     }
   }, [video.uuid]);
 
-  const handleToggleLikeBtn = () => {
+  const handleToggleLikeBtn = async () => {
     if (!likeBtnActive && !dislikeBtnActive) {
       setLikeBtnActive(true);
       ReacaoService.criar({
