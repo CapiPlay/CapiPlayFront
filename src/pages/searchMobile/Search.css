@@ -21,10 +21,11 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: var(--whitesmoke);
 }
 
 .icons__search {
-    color: var(--lightpurple);
+    color: var(--whitesmoke);
 }
 
 /* Responsividade  */
@@ -39,18 +40,20 @@
     .container__search {
         position: absolute;
         top: 85%;
-        width: 91%;
         height: 41vh;
         background-color: var(--whitesmoke);
         border-radius: 10px;
     }
 
     .search__box>span {
-        font-size: 12px;
+        font-size: 14px;
         width: 100%;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+        margin-left: 1%;
+        color: var(--darkpurple);
+        user-select: none;
     }
 
     .search__box {
@@ -64,15 +67,8 @@
         background-color: var(--beige);
     }
 
-    .search__box>span {
-        margin-left: 1%;
-        font-size: 14px;
-        color: var(--darkpurpleToo);
-        user-select: none;
-    }
-
     .icons__search {
-        color: var(--darkpurpleToo);
+        color: var(--darkpurple);
         opacity: .6;
     }
 }

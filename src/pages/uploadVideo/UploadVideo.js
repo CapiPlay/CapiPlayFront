@@ -3,39 +3,31 @@ import './UploadVideo.css'
 
 // react
 import { HiUpload } from 'react-icons/hi'
-import { useLocation } from 'react-router-dom'
 import React, { useState, useRef } from 'react'
-import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 // componentes
 import Input from '../../components/input/Input'
 import Select from '../../components/select/Select'
 import Button from '../../components/button/Button'
+import InputTag from '../../components/inputTag/InputTag'
 import InputFile from '../../components/inputFile/InputFile'
 import HeaderUpload from '../upload/headerUpload/HeaderUpload'
 import InputTextArea from '../../components/inputTextArea/InputTextArea'
-import InputFileUpload from '../../components/inputFileUpload/InputFileUpload'
+import { getImageData } from '../../pages/upload/imageDataStore';
 
 // service
 import VideoService from '../../service/Video/VideoService'
 
 function UploadVideo() {
 
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const encodedMiniaturaDataURL = searchParams.get('miniatura');
-
-  // Decode the data URL and set it as the miniatura
-  const miniaturaUrl = decodeURIComponent(encodedMiniaturaDataURL);
-
-
+  const navigate = useNavigate();
   const [videoSrc, setVideoSrc] = useState(null)
-
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
-
-  const [image, setImage] = useState()
-  const imagePreviewRef = useRef(null)
+  const image = getImageData();
+  const imagePreviewRef = useRef(null);
+  const [imagem, setImagem] = useState(null);
 
   const [video, setVideo] = useState({
     titulo: "",
@@ -44,60 +36,56 @@ function UploadVideo() {
     categoria: "",
     shorts: false,
     video: "",
-    miniatura: miniaturaUrl,
     restrito: ""
   })
 
   const categorias = [
-    { label: "Artes e Cultura", value: "Artes e Cultura" },
-    { label: "Ciência e Tecnologia", value: "Ciência e Tecnologia" },
-    { label: "Culinária", value: "Culinária" },
-    { label: "Educação", value: "Educação" },
-    { label: "Esportes", value: "Esportes" },
-    { label: "Entretenimento", value: "Entretenimento" },
-    { label: "Documentários", value: "Documentários" },
-    { label: "Jogos", value: "Jogos" },
-    { label: "Lifestyle", value: "Lifestyle" },
-    { label: "Moda e Beleza", value: "Moda e Beleza" },
-    { label: "Música", value: "Música" },
-    { label: "Viagem e Turismo", value: "Viagem e Turismo" }
+    { label: "Artes e Cultura", value: "ARTESECULTURA" },
+    { label: "Ciência e Tecnologia", value: "CIENCIAETECNOLOGIA" },
+    { label: "Culinária", value: "CULINARIA" },
+    { label: "Educação", value: "EDUCACAO" },
+    { label: "Esportes", value: "ESPORTES" },
+    { label: "Entretenimento", value: "ENTRETERIMENTO" },
+    { label: "Documentários", value: "DOCUMENTARIO" },
+    { label: "Jogos", value: "JOGOS" },
+    { label: "Lifestyle", value: "LIFESTYLE" },
+    { label: "Moda e Beleza", value: "MODAEBELEZA" },
+    { label: "Música", value: "MUSICA" },
+    { label: "Viagem e Turismo", value: "VIAGEMETURISMO" }
   ];
 
-  const handleInputChange = (e) => {
-    setVideo({ ...video, [e.target.name]: e.target.value })
+  const handleVideoChange = (event) => {
+    const selectedVideo = event.target.files[0];
+    setVideo({ ...video, video: selectedVideo });
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      if (imagePreviewRef.current) {
+        imagePreviewRef.current.src = event.target.result;
+        imagePreviewRef.current.style.display = 'block';
+      }
+    }
+    reader.readAsDataURL(selectedVideo);
+    const videoURL = URL.createObjectURL(selectedVideo);
+    setVideoSrc(videoURL);
+
+    setVideoSrc(URL.createObjectURL(selectedVideo));
   }
+
+  const handleInputChange = (event) => {
+    const { name, value, files } = event.target;
+    setVideo({ ...video, [name]: value });
+  };
 
   const handleTagChange = (e) => {
     setTag(e.target.value);
   };
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const videoURL = URL.createObjectURL(file);
-  
-      const reader = new FileReader();
-      const formData = new FormData();
-      formData.append('video', file);
-  
-      reader.onload = function (event) {
-        if (imagePreviewRef.current) {
-          imagePreviewRef.current.src = event.target.result;
-          imagePreviewRef.current.style.display = 'block';
-        }
-      };
-      reader.readAsDataURL(file);
-  
-      setVideo((prevVideo) => ({
-        ...prevVideo,
-        video: file, // Assign the video file
-        miniatura: videoURL, // Assign the thumbnail URL
-      }));
-  
-      setVideoSrc(videoURL);
-      setImage(formData);
+
+  const enterInputTag = (event) => {
+    if (event.key === "Enter") {
+      renderizarNovaTag()
     }
-  };
-  
+  }
+
   const renderizarNovaTag = () => {
     if (tag !== "") {
       setTags([...tags, tag])
@@ -111,7 +99,6 @@ function UploadVideo() {
     const updatedTags = [...tags];
     updatedTags.splice(index, 1);
     setTags(updatedTags);
-
     setVideo((prevVideo) => ({
       ...prevVideo,
       tags: updatedTags,
@@ -120,18 +107,27 @@ function UploadVideo() {
 
   const enviarVideo = async (event) => {
     event.preventDefault();
-
-    const videoFormData = new FormData();
-    videoFormData.append('video', video.video); // Assuming 'video' is the actual video file
-    videoFormData.append('miniatura', video.miniatura); // Assuming 'miniatura' is the thumbnail file
-    console.log(videoFormData)
     try {
+      const videoFormData = new FormData();
+      videoFormData.append("titulo", video.titulo);
+      videoFormData.append("descricao", video.descricao);
+      videoFormData.append("tags", video.tags);
+      videoFormData.append("categoria", video.categoria);
+      videoFormData.append("shorts", video.shorts);
+      videoFormData.append("video", video.video);
+      videoFormData.append("miniatura", image);
+      videoFormData.append("restrito", video.restrito);
+      console.log("Conteúdo do videoFormData:");
+      for (let pair of videoFormData.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+      }
       const response = await VideoService.criar(videoFormData);
-      console.log(response.data);
+      alert("Vídeo cadastrado!")
+      navigate('/')
     } catch (error) {
+      alert("Ocorreu um erro ao cadastrar o vídeo")
       console.error('Error:', error);
     }
-    console.log(video);
   };
 
   return (
@@ -166,7 +162,6 @@ function UploadVideo() {
                 required={true}
               />
             </div>
-
             <div className='upload__video__container__first__row'>
               <div className='upload__video__box__inputfile'>
                 <div className='upload__video__inputfile'>
@@ -175,11 +170,11 @@ function UploadVideo() {
                     <InputFile
                       label={"Selecionar arquivo"}
                       radius={"10px"}
-                      file={image}
-                      name='video'
-                      onChange={handleFileChange}
+                      file={imagem}
+                      name="video"
+                      onChange={handleVideoChange}
                       value={video.video}
-                      accept={".mp4"}
+                      accept={".MP4"}
                     />
                   </div>
                 </div>
@@ -190,25 +185,24 @@ function UploadVideo() {
                 )}
               </div>
               <div className='upload__video__box__input'>
-                <div className='upload__video__box__input'>
-                  <div className='upload__video__box__tags'>
-                    <div className='upload__video__tags__input'>
-                      <Input
-                        placeholder={"Tags do vídeo"}
-                        type={"text"}
-                        value={tag}
-                        onChange={handleTagChange}
-                        name='tag'
-                        required={true}
-                      />
-                    </div>
-                    <button
-                      className='upload__video__tags__button'
-                      onClick={renderizarNovaTag}
-                      type='button'>
-                      Enviar
-                    </button>
+                <div className='upload__video__box__tags'>
+                  <div className='upload__video__tags__input'>
+                    <InputTag
+                      placeholder={"Tags do vídeo"}
+                      type={"text"}
+                      value={tag}
+                      onChange={handleTagChange}
+                      name='tag'
+                      required={true}
+                      onKeyDown={enterInputTag}
+                    />
                   </div>
+                  <button
+                    className='upload__video__tags__button'
+                    onClick={renderizarNovaTag}
+                    type='button'>
+                    Enviar
+                  </button>
                 </div>
                 {tags.length != 0 &&
                   <div className='upload__video__tags__scroll'>

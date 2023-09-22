@@ -3,92 +3,90 @@ import './UploadShorts.css'
 
 // react
 import { HiUpload } from 'react-icons/hi'
-import { useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useRef } from 'react'
 
 // componentes
 import Input from '../../components/input/Input'
 import Select from '../../components/select/Select'
 import Button from '../../components/button/Button'
+import InputTag from '../../components/inputTag/InputTag'
 import InputFile from '../../components/inputFile/InputFile'
 import HeaderUpload from '../upload/headerUpload/HeaderUpload'
+import { getImageData } from '../../pages/upload/imageDataStore';
 
+// service
+import VideoService from '../../service/Video/VideoService'
 
 function UploadShorts() {
 
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const miniaturaUrl = searchParams.get("miniatura");
-
+  const navigate = useNavigate();
   const [videoSrc, setVideoSrc] = useState(null)
-
   const [tag, setTag] = useState("");
   const [tags, setTags] = useState([]);
-
-  const [image, setImage] = useState()
-  const imagePreviewRef = useRef(null)
+  const image = getImageData();
+  const imagePreviewRef = useRef(null);
+  const [imagem, setImagem] = useState(null);
 
   const [video, setVideo] = useState({
     titulo: "",
-    descricao: null,
+    descricao: "",
     tags: [],
     categoria: "",
     shorts: true,
     video: "",
-    miniatura: miniaturaUrl,
     restrito: ""
   })
 
   const categorias = [
-    { label: "Artes e Cultura", value: "Artes e Cultura" },
-    { label: "Ciência e Tecnologia", value: "Ciência e Tecnologia" },
-    { label: "Culinária", value: "Culinária" },
-    { label: "Educação", value: "Educação" },
-    { label: "Esportes", value: "Esportes" },
-    { label: "Entretenimento", value: "Entretenimento" },
-    { label: "Documentários", value: "Documentários" },
-    { label: "Jogos", value: "Jogos" },
-    { label: "Lifestyle", value: "Lifestyle" },
-    { label: "Moda e Beleza", value: "Moda e Beleza" },
-    { label: "Música", value: "Música" },
-    { label: "Viagem e Turismo", value: "Viagem e Turismo" }
+    { label: "Artes e Cultura", value: "ARTESECULTURA" },
+    { label: "Ciência e Tecnologia", value: "CIENCIAETECNOLOGIA" },
+    { label: "Culinária", value: "CULINARIA" },
+    { label: "Educação", value: "EDUCACAO" },
+    { label: "Esportes", value: "ESPORTES" },
+    { label: "Entretenimento", value: "ENTRETERIMENTO" },
+    { label: "Documentários", value: "DOCUMENTARIO" },
+    { label: "Jogos", value: "JOGOS" },
+    { label: "Lifestyle", value: "LIFESTYLE" },
+    { label: "Moda e Beleza", value: "MODAEBELEZA" },
+    { label: "Música", value: "MUSICA" },
+    { label: "Viagem e Turismo", value: "VIAGEMETURISMO" }
   ];
 
-  const handleInputChange = (e) => {
-    setVideo({ ...video, [e.target.name]: e.target.value })
+  const handleVideoChange = (event) => {
+    const selectedVideo = event.target.files[0];
+    setVideo({ ...video, video: selectedVideo });
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      if (imagePreviewRef.current) {
+        imagePreviewRef.current.src = event.target.result;
+        imagePreviewRef.current.style.display = 'block';
+      }
+    }
+    reader.readAsDataURL(selectedVideo);
+    const videoURL = URL.createObjectURL(selectedVideo);
+    setVideoSrc(videoURL);
+
+    setVideoSrc(URL.createObjectURL(selectedVideo));
   }
+
+  const handleInputChange = (event) => {
+    const { name, value, files } = event.target;
+    setVideo({ ...video, [name]: value });
+  };
 
   const handleTagChange = (e) => {
     setTag(e.target.value);
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0]
-    if (file) {
-      const formData = new FormData()
-      formData.append("foto", file)
-      setImage(formData)
-
-      const reader = new FileReader();
-
-      reader.onload = function (event) {
-        if (imagePreviewRef.current) {
-          imagePreviewRef.current.src = event.target.result;
-          imagePreviewRef.current.style.display = 'block';
-        }
-      };
-
-      reader.readAsDataURL(file);
-
-      const videoURL = URL.createObjectURL(file);
-      setVideoSrc(videoURL);
-
-      setVideoSrc(URL.createObjectURL(file));
+  const enterInputTag = (event) => {
+    if (event.key === "Enter") {
+      renderizarNovaTag()
     }
   }
 
   const renderizarNovaTag = () => {
-    if (tag.trim() !== "") {
+    if (tag !== "") {
       setTags([...tags, tag])
       const updatedTags = [...video.tags, tag]
       setVideo({ ...video, tags: updatedTags })
@@ -100,29 +98,34 @@ function UploadShorts() {
     const updatedTags = [...tags];
     updatedTags.splice(index, 1);
     setTags(updatedTags);
-
     setVideo((prevVideo) => ({
       ...prevVideo,
       tags: updatedTags,
     }))
   }
 
-  const enviarShorts = (event) => {
-    event.preventDefault()
-
-    setVideo((prevVideo) => ({
-      ...prevVideo,
-      video: videoSrc
-    }));
-    // VideoService.criar(video)
-    console.log(video)
-    // window.location.reload()
-  }
-
-  const handleEnterPress = (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      renderizarNovaTag();
+  const enviarShorts = async (event) => {
+    event.preventDefault();
+    try {
+      const shortsFormData = new FormData();
+      shortsFormData.append("titulo", video.titulo);
+      shortsFormData.append("descricao", video.descricao);
+      shortsFormData.append("tags", video.tags);
+      shortsFormData.append("categoria", video.categoria);
+      shortsFormData.append("shorts", video.shorts);
+      shortsFormData.append("video", video.video);
+      shortsFormData.append("miniatura", image);
+      shortsFormData.append("restrito", video.restrito);
+      console.log("Conteúdo do videoFormData:");
+      for (let pair of shortsFormData.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+      }
+      const response = await VideoService.criar(shortsFormData);
+      alert("Shorts cadastrado!")
+      navigate('/')
+    } catch (error) {
+      alert("Ocorreu um erro ao cadastrar o Shorts")
+      console.error('Error:', error);
     }
   };
 
@@ -152,26 +155,24 @@ function UploadShorts() {
               />
 
               <div className='upload__shorts__box__input'>
-                <div className='upload__shorts__box__input'>
-                  <div className='upload__shorts__box__tags'>
-                    <div className='upload__shorts__tags__input'>
-                      <Input
-                        placeholder={"Tags do shorts"}
-                        type={"text"}
-                        value={tag}
-                        onChange={handleTagChange}
-                        onKeyDown={handleEnterPress}
-                        name='tag'
-                        required={true}
-                      />
-                    </div>
-                    <button
-                      className='upload__shorts__tags__button'
-                      onClick={renderizarNovaTag}
-                      type='button'>
-                      Enviar
-                    </button>
+                <div className='upload__shorts__box__tags'>
+                  <div className='upload__shorts__tags__input'>
+                    <InputTag
+                      placeholder={"Tags do vídeo"}
+                      type={"text"}
+                      value={tag}
+                      onChange={handleTagChange}
+                      name='tag'
+                      required={true}
+                      onKeyDown={enterInputTag}
+                    />
                   </div>
+                  <button
+                    className='upload__shorts__tags__button'
+                    onClick={renderizarNovaTag}
+                    type='button'>
+                    Enviar
+                  </button>
                 </div>
                 {tags.length != 0 &&
                   <div className='upload__shorts__tags__scroll'>
@@ -208,11 +209,11 @@ function UploadShorts() {
                     <InputFile
                       label={"Selecionar arquivo"}
                       radius={"10px"}
-                      file={image}
+                      file={imagem}
                       name='video'
-                      onChange={handleFileChange}
+                      onChange={handleVideoChange}
                       value={video.video}
-                      accept={".mp4"}
+                      accept={".MP4"}
                     />
                   </div>
                 </div>

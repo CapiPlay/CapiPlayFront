@@ -1,0 +1,71 @@
+.input__tag__group {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input__tag__control {
+    height: 3rem;
+    width: 100%;
+    font-size: 16px;
+
+    box-sizing: border-box;
+    border: none;
+    padding: 0 13px;
+    outline: none;
+    border: 1px solid var(--darkblue);
+    border-radius: 10px;
+    transition: 0.2s ease-out;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--backgroundInput);
+}
+
+.input__tag__control:focus {
+    border-color: var(--purple);
+}
+
+.input__tag__control:focus+label {
+    transform: translateY(-170%);
+    font-size: 16px;
+    color: var(--lightpurple);
+}
+
+.input__tag__control::placeholder {
+    color: transparent;
+}
+
+.input__tag__control[title]::after {
+    content: attr("Drogaaaaa");
+    color: #fff;
+    background-color: black !important;
+    padding: 4px 8px;
+    border-radius: 4px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.input__tag__active {
+    transform: translateY(-170%);
+    font-size: 16px;
+    color: var(--lightpurple);
+}
+
+.input__tag__label__input {
+    position: absolute;
+    left: 0;
+    font-size: 16px;
+    color: var(--placeholderInput);
+    transition: 0.2s ease-out;
+    pointer-events: none;
+    box-sizing: border-box;
+    padding: 0 14px;
+}
