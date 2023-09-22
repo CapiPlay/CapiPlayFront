@@ -59,38 +59,33 @@ const Header = ({ searchValue }) => {
     }
 
     useEffect(() => {
+
         if (valueInput === null) {
             const urlSearchParams = new URLSearchParams(location.search)
             const searchParams = urlSearchParams.get("q")
             setValueInput(searchParams)
         }
 
-        const handleClick = (e) => {
-            const element = e.target.offsetParent
-            if (element == null || !element.classList.contains("header__input__container")) {
-                setSearchDesktop(false)
-            }
+        if (verifyClicked) {
+            setSearchDesktop(true)
+        } else {
+            setSearchDesktop(false)
         }
 
-        // if(verifyClicked) {
-        //     setSearchDesktop(true)
-        // } else {
-        //     searchDesktop(false)
-        // }
-
-        document.addEventListener("click", handleClick)
+        document.addEventListener("click", handleClickBlur)
         setWidthPage(window.innerWidth)
 
-        return (
-            document.removeEventListener("click", handleClick)
-        )
+        return ()=> {
+            document.removeEventListener("click", handleClickBlur)
+        }
+        
     }, [])
 
-    // const handleSelection = (searchSelected) => {
-    //     setValueInput(searchSelected)
-    //     setVerifyClicked(true)
-    //     nav(`/result-search?search=${searchSelected}`)
-    // }
+    const handleSelection = (searchSelected) => {
+        setValueInput(searchSelected)
+        setVerifyClicked(true)
+        nav(`/result-search?search=${searchSelected}`)
+    }
 
     //Ações de usuário
     const handleOpenModalProfile = () => {
@@ -101,9 +96,16 @@ const Header = ({ searchValue }) => {
         dispatch(doIsClicked())
     }
 
+    const handleClickBlur = (e) => {
+        const element = e.target.offsetParent
+        if (element == null || !element.classList.contains("header__input__container")) {
+            setSearchDesktop(false)
+        }
+    }
+
     useEffect(() => {
         const userCookie = Cookies.get("user")
-
+    
         if (userCookie) {
             try {
                 setUsuario(true)
@@ -133,6 +135,7 @@ const Header = ({ searchValue }) => {
                         className='header__input__text__search'
                         placeholder='Pesquisar'
                         onFocus={() => setSearchDesktop(true)}
+                        onClick={handleClickBlur}
                         value={valueInput}
                         onKeyPress={verifyKeyPress}
                         onChange={handleChange} />
