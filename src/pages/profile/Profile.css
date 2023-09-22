@@ -30,6 +30,7 @@
 }
 
 .profile__pic {
+    border-radius: 100%;
     margin: 0 auto;
 }
 
@@ -74,6 +75,11 @@
 }
 
 /* Desktop */
+
+.profile__pic__desktop {
+    border-radius: 100%;
+}
+
 .profile__container__picture__desktop {
     display: flex;
     flex-direction: row;

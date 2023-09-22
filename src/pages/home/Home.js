@@ -18,6 +18,7 @@ function Home(darkMode) {
   const [currentPage, setCurrentPage] = useState(0);
   const [loadingMoreVideos, setLoadingMoreVideos] = useState(false);
 
+
   Aos.init({
     duration: 200
   });
@@ -40,180 +41,177 @@ function Home(darkMode) {
   const handleScroll = () => {
     const scrolled = window.innerHeight + window.scrollY;
     const totalHeight = document.documentElement.scrollHeight;
-
+  
     if (!loadingMoreVideos && scrolled >= totalHeight - 100) {
       setLoadingMoreVideos(true);
       getMoreVideos(currentPage + 1);
-    }
   };
+}
 
   useEffect(() => {
-
     window.addEventListener('scroll', handleScroll);
-
+  
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [currentPage, loadingMoreVideos]);
 
   const getMoreVideos = async (page) => {
-    const moreVideos = await VideoService.buscarTodos(50, 0, false);  
-    const videos = moreVideos.content  
-    if (videosReu?.length == 0) {
-      setVideosReu((prevVideos) => [...prevVideos, ...videos]);
-      setCurrentPage(page);
+    const moreVideos = await VideoService.buscarTodos(10, page, false);
+    if (moreVideos.last === true) {
+      const newVideos = moreVideos.content.filter((video) => {
+        return !videosReu.some((existingVideo) => existingVideo.uuid === video.uuid);
+      });
+      if (newVideos.length > 0) {
+        setVideosReu((prevVideos) => [...prevVideos, ...newVideos]);
+        setCurrentPage(page);
+      }
     }
+  
     setLoadingMoreVideos(false);
   };
 
-  const getVideosReu = async () => {
-    const pageable = await VideoService.buscarTodos(6, 0, false);
-    const videos = pageable.content
-    if (videosReu?.length == 0) {
-      setVideosReu(videos);
-    } else {
-      setVideosReu([]);
-    }
-  };
+const getVideosReu = async () => {
+  const pageable = await VideoService.buscarTodos(6, 0, false);
+  const videos = pageable.content
+  if (videosReu?.length == 0) {
+    setVideosReu(videos);
+  } else {
+    setVideosReu([]);
+  }
+};
 
 
-  const getVideosRet = async () => {
-    const pageable = await VideoService.buscarTodos(6, 0, false);
-    if (pageable?.length > 0) {
-      setVideosRet(pageable);
-    } else {
-      setVideosRet([]);
-    }
+const getVideosRet = async () => {
+  const pageable = await VideoService.buscarTodos(6, 0, false);
+  if (pageable?.length > 0) {
+    setVideosRet(pageable);
+  } else {
     setVideosRet([]);
   }
+}
 
-  const getVideosRev = async () => {
-    const videos = await VideoService.buscarTodos(6, 0, false);
-    if (videos?.length > 6) {
-      videos.sort((a, b) => b.pontuacao - a.pontuacao);
-      const top6Videos = videos.slice(0, 6);
-      setVideosRev(top6Videos);
-    } else {
-      setVideosRev([]);
-    }
+const getVideosRev = async () => {
+  const videos = await VideoService.buscarTodos(6, 0, false);
+  const vidiozinho = videos.content;
+  if (vidiozinho.length >= 6) {
+    setVideosRev(vidiozinho);
+  } else {
     setVideosRev([]);
   }
+}
 
-  const userProfile = () => {
-    const userToken = Cookies.get('token');
-    if (userToken) {
-      try {
-        const tokenPayload = userToken.split('.')[1];
-        const decodedPayload = atob(tokenPayload);
-        const userLogin = JSON.parse(decodedPayload);
-        if (userLogin) {
-          return true;
-        } else {
-          return false;
-        }
-      } catch (error) {
-        console.error("Erro ao analisar o token:", error);
+const userProfile = () => {
+  const userToken = Cookies.get('token');
+  if (userToken) {
+    try {
+      const tokenPayload = userToken.split('.')[1];
+      const decodedPayload = atob(tokenPayload);
+      const userLogin = JSON.parse(decodedPayload);
+      if (userLogin) {
+        return true;
+      } else {
         return false;
       }
-    } else {
+    } catch (error) {
+      console.error("Erro ao analisar o token:", error);
       return false;
     }
+  } else {
+    return false;
   }
+}
 
-  const renderDesktopView = () => (
-    <>
-      <div className={`home-component ${darkMode ? 'dark-mode' : 'light-mode'}`}>
-        <Header userLogin={userProfile()} />
-        <Side_Bar />
-        <div className='container__header__home'></div>
-        <div className='container__home'>
-          <div className='container__slider__base__desk'>
-            <Slider_Category />
-          </div>
-          <div className='container__slider__base__desk'>
-            <Slider />
-          </div>
-          <div className='container__video__cards__desk'>
-            {videosRev.map((video) => (
-              <Video_card key={video.uuid} video={video} />
-            ))}
-          </div>
-          <div className='container__shorts__cards__desk'>
-            <Slider_Shorts />
-          </div>
-          <div className='container__video__cards__desk'>
-            {videosReu.map((video) => (
-              <Video_card key={video.uuid} video={video} />
-            ))}
-          </div>
-        </div>
-      </div>
-    </>
-
-  );
-
-  const renderTabletView = () => (
-    <>
-      <Header />
+const renderDesktopView = () => (
+  <>
+    <div className={`home-component ${darkMode ? 'dark-mode' : 'light-mode'}`}>
+      <Header userLogin={userProfile()} />
+      <Side_Bar />
+      <div className='container__header__home'></div>
       <div className='container__home'>
-        <div className='container__slider__base__tablet'>
+        <div className='container__slider__base__desk'>
           <Slider_Category />
         </div>
-        <div className='container__slider__base__tablet'>
-          <Slider />
-        </div>
-        <div className='container__video__cards__tablet'>
+        <div className='container__video__cards__desk'>
           {videosRev.map((video) => (
             <Video_card key={video.uuid} video={video} />
           ))}
         </div>
-        <div className='container__shorts__cards__tablet'>
+        <div className='container__shorts__cards__desk'>
           <Slider_Shorts />
         </div>
-        <div className='container__video__cards__tablet'>
+        <div className='container__video__cards__desk'>
           {videosReu.map((video) => (
             <Video_card key={video.uuid} video={video} />
           ))}
         </div>
       </div>
-    </>
-  );
+    </div>
+  </>
 
-  const renderMobileView = () => (
-    <>
-      <Header />
-      <div className='container__home'>
-        <div className='container__slider__base'>
-          <Slider />
-        </div>
-        <div className='container__video__cards'>
-          {videosRet.map((video) => (
-            <Video_card key={video.uuid} video={video} />
-          ))}
-        </div>
-        <div className='container__shorts__cards__mobile'>
-          <Slider_Shorts />
-        </div>
-        <div className='container__video__cards'>
-          {videosReu.map((video) => (
-            <Video_card key={video.uuid} video={video} />
-          ))}
-        </div>
+);
+
+const renderTabletView = () => (
+  <>
+    <Header />
+    <Side_Bar />
+    <div className='container__home'>
+      <div className='container__slider__base__tablet'>
+        <Slider_Category />
       </div>
-    </>
-  );
+      <div className='container__video__cards__tablet'>
+        {videosRev.map((video) => (
+          <Video_card key={video.uuid} video={video} />
+        ))}
+      </div>
+      <div className='container__shorts__cards__tablet'>
+        <Slider_Shorts />
+      </div>
+      <div className='container__video__cards__tablet'>
+        {videosReu.map((video) => (
+          <Video_card key={video.uuid} video={video} />
+        ))}
+      </div>
+    </div>
+  </>
+);
 
-  const getViewToRender = () => {
-    if (screenSize.width > 900) {
-      return renderDesktopView();
-    } else if (screenSize.width < 900 && screenSize.width > 500) {
-      return renderTabletView();
-    } else {
-      return renderMobileView();
-    }
-  };
+const renderMobileView = () => (
+  <>
+    <Header />
+    <Side_Bar />
+    <div className='container__home'>
+      <div className='container__slider__base'>
+        <Slider />
+      </div>
+      <div className='container__video__cards'>
+        {videosRet.map((video) => (
+          <Video_card key={video.uuid} video={video} />
+        ))}
+      </div>
+      <div className='container__shorts__cards__mobile'>
+        <Slider_Shorts />
+      </div>
+      <div className='container__video__cards'>
+        {videosReu.map((video) => (
+          <Video_card key={video.uuid} video={video} />
+        ))}
+      </div>
+    </div>
+  </>
+);
 
-  return <>{getViewToRender()}</>;
+const getViewToRender = () => {
+  if (screenSize.width > 900) {
+    return renderDesktopView();
+  } else if (screenSize.width < 900 && screenSize.width > 500) {
+    return renderTabletView();
+  } else {
+    return renderMobileView();
+  }
+};
+
+return <>{getViewToRender()}</>;
 }
 
 export default Home;

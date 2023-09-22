@@ -30,12 +30,15 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 50%;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .upload__shorts__box__input {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    height: 7rem;
+    gap: 1rem;
 }
 
 .upload__shorts__box__tags {
@@ -56,6 +59,7 @@
     border: 0;
     background-color: var(--purple);
     color: var(--whitesmoke);
+    cursor: pointer;
 }
 
 .upload__shorts__tags__scroll {
@@ -89,7 +93,6 @@
     align-items: center;
     gap: 0.5rem;
     width: auto;
-    height: 1rem;
     padding: 0.7rem;
     font-size: smaller;
     text-align: center;
@@ -160,10 +163,6 @@
     border-radius: 0.5rem;
     border: 2px solid var(--whitesmoke);
     background-color: transparent;
-}
-
-.upload__shorts__inputfile__border:hover {
-    cursor: pointer;
 }
 
 .upload__shorts__preview {

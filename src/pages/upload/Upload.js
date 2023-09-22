@@ -1,53 +1,50 @@
 // style
 import './Upload.css'
 
+
 // react
 import { Link } from 'react-router-dom'
 import { useState, useRef } from 'react'
 import { HiUpload } from 'react-icons/hi'
 import { BsFillFastForwardFill } from 'react-icons/bs'
 
+
 // componentes
 import Button from '../../components/button/Button'
 import HeaderUpload from './headerUpload/HeaderUpload'
 import InputFile from '../../components/inputFile/InputFile'
+import { setImageData } from './imageDataStore';
+
 
 // imagens
 import Preview from '../../assets/image/preview_video.png'
 
+
 function Upload() {
+    const [isVideo, setIsVideo] = useState(true);
+    const imagePreviewRef = useRef(null);
 
-    const [isVideo, setIsVideo] = useState(true)
-    const [image, setImage] = useState()
-    const imagePreviewRef = useRef(Preview)
-
-    const [miniatura, setMiniatura] = useState()
+    const [miniatura, setMiniatura] = useState();
 
     const handleVideoChange = () => {
-        setIsVideo(true)
+        setIsVideo(true);
     }
     const handleShortsChange = () => {
-        setIsVideo(false)
+        setIsVideo(false);
     }
 
     const handleFileChange = (e) => {
-
-        const file = e.target.files[0]
+        const file = e.target.files[0];
         if (file) {
-            const formData = new FormData()
-            formData.append("foto", file)
-            setImage(formData)
-            setMiniatura(formData)
-
+            setMiniatura(file);
+            setImageData(file);
             const reader = new FileReader();
-
             reader.onload = function (event) {
                 if (imagePreviewRef.current) {
                     imagePreviewRef.current.src = event.target.result;
                     imagePreviewRef.current.style.display = 'block';
                 }
             };
-
             reader.readAsDataURL(file);
         }
     }
@@ -112,7 +109,7 @@ function Upload() {
                                     label={"Selecionar arquivo"}
                                     radius={"10px"}
                                     onChange={handleFileChange}
-                                    file={image}
+                                    file={miniatura}
                                     accept={".png"}
                                 />
                             </div>
@@ -122,7 +119,13 @@ function Upload() {
                                     type={"submit"}
                                     principal={false}
                                 />
-                                <Link className='upload__next__button__link' to={`/upload-video?miniatura=${encodeURIComponent(miniatura)}`}>
+                                <Link
+                                    className='upload__next__button__link'
+                                    to={{
+                                        pathname: '/upload-video',
+                                        state: { miniatura: miniatura }
+                                    }}
+                                >
                                     <Button
                                         label={"Próximo"}
                                         type={"submit"}
@@ -140,13 +143,12 @@ function Upload() {
                                     ref={imagePreviewRef}
                                     src="#"
                                     alt="Preview da Imagem" />
-
                                 <div className='upload__box__all__buttons__shorts'>
                                     <InputFile
                                         label={"Selecionar arquivo"}
                                         radius={"10px"}
                                         onChange={handleFileChange}
-                                        file={image}
+                                        file={miniatura}
                                         accept={".png"}
                                     />
                                     <div className='upload__next__buttons__box__shorts'>
@@ -155,7 +157,7 @@ function Upload() {
                                             type={"submit"}
                                             principal={false}
                                         />
-                                        <Link className='upload__next__button__link' to={`/upload-shorts?miniatura=${encodeURIComponent(miniatura)}`}>
+                                        <Link className='upload__next__button__link' to={`/upload-shorts`}>
                                             <Button
                                                 label={"Próximo"}
                                                 type={"submit"}
@@ -172,5 +174,6 @@ function Upload() {
         </>
     )
 }
+
 
 export default Upload
