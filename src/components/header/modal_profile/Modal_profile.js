@@ -14,14 +14,16 @@ import ThemeToggle from '../theme_toggle/ThemeToggle'
 import notFound from '../../../assets/image/404_NotFound.png' 
 import channel from '../../../assets/image/channel_profile.png'
 
+//service
+import UsuarioEngajamentoService from '../../../service/Engajamento/UsuarioEngajamentoService'; 
+
+
 function Modal_profile({ profile }) {
     
+    const [usuario , setUsuario] = useState({})
     const [openModal, setOpenModal] = useState(0)
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-
-    Aos.init({
-        duration: 200
-    });
+    const [image, setImage] = useState(notFound)
 
     function verify() {
         if (openModal !== 0) {
@@ -54,6 +56,7 @@ function Modal_profile({ profile }) {
     }
 
     useEffect(() => {
+        console.log(profile)
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
@@ -64,10 +67,25 @@ function Modal_profile({ profile }) {
         };
     }, []);
 
+    useEffect(() => {
+        UsuarioEngajamentoService.buscarUm()
+            .then((data) => {
+                setUsuario(data)
+                console.log(data)
+            })
+            .catch((error) => console.error('Erro ao buscar usuario:', error));
+    }, []);
+
+    useEffect(() => {
+        if (usuario.foto) {
+            setImage("http://10.4.96.50:7000/api/usuario/static/" + usuario.foto)
+        }
+    }, [usuario])
+
     const renderDesktopView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img src={verifyProfileImage()} className='container__perfilImage' />
+                <img src={image} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
@@ -82,6 +100,8 @@ function Modal_profile({ profile }) {
                                 </div>
                                 <div className='divider__profile__modal'></div>
                                 <Link to="/historic" className='text__profile_modal'><p>Histórico</p></Link>
+                                <div className='divider__profile__modal'></div>
+                                <Link to="/settings" className='text__profile_modal'><p>Configurações</p></Link>
                                 <div className='divider__profile__modal'></div>
                                 <p onClick={Logout} className='text__profile_modal'>Sair</p>
                             </div>
@@ -111,7 +131,7 @@ function Modal_profile({ profile }) {
     const renderTabletView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img src={verifyProfileImage()} className='container__perfilImage' />
+                <img src={image} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
@@ -155,7 +175,7 @@ function Modal_profile({ profile }) {
     const renderMobileView = () => (
         <>
             <div onClick={() => setOpenModal(openModal + 1)}>
-                <img src={verifyProfileImage()} className='container__perfilImage' />
+                <img src={image} className='container__perfilImage' />
             </div>
             {verify() &&
                 <div className="background__modal__profile" onClick={() => setOpenModal(openModal - 1)}>
