@@ -13,13 +13,11 @@ import Button from "../../components/button/Button"
 
 // Icons
 import { ToastContainer, toast } from "react-toastify"
-import Cookies from "js-cookie"
 
 const Login = ({ }) => {
     const navigate = useNavigate();
 
     const [loginData, setLoginData] = useState({ email: '', senha: '' })
-    const [keepLoggedIn, setKeepLoggedIn] = useState(false)
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const dispatch = useDispatch()
 
@@ -39,7 +37,7 @@ const Login = ({ }) => {
         if (loginData.email && loginData.senha) {
             try {
                 dispatch(doLogin(loginData))
-                navigate("/")
+                // navigate("/")
             } catch (err) {
                 toast.error("E-mail ou senha inválido")
             }

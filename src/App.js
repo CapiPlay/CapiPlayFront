@@ -24,7 +24,7 @@ import axiosInstance from "./service/AxiosConfig"
 import { useEffect } from 'react'
 import UsuarioService from './service/Usuario/UsuarioService'
 import Cookies from 'js-cookie'
-import Category from './pages/category/Category';
+import Category from './pages/category/Category'
 
 function App() {
 
@@ -43,7 +43,7 @@ function App() {
   const generateTokenAnonimous = async () => {
     const userToken = Cookies.get("token")
     const existAnonimoToken = Cookies.get("anonimo")
-    if (userToken || existAnonimoToken) {
+    if (userToken || existAnonimoToken !== null) {
       return
     }
     const tokenAnonimo = await UsuarioService.getTokenAnonimo()
