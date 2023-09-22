@@ -28,7 +28,7 @@ const Historic = () => {
     useEffect(() => {
         const func = async () => {
             const array = [];
-            await VideoService.buscarTodos(10, 0, false).then((res) => {
+            await VideoService.buscarTodos(1000,0,false).then((res) => {
                 res.content.forEach((r) => {
                     array.push(r)
                 })

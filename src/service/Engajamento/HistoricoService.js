@@ -60,7 +60,8 @@ const HistoricoService = {
     try {
       const response = await axios.get(
           "/engajamento/historico/buscar-todos-historicos-por-usuario"
-      );
+      );  
+      console.log(response.data);
       return response.data;
     } catch (err) {
       console.error(err);
