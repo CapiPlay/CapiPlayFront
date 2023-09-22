@@ -30,7 +30,6 @@ const Header = ({ searchValue }) => {
     const dispatch = useDispatch()
 
     const [search, setSearch] = useState(false)
-    const [searchDesktop, setSearchDesktop] = useState(false)
     const [verifyClicked, setVerifyClicked] = useState(false)
     const [valueInput, setValueInput] = useState(searchValue)
 
@@ -41,7 +40,7 @@ const Header = ({ searchValue }) => {
 
     // Search
     const handleClick = () => {
-        setSearchDesktop(!searchDesktop)
+        setSearch(!search)
     }
 
     const handleSearch = () => {
@@ -67,25 +66,19 @@ const Header = ({ searchValue }) => {
         }
 
         if (verifyClicked) {
-            setSearchDesktop(true)
+            setSearch(true)
         } else {
-            setSearchDesktop(false)
+            setSearch(false)
         }
 
         document.addEventListener("click", handleClickBlur)
         setWidthPage(window.innerWidth)
 
-        return ()=> {
+        return () => {
             document.removeEventListener("click", handleClickBlur)
         }
-        
-    }, [])
 
-    const handleSelection = (searchSelected) => {
-        setValueInput(searchSelected)
-        setVerifyClicked(true)
-        nav(`/result-search?search=${searchSelected}`)
-    }
+    }, [])
 
     //Ações de usuário
     const handleOpenModalProfile = () => {
@@ -99,13 +92,13 @@ const Header = ({ searchValue }) => {
     const handleClickBlur = (e) => {
         const element = e.target.offsetParent
         if (element == null || !element.classList.contains("header__input__container")) {
-            setSearchDesktop(false)
+            setSearch(false)
         }
     }
 
     useEffect(() => {
         const userCookie = Cookies.get("user")
-    
+
         if (userCookie) {
             try {
                 setUsuario(true)
@@ -134,7 +127,7 @@ const Header = ({ searchValue }) => {
                     <input
                         className='header__input__text__search'
                         placeholder='Pesquisar'
-                        onFocus={() => setSearchDesktop(true)}
+                        onFocus={() => setSearch(true)}
                         onClick={handleClickBlur}
                         value={valueInput}
                         onKeyPress={verifyKeyPress}
@@ -142,7 +135,7 @@ const Header = ({ searchValue }) => {
                     <AiOutlineSearch onClick={handleClick} />
                 </div>
                 {
-                    searchDesktop &&
+                    search &&
                     <Search />
                 }
             </div>
