@@ -14,6 +14,8 @@ import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajame
 //cookies
 import Cookies from 'js-cookie';
 
+import ProfilePicture from '../../assets/imagemPerfil.png'
+
 
 const Profile = () => {
 
