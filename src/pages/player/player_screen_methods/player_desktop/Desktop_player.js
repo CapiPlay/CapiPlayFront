@@ -24,13 +24,10 @@ function Desktop_player({ video }) {
     const [allComments, setAllComments] = useState()
 
     useEffect( () => {
+        buscarComments()
         getVideos()
     }, [])
-
-    useEffect( () => {
-        buscarComments()
-    }, [video])
-
+    
     const toggleComment = () => {
         setComments(!comment)
     }

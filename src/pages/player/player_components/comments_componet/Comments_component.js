@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Comments_component.css'
 import { BiSolidDownArrow, BiSolidDislike, BiDislike, BiLike, BiSolidLike } from 'react-icons/bi'
 import Comments_answers_component from '../comments_answers_component/Comments_answers_component'
-import ComentarioService from '../../../../service/Engajamento/ComentarioService'
-import ReacaoComentarioService from '../../../../service/Engajamento/ReacaoComentarioService'
+import ProfilePicture from '../../../../assets/image/channel_profile.png'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Comments_component({ commentVideo }) {
@@ -16,6 +15,11 @@ function Comments_component({ commentVideo }) {
     const [formatoHora, setFormatoHora] = useState()
     const [curtidas, setCurtidas] = useState(0)
     const [descurtidas, setDescurtidas] = useState(0)
+    const [foto, setFoto] = useState(ProfilePicture)
+
+    useEffect(() => {
+        setFoto('http://10.4.96.50:7000/api/usuario/static/' + commentVideo.idUsuario.foto)
+    }, [commentVideo])
 
     useEffect(() => {
         setCommentLikes()
@@ -32,8 +36,6 @@ function Comments_component({ commentVideo }) {
     useEffect(() => {
         setDateComment()
     }, [date])
-
-    const user_image = 'https://yt3.ggpht.com/PFRD_rpPwAIY-FC2t6Ob0GpJe2udeEaXNwug4Dx8v7zxxda6ZKHU1aKBX-XoWvYh2H4Ow6TtBDk=s176-c-k-c0x00ffffff-no-rj-mo'
 
     const toggleShowMore = () => {
         setShowMore(!showMore);
@@ -132,17 +134,23 @@ function Comments_component({ commentVideo }) {
         <>
             <div className='comment'>
                 <div className='user__icon__container'>
-                    <img src={user_image} className='user__icon' />
+                    <img src={foto} className='user__icon' />
                 </div>
                 <div className='comment__content'>
                     <div className='comment__user__username' >
                         @{commentVideo.idUsuario.nomeCanal}<span className='ball'></span><p key={date}> há {date} {formatoHora}</p>
                     </div>
+                    {commentVideo.texto.length < 50 ?
+                    <p>
+                        {commentVideo.texto}
+                    </p>
+                    :
                     <p className='comment__text'>{showMore ? commentVideo.texto : `${commentVideo.texto.slice(0, 50)}...`}
                         {!showMore && <div>
                             <button onClick={() => toggleShowMore()} className='description__moreORless'> <p className='selection'>Mostrar mais <p className='selection__icon'><BiSolidDownArrow /></p></p></button>
                         </div>}
                     </p>
+                    }
                     <div className='comment__interactions'>
                         <div className='likes'>
                             {like_btn ?
