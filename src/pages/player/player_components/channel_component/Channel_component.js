@@ -26,7 +26,7 @@ function Channel_component({video}) {
     return (
         <div>
             <div className='component'>
-                <Link to={`/profile/${video.usuario.uuid}`} className='link__player'>
+                <Link to={`/profile`} className='link__player'>
                     <div className='channel__container'>
                         <div className='channel'>
                             <img src={foto} className='channel__image' />
