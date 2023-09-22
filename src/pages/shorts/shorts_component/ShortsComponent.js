@@ -1,23 +1,32 @@
+import '../Shorts.css'
+import Cookies from 'js-cookie'
+
+// hooks
 import React, { useRef, useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setListShorts, setActualShorts } from '../../../store/features/shorts/shortsSlice'
-import { useNavigate, useParams } from 'react-router-dom'
-import VideoService from '../../../service/Video/VideoService'
+
+// icons
 import { BiLike, BiDislike, BiCommentDetail, BiSolidLike, BiSolidDislike } from 'react-icons/bi'
-import imagePerfil from '../../../assets/imagemPerfil.png'
+
+// component
 import ButtonSubmit from '../../../components/buttonSubmit/ButtonSubmit'
 import CommentsComponent from '../../../components/commentsComponent/CommentsComponent'
-import '../Shorts.css'
+
+// service
+import VideoService from '../../../service/Video/VideoService'
 import ReacaoService from '../../../service/Engajamento/ReacaoService'
 
+import imagePerfil from '../../../assets/imagemPerfil.png'
+
 const ShortsComponent = ({ short }) => {
+
+    const user = JSON.parse(Cookies.get("user"))
 
     const navigate = useNavigate()
     const targetRef = useRef(null)
     const dispatch = useDispatch()
-
-    console.log(short)
-
     const { id } = useParams()
 
     const [openModalComments, setOpenModalComments] = useState(false)
@@ -65,14 +74,14 @@ const ShortsComponent = ({ short }) => {
         dispatch(setActualShorts(short.data))
     }
 
-    const updateListShorts = async() => {
+    const updateListShorts = async () => {
         const shortUuid = short.uuid
         if (shortUuid !== id) {
             try {
                 await getUUID()
-                const newShort = await VideoService.buscarShorts()
-                const newShortsList = [newShort.data]
-                dispatch(setListShorts(newShortsList))
+                const response = await VideoService.buscarShorts()
+                const newShorts = [response.data]
+                dispatch(setListShorts(newShorts))
                 navigate(`/shorts/${shortUuid}`)
             } catch (err) {
                 console.error(err)
@@ -88,10 +97,12 @@ const ShortsComponent = ({ short }) => {
         setOpenModalComments(!openModalComments)
     }
 
-    const funcLikeShorts = async() => {
+    const funcLikeShorts = async () => {
         setLikeShort(!likeShort)
         setDislikeShort(false)
-        await ReacaoService.criar()
+        const cmd = { idUsuario: user.uuid, idVideo: id, curtida: true }
+        console.log(cmd)
+        await ReacaoService.criar(cmd)
     }
 
     const funcDislikeShorts = async () => {
@@ -107,8 +118,13 @@ const ShortsComponent = ({ short }) => {
 
     return (
         <div className="container__video slide" >
-            <video src={getPathShorts(short?.caminhos[5])} ref={targetRef} loop muted={isMuted} {...(isVideoInView && { autoPlay: true })} />
-
+            <video
+                src={getPathShorts(short?.caminhos[5])}
+                ref={targetRef}
+                loop
+                muted={isMuted}
+                {...(isVideoInView && { autoPlay: true })}
+            />
             <div className='container__icons__shorts'>
                 <div onClick={funcLikeShorts}>
                     {likeShort ? <BiSolidLike /> : <BiLike />}
