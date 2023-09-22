@@ -5,8 +5,7 @@
     width: 100%;
     height: 4rem;
 
-    display: grid;
-    grid-template-columns: 25% 50% 25%;
+    display: flex;
 
     padding: 0 1rem 0 1rem;
 
@@ -43,6 +42,16 @@
     border-radius: 50%;
 }
 
+.header__logo__icon {
+    width: 3rem;
+    height: 100%;
+}
+
+.header__logo__icon >img  {
+    width: 100%;
+    height: 100%;
+}
+
 .header__input__container {
     width: 100%;
     height: 100%;
@@ -54,7 +63,7 @@
 }
 
 .header__input__container>div:first-of-type {
-    width: 100%;
+    width: 50%;
     height: 60%;
 
     display: flex;
@@ -92,7 +101,7 @@
 }
 
 .header__info {
-    width: 100%;
+    width: 20%;
     height: 100%;
 
     display: flex;

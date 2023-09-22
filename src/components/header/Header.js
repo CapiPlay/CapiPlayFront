@@ -15,6 +15,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 // imagens
 import notFound from '../../assets/image/404_NotFound.png'
+import logo from '../../assets/image/Logo.png'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -121,11 +122,13 @@ const Header = ({ searchValue }) => {
         }
     }, [])
 
-
     return (
         <div className='header__container'>
             <div className='header__menu__icon'>
                 <IoMenu onClick={handleOpenSideBar} />
+            </div>
+            <div className='header__logo__icon'>
+                <img src={logo} alt="" />
             </div>
             <div className='header__input__container' style={widthPage <= 900 ? {} : { position: "relative" }}>
                 <div>

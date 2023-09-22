@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 
 // react
 import { Link } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import ThemeToggle from '../theme_toggle/ThemeToggle'
 
 const Modal_profile = () => {
@@ -36,7 +36,7 @@ const Modal_profile = () => {
             <div className='divider__profile__modal'></div>
             <Link to="/historic" ><p>Histórico</p></Link>
             <div className='divider__profile__modal'></div>
-            <Link to="/settings" ><p>Settings</p></Link>
+            <Link to="/settings" ><p>Configurações</p></Link>
             <div className='divider__profile__modal'></div>
             <p onClick={Logout}>Sair</p>
         </div>
