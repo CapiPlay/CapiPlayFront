@@ -14,10 +14,13 @@ import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajame
 //cookies
 import Cookies from 'js-cookie';
 
+import ProfilePicture from '../../assets/imagemPerfil.png'
+
 
 const Profile = () => {
 
     const [usuario, setUsuario] = useState({});
+    const [foto, setFoto] = useState(ProfilePicture)
     const { idUsuario } = useParams();
 
     const userProfile = () => {
@@ -51,6 +54,9 @@ const Profile = () => {
             .catch((error) => console.error('Erro ao buscar usuario:', error));
     }, [idUsuario]);
 
+    useEffect(() => {
+        setFoto('http://10.4.96.50:7000/api/usuario/static/' + usuario.foto)
+    }, [usuario])
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
@@ -72,8 +78,8 @@ const Profile = () => {
             <div>
                 <div>
                     <div className='profile__container_mobile'>
-                        <div className='profile__container__picture'>
-                            <img className="profile__pic" src={"http://10.4.96.50:7000/api/usuario/static/" + usuario.foto} />
+                        <div className='profile__container__picture' key={usuario.idUsuario}>
+                            <img className="profile__pic" src={foto} />
                             <h2 className='profile__name'>{usuario.nomeCanal}</h2>
                             <button className='profile__subscribe__button'>Inscrever-se</button>
                             <p className='profile__id'>@{usuario.nomePerfil}</p>
@@ -106,7 +112,7 @@ const Profile = () => {
                 <div>
                     <div className='profile__container_desktop'>
                         <div className='profile__container__picture__desktop'>
-                            <img className="profile__pic__desktop" src={"http://10.4.96.50:7000/api/usuario/static/" + usuario.foto} />
+                            <img className="profile__pic__desktop" src={foto} />
                             <div className='profile__box__desktop'>
                                 <div className='profile__box__name_subscribe__desktop'>
                                     <h2 className='profile__name__desktop'>{usuario.nomeCanal}</h2>

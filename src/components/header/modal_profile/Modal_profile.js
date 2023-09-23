@@ -17,7 +17,7 @@ const Modal_profile = () => {
         Cookies.remove('user')
     }
 
-    const userExist = Cookies.get("token") 
+    const userExist = Cookies.get("token")
 
     return (
         <div className='modal__profile__container'>
@@ -35,8 +35,14 @@ const Modal_profile = () => {
             </div>
             <div className='divider__profile__modal'></div>
             <Link to="/historic" ><p>Histórico</p></Link>
-            <div className='divider__profile__modal'></div>
-            <Link to="/settings" ><p>Settings</p></Link>
+            {
+                userExist ? (
+                    <><div className='divider__profile__modal'></div>
+                    <Link to="/settings"><p>Configuraçãzo</p></Link></>
+                ) : (
+                    <></>
+                )
+            }
             <div className='divider__profile__modal'></div>
             <p onClick={Logout}>Sair</p>
         </div>

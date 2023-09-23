@@ -185,26 +185,24 @@ function UploadVideo() {
                 )}
               </div>
               <div className='upload__video__box__input'>
-                <div className='upload__video__box__input'>
-                  <div className='upload__video__box__tags'>
-                    <div className='upload__video__tags__input'>
-                      <InputTag
-                        placeholder={"Tags do vídeo"}
-                        type={"text"}
-                        value={tag}
-                        onChange={handleTagChange}
-                        name='tag'
-                        required={true}
-                        onKeyDown={enterInputTag}
-                      />
-                    </div>
-                    <button
-                      className='upload__video__tags__button'
-                      onClick={renderizarNovaTag}
-                      type='button'>
-                      Enviar
-                    </button>
+                <div className='upload__video__box__tags'>
+                  <div className='upload__video__tags__input'>
+                    <InputTag
+                      placeholder={"Tags do vídeo"}
+                      type={"text"}
+                      value={tag}
+                      onChange={handleTagChange}
+                      name='tag'
+                      required={true}
+                      onKeyDown={enterInputTag}
+                    />
                   </div>
+                  <button
+                    className='upload__video__tags__button'
+                    onClick={renderizarNovaTag}
+                    type='button'>
+                    Enviar
+                  </button>
                 </div>
                 {tags.length != 0 &&
                   <div className='upload__video__tags__scroll'>

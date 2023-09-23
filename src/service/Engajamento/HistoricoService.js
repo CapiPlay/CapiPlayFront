@@ -56,11 +56,12 @@ const HistoricoService = {
    *
    * @returns List&lt;Usuario&gt; (Usuario idUsuario, Video idVideo, ZonedDateTime dataHora, Integer qtdVisualizadas,float percentagemSomada)
    */
-  buscarTodosPorData: async () => {
+  buscarTodosPorUsuario: async () => {
     try {
       const response = await axios.get(
-        "/engajamento/historico/buscar-todos-históricos-por-usuario"
-      );
+          "/engajamento/historico/buscar-todos-historicos-por-usuario"
+      );  
+      console.log(response.data);
       return response.data;
     } catch (err) {
       console.error(err);

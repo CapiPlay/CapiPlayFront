@@ -11,10 +11,13 @@ import Video_card from '../../../../components/video_card/Video_card'
 import { BiArrowBack } from 'react-icons/bi'
 import { VscSend } from 'react-icons/vsc'
 import VideoService from '../../../../service/Video/VideoService'
+import ComentarioService from '../../../../service/Engajamento/ComentarioService'
 
 function Mobile_player({ video }) {
 
     const [showComments, setShowComments] = useState(false);
+    const [commentText, setCommentText] = useState('');
+    const [allComments, setAllComments] = useState()
 
     const handleShowComments = () => {
         setShowComments(true);
@@ -27,11 +30,34 @@ function Mobile_player({ video }) {
     const [videos, setVideos] = useState([])
 
     useEffect(() => {
+        buscarComments()
         getVideos()
     }, [])
 
     const getVideos = async () => {
-        setVideos(await VideoService.buscarCompleto(6, 0, false))
+        var videostemp = await VideoService.buscarTodos(6, 0, false)
+        setVideos(videostemp.content)
+
+    }
+
+    const handleNewComment = () => {
+        console.log(video)
+        if (commentText.trim() !== '') {
+            ComentarioService.criar({
+                texto: commentText,
+                idVideo: video.uuid
+            })
+            setCommentText('');
+        }
+    }
+
+    const buscarComments = async () => {
+        var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, 0)
+        if (commentsTemp == null || commentsTemp == undefined) {
+            setAllComments(null)
+        } else {
+            setAllComments(commentsTemp.content)
+        }
     }
 
     return (
@@ -72,11 +98,18 @@ function Mobile_player({ video }) {
                     <div className='total__comments'>
                         <p>Comentários</p>
                     </div>
-                    <div>
-                        <Comments_component video={video} />
-                    </div>
                 </div>
-
+                {allComments == null ?
+                    <div>
+                        <p>Sem comentarios</p>
+                    </div>
+                    :
+                    <div className='comentarios__video'>
+                        {allComments.map((commentVideo) => (
+                            <Comments_component commentVideo={commentVideo} />
+                        ))}
+                    </div>
+                }
                 <div>
                     <Divider_component />
                 </div>
@@ -90,30 +123,33 @@ function Mobile_player({ video }) {
             }
             {showComments &&
                 <div className='comments__modal'>
-                    <div className='close__comments'><p>Comentários</p><p onClick={() => handleCloseComments()}><AiOutlineClose /></p></div>
-                    <div className='comments__scroll__modal'>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
-                        <div><Comments_component /></div>
+                    <div className='close__comments'>
+                        <p>Comentários</p>
+                        <p onClick={() => handleCloseComments()}>
+                            <AiOutlineClose /></p>
                     </div>
-                    <div className='comments__input__mobile__container'><input className='comments__input__mobile' placeholder='Escreva um comentário' /><VscSend className='send__icon' /></div>
+                    <div className='comments__scroll__modal'>
+                        {allComments == null ?
+                            <div>
+                                <p>Sem comentarios</p>
+                            </div>
+                            :
+                            <div>
+                                {allComments.map((commentVideo) => (
+                                    <Comments_component commentVideo={commentVideo} />
+                                ))}
+                            </div>
+                        }
+                    </div>
+                    <div className='comments__input__mobile__container'>
+                        <input
+                            className='comments__input__mobile'
+                            placeholder='Escreva um comentário'
+                            type='text'
+                            value={commentText}
+                            onChange={(e) => setCommentText(e.target.value)}
+                        /><VscSend className='send__icon' onClick={handleNewComment} />
+                    </div>
                 </div>
             }
         </>
