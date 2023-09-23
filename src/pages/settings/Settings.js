@@ -20,8 +20,6 @@ import UsuarioService from '../../service/Usuario/UsuarioService';
 import Cookies from 'js-cookie';
 
 const Settings = ({ }) => {
-
-
     const navigate = useNavigate();
 
     const [settingsData, setSettingsData] = useState({
@@ -33,6 +31,10 @@ const Settings = ({ }) => {
         descricao: '',
         foto: ''
     });
+
+    const [fileChanged, setFileChanged] = useState(false)
+    const [image, setImage] = useState(null)
+    const [registerData, setRegisterData] = useState(settingsData)
 
     // const [usuario, setUsuario] = useState({});
     const { idUsuario } = useParams();
@@ -82,7 +84,6 @@ const Settings = ({ }) => {
         setIsModalOpen(false);
     };
 
-
     const [isModalImageOpen, setIsModalImageOpen] = useState(false);
 
     const openImageModal = () => {
@@ -102,22 +103,13 @@ const Settings = ({ }) => {
                 settings.append("senha", settingsData.senha);
                 settings.append("descricao", settingsData.descricao);
 
-                // Verifique se uma nova imagem foi selecionada
-                if (selectedImage) {
-                    settings.append("foto", selectedImage);
-                } else {
-                    // Use a imagem atual se nenhuma nova imagem for selecionada
-                    settings.append("foto", settingsData.foto);
-                }
+                setRegisterData({ ...registerData, foto: image })
 
-                console.log("Conteúdo do settingsData:");
-                for (let pair of settings.entries()) {
-                    console.log(pair[0] + ": " + pair[1]);
-                }
-
-                const response = UsuarioService.editar(settings, settingsData.foto);
-                alert("Usuario editado com sucesso");
-                window.location.reload();
+                UsuarioService.editar(settings, settingsData.foto).then((response) => {
+                    // window.location.reload();
+                    console.log(settingsData);
+                    console.log(response);
+                });
             } catch (error) {
                 alert("Ocorreu um erro ao editar o usuário");
                 console.error('Error:', error);
@@ -140,13 +132,19 @@ const Settings = ({ }) => {
         };
     }, []);
 
+    const handleFileChange = (e) => {
+        const file = e.target.files[0]
+        if (file) {
+            setFileChanged(true)
+            setImage(file)
+        }
+    }
 
-    const [selectedImage, setSelectedImage] = useState("");
-
-    const handleImageChange = (event) => {
-        const file = event.target.files[0]; // Obtenha o primeiro arquivo selecionado
-        setSelectedImage(file);
-    };
+    const handleRemoveFile = (e) => {
+        e.preventDefault()
+        setFileChanged(!fileChanged)
+        setImage(null)
+    }
 
     const renderMobileView = () => (
         <>
@@ -283,21 +281,15 @@ const Settings = ({ }) => {
             <HeaderSettings userLogin={userProfile()} />
             <div className='settings__container__desktop'>
                 <div className="settings__form__desktop">
-                    <img className="profile__settings__pic__desktop" src={"http://10.4.96.50:7000/api/usuario/static/" + settingsData.foto} />
+                    <img id="profile_foto_teste" className="profile__settings__pic__desktop" src={"http://10.4.96.50:7000/api/usuario/static/" + settingsData.foto} />
                     <div className='settings__box__image__options__desktop'>
                         <InputFile
                             className='settings__image__options__buttons__desktop'
-                            file={settingsData.foto}
-                            name={"foto"}
-                            type={"file"}
-                            onChange={handleImageChange}
-                            required={true}
-
-                        // className='settings__image__options__buttons__desktop'
-                        // file={settingsData.foto}
-                        // name={"foto"}
-                        // type={"file"}
-                        // required={true}
+                            label={"Foto de perfil"}
+                            onChange={handleFileChange}
+                            removeFile={handleRemoveFile}
+                            file={image}
+                            key={fileChanged.toString()}
                         >
                             Alterar/
                         </InputFile>
