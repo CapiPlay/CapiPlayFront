@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderSettings from '../../components/header/Header'
 import Input from "../../components/input/Input";
 import InputDisabled from "../../components/inputDisabled/InputDisabled"
+import InputFile from "../../components/inputFile/InputFile"
 import Button from "../../components/button/Button";
 import TextArea from '../../components/inputTextArea/InputTextArea';
 import Side_Bar from '../home/side_bar/Side_Bar'
@@ -20,6 +21,7 @@ import Cookies from 'js-cookie';
 
 const Settings = ({ }) => {
 
+
     const navigate = useNavigate();
 
     const [settingsData, setSettingsData] = useState({
@@ -28,7 +30,8 @@ const Settings = ({ }) => {
         nome: '',
         perfil: '',
         senha: '',
-        descricao: ''
+        descricao: '',
+        foto: ''
     });
 
     // const [usuario, setUsuario] = useState({});
@@ -91,27 +94,36 @@ const Settings = ({ }) => {
     };
 
     const handleUpdateUser = () => {
-        if(settingsData.senha.length >= 6 && settingsData.senha.length <= 20){
+        if (settingsData.senha.length >= 6 && settingsData.senha.length <= 20) {
             try {
-                const settings = new,
-                 FormData();
+                const settings = new FormData();
                 settings.append("nome", settingsData.nome);
                 settings.append("perfil", settingsData.perfil);
                 settings.append("senha", settingsData.senha);
                 settings.append("descricao", settingsData.descricao);
+
+                // Verifique se uma nova imagem foi selecionada
+                if (selectedImage) {
+                    settings.append("foto", selectedImage);
+                } else {
+                    // Use a imagem atual se nenhuma nova imagem for selecionada
+                    settings.append("foto", settingsData.foto);
+                }
+
                 console.log("Conteúdo do settingsData:");
                 for (let pair of settings.entries()) {
                     console.log(pair[0] + ": " + pair[1]);
                 }
-                const response = UsuarioService.editar(settings);
-                alert("Usuario editado com sucesso")
+
+                const response = UsuarioService.editar(settings, settingsData.foto);
+                alert("Usuario editado com sucesso");
                 window.location.reload();
             } catch (error) {
-                alert("Ocorreu um erro ao editar o usuario")
+                alert("Ocorreu um erro ao editar o usuário");
                 console.error('Error:', error);
             }
         } else {
-            alert("A senha deve conter entre 6 e 20 caracteres, letra maiuscula, letra minuscula e ao menos 1 caracter especial");
+            alert("A senha deve conter entre 6 e 20 caracteres, letra maiúscula, letra minúscula e ao menos 1 caractere especial");
         }
     };
 
@@ -128,6 +140,13 @@ const Settings = ({ }) => {
         };
     }, []);
 
+
+    const [selectedImage, setSelectedImage] = useState("");
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0]; // Obtenha o primeiro arquivo selecionado
+        setSelectedImage(file);
+    };
 
     const renderMobileView = () => (
         <>
@@ -169,7 +188,7 @@ const Settings = ({ }) => {
                             className='settings__input'
                         />
                         <Input
-                            enable={true}
+                            // enable={true}
                             placeholder={"Nome de usuário"}
                             value={settingsData.nomeUsuario}
                             onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
@@ -264,24 +283,25 @@ const Settings = ({ }) => {
             <HeaderSettings userLogin={userProfile()} />
             <div className='settings__container__desktop'>
                 <div className="settings__form__desktop">
-                    <img src={ProfileImage} className='profile__settings' />
+                    <img className="profile__settings__pic__desktop" src={"http://10.4.96.50:7000/api/usuario/static/" + settingsData.foto} />
                     <div className='settings__box__image__options__desktop'>
-                        <button className='settings__image__options__buttons__desktop'>Alterar</button>
-                        <button className='settings__image__options__buttons__desktop' onClick={openImageModal}>Remover</button>
-                        {isModalImageOpen && (
-                            <>
-                                <div className='modal__overlay'>
-                                    <div className='modal__content'>
-                                        <p className='text'>Tem certeza que deseja remover sua foto de perfil?</p>
-                                        <div className='modal__buttons'>
-                                            <Button onClick={closeImageModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                            <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='background'></div>
-                            </>
-                        )}
+                        <InputFile
+                            className='settings__image__options__buttons__desktop'
+                            file={settingsData.foto}
+                            name={"foto"}
+                            type={"file"}
+                            onChange={handleImageChange}
+                            required={true}
+
+                        // className='settings__image__options__buttons__desktop'
+                        // file={settingsData.foto}
+                        // name={"foto"}
+                        // type={"file"}
+                        // required={true}
+                        >
+                            Alterar/
+                        </InputFile>
+                        <button className='settings__image__options__buttons__desktop'>Remover</button>
                     </div>
                     <div className='settings__input__container__desktop'>
                         <div className='settings__input__box'>
@@ -394,21 +414,6 @@ const Settings = ({ }) => {
                     <Button onClick={openModal} label={"Cancelar"} className='settings__options__buttons__cancel__desktop' principal={false} />
                     <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm__desktop' principal={true} />
                 </div>
-                {isModalOpen && (
-                    <>
-                        <div className='modal__overlay'>
-                            <div className='modal__content'>
-                                <p className='text'>Tem certeza que deseja cancelar suas alterações?</p>
-                                <div className='modal__buttons'>
-                                    <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                    <Button onclick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
-                                </div>
-                            </div>
-                        </div>
-                        <div className='background'></div>
-                    </>
-                )}
-
             </div>
         </>
     )

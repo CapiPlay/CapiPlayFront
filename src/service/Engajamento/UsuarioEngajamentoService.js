@@ -10,9 +10,12 @@ const UsuarioEngajamentoService = {
 
     try {
       const response = await axios.get("/engajamento/usuario")
+      console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab")
       console.log(response.data)
       return response.data
     } catch (err) {
+      console.log("ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg")
+
       console.error(err)
     }
   },

@@ -55,6 +55,7 @@ const Profile = () => {
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
+        console.log(usuario)
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
