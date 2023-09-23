@@ -5,7 +5,7 @@ import './Modal_profile.css'
 import Cookies from 'js-cookie'
 
 // react
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import ThemeToggle from '../theme_toggle/ThemeToggle'
 
@@ -15,7 +15,10 @@ const Modal_profile = () => {
         window.location.reload(false)
         Cookies.remove('token')
         Cookies.remove('user')
+        na
     }
+
+
 
     const userExist = Cookies.get("token")
 
@@ -38,7 +41,7 @@ const Modal_profile = () => {
             {
                 userExist ? (
                     <><div className='divider__profile__modal'></div>
-                    <Link to="/settings"><p>Configuraçãzo</p></Link></>
+                    <Link to="/settings"><p>Configuração</p></Link></>
                 ) : (
                     <></>
                 )
