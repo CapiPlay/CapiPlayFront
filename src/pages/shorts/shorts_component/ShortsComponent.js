@@ -22,7 +22,7 @@ import imagePerfil from '../../../assets/imagemPerfil.png'
 
 const ShortsComponent = ({ short }) => {
 
-    const user = JSON.parse(Cookies.get("user"))
+    const [user, setUser] = useState()
 
     const navigate = useNavigate()
     const targetRef = useRef(null)
@@ -34,6 +34,25 @@ const ShortsComponent = ({ short }) => {
     const [dislikeShort, setDislikeShort] = useState(false)
     const [isVideoInView, setIsVideoInView] = useState(false)
     const [isMuted, setIsMuted] = useState(true)
+
+    useEffect(() => {
+        const jsonUser = Cookies.get("user")
+        if (jsonUser !== "" && jsonUser !== undefined) {
+            console.log(jsonUser)
+            setUser(JSON.parse(jsonUser))
+        }
+
+        const handleBackToHomePage = () => {
+            navigate("/")
+        }
+
+        window.addEventListener('popstate', handleBackToHomePage)
+
+        return () => {
+            window.removeEventListener('popstate', handleBackToHomePage)
+        }
+
+    }, [])
 
     useEffect(() => {
         const options = {
@@ -97,18 +116,30 @@ const ShortsComponent = ({ short }) => {
         setOpenModalComments(!openModalComments)
     }
 
+    const validateUser = () => {
+        if (user instanceof Object && user.uuid) {
+            return true
+        } else {
+            navigate("/login")
+        }
+    }
+
     const funcLikeShorts = async () => {
-        setLikeShort(!likeShort)
-        setDislikeShort(false)
-        const cmd = { idUsuario: user.uuid, idVideo: id, curtida: true }
-        console.log(cmd)
-        await ReacaoService.criar(cmd)
+        if (validateUser) {
+            setLikeShort(!likeShort)
+            setDislikeShort(false)
+            const cmd = { idUsuario: user.uuid, idVideo: id, curtida: true }
+            console.log(cmd)
+            await ReacaoService.criar(cmd)
+        }
     }
 
     const funcDislikeShorts = async () => {
-        setDislikeShort(!dislikeShort)
-        setLikeShort(false)
-        await ReacaoService.criar()
+        if (validateUser) {
+            setDislikeShort(!dislikeShort)
+            setLikeShort(false)
+            await ReacaoService.criar()
+        }
     }
 
     const getPathShorts = (currentPath) => {
@@ -145,7 +176,7 @@ const ShortsComponent = ({ short }) => {
                         <span>{short?.profile}</span>
                     </div>
                     <div className='button__submit__shorts' style={openModalComments ? { display: "none" } : {}}>
-                        <ButtonSubmit label={'Inscrever-se'} onClick={null} />
+                        <ButtonSubmit valiUser={validateUser} />
                     </div>
                 </div>
             </div>
