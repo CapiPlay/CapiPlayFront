@@ -9,29 +9,36 @@ function LikeDislikeButtons({ video }) {
   const [dislikeBtnActive, setDislikeBtnActive] = useState(false);
 
   async function getReacao() {
-    const temp = await ReacaoService.buscarUm(video.uuid);
-    return await temp;
-    };
+    try {
+      const temp = await ReacaoService.buscarUm(video.uuid);
+      return temp;
+      } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
   
   useEffect(() => {
-    getReacao();
-    console.log(reacao);
+    var reacao = getReacao();
+    console.log(reacao.then((res) => console.log(res)));
     if (reacao) {
-      if (reacao == null) {
+      if (reacao == undefined) {
+        console.log("CAIU AQUIIII CAIU AQUIIII UNDEFINED");
         setLikeBtnActive(false);
         setDislikeBtnActive(false);
-        return;
-      } else if (!reacao) {
+      } else if (reacao == false) {
+        console.log("CAIU AQUIIII CAIU AQUIIII BTNDESLIKE");
         setDislikeBtnActive(true);
-        return;
-      } else if (reacao) {
+      } else if (reacao == true) {
+        console.log("CAIU AQUIIII BTNLIKE");
         setLikeBtnActive(true);
-        return;
       }
     }
   }, [video.uuid]);
 
   const handleToggleLikeBtn = async () => {
+    var reacao = getReacao();
+    console.log(reacao.then((res) => console.log(res)));
     if (!likeBtnActive && !dislikeBtnActive) {
       setLikeBtnActive(true);
       ReacaoService.criar({
