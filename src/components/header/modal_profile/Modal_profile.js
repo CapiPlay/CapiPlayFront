@@ -11,14 +11,13 @@ import ThemeToggle from '../theme_toggle/ThemeToggle'
 
 const Modal_profile = () => {
 
+    const nav = useNavigate();
+
     function Logout() {
-        window.location.reload(false)
         Cookies.remove('token')
         Cookies.remove('user')
-        na
+        nav('/')
     }
-
-
 
     const userExist = Cookies.get("token")
 
@@ -47,7 +46,7 @@ const Modal_profile = () => {
                 )
             }
             <div className='divider__profile__modal'></div>
-            <p onClick={Logout}>Sair</p>
+            <p className="logout__profile" onClick={Logout}>Sair</p>
         </div>
     )
 }
