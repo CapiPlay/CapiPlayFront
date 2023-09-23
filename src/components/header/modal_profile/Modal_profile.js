@@ -17,6 +17,7 @@ const Modal_profile = () => {
         Cookies.remove('token')
         Cookies.remove('user')
         nav('/')
+        window.location.reload()
     }
 
     const userExist = Cookies.get("token")
