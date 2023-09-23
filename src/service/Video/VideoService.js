@@ -50,6 +50,7 @@ const VideoService = {
       const response = await axios.get(
         `/video/buscar-historico?size=${size}&page=${page}`
       );
+
       return response.data;
     } catch (err) {
       console.error(err);
@@ -105,6 +106,29 @@ const VideoService = {
       const response = await axios.get(
         `/video/filtro/${pesquisa}?size=${size}&page=${page}`, filtro
       );
+      return response.data;
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
+  buscarHistoricoPesquisa: async () => {
+    try {
+      const response = await axios.get(
+        `/video/usuario/historico-pesquisa`
+      );
+      return response.data;
+    } catch (err) {
+      console.error(err);
+    }
+  }, 
+
+  pesquisarValor: async (pesquisa, shorts) => {
+    try {
+      const response = await axios.get(
+        `/video/pesquisa/${pesquisa}?shorts=${shorts}`
+      );
+      console.log(pesquisa)
       return response.data;
     } catch (err) {
       console.error(err);

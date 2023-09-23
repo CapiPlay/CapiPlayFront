@@ -13,6 +13,7 @@ import Slider_Category from "../home/slider_category/Slider_Category";
 
 // icons
 import { FiFilter } from "react-icons/fi"
+import VideoService from "../../service/Video/VideoService";
 
 const ResultSearch = () => {
 
@@ -27,8 +28,12 @@ const ResultSearch = () => {
     const [searchValue, setSearchValue] = useState("");
     const searchParams = urlSearchParams.get("search");
 
-
     useEffect(() => {
+
+        const pesquisar = async () => {
+            const response = await VideoService.pesquisarValor(searchParams);
+            console.log(response)
+        }
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
@@ -37,6 +42,8 @@ const ResultSearch = () => {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
+
+        pesquisar()
     }, []);
 
     useEffect(() => {

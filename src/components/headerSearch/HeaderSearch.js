@@ -28,7 +28,7 @@ const HeaderSearch = ({ valueInput, handleChange, functionBack, handleSearch }) 
                     value={valueInput}
                     onChange={handleChange}
                     onKeyPress={verifyKeyPress} />
-                <AiOutlineSearch className="icon__search"/>
+                <AiOutlineSearch className="icon__search" />
             </div>
         </div>
     )

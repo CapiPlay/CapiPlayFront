@@ -24,48 +24,49 @@ const Search = () => {
     const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : "");
 
     const handleChange = (e) => {
-        console.log(e)
         setValueInput(e.target.value);
     }
 
     const handleSearch = (value) => {
-        nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : valueInput)}`);
+        VideoService.pesquisarValor(value, false).then(
+            nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : valueInput)}`))
     }
 
     // utilizado temporariamente para simular histórico de pesquisa/sugestões de pesquisa 
     const [lastSearches, setLastSearches] = useState(([
-        // "Benefícios da meditação para a saúde",
-        // "Receita de bolo de cenoura com cobertura de chocolate",
-        // "Principais destinos turísticos na Europa",
-        // "História da America Latina",
-        // "Receita de pão de queijo",
-        // "Livros românticos",
-        // "Eu a patroa e as criancas",
-        // "React icons como funciona",
-        // "Torta de frango receita",
-        // "Livros de aventura 2023",
-    ]));
-
-    useEffect(() => {
-        VideoService.buscarHistorico(10, 0).then(
-            (res) => {
-                setLastSearches(res.data);
-                console.log(res.data)
-            }
-        )
-    }, [])
-
-    const [searches, setSearches] = useState(([
-        "Filme como treinar seu dragão é bom?",
-        "Pica - Pau completo dublado",
-        "Como fazer uma torta de abacaxi com calda de côco?",
+        "Benefícios da meditação para a saúde",
+        "Receita de bolo de cenoura com cobertura de chocolate",
+        "Principais destinos turísticos na Europa",
         "História da America Latina",
         "Receita de pão de queijo",
         "Livros românticos",
         "Eu a patroa e as criancas",
         "React icons como funciona",
         "Torta de frango receita",
-        "Livros de aventura 2023"
+        "Livros de aventura 2023",
+    ]));
+
+    useEffect(() => {
+        VideoService.buscarHistoricoPesquisa().then(
+            (res) => {
+                setLastSearches(res);
+                console.log(res)
+            }
+        )
+
+    }, [])
+
+    const [searches, setSearches] = useState(([
+        // "Filme como treinar seu dragão é bom?",
+        // "Pica - Pau completo dublado",
+        // "Como fazer uma torta de abacaxi com calda de côco?",
+        // "História da America Latina",
+        // "Receita de pão de queijo",
+        // "Livros românticos",
+        // "Eu a patroa e as criancas",
+        // "React icons como funciona",
+        // "Torta de frango receita",
+        // "Livros de aventura 2023"
     ]));
 
     const renderSearch = () => {
@@ -73,9 +74,9 @@ const Search = () => {
             return (
                 <>
                     {lastSearches && lastSearches.map((lastSearch) => (
-                        <div className="search__box" onClick={() => handleSearch(lastSearch)}>
+                        <div className="search__box" onClick={() => handleSearch(lastSearch.pesquisa)}>
                             <MdRestartAlt className="icons__search" />
-                            <span>{lastSearch}</span>
+                            <span>{lastSearch.pesquisa}</span>
                         </div>
                     ))}
                 </>
