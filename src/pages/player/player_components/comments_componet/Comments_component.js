@@ -16,6 +16,7 @@ function Comments_component({ commentVideo }) {
     const [curtidas, setCurtidas] = useState(0)
     const [descurtidas, setDescurtidas] = useState(0)
     const [foto, setFoto] = useState(ProfilePicture)
+    const [answer, setAnswer] = useState(false)
 
     useEffect(() => {
         setFoto('http://10.4.96.50:7000/api/usuario/static/' + commentVideo.idUsuario.foto)
@@ -130,6 +131,10 @@ function Comments_component({ commentVideo }) {
         }
     }
 
+    const handleAnswer = () => {
+        setAnswer(!answer)
+    }
+
     return (
         <>
             <div className='comment'>
@@ -187,7 +192,13 @@ function Comments_component({ commentVideo }) {
                                 <div>({commentVideo.qtdRespostas}) Respostas </div>
                             </div>
                         }
+                        <div className='answer' onClick={handleAnswer}><span className='ball'></span> <p>Responder</p></div>
                     </div>
+                    {answer ?
+                        <div className='input__answer__container'><input type='text'/><button/></div>
+                        :
+                        <></>
+                    }
                 </div>
             </div>
             <div className='comment__answers'>

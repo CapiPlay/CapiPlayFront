@@ -13,7 +13,6 @@ import VideoService from '../../../../service/Video/VideoService'
 import { IoMdSend } from 'react-icons/io'
 import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import ComentarioService from '../../../../service/Engajamento/ComentarioService'
-import { Link } from 'react-router-dom'
 
 // import Video_player_contructor from '../../video_player_contructor/Video_player_contructor'
 
@@ -21,7 +20,9 @@ function Desktop_player({ video }) {
     const [videos, setVideos] = useState([])
     const [comment, setComments] = useState(false)
     const [commentText, setCommentText] = useState('');
-    const [allComments, setAllComments] = useState()
+    let [allComments, setAllComments] = useState()
+    const [last, setLast] = useState(true) 
+    const [page, setPage] = useState(0)
 
     useEffect( () => {
         buscarComments()
@@ -50,11 +51,26 @@ function Desktop_player({ video }) {
     }
 
     const buscarComments = async () => {
-        var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, 0)
+        var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, page)
+        setPage(page + 1)
         if(commentsTemp == null || commentsTemp == undefined){
             setAllComments(null)
         }else{
+            console.log(commentsTemp.content)
+            setLast(commentsTemp.last)
             setAllComments(commentsTemp.content)
+        }
+    }
+
+    const buscarMaisComentarios = async () => {
+        var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, page)
+        if(commentsTemp == null || commentsTemp == undefined){
+            setAllComments(null)
+        }else{
+            setPage(page + 1)
+            allComments.push(...commentsTemp.content)
+            setLast(commentsTemp.last)
+            setAllComments(allComments)
         }
     }
 
@@ -132,11 +148,14 @@ function Desktop_player({ video }) {
                                     <p>Sem comentarios</p>
                                 </div>
                                 :
-                                <div>
-                                    {allComments.map((commentVideo) => (
-                                         <Comments_component commentVideo={commentVideo} />
-                                    ))}
-                                </div>
+                                <>
+                                    <div>
+                                        {allComments.map((commentVideo) => (
+                                             <Comments_component commentVideo={commentVideo} />
+                                        ))}
+                                    </div>
+                                    {!last && <div onClick={buscarMaisComentarios} className='show__more__comments'>Mostrar mais <BiSolidDownArrow size={'1rem'}/></div>}
+                                </>
                                 }
                                 
                             </div>
