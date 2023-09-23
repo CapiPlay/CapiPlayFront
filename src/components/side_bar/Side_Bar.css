@@ -118,3 +118,9 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
+@media (max-width: 900px) {
+    .container__side__bar {
+        top: 3rem;
+    }
+}

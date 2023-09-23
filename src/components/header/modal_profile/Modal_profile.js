@@ -6,10 +6,10 @@ import Cookies from 'js-cookie'
 
 // react
 import { Link } from 'react-router-dom'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ThemeToggle from '../theme_toggle/ThemeToggle'
 
-const Modal_profile = () => {
+const Modal_profile = ({ isOpen }) => {
 
     function Logout() {
         window.location.reload(false)
@@ -17,7 +17,27 @@ const Modal_profile = () => {
         Cookies.remove('user')
     }
 
-    const userExist = Cookies.get("token") 
+    const userExist = Cookies.get("token")
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (!e.target.closest('.modal__profile__container') && !e.target.closest('#image__profile')) {
+                isOpen()
+            }
+        }
+
+        const handleResize = () => {
+            isOpen()
+        }
+
+        document.addEventListener('click', handleClickOutside)
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside)
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
 
     return (
         <div className='modal__profile__container'>

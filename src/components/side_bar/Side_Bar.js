@@ -27,41 +27,42 @@ const categories = [
     { name: 'VIAGEMETURISMO', label: 'Viagem e turismo', icon: <SlPlane /> },
 ]
 
-const Side_Bar = () => {
+const Side_Bar = ({ isOpen}) => {
+
     const openSideBar = useSelector((state) => state.header.isClicked)
     const [activeCategory, setActiveCategory] = useState('')
     const [widthPage, setWidthPage] = useState(window.innerWidth)
-    const sideBarRef = useRef(null)
 
     const handleCategoryClick = (category) => {
         setActiveCategory(category)
     }
 
-    const handleClickOutside = (e) => {
-        if (
-            sideBarRef.current &&
-            !sideBarRef.current.contains(e.target) &&
-            widthPage <= 900
-        ) {
-            // Feche a barra lateral aqui (pode ser definindo o estado openSideBar como falso)
-            // Exemplo: dispatch({ type: 'SET_SIDEBAR_OPEN', payload: false });
-        }
-    }
-
-    useEffect(() => {
-        window.addEventListener('click', handleClickOutside)
-        return () => {
-            window.removeEventListener('click', handleClickOutside)
-        }
-    }, [])
-
     useEffect(() => {
         setWidthPage(window.innerWidth)
     }, [])
 
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (!e.target.closest('.container__side__bar') && !e.target.closest('.header__menu__icon')) {
+                isOpen(false)
+            }
+        }
+
+        const handleResize = () => {
+            isOpen(false)
+        }
+
+        document.addEventListener('click', handleClickOutside)
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside)
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
+
     return (
         <div
-            ref={sideBarRef}
             className={`container__side__bar ${openSideBar ? 'side__bar__open' : ''}`}
             style={widthPage <= 900 && openSideBar !== true ? { display: 'none', height: '100%' } : {}}
         >
