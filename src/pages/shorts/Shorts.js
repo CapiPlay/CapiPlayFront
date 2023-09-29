@@ -17,6 +17,9 @@ import { BsFillArrowDownSquareFill } from "react-icons/bs"
 // service
 import VideoService from '../../service/Video/VideoService'
 
+// slice
+import { getIdUserPost } from '../../../store/features/shorts/shortsSlice'
+
 const Shorts = () => {
 
     const dispatch = useDispatch()
@@ -73,6 +76,8 @@ const Shorts = () => {
             const newShorts = []
 
             const firstShort = await VideoService.buscarCompleto(id)
+            dispatch(getIdUserPost(firstShort.usuario.uuid))
+
             newShorts.push(firstShort)
 
             const promise = Array.from({ length: 3 }, () => VideoService.buscarShorts())

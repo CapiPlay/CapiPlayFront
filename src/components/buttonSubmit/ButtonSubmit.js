@@ -1,13 +1,19 @@
 import '../buttonSubmit/ButtonSubmit.css'
 import { useState } from 'react'
+import EngajamentoService from '../../service/Engajamento/InscricaoService'
+import Cookies from 'js-cookie'
 
-const ButtonSubmit = ({ valiUser }) => {
+const ButtonSubmit = () => {
+
+  const user = JSON.parse(Cookies.get("user"))
+
   const [isClicked, setIsClicked] = useState(false)
   const [buttonText, setButtonText] = useState('Inscrever-se')
 
   const handleClick = () => {
     setIsClicked((prevIsClicked) => !prevIsClicked);
     setButtonText(isClicked ? 'Inscrever-se' : 'Inscrito')
+    EngajamentoService.criar(user.uuid)
   }
 
   const buttonClassName = `container__submit__button ${isClicked ? 'animate' : ''}`

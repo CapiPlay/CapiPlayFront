@@ -38,7 +38,6 @@ const ShortsComponent = ({ short }) => {
     useEffect(() => {
         const jsonUser = Cookies.get("user")
         if (jsonUser !== "" && jsonUser !== undefined) {
-            console.log(jsonUser)
             setUser(JSON.parse(jsonUser))
         }
 
