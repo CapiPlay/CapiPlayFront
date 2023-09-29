@@ -1,9 +1,16 @@
 import '../buttonSubmit/ButtonSubmit.css'
-import { useState } from 'react'
-import EngajamentoService from '../../service/Engajamento/InscricaoService'
 import Cookies from 'js-cookie'
 
+// service
+import EngajamentoService from '../../service/Engajamento/InscricaoService'
+
+// hooks
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
+
 const ButtonSubmit = () => {
+
+  const idUserPost = useSelector((state) => state.shorts.idUserPost)
 
   const user = JSON.parse(Cookies.get("user"))
 
@@ -13,7 +20,7 @@ const ButtonSubmit = () => {
   const handleClick = () => {
     setIsClicked((prevIsClicked) => !prevIsClicked);
     setButtonText(isClicked ? 'Inscrever-se' : 'Inscrito')
-    EngajamentoService.criar(user.uuid)
+    EngajamentoService.criar(user.uuid, idUserPost)
   }
 
   const buttonClassName = `container__submit__button ${isClicked ? 'animate' : ''}`

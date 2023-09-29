@@ -33,7 +33,7 @@ const shortsSlice = createSlice({
   }
 })
 
-export const { modifyListShorts, modifyActualShorts } = shortsSlice.actions
+export const { modifyListShorts, modifyActualShorts, modifyIdUserPost } = shortsSlice.actions
 export default shortsSlice.reducer
 
 const setListShorts = (list) => async (dispatch) => {
@@ -52,7 +52,7 @@ const setActualShorts = (short, position) => async (dispatch) => {
   }
 }
 
-const getIdUserPost = (idUserPost) => {
+const getIdUserPost = (idUserPost) => async (dispatch) => {
   if (idUserPost) {
     dispatch(modifyIdUserPost({idUserPost: idUserPost}))
   }
@@ -60,5 +60,6 @@ const getIdUserPost = (idUserPost) => {
 
 export {
   setListShorts,
-  setActualShorts
+  setActualShorts,
+  getIdUserPost
 }

@@ -4,7 +4,7 @@ import '../shorts/Shorts.css'
 import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux"
-import { setListShorts } from '../../store/features/shorts/shortsSlice'
+import { setListShorts, getIdUserPost } from '../../store/features/shorts/shortsSlice'
 
 // componentes
 import ShortsComponent from './shorts_component/ShortsComponent'
@@ -16,9 +16,6 @@ import { BsFillArrowDownSquareFill } from "react-icons/bs"
 
 // service
 import VideoService from '../../service/Video/VideoService'
-
-// slice
-import { getIdUserPost } from '../../../store/features/shorts/shortsSlice'
 
 const Shorts = () => {
 
