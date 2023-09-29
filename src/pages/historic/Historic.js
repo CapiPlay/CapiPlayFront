@@ -15,7 +15,7 @@ import VideoService from "../../service/Video/VideoService";
 const Historic = () => {
 
     // videos que vão vir da HistoricService 
-    const [videoHistoric, setVideoHistoric] = useState({});
+    const [videoHistoric, setVideoHistoric] = useState([]);
 
     // shorts que vão vir da HistoricService 
     // *pode haver mudanças em como o short será renderizado
@@ -31,7 +31,7 @@ const Historic = () => {
 
         const func = async () => {
             const array = [];
-            await VideoService.buscarTodos(1000,0,false).then((res) => {
+            await VideoService.buscarTodos(1000, 0, false).then((res) => {
                 res.content.forEach((r) => {
                     array.push(r)
                 })
