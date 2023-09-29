@@ -43,7 +43,7 @@ function App() {
   const generateTokenAnonimous = async () => {
     const userToken = Cookies.get("token")
     const existAnonimoToken = Cookies.get("anonimo")
-    if (userToken || existAnonimoToken !== null) {
+    if (userToken || existAnonimoToken) {
       return
     }
     const tokenAnonimo = await UsuarioService.getTokenAnonimo()
