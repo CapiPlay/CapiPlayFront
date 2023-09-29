@@ -48,7 +48,6 @@ const ResultSearch = () => {
 
     useEffect(() => {
         setSearchValue(searchParams);
-        console.log(videos[0].caminhos[4])
     }, [searchParams])
 
     useEffect(() => {

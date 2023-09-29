@@ -24,11 +24,12 @@ const Search = () => {
     const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : "");
 
     const handleChange = (e) => {
+        console.log(e.target.value)
         setValueInput(e.target.value);
     }
 
     const handleSearch = (value) => {
-        VideoService.pesquisarValor(value, false).then(
+        VideoService.pesquisarValor(value && value.length > 0 ? value : valueInput, false).then(
             nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : valueInput)}`))
     }
 
@@ -50,7 +51,6 @@ const Search = () => {
         VideoService.buscarHistoricoPesquisa().then(
             (res) => {
                 setLastSearches(res);
-                console.log(res)
             }
         )
 
@@ -105,13 +105,13 @@ const Search = () => {
 
     return (
         <div className="container__search" style={{ display: back ? "none" : "block" }}>
-            {window.innerWidth < 900
+            {window.innerWidth <= 900
                 &&
-                <HeaderSearch
-                    handleSearch={handleSearch}
-                    valueInput={valueInput}
-                    handleChange={handleChange}
-                    functionBack={() => setBack(!back)} />
+                    <HeaderSearch
+                        handleSearch={handleSearch}
+                        valueInput={valueInput}
+                        handleChange={handleChange}
+                        functionBack={() => setBack(!back)} />
             }
             {renderSearch()}
         </div>

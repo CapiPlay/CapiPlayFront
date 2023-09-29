@@ -15,7 +15,7 @@ const HeaderSearch = ({ valueInput, handleChange, functionBack, handleSearch }) 
 
     const verifyKeyPress = (e) => {
         if (e.key === 'Enter') {
-            handleSearch();
+            handleSearch(valueInput);
         }
     }
 
@@ -26,7 +26,7 @@ const HeaderSearch = ({ valueInput, handleChange, functionBack, handleSearch }) 
                 <input
                     type="text"
                     value={valueInput}
-                    onChange={handleChange}
+                    onChange={(e)=>handleChange(e)}
                     onKeyPress={verifyKeyPress} />
                 <AiOutlineSearch className="icon__search" />
             </div>

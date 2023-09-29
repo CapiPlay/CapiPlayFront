@@ -48,7 +48,6 @@ const Historic = () => {
             })
             setVideoHistoric([...ar]);
             console.log(ar)
-
         }
 
         func()
