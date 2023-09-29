@@ -95,7 +95,7 @@ const Settings = ({ }) => {
     };
 
     const handleUpdateUser = () => {
-        if (settingsData.senha.length >= 6 && settingsData.senha.length <= 20) {
+        // if (settingsData.senha.length >= 6 && settingsData.senha.length <= 20) {
             try {
                 const settings = new FormData();
                 settings.append("nome", settingsData.nome);
@@ -114,9 +114,9 @@ const Settings = ({ }) => {
                 alert("Ocorreu um erro ao editar o usuário");
                 console.error('Error:', error);
             }
-        } else {
-            alert("A senha deve conter entre 6 e 20 caracteres, letra maiúscula, letra minúscula e ao menos 1 caractere especial");
-        }
+        // } else {
+        //     alert("A senha deve conter entre 6 e 20 caracteres, letra maiúscula, letra minúscula e ao menos 1 caractere especial");
+        // }
     };
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
