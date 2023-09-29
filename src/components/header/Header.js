@@ -22,6 +22,7 @@ import { doIsClicked } from "../../store/features/header/headerSlice"
 
 // service
 import Cookies from 'js-cookie'
+import VideoService from '../../service/Video/VideoService'
 
 const Header = ({ searchValue }) => {
 
@@ -55,6 +56,12 @@ const Header = ({ searchValue }) => {
 
     const handleChange = (e) => {
         setValueInput(e.target.value)
+    }
+
+    const onSearch = () => {
+        VideoService.pesquisarValor(valueInput, false).then(
+            nav(`/result-search?search=${encodeURIComponent(valueInput)}`)
+        )
     }
 
     useEffect(() => {
@@ -136,7 +143,7 @@ const Header = ({ searchValue }) => {
                 </div>
                 {
                     search &&
-                    <Search />
+                    <Search valueSearch={valueInput}/>
                 }
             </div>
             <div className='header__info'>

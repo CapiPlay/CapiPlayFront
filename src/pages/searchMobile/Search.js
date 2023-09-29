@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 import VideoService from "../../service/Video/VideoService";
 
-const Search = () => {
+const Search = ({valueSearch}) => {
 
     const sizeIcon = 20;
     const colorIcon = "var(--whitesmoke)";
@@ -21,7 +21,7 @@ const Search = () => {
     const location = useLocation();
     const urlSearchParams = new URLSearchParams(location.search);
     const searchParams = urlSearchParams.get("search");
-    const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : "");
+    const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : valueSearch);
 
     const handleChange = (e) => {
         console.log(e.target.value)
