@@ -131,7 +131,6 @@
 }
 
 #upload__image__preview__shorts {
-    display: none;
     width: 14rem; 
     height: 60vh;
     border-radius: 1rem;
