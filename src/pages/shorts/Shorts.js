@@ -34,22 +34,17 @@ const Shorts = () => {
     }, [windowWidth])
 
     const handleNextVideo = () => {
-        setTimeout(() => {
-            const scrollStep = window.innerHeight / 2
-            const containerShorts = scrollRef.current
-
-            if (containerShorts) {
-                containerShorts.scrollBy({
-                    top: scrollStep,
-                    behavior: 'smooth'
-                })
-            }
-        }, 200)
+        const scrollStep = window.innerHeight / 2
+        scrollTo(scrollStep)
     }
 
     const handlePreviousVideo = () => {
+        const scrollStep = -window.innerHeight / 2
+        scrollTo(scrollStep)
+    }
+
+    const scrollTo = (scrollStep) => {
         setTimeout(() => {
-            const scrollStep = -window.innerHeight / 2
             const containerShorts = scrollRef.current
 
             if (containerShorts) {
@@ -58,7 +53,7 @@ const Shorts = () => {
                     behavior: 'smooth',
                 })
             }
-        }, 500)
+        }, 200)
     }
 
     useEffect(() => {
