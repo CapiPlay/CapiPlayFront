@@ -39,7 +39,10 @@ const Login = ({ }) => {
         if (loginData.email && loginData.senha) {
             try {
                 dispatch(doLogin(loginData))
-                navigate("/")
+                setTimeout(() => {
+                    navigate("/")
+                    window.location.reload()
+                }, 100)
             } catch (err) {
                 toast.error("E-mail ou senha inválido")
             }
