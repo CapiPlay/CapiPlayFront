@@ -37,8 +37,7 @@ const Login = ({ }) => {
     const login = async () => {
         if (loginData.email && loginData.senha) {
             try {
-                dispatch(doLogin(loginData))
-                const res = JSON.parse(Cookies.get("user"))
+                const res = dispatch(doLogin(loginData))
                 if (res) {
                     navigate("/")
                 }
