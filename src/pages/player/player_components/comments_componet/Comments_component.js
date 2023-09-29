@@ -3,6 +3,8 @@ import './Comments_component.css'
 import { BiSolidDownArrow, BiSolidDislike, BiDislike, BiLike, BiSolidLike } from 'react-icons/bi'
 import Comments_answers_component from '../comments_answers_component/Comments_answers_component'
 import ProfilePicture from '../../../../assets/image/channel_profile.png'
+import { IoMdSend } from 'react-icons/io'
+import RespostaService from '../../../../service/Engajamento/RespostaService'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Comments_component({ commentVideo }) {
@@ -17,12 +19,15 @@ function Comments_component({ commentVideo }) {
     const [descurtidas, setDescurtidas] = useState(0)
     const [foto, setFoto] = useState(ProfilePicture)
     const [answer, setAnswer] = useState(false)
+    const [answerText, setAnswerText] = useState('')
+    const [allCommentsAnswers, setAllCommentsAnswers] = useState([])
 
     useEffect(() => {
         setFoto('http://10.4.96.50:7000/api/usuario/static/' + commentVideo.idUsuario.foto)
     }, [commentVideo])
 
     useEffect(() => {
+        handleAllAnswers()
         setCommentLikes()
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
@@ -43,36 +48,11 @@ function Comments_component({ commentVideo }) {
     };
 
     const setCommentLikes = async () => {
-        // const commentsReactions = await ReacaoComentarioService.buscarTodosPorComentario({idComentario: commentVideo.idComentario});
-        // if(commentsReactions !== undefined){
-        //     commentsReactions.forEach(commentReaction => {
-        //         if(commentReaction.curtida){
-        //             setCurtidas(curtidas + 1)
-        //         } else {
-        //             setDescurtidas(descurtidas + 1)  
-        //         }
-        //     });
-        // }
+        
     }
 
     const toggleLikeBtn = () => {
-        // if(like_btn){
-        //     EngajamentoService.criar(
-        //         {
-        //             usuarioId: 1, // usuarioId
-        //             videoId: video.uuid,
-        //             curtida: 1
-        //         }
-        //     )
-        // }else{
-        //     EngajamentoService.criar(
-        //         {
-        //             usuarioId: 1, // usuarioId
-        //             videoId: video.uuid,
-        //             curtida: 0
-        //         }
-        //     )
-        // }
+       
         setLikeBtn(!like_btn);
     };
 
@@ -107,6 +87,7 @@ function Comments_component({ commentVideo }) {
             }else{
                 setFormatoHora("dias")
             }
+            setDate(diferencaEmDias)
         }else if(diferencaEmHoras > 0) {
             if(diferencaEmHoras == 1){
                 setFormatoHora("hora")
@@ -131,8 +112,30 @@ function Comments_component({ commentVideo }) {
         }
     }
 
-    const handleAnswer = () => {
+    const handleNewAnswer = () => {
+        const criarCMD = {
+            texto: answerText,
+                idComentario: commentVideo.idComentario
+        }
+        console.log(criarCMD)
+        if (answerText.trim() !== '') {
+            console.log("Foi")
+            RespostaService.criar(criarCMD)
+            console.log(answerText)
+            setAnswerText('');
+        }
+    }
+
+    const handleToggleAnswer = () => {
         setAnswer(!answer)
+    }
+
+    const handleAllAnswers = async () => {
+        const buscarTodosCmd = {
+            idComentario: commentVideo.idComentario
+        }
+        let temp = await RespostaService.buscarTodosPorComentario(buscarTodosCmd, 0);
+        setAllCommentsAnswers(temp)
     }
 
     return (
@@ -192,10 +195,16 @@ function Comments_component({ commentVideo }) {
                                 <div>({commentVideo.qtdRespostas}) Respostas </div>
                             </div>
                         }
-                        <div className='answer' onClick={handleAnswer}><span className='ball'></span> <p>Responder</p></div>
+                        <div className='answer' onClick={handleToggleAnswer}><span className='ball'></span> <p>Responder</p></div>
                     </div>
                     {answer ?
-                        <div className='input__answer__container'><input type='text'/><button/></div>
+                        <div className='input__answer__container'>
+                            <input 
+                                type='text'
+                                onChange={(e) => setAnswerText(e.target.value)}
+                                /> 
+                            <div className='send__icon__comment' onClick={handleNewAnswer}><IoMdSend size={'1.6rem'}/></div>
+                        </div>
                         :
                         <></>
                     }
@@ -204,8 +213,11 @@ function Comments_component({ commentVideo }) {
             <div className='comment__answers'>
                 {commentsAnswer &&
                     <div>
-                        <Comments_answers_component />
-                    </div>}
+                        {allCommentsAnswers.map((answer) =>(
+                            <Comments_answers_component answer={answer}/>
+                        ))}
+                    </div> 
+                }
             </div>
         </>
     )

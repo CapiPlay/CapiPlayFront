@@ -3,10 +3,12 @@ import './Comments_answers_component.css'
 import { BiSolidDownArrow, BiSolidUpArrow, BiDislike, BiLike, BiSolidLike } from 'react-icons/bi'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
-function Comments_answers_component(video) {
+function Comments_answers_component({answer}) {
     const [showMore, setShowMore] = useState(false);
     const [like_btn, setLikeBtn] = useState(true);
     const [commentsAnswer, setCommentsAnswer] = useState(false);
+
+    console.log(answer)
 
     //são apenas variáveis de exemplo, elas vão vir com o objeto
     const comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget nunc justo. Interdum et malesuada fames ac ante ipsum primis in faucibus. ";

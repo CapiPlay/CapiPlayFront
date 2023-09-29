@@ -7,6 +7,7 @@ const RespostaService = {
    * @returns Resposta (String idResposta, String texto, ZonedDateTime dataHora, Usuario idUsuario, Comentario idComentario)
    */
   criar: async (criarRespostaCommand) => {
+    console.log(criarRespostaCommand)
     try {
       const response = await axios.post(
         "/engajamento/resposta",

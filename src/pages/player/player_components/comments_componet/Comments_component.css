@@ -58,6 +58,7 @@
 }
 
 .input__answer__container{
+    gap: 6px;
     margin-top: 3%;
     display: flex;
     justify-content: center;
@@ -121,4 +122,19 @@
 .comment__content {
     color: var(--whiteBlack);
     width: 80%;
+}
+
+.send__icon__comment{
+    background-color: var(--purple);
+    border: solid var(--purple);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.send__icon__comment:hover{
+    background-color: var(--purplehover);
+    border: solid var(--purplehover);
 }

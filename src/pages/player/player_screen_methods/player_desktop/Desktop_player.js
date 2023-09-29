@@ -56,7 +56,6 @@ function Desktop_player({ video }) {
         if(commentsTemp == null || commentsTemp == undefined){
             setAllComments(null)
         }else{
-            console.log(commentsTemp.content)
             setLast(commentsTemp.last)
             setAllComments(commentsTemp.content)
         }
