@@ -41,11 +41,10 @@ const ComentarioService = {
    * @param {*} buscarUmComentarioCommand (String idComentario)
    * @returns Page&lt;Comentario&gt;
    */
-  buscarTodosPorVideo: async (buscarTodosPorVideoComentarioCommand, page) => {
+  buscarTodosPorVideo: async (idVideo, page) => {
     try {
       const response = await axios.get(
-        "/engajamento/comentario/buscar-todos-por-video/" + page,
-        buscarTodosPorVideoComentarioCommand
+        "/engajamento/comentario/buscar-todos-por-video/" + page + "/" + idVideo
       );
       return response.data;
     } catch (err) {

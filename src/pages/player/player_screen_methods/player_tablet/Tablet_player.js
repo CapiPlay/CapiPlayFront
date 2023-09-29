@@ -8,17 +8,50 @@ import Comments_component from '../../player_components/comments_componet/Commen
 import Video_card from '../../../../components/video_card/Video_card'
 import { BiArrowBack } from 'react-icons/bi'
 import VideoService from '../../../../service/Video/VideoService'
+import ComentarioService from '../../../../service/Engajamento/ComentarioService'
+import { IoMdSend } from 'react-icons/io'
+import { BiSolidDownArrow, BiSolidUpArrow } from 'react-icons/bi'
 import LikeDislikeButtons from '../../player_components/feedbackButton/LikeDislikeButtons'
 
 function Tablet_player({ video }) {
     const [videos, setVideos] = useState([])
+    const [commentText, setCommentText] = useState('');
+    const [allComments, setAllComments] = useState()
+    const [comment, setComments] = useState(false)
 
     useEffect(() => {
+        buscarComments()
         getVideos()
     }, [])
 
     const getVideos = async () => {
-        setVideos(await VideoService.buscarTodos(6, 0, false))
+        var videostemp = await VideoService.buscarTodos(6, 0, false)
+        setVideos(videostemp.content)
+
+    }
+
+    const handleNewComment = () => {
+        console.log(video)
+        if (commentText.trim() !== '') {
+            ComentarioService.criar({
+                texto: commentText,
+                idVideo: video.uuid
+            })
+            setCommentText('');
+        }
+    }
+
+    const buscarComments = async () => {
+        var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, 0)
+        if (commentsTemp == null || commentsTemp == undefined) {
+            setAllComments(null)
+        } else {
+            setAllComments(commentsTemp.content)
+        }
+    }
+
+    const toggleComment = () => {
+        setComments(!comment)
     }
 
     return (
@@ -56,9 +89,40 @@ function Tablet_player({ video }) {
             <div className='comments__container'>
                 <div className='total__comments'>
                     <p>Comentários</p>
+                    <div className='toggleComment' onClick={toggleComment}>
+                        Comentar
+                        {comment ?
+                            <BiSolidUpArrow /> :
+                            <BiSolidDownArrow />
+                        }
+                    </div>
                 </div>
-                <div>
-                    <Comments_component video={video} />
+                {comment &&
+                    <div className='comments__input'>
+                        <input
+                            type='text'
+                            value={commentText}
+                            onChange={(e) => setCommentText(e.target.value)}
+                        />
+                        <div className='send__comments__icon' onClick={handleNewComment}>
+                            <IoMdSend size={'2rem'} />
+                        </div>
+                    </div>
+                }
+                <div className='comments'>
+                    <div>
+                        {allComments == null ?
+                            <div>
+                                <p>Sem comentarios</p>
+                            </div>
+                            :
+                            <div>
+                                {allComments.map((commentVideo) => (
+                                    <Comments_component commentVideo={commentVideo} />
+                                ))}
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
             <div>

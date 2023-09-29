@@ -1,7 +1,7 @@
 import '../buttonSubmit/ButtonSubmit.css'
 import { useState } from 'react'
 
-const ButtonSubmit = ({ label, onClick }) => {
+const ButtonSubmit = ({ valiUser }) => {
   const [isClicked, setIsClicked] = useState(false)
   const [buttonText, setButtonText] = useState('Inscrever-se')
 

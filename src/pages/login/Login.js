@@ -19,7 +19,6 @@ const Login = ({ }) => {
     const navigate = useNavigate();
 
     const [loginData, setLoginData] = useState({ email: '', senha: '' })
-    const [keepLoggedIn, setKeepLoggedIn] = useState(false)
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const dispatch = useDispatch()
 
@@ -38,8 +37,10 @@ const Login = ({ }) => {
     const login = async () => {
         if (loginData.email && loginData.senha) {
             try {
-                dispatch(doLogin(loginData))
-                navigate("/")
+                const res = dispatch(doLogin(loginData))
+                if (res) {
+                    navigate("/")
+                }
             } catch (err) {
                 toast.error("E-mail ou senha inválido")
             }

@@ -11,6 +11,7 @@ import VideoService from '../../../../service/Video/VideoService'
 import { IoMdSend } from 'react-icons/io'
 import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import ComentarioService from '../../../../service/Engajamento/ComentarioService'
+import { Link } from 'react-router-dom'
 import LikeDislikeButtons from '../../player_components/feedbackButton/LikeDislikeButtons'
 
 // import Video_player_contructor from '../../video_player_contructor/Video_player_contructor'
@@ -25,9 +26,7 @@ function Desktop_player({ video }) {
         buscarComments()
         getVideos()
     }, [])
-
-    console.log(video)
-
+    
     const toggleComment = () => {
         setComments(!comment)
     }
@@ -50,7 +49,7 @@ function Desktop_player({ video }) {
     }
 
     const buscarComments = async () => {
-        var commentsTemp = await ComentarioService.buscarTodosPorVideo({idVideo: video.uuid}, 0)
+        var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, 0)
         if(commentsTemp == null || commentsTemp == undefined){
             setAllComments(null)
         }else{
@@ -82,10 +81,10 @@ function Desktop_player({ video }) {
                     <div className='interaction'>
                         <div className='interaction__info'>
                             <div className='views__div'>
-                                <AiFillEye size={'1.3rem'} /> {video.curtidas} Visualizações
+                                <AiFillEye size={'1.3rem'} /> {video.visualizacoes} Visualizações
                             </div>
                             <div className='likes__div'>
-                                <AiFillHeart size={'1.25rem'} /> {video.visualizacoes} Likes
+                                <AiFillHeart size={'1.25rem'} /> {video.curtidas} Likes
                             </div>
                         </div>
                         <div className='like__dislike__btns'>
