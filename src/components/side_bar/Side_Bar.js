@@ -27,10 +27,10 @@ const categories = [
     { name: 'VIAGEMETURISMO', label: 'Viagem e turismo', icon: <SlPlane /> },
 ]
 
-const Side_Bar = ({ isOpen}) => {
+const Side_Bar = () => {
 
     const openSideBar = useSelector((state) => state.header.isClicked)
-    const [activeCategory, setActiveCategory] = useState('')
+    const [activeCategory, setActiveCategory] = useState('Arte')
     const [widthPage, setWidthPage] = useState(window.innerWidth)
 
     const handleCategoryClick = (category) => {
@@ -39,26 +39,6 @@ const Side_Bar = ({ isOpen}) => {
 
     useEffect(() => {
         setWidthPage(window.innerWidth)
-    }, [])
-
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            if (!e.target.closest('.container__side__bar') && !e.target.closest('.header__menu__icon')) {
-                isOpen(false)
-            }
-        }
-
-        const handleResize = () => {
-            isOpen(false)
-        }
-
-        document.addEventListener('click', handleClickOutside)
-        window.addEventListener('resize', handleResize)
-
-        return () => {
-            document.removeEventListener('click', handleClickOutside)
-            window.removeEventListener('resize', handleResize)
-        }
     }, [])
 
     return (
