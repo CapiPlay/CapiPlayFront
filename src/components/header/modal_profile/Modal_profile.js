@@ -5,19 +5,22 @@ import './Modal_profile.css'
 import Cookies from 'js-cookie'
 
 // react
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import ThemeToggle from '../theme_toggle/ThemeToggle'
 
 const Modal_profile = () => {
 
+    const nav = useNavigate();
+
     function Logout() {
-        window.location.reload(false)
         Cookies.remove('token')
         Cookies.remove('user')
+        nav('/')
+        window.location.reload()
     }
 
-    const userExist = Cookies.get("token") 
+    const userExist = Cookies.get("token")
 
     return (
         <div className='modal__profile__container'>
@@ -35,10 +38,16 @@ const Modal_profile = () => {
             </div>
             <div className='divider__profile__modal'></div>
             <Link to="/historic" ><p>Histórico</p></Link>
+            {
+                userExist ? (
+                    <><div className='divider__profile__modal'></div>
+                    <Link to="/settings"><p>Configuração</p></Link></>
+                ) : (
+                    <></>
+                )
+            }
             <div className='divider__profile__modal'></div>
-            <Link to="/settings" ><p>Settings</p></Link>
-            <div className='divider__profile__modal'></div>
-            <p onClick={Logout}>Sair</p>
+            <p className="logout__profile" onClick={Logout}>Sair</p>
         </div>
     )
 }

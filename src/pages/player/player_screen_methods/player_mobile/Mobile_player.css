@@ -131,11 +131,16 @@
     font-size: 15px;
 }
 
+.comentarios__video{
+    margin: 1rem;
+}
+
 .comments__modal{
     z-index: 999;
     position: absolute;
     height: max-content;
     background-color: var(--darkpurple);
+    width: 100%;
 }
 
 .videos__mobile{

@@ -7,6 +7,8 @@ import { format } from 'date-fns';
 import HeaderToBack from "../../components/headerToBack/HeaderToBack"
 import Video_card from "../../components/video_card/Video_card"
 import Slider_Shorts from "../../components/slider_shorts/Slider_Shorts";
+import HistoricoService from "../../service/Engajamento/HistoricoService";
+import VideoService from "../../service/Video/VideoService";
 
 const Historic = () => {
 
@@ -23,8 +25,30 @@ const Historic = () => {
 
     // responsividade
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
-
     useEffect(() => {
+        const func = async () => {
+            const array = [];
+            await VideoService.buscarTodos(1000,0,false).then((res) => {
+                res.content.forEach((r) => {
+                    array.push(r)
+                })
+            })
+            const ar = [];
+            await HistoricoService.buscarTodosPorUsuario().then((res) => {
+                res.forEach((r1) => {
+                    array.filter((r2) => {
+                        if (r1.idVideo.id === r2.uuid) {
+                            ar.push(r2)
+                        }
+                    })
+                })
+            })
+            setVideoHistoric([...ar]);
+            console.log(ar)
+
+        }
+
+        func()
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
@@ -33,6 +57,7 @@ const Historic = () => {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
+
     }, []);
 
     const renderMobileView = () => (
@@ -52,8 +77,8 @@ const Historic = () => {
                         }
                         {videoHistoric &&
                             <div className="container__videos__historic__mob">
-                                {Array.from({ length: 2 }, (_, index) => (
-                                    <Video_card key={index} />
+                                {videoHistoric.map((video) => (
+                                    <Video_card key={video.id} video={video} />
                                 ))}
                             </div>
                         }
@@ -81,8 +106,8 @@ const Historic = () => {
                         }
                         {videoHistoric &&
                             <div className="container__videos__historic__tablet">
-                                {Array.from({ length: 4 }, (_, index) => (
-                                    <Video_card key={index} />
+                                {videoHistoric.map((video) => (
+                                    <Video_card key={video.id} video={video} />
                                 ))}
                             </div>
                         }
@@ -110,8 +135,8 @@ const Historic = () => {
                         }
                         {videoHistoric &&
                             <div className="container__videos__historic__desktop">
-                                {Array.from({ length: 6 }, (_, index) => (
-                                    <Video_card key={index} />
+                                {videoHistoric.map((video) => (
+                                    <Video_card key={video.id} video={video} />
                                 ))}
                             </div>
                         }
