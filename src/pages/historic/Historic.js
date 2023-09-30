@@ -46,10 +46,16 @@ const Historic = () => {
             // setVideoHistoric([...ar]);
             // console.log(ar)
 
-            VideoService.buscarHistorico(99999, 0).then(
+            VideoService.buscarHistorico(99999, 0, false).then(
                 (res) => {
                     console.log(res)
                     setVideoHistoric(res);
+                }
+            );
+            VideoService.buscarHistorico(99999, 0, true).then(
+                (res) => {
+                    console.log("Shorts: ", res)
+                    setShortHistoric(res);
                 }
             );
         }
@@ -107,7 +113,7 @@ const Historic = () => {
                         </div>
                         {shortHistoric &&
                             <div className="container__slider__shorts__historic">
-                                <Slider_Shorts />
+                                <Slider_Shorts shorts={shortHistoric}/>
                             </div>
                         }
                         {videoHistoric &&

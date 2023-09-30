@@ -3,12 +3,26 @@ import Slider from 'react-slick';
 import Shortcard from '../short_card/ShortCard';
 import VideoService from '../../service/Video/VideoService';
 
-function Slider_Shorts() {
+function Slider_Shorts({shorts}) {
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
     const [videosRec, setVideosRec] = useState([])
 
     useEffect(() => {
+        if (shorts) {
+            setVideosRec([...shorts]);
+            return
+        }
+        
+        const getVideosRec = async () => {
+            const pageable = await VideoService.buscarTodos(12, 0, true);
+            const videos = pageable.content;
+            if (videos.length >= 6) {
+                setVideosRec([...videos]);
+            } else {
+                setVideosRec([]);
+            }
+        };
         getVideosRec();
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
@@ -19,16 +33,6 @@ function Slider_Shorts() {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
-
-    const getVideosRec = async () => {
-        const pageable = await VideoService.buscarTodos(12, 0, true);
-        const videos = pageable.content;
-        if (videos.length >= 6) {
-            setVideosRec([...videos]);
-        } else {
-            setVideosRec([]);
-        }
-    };
 
     const settingsDesk = {
         slidesToShow: 5,
