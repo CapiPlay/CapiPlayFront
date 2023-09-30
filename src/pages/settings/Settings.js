@@ -29,7 +29,8 @@ const Settings = ({ }) => {
         perfil: '',
         senha: '',
         descricao: '',
-        foto: ''
+        foto: '',
+        senhaNova: ''
     });
 
     const [fileChanged, setFileChanged] = useState(false)
@@ -65,7 +66,6 @@ const Settings = ({ }) => {
         UsuarioService.detalhes()
             .then((data) => {
                 setSettingsData(data)
-                console.log(data)
             })
             .catch((error) => console.error('Erro ao buscar usuario:', error));
     }, [idUsuario]);
@@ -94,20 +94,24 @@ const Settings = ({ }) => {
         setIsModalImageOpen(false);
     };
 
-    const handleUpdateUser = () => {
+    const handleUpdateUser = (event) => {
+        event.preventDefault();
         // if (settingsData.senha.length >= 6 && settingsData.senha.length <= 20) {
             try {
                 const settings = new FormData();
                 settings.append("nome", settingsData.nome);
                 settings.append("perfil", settingsData.perfil);
-                settings.append("senha", settingsData.senha);
+                if(settingsData.senhaNova)
+                    settings.append("senha", settingsData.senhaNova);
                 settings.append("descricao", settingsData.descricao);
 
                 setRegisterData({ ...registerData, foto: image })
 
-                UsuarioService.editar(settings, settingsData.foto).then((response) => {
+                console.log(settings);
+                console.log(settingsData);
+                console.log(settingsData.foto);
+                UsuarioService.editar(settings, image).then((response) => {
                     // window.location.reload();
-                    console.log(settingsData);
                     console.log(response);
                 });
             } catch (error) {
@@ -139,6 +143,11 @@ const Settings = ({ }) => {
             setImage(file)
         }
     }
+
+    // const handleFileChange = (e) => {
+    //     const file = e.target.files[0];
+    //     setImage(file);
+    //   };
 
     const handleRemoveFile = (e) => {
         e.preventDefault()
@@ -344,7 +353,7 @@ const Settings = ({ }) => {
                                 <Input
                                     name={"senha"}
                                     placeholder={"Senha nova"}
-                                    onChange={(e) => setSettingsData({ ...settingsData, senha: e.target.value })}
+                                    onChange={(e) => setSettingsData({ ...settingsData, senhaNova: e.target.value })}
                                     type={"password"}
                                     required={true}
                                     className='settings__input__desktop'

@@ -35,7 +35,7 @@ const Login = ({ }) => {
     }, [])
 
     const login = async () => {
-        if (loginData.email && loginData.senha) {
+        // if (loginData.email && loginData.senha) {
             try {
                 dispatch(doLogin(loginData))
                 const res = JSON.parse(Cookies.get("user"))
@@ -45,9 +45,9 @@ const Login = ({ }) => {
             } catch (err) {
                 toast.error("E-mail ou senha inválido")
             }
-        } else {
-            toast.error("Preencha todos os campos")
-        }
+        // } else {
+        //     toast.error("Preencha todos os campos")
+        // }
     }
 
     return (

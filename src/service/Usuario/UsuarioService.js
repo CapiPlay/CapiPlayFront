@@ -57,7 +57,7 @@ const UserService = {
       const formData = new FormData();
       formData.append("foto1", foto1);
   
-      const response = await axios.put("/usuario", editarUsuarioCommand, {
+      const response = await axios.put("/usuario", editarUsuarioCommand, formData, {
         headers: {
           "Content-Type": "multipart/form-data", 
         },
