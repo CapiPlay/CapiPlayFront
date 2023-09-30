@@ -150,7 +150,7 @@ function Desktop_player({ video }) {
                                 <>
                                     <div>
                                         {allComments.map((commentVideo) => (
-                                             <Comments_component commentVideo={commentVideo} />
+                                             <Comments_component commentVideo={commentVideo} key={commentVideo.idComentario}/>
                                         ))}
                                     </div>
                                     {!last && <div onClick={buscarMaisComentarios} className='show__more__comments'>Mostrar mais <BiSolidDownArrow size={'1rem'}/></div>}

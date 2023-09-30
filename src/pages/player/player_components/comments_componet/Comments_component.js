@@ -20,14 +20,13 @@ function Comments_component({ commentVideo }) {
     const [foto, setFoto] = useState(ProfilePicture)
     const [answer, setAnswer] = useState(false)
     const [answerText, setAnswerText] = useState('')
-    const [allCommentsAnswers, setAllCommentsAnswers] = useState([])
+    const [allCommentsAnswers, setAllCommentsAnswers] = useState()
 
     useEffect(() => {
         setFoto('http://10.4.96.50:7000/api/usuario/static/' + commentVideo.idUsuario.foto)
     }, [commentVideo])
 
     useEffect(() => {
-        handleAllAnswers()
         setCommentLikes()
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
@@ -42,6 +41,10 @@ function Comments_component({ commentVideo }) {
     useEffect(() => {
         setDateComment()
     }, [date])
+
+    useEffect(() => {
+        handleAllAnswers()
+    }, [commentsAnswer])
 
     const toggleShowMore = () => {
         setShowMore(!showMore);
@@ -127,15 +130,12 @@ function Comments_component({ commentVideo }) {
     }
 
     const handleToggleAnswer = () => {
-        setAnswer(!answer)
+         setAnswer(!answer)
     }
 
     const handleAllAnswers = async () => {
-        const buscarTodosCmd = {
-            idComentario: commentVideo.idComentario
-        }
-        let temp = await RespostaService.buscarTodosPorComentario(buscarTodosCmd, 0);
-        setAllCommentsAnswers(temp)
+        let temp = await RespostaService.buscarTodosPorComentario(commentVideo.idComentario, 0);
+        setAllCommentsAnswers(temp.content)
     }
 
     return (
@@ -154,9 +154,9 @@ function Comments_component({ commentVideo }) {
                     </p>
                     :
                     <p className='comment__text'>{showMore ? commentVideo.texto : `${commentVideo.texto.slice(0, 50)}...`}
-                        {!showMore && <div>
-                            <button onClick={() => toggleShowMore()} className='description__moreORless'> <p className='selection'>Mostrar mais <p className='selection__icon'><BiSolidDownArrow /></p></p></button>
-                        </div>}
+                        {!showMore && 
+                            <button onClick={() => toggleShowMore()} className='description__moreORless'> <p className='selection'>Mostrar mais <span className='selection__icon'><BiSolidDownArrow /></span></p></button>
+                        }
                     </p>
                     }
                     <div className='comment__interactions'>
@@ -183,7 +183,7 @@ function Comments_component({ commentVideo }) {
                             }
                         </div>
                         {verifyDesktop() ?
-                            <div className='comment__total__answers' onClick={() => toggleCommentsAnswers()}>
+                            <div className='comment__total__answers' onClick={toggleCommentsAnswers}>
                                 {commentVideo.qtdRespostas == 0 ?
                                     <div></div>
                                     :
@@ -213,8 +213,8 @@ function Comments_component({ commentVideo }) {
             <div className='comment__answers'>
                 {commentsAnswer &&
                     <div>
-                        {allCommentsAnswers.map((answer) =>(
-                            <Comments_answers_component answer={answer}/>
+                        {allCommentsAnswers.map((answer) => (
+                            <Comments_answers_component answer={answer} key={answer}/>
                         ))}
                     </div> 
                 }
