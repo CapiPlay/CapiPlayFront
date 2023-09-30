@@ -22,21 +22,17 @@ function LikeDislikeButtons({ video }) {
 
   useEffect(() => {
     getReacao().then((a) => {
-      console.log("SDFSDFSDDSFDSFFDS" + a);
       setReacao(a);
     });
   }, [video.uuid]);
 
   useEffect(() => {
     if (reacao == undefined) {
-      console.log("CAIU AQUIIII CAIU AQUIIII UNDEFINED");
       setLikeBtnActive(false);
       setDislikeBtnActive(false);
     } else if (reacao == false) {
-      console.log("CAIU AQUIIII CAIU AQUIIII BTNDESLIKE");
       setDislikeBtnActive(true);
     } else if (reacao == true) {
-      console.log("CAIU AQUIIII BTNLIKE");
       setLikeBtnActive(true);
     }
   }, [reacao]);
