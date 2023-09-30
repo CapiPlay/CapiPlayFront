@@ -118,7 +118,7 @@ const Register = () => {
                             />
                             <Input
                                 placeholder={"Data de Nascimento"}
-                                type={"date"}
+                                type={"number"}
                                 required={true}
                                 name={"dataNascimento"}
                                 onChange={keyboard}

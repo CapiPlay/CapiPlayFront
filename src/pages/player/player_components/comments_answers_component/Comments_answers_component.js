@@ -1,20 +1,62 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Comments_answers_component.css'
+import ProfilePicture from '../../../../assets/image/channel_profile.png'
 import { BiSolidDownArrow, BiSolidUpArrow, BiDislike, BiLike, BiSolidLike } from 'react-icons/bi'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
-function Comments_answers_component(video) {
+function Comments_answers_component({answer}) {
     const [showMore, setShowMore] = useState(false);
     const [like_btn, setLikeBtn] = useState(true);
     const [commentsAnswer, setCommentsAnswer] = useState(false);
+    const [foto, setFoto] = useState(ProfilePicture)
+    const [date, setDate] = useState();
+    const [formatoHora, setFormatoHora] = useState()
 
-    //são apenas variáveis de exemplo, elas vão vir com o objeto
-    const comment = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget nunc justo. Interdum et malesuada fames ac ante ipsum primis in faucibus. ";
-    const username = 'ChillBean'
-    const comment_date = '4'
-    const user_image = 'https://steamuserimages-a.akamaihd.net/ugc/1982175219714100763/A4498FCF170B98665E37618B6473EB613B40B0B9/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false'
+    useEffect(() => {
+        setFoto('http://10.4.96.50:7000/api/usuario/static/' + answer.idUsuario.foto)
+    }, [answer])
+
+    const setDateComment = () => {
+        const dataHoraJSON = answer.dataHora;
+        const dataHoraObj = new Date(dataHoraJSON);
+        const dataHoraAtual = new Date();
+        const diferencaEmMilissegundos = dataHoraAtual - dataHoraObj;
+        const diferencaEmSegundos = Math.floor(diferencaEmMilissegundos / 1000)
+        const diferencaEmMinutos = Math.floor(diferencaEmMilissegundos / (1000 * 60));
+        const diferencaEmHoras = Math.floor(diferencaEmMinutos / 60)
+        const diferencaEmDias = Math.floor(diferencaEmMilissegundos / (1000 * 60 * 60 * 24));
+        if(diferencaEmDias > 0){
+            if(diferencaEmDias == 1){
+                setFormatoHora("dia")
+            }else{
+                setFormatoHora("dias")
+            }
+            setDate(diferencaEmDias)
+        }else if(diferencaEmHoras > 0) {
+            if(diferencaEmHoras == 1){
+                setFormatoHora("hora")
+            }else{
+                setFormatoHora("horas")
+            }
+            setDate(diferencaEmHoras)
+        } else if(diferencaEmMinutos > 0){
+            if(diferencaEmMinutos == 1){
+                setFormatoHora("minuto")
+            }else{
+                setFormatoHora("minutos")
+            }
+            setDate(diferencaEmMinutos)
+        } else{
+            if(diferencaEmSegundos == 1){
+                setFormatoHora("segundo")
+            }else{
+                setFormatoHora("segundos")
+            }
+            setDate(diferencaEmSegundos)
+        }
+    }
+
     const comment_likes = 200
-    const comment_answers = [{}, {}, {}, {}, {}, {}]
 
     const toggleShowMore = () => {
         setShowMore(!showMore);
@@ -24,24 +66,24 @@ function Comments_answers_component(video) {
         setLikeBtn(!like_btn);
     };
 
-    const toggleCommentsAnswers = () => {
-        setCommentsAnswer(!commentsAnswer);
-    };
+    useEffect(() => {
+        setDateComment()
+    }, [date])
 
     return (
         <>
             <div className='comment'>
                 <div className='user__icon__container'>
-                    <img src={user_image} className='user__icon' />
+                    <img src={foto} className='user__icon' />
                 </div>
                 <div className='comment__content'>
                     <div className='comment__user__username'>
-                        @{username}<span className='ball'></span> há {comment_date} dias
+                        @{answer.idUsuario.nomeCanal}<span className='ball'></span> há {date} {formatoHora}
                     </div>
-                    <p>{showMore ? comment : `${comment.slice(0, 50)}...`}
-                        <div>
-                            <button onClick={() => toggleShowMore()} className='description__moreORless'>{!showMore ? <p className='selection'>Mostrar mais <p className='selection__icon'><BiSolidDownArrow /></p></p> : <p className='selection'>Mostrar menos <p className='selection__icon'><BiSolidUpArrow /></p></p>}</button>
-                        </div>
+                    <p>{showMore ? answer.texto : `${answer.texto.slice(0, 50)}...`}
+                        {!showMore && 
+                            <button onClick={() => toggleShowMore()} className='description__moreORless'> <p className='selection'>Mostrar mais <span className='selection__icon'><BiSolidDownArrow /></span></p></button>
+                        }
                     </p>
                     <div className='comment__interactions'>
                         <div className='likes'>
