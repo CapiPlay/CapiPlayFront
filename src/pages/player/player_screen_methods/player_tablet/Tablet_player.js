@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './Tablet_player.css'
-import Like from '../../player_components/like_btn/Like_btn'
-import Dislike from '../../player_components/dislike_btn/Dislike_btn'
 import { AiFillEye, AiFillHeart } from 'react-icons/ai'
 import Channel_component from '../../player_components/channel_component/Channel_component'
 import Description_component from '../../player_components/description_component/Description_component'
@@ -13,6 +11,7 @@ import VideoService from '../../../../service/Video/VideoService'
 import ComentarioService from '../../../../service/Engajamento/ComentarioService'
 import { IoMdSend } from 'react-icons/io'
 import { BiSolidDownArrow, BiSolidUpArrow } from 'react-icons/bi'
+import LikeDislikeButtons from '../../player_components/feedbackButton/LikeDislikeButtons'
 
 function Tablet_player({ video }) {
     const [videos, setVideos] = useState([])
@@ -75,8 +74,7 @@ function Tablet_player({ video }) {
                     </div>
                 </div>
                 <div className='like__dislike__btns'>
-                    <Like />
-                    <Dislike />
+                    <LikeDislikeButtons video={video} />
                 </div>
             </div>
             <div>
