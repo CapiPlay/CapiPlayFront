@@ -45,23 +45,19 @@ const Header = ({ searchValue }) => {
     }
 
     const handleSearch = () => {
-        nav(`/result-search?search=${encodeURIComponent(valueInput)}`)
+        VideoService.pesquisarValor(valueInput, false).then(
+            nav(`/result-search?search=${encodeURIComponent(valueInput)}`)
+        )
     }
 
     const verifyKeyPress = (e) => {
         if (e.key === 'Enter') {
-            handleSearch()
+            handleSearch(valueInput)
         }
     }
 
     const handleChange = (e) => {
         setValueInput(e.target.value)
-    }
-
-    const onSearch = () => {
-        VideoService.pesquisarValor(valueInput, false).then(
-            nav(`/result-search?search=${encodeURIComponent(valueInput)}`)
-        )
     }
 
     useEffect(() => {

@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 import VideoService from "../../service/Video/VideoService";
 
-const Search = ({valueSearch}) => {
+const Search = ({ valueSearch }) => {
 
     const sizeIcon = 20;
     const colorIcon = "var(--whitesmoke)";
@@ -21,7 +21,7 @@ const Search = ({valueSearch}) => {
     const location = useLocation();
     const urlSearchParams = new URLSearchParams(location.search);
     const searchParams = urlSearchParams.get("search");
-    const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : valueSearch);
+    const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : valueSearch ? valueSearch : "");
 
     const handleChange = (e) => {
         console.log(e.target.value)
@@ -56,6 +56,10 @@ const Search = ({valueSearch}) => {
 
     }, [])
 
+    useEffect(() => {
+        console.log(valueSearch)
+    }, [valueSearch])
+
     const [searches, setSearches] = useState(([
         // "Filme como treinar seu dragão é bom?",
         // "Pica - Pau completo dublado",
@@ -70,7 +74,7 @@ const Search = ({valueSearch}) => {
     ]));
 
     const renderSearch = () => {
-        if (valueInput.trim() === '') {
+        if (valueInput?.trim() === '') {
             return (
                 <>
                     {lastSearches && lastSearches.map((lastSearch) => (
@@ -107,11 +111,11 @@ const Search = ({valueSearch}) => {
         <div className="container__search" style={{ display: back ? "none" : "block" }}>
             {window.innerWidth <= 900
                 &&
-                    <HeaderSearch
-                        handleSearch={handleSearch}
-                        valueInput={valueInput}
-                        handleChange={handleChange}
-                        functionBack={() => setBack(!back)} />
+                <HeaderSearch
+                    handleSearch={handleSearch}
+                    valueInput={valueInput}
+                    handleChange={handleChange}
+                    functionBack={() => setBack(!back)} />
             }
             {renderSearch()}
         </div>
