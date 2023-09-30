@@ -3,6 +3,8 @@ import './Comments_component.css'
 import { BiSolidDownArrow, BiSolidDislike, BiDislike, BiLike, BiSolidLike } from 'react-icons/bi'
 import Comments_answers_component from '../comments_answers_component/Comments_answers_component'
 import ProfilePicture from '../../../../assets/image/channel_profile.png'
+import { IoMdSend } from 'react-icons/io'
+import RespostaService from '../../../../service/Engajamento/RespostaService'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Comments_component({ commentVideo }) {
@@ -16,6 +18,9 @@ function Comments_component({ commentVideo }) {
     const [curtidas, setCurtidas] = useState(0)
     const [descurtidas, setDescurtidas] = useState(0)
     const [foto, setFoto] = useState(ProfilePicture)
+    const [answer, setAnswer] = useState(false)
+    const [answerText, setAnswerText] = useState('')
+    const [allCommentsAnswers, setAllCommentsAnswers] = useState()
 
     useEffect(() => {
         setFoto('http://10.4.96.50:7000/api/usuario/static/' + commentVideo.idUsuario.foto)
@@ -37,41 +42,20 @@ function Comments_component({ commentVideo }) {
         setDateComment()
     }, [date])
 
+    useEffect(() => {
+        handleAllAnswers()
+    }, [commentsAnswer])
+
     const toggleShowMore = () => {
         setShowMore(!showMore);
     };
 
     const setCommentLikes = async () => {
-        // const commentsReactions = await ReacaoComentarioService.buscarTodosPorComentario({idComentario: commentVideo.idComentario});
-        // if(commentsReactions !== undefined){
-        //     commentsReactions.forEach(commentReaction => {
-        //         if(commentReaction.curtida){
-        //             setCurtidas(curtidas + 1)
-        //         } else {
-        //             setDescurtidas(descurtidas + 1)  
-        //         }
-        //     });
-        // }
+        
     }
 
     const toggleLikeBtn = () => {
-        // if(like_btn){
-        //     EngajamentoService.criar(
-        //         {
-        //             usuarioId: 1, // usuarioId
-        //             videoId: video.uuid,
-        //             curtida: 1
-        //         }
-        //     )
-        // }else{
-        //     EngajamentoService.criar(
-        //         {
-        //             usuarioId: 1, // usuarioId
-        //             videoId: video.uuid,
-        //             curtida: 0
-        //         }
-        //     )
-        // }
+       
         setLikeBtn(!like_btn);
     };
 
@@ -106,6 +90,7 @@ function Comments_component({ commentVideo }) {
             }else{
                 setFormatoHora("dias")
             }
+            setDate(diferencaEmDias)
         }else if(diferencaEmHoras > 0) {
             if(diferencaEmHoras == 1){
                 setFormatoHora("hora")
@@ -130,6 +115,26 @@ function Comments_component({ commentVideo }) {
         }
     }
 
+    const handleNewAnswer = () => {
+        const criarCMD = {
+            texto: answerText,
+                idComentario: commentVideo.idComentario
+        }
+        if (answerText.trim() !== '') {
+            RespostaService.criar(criarCMD)
+            setAnswerText('');
+        }
+    }
+
+    const handleToggleAnswer = () => {
+         setAnswer(!answer)
+    }
+
+    const handleAllAnswers = async () => {
+        let temp = await RespostaService.buscarTodosPorComentario(commentVideo.idComentario, 0);
+        setAllCommentsAnswers(temp.content)
+    }
+
     return (
         <>
             <div className='comment'>
@@ -146,9 +151,9 @@ function Comments_component({ commentVideo }) {
                     </p>
                     :
                     <p className='comment__text'>{showMore ? commentVideo.texto : `${commentVideo.texto.slice(0, 50)}...`}
-                        {!showMore && <div>
-                            <button onClick={() => toggleShowMore()} className='description__moreORless'> <p className='selection'>Mostrar mais <p className='selection__icon'><BiSolidDownArrow /></p></p></button>
-                        </div>}
+                        {!showMore && 
+                            <button onClick={() => toggleShowMore()} className='description__moreORless'> <p className='selection'>Mostrar mais <span className='selection__icon'><BiSolidDownArrow /></span></p></button>
+                        }
                     </p>
                     }
                     <div className='comment__interactions'>
@@ -175,7 +180,7 @@ function Comments_component({ commentVideo }) {
                             }
                         </div>
                         {verifyDesktop() ?
-                            <div className='comment__total__answers' onClick={() => toggleCommentsAnswers()}>
+                            <div className='comment__total__answers' onClick={toggleCommentsAnswers}>
                                 {commentVideo.qtdRespostas == 0 ?
                                     <div></div>
                                     :
@@ -187,14 +192,29 @@ function Comments_component({ commentVideo }) {
                                 <div>({commentVideo.qtdRespostas}) Respostas </div>
                             </div>
                         }
+                        <div className='answer' onClick={handleToggleAnswer}><span className='ball'></span> <p>Responder</p></div>
                     </div>
+                    {answer ?
+                        <div className='input__answer__container'>
+                            <input 
+                                type='text'
+                                onChange={(e) => setAnswerText(e.target.value)}
+                                /> 
+                            <div className='send__icon__comment' onClick={handleNewAnswer}><IoMdSend size={'1.6rem'}/></div>
+                        </div>
+                        :
+                        <></>
+                    }
                 </div>
             </div>
             <div className='comment__answers'>
                 {commentsAnswer &&
                     <div>
-                        <Comments_answers_component />
-                    </div>}
+                        {allCommentsAnswers.map((answer) => (
+                            <Comments_answers_component answer={answer} key={answer.idResposta}/>
+                        ))}
+                    </div> 
+                }
             </div>
         </>
     )

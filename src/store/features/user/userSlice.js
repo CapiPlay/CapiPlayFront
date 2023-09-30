@@ -46,7 +46,9 @@ const doLogin = (credentials) => async (dispatch) => {
     const data = await UsuarioService.login(credentials)
 
     if (data) {
-      dispatch(login({ token: data }))
+      dispatch(login({ token: data }));
+    } else {
+      throw new Error("Credenciais inválidas")
     }
   } catch (err) {
     throw err

@@ -38,7 +38,6 @@ const ShortsComponent = ({ short }) => {
     useEffect(() => {
         const jsonUser = Cookies.get("user")
         if (jsonUser !== "" && jsonUser !== undefined) {
-            console.log(jsonUser)
             setUser(JSON.parse(jsonUser))
         }
 
@@ -129,7 +128,6 @@ const ShortsComponent = ({ short }) => {
             setLikeShort(!likeShort)
             setDislikeShort(false)
             const cmd = { idUsuario: user.uuid, idVideo: id, curtida: true }
-            console.log(cmd)
             await ReacaoService.criar(cmd)
         }
     }
@@ -138,7 +136,8 @@ const ShortsComponent = ({ short }) => {
         if (validateUser) {
             setDislikeShort(!dislikeShort)
             setLikeShort(false)
-            await ReacaoService.criar()
+            const cmd = { idUsuario: user.uuid, idVideo: id, curtida: false }
+            await ReacaoService.criar(cmd)
         }
     }
 
@@ -176,7 +175,7 @@ const ShortsComponent = ({ short }) => {
                         <span>{short?.profile}</span>
                     </div>
                     <div className='button__submit__shorts' style={openModalComments ? { display: "none" } : {}}>
-                        <ButtonSubmit valiUser={validateUser} />
+                        <ButtonSubmit />
                     </div>
                 </div>
             </div>
