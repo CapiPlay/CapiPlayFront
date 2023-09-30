@@ -70,6 +70,7 @@ const Register = () => {
         user.append("foto1", image)
 
         try {
+            console.log(registerData)
             await dispatch(doSignup(user, image))
             nextStep()
             
