@@ -23,11 +23,10 @@ const InscricaoService = {
    * @param {*} buscarUmInscricaoCommand (String idUsuario, String idCanal)
    * @returns Inscricao (Usuario idUsuario, Usuario idCanal)
    */
-  buscarUm: async (buscarUmInscricaoCommand) => {
+  buscarUm: async (idCanal) => {
     try {
       const response = await axios.get(
-        "/engajamento/inscricao",
-        buscarUmInscricaoCommand
+        "/engajamento/inscricao/" + idCanal
       );
       return response.data;
     } catch (err) {

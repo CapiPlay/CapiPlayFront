@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   listShorts: [],
   actualShorts: {},
-  position: 0
+  position: 0,
+  idUserPost: 0
 }
 
 const shortsSlice = createSlice({
@@ -22,11 +23,17 @@ const shortsSlice = createSlice({
         state.actualShorts = { ...short }
         state.position = position
       }
+    },
+    modifyIdUserPost: (state, action) => {
+      const { idUserPost } = action.payload
+      if (idUserPost) {
+        state.idUserPost = idUserPost
+      }
     }
   }
 })
 
-export const { modifyListShorts, modifyActualShorts } = shortsSlice.actions
+export const { modifyListShorts, modifyActualShorts, modifyIdUserPost } = shortsSlice.actions
 export default shortsSlice.reducer
 
 const setListShorts = (list) => async (dispatch) => {
@@ -45,11 +52,14 @@ const setActualShorts = (short, position) => async (dispatch) => {
   }
 }
 
-const getActualShorts = () => async () => {
-
+const getIdUserPost = (idUserPost) => async (dispatch) => {
+  if (idUserPost) {
+    dispatch(modifyIdUserPost({idUserPost: idUserPost}))
+  }
 }
 
 export {
   setListShorts,
-  setActualShorts
+  setActualShorts,
+  getIdUserPost
 }
