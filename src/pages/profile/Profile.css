@@ -145,3 +145,7 @@
     padding-left: 10%;
     gap: 2rem;
 }
+
+.profile__pagination__desktop {
+    margin-left: 10rem;
+}

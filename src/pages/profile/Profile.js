@@ -1,55 +1,45 @@
-//react e css
+// styles
 import './Profile.css'
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
-
-//components
-import Side_Bar from '../home/side_bar/Side_Bar'
-import Video_card from '../../components/video_card/Video_card'
-import Header from '../../components/header/Header'
-
-//service
-import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajamentoService';
 
 //cookies
 import Cookies from 'js-cookie';
 
+// react
+import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+
+//components
+import Side_Bar from '../home/side_bar/Side_Bar'
+import Header from '../../components/header/Header'
+import Video_card from '../../components/video_card/Video_card'
+
+// images
 import ProfilePicture from '../../assets/imagemPerfil.png'
 
+//services
+import VideoService from '../../service/Video/VideoService';
+import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajamentoService';
 
 const Profile = () => {
 
+    const { idUsuario } = useParams();
     const [usuario, setUsuario] = useState({});
     const [foto, setFoto] = useState(ProfilePicture)
-    const { idUsuario } = useParams();
 
-    const userProfile = () => {
-        const userToken = Cookies.get('token');
-        if (userToken) {
-          try {
-            const tokenPayload = userToken.split('.')[1];
-            const decodedPayload = atob(tokenPayload);
-            const userLogin = JSON.parse(decodedPayload);
-            if (userLogin) {
-              return true;
-            } else {
-              return false;
-            }
-          } catch (error) {
-            console.error("Erro ao analisar o token:", error);
-            return false;
-          }
-        } else {
-          return false;
-        }
-      }
+    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
+    const [videos, setVideos] = useState([])
+    const [page, setPage] = useState(1)
+    const [size, setSize] = useState(3)
+    const [totalPages, setTotalPages] = useState(1)
+
+    const userDataJSON = Cookies.get('user');
+    const [uuid, setUuid] = useState()
 
     useEffect(() => {
         UsuarioEngajamentoService.buscarUm()
             .then((data) => {
                 setUsuario(data)
-                console.log(data)
             })
             .catch((error) => console.error('Erro ao buscar usuario:', error));
     }, [idUsuario]);
@@ -57,8 +47,6 @@ const Profile = () => {
     useEffect(() => {
         setFoto('http://10.4.96.50:7000/api/usuario/static/' + usuario.foto)
     }, [usuario])
-
-    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
         function handleResize() {
@@ -70,6 +58,56 @@ const Profile = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    useEffect(() => {
+        getVideos();
+    }, [page, size]);
+
+    const userProfile = () => {
+        const userToken = Cookies.get('token');
+        if (userToken) {
+            try {
+                const tokenPayload = userToken.split('.')[1];
+                const decodedPayload = atob(tokenPayload);
+                const userLogin = JSON.parse(decodedPayload);
+                if (userLogin) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (error) {
+                console.error("Erro ao analisar o token:", error);
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    const getVideos = async () => {
+        if (userDataJSON) {
+            try {
+                const userData = JSON.parse(userDataJSON);
+                setUuid(userData.uuid);
+            } catch (error) {
+                console.error('Erro ao fazer o parse do JSON:', error);
+            }
+        } else {
+            console.log('Cookie não encontrado.');
+        }
+        try {
+            const response = await VideoService.buscarUploads(size, page, {
+                donoCanalId: uuid
+            });
+            setVideos(response)
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    const handlePageChange = (page) => {
+        setPage(page);
+    };
 
     const renderMobileView = () => (
         <>
@@ -92,11 +130,7 @@ const Profile = () => {
                     </div>
                     <hr class="solid" />
                     <div className='profile__box__videos'>
-                        <Video_card />
-                        <Video_card />
-                        <Video_card />
-                        <Video_card />
-                        <Video_card />
+                        dvbsoibo
                     </div>
                 </div>
 
@@ -107,7 +141,7 @@ const Profile = () => {
         <>
             <Side_Bar />
             <Header userLogin={userProfile()} />
-            <div>  
+            <div>
                 <div>
                     <div className='profile__container_desktop'>
                         <div className='profile__container__picture__desktop'>
@@ -128,12 +162,24 @@ const Profile = () => {
                         </div>
                     </div>
                     <hr class="solid" />
+                    <div className="profile__pagination__desktop">
+                        Páginas:
+                        {Array.from({ length: totalPages }, (_, index) => index).map(
+                            (page) => (
+                                <button className="buttonPaginaItens"
+                                    key={page}
+                                    // className={page === currentPage ? "active" : ""}
+                                    onClick={() => handlePageChange(page)}
+                                >
+                                    {page + 1}
+                                </button>
+                            )
+                        )}
+                    </div>
                     <div className='profile__box__videos__desktop'>
-                        <Video_card />
-                        <Video_card />
-                        <Video_card />
-                        <Video_card />
-                        <Video_card />
+                        {videos.map((video) => (
+                            <Video_card key={video.uuid} video={video} />
+                        ))}
                     </div>
                 </div>
 

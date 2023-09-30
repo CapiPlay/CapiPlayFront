@@ -8,9 +8,9 @@ const VideoService = {
    * @param {*} video ( String titulo,String descricao,List<String> tags,String categoria,
    * Boolean shorts, MultipartFile video,MultipartFile miniatura,Boolean restrito,String usuarioId))
    * @returns void
-   */ 
+   */
   criar: async (formData, usuarioId) => {
-    return await axios.post('/api/video/criar', formData, {
+    return await axios.post('/video/criar', formData, {
       headers: {
         'usuarioId': usuarioId,
       },
@@ -101,10 +101,26 @@ const VideoService = {
     }
   },
 
-  buscarUploads: async (size, page, donoCanalId) => {
+  // buscarUploads: async (size, page, params) => {
+  //   try {
+  //     const response = await axios.get(`/video/buscar-videos-canal`, {
+  //       params: {
+  //         size: size,
+  //         page: page,
+  //         donoCanalId: params.donoCanalId
+  //       }
+  //     });
+  //     return response.data;
+  //   } catch (err) {
+  //     console.error(err);
+  //     throw err;  // Rejoga o erro para que possa ser capturado na chamada da função
+  //   }
+  // },
+
+  buscarUploads: async (size, page, params) => {
     try {
       const response = await axios.get(
-        `/video/buscar-videos-canal?size=${size}&page=${page}&donoCanalId${donoCanalId}`
+        `/video/buscar-videos-canal?size=${size}&page=${page}&donoCanalId=${params.donoCanalId}`
       );
       return response.data;
     } catch (err) {
