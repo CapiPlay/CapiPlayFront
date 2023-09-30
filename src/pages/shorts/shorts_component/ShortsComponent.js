@@ -128,7 +128,6 @@ const ShortsComponent = ({ short }) => {
             setLikeShort(!likeShort)
             setDislikeShort(false)
             const cmd = { idUsuario: user.uuid, idVideo: id, curtida: true }
-            console.log(cmd)
             await ReacaoService.criar(cmd)
         }
     }
@@ -137,7 +136,8 @@ const ShortsComponent = ({ short }) => {
         if (validateUser) {
             setDislikeShort(!dislikeShort)
             setLikeShort(false)
-            await ReacaoService.criar()
+            const cmd = { idUsuario: user.uuid, idVideo: id, curtida: false }
+            await ReacaoService.criar(cmd)
         }
     }
 
@@ -175,7 +175,7 @@ const ShortsComponent = ({ short }) => {
                         <span>{short?.profile}</span>
                     </div>
                     <div className='button__submit__shorts' style={openModalComments ? { display: "none" } : {}}>
-                        <ButtonSubmit idUserPost={short.usuario.uuid} />
+                        <ButtonSubmit />
                     </div>
                 </div>
             </div>

@@ -1,75 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import './LikeDislikeButtons.css';
-import { BiLike, BiSolidLike, BiDislike, BiSolidDislike } from 'react-icons/bi';
-import ReacaoService from '../../../../service/Engajamento/ReacaoService';
-import { set } from 'date-fns';
+import React, { useState, useEffect } from 'react'
+import './LikeDislikeButtons.css'
+import { BiLike, BiSolidLike, BiDislike, BiSolidDislike } from 'react-icons/bi'
+import ReacaoService from '../../../../service/Engajamento/ReacaoService'
 
 function LikeDislikeButtons({ video }) {
 
-  const [likeBtnActive, setLikeBtnActive] = useState(false);
-  const [dislikeBtnActive, setDislikeBtnActive] = useState(false);
+  const [likeBtnActive, setLikeBtnActive] = useState(false)
+  const [dislikeBtnActive, setDislikeBtnActive] = useState(false)
 
-  const [reacao, setReacao] = useState(undefined);
+  const [reacao, setReacao] = useState(undefined)
 
   async function getReacao() {
     try {
-      const a = await ReacaoService.buscarUm(video.uuid);
-      return a;
+      const a = await ReacaoService.buscarUm(video.uuid)
+      return a
       } catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
 
   useEffect(() => {
     getReacao().then((a) => {
-      console.log("SDFSDFSDDSFDSFFDS" + a);
-      setReacao(a);
-    });
-  }, [video.uuid]);
+      setReacao(a)
+    })
+  }, [video.uuid])
 
   useEffect(() => {
     if (reacao == undefined) {
-      console.log("CAIU AQUIIII CAIU AQUIIII UNDEFINED");
-      setLikeBtnActive(false);
-      setDislikeBtnActive(false);
+      setLikeBtnActive(false)
+      setDislikeBtnActive(false)
     } else if (reacao == false) {
-      console.log("CAIU AQUIIII CAIU AQUIIII BTNDESLIKE");
-      setDislikeBtnActive(true);
+      setDislikeBtnActive(true)
     } else if (reacao == true) {
-      console.log("CAIU AQUIIII BTNLIKE");
-      setLikeBtnActive(true);
+      setLikeBtnActive(true)
     }
-  }, [reacao]);
+  }, [reacao])
 
   const handleToggleLikeBtn = async () => {
-    const like = {idVideo: video.uuid, curtida: true};
+    const like = {idVideo: video.uuid, curtida: true} 
     if (!likeBtnActive && !dislikeBtnActive) {
-      setLikeBtnActive(true);
+      setLikeBtnActive(true) 
       ReacaoService.criar(like)
     } else if (likeBtnActive && !dislikeBtnActive) {
-      setLikeBtnActive(false);
+      setLikeBtnActive(false) 
       ReacaoService.criar(like)
     }else if (dislikeBtnActive) {
-      setLikeBtnActive(true);
-      setDislikeBtnActive(false);
+      setLikeBtnActive(true) 
+      setDislikeBtnActive(false) 
       ReacaoService.criar(like)
     }
-  };
+  } 
 
   const handleToggleDislikeBtn = () => {
-    const deslike = {idVideo: video.uuid, curtida: false};
+    const deslike = {idVideo: video.uuid, curtida: false} 
     if (!likeBtnActive && !dislikeBtnActive) {
-      setDislikeBtnActive(true);
+      setDislikeBtnActive(true) 
       ReacaoService.criar(deslike)
     } else if (!likeBtnActive && dislikeBtnActive) {
-      setDislikeBtnActive(false);
+      setDislikeBtnActive(false) 
       ReacaoService.criar(deslike)
     } else if (likeBtnActive) {
-      setDislikeBtnActive(true);
-      setLikeBtnActive(false);
+      setDislikeBtnActive(true) 
+      setLikeBtnActive(false) 
       ReacaoService.criar(deslike)
     }
-  };
+  } 
 
   return (
     <div className="like-dislike-buttons"> 
@@ -80,7 +75,7 @@ function LikeDislikeButtons({ video }) {
         {dislikeBtnActive ? <BiSolidDislike size={'1.6rem'} /> : <BiDislike size={'1.6rem'} />}
       </button>
     </div>
-  );
+  ) 
 }
 
-export default LikeDislikeButtons;
+export default LikeDislikeButtons 

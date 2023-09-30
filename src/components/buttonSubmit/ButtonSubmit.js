@@ -9,13 +9,11 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 
-const ButtonSubmit = ({idUserPost}) => {
+const ButtonSubmit = () => {
 
-  // const idUserPost = useSelector((state) => state.shorts.idUserPost)
+  const idUserPost = useSelector((state) => state.shorts.idUserPost)
   
   const user = JSON.parse(Cookies.get("user"))
-  console.log(user.uuid)
-  console.log(idUserPost)
 
   const [isSubscribe, setIsSubscribe] = useState(false)
 
