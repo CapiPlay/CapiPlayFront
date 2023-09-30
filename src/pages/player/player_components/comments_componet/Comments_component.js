@@ -120,11 +120,8 @@ function Comments_component({ commentVideo }) {
             texto: answerText,
                 idComentario: commentVideo.idComentario
         }
-        console.log(criarCMD)
         if (answerText.trim() !== '') {
-            console.log("Foi")
             RespostaService.criar(criarCMD)
-            console.log(answerText)
             setAnswerText('');
         }
     }
@@ -214,7 +211,7 @@ function Comments_component({ commentVideo }) {
                 {commentsAnswer &&
                     <div>
                         {allCommentsAnswers.map((answer) => (
-                            <Comments_answers_component answer={answer} key={answer}/>
+                            <Comments_answers_component answer={answer} key={answer.idResposta}/>
                         ))}
                     </div> 
                 }

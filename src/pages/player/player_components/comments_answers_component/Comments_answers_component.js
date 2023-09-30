@@ -80,11 +80,17 @@ function Comments_answers_component({answer}) {
                     <div className='comment__user__username'>
                         @{answer.idUsuario.nomeCanal}<span className='ball'></span> há {date} {formatoHora}
                     </div>
-                    <p>{showMore ? answer.texto : `${answer.texto.slice(0, 50)}...`}
+                    {answer.texto.length < 50 ?
+                    <p>
+                        {answer.texto}
+                    </p>
+                    :
+                    <p className='comment__text'>{showMore ? answer.texto : `${answer.texto.slice(0, 50)}...`}
                         {!showMore && 
                             <button onClick={() => toggleShowMore()} className='description__moreORless'> <p className='selection'>Mostrar mais <span className='selection__icon'><BiSolidDownArrow /></span></p></button>
                         }
                     </p>
+                    }
                     <div className='comment__interactions'>
                         <div className='likes'>
                             {like_btn ?
