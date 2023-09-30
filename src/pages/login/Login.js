@@ -16,9 +16,7 @@ import { ToastContainer, toast } from "react-toastify"
 
 const Login = ({ }) => {
     const navigate = useNavigate()
-
     const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
-    console.log(isAuthenticated)
 
     const [loginData, setLoginData] = useState({ email: '', senha: '' })
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
@@ -39,7 +37,7 @@ const Login = ({ }) => {
     const login = async () => {
         if (loginData.email && loginData.senha) {
             try {
-                dispatch(doLogin(loginData))
+                await dispatch(doLogin(loginData))
             } catch (err) {
                 toast.error("E-mail ou senha inválido")
             }
