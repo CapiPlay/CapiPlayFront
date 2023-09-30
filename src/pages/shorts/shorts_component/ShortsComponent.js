@@ -175,7 +175,7 @@ const ShortsComponent = ({ short }) => {
                         <span>{short?.profile}</span>
                     </div>
                     <div className='button__submit__shorts' style={openModalComments ? { display: "none" } : {}}>
-                        <ButtonSubmit valiUser={validateUser} />
+                        <ButtonSubmit idUserPost={short.usuario.uuid} />
                     </div>
                 </div>
             </div>

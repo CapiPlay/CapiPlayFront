@@ -87,7 +87,6 @@ const Shorts = () => {
         addShortsToList()
     }, [])
 
-
     return (
         <div
             className='container__all__shorts'
@@ -99,8 +98,13 @@ const Shorts = () => {
             }
             <div className="container__shorts" ref={scrollRef} >
                 {
-                    shorts &&
-                    shorts.map((short, i) => <ShortsComponent key={i} short={short} position={i} />)
+                    shorts && (
+                        <>
+                            {
+                                shorts.map((short, i) => <ShortsComponent key={i} short={short} position={i} />)
+                            }
+                        </>
+                    )
                 }
             </div>
             {
