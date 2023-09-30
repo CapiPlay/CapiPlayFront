@@ -28,7 +28,7 @@ function Desktop_player({ video }) {
         buscarComments()
         getVideos()
     }, [])
-    
+
     const toggleComment = () => {
         setComments(!comment)
     }
@@ -71,6 +71,10 @@ function Desktop_player({ video }) {
             setLast(commentsTemp.last)
             setAllComments(allComments)
         }
+    }
+
+    const handleVideoChange = () => {
+        window.location.reload()
     }
 
     return (
@@ -162,7 +166,7 @@ function Desktop_player({ video }) {
                 </div>
                 <div className='videos__desktop'>
                     {videos.map((video) => (
-                        <Video_card key={video.uuid} video={video} />
+                        <Video_card key={video.uuid} video={video} onClick={handleVideoChange}/>
                     ))}
                 </div>
             </div>
