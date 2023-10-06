@@ -9,6 +9,9 @@ import Video_card from "../../components/video_card/Video_card"
 import Slider_Shorts from "../../components/slider_shorts/Slider_Shorts";
 import HistoricoService from "../../service/Engajamento/HistoricoService";
 import VideoService from "../../service/Video/VideoService";
+import { Carousel } from "bootstrap";
+import CarouselShorts from "./carouselShorts/CarouselShorts";
+import Shortcard from "../../components/short_card/ShortCard";
 
 const Historic = () => {
 
@@ -16,35 +19,12 @@ const Historic = () => {
     const [videoHistoric, setVideoHistoric] = useState([]);
 
     // shorts que vão vir da HistoricService 
-    // *pode haver mudanças em como o short será renderizado
     const [shortHistoric, setShortHistoric] = useState([]);
-
-    // formato de data exemplar
-    const dateTest = new Date("2023-05-18")
-    const dateFormat = 'dd/MM/yy';
 
     // responsividade
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
     useEffect(() => {
         const func = async () => {
-            // const array = [];
-            // await VideoService.buscarTodos(1000,0,false).then((res) => {
-            //     res.content.forEach((r) => {
-            //         array.push(r)
-            //     })
-            // })
-            // const ar = [];
-            // await HistoricoService.buscarTodosPorUsuario().then((res) => {
-            //     res.forEach((r1) => {
-            //         array.filter((r2) => {
-            //             if (r1.idVideo.id === r2.uuid) {
-            //                 ar.push(r2)
-            //             }
-            //         })
-            //     })
-            // })
-            // setVideoHistoric([...ar]);
-            // console.log(ar)
 
             VideoService.buscarHistorico(99999, 0, false).then(
                 (res) => {
@@ -54,7 +34,6 @@ const Historic = () => {
             );
             VideoService.buscarHistorico(99999, 0, true).then(
                 (res) => {
-                    console.log("Shorts: ", res)
                     setShortHistoric(res);
                 }
             );
@@ -79,12 +58,9 @@ const Historic = () => {
                 videoHistoric
                     ?
                     <div className="historic__data">
-                        <div>
-                            <span>{format(dateTest, dateFormat)}</span>
-                        </div>
                         {shortHistoric &&
                             <div className="container__slider__shorts__historic">
-                                <Slider_Shorts />
+                                <CarouselShorts shorts={shortHistoric} />
                             </div>
                         }
                         {videoHistoric &&
@@ -108,12 +84,9 @@ const Historic = () => {
                 videoHistoric
                     ?
                     <div className="historic__data">
-                        <div>
-                            <span>{format(dateTest, dateFormat)}</span>
-                        </div>
                         {shortHistoric &&
                             <div className="container__slider__shorts__historic">
-                                <Slider_Shorts shorts={shortHistoric}/>
+                                <CarouselShorts shorts={shortHistoric} />
                             </div>
                         }
                         {videoHistoric &&
@@ -137,12 +110,12 @@ const Historic = () => {
                 videoHistoric
                     ?
                     <div className="historic__data">
-                        <div>
-                            <span>{format(dateTest, dateFormat)}</span>
-                        </div>
                         {shortHistoric &&
                             <div className="container__slider__shorts__historic">
-                                <Slider_Shorts />
+                                {shortHistoric.map((short) => (
+                                    <Shortcard key={short.id} short={short} />
+                                ))}
+                                {/* <CarouselShorts shorts={shortHistoric} /> */}
                             </div>
                         }
                         {videoHistoric &&

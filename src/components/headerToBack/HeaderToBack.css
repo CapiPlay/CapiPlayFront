@@ -12,6 +12,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 14px;
+    cursor: pointer;
 }
 
 .button__text__back>span {
