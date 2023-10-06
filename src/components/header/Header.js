@@ -38,6 +38,19 @@ const Header = ({ searchValue }) => {
     const [usuario, setUsuario] = useState(false)
     const [widthPage, setWidthPage] = useState()
     const [openModalProfile, setOpenModalProfile] = useState(false)
+    const [searches, setSearches] = useState([]);
+    const [lastSearches, setLastSearches] = useState([
+        "Benefícios da meditação para a saúde",
+        "Receita de bolo de cenoura com cobertura de chocolate",
+        "Principais destinos turísticos na Europa",
+        "História da America Latina",
+        "Receita de pão de queijo",
+        "Livros românticos",
+        "Eu a patroa e as criancas",
+        "React icons como funciona",
+        "Torta de frango receita",
+        "Livros de aventura 2023",
+    ]);
 
     // Search
     const handleClick = () => {
@@ -54,19 +67,30 @@ const Header = ({ searchValue }) => {
         if (e.key === 'Enter') {
             handleSearch(valueInput)
         }
+        filterSearch(valueInput)
     }
 
     const handleChange = (e) => {
-        setValueInput(e.target.value)
-    }
+        const searchValue = e.target.value.toLowerCase();
+        setValueInput(searchValue);
+        filterSearch(searchValue);
+    };
 
-    useEffect(() => {
+    const filterSearch = (searchValue) => {
+        const search = lastSearches.filter((search) => {
+            return search.pesquisa.toLowerCase().includes(searchValue);
+        });
+        setSearches(search);
+    };
+    
+
+    useEffect(() => { 
 
         if (valueInput === null) {
             const urlSearchParams = new URLSearchParams(location.search)
             const searchParams = urlSearchParams.get("q")
             setValueInput(searchParams)
-        }
+        } 
 
         if (verifyClicked) {
             setSearch(true)
@@ -139,7 +163,7 @@ const Header = ({ searchValue }) => {
                 </div>
                 {
                     search &&
-                    <Search valueSearch={valueInput}/>
+                    <Search valueSearch={valueInput} change={handleChange} searches={searches} lastSearches={lastSearches} setLastSearches={setLastSearches}/>
                 }
             </div>
             <div className='header__info'>
