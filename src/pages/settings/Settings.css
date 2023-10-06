@@ -17,7 +17,8 @@
 }
 
 .settings__form {
-    margin: 0 1.5rem;
+    margin: 1.5rem;
+    margin-top: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -119,6 +120,7 @@
 /* desktop */
 
 .settings__form__desktop {
+    padding-top: 7rem;
     margin: 0 1.5rem;
     display: flex;
     flex-direction: column;
@@ -210,6 +212,15 @@
     width: 100%;
 }
 
+.profile__settings__pic__desktop {
+    border-radius: 100%;
+    width: 10rem;
+    height: 10rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .settings__options__buttons__delete__desktop {
     background-color: transparent;
     border: 0;
@@ -295,7 +306,8 @@
 }
 
 .settings__form__tablet {
-    margin: 0 1.5rem;
+    margin: 3rem;
+    margin-top: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -395,112 +407,4 @@
     height: 2rem;
     width: 35%;
     border-radius: 0.5rem;
-}
-
-/* MODAL */
-
-.modal__overlay {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    width: fit-content;
-    display: flex;
-    height: 8.5rem;
-    top: 39%;
-    background-color: var(--beige);
-    position: absolute;
-    z-index: 2;
-}
-
-.background {
-    width: 100%;
-    height: 100vh;
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(20px);
-    background-color: black;
-    z-index: 1;
-}
-
-.modal__buttons {
-    padding-left: 1.1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 90%;
-}
-
-.text {
-    color: black;
-    margin: 1.5rem;
-    text-align: center;
-}
-
-.page__settings {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.modal__overlay_mobile {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    width: fit-content;
-    display: flex;
-    top: 39%;
-    background-color: var(--beige);
-    position: absolute;
-    z-index: 2;
-    margin: 1rem;
-    padding: 1rem;
-}
-
-.modal__overlay_tablet {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    width: 50%;
-    height: 15%;
-    display: flex;
-    top: 0%;
-    background-color: var(--beige);
-    position: absolute;
-    z-index: 2;
-    margin: 52% 25%;
-    padding: 1rem;
-}
-
-
-.background {
-    width: 100%;
-    height: 100vh;
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(20px);
-    background-color: black;
-    z-index: 1;
-}
-
-.modal__buttons {
-    padding-left: 1.1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 90%;
-}
-
-.text {
-    color: black;
-    margin: 1.5rem;
-    text-align: center;
 }
