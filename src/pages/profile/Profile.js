@@ -46,7 +46,7 @@ const Profile = () => {
 
 
     useEffect(() => {
-        UsuarioEngajamentoService.buscarUm()
+        UsuarioEngajamentoService.buscarUm(idUsuario)
             .then((data) => {
                 setUsuario(data)
                 console.log(data)

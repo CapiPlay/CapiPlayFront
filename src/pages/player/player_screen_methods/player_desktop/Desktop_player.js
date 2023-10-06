@@ -73,10 +73,6 @@ function Desktop_player({ video }) {
         }
     }
 
-    const handleVideoChange = () => {
-        window.location.reload()
-    }
-
     return (
         <><Header></Header>
             <div className='space'></div>
@@ -145,10 +141,10 @@ function Desktop_player({ video }) {
                             }
                         <div className='comments'>
                             <div>
-                                {allComments == null ?
-                                <div>
-                                    <p>Sem comentarios</p>
-                                </div>
+                                {allComments === undefined ?
+                                    <div className='no__comments'>
+                                        <p>Sem comentarios</p>
+                                    </div>
                                 :
                                 <>
                                     <div>
@@ -166,7 +162,7 @@ function Desktop_player({ video }) {
                 </div>
                 <div className='videos__desktop'>
                     {videos.map((video) => (
-                        <Video_card key={video.uuid} video={video} onClick={handleVideoChange}/>
+                         <Video_card key={video.uuid} video={video}/>
                     ))}
                 </div>
             </div>
