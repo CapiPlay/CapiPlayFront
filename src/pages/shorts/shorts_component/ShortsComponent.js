@@ -144,11 +144,10 @@ const ShortsComponent = ({ short }) => {
     useEffect(() => {
         const findLike = async () => {
             const engagementLike = await ReacaoService.buscarUm(short?.uuid)
-            console.log(engagementLike)
-            if (engagementLike?.curtida) {
+            if (engagementLike) {
                 setLikeShort(!likeShort)
                 setDislikeShort(false)
-            } else if (engagementLike?.curtida === false) {
+            } else if (engagementLike === false) {
                 setDislikeShort(!dislikeShort)
                 setLikeShort(false)
             }
