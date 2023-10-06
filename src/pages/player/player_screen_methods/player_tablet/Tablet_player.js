@@ -118,7 +118,7 @@ function Tablet_player({ video }) {
                             :
                             <div>
                                 {allComments.map((commentVideo) => (
-                                    <Comments_component commentVideo={commentVideo} />
+                                    <Comments_component commentVideo={commentVideo} key={commentText.idComentario}/>
                                 ))}
                             </div>
                         }
