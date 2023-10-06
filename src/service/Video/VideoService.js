@@ -68,6 +68,18 @@ const VideoService = {
     }
   },
 
+  buscarTags: async () => {
+    try {
+      const response = await axios.get(
+        `/video/buscar-tags`
+      );
+      return response.data;
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
+  },
+
   // buscarResumido  : async (size, page, shorts) => {
   //   try {
   //     const response = await axios.get(
