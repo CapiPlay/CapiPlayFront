@@ -28,32 +28,14 @@ const categories = [
 ]
 
 const Side_Bar = () => {
+
     const openSideBar = useSelector((state) => state.header.isClicked)
-    const [activeCategory, setActiveCategory] = useState('')
+    const [activeCategory, setActiveCategory] = useState('Arte')
     const [widthPage, setWidthPage] = useState(window.innerWidth)
-    const sideBarRef = useRef(null)
 
     const handleCategoryClick = (category) => {
         setActiveCategory(category)
     }
-
-    const handleClickOutside = (e) => {
-        if (
-            sideBarRef.current &&
-            !sideBarRef.current.contains(e.target) &&
-            widthPage <= 900
-        ) {
-            // Feche a barra lateral aqui (pode ser definindo o estado openSideBar como falso)
-            // Exemplo: dispatch({ type: 'SET_SIDEBAR_OPEN', payload: false });
-        }
-    }
-
-    useEffect(() => {
-        window.addEventListener('click', handleClickOutside)
-        return () => {
-            window.removeEventListener('click', handleClickOutside)
-        }
-    }, [])
 
     useEffect(() => {
         setWidthPage(window.innerWidth)
@@ -61,7 +43,6 @@ const Side_Bar = () => {
 
     return (
         <div
-            ref={sideBarRef}
             className={`container__side__bar ${openSideBar ? 'side__bar__open' : ''}`}
             style={widthPage <= 900 && openSideBar !== true ? { display: 'none', height: '100%' } : {}}
         >

@@ -15,6 +15,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 // imagens
 import notFound from '../../assets/image/404_NotFound.png'
+import logo from '../../assets/image/Logo.png'
 
 // redux
 import { useDispatch } from 'react-redux'
@@ -81,8 +82,14 @@ const Header = ({ searchValue }) => {
     }, [])
 
     //Ações de usuário
-    const handleOpenModalProfile = () => {
-        setOpenModalProfile(!openModalProfile)
+    const handleOpenModalProfile = (state) => {
+        console.log("Entrei")
+        if (state === true || state === false) {
+            setOpenModalProfile(state)
+        } else {
+            console.log("else")
+            setOpenModalProfile(!openModalProfile)
+        }
     }
 
     const handleOpenSideBar = async () => {
@@ -116,11 +123,13 @@ const Header = ({ searchValue }) => {
         }
     }, [])
 
-
     return (
         <div className='header__container'>
             <div className='header__menu__icon'>
                 <IoMenu onClick={handleOpenSideBar} />
+            </div>
+            <div className='header__logo__icon'>
+                <Link to={"/"}><img src={logo} alt="" /></Link>
             </div>
             <div className='header__input__container' style={widthPage <= 900 ? {} : { position: "relative" }}>
                 <div>
@@ -150,11 +159,10 @@ const Header = ({ searchValue }) => {
                     }
                 </div>
                 <div className='info__from__header'>
-                    <img src={image} onClick={handleOpenModalProfile} />
+                    <img src={image} onClick={handleOpenModalProfile} id='image__profile'/>
                 </div>
                 {
-                    openModalProfile &&
-                    <Modal_profile />
+                    openModalProfile && <Modal_profile isOpen={handleOpenModalProfile} />
                 }
             </div>
         </div>

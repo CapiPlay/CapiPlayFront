@@ -60,6 +60,9 @@
   background-color: var(--darkpurple);
 }
 
-.logout__profile {
-  cursor: pointer;
+@media (max-width: 500px) {
+  .modal__profile__container {
+    right: 2.8rem;
+    top: 2.8rem;
+  }
 }
