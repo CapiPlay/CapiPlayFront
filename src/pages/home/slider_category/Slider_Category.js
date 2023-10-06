@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Slider_Category.css'
 import Slider from 'react-slick';
 import VideoService from '../../../service/Video/VideoService';
+import { Link } from 'react-router-dom';
 
 function Slider_Category() {
 
@@ -86,11 +87,11 @@ function Slider_Category() {
   const renderDesktopView = () => (
     <Slider {...settingsDesk}>
       {tags.map((tag, index) => (
-        <div key={tag}>
+        <Link className='text_decoration' key={tag}>
           <h3 className={index === tag ? 'container__banner__large__category' : 'container__banner__category'} >
             #{tag.tag}
           </h3>
-        </div>
+        </Link>
       ))}
     </Slider>
   );
@@ -98,11 +99,11 @@ function Slider_Category() {
   const renderTabletView = () => (
     <Slider {...settingsTablet}>
       {tags.map((tag, index) => (
-        <div key={tag}>
+        <Link className='text_decoration' key={tag}>
           <h3 className={index === tag ? 'container__banner__large__category__tablet' : 'container__banner__category__tablet'} >
             #{tag.tag}
           </h3>
-        </div>
+        </Link>
       ))}
     </Slider>
   );

@@ -54,3 +54,8 @@
 .container__banner__large__category__tablet:hover {
     cursor: pointer;
 }
+
+.text_decoration {
+    text-decoration: none;
+    color: var(--white);
+}
