@@ -3,7 +3,7 @@ import Header from '../../components/header/Header';
 import './Home.css';
 import Slider from './slider/Slider';
 import Video_card from '../../components/video_card/Video_card';
-import Side_Bar from './side_bar/Side_Bar';
+import Side_Bar from '../../components/side_bar/Side_Bar';
 import Slider_Category from './slider_category/Slider_Category';
 import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
 import VideoService from '../../service/Video/VideoService';

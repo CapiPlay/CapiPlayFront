@@ -8,7 +8,7 @@ import TagsCarousel from "../../components/tagsCarousel/TagsCarousel";
 import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 import Video_card from "../../components/video_card/Video_card";
 import Header from "../../components/header/Header";
-import Side_Bar from "../home/side_bar/Side_Bar";
+import Side_Bar from "../../components/side_bar/Side_Bar";
 import Slider_Category from "../home/slider_category/Slider_Category";
 
 // icons
