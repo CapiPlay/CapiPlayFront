@@ -73,7 +73,7 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
     if (type === "number") {
       // Remove todos os caracteres não numéricos
       const numericValue = inputValue.replace(/\D/g, '');
-      
+
       // Aplica a máscara de número, por exemplo, para formatar como um CPF (###.###.###-##)
       const formattedValue = numericValue.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3');
       setMaskedValue(formattedValue);
