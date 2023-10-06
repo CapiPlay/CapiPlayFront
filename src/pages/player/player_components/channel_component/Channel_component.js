@@ -20,13 +20,15 @@ function Channel_component({video}) {
     }, [video]);
 
     useEffect(() => {
-        setFoto('http://10.4.96.50:7000/api/usuario/static/' + usuario.foto)
+        if(usuario.foto !== undefined){
+            setFoto('http://10.4.96.50:7000/api/usuario/static/' + usuario.foto)
+        }
     }, [usuario])
 
     return (
         <div>
             <div className='component'>
-                <Link to={`/profile`} className='link__player'>
+                <Link to={`/profile/${video.usuario.uuid}`} className='link__player'>
                     <div className='channel__container'>
                         <div className='channel'>
                             <img src={foto} className='channel__image' />

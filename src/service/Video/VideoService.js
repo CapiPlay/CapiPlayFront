@@ -65,6 +65,19 @@ const VideoService = {
       return response.data;
     } catch (err) {
       console.error(err);
+      return [];
+    }
+  },
+
+  buscarTags: async () => {
+    try {
+      const response = await axios.get(
+        `/video/buscar-tags`
+      );
+      return response.data;
+    } catch (err) {
+      console.error(err);
+      return [];
     }
   },
 

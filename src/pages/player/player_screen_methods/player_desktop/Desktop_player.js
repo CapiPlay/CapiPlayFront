@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './Desktop_player.css'
-import Like from '../../player_components/like_btn/Like_btn'
-import Dislike from '../../player_components/dislike_btn/Dislike_btn'
 import { AiFillEye, AiFillHeart } from 'react-icons/ai'
 import Channel_component from '../../player_components/channel_component/Channel_component'
 import Description_component from '../../player_components/description_component/Description_component'
@@ -13,7 +11,8 @@ import VideoService from '../../../../service/Video/VideoService'
 import { IoMdSend } from 'react-icons/io'
 import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import ComentarioService from '../../../../service/Engajamento/ComentarioService'
-import { Link } from 'react-router-dom'
+import notFound from '../../../../assets/image/404_NotFound.png'
+import LikeDislikeButtons from '../../player_components/feedbackButton/LikeDislikeButtons'
 
 // import Video_player_contructor from '../../video_player_contructor/Video_player_contructor'
 
@@ -21,13 +20,19 @@ function Desktop_player({ video }) {
     const [videos, setVideos] = useState([])
     const [comment, setComments] = useState(false)
     const [commentText, setCommentText] = useState('');
-    const [allComments, setAllComments] = useState()
+    let [allComments, setAllComments] = useState([])
+    const [last, setLast] = useState(true) 
+    const [page, setPage] = useState(0)
 
     useEffect( () => {
         buscarComments()
         getVideos()
     }, [])
-    
+
+    useEffect(() => {
+        console.log(allComments)
+    }, [allComments])
+
     const toggleComment = () => {
         setComments(!comment)
     }
@@ -50,11 +55,28 @@ function Desktop_player({ video }) {
     }
 
     const buscarComments = async () => {
-        var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, 0)
-        if(commentsTemp == null || commentsTemp == undefined){
+        var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, page)
+        setPage(page + 1)
+        if(commentsTemp.content == null || commentsTemp.content == undefined){
             setAllComments(null)
         }else{
-            setAllComments(commentsTemp.content)
+            setLast(commentsTemp.last)
+            if(commentsTemp.content !== null || commentsTemp.content !== undefined){
+                console.log("aaa")
+                setAllComments(commentsTemp.content)
+            }
+        }
+    }
+
+    const buscarMaisComentarios = async () => {
+        var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, page)
+        if(commentsTemp.content == null || commentsTemp.content == undefined){
+            setAllComments(null)
+        }else{
+            setPage(page + 1)
+            allComments.push(...commentsTemp.content)
+            setLast(commentsTemp.last)
+            setAllComments(allComments)
         }
     }
 
@@ -89,8 +111,7 @@ function Desktop_player({ video }) {
                             </div>
                         </div>
                         <div className='like__dislike__btns'>
-                            <Like video={video} />
-                            <Dislike video={video} />
+                            <LikeDislikeButtons video={video} />
                         </div>
                     </div>
                     <div>
@@ -127,16 +148,25 @@ function Desktop_player({ video }) {
                             }
                         <div className='comments'>
                             <div>
-                                {allComments == null ?
-                                <div>
-                                    <p>Sem comentarios</p>
-                                </div>
+                                {allComments.length === 0?
+                                    <div className='no__comments'>
+                                        <div>
+                                            <p>Sem comentarios</p>
+                                            <br/>
+                                            <div className='no__comments__image'>
+                                                <img src={notFound} alt='notFound' width={50}/>
+                                            </div>
+                                        </div>
+                                    </div>
                                 :
-                                <div>
-                                    {allComments.map((commentVideo) => (
-                                         <Comments_component commentVideo={commentVideo} />
-                                    ))}
-                                </div>
+                                <>
+                                    <div>
+                                        {allComments.map((commentVideo) => (
+                                             <Comments_component commentVideo={commentVideo} key={commentVideo.idComentario}/>
+                                        ))}
+                                    </div>
+                                    {!last && <div onClick={buscarMaisComentarios} className='show__more__comments'>Mostrar mais <BiSolidDownArrow size={'1rem'}/></div>}
+                                </>
                                 }
                                 
                             </div>
@@ -145,7 +175,7 @@ function Desktop_player({ video }) {
                 </div>
                 <div className='videos__desktop'>
                     {videos.map((video) => (
-                        <Video_card key={video.uuid} video={video} />
+                         <Video_card key={video.uuid} video={video}/>
                     ))}
                 </div>
             </div>

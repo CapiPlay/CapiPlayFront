@@ -24,12 +24,11 @@ import axiosInstance from "./service/AxiosConfig"
 import { useEffect } from 'react'
 import UsuarioService from './service/Usuario/UsuarioService'
 import Cookies from 'js-cookie'
-import Category from './pages/category/Category';
+import Category from './pages/category/Category'
 
 function App() {
 
   const [isLightMode] = useState(localStorage.getItem('lightTheme') === 'true')
-  const [loading, setLoading] = useState(false)
   const loadingBarRef = useRef(null)
 
   useEffect(() => {
@@ -43,39 +42,48 @@ function App() {
   const generateTokenAnonimous = async () => {
     const userToken = Cookies.get("token")
     const existAnonimoToken = Cookies.get("anonimo")
+
     if (userToken || existAnonimoToken) {
       return
     }
-    const tokenAnonimo = await UsuarioService.getTokenAnonimo()
+
+    let tokenAnonimo
+    try {
+      tokenAnonimo = await UsuarioService.getTokenAnonimo()
+      if (!tokenAnonimo) {
+        throw new Error("Falha de comunicação com o servidor!")
+      }
+    } catch (error) {
+      console.error(error)
+      return
+    }
+
     Cookies.set("anonimo", tokenAnonimo)
   }
 
-  useEffect(() => {
-    generateTokenAnonimous()
-    
-    axiosInstance.interceptors.request.use(
-    (config) => {
-      setLoading(true)
-      loadingBarRef.current.continuousStart()
-      return config
-    },
-    (error) => {
-      return Promise.reject(error)
-    }
-  )
+  generateTokenAnonimous()
 
-  axiosInstance.interceptors.response.use(
-    (response) => {
-      setLoading(false)
-      loadingBarRef.current.complete()
-      return response
-    },
-    (error) => {
-      setLoading(false)
-      loadingBarRef.current.complete()
-      return Promise.reject(error)
-    }
-  )
+  useEffect(() => {
+    axiosInstance.interceptors.request.use(
+      (config) => {
+        loadingBarRef.current.continuousStart()
+        return config
+      },
+      (error) => {
+        return Promise.reject(error)
+      }
+    )
+
+    axiosInstance.interceptors.response.use(
+      (response) => {
+        loadingBarRef.current.complete()
+        return response
+      },
+      (error) => {
+        loadingBarRef.current.complete()
+        return Promise.reject(error)
+      }
+    )
   }, [])
 
   return (
@@ -91,7 +99,7 @@ function App() {
             <Route path="/shorts/:id" element={<Shorts />} />
             <Route path="/video-details" element={<VideoDetails />} />
             <Route path="/video-upload" element={<VideoUpload />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:idUsuario" element={<Profile />} />
             <Route path="/result-search" element={<ResultSearch />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/upload-video" element={<UploadVideo />} />

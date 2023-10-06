@@ -17,7 +17,8 @@ import { setImageData } from './imageDataStore';
 
 
 // imagens
-import Preview from '../../assets/image/preview_video.png'
+import PreviewVideo from '../../assets/image/preview_video.png'
+import PreviewShorts from '../../assets/image/preview_shorts.png'
 
 
 function Upload() {
@@ -103,7 +104,7 @@ function Upload() {
                                 <img
                                     id="upload__image__preview"
                                     ref={imagePreviewRef}
-                                    src={Preview}
+                                    src={PreviewVideo}
                                     alt="Preview da Imagem" />
                                 <InputFile
                                     label={"Selecionar arquivo"}
@@ -141,7 +142,7 @@ function Upload() {
                                 <img
                                     id="upload__image__preview__shorts"
                                     ref={imagePreviewRef}
-                                    src="#"
+                                    src={PreviewShorts}
                                     alt="Preview da Imagem" />
                                 <div className='upload__box__all__buttons__shorts'>
                                     <InputFile

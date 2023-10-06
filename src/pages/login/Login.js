@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { doLogin } from "../../store/features/user/userSlice"
 
 import "./Login.css"
@@ -13,13 +13,12 @@ import Button from "../../components/button/Button"
 
 // Icons
 import { ToastContainer, toast } from "react-toastify"
-import Cookies from "js-cookie"
 
 const Login = ({ }) => {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+    const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
 
     const [loginData, setLoginData] = useState({ email: '', senha: '' })
-    const [keepLoggedIn, setKeepLoggedIn] = useState(false)
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
     const dispatch = useDispatch()
 
@@ -38,8 +37,7 @@ const Login = ({ }) => {
     const login = async () => {
         if (loginData.email && loginData.senha) {
             try {
-                dispatch(doLogin(loginData))
-                navigate("/")
+                await dispatch(doLogin(loginData))
             } catch (err) {
                 toast.error("E-mail ou senha inválido")
             }
@@ -47,6 +45,12 @@ const Login = ({ }) => {
             toast.error("Preencha todos os campos")
         }
     }
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate("/")
+        }
+    }, [isAuthenticated])
 
     return (
         <div className="container__all__login" style={{ minHeight: `${windowHeight}px` }} >

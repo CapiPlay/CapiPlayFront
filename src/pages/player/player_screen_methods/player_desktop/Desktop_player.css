@@ -138,6 +138,18 @@
     border: solid var(--lightpurple) 2.5px;
 }
 
+.no__comments{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no__comments__image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .send__comments__icon{
     background-color: var(--purple);
     border: solid var(--purple);
@@ -151,4 +163,14 @@
 .send__comments__icon:hover{
     background-color: var(--purplehover);
     border: solid var(--purplehover);
+}
+
+.show__more__comments{
+    margin-top: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: var(--lightpurple);
 }

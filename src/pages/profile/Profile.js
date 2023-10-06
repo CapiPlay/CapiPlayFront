@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 //components
-import Side_Bar from '../home/side_bar/Side_Bar'
+import Side_Bar from '../../components/side_bar/Side_Bar'
 import Video_card from '../../components/video_card/Video_card'
 import Header from '../../components/header/Header'
 
@@ -46,7 +46,7 @@ const Profile = () => {
 
 
     useEffect(() => {
-        UsuarioEngajamentoService.buscarUm()
+        UsuarioEngajamentoService.buscarUm(idUsuario)
             .then((data) => {
                 setUsuario(data)
                 console.log(data)
