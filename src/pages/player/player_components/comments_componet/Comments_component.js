@@ -132,7 +132,9 @@ function Comments_component({ commentVideo }) {
 
     const handleAllAnswers = async () => {
         let temp = await RespostaService.buscarTodosPorComentario(commentVideo.idComentario, 0);
-        setAllCommentsAnswers(temp.content)
+        if (temp !== undefined){
+            setAllCommentsAnswers(temp.content)
+        }
     }
 
     return (

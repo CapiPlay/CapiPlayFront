@@ -104,7 +104,7 @@ function Mobile_player({ video }) {
                     :
                     <div className='comentarios__video'>
                         {allComments.map((commentVideo) => (
-                            <Comments_component commentVideo={commentVideo} />
+                            <Comments_component commentVideo={commentVideo} key={commentText.idComentario}/>
                         ))}
                     </div>
                 }
@@ -134,7 +134,7 @@ function Mobile_player({ video }) {
                             :
                             <div>
                                 {allComments.map((commentVideo) => (
-                                    <Comments_component commentVideo={commentVideo} />
+                                    <Comments_component commentVideo={commentVideo} key={commentText.idComentario}/>
                                 ))}
                             </div>
                         }
