@@ -11,12 +11,14 @@ import { VscSend } from 'react-icons/vsc'
 import VideoService from '../../../../service/Video/VideoService'
 import LikeDislikeButtons from '../../player_components/feedbackButton/LikeDislikeButtons'
 import ComentarioService from '../../../../service/Engajamento/ComentarioService'
+import { useNavigate } from 'react-router-dom'
 
 function Mobile_player({ video }) {
 
     const [showComments, setShowComments] = useState(false);
     const [commentText, setCommentText] = useState('');
     const [allComments, setAllComments] = useState()
+    const navigate = useNavigate()
 
     const handleShowComments = () => {
         setShowComments(true);
@@ -59,9 +61,14 @@ function Mobile_player({ video }) {
         }
     }
 
+    const goBack = () => {
+        console.log('aaa')
+        navigate('/')
+    }
+
     return (
         <>
-            {!showComments && <div className='return__btn'><BiArrowBack color='var(--lightpurple)' />Voltar</div>}
+            {!showComments && <div className='return__btn' onClick={goBack}><BiArrowBack color='var(--lightpurple)' />Voltar</div>}
 
             <video controls className='video__player__mobile' poster={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[3]} key={video.uuid}>
                 <source src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />

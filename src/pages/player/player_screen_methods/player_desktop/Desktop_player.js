@@ -29,10 +29,6 @@ function Desktop_player({ video }) {
         getVideos()
     }, [])
 
-    useEffect(() => {
-        console.log(allComments)
-    }, [allComments])
-
     const toggleComment = () => {
         setComments(!comment)
     }
@@ -44,7 +40,6 @@ function Desktop_player({ video }) {
     }
 
     const handleNewComment = () => {
-        console.log(video)
         if (commentText.trim() !== '') {
             ComentarioService.criar({
                 texto: commentText,
@@ -62,7 +57,6 @@ function Desktop_player({ video }) {
         }else{
             setLast(commentsTemp.last)
             if(commentsTemp.content !== null || commentsTemp.content !== undefined){
-                console.log("aaa")
                 setAllComments(commentsTemp.content)
             }
         }
