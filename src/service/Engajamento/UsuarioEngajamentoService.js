@@ -12,6 +12,7 @@ const UsuarioEngajamentoService = {
       const response = await axios.get("/engajamento/usuario/" + idUsuario)
       return response.data
     } catch (err) {
+
       console.error(err)
     }
   },
