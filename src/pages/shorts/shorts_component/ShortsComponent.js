@@ -17,8 +17,7 @@ import CommentsComponent from '../../../components/commentsComponent/CommentsCom
 // service
 import VideoService from '../../../service/Video/VideoService'
 import ReacaoService from '../../../service/Engajamento/ReacaoService'
-
-import imagePerfil from '../../../assets/imagemPerfil.png'
+import UsuarioService from '../../../service/Usuario/UsuarioService'
 
 const ShortsComponent = ({ short }) => {
 
@@ -34,6 +33,8 @@ const ShortsComponent = ({ short }) => {
     const [dislikeShort, setDislikeShort] = useState(false)
     const [isVideoInView, setIsVideoInView] = useState(false)
     const [isMuted, setIsMuted] = useState(true)
+
+    const channel = UsuarioService.detalhes()
 
     useEffect(() => {
         const jsonUser = Cookies.get("user")
