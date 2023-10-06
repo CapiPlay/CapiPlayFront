@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 
 // hooks
 import React, { useRef, useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setListShorts, setActualShorts } from '../../../store/features/shorts/shortsSlice'
 
@@ -144,6 +144,7 @@ const ShortsComponent = ({ short }) => {
     useEffect(() => {
         const findLike = async () => {
             const engagementLike = await ReacaoService.buscarUm(short?.uuid)
+            console.log(short)
             if (engagementLike) {
                 setLikeShort(!likeShort)
                 setDislikeShort(false)
@@ -183,11 +184,13 @@ const ShortsComponent = ({ short }) => {
                 <div className='title__short'>
                     <span>{short?.titulo}</span>
                 </div>
-                <div className='informations__profile__shorts'>
-                    <div className='profile__shorts'>
-                        <img src={imagePerfil} alt='Imagem de Perfil' />
-                        <span>{short?.profile}</span>
-                    </div>
+                <div className='informations__profile__shorts' >
+                    <Link to={"/profile/" + short?.usuario.uuid}>
+                        <div className='profile__shorts'>
+                            <img src={imagePerfil} alt='Imagem de Perfil' />
+                            <span>{short?.profile}</span>
+                        </div>
+                    </Link>
                     <div className='button__submit__shorts' style={openModalComments ? { display: "none" } : {}}>
                         <ButtonSubmit />
                     </div>
