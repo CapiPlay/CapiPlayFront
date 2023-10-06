@@ -128,9 +128,25 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="profile__pagination__desktop">
+                        Páginas:
+                        {Array.from({ length: totalPages }, (_, index) => index).map(
+                            (page) => (
+                                <button className="buttonPaginaItens"
+                                    key={page}
+                                    // className={page === currentPage ? "active" : ""}
+                                    onClick={() => handlePageChange(page)}
+                                >
+                                    {page + 1}
+                                </button>
+                            )
+                        )}
+                    </div>
                     <hr class="solid" />
                     <div className='profile__box__videos'>
-                        dvbsoibo
+                    {videos.map((video) => (
+                            <Video_card key={video.uuid} video={video} />
+                        ))}
                     </div>
                 </div>
 
