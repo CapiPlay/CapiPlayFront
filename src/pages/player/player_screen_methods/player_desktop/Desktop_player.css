@@ -142,7 +142,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
+}
+
+.no__comments__image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .send__comments__icon{

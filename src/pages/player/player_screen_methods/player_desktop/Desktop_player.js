@@ -11,7 +11,7 @@ import VideoService from '../../../../service/Video/VideoService'
 import { IoMdSend } from 'react-icons/io'
 import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import ComentarioService from '../../../../service/Engajamento/ComentarioService'
-import { Link } from 'react-router-dom'
+import notFound from '../../../../assets/image/404_NotFound.png'
 import LikeDislikeButtons from '../../player_components/feedbackButton/LikeDislikeButtons'
 
 // import Video_player_contructor from '../../video_player_contructor/Video_player_contructor'
@@ -20,7 +20,7 @@ function Desktop_player({ video }) {
     const [videos, setVideos] = useState([])
     const [comment, setComments] = useState(false)
     const [commentText, setCommentText] = useState('');
-    let [allComments, setAllComments] = useState()
+    let [allComments, setAllComments] = useState([])
     const [last, setLast] = useState(true) 
     const [page, setPage] = useState(0)
 
@@ -28,6 +28,10 @@ function Desktop_player({ video }) {
         buscarComments()
         getVideos()
     }, [])
+
+    useEffect(() => {
+        console.log(allComments)
+    }, [allComments])
 
     const toggleComment = () => {
         setComments(!comment)
@@ -53,17 +57,20 @@ function Desktop_player({ video }) {
     const buscarComments = async () => {
         var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, page)
         setPage(page + 1)
-        if(commentsTemp == null || commentsTemp == undefined){
+        if(commentsTemp.content == null || commentsTemp.content == undefined){
             setAllComments(null)
         }else{
             setLast(commentsTemp.last)
-            setAllComments(commentsTemp.content)
+            if(commentsTemp.content !== null || commentsTemp.content !== undefined){
+                console.log("aaa")
+                setAllComments(commentsTemp.content)
+            }
         }
     }
 
     const buscarMaisComentarios = async () => {
         var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, page)
-        if(commentsTemp == null || commentsTemp == undefined){
+        if(commentsTemp.content == null || commentsTemp.content == undefined){
             setAllComments(null)
         }else{
             setPage(page + 1)
@@ -141,9 +148,15 @@ function Desktop_player({ video }) {
                             }
                         <div className='comments'>
                             <div>
-                                {allComments === undefined ?
+                                {allComments.length === 0?
                                     <div className='no__comments'>
-                                        <p>Sem comentarios</p>
+                                        <div>
+                                            <p>Sem comentarios</p>
+                                            <br/>
+                                            <div className='no__comments__image'>
+                                                <img src={notFound} alt='notFound' width={50}/>
+                                            </div>
+                                        </div>
                                     </div>
                                 :
                                 <>

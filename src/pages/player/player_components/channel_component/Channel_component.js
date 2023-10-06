@@ -20,7 +20,9 @@ function Channel_component({video}) {
     }, [video]);
 
     useEffect(() => {
-        setFoto('http://10.4.96.50:7000/api/usuario/static/' + usuario.foto)
+        if(usuario.foto !== undefined){
+            setFoto('http://10.4.96.50:7000/api/usuario/static/' + usuario.foto)
+        }
     }, [usuario])
 
     return (
