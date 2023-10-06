@@ -99,20 +99,15 @@ const Settings = ({ }) => {
         // if (settingsData.senha.length >= 6 && settingsData.senha.length <= 20) {
             try {
                 const settings = new FormData();
+                setRegisterData({ ...registerData, foto: image })
                 settings.append("nome", settingsData.nome);
                 settings.append("perfil", settingsData.perfil);
                 if(settingsData.senhaNova)
                     settings.append("senha", settingsData.senhaNova);
                 settings.append("descricao", settingsData.descricao);
-
-                setRegisterData({ ...registerData, foto: image })
-
-                console.log(settings);
-                console.log(settingsData);
-                console.log(settingsData.foto);
+                settings.append("foto1", image)
                 UsuarioService.editar(settings, image).then((response) => {
-                    // window.location.reload();
-                    console.log(response);
+                    window.location.reload();
                 });
             } catch (error) {
                 alert("Ocorreu um erro ao editar o usuário");
@@ -144,15 +139,10 @@ const Settings = ({ }) => {
         }
     }
 
-    // const handleFileChange = (e) => {
-    //     const file = e.target.files[0];
-    //     setImage(file);
-    //   };
-
     const handleRemoveFile = (e) => {
         e.preventDefault()
         setFileChanged(!fileChanged)
-        setImage(null)
+        setImage("")
     }
 
     const renderMobileView = () => (
@@ -302,7 +292,7 @@ const Settings = ({ }) => {
                         >
                             Alterar/
                         </InputFile>
-                        <button className='settings__image__options__buttons__desktop'>Remover</button>
+                        <button className='settings__image__options__buttons__desktop' onClick={handleRemoveFile}>Remover</button>
                     </div>
                     <div className='settings__input__container__desktop'>
                         <div className='settings__input__box'>
