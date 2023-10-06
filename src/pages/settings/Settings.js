@@ -11,7 +11,7 @@ import InputDisabled from "../../components/inputDisabled/InputDisabled"
 import InputFile from "../../components/inputFile/InputFile"
 import Button from "../../components/button/Button";
 import TextArea from '../../components/inputTextArea/InputTextArea';
-import Side_Bar from '../home/side_bar/Side_Bar'
+// import Side_Bar from '../home/side_bar/Side_Bar'
 
 //Service
 import UsuarioService from '../../service/Usuario/UsuarioService';
