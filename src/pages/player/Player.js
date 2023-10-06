@@ -8,7 +8,7 @@ import VideoService from '../../service/Video/VideoService'
 
 function Player() {
   const [video, setVideo] = useState();
-  const { videoId } = useParams();
+  const {videoId} = useParams();
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {

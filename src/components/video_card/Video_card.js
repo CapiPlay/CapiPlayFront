@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Video_card.css'
 
 function Video_card({ video }) {
+
+    const navigate = useNavigate()
 
     if (!video) {
         // Handle the case when the video is undefined or null
@@ -19,9 +21,13 @@ function Video_card({ video }) {
         video.curtidas = (video.curtidas / 1000).toFixed(1) + 'K';
     }
 
+    const handleVideoChange = () => {
+        window.location.reload()
+    }
+
     return (
 
-        <div className='box__video__card'>
+        <div className='box__video__card' onClick={handleVideoChange}>
             <Link to={`/video/${video.uuid}`}>
                 <div className='container__video__image'>
                     <img src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[4]} className='container__video__card__image' />

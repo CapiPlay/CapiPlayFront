@@ -138,6 +138,13 @@
     border: solid var(--lightpurple) 2.5px;
 }
 
+.no__comments{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+}
+
 .send__comments__icon{
     background-color: var(--purple);
     border: solid var(--purple);
