@@ -27,25 +27,13 @@ const Historic = () => {
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
     useEffect(() => {
         const func = async () => {
-            const array = [];
-            await VideoService.buscarTodos(1000,0,false).then((res) => {
-                res.content.forEach((r) => {
-                    array.push(r)
-                })
-            })
-            const ar = [];
-            await HistoricoService.buscarTodosPorUsuario().then((res) => {
-                res.forEach((r1) => {
-                    array.filter((r2) => {
-                        if (r1.idVideo.id === r2.uuid) {
-                            ar.push(r2)
-                        }
-                    })
-                })
-            })
-            setVideoHistoric([...ar]);
-            console.log(ar)
 
+            VideoService.buscarHistorico(99999, 0).then(
+                (res) => {
+                    console.log(res)
+                    setVideoHistoric(res);
+                }
+            );
         }
 
         func()
