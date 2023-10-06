@@ -17,7 +17,8 @@
 }
 
 .settings__form {
-    margin: 0 1.5rem;
+    margin: 1.5rem;
+    margin-top: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -213,6 +214,11 @@
 
 .profile__settings__pic__desktop {
     border-radius: 100%;
+    width: 10rem;
+    height: 10rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .settings__options__buttons__delete__desktop {
@@ -300,7 +306,8 @@
 }
 
 .settings__form__tablet {
-    margin: 0 1.5rem;
+    margin: 3rem;
+    margin-top: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -19,8 +19,10 @@ import UsuarioService from '../../service/Usuario/UsuarioService';
 //cookies
 import Cookies from 'js-cookie';
 
+//imagem
+import ImagemPadrao from '../../assets/image/404_NotFound.png'
+
 const Settings = ({ }) => {
-    const navigate = useNavigate();
 
     const [settingsData, setSettingsData] = useState({
         email: '',
@@ -66,56 +68,29 @@ const Settings = ({ }) => {
         UsuarioService.detalhes()
             .then((data) => {
                 setSettingsData(data)
+                setImage("http://10.4.96.50:7000/api/usuario/static/" + data.foto)
             })
             .catch((error) => console.error('Erro ao buscar usuario:', error));
     }, [idUsuario]);
 
-
-    const [novaSenha, setNovaSenha] = useState("")
-    const [senhaInformada, setSenhaInformada] = useState("")
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-
-    const [isModalImageOpen, setIsModalImageOpen] = useState(false);
-
-    const openImageModal = () => {
-        setIsModalImageOpen(true);
-    };
-
-    const closeImageModal = () => {
-        setIsModalImageOpen(false);
-    };
-
     const handleUpdateUser = (event) => {
         event.preventDefault();
-        // if (settingsData.senha.length >= 6 && settingsData.senha.length <= 20) {
-            try {
-                const settings = new FormData();
-                setRegisterData({ ...registerData, foto: image })
-                settings.append("nome", settingsData.nome);
-                settings.append("perfil", settingsData.perfil);
-                if(settingsData.senhaNova)
-                    settings.append("senha", settingsData.senhaNova);
-                settings.append("descricao", settingsData.descricao);
-                settings.append("foto1", image)
-                UsuarioService.editar(settings, image).then((response) => {
-                    window.location.reload();
-                });
-            } catch (error) {
-                alert("Ocorreu um erro ao editar o usuário");
-                console.error('Error:', error);
-            }
-        // } else {
-        //     alert("A senha deve conter entre 6 e 20 caracteres, letra maiúscula, letra minúscula e ao menos 1 caractere especial");
-        // }
+        try {
+            const settings = new FormData();
+            setRegisterData({ ...registerData, foto: image })
+            settings.append("nome", settingsData.nome);
+            settings.append("perfil", settingsData.perfil);
+            if (settingsData.senhaNova)
+                settings.append("senha", settingsData.senhaNova);
+            settings.append("descricao", settingsData.descricao);
+            settings.append("foto1", settingsData.foto)
+            UsuarioService.editar(settings, settingsData.foto).then((response) => {
+                window.location.reload();
+            });
+        } catch (error) {
+            alert("Ocorreu um erro ao editar o usuário");
+            console.error('Error:', error);
+        }
     };
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -131,46 +106,53 @@ const Settings = ({ }) => {
         };
     }, []);
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0]
+    const handleFileChange = (event) => {
+        const file = event.target.files[0]
         if (file) {
-            setFileChanged(true)
-            setImage(file)
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setImage(e.target.result);
+            }
+            reader.readAsDataURL(file);
+            setFileChanged(true);
+            console.log(file)
+            setSettingsData({ ...settingsData, foto: file })
         }
     }
 
     const handleRemoveFile = (e) => {
-        e.preventDefault()
-        setFileChanged(!fileChanged)
-        setImage("")
-    }
+        e.preventDefault();
+        setFileChanged(!fileChanged);
+        setImage(ImagemPadrao);
+        console.log(image);
+        setSettingsData({ ...settingsData, foto: '' });
+    };
+
+
 
     const renderMobileView = () => (
         <>
             <div className='settings__container'>
                 <HeaderSettings />
                 <div className="settings__form">
-                    {/* <img src={ProfileImage} className='profile__settings' /> */}
+                <div className="profile__settings__pic__desktop" style={{ backgroundImage: `url(${image})` }}> </div>
                     <div className='settings__box__image__options'>
-                        <button className='settings__image__options__buttons'>Alterar</button>
-                        <button className='settings__image__options__buttons' onClick={openImageModal}>Remover</button>
-                        {isModalImageOpen && (
-                            <>
-                                <div className='modal__overlay_mobile'>
-                                    <div className='modal__content'>
-                                        <p className='text'>Tem certeza que deseja remover sua foto?</p>
-                                        <div className='modal__buttons'>
-                                            <Button onClick={closeImageModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                            <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='background'></div>
-                            </>
-                        )}
+                        <InputFile
+                            accept="image/*"
+                            className='settings__image__options__buttons__desktop'
+                            label={"Foto de perfil"}
+                            onChange={handleFileChange}
+                            removeFile={handleRemoveFile}
+                            file={image}
+                            key={fileChanged.toString()}
+                        >
+                            Alterar/
+                        </InputFile>
+                        <button className='settings__image__options__buttons' onClick={handleRemoveFile}>Remover</button>
                     </div>
                     <div className="settings__field">
                         <InputDisabled
+                            name={"email"}
                             placeholder={"E-mail"}
                             value={settingsData.email}
                             type={"text"}
@@ -178,6 +160,7 @@ const Settings = ({ }) => {
                             className='settings__input'
                         />
                         <InputDisabled
+                            name={"dataNascimento"}
                             placeholder={"Data de Nascimento"}
                             value={settingsData.dataNascimento}
                             type={"date"}
@@ -185,10 +168,10 @@ const Settings = ({ }) => {
                             className='settings__input'
                         />
                         <Input
-                            // enable={true}
                             placeholder={"Nome de usuário"}
-                            value={settingsData.nomeUsuario}
-                            onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
+                            name={"nome"}
+                            value={settingsData.nome}
+                            onChange={(e) => setSettingsData({ ...settingsData, nome: e.target.value })}
                             type={"text"}
                             required={true}
                             className='settings__input'
@@ -197,52 +180,27 @@ const Settings = ({ }) => {
                     <div className="settings__field">
                         <Input
                             placeholder={"Nome do canal"}
-                            value={settingsData.nomeCanal}
-                            onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
+                            name={"perfil"}
+                            value={settingsData.perfil}
+                            onChange={(e) => setSettingsData({ ...settingsData, perfil: e.target.value })}
                             type={"text"}
+                            required={true}
+                            className='settings__input__desktop'
+                        />
+                    </div>
+                    <div className="settings__field">
+                        <Input
+                            name={"senha"}
+                            placeholder={"Senha nova"}
+                            onChange={(e) => setSettingsData({ ...settingsData, senhaNova: e.target.value })}
+                            type={"password"}
                             required={true}
                             className='settings__input'
                         />
                     </div>
                     <div className="settings__field">
-                        {senhaInformada != settingsData.senha ? (
-                            <Input
-                                placeholder={"Senha antiga"}
-                                value={senhaInformada}
-                                onChange={(e) => setSenhaInformada(e.target.value)}
-                                type={"password"}
-                                required={true}
-                                className='settings__input__desktop'
-                            />
-                        ) : (
-                            <InputDisabled
-                                placeholder={"Senha antiga"}
-                                type={"password"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        )}
-                        {senhaInformada != "" && senhaInformada == settingsData.senhaAtual ? (
-                            <Input
-                                placeholder={"Nova senha"}
-                                value={novaSenha}
-                                onChange={(e) => setNovaSenha(e.target.value)}
-                                type={"password"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        ) : (
-                            <InputDisabled
-                                placeholder={"Nova senha"}
-                                value={novaSenha}
-                                type={"date"}
-                                required={true}
-                                className='settings__input'
-                            />
-                        )}
-                    </div>
-                    <div className="settings__field">
                         <TextArea
+                            name={"descricao"}
                             placeholder={"Descrição do canal"}
                             value={settingsData.descricao}
                             onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
@@ -254,23 +212,9 @@ const Settings = ({ }) => {
                 <br />
                 <hr className="solid" />
                 <div className='settings__options__buttons__div'>
-                    <Button onClick={openModal} label={"Cancelar"} className='settings__options__buttons__cancel' principal={true} />
+                    <Button label={"Cancelar"} className='settings__options__buttons__cancel' principal={true} />
                     <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm' principal={false} />
                 </div>
-                {isModalOpen && (
-                    <>
-                        <div className='modal__overlay_mobile'>
-                            <div className='modal__content'>
-                                <p className='text'>Tem certeza que deseja cancelar suas alterações?</p>
-                                <div className='modal__buttons'>
-                                    <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                    <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
-                                </div>
-                            </div>
-                        </div>
-                        <div className='background'></div>
-                    </>
-                )}
             </div>
         </>
     )
@@ -280,9 +224,10 @@ const Settings = ({ }) => {
             <HeaderSettings userLogin={userProfile()} />
             <div className='settings__container__desktop'>
                 <div className="settings__form__desktop">
-                    <img id="profile_foto_teste" className="profile__settings__pic__desktop" src={"http://10.4.96.50:7000/api/usuario/static/" + settingsData.foto} />
+                    <div className="profile__settings__pic__desktop" style={{ backgroundImage: `url(${image})` }}> </div>
                     <div className='settings__box__image__options__desktop'>
                         <InputFile
+                            accept="image/*"
                             className='settings__image__options__buttons__desktop'
                             label={"Foto de perfil"}
                             onChange={handleFileChange}
@@ -348,40 +293,6 @@ const Settings = ({ }) => {
                                     required={true}
                                     className='settings__input__desktop'
                                 />
-                                {/* {senhaInformada != settingsData.senhaAtual ? (
-                                    <Input
-                                        placeholder={"Senha antiga"}
-                                        value={senhaInformada}
-                                        onChange={(e) => setSenhaInformada(e.target.value)}
-                                        type={"password"}
-                                        required={true}
-                                        className='settings__input__desktop'
-                                    />
-                                ) : (
-                                    <InputDisabled
-                                        placeholder={"Senha antiga"}
-                                        type={"password"}
-                                        required={true}
-                                        className='settings__input'
-                                    />
-                                )}
-                                {senhaInformada != "" && senhaInformada == settingsData.senhaAtual ? (
-                                    <Input
-                                        placeholder={"Senha nova"}
-                                        value={novaSenha}
-                                        onChange={(e) => setNovaSenha(e.target.value)}
-                                        type={"password"}
-                                        required={true}
-                                        className='settings__input'
-                                    />
-                                ) : (
-                                    <InputDisabled
-                                        placeholder={"Senha nova"}
-                                        type={"password"}
-                                        required={true}
-                                        className='settings__input'
-                                    />
-                                )} */}
                             </div>
                             <div className="settings__field__desktop">
                                 <TextArea
@@ -397,12 +308,10 @@ const Settings = ({ }) => {
                     </div>
                 </div>
             </div>
-
-
             <hr className="solid" />
             <div className='settings__options__buttons__container'>
                 <div className='settings__options__buttons__div__desktop'>
-                    <Button onClick={openModal} label={"Cancelar"} className='settings__options__buttons__cancel__desktop' principal={false} />
+                    <Button label={"Cancelar"} className='settings__options__buttons__cancel__desktop' principal={false} />
                     <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm__desktop' principal={true} />
                 </div>
             </div>
@@ -413,29 +322,25 @@ const Settings = ({ }) => {
             <div className='settings__container__tablet'>
                 <HeaderSettings />
                 <div className="settings__form__tablet">
-                    {/* <img src={ProfileImage} className='profile__settings__tablet' /> */}
-                    <div className='settings__box__image__options__tablet'>
-                        <button className='settings__image__options__buttons__tablet'>Alterar</button>
-                        <button className='settings__image__options__buttons__tablet' onClick={openImageModal}>Remover</button>
-                        {isModalImageOpen && (
-                            <>
-                                <div className='modal__overlay_tablet'>
-                                    <div className='modal__content'>
-                                        <p className='text'>Tem certeza que deseja remover sua foto de perfil?</p>
-                                        <div className='modal__buttons'>
-                                            <Button onClick={closeImageModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                            <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='background'></div>
-                            </>
-                        )}
+                <div className="profile__settings__pic__desktop" style={{ backgroundImage: `url(${image})` }}> </div>                    <div className='settings__box__image__options__tablet'>
+                        <InputFile
+                            accept="image/*"
+                            className='settings__image__options__buttons__tablet'
+                            label={"Foto de perfil"}
+                            onChange={handleFileChange}
+                            removeFile={handleRemoveFile}
+                            file={image}
+                            key={fileChanged.toString()}
+                        >
+                            Alterar/
+                        </InputFile>
+                        <button className='settings__image__options__buttons__tablet' onClick={handleRemoveFile}>Remover</button>
                     </div>
                     <div className='settings__input__container__tablet'>
                         <div className='settings__input__box'>
                             <div className="settings__field__desktop">
                                 <InputDisabled
+                                    name={"email"}
                                     placeholder={"E-mail"}
                                     value={settingsData.email}
                                     type={"text"}
@@ -445,6 +350,7 @@ const Settings = ({ }) => {
                             </div>
                             <div className="settings__field__desktop">
                                 <InputDisabled
+                                    name={"dataNascimento"}
                                     placeholder={"Data de Nascimento"}
                                     value={settingsData.dataNascimento}
                                     type={"date"}
@@ -455,62 +361,38 @@ const Settings = ({ }) => {
                             <div className="settings__field__tablet">
                                 <Input
                                     placeholder={"Nome de usuário"}
-                                    value={settingsData.nomeUsuario}
-                                    onChange={(e) => setSettingsData({ ...settingsData, nomeUsuario: e.target.value })}
+                                    name={"nome"}
+                                    value={settingsData.nome}
+                                    onChange={(e) => setSettingsData({ ...settingsData, nome: e.target.value })}
                                     type={"text"}
                                     required={true}
-                                    className='settings__input__tablet'
+                                    className='settings__input__desktop'
                                 />
                             </div>
                             <div className="settings__field__tablet">
                                 <Input
                                     placeholder={"Nome do canal"}
-                                    value={settingsData.nomeCanal}
-                                    onChange={(e) => setSettingsData({ ...settingsData, nomeCanal: e.target.value })}
+                                    name={"perfil"}
+                                    value={settingsData.perfil}
+                                    onChange={(e) => setSettingsData({ ...settingsData, perfil: e.target.value })}
                                     type={"text"}
                                     required={true}
-                                    className='settings__input__tablet'
+                                    className='settings__input__desktop'
                                 />
                             </div>
                         </div>
                         <div className='settings__input__box'>
                             <div className="settings__field__tablet">
-                                {senhaInformada != settingsData.senhaAtual ? (
-                                    <Input
-                                        placeholder={"Senha antiga"}
-                                        value={senhaInformada}
-                                        onChange={(e) => setSenhaInformada(e.target.value)}
-                                        type={"password"}
-                                        required={true}
-                                        className='settings__input__desktop'
-                                    />
-                                ) : (
-                                    <InputDisabled
-                                        placeholder={"Senha antiga"}
-                                        type={"password"}
-                                        required={true}
-                                        className='settings__input'
-                                    />
-                                )}
-                                {senhaInformada != "" && senhaInformada == settingsData.senhaAtual ? (
-                                    <Input
-                                        placeholder={"Nova senha"}
-                                        value={novaSenha}
-                                        onChange={(e) => setNovaSenha(e.target.value)}
-                                        type={"password"}
-                                        required={true}
-                                        className='settings__input'
-                                    />
-                                ) : (
-                                    <InputDisabled
-                                        placeholder={"Nova senha"}
-                                        value={novaSenha}
-                                        type={"date"}
-                                        required={true}
-                                        className='settings__input'
-                                    />
-                                )}
+                                <Input
+                                    name={"senha"}
+                                    placeholder={"Senha nova"}
+                                    onChange={(e) => setSettingsData({ ...settingsData, senhaNova: e.target.value })}
+                                    type={"password"}
+                                    required={true}
+                                    className='settings__input__desktop'
+                                />
                                 <TextArea
+                                    name={"descricao"}
                                     placeholder={"Descrição do canal"}
                                     value={settingsData.descricao}
                                     onChange={(e) => setSettingsData({ ...settingsData, descricao: e.target.value })}
@@ -524,28 +406,13 @@ const Settings = ({ }) => {
                 <hr className="solid" />
                 <div className='settings__options__buttons__tablet'>
                     <div className='settings__options__buttons__div__tablet'>
-                        <Button onClick={openModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                        {isModalOpen && (
-                            <>
-                                <div className='modal__overlay_tablet'>
-                                    <div className='modal__content'>
-                                        <p className='text'>Tem certeza que deseja cancelar suas alterações?</p>
-                                        <div className='modal__buttons'>
-                                            <Button onClick={closeModal} label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
-                                            <Button label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='background'></div>
-                            </>
-                        )}
+                        <Button label={"Cancelar"} className='settings__options__buttons__cancel__tablet' principal={false} />
                         <Button onClick={handleUpdateUser} label={"Confirmar"} className='settings__options__buttons__confirm__tablet' principal={true} />
                     </div>
                 </div>
             </div>
         </>
     )
-
     const getViewToRender = () => {
         if (screenSize.width > 900) {
             return renderDesktopView();
