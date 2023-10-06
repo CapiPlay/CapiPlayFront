@@ -101,7 +101,7 @@ const Shorts = () => {
                     shorts && (
                         <>
                             {
-                                shorts.map((short, i) => <ShortsComponent key={i} short={short} position={i} />)
+                                shorts.map((short, i) => <ShortsComponent key={short?.uuid} short={short} position={i} />)
                             }
                         </>
                     )

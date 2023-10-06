@@ -22,15 +22,15 @@ const ButtonSubmit = () => {
     EngajamentoService.criar({ idUsuario: user.uuid, idCanal: idUserPost })
   }
 
-  useEffect(() => {
-    const findSubscriber = async () => {
-      const engajGet = await EngajamentoService.buscarUm(idUserPost)
-      if (engajGet) {
-        setIsSubscribe(true)
-      }
-    }
-    findSubscriber()
-  }, [])
+  // useEffect(() => {
+  //   const findSubscriber = async () => {
+  //     const engajGet = await EngajamentoService.buscarUm(idUserPost)
+  //     if (engajGet) {
+  //       setIsSubscribe(true)
+  //     }
+  //   }
+  //   findSubscriber()
+  // }, [])
 
   const buttonClassName = `container__submit__button ${isSubscribe ? 'animate' : ''}`
 

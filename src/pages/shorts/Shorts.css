@@ -233,9 +233,9 @@
 .container__shorts {
     width: 100%;
     max-width: 25rem;
-    height: 40rem;
+    height: 35rem;
 
-    margin-top: 2rem;
+    margin-top: 3rem;
 
     overflow: scroll;
     scroll-snap-type: y mandatory;

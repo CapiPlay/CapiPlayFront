@@ -141,6 +141,21 @@ const ShortsComponent = ({ short }) => {
         }
     }
 
+    useEffect(() => {
+        const findLike = async () => {
+            const engagementLike = await ReacaoService.buscarUm(short?.uuid)
+            console.log(engagementLike)
+            if (engagementLike?.curtida) {
+                setLikeShort(!likeShort)
+                setDislikeShort(false)
+            } else if (engagementLike?.curtida === false) {
+                setDislikeShort(!dislikeShort)
+                setLikeShort(false)
+            }
+        }
+        findLike()
+    }, [])
+
     const getPathShorts = (currentPath) => {
         const path = `http://10.4.96.50:7000/api/video/static/${currentPath}`
         return path
