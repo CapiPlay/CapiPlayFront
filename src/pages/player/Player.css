@@ -13,7 +13,7 @@
     color: var(--lightpurple);
 }
 
-.likes__div{
+.like-dislike-buttons{
     display: flex;
     align-items: center;
     gap: 0.5rem;

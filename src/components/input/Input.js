@@ -5,6 +5,7 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
   const [inputType, setInputType] = useState("text")
   const [labelColor, setLabelColor] = useState({})
   const [inputBorderColor, setInputBorderColor] = useState({})
+  const [maskedValue, setMaskedValue] = useState("") // Novo estado para o valor com máscara
 
   const ref = useRef(null)
   const hasValue = value && value.length > 0
@@ -15,25 +16,21 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
   const day = new Date().getDate()
 
   useEffect(() => {
-
-    if(value) {
+    if (value) {
       setLabelColor({ color: "#BF94FF" })
       setInputBorderColor({ borderColor: "#BF94FF" })
     }
-
-  }, [])
+  }, [value])
 
   useEffect(() => {
     const handleFocus = () => {
-      if (type === "date") {
-        setInputType("date")
+      if (type === "number") {
+        setInputType("text")
+      } else {
+        setInputType(type)
       }
       setLabelColor({ color: "#BF94FF" })
       setInputBorderColor({ borderColor: "#BF94FF" })
-    }
-
-    if (type !== "date") {
-      setInputType(type)
     }
 
     const handleBlur = () => {
@@ -72,15 +69,25 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
       updatedEvent.target.value = ""
       onChange(updatedEvent)
     }
+
+    if (type === "number") {
+      // Remove todos os caracteres não numéricos
+      const numericValue = inputValue.replace(/\D/g, '');
+      
+      // Aplica a máscara de número, por exemplo, para formatar como um CPF (###.###.###-##)
+      const formattedValue = numericValue.replace(/(\d{2})(\d{2})(\d{4})/, '$1/$2/$3');
+      setMaskedValue(formattedValue);
+    } else {
+      setMaskedValue(inputValue);
+    }
   }
 
   const validateDate = (inputValue) => {
-    if (type === "date" && inputValue) {
+    if (type === "number" && inputValue) {
       const inputDate = new Date(inputValue)
       const yearInputDate = inputDate.getFullYear()
-      const maxDate = new Date(`${maxYear}-${month}-${day}`)
-      const minDate = new Date(`${minYear}-${month}-${day}`)
-
+      const maxDate = new Date(`${day}-${month}-${maxYear}`)
+      const minDate = new Date(`${day}-${month}-${minYear}`)
       if ((inputDate > maxDate || inputDate < minDate) && String(yearInputDate).length === 4) {
         return false
       }
@@ -93,7 +100,7 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
       <input
         className="input__control"
         type={inputType}
-        value={value}
+        value={maskedValue} // Use o valor com máscara aqui
         onChange={(e) => handleInputChange(e)}
         onClick={onClick}
         enable={enable}
@@ -102,8 +109,8 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
         style={inputBorderColor}
         placeholder={placeholder}
         name={name}
-        max={type === "date" ? `${maxYear}-${month}-${day}` : undefined}
-        min={type === "date" ? `${minYear}-${month}-${day}` : undefined}
+        max={type === "date" ? `${day}-${month}-${maxYear}` : undefined}
+        min={type === "date" ? `${day}-${month}-${minYear}` : undefined}
       />
       <label className={`label__input ${hasValue ? "active" : ""}`} style={labelColor}>
         {placeholder}

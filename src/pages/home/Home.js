@@ -45,11 +45,10 @@ function Home(darkMode) {
     if (!loadingMoreVideos && scrolled >= totalHeight - 100) {
       setLoadingMoreVideos(true);
       getMoreVideos(currentPage + 1);
-    }
-  };
+    };
+  }
 
   useEffect(() => {
-
     window.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -58,12 +57,17 @@ function Home(darkMode) {
   }, [currentPage, loadingMoreVideos]);
 
   const getMoreVideos = async (page) => {
-    const moreVideos = await VideoService.buscarTodos(50, 0, false);
-    const videos = moreVideos.content
-    if (videosReu?.length == 0) {
-      setVideosReu((prevVideos) => [...prevVideos, ...videos]);
-      setCurrentPage(page);
+    const moreVideos = await VideoService.buscarTodos(10, page, false);
+    if (moreVideos.last === true) {
+      const newVideos = moreVideos.content.filter((video) => {
+        return !videosReu.some((existingVideo) => existingVideo.uuid === video.uuid);
+      });
+      if (newVideos?.length > 0) {
+        setVideosReu((prevVideos) => [...prevVideos, ...newVideos]);
+        setCurrentPage(page);
+      }
     }
+
     setLoadingMoreVideos(false);
   };
 
@@ -90,11 +94,11 @@ function Home(darkMode) {
   const getVideosRev = async () => {
     const videos = await VideoService.buscarTodos(6, 0, false);
     const vidiozinho = videos.content;
-    console.log(vidiozinho);
-    if (vidiozinho.length >= 6) {
+    if (vidiozinho?.length >= 6) {
       setVideosRev(vidiozinho);
     } else {
       setVideosRev([]);
+      window.location.reload();
     }
   }
 
@@ -130,17 +134,25 @@ function Home(darkMode) {
             <Slider_Category />
           </div>
           <div className='container__video__cards__desk'>
-            {videosRev.map((video) => (
-              <Video_card key={video.uuid} video={video} />
-            ))}
+            {videosRev ? (
+              videosRev.map((video) => (
+                <Video_card key={video.uuid} video={video} />
+              ))
+            ) : (
+              <div class="ui active inline loader"></div>
+            )}
           </div>
           <div className='container__shorts__cards__desk'>
             <Slider_Shorts />
           </div>
           <div className='container__video__cards__desk'>
-            {videosReu.map((video) => (
-              <Video_card key={video.uuid} video={video} />
-            ))}
+            {videosReu ? (
+              videosReu.map((video) => (
+                <Video_card key={video.uuid} video={video} />
+              ))
+            ) : (
+              <div class="ui active inline loader"></div>
+            )}
           </div>
         </div>
       </div>
@@ -151,23 +163,36 @@ function Home(darkMode) {
   const renderTabletView = () => (
     <>
       <Header />
-      <Side_Bar/>
+      <Side_Bar />
       <div className='container__home'>
         <div className='container__slider__base__tablet'>
           <Slider_Category />
         </div>
         <div className='container__video__cards__tablet'>
-          {videosRev.map((video) => (
-            <Video_card key={video.uuid} video={video} />
-          ))}
+          {videosRev ? (
+            videosRev.map((video) => (
+              <Video_card key={video.uuid} video={video} />
+            ))
+          ) : (
+            <div className="ui segment">
+              <p></p>
+              <div className="ui active dimmer">
+                <div className="ui loader"></div>
+              </div>
+            </div>
+          )}
         </div>
         <div className='container__shorts__cards__tablet'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards__tablet'>
-          {videosReu.map((video) => (
-            <Video_card key={video.uuid} video={video} />
-          ))}
+          {videosReu ? (
+            videosReu.map((video) => (
+              <Video_card key={video.uuid} video={video} />
+            ))
+          ) : (
+            <div class="ui active inline loader"></div>
+          )}
         </div>
       </div>
     </>
@@ -176,23 +201,36 @@ function Home(darkMode) {
   const renderMobileView = () => (
     <>
       <Header />
-      <Side_Bar/>
+      <Side_Bar />
       <div className='container__home'>
         <div className='container__slider__base'>
           <Slider />
         </div>
         <div className='container__video__cards'>
-          {videosRet.map((video) => (
-            <Video_card key={video.uuid} video={video} />
-          ))}
+          {videosRet ? (
+            videosRet.map((video) => (
+              <Video_card key={video.uuid} video={video} />
+            ))
+          ) : (
+            <div className="ui segment">
+              <p></p>
+              <div className="ui active dimmer">
+                <div className="ui loader"></div>
+              </div>
+            </div>
+          )}
         </div>
         <div className='container__shorts__cards__mobile'>
           <Slider_Shorts />
         </div>
         <div className='container__video__cards'>
-          {videosReu.map((video) => (
-            <Video_card key={video.uuid} video={video} />
-          ))}
+          {videosReu ? (
+            videosReu.map((video) => (
+              <Video_card key={video.uuid} video={video} />
+            ))
+          ) : (
+            <div className="ui active inline loader"></div>
+          )}
         </div>
       </div>
     </>

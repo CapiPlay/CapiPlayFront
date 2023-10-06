@@ -31,7 +31,6 @@ const Header = ({ searchValue }) => {
     const dispatch = useDispatch()
 
     const [search, setSearch] = useState(false)
-    const [searchDesktop, setSearchDesktop] = useState(false)
     const [verifyClicked, setVerifyClicked] = useState(false)
     const [valueInput, setValueInput] = useState(searchValue)
 
@@ -42,7 +41,7 @@ const Header = ({ searchValue }) => {
 
     // Search
     const handleClick = () => {
-        setSearchDesktop(!searchDesktop)
+        setSearch(!search)
     }
 
     const handleSearch = () => {
@@ -60,38 +59,27 @@ const Header = ({ searchValue }) => {
     }
 
     useEffect(() => {
+
         if (valueInput === null) {
             const urlSearchParams = new URLSearchParams(location.search)
             const searchParams = urlSearchParams.get("q")
             setValueInput(searchParams)
         }
 
-        const handleClick = (e) => {
-            const element = e.target.offsetParent
-            if (element == null || !element.classList.contains("header__input__container")) {
-                setSearchDesktop(false)
-            }
+        if (verifyClicked) {
+            setSearch(true)
+        } else {
+            setSearch(false)
         }
 
-        // if(verifyClicked) {
-        //     setSearchDesktop(true)
-        // } else {
-        //     searchDesktop(false)
-        // }
-
-        document.addEventListener("click", handleClick)
+        document.addEventListener("click", handleClickBlur)
         setWidthPage(window.innerWidth)
 
-        return (
-            document.removeEventListener("click", handleClick)
-        )
-    }, [])
+        return () => {
+            document.removeEventListener("click", handleClickBlur)
+        }
 
-    // const handleSelection = (searchSelected) => {
-    //     setValueInput(searchSelected)
-    //     setVerifyClicked(true)
-    //     nav(`/result-search?search=${searchSelected}`)
-    // }
+    }, [])
 
     //Ações de usuário
     const handleOpenModalProfile = (state) => {
@@ -106,6 +94,13 @@ const Header = ({ searchValue }) => {
 
     const handleOpenSideBar = async () => {
         dispatch(doIsClicked())
+    }
+
+    const handleClickBlur = (e) => {
+        const element = e.target.offsetParent
+        if (element == null || !element.classList.contains("header__input__container")) {
+            setSearch(false)
+        }
     }
 
     useEffect(() => {
@@ -141,14 +136,15 @@ const Header = ({ searchValue }) => {
                     <input
                         className='header__input__text__search'
                         placeholder='Pesquisar'
-                        onFocus={() => setSearchDesktop(true)}
+                        onFocus={() => setSearch(true)}
+                        onClick={handleClickBlur}
                         value={valueInput}
                         onKeyPress={verifyKeyPress}
                         onChange={handleChange} />
                     <AiOutlineSearch onClick={handleClick} />
                 </div>
                 {
-                    searchDesktop &&
+                    search &&
                     <Search />
                 }
             </div>

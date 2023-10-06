@@ -70,6 +70,7 @@ const Register = () => {
         user.append("foto1", image)
 
         try {
+            console.log(registerData)
             await dispatch(doSignup(user, image))
             nextStep()
             
@@ -118,7 +119,7 @@ const Register = () => {
                             />
                             <Input
                                 placeholder={"Data de Nascimento"}
-                                type={"date"}
+                                type={"number"}
                                 required={true}
                                 name={"dataNascimento"}
                                 onChange={keyboard}

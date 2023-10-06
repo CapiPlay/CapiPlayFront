@@ -64,8 +64,20 @@ const VideoService = {
       return response.data;
     } catch (err) {
       console.error(err);
+      return [];
     }
   },
+
+  // buscarResumido  : async (size, page, shorts) => {
+  //   try {
+  //     const response = await axios.get(
+  //       `/video/buscar-resumido?size=${size}&page=${page}&shorts=${shorts}`
+  //     );
+  //     return response.data;
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // },
 
 
   buscarPorCategoria: async (categoria, page, size, shorts) => {

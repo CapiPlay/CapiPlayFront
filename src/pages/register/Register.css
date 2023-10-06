@@ -131,3 +131,10 @@
     border-radius: 20px;
     border: 3px solid var(--darkpurple);
 }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+ -webkit-appearance: none; /* Remova a aparência padrão do navegador */
+ appearance: none; /* Remova a aparência padrão do navegador */
+ margin: 0; /* Defina a margem para zero para evitar espaço em branco extra */
+}
