@@ -31,7 +31,7 @@ function Slider_Shorts() {
     };
 
     const settingsDesk = {
-        slidesToShow: 5,
+        slidesToShow: 4,
         slidesToScroll: 1,
         swipeToSlide: true,
         autoplay: true,
@@ -40,6 +40,17 @@ function Slider_Shorts() {
         infinite: true,
         arrows: false,
         responsive: [
+            {
+                breakpoint: 1416,
+                settings: {
+                    arrows: false,
+                    centerPadding: '40px',
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    swipeToSlide: true,
+                    arrows: false,
+                }
+            },
             {
                 breakpoint: 768,
                 settings: {
