@@ -9,9 +9,9 @@ const VideoService = {
    * @param {*} video ( String titulo,String descricao,List<String> tags,String categoria,
    * Boolean shorts, MultipartFile video,MultipartFile miniatura,Boolean restrito,String usuarioId))
    * @returns void
-   */ 
+   */
   criar: async (formData, usuarioId) => {
-    return await axios.post('/api/video/criar', formData, {
+    return await axios.post('/video/criar', formData, {
       headers: {
         'usuarioId': usuarioId,
       },
@@ -51,6 +51,7 @@ const VideoService = {
       const response = await axios.get(
         `/video/buscar-historico?size=${size}&page=${page}`
       );
+
       return response.data;
     } catch (err) {
       console.error(err);
@@ -81,18 +82,6 @@ const VideoService = {
     }
   },
 
-  // buscarResumido  : async (size, page, shorts) => {
-  //   try {
-  //     const response = await axios.get(
-  //       `/video/buscar-resumido?size=${size}&page=${page}&shorts=${shorts}`
-  //     );
-  //     return response.data;
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // },
-
-
   buscarPorCategoria: async (categoria, page, size, shorts) => {
     try {
       const response = await axios.get(
@@ -115,10 +104,26 @@ const VideoService = {
     }
   },
 
-  buscarUploads: async (size, page, donoCanalId) => {
+  // buscarUploads: async (size, page, params) => {
+  //   try {
+  //     const response = await axios.get(`/video/buscar-videos-canal`, {
+  //       params: {
+  //         size: size,
+  //         page: page,
+  //         donoCanalId: params.donoCanalId
+  //       }
+  //     });
+  //     return response.data;
+  //   } catch (err) {
+  //     console.error(err);
+  //     throw err;  // Rejoga o erro para que possa ser capturado na chamada da função
+  //   }
+  // },
+
+  buscarUploads: async (size, page, params) => {
     try {
       const response = await axios.get(
-        `/video/buscar-videos-canal?size=${size}&page=${page}&donoCanalId${donoCanalId}`
+        `/video/buscar-videos-canal?size=${size}&page=${page}&donoCanalId=${params.donoCanalId}`
       );
       return response.data;
     } catch (err) {
@@ -144,13 +149,35 @@ const VideoService = {
         {
           videoId: id
         }
-        
+
       )
     } catch (err) {
       console.error(err)
     }
-  }
+  },
 
+  buscarHistoricoPesquisa: async () => {
+    try {
+      const response = await axios.get(
+        `/video/usuario/historico-pesquisa`
+      );
+      return response.data;
+    } catch (err) {
+      console.error(err);
+    }
+  },
+
+  pesquisarValor: async (pesquisa, shorts) => {
+    try {
+      const response = await axios.get(
+        `/video/pesquisa/${pesquisa}?shorts=${shorts}`
+      );
+      console.log(pesquisa)
+      return response.data;
+    } catch (err) {
+      console.error(err);
+    }
+  }
 };
 
 export default VideoService;

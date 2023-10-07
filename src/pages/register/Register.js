@@ -58,24 +58,39 @@ const Register = () => {
         setbPChooseCategory(!bPChooseCategory)
     }
 
+    const formatDataNascimento = (dataNascimento) => {
+        const formattedDataNascimento = `${dataNascimento.slice(4, 8)}-${dataNascimento.slice(0, 2)}-${dataNascimento.slice(2, 4)}`;
+        return formattedDataNascimento;
+    }
+
+
     const register = async (e) => {
         e.preventDefault()
+
+        const formattedDataNascimento = formatDataNascimento(registerData.dataNascimento);
+
+        if (formattedDataNascimento === "") {
+            toast.error("A data de nascimento é inválida.");
+            return;
+        }
 
         setRegisterData({ ...registerData, foto1: image })
         user.append("nome", registerData.nome)
         user.append("senha", registerData.senha)
         user.append("email", registerData.email)
         user.append("perfil", registerData.nome)
-        user.append("dataNascimento", registerData.dataNascimento)
+        user.append("dataNascimento", formattedDataNascimento)
         user.append("foto1", image)
+
+        registerData.dataNascimento = formattedDataNascimento
 
         try {
             console.log(registerData)
             await dispatch(doSignup(user, image))
             nextStep()
-            
+
         } catch (err) {
-            toast.error(err.response.data.error)
+            toast.error(err?.response?.data?.error)
         }
     }
 

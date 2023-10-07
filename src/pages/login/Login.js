@@ -35,15 +35,15 @@ const Login = ({ }) => {
     }, [])
 
     const login = async () => {
-        if (loginData.email && loginData.senha) {
+        // if (loginData.email && loginData.senha) {
             try {
                 await dispatch(doLogin(loginData))
             } catch (err) {
                 toast.error("E-mail ou senha inválido")
             }
-        } else {
-            toast.error("Preencha todos os campos")
-        }
+        // } else {
+        //     toast.error("Preencha todos os campos")
+        // }
     }
 
     useEffect(() => {

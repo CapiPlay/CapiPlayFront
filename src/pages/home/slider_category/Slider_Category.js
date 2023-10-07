@@ -12,8 +12,9 @@ function Slider_Category() {
   const settingsDesk = {
     slidesToShow: 5,
     slidesToScroll: 1,
-    swipeToSlide: true,
     autoplay: true,
+    autoplaySpeed: 1500,
+    swipeToSlide: true,
     arrows: false,
     responsive: [
       {
@@ -87,7 +88,7 @@ function Slider_Category() {
   const renderDesktopView = () => (
     <Slider {...settingsDesk}>
       {tags.map((tag, index) => (
-        <Link className='text_decoration' key={tag}>
+        <Link to="/" className='text_decoration' key={tag}>
           <h3 className={index === tag ? 'container__banner__large__category' : 'container__banner__category'} >
             #{tag.tag}
           </h3>
@@ -99,7 +100,7 @@ function Slider_Category() {
   const renderTabletView = () => (
     <Slider {...settingsTablet}>
       {tags.map((tag, index) => (
-        <Link className='text_decoration' key={tag}>
+        <Link to="/" className='text_decoration' key={tag}>
           <h3 className={index === tag ? 'container__banner__large__category__tablet' : 'container__banner__category__tablet'} >
             #{tag.tag}
           </h3>
