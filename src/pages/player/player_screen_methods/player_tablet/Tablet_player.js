@@ -12,12 +12,15 @@ import ComentarioService from '../../../../service/Engajamento/ComentarioService
 import { IoMdSend } from 'react-icons/io'
 import { BiSolidDownArrow, BiSolidUpArrow } from 'react-icons/bi'
 import LikeDislikeButtons from '../../player_components/feedbackButton/LikeDislikeButtons'
+import { useNavigate } from 'react-router-dom'
+import notFound from '../../../../assets/image/404_NotFound.png'
 
 function Tablet_player({ video }) {
     const [videos, setVideos] = useState([])
     const [commentText, setCommentText] = useState('');
-    const [allComments, setAllComments] = useState()
+    const [allComments, setAllComments] = useState([])
     const [comment, setComments] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         buscarComments()
@@ -54,8 +57,12 @@ function Tablet_player({ video }) {
         setComments(!comment)
     }
 
+    const goBack = () => {
+        navigate('/')
+    }
+
     return (
-        <><div className='return__btn'><BiArrowBack color='var(--lightpurple)' />Voltar</div>
+        <><div className='return__btn' onClick={goBack}><BiArrowBack color='var(--lightpurple)' />Voltar</div>
             <div>
                 <video controls className='video__player__tablet' poster={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[3]} key={video.uuid}>
                     <source src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
@@ -111,17 +118,25 @@ function Tablet_player({ video }) {
                 }
                 <div className='comments'>
                     <div>
-                        {allComments == null ?
-                            <div>
-                                <p>Sem comentarios</p>
-                            </div>
-                            :
-                            <div>
-                                {allComments.map((commentVideo) => (
-                                    <Comments_component commentVideo={commentVideo} key={commentText.idComentario}/>
-                                ))}
-                            </div>
-                        }
+                        {allComments.length === 0?
+                                    <div className='no__comments'>
+                                        <div>
+                                            <p>Sem comentarios</p>
+                                            <br/>
+                                            <div className='no__comments__image'>
+                                                <img src={notFound} alt='notFound' width={50}/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                :
+                                <>
+                                    <div>
+                                        {allComments.map((commentVideo) => (
+                                             <Comments_component commentVideo={commentVideo} key={commentVideo.idComentario}/>
+                                        ))}
+                                    </div>
+                                </>
+                                }
                     </div>
                 </div>
             </div>

@@ -62,7 +62,6 @@ function Mobile_player({ video }) {
     }
 
     const goBack = () => {
-        console.log('aaa')
         navigate('/')
     }
 
