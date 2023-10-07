@@ -78,7 +78,7 @@ const Header = ({ searchValue }) => {
     };
 
     const filterSearch = (searchValue) => {
-        const search = lastSearches.filter((search) => {
+        const search = lastSearches&&lastSearches.filter((search) => {
             return search.pesquisa.toLowerCase().includes(searchValue);
         });
         setSearches(search);

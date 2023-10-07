@@ -20,6 +20,7 @@ const ResultSearch = () => {
     const [openFilter, setOpenFilter] = useState(false);
     const [defaultFilter, setDefaultFilter] = useState(false);
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+    const [videos, setVideos] = useState([]);
 
     const nav = useNavigate();
     const location = useLocation();
@@ -29,11 +30,6 @@ const ResultSearch = () => {
     const searchParams = urlSearchParams.get("search");
 
     useEffect(() => {
-
-        const pesquisar = async () => {
-            const response = await VideoService.pesquisarValor(searchParams);
-            console.log(response)
-        }
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
@@ -42,12 +38,15 @@ const ResultSearch = () => {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-
-        pesquisar()
     }, []);
 
     useEffect(() => {
         setSearchValue(searchParams);
+        const pesquisar = async () => {
+            const response = await VideoService.pesquisarValor(searchParams, false);
+            setVideos(response);
+        }
+        pesquisar();
     }, [searchParams])
 
     useEffect(() => {
@@ -65,57 +64,6 @@ const ResultSearch = () => {
         console.log("search: ")
     }
 
-    // usado apenas para simular vídeos criados
-    const videos = [{
-        caminhos: [
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R154X268_12274321535252966226.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R200X348_12298039738819693576.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R230X388_11546781998646356009.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R340X193_320004629004798342.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R380X193_15989669518116379324.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\video_6373942157941823133.mp4"
-        ],
-        titulo: "titulo",
-        uuid: "2"
-    },
-    {
-        caminhos: [
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R154X268_12274321535252966226.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R200X348_12298039738819693576.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R230X388_11546781998646356009.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R340X193_320004629004798342.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R380X193_15989669518116379324.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\video_6373942157941823133.mp4"
-        ],
-        titulo: "titulo",
-        uuid: "2"
-    },
-    {
-        caminhos: [
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R154X268_12274321535252966226.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R200X348_12298039738819693576.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R230X388_11546781998646356009.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R340X193_320004629004798342.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R380X193_15989669518116379324.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\video_6373942157941823133.mp4"
-        ],
-        titulo: "titulo",
-        uuid: "2"
-    },
-    {
-        caminhos: [
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R154X268_12274321535252966226.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R200X348_12298039738819693576.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R230X388_11546781998646356009.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R340X193_320004629004798342.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\miniatura_R380X193_15989669518116379324.png",
-            "1118d2c7-ac2f-4d5b-8d4b-435e08a4f489\\video_6373942157941823133.mp4"
-        ],
-        titulo: "titulo",
-        uuid: "2"
-    }
-    ];
-
     const renderDesktop = () => {
         return (
             <>
@@ -132,7 +80,7 @@ const ResultSearch = () => {
                 </div>
                 {renderFilter()}
                 <div className="container__videos__result__desktop">
-                    {videos.map((video) => (
+                    {videos&&videos.map((video) => (
                         <div className="video__result__search">
                             <Video_card video={video} />
                         </div>
@@ -159,7 +107,7 @@ const ResultSearch = () => {
                 </div>
                 {renderFilter()}
                 <div className="container__videos__result">
-                    {videos.map((video) => (
+                    {videos&&videos.map((video) => (
                         <div className="video__result__search">
                             <Video_card video={video} />
                         </div>
