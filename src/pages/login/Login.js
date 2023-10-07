@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { doLogin } from "../../store/features/user/userSlice"
 
+import { useLocation } from 'react-router-dom';
 import "./Login.css"
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -17,6 +18,8 @@ import { ToastContainer, toast } from "react-toastify"
 const Login = ({ }) => {
     const navigate = useNavigate()
     const isAuthenticated = useSelector((state) => state.user.isAuthenticated)
+
+    const location = useLocation();
 
     const [loginData, setLoginData] = useState({ email: '', senha: '' })
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
@@ -47,9 +50,13 @@ const Login = ({ }) => {
     }
 
     useEffect(() => {
-        if (isAuthenticated) {
-            navigate("/")
+        const params = new URLSearchParams(location.search);
+        const originalUrl = params.get("originalUrl")? params.get("originalUrl") : '/';
+
+        if (originalUrl && isAuthenticated) {
+            window.location.href = originalUrl;
         }
+        
     }, [isAuthenticated])
 
     return (
