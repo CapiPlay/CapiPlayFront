@@ -34,6 +34,7 @@ const Historic = () => {
             );
             VideoService.buscarHistorico(99999, 0, true).then(
                 (res) => {
+                    console.log(res)
                     setShortHistoric(res);
                 }
             );
