@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import axios from "../AxiosConfig";
 
 
@@ -134,7 +135,22 @@ const VideoService = {
     } catch (err) {
       console.error(err);
     }
+  },
+
+  visualizarVideo: async (id) => {
+    try {
+      const response = await axios.put(
+        `/video/visualizar`,
+        {
+          videoId: id
+        }
+        
+      )
+    } catch (err) {
+      console.error(err)
+    }
   }
+
 };
 
 export default VideoService;

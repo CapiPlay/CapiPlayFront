@@ -17,7 +17,7 @@ import CommentsComponent from '../../../components/commentsComponent/CommentsCom
 // service
 import VideoService from '../../../service/Video/VideoService'
 import ReacaoService from '../../../service/Engajamento/ReacaoService'
-import UsuarioService from '../../../service/Usuario/UsuarioService'
+import UsuarioEngajamentoService from '../../../service/Engajamento/UsuarioEngajamentoService'
 
 const ShortsComponent = ({ short }) => {
 
@@ -34,11 +34,14 @@ const ShortsComponent = ({ short }) => {
     const [isVideoInView, setIsVideoInView] = useState(false)
     const [isMuted, setIsMuted] = useState(true)
 
-    const channel = UsuarioService.detalhes()
+    const [channelPicture, setChannelPicture] = useState("")
+    const [channelName, setChannelName] = useState("")
+
+    const minimalTimeToVisualization = Math.ceil(targetRef?.current?.duration * 0.05)
 
     useEffect(() => {
         const jsonUser = Cookies.get("user")
-        if (jsonUser !== "" && jsonUser !== undefined) {
+        if (jsonUser !== "" && jsonUser) {
             setUser(JSON.parse(jsonUser))
         }
 
@@ -46,12 +49,36 @@ const ShortsComponent = ({ short }) => {
             navigate("/")
         }
 
+
+
+        const findPictureAndNameChannel = async () => {
+            const channel = await UsuarioEngajamentoService.buscarUm(short?.usuario.uuid)
+            setChannelPicture("http://10.4.96.50:7000/api/usuario/static/" + channel?.foto)
+            setChannelName(channel?.nomeCanal)
+        }
+
+        findPictureAndNameChannel()
+
         window.addEventListener('popstate', handleBackToHomePage)
 
         return () => {
             window.removeEventListener('popstate', handleBackToHomePage)
         }
 
+    }, [])
+
+    useEffect(() => {
+        const findLike = async () => {
+            const engagementLike = await ReacaoService.buscarUm(short?.uuid)
+            if (engagementLike) {
+                setLikeShort(!likeShort)
+                setDislikeShort(false)
+            } else if (engagementLike === false) {
+                setDislikeShort(!dislikeShort)
+                setLikeShort(false)
+            }
+        }
+        findLike()
     }, [])
 
     useEffect(() => {
@@ -95,11 +122,11 @@ const ShortsComponent = ({ short }) => {
 
     const updateListShorts = async () => {
         const shortUuid = short.uuid
-        if (shortUuid !== id) {
+        if (shortUuid !== id && shortUuid) {
             try {
                 await getUUID()
                 const response = await VideoService.buscarShorts()
-                const newShorts = [response.data]
+                const newShorts = response.data
                 dispatch(setListShorts(newShorts))
                 navigate(`/shorts/${shortUuid}`)
             } catch (err) {
@@ -142,24 +169,13 @@ const ShortsComponent = ({ short }) => {
         }
     }
 
-    useEffect(() => {
-        const findLike = async () => {
-            const engagementLike = await ReacaoService.buscarUm(short?.uuid)
-            console.log(short)
-            if (engagementLike) {
-                setLikeShort(!likeShort)
-                setDislikeShort(false)
-            } else if (engagementLike === false) {
-                setDislikeShort(!dislikeShort)
-                setLikeShort(false)
-            }
-        }
-        findLike()
-    }, [])
-
     const getPathShorts = (currentPath) => {
         const path = `http://10.4.96.50:7000/api/video/static/${currentPath}`
         return path
+    }
+
+    if (!short) {
+        return updateListShorts()
     }
 
     return (
@@ -188,8 +204,8 @@ const ShortsComponent = ({ short }) => {
                 <div className='informations__profile__shorts' >
                     <Link to={"/profile/" + short?.usuario.uuid}>
                         <div className='profile__shorts'>
-                            <img src={imagePerfil} alt='Imagem de Perfil' />
-                            <span>{short?.profile}</span>
+                            <img src={channelPicture} alt='Imagem de Perfil' />
+                            <span>{channelName}</span>
                         </div>
                     </Link>
                     <div className='button__submit__shorts' style={openModalComments ? { display: "none" } : {}}>

@@ -73,7 +73,7 @@ const Shorts = () => {
             const newShorts = []
 
             const firstShort = await VideoService.buscarCompleto(id)
-            dispatch(getIdUserPost(firstShort.usuario.uuid))
+            dispatch(getIdUserPost(firstShort?.usuario?.uuid))
 
             newShorts.push(firstShort)
 
@@ -101,7 +101,7 @@ const Shorts = () => {
                     shorts && (
                         <>
                             {
-                                shorts.map((short, i) => <ShortsComponent key={short?.uuid} short={short} position={i} />)
+                                shorts.map((short, i) => <ShortsComponent key={short?.uuid + i} short={short} position={i} />)
                             }
                         </>
                     )
