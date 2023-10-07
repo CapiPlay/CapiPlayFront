@@ -10,7 +10,6 @@ import React, { useEffect, useState } from 'react'
 
 //components
 import Side_Bar from '../../components/side_bar/Side_Bar'
-import Side_Bar from '../home/side_bar/Side_Bar'
 import Header from '../../components/header/Header'
 import Video_card from '../../components/video_card/Video_card'
 
