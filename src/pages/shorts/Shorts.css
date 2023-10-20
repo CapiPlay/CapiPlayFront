@@ -14,7 +14,9 @@
 
 .container__button__pass__shorts {
     width: 2rem;
-    height: 78%;
+    height: 80%;
+
+    margin-top: 3rem;
 
     display: flex;
     align-items: center;
@@ -239,7 +241,7 @@
 .container__shorts {
     width: 100%;
     max-width: 25rem;
-    height: 35rem;
+    height: 32rem;
 
     margin-top: 3rem;
 
@@ -263,12 +265,6 @@
 /* Responsividade */
 
 @media (min-width: 1200px) {
-
-    .container__button__pass__shorts {
-        height: 81%;
-
-        margin-top: 2.3%;
-    }
 
     .container__informations__video span {
         font-size: 14px;

@@ -166,7 +166,7 @@ function Slider_Shorts() {
     const renderMobileView = () => (
         <div>
             {videosRec ? (
-                <Slider {...settingsTablet}>
+                <Slider {...settingsMobile}>
                     {videosRec.map((video) => (
                         <Shortcard key={video.uuid} short={video} />
                     ))}

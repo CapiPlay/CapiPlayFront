@@ -142,7 +142,7 @@ const ShortsComponent = ({ short }) => {
     }
 
     const validateUser = () => {
-        if (user instanceof Object && user.uuid) {
+        if (user) {
             return true
         } else {
             navigate("/login")
@@ -150,7 +150,7 @@ const ShortsComponent = ({ short }) => {
     }
 
     const funcLikeShorts = async () => {
-        if (validateUser) {
+        if (validateUser()) {
             setLikeShort(!likeShort)
             setDislikeShort(false)
             const cmd = { idUsuario: user.uuid, idVideo: id, curtida: true }
@@ -159,7 +159,7 @@ const ShortsComponent = ({ short }) => {
     }
 
     const funcDislikeShorts = async () => {
-        if (validateUser) {
+        if (validateUser()) {
             setDislikeShort(!dislikeShort)
             setLikeShort(false)
             const cmd = { idUsuario: user.uuid, idVideo: id, curtida: false }
