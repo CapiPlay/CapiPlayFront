@@ -1,12 +1,12 @@
 import React from 'react'
-import './LikesComment.css'
-import ReacaoComentarioService from '../../../../service/Engajamento/ReacaoComentarioService'
+import './FeedBackAnswerLikes.css'
+import ReacaoRespostaService from '../../../../service/Engajamento/ReacaoRespostaService'
 import { BiLike, BiSolidLike, BiDislike, BiSolidDislike } from 'react-icons/bi'
 import { useEffect } from 'react'
 import { useState } from 'react'
-import ComentarioService from '../../../../service/Engajamento/ComentarioService'
+import RespostaService from '../../../../service/Engajamento/RespostaService'
 
-const LikesComment = ({ commentId }) => {
+const FeedBackAnswerLikes = ({ answerId }) => {
     const [likeBtnActive, setLikeBtnActive] = useState(false)
     const [dislikeBtnActive, setDislikeBtnActive] = useState(false)
     const [likesAmount, setLikesAmount] = useState(0)
@@ -15,30 +15,30 @@ const LikesComment = ({ commentId }) => {
     const [reacao, setReacao] = useState(undefined)
   
     async function getReacao() {
-        const temp = await ReacaoComentarioService.buscarUm(commentId)
+        const temp = await ReacaoRespostaService.buscarUm(answerId)
         setReacao(temp)
     }
 
-    const getReacaoAmount = async () => {
-      const temp = await ComentarioService.buscarUm(commentId)
-      if(temp !== undefined || temp !== null){
-        setLikesAmount(0)
-        setDislikesAmount(0)
-        let lista = temp.reacaoComentarioList
-        lista.forEach(reaction => {
-          if(reaction.curtida){
-            setLikesAmount(likesAmount + 1)
-          }else if(!reaction.curtida){
-            setDislikesAmount(dislikesAmount + 1)
-          }
-        });
-      }
-    }
+    // const getReacaoAmount = async () => {
+    //   const temp = await RespostaService.buscarUm(answerId)
+    //   if(temp !== undefined || temp !== null){
+    //     setLikesAmount(0)
+    //     setDislikesAmount(0)
+    //     let lista = temp.reacaoComentarioList
+    //     lista.forEach(reaction => {
+    //       if(reaction.curtida){
+    //         setLikesAmount(likesAmount + 1)
+    //       }else if(!reaction.curtida){
+    //         setDislikesAmount(dislikesAmount + 1)
+    //       }
+    //     });
+    //   }
+    // }
   
     useEffect(() => {
       getReacao()
-      getReacaoAmount()
-    }, [commentId])
+    //   getReacaoAmount()
+    }, [answerId])
 
     useEffect(() => {
       if (reacao === undefined) {
@@ -52,38 +52,38 @@ const LikesComment = ({ commentId }) => {
     }, [reacao])
   
     const handleToggleLikeBtn = async () => {
-      const like = {idComentario: commentId, curtida: true}
+      const like = {idResposta: answerId, curtida: true}
       if (!likeBtnActive && !dislikeBtnActive) {
         setLikeBtnActive(true) 
-        await ReacaoComentarioService.criar(like)
-        getReacaoAmount()
+        await ReacaoRespostaService.criar(like)
+        // getReacaoAmount()
       } else if (likeBtnActive && !dislikeBtnActive) {
         setLikeBtnActive(false) 
-        await ReacaoComentarioService.criar(like)
-        getReacaoAmount()
+        await ReacaoRespostaService.criar(like)
+        // getReacaoAmount()
       }else if (dislikeBtnActive) {
         setLikeBtnActive(true) 
         setDislikeBtnActive(false) 
-        await ReacaoComentarioService.criar(like)
-        getReacaoAmount()
+        await ReacaoRespostaService.criar(like)
+        // getReacaoAmount()
       }
     } 
   
     const handleToggleDislikeBtn = async () => {
-      const deslike = {idComentario: commentId, curtida: false} 
+      const deslike = {idResposta: answerId, curtida: false} 
       if (!likeBtnActive && !dislikeBtnActive) {
         setDislikeBtnActive(true) 
-        await ReacaoComentarioService.criar(deslike)
-        getReacaoAmount()
+        await ReacaoRespostaService.criar(deslike)
+        // getReacaoAmount()
       } else if (!likeBtnActive && dislikeBtnActive) {
         setDislikeBtnActive(false) 
-        await ReacaoComentarioService.criar(deslike)
-        getReacaoAmount()
+        await ReacaoRespostaService.criar(deslike)
+        // getReacaoAmount()
       } else if (likeBtnActive) {
         setDislikeBtnActive(true) 
         setLikeBtnActive(false) 
-        await ReacaoComentarioService.criar(deslike)
-        getReacaoAmount()
+        await ReacaoRespostaService.criar(deslike)
+        // getReacaoAmount()
       }
     } 
   
@@ -101,4 +101,4 @@ const LikesComment = ({ commentId }) => {
     ) 
 }
 
-export default LikesComment
+export default FeedBackAnswerLikes

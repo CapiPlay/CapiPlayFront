@@ -25,11 +25,10 @@ const ReacaoComentarioService = {
    */
   buscarUm: async (idComentario) => {
     try {
-      console.log(idComentario)
       const response = await axios.get(
         "/engajamento/reacaoComentario/" + idComentario
       );
-      return response.data;
+      return response.data.curtida;
     } catch (err) {
       console.error(err);
     }
