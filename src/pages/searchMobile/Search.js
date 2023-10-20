@@ -31,10 +31,9 @@ const Search = ({ valueSearch, change, searches, lastSearches, setLastSearches }
                     new Set(res.map(video => video.pesquisa))
                 ).map(pesquisa => {
                     return res.find(video => video.pesquisa=== pesquisa);
-                })]);
+                })].slice(0, 11));
             }
         )
-
     }, [])
 
     useEffect(() => {
