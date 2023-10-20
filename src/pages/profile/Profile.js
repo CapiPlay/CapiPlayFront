@@ -33,11 +33,11 @@ const Profile = () => {
     const [size, setSize] = useState(3)
     const [totalPages, setTotalPages] = useState(1)
 
-    const userDataJSON = Cookies.get('user');
+    const userDataJSON = JSON.parse(Cookies.get('user') || '');
     const [uuid, setUuid] = useState()
 
     useEffect(() => {
-        UsuarioEngajamentoService.buscarUm()
+        UsuarioEngajamentoService.buscarUm(userDataJSON?.uuid)
             .then((data) => {
                 setUsuario(data)
             })
