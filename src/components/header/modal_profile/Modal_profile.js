@@ -67,9 +67,6 @@ const Modal_profile = ({ isOpen }) => {
                 )
             }
             <div className='divider__profile__modal'></div>
-            
-            <Link to="/settings" ><p>Configurações</p></Link>
-            <div className='divider__profile__modal'></div>
             <p onClick={Logout}>Sair</p>
         </div >
     )
