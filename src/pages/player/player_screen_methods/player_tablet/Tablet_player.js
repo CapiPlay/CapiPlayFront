@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './Tablet_player.css'
-import Like from '../../player_components/like_btn/Like_btn'
-import Dislike from '../../player_components/dislike_btn/Dislike_btn'
 import { AiFillEye, AiFillHeart } from 'react-icons/ai'
 import Channel_component from '../../player_components/channel_component/Channel_component'
 import Description_component from '../../player_components/description_component/Description_component'
@@ -10,20 +8,61 @@ import Comments_component from '../../player_components/comments_componet/Commen
 import Video_card from '../../../../components/video_card/Video_card'
 import { BiArrowBack } from 'react-icons/bi'
 import VideoService from '../../../../service/Video/VideoService'
+import ComentarioService from '../../../../service/Engajamento/ComentarioService'
+import { IoMdSend } from 'react-icons/io'
+import { BiSolidDownArrow, BiSolidUpArrow } from 'react-icons/bi'
+import LikeDislikeButtons from '../../player_components/feedbackButton/LikeDislikeButtons'
+import { useNavigate } from 'react-router-dom'
+import notFound from '../../../../assets/image/404_NotFound.png'
 
 function Tablet_player({ video }) {
     const [videos, setVideos] = useState([])
+    const [commentText, setCommentText] = useState('');
+    const [allComments, setAllComments] = useState([])
+    const [comment, setComments] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
+        buscarComments()
         getVideos()
     }, [])
 
     const getVideos = async () => {
-        setVideos(await VideoService.buscarTodos(6, 0, false))
+        var videostemp = await VideoService.buscarTodos(6, 0, false)
+        setVideos(videostemp.content)
+
+    }
+
+    const handleNewComment = () => {
+        console.log(video)
+        if (commentText.trim() !== '') {
+            ComentarioService.criar({
+                texto: commentText,
+                idVideo: video.uuid
+            })
+            setCommentText('');
+        }
+    }
+
+    const buscarComments = async () => {
+        var commentsTemp = await ComentarioService.buscarTodosPorVideo(video.uuid, 0)
+        if (commentsTemp == null || commentsTemp == undefined) {
+            setAllComments(null)
+        } else {
+            setAllComments(commentsTemp.content)
+        }
+    }
+
+    const toggleComment = () => {
+        setComments(!comment)
+    }
+
+    const goBack = () => {
+        navigate('/')
     }
 
     return (
-        <><div className='return__btn'><BiArrowBack color='var(--lightpurple)' />Voltar</div>
+        <><div className='return__btn' onClick={goBack}><BiArrowBack color='var(--lightpurple)' />Voltar</div>
             <div>
                 <video controls className='video__player__tablet' poster={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[3]} key={video.uuid}>
                     <source src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[5]} type="video/mp4" />
@@ -42,8 +81,7 @@ function Tablet_player({ video }) {
                     </div>
                 </div>
                 <div className='like__dislike__btns'>
-                    <Like />
-                    <Dislike />
+                    <LikeDislikeButtons video={video} />
                 </div>
             </div>
             <div>
@@ -58,9 +96,48 @@ function Tablet_player({ video }) {
             <div className='comments__container'>
                 <div className='total__comments'>
                     <p>Comentários</p>
+                    <div className='toggleComment' onClick={toggleComment}>
+                        Comentar
+                        {comment ?
+                            <BiSolidUpArrow /> :
+                            <BiSolidDownArrow />
+                        }
+                    </div>
                 </div>
-                <div>
-                    <Comments_component video={video} />
+                {comment &&
+                    <div className='comments__input'>
+                        <input
+                            type='text'
+                            value={commentText}
+                            onChange={(e) => setCommentText(e.target.value)}
+                        />
+                        <div className='send__comments__icon' onClick={handleNewComment}>
+                            <IoMdSend size={'2rem'} />
+                        </div>
+                    </div>
+                }
+                <div className='comments'>
+                    <div>
+                        {allComments.length === 0?
+                                    <div className='no__comments'>
+                                        <div>
+                                            <p>Sem comentarios</p>
+                                            <br/>
+                                            <div className='no__comments__image'>
+                                                <img src={notFound} alt='notFound' width={50}/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                :
+                                <>
+                                    <div>
+                                        {allComments.map((commentVideo) => (
+                                             <Comments_component commentVideo={commentVideo} key={commentVideo.idComentario}/>
+                                        ))}
+                                    </div>
+                                </>
+                                }
+                    </div>
                 </div>
             </div>
             <div>

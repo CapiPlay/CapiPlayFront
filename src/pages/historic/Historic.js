@@ -19,6 +19,7 @@ const Historic = () => {
     useEffect(() => {
         const func = async () => {
 
+
             VideoService.buscarHistorico(99999, 0, false).then(
                 (res) => {
                     console.log(res)

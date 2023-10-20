@@ -34,8 +34,19 @@ function Slider_Shorts({shorts}) {
         };
     }, []);
 
+    const getVideosRec = async () => {
+        const pageable = await VideoService.buscarTodos(12, 0, true);
+        const videos = pageable.content;
+        if (videos?.length >= 6) {
+            setVideosRec([...videos]);
+        } else {
+            setVideosRec([]);
+        }
+    };
+
+
     const settingsDesk = {
-        slidesToShow: 5,
+        slidesToShow: 4,
         slidesToScroll: 1,
         swipeToSlide: true,
         autoplay: true,
@@ -44,6 +55,17 @@ function Slider_Shorts({shorts}) {
         infinite: true,
         arrows: false,
         responsive: [
+            {
+                breakpoint: 1416,
+                settings: {
+                    arrows: false,
+                    centerPadding: '40px',
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
+                    swipeToSlide: true,
+                    arrows: false,
+                }
+            },
             {
                 breakpoint: 768,
                 settings: {
@@ -118,27 +140,61 @@ function Slider_Shorts({shorts}) {
     };
 
     const renderDesktopView = () => (
-        <Slider {...settingsDesk}>
-            {videosRec.map((video) => (
-                <Shortcard key={video.uuid} short={video} />
-            ))}
-        </Slider>
+        <div>
+
+            {videosRec ? (
+                <Slider {...settingsDesk}>
+                    {videosRec.map((video) => (
+                        <Shortcard key={video.uuid} short={video} />
+                    ))}
+                </Slider>
+            ) : (
+                <div className="ui segment">
+                    <p></p>
+                    <div className="ui active dimmer">
+                        <div className="ui loader"></div>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 
     const renderTabletView = () => (
-        <Slider {...settingsTablet}>
-            {videosRec.map((video) => (
-                <Shortcard key={video.uuid} short={video} />
-            ))}
-        </Slider>
+        <div>
+            {videosRec ? (
+                <Slider {...settingsTablet}>
+                    {videosRec.map((video) => (
+                        <Shortcard key={video.uuid} short={video} />
+                    ))}
+                </Slider>
+            ) : (
+                <div className="ui segment">
+                    <p></p>
+                    <div className="ui active dimmer">
+                        <div className="ui loader"></div>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 
     const renderMobileView = () => (
-        <Slider {...settingsMobile}>
-            {videosRec.map((video) => (
-                <Shortcard key={video.uuid} short={video} />
-            ))}
-        </Slider>
+        <div>
+            {videosRec ? (
+                <Slider {...settingsTablet}>
+                    {videosRec.map((video) => (
+                        <Shortcard key={video.uuid} short={video} />
+                    ))}
+                </Slider>
+            ) : (
+                <div className="ui segment">
+                    <p></p>
+                    <div className="ui active dimmer">
+                        <div className="ui loader"></div>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 
     const getViewToRender = () => {

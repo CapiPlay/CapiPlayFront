@@ -1,5 +1,4 @@
 import axios from "../AxiosConfig";
-
 const UserService = {
 
   /**
@@ -26,6 +25,7 @@ const UserService = {
   login: async (loginDto) => {
     try {
       const response = await axios.post("/usuario/login", loginDto);
+      
       return response.data;
     } catch (error) {
       console.error(error);
@@ -54,7 +54,14 @@ const UserService = {
    */
   editar: async ( editarUsuarioCommand, foto1) => {
     try {
-      const response = await axios.put(`/usuario`, editarUsuarioCommand, foto1);
+      const formData = new FormData();
+      formData.append("foto1", foto1);
+  
+      const response = await axios.put("/usuario", editarUsuarioCommand, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data", 
+        },
+      });
       return response.data;
     } catch (error) {
       console.error(error);

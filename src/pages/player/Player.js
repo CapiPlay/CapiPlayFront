@@ -8,7 +8,7 @@ import VideoService from '../../service/Video/VideoService'
 
 function Player() {
   const [video, setVideo] = useState();
-  const { videoId } = useParams();
+  const {videoId} = useParams();
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function Player() {
   }
 
   const verifyDesktop = () => {
-    if (screenSize.width < 900 && screenSize.width > 450) {
+    if (screenSize.width > 900) {
       return true
     } else {
       return false
@@ -48,17 +48,17 @@ function Player() {
         <>
           {verifyTablet() ? (
             <div>
-              <Tablet_player video={video} />
+              <Tablet_player video={video} key={1} />
             </div>
           ) : (
             <div>
               {verifyDesktop() ? (
                 <div>
-                  <Mobile_player video={video} />
+                  <Desktop_player video={video} key={2} />
                 </div>
               ) : (
                 <div>
-                  <Desktop_player video={video} />
+                  <Mobile_player video={video} key={3}/>
                 </div>
               )}
             </div>

@@ -8,6 +8,7 @@
     margin-top: 4%;
     color: white;
     display: flex;
+    width: 100%;
     
 }
 
@@ -28,12 +29,15 @@
     justify-content: center;
     align-items: center;
     font-size: 0.8rem;
+    gap: 5px;
 }
 
 .dislikes{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 0.8rem;
+    gap: 5px;
 }
 
 .ball{
@@ -53,6 +57,33 @@
     margin-bottom: 3px;
 }
 
+.input__answer__container{
+    gap: 6px;
+    margin-top: 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input__answer__container > input {
+    outline: none;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    height: 0.6rem;
+    padding: 0.7rem;
+    font-weight: bolder;
+}
+
+.input__answer__container >input:focus{
+    border: solid var(--lightpurple) 2.5px;
+}
+
+.comment__text{
+    word-wrap: break-word;
+    width: 100%;
+}
+
 .comment__total__answers{
     display: flex;
     align-items: center;
@@ -63,6 +94,19 @@
 }
 
 .comment__like__btn{
+    cursor: pointer;
+}
+
+.answer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    color: var(--lightpurple);
+}
+
+.answer > p{
+    font-size: 0.8rem;
     cursor: pointer;
 }
 
@@ -77,4 +121,20 @@
 /* ----- for light mode ----- */
 .comment__content {
     color: var(--whiteBlack);
+    width: 80%;
+}
+
+.send__icon__comment{
+    background-color: var(--purple);
+    border: solid var(--purple);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.send__icon__comment:hover{
+    background-color: var(--purplehover);
+    border: solid var(--purplehover);
 }

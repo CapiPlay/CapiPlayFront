@@ -34,6 +34,10 @@
     margin: 0 auto;
 }
 
+.profile__pic__desktop{
+    border-radius: 100px;
+}
+
 .profile__name {
     color: var(--lightpurple);
 }
@@ -140,4 +144,8 @@
     padding-top: 2rem;
     padding-left: 10%;
     gap: 2rem;
+}
+
+.profile__pagination__desktop {
+    margin-left: 10rem;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Category.css'
 import Header from '../../components/header/Header';
-import Side_Bar from '../home/side_bar/Side_Bar';
+import Side_Bar from '../../components/side_bar/Side_Bar';
 import Slider_Category from '../home/slider_category/Slider_Category';
 import Cookies from 'js-cookie';
 import VideoService from '../../service/Video/VideoService';

@@ -8,11 +8,12 @@ import TagsCarousel from "../../components/tagsCarousel/TagsCarousel";
 import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 import Video_card from "../../components/video_card/Video_card";
 import Header from "../../components/header/Header";
-import Side_Bar from "../home/side_bar/Side_Bar";
+import Side_Bar from "../../components/side_bar/Side_Bar";
 import Slider_Category from "../home/slider_category/Slider_Category";
 
 // icons
 import { FiFilter } from "react-icons/fi"
+import VideoService from "../../service/Video/VideoService";
 
 const ResultSearch = () => {
 
@@ -27,8 +28,12 @@ const ResultSearch = () => {
     const [searchValue, setSearchValue] = useState("");
     const searchParams = urlSearchParams.get("search");
 
-
     useEffect(() => {
+
+        const pesquisar = async () => {
+            const response = await VideoService.pesquisarValor(searchParams);
+            console.log(response)
+        }
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
@@ -37,11 +42,12 @@ const ResultSearch = () => {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
+
+        pesquisar()
     }, []);
 
     useEffect(() => {
         setSearchValue(searchParams);
-        console.log(videos[0].caminhos[4])
     }, [searchParams])
 
     useEffect(() => {
