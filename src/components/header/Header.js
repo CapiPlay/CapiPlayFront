@@ -55,10 +55,13 @@ const Header = ({ searchValue }) => {
 
     // Search
     const handleClick = () => {
-        setSearch(true)
+        handleSearch(valueInput)
     }
 
     const handleSearch = () => {
+        if (valueInput === null || valueInput === undefined || valueInput === "") {
+            return
+        }
         VideoService.pesquisarValor(valueInput, false).then(
             nav(`/result-search?search=${encodeURIComponent(valueInput)}`)
         )

@@ -58,12 +58,14 @@ const ResultSearch = () => {
   };
 
   const handleSearch = (value) => {
+    if (value === null || value === undefined || value === "") {
+        return
+    }
     nav(
       `/result-search?search=${encodeURIComponent(
         value && value.length > 0 ? value : searchValue
       )}`
     );
-    console.log("search: ");
   };
 
   const renderDesktop = () => {

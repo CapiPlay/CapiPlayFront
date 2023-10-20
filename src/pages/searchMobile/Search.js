@@ -21,6 +21,9 @@ const Search = ({ valueSearch, change, searches, lastSearches, setLastSearches }
     
 
     const handleSearch = (value) => {
+        if (valueInput === null || valueInput === undefined || valueInput === "") {
+            return
+        }
         nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : valueInput)}`)
     }
 
