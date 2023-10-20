@@ -29,12 +29,13 @@ const ButtonSubmit = () => {
   }
 
   useEffect(() => {
-
     const jsonUser = Cookies.get("user")
     if (jsonUser !== "" && jsonUser) {
       setUser(JSON.parse(jsonUser))
     }
+  }, [])
 
+  useEffect(() => {
     const findSubscriber = async () => {
       if (user) {
         const engajGet = await EngajamentoService.buscarUm(idUserPost)
@@ -44,7 +45,7 @@ const ButtonSubmit = () => {
       }
     }
     findSubscriber()
-  }, [])
+  }, [user])
 
   const buttonClassName = `container__submit__button ${isSubscribe ? 'animate' : ''}`
 

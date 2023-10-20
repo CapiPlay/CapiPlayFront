@@ -34,6 +34,8 @@ const ShortsComponent = ({ short }) => {
     const [isVideoInView, setIsVideoInView] = useState(false)
     const [isMuted, setIsMuted] = useState(true)
 
+    const [likes, setLikes] = useState(0)
+
     const [channelPicture, setChannelPicture] = useState("")
     const [channelName, setChannelName] = useState("")
 
@@ -78,6 +80,11 @@ const ShortsComponent = ({ short }) => {
         }
         findLike()
     }, [])
+
+    useEffect(() => {
+        console.log(short?.curtidas)
+        setLikes(short?.curtidas)
+    }, [likeShort, dislikeShort])
 
     useEffect(() => {
         const options = {
@@ -189,7 +196,7 @@ const ShortsComponent = ({ short }) => {
             <div className='container__icons__shorts'>
                 <div onClick={funcLikeShorts}>
                     {likeShort ? <BiSolidLike /> : <BiLike />}
-                    <span>{short?.curtidas}</span>
+                    <span>{likes}</span>
                 </div>
                 <div>
                     {dislikeShort ? <BiSolidDislike onClick={funcDislikeShorts} /> : <BiDislike onClick={funcDislikeShorts} />}
