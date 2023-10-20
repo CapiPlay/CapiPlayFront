@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 // Componentes
 import VideoService from "../../service/Video/VideoService";
 import CarouselShorts from "./carouselShorts/CarouselShorts";
-import Shortcard from "../../components/short_card/ShortCard";
 import Video_card from "../../components/video_card/Video_card"
 import HeaderToBack from "../../components/headerToBack/HeaderToBack"
 
@@ -18,8 +17,6 @@ const Historic = () => {
 
     useEffect(() => {
         const func = async () => {
-
-
             VideoService.buscarHistorico(99999, 0, false).then(
                 (res) => {
                     console.log(res)
@@ -53,7 +50,9 @@ const Historic = () => {
                         {videoHistoric &&
                             <div className="container__videos__historic__mob">
                                 {videoHistoric.map((video) => (
-                                    <Video_card key={video.id} video={video} />
+                                    <div>
+                                        <Video_card key={video.id} video={video} />
+                                    </div>
                                 ))}
                             </div>
                         }
