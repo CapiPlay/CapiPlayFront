@@ -39,7 +39,7 @@ const Search = ({ valueSearch, change, searches, lastSearches, setLastSearches }
     }, [searches])
 
     const renderSearch = () => {
-        if (valueInput?.trim() === '') {
+        if (valueInput?.trim() === '' && searches.length === 0) {
             return (
                 <>
                     {lastSearches && lastSearches.map((lastSearch) => (

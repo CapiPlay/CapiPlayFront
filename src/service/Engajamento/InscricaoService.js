@@ -30,7 +30,7 @@ const InscricaoService = {
       );
       return response.data;
     } catch (err) {
-      console.error(err);
+      return
     }
   },
 };

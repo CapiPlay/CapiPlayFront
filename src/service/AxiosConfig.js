@@ -38,7 +38,15 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.response.use((response) => {
     return response
 }, (error) => {
+    if (error.response && error.response.status === 401) {
+        const originalUrl = encodeURIComponent(window.location.href);
+        const redirectToLoginUrl = `/login?originalUrl=${originalUrl}`;
+
+        window.location.href = redirectToLoginUrl;
+      }
     return Promise.reject(error)
 })
+
+
 
 export default axiosInstance
