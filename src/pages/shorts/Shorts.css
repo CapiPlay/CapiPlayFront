@@ -163,7 +163,7 @@
 
 .title__short {
     width: 100%;
-    height: 40%;
+    height: auto;
     padding-left: 1rem;
     padding-right: 1rem;
 }
@@ -186,6 +186,11 @@
     flex-grow: 1;
 }
 
+.informations__profile__shorts > a {
+    text-decoration: none;
+    color: var(--whitesmoke);
+}
+
 .profile__shorts {
     display: flex;
     align-items: center;
@@ -201,14 +206,15 @@
     margin-right: .5rem;
 }
 
-.profile__shorts span {
+.profile__shorts > a span {
     font-size: 14px;
+    text-decoration: none;
 }
 
 .button__submit__shorts {
     flex-shrink: 0;
     width: 8rem;
-    height: 50%;
+    height: 40%;
     margin-left: 1rem;
 }
 
@@ -233,9 +239,9 @@
 .container__shorts {
     width: 100%;
     max-width: 25rem;
-    height: 40rem;
+    height: 35rem;
 
-    margin-top: 2rem;
+    margin-top: 3rem;
 
     overflow: scroll;
     scroll-snap-type: y mandatory;
@@ -257,25 +263,12 @@
 /* Responsividade */
 
 @media (min-width: 1200px) {
-    /* .container__video {
-        width: 30%;
-        height: 80%;
-
-        margin-top: 5%;
-    } */
 
     .container__button__pass__shorts {
         height: 81%;
 
         margin-top: 2.3%;
     }
-
-    /* .container__video>img:first-child {
-        width: 100%;
-        height: 100%;
-
-        border-radius: 10px;
-    } */
 
     .container__informations__video span {
         font-size: 14px;
@@ -318,26 +311,11 @@
 
 @media (min-width: 835px) and (max-width: 1199.98px) {
 
-    /* .container__video {
-        width: 50%;
-        height: 65%;
-
-        margin-top: 5%;
-    } */
-
     .container__button__pass__shorts {
         height: 65%;
 
         margin-top: 5%;
     }
-
-    /* 
-    .container__video>img:first-child {
-        width: 100%;
-        height: 100%;
-
-        border-radius: 10px;
-    } */
 
     .container__informations__video span {
         font-size: 14px;
@@ -358,13 +336,6 @@
 
 @media (min-width: 576px) and (max-width: 834px) {
 
-    /* .container__video {
-        width: 50%;
-        height: 65%;
-
-        margin-top: 5%;
-    } */
-
     .container__button__pass__shorts {
         height: 65%;
 
@@ -374,13 +345,6 @@
     .container__informations__video span {
         font-size: 14px;
     }
-
-    /* .container__video>img:first-child {
-        width: 100%;
-        height: 100%;
-
-        border-radius: 10px;
-    } */
 
     .button__submit__shorts {
         width: 6rem;

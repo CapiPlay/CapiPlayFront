@@ -12,8 +12,8 @@ import { useEffect } from 'react'
 const ButtonSubmit = () => {
 
   const idUserPost = useSelector((state) => state.shorts.idUserPost)
-  
-  const user = JSON.parse(Cookies.get("user"))
+
+  const [user, setUser] = useState()
 
   const [isSubscribe, setIsSubscribe] = useState(false)
 
@@ -23,6 +23,12 @@ const ButtonSubmit = () => {
   }
 
   useEffect(() => {
+
+    const jsonUser = Cookies.get("user")
+    if (jsonUser !== "" && jsonUser) {
+      setUser(JSON.parse(jsonUser))
+    }
+
     const findSubscriber = async () => {
       const engajGet = await EngajamentoService.buscarUm(idUserPost)
       if (engajGet) {

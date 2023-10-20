@@ -30,7 +30,7 @@ const ReacaoService = {
       );
       return response.data.curtida;
     } catch (err) {
-      console.error(err);
+      return
     }
   },
 
