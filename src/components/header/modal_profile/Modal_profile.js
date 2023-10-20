@@ -21,6 +21,7 @@ const Modal_profile = ({ isOpen }) => {
     }
 
     const userExist = Cookies.get("token")
+    const user = JSON.parse(Cookies.get("user"))
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -46,7 +47,7 @@ const Modal_profile = ({ isOpen }) => {
         <div className='modal__profile__container'>
             {
                 userExist ? (
-                    <Link to="/profile"><p>Seu canal</p></Link>
+                    <Link to={`/profile/${user?.uuid}`}><p>Seu canal</p></Link>
                 ) : (
                     <Link to="/login"><p>Acessar Conta</p></Link>
                 )
@@ -66,9 +67,6 @@ const Modal_profile = ({ isOpen }) => {
                     <></>
                 )
             }
-            <div className='divider__profile__modal'></div>
-            
-            <Link to="/settings" ><p>Configurações</p></Link>
             <div className='divider__profile__modal'></div>
             <p onClick={Logout}>Sair</p>
         </div >
