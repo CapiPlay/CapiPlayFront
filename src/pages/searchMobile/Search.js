@@ -39,10 +39,6 @@ const Search = ({ valueSearch, change, searches, lastSearches, setLastSearches }
         )
     }, [])
 
-    useEffect(() => {
-        console.log(searches)
-    }, [searches])
-
     const renderSearch = () => {
         if (valueInput?.trim() === '' && searches.length === 0) {
             return (
