@@ -21,14 +21,17 @@ const Search = ({ valueSearch, change, searches, lastSearches, setLastSearches }
     
 
     const handleSearch = (value) => {
-        VideoService.pesquisarValor(value && value.length > 0 ? value : valueInput, false).then(
-            nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : valueInput)}`))
+        nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : valueInput)}`)
     }
 
     useEffect(() => {
         VideoService.buscarHistoricoPesquisa().then(
             (res) => {
-                setLastSearches(res);
+                setLastSearches([...Array.from(
+                    new Set(res.map(video => video.pesquisa))
+                ).map(pesquisa => {
+                    return res.find(video => video.pesquisa=== pesquisa);
+                })]);
             }
         )
 
