@@ -22,7 +22,7 @@ import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajame
 
 const Profile = () => {
 
-    const { idUsuario } = useParams();
+    const { id } = useParams();
     const [usuario, setUsuario] = useState({});
     const [foto, setFoto] = useState(ProfilePicture)
 
@@ -33,16 +33,16 @@ const Profile = () => {
     const [size, setSize] = useState(3)
     const [totalPages, setTotalPages] = useState(1)
 
-    const userDataJSON = JSON.parse(Cookies.get('user') || '');
-    const [uuid, setUuid] = useState()
-
     useEffect(() => {
-        UsuarioEngajamentoService.buscarUm(userDataJSON?.uuid)
-            .then((data) => {
-                setUsuario(data)
-            })
-            .catch((error) => console.error('Erro ao buscar usuario:', error));
-    }, [idUsuario]);
+        console.log(id)
+        if(id){
+            UsuarioEngajamentoService.buscarUm(id)
+                .then((data) => {
+                    setUsuario(data)
+                })
+                .catch((error) => console.error('Erro ao buscar usuario:', error));
+        }
+    }, [id]);
 
     useEffect(() => {
         setFoto('http://10.4.96.50:7000/api/usuario/static/' + usuario.foto)
@@ -85,19 +85,9 @@ const Profile = () => {
     }
 
     const getVideos = async () => {
-        if (userDataJSON) {
-            try {
-                const userData = JSON.parse(userDataJSON);
-                setUuid(userData.uuid);
-            } catch (error) {
-                console.error('Erro ao fazer o parse do JSON:', error);
-            }
-        } else {
-            console.log('Cookie não encontrado.');
-        }
         try {
             const response = await VideoService.buscarUploads(size, page, {
-                donoCanalId: uuid
+                donoCanalId: id
             });
             setVideos(response)
         } catch (error) {
@@ -142,7 +132,7 @@ const Profile = () => {
                             )
                         )}
                     </div>
-                    <hr class="solid" />
+                    <hr className="solid" />
                     <div className='profile__box__videos'>
                     {videos.map((video) => (
                             <Video_card key={video.uuid} video={video} />
