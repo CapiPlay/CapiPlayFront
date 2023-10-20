@@ -30,9 +30,11 @@ const ButtonSubmit = () => {
     }
 
     const findSubscriber = async () => {
-      const engajGet = await EngajamentoService.buscarUm(idUserPost)
-      if (engajGet) {
-        setIsSubscribe(true)
+      if (user) {
+        const engajGet = await EngajamentoService.buscarUm(idUserPost)
+        if (engajGet) {
+          setIsSubscribe(true)
+        }
       }
     }
     findSubscriber()
