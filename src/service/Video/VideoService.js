@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import axios from "../AxiosConfig";
 
 
@@ -141,6 +142,20 @@ const VideoService = {
     }
   },
 
+  visualizarVideo: async (id) => {
+    try {
+      const response = await axios.put(
+        `/video/visualizar`,
+        {
+          videoId: id
+        }
+
+      )
+    } catch (err) {
+      console.error(err)
+    }
+  },
+
   buscarHistoricoPesquisa: async () => {
     try {
       const response = await axios.get(
@@ -150,7 +165,7 @@ const VideoService = {
     } catch (err) {
       console.error(err);
     }
-  }, 
+  },
 
   pesquisarValor: async (pesquisa, shorts) => {
     try {

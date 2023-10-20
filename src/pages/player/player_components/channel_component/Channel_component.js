@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useState } from 'react';
 import UsuarioEngajamentoService from '../../../../service/Engajamento/UsuarioEngajamentoService'; 
 import ProfilePicture from '../../../../assets/image/channel_profile.png'
+import ButtonSubmit from '../../../../components/buttonSubmit/ButtonSubmit'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Channel_component({video}) {
@@ -42,7 +43,7 @@ function Channel_component({video}) {
                     </div>
                 </Link>
                 <div className='subscribe'>
-                    <button className='subscribe__btn'>inscrever-se</button>
+                    <ButtonSubmit/>
                 </div>
             </div>
         </div>

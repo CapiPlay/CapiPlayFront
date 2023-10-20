@@ -33,16 +33,17 @@ function Video_card({ video }) {
                     <img src={"http://10.4.96.50:7000/api/video/static/" + video.caminhos[4]} className='container__video__card__image' />
                 </div>
             </Link>
-            <div className='container__video__info'>
-                <img src="https://1.bp.blogspot.com/_i5HYEqTAi9w/SfkWb4gS0jI/AAAAAAAABXE/8BEdz7gYctA/s280/Pingu1.jpg" className='container__video__perfilImage' />
-                <div className='container__video__info__text'>
-                    <h5 className='container__video__title__text'>{video.titulo}</h5>
-                    <div>
-                        <h5 className='container__video__perfilName'>Nome do Canal</h5>
-                        <h6 className='container__video__views'>{video.visualizacoes} visualizações <span className='text__likes'>{video.curtidas} Likes</span></h6>
+                <div className='container__video__info'>
+                    <img src="https://1.bp.blogspot.com/_i5HYEqTAi9w/SfkWb4gS0jI/AAAAAAAABXE/8BEdz7gYctA/s280/Pingu1.jpg" className='container__video__perfilImage' />
+                    <div className='container__video__info__text'>
+                        <h5 className='container__video__title__text'>{video.titulo}</h5>
+                        <div>
+                            <h5 className='container__video__perfilName'>Nome do Canal</h5>
+                            <h6 className='container__video__views'>{video.visualizacoes} visualizações <span className='text__likes'>{video.curtidas} Likes</span></h6>
+                        </div>
                     </div>
                 </div>
-            </div>
+            
         </div >
     )
 }
