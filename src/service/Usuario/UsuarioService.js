@@ -1,5 +1,4 @@
 import axios from "../AxiosConfig";
-
 const UserService = {
 
   /**
@@ -26,6 +25,7 @@ const UserService = {
   login: async (loginDto) => {
     try {
       const response = await axios.post("/usuario/login", loginDto);
+      
       return response.data;
     } catch (error) {
       console.error(error);
