@@ -49,8 +49,6 @@ const ShortsComponent = ({ short }) => {
             navigate("/")
         }
 
-
-
         const findPictureAndNameChannel = async () => {
             const channel = await UsuarioEngajamentoService.buscarUm(short?.usuario.uuid)
             setChannelPicture("http://10.4.96.50:7000/api/usuario/static/" + channel?.foto)
@@ -185,6 +183,7 @@ const ShortsComponent = ({ short }) => {
                 ref={targetRef}
                 loop
                 muted={isMuted}
+                onChange={console.log()}
                 {...(isVideoInView && { autoPlay: true })}
             />
             <div className='container__icons__shorts'>
