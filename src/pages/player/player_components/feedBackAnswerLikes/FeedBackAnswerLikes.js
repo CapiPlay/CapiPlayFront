@@ -19,25 +19,25 @@ const FeedBackAnswerLikes = ({ answerId }) => {
         setReacao(temp)
     }
 
-    // const getReacaoAmount = async () => {
-    //   const temp = await RespostaService.buscarUm(answerId)
-    //   if(temp !== undefined || temp !== null){
-    //     setLikesAmount(0)
-    //     setDislikesAmount(0)
-    //     let lista = temp.reacaoRespostaList
-    //     lista.forEach(reaction => {
-    //       if(reaction.curtida){
-    //         setLikesAmount(likesAmount + 1)
-    //       }else if(!reaction.curtida){
-    //         setDislikesAmount(dislikesAmount + 1)
-    //       }
-    //     });
-    //   }
-    // }
+    const getReacaoAmount = async () => {
+      const temp = await RespostaService.buscarUm(answerId)
+      if(temp !== undefined || temp !== null){
+        setLikesAmount(0)
+        setDislikesAmount(0)
+        let lista = temp.reacaoRespostaList
+        lista.forEach(reaction => {
+          if(reaction.curtida){
+            setLikesAmount(likesAmount + 1)
+          }else if(!reaction.curtida){
+            setDislikesAmount(dislikesAmount + 1)
+          }
+        });
+      }
+    }
   
     useEffect(() => {
       getReacao()
-    //   getReacaoAmount()
+      getReacaoAmount()
     }, [answerId])
 
     useEffect(() => {
