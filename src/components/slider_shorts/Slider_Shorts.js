@@ -3,26 +3,12 @@ import Slider from 'react-slick';
 import Shortcard from '../short_card/ShortCard';
 import VideoService from '../../service/Video/VideoService';
 
-function Slider_Shorts({shorts}) {
+function Slider_Shorts() {
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
     const [videosRec, setVideosRec] = useState([])
 
     useEffect(() => {
-        if (shorts) {
-            setVideosRec([...shorts]);
-            return
-        }
-        
-        const getVideosRec = async () => {
-            const pageable = await VideoService.buscarTodos(12, 0, true);
-            const videos = pageable.content;
-            if (videos.length >= 6) {
-                setVideosRec([...videos]);
-            } else {
-                setVideosRec([]);
-            }
-        };
         getVideosRec();
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
@@ -43,7 +29,6 @@ function Slider_Shorts({shorts}) {
             setVideosRec([]);
         }
     };
-
 
     const settingsDesk = {
         slidesToShow: 4,
@@ -181,7 +166,7 @@ function Slider_Shorts({shorts}) {
     const renderMobileView = () => (
         <div>
             {videosRec ? (
-                <Slider {...settingsTablet}>
+                <Slider {...settingsMobile}>
                     {videosRec.map((video) => (
                         <Shortcard key={video.uuid} short={video} />
                     ))}
