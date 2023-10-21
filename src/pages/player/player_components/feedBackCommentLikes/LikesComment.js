@@ -27,9 +27,17 @@ const LikesComment = ({ commentId }) => {
         let lista = temp.reacaoComentarioList
         lista.forEach(reaction => {
           if(reaction.curtida){
-            setLikesAmount(likesAmount + 1)
+            if(likeBtnActive){
+              setLikesAmount(likesAmount -1)
+            }else{
+              setLikesAmount(likesAmount + 1)
+            }
           }else if(!reaction.curtida){
-            setDislikesAmount(dislikesAmount + 1)
+            if(dislikeBtnActive){
+              setDislikesAmount(dislikesAmount - 1)
+            }else{
+              setDislikesAmount(dislikesAmount + 1)
+            }
           }
         });
       }
