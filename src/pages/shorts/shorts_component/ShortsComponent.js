@@ -73,18 +73,16 @@ const ShortsComponent = ({ short }) => {
             if (engagementLike) {
                 setLikeShort(!likeShort)
                 setDislikeShort(false)
+                setLikes(short?.curtidas)
             } else if (engagementLike === false) {
                 setDislikeShort(!dislikeShort)
                 setLikeShort(false)
             }
         }
         findLike()
-    }, [])
 
-    useEffect(() => {
-        console.log(short?.curtidas)
         setLikes(short?.curtidas)
-    }, [likeShort, dislikeShort])
+    }, [])
 
     useEffect(() => {
         const options = {
@@ -128,15 +126,10 @@ const ShortsComponent = ({ short }) => {
     const updateListShorts = async () => {
         const shortUuid = short.uuid
         if (shortUuid !== id && shortUuid) {
-            try {
-                await getUUID()
-                const response = await VideoService.buscarShorts()
-                const newShorts = response.data
-                dispatch(setListShorts(newShorts))
-                navigate(`/shorts/${shortUuid}`)
-            } catch (err) {
-                console.error(err)
-            }
+            await getUUID()
+            const response = await VideoService.buscarShorts()
+            dispatch(setListShorts(response))
+            navigate(`/shorts/${shortUuid}`)
         }
     }
 
@@ -156,9 +149,15 @@ const ShortsComponent = ({ short }) => {
         }
     }
 
+    const updateLike = async () => {
+        const takeLike = await VideoService.buscarCompleto(short?.uuid)
+        console.log(takeLike)
+    }
+
     const funcLikeShorts = async () => {
         if (validateUser()) {
             setLikeShort(!likeShort)
+            updateLike()
             setDislikeShort(false)
             const cmd = { idUsuario: user.uuid, idVideo: id, curtida: true }
             await ReacaoService.criar(cmd)
@@ -169,6 +168,7 @@ const ShortsComponent = ({ short }) => {
         if (validateUser()) {
             setDislikeShort(!dislikeShort)
             setLikeShort(false)
+
             const cmd = { idUsuario: user.uuid, idVideo: id, curtida: false }
             await ReacaoService.criar(cmd)
         }

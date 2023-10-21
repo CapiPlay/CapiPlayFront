@@ -16,7 +16,7 @@ const getAuthHeaders = (token) => {
 
 const getToken = () => {
     const userToken = Cookies.get("token")
-    if(userToken) {
+    if (userToken) {
         return userToken
     }
     const tokenAnonimo = Cookies.get("anonimo")
@@ -43,7 +43,7 @@ axiosInstance.interceptors.response.use((response) => {
         const redirectToLoginUrl = `/login?originalUrl=${originalUrl}`;
 
         window.location.href = redirectToLoginUrl;
-      }
+    }
     return Promise.reject(error)
 })
 
