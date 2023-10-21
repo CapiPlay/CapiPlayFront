@@ -59,7 +59,7 @@ const Register = () => {
     }
 
     const formatDataNascimento = (dataNascimento) => {
-        const formattedDataNascimento = `${dataNascimento.slice(4, 8)}-${dataNascimento.slice(0, 2)}-${dataNascimento.slice(2, 4)}`;
+        const formattedDataNascimento = `${dataNascimento.slice(4, 8)}-${dataNascimento.slice(2, 4)}-${dataNascimento.slice(0, 2)}`;
         return formattedDataNascimento;
     }
 

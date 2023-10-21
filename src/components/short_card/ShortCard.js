@@ -70,7 +70,7 @@ const Shortcard = ({ short }) => {
     const renderTabletView = () => (
         <div className="container__short__card__tablet">
             <Link to={`/player/${short.uuid}`}>
-                <img className="short__image" src={short.img} />
+                <img className="short__image" src={"http://10.4.96.50:7000/api/video/static/" + short.caminhos[1]} />
             </Link>
             <div className="container__informations__shorts">
                 <span>{short.title}</span>

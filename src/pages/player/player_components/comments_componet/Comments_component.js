@@ -5,6 +5,7 @@ import Comments_answers_component from '../comments_answers_component/Comments_a
 import ProfilePicture from '../../../../assets/image/channel_profile.png'
 import { IoMdSend } from 'react-icons/io'
 import RespostaService from '../../../../service/Engajamento/RespostaService'
+import LikesComment from '../feedBackCommentLikes/LikesComment'
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Comments_component({ commentVideo }) {
@@ -159,28 +160,7 @@ function Comments_component({ commentVideo }) {
                     </p>
                     }
                     <div className='comment__interactions'>
-                        <div className='likes'>
-                            {like_btn ?
-                                <>
-                                    <BiLike size={'1rem'} className='comment__like__btn' onClick={() => toggleLikeBtn()} />{curtidas}
-                                </>
-                                :
-                                <>
-                                    <BiSolidLike size={'1rem'} className='comment__like__btn' onClick={() => toggleLikeBtn()} />{curtidas}
-                                </>
-                            }
-                        </div>
-                        <div className='dislikes'>
-                            {dislike_btn ?
-                                <>
-                                    <BiDislike size={'1rem'} className='comment__dislike__btn' onClick={() => toggleDislikeBtn()}/>{descurtidas}
-                                </>
-                                :
-                                <>
-                                    <BiSolidDislike size={'1rem'} className='comment__dislike__btn' onClick={() => toggleDislikeBtn()}/>{descurtidas}
-                                </>
-                            }
-                        </div>
+                        <LikesComment commentId={commentVideo.idComentario}/>
                         {verifyDesktop() ?
                             <div className='comment__total__answers' onClick={toggleCommentsAnswers}>
                                 {commentVideo.qtdRespostas == 0 ?
