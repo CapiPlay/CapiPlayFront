@@ -1,10 +1,14 @@
-import React, { useRef, useEffect, useState } from "react"
+//style
 import "./Input.css"
+
+//react
+import React, { useRef, useEffect, useState } from "react"
 
 const Input = ({ placeholder, value, onChange, onClick, required, type, enable, name }) => {
   const [inputType, setInputType] = useState("text")
   const [labelColor, setLabelColor] = useState({})
   const [inputBorderColor, setInputBorderColor] = useState({})
+
   const [maskedValue, setMaskedValue] = useState("") // Novo estado para o valor com máscara
 
   const ref = useRef(null)
@@ -16,6 +20,9 @@ const Input = ({ placeholder, value, onChange, onClick, required, type, enable, 
   const day = new Date().getDate()
 
   useEffect(() => {
+    if (window.location.href.includes("settings")) {
+      setMaskedValue(value)
+    }
     if (value) {
       setLabelColor({ color: "#BF94FF" })
       setInputBorderColor({ borderColor: "#BF94FF" })

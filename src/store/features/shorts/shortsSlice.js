@@ -13,9 +13,9 @@ const shortsSlice = createSlice({
   reducers: {
     modifyListShorts: (state, action) => {
       const { list } = action.payload
-      if (list) {
-        state.listShorts = [...state.listShorts, ...list]
-      }
+      state.listShorts = [...state.listShorts, ...list]
+      console.log("Today")
+
     },
     modifyActualShorts: (state, action) => {
       const { short, position } = action.payload
@@ -54,7 +54,7 @@ const setActualShorts = (short, position) => async (dispatch) => {
 
 const getIdUserPost = (idUserPost) => async (dispatch) => {
   if (idUserPost) {
-    dispatch(modifyIdUserPost({idUserPost: idUserPost}))
+    dispatch(modifyIdUserPost({ idUserPost: idUserPost }))
   }
 }
 
