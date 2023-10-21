@@ -1,17 +1,16 @@
+//style
+import './Settings.css'
+
+//react
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import './Settings.css'
-import { useNavigate } from 'react-router-dom';
 
 //componentes
 import HeaderSettings from '../../components/header/Header'
 import Input from "../../components/input/Input";
 import InputDisabled from "../../components/inputDisabled/InputDisabled"
-import InputFile from "../../components/inputFile/InputFile"
 import Button from "../../components/button/Button";
 import TextArea from '../../components/inputTextArea/InputTextArea';
-import Side_Bar from '../../components/side_bar/Side_Bar'
 
 //Service
 import UsuarioService from '../../service/Usuario/UsuarioService';
@@ -21,6 +20,7 @@ import Cookies from 'js-cookie';
 
 //imagem
 import ImagemPadrao from '../../assets/image/404_NotFound.png'
+import InputFile from '../../components/inputFile/InputFile';
 
 const Settings = ({ }) => {
 
@@ -38,8 +38,6 @@ const Settings = ({ }) => {
     const [fileChanged, setFileChanged] = useState(false)
     const [image, setImage] = useState(null)
     const [registerData, setRegisterData] = useState(settingsData)
-
-    // const [usuario, setUsuario] = useState({});
     const { idUsuario } = useParams();
 
     const userProfile = () => {
@@ -62,7 +60,6 @@ const Settings = ({ }) => {
             return false;
         }
     }
-
 
     useEffect(() => {
         UsuarioService.detalhes()
@@ -115,7 +112,6 @@ const Settings = ({ }) => {
             }
             reader.readAsDataURL(file);
             setFileChanged(true);
-            console.log(file)
             setSettingsData({ ...settingsData, foto: file })
         }
     }
@@ -128,27 +124,24 @@ const Settings = ({ }) => {
         setSettingsData({ ...settingsData, foto: '' });
     };
 
-
-
     const renderMobileView = () => (
         <>
             <div className='settings__container'>
                 <HeaderSettings />
                 <div className="settings__form">
-                <div className="profile__settings__pic__desktop" style={{ backgroundImage: `url(${image})` }}> </div>
+                    <div className="profile__settings__pic__desktop" style={{ backgroundImage: `url(${image})` }}> </div>
                     <div className='settings__box__image__options'>
                         <InputFile
                             accept="image/*"
                             className='settings__image__options__buttons__desktop'
                             label={"Foto de perfil"}
+                            radius={"20px"}
                             onChange={handleFileChange}
                             removeFile={handleRemoveFile}
                             file={image}
                             key={fileChanged.toString()}
-                        >
-                            Alterar/
-                        </InputFile>
-                        <button className='settings__image__options__buttons' onClick={handleRemoveFile}>Remover</button>
+                        />
+                        {/* <button className='settings__image__options__buttons' onClick={handleRemoveFile}>Remover</button> */}
                     </div>
                     <div className="settings__field">
                         <InputDisabled
@@ -224,20 +217,19 @@ const Settings = ({ }) => {
             <HeaderSettings userLogin={userProfile()} />
             <div className='settings__container__desktop'>
                 <div className="settings__form__desktop">
-                    <div className="profile__settings__pic__desktop" style={{ backgroundImage: `url(${image})` }}> </div>
+                    <div className="profile__settings__pic__desktop" style={{ backgroundImage: `url(${image})` }} />
                     <div className='settings__box__image__options__desktop'>
                         <InputFile
                             accept="image/*"
                             className='settings__image__options__buttons__desktop'
                             label={"Foto de perfil"}
+                            radius={"20px"}
                             onChange={handleFileChange}
                             removeFile={handleRemoveFile}
                             file={image}
                             key={fileChanged.toString()}
-                        >
-                            Alterar/
-                        </InputFile>
-                        <button className='settings__image__options__buttons__desktop' onClick={handleRemoveFile}>Remover</button>
+                        />
+                        {/* <button className='settings__image__options__buttons__desktop' onClick={handleRemoveFile}>Remover</button> */}
                     </div>
                     <div className='settings__input__container__desktop'>
                         <div className='settings__input__box'>
@@ -322,19 +314,19 @@ const Settings = ({ }) => {
             <div className='settings__container__tablet'>
                 <HeaderSettings />
                 <div className="settings__form__tablet">
-                <div className="profile__settings__pic__desktop" style={{ backgroundImage: `url(${image})` }}> </div>                    <div className='settings__box__image__options__tablet'>
-                        <InputFile
-                            accept="image/*"
-                            className='settings__image__options__buttons__tablet'
-                            label={"Foto de perfil"}
-                            onChange={handleFileChange}
-                            removeFile={handleRemoveFile}
-                            file={image}
-                            key={fileChanged.toString()}
-                        >
-                            Alterar/
-                        </InputFile>
-                        <button className='settings__image__options__buttons__tablet' onClick={handleRemoveFile}>Remover</button>
+                    <div className="profile__settings__pic__desktop" style={{ backgroundImage: `url(${image})` }}> </div>                    <div className='settings__box__image__options__tablet'>
+                        <div className='settings__box__image__options__desktop'>
+                            <InputFile
+                                onChange={handleFileChange}
+                                radius={"20px"}
+                                label={"Foto de perfil"}
+                                file={image}
+                                removeFile={handleRemoveFile}
+                                accept="image/*"
+                                key={fileChanged.toString()}
+                            />
+                        </div>
+                        {/* <button className='settings__image__options__buttons__tablet' onClick={handleRemoveFile}>Remover</button> */}
                     </div>
                     <div className='settings__input__container__tablet'>
                         <div className='settings__input__box'>

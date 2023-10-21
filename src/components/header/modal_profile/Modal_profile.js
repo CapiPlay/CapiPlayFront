@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 
 // react
 import { Link, useNavigate } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import ThemeToggle from '../theme_toggle/ThemeToggle'
 
 const Modal_profile = ({ isOpen }) => {
@@ -18,6 +18,13 @@ const Modal_profile = ({ isOpen }) => {
         Cookies.remove('token')
         Cookies.remove('user')
         nav('/')
+        window.location.reload()
+    }
+
+    
+    function Profile() {
+     
+        nav(`/profile/${user?.uuid}`)
         window.location.reload()
     }
 
@@ -52,7 +59,7 @@ const Modal_profile = ({ isOpen }) => {
         <div className='modal__profile__container'>
             {
                 userExist ? (
-                    <Link to={`/profile/${user?.uuid}`}><p>Seu canal</p></Link>
+                    <p onClick={Profile}>Seu canal</p>
                 ) : (
                     <Link to="/login"><p>Acessar Conta</p></Link>
                 )

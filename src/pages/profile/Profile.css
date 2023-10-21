@@ -92,7 +92,26 @@
     gap: 2rem;
 }
 
+.profile__pagination__desktop{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem;
+    margin-left: 10rem;
+    width: 80vw;
+}
 
+.buttonPaginaItens{
+    background-color: var(--lightpurple);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    width: 3%;
+    font-weight: bold;
+    color: var(--darkpurple)
+}
 
 .profile__box__desktop {
     display: flex;
@@ -144,8 +163,4 @@
     padding-top: 2rem;
     padding-left: 10%;
     gap: 2rem;
-}
-
-.profile__pagination__desktop {
-    margin-left: 10rem;
 }
