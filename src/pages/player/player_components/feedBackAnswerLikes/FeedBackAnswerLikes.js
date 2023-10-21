@@ -24,7 +24,7 @@ const FeedBackAnswerLikes = ({ answerId }) => {
     //   if(temp !== undefined || temp !== null){
     //     setLikesAmount(0)
     //     setDislikesAmount(0)
-    //     let lista = temp.reacaoComentarioList
+    //     let lista = temp.reacaoRespostaList
     //     lista.forEach(reaction => {
     //       if(reaction.curtida){
     //         setLikesAmount(likesAmount + 1)

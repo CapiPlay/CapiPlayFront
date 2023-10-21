@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Comments_answers_component.css'
 import ProfilePicture from '../../../../assets/image/channel_profile.png'
 import { BiSolidDownArrow, BiSolidUpArrow, BiDislike, BiLike, BiSolidLike } from 'react-icons/bi'
+import FeedBackAnswerLikes from '../feedBackAnswerLikes/FeedBackAnswerLikes';
 
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Comments_answers_component({answer}) {
@@ -92,20 +93,7 @@ function Comments_answers_component({answer}) {
                     </p>
                     }
                     <div className='comment__interactions'>
-                        <div className='likes'>
-                            {like_btn ?
-                                <>
-                                    <BiLike size={'1rem'} className='comment__like__btn' onClick={() => toggleLikeBtn()} />{comment_likes}
-                                </>
-                                :
-                                <>
-                                    <BiSolidLike size={'1rem'} className='comment__like__btn' onClick={() => toggleLikeBtn()} />{comment_likes}
-                                </>
-                            }
-                        </div>
-                        <div className='dislikes'>
-                            <BiDislike className='comment__dislike__btn' />
-                        </div>
+                        <FeedBackAnswerLikes answerId={answer.idResposta}/>
                     </div>
                 </div>
             </div>
