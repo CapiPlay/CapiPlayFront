@@ -9,7 +9,6 @@ import { useParams } from 'react-router-dom';
 import HeaderSettings from '../../components/header/Header'
 import Input from "../../components/input/Input";
 import InputDisabled from "../../components/inputDisabled/InputDisabled"
-import InputFile from "../../components/inputFile/InputFile"
 import Button from "../../components/button/Button";
 import TextArea from '../../components/inputTextArea/InputTextArea';
 
@@ -21,6 +20,7 @@ import Cookies from 'js-cookie';
 
 //imagem
 import ImagemPadrao from '../../assets/image/404_NotFound.png'
+import InputFile from '../../components/inputFile/InputFile';
 
 const Settings = ({ }) => {
 
@@ -79,11 +79,11 @@ const Settings = ({ }) => {
             settings.append("perfil", settingsData.perfil);
             if (settingsData.senhaNova)
                 settings.append("senha", settingsData.senhaNova);
-                settings.append("descricao", settingsData.descricao);
-                settings.append("foto1", settingsData.foto)
-                UsuarioService.editar(settings, settingsData.foto).then((response) => {
-                    window.location.reload();
-                });
+            settings.append("descricao", settingsData.descricao);
+            settings.append("foto1", settingsData.foto)
+            UsuarioService.editar(settings, settingsData.foto).then((response) => {
+                window.location.reload();
+            });
         } catch (error) {
             alert("Ocorreu um erro ao editar o usuário");
             console.error('Error:', error);
@@ -112,7 +112,6 @@ const Settings = ({ }) => {
             }
             reader.readAsDataURL(file);
             setFileChanged(true);
-            console.log(file)
             setSettingsData({ ...settingsData, foto: file })
         }
     }
@@ -136,14 +135,13 @@ const Settings = ({ }) => {
                             accept="image/*"
                             className='settings__image__options__buttons__desktop'
                             label={"Foto de perfil"}
+                            radius={"20px"}
                             onChange={handleFileChange}
                             removeFile={handleRemoveFile}
                             file={image}
                             key={fileChanged.toString()}
-                        >
-                            Alterar/
-                        </InputFile>
-                        <button className='settings__image__options__buttons' onClick={handleRemoveFile}>Remover</button>
+                        />
+                        {/* <button className='settings__image__options__buttons' onClick={handleRemoveFile}>Remover</button> */}
                     </div>
                     <div className="settings__field">
                         <InputDisabled
@@ -219,19 +217,19 @@ const Settings = ({ }) => {
             <HeaderSettings userLogin={userProfile()} />
             <div className='settings__container__desktop'>
                 <div className="settings__form__desktop">
-                    <div className="profile__settings__pic__desktop" style={{ backgroundImage: `url(${image})` }}/>
+                    <div className="profile__settings__pic__desktop" style={{ backgroundImage: `url(${image})` }} />
                     <div className='settings__box__image__options__desktop'>
                         <InputFile
                             accept="image/*"
                             className='settings__image__options__buttons__desktop'
-                            label={""}
+                            label={"Foto de perfil"}
+                            radius={"20px"}
                             onChange={handleFileChange}
                             removeFile={handleRemoveFile}
                             file={image}
-                            key={fileChanged.toString()}>
-                            Alterar/
-                        </InputFile>
-                        <button className='settings__image__options__buttons__desktop' onClick={handleRemoveFile}>Remover</button>
+                            key={fileChanged.toString()}
+                        />
+                        {/* <button className='settings__image__options__buttons__desktop' onClick={handleRemoveFile}>Remover</button> */}
                     </div>
                     <div className='settings__input__container__desktop'>
                         <div className='settings__input__box'>
@@ -317,18 +315,18 @@ const Settings = ({ }) => {
                 <HeaderSettings />
                 <div className="settings__form__tablet">
                     <div className="profile__settings__pic__desktop" style={{ backgroundImage: `url(${image})` }}> </div>                    <div className='settings__box__image__options__tablet'>
-                        <InputFile
-                            accept="image/*"
-                            className='settings__image__options__buttons__tablet'
-                            label={"Foto de perfil"}
-                            onChange={handleFileChange}
-                            removeFile={handleRemoveFile}
-                            file={image}
-                            key={fileChanged.toString()}
-                        >
-                            Alterar/
-                        </InputFile>
-                        <button className='settings__image__options__buttons__tablet' onClick={handleRemoveFile}>Remover</button>
+                        <div className='settings__box__image__options__desktop'>
+                            <InputFile
+                                onChange={handleFileChange}
+                                radius={"20px"}
+                                label={"Foto de perfil"}
+                                file={image}
+                                removeFile={handleRemoveFile}
+                                accept="image/*"
+                                key={fileChanged.toString()}
+                            />
+                        </div>
+                        {/* <button className='settings__image__options__buttons__tablet' onClick={handleRemoveFile}>Remover</button> */}
                     </div>
                     <div className='settings__input__container__tablet'>
                         <div className='settings__input__box'>
