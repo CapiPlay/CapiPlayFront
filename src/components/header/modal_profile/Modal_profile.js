@@ -12,6 +12,7 @@ import ThemeToggle from '../theme_toggle/ThemeToggle'
 const Modal_profile = ({ isOpen }) => {
 
     const nav = useNavigate();
+    const [user, setUser] = useState()
 
     function Logout() {
         Cookies.remove('token')
@@ -28,7 +29,6 @@ const Modal_profile = ({ isOpen }) => {
     }
 
     const userExist = Cookies.get("token")
-    const user = JSON.parse(Cookies.get("user") || "false")
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -39,6 +39,11 @@ const Modal_profile = ({ isOpen }) => {
 
         const handleResize = () => {
             isOpen()
+        }
+
+        if(userExist) {
+            const objUser = JSON.parse(Cookies.get('user'))
+            setUser(objUser)
         }
 
         document.addEventListener('click', handleClickOutside)
