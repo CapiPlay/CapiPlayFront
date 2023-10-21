@@ -21,7 +21,6 @@ import VideoService from '../../service/Video/VideoService';
 import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajamentoService';
 
 const Profile = () => {
-
     const { id } = useParams();
     const [usuario, setUsuario] = useState({});
     const [foto, setFoto] = useState(ProfilePicture)
@@ -34,7 +33,6 @@ const Profile = () => {
     const [totalPages, setTotalPages] = useState(1)
 
     useEffect(() => {
-        console.log(id)
         if (id) {
             UsuarioEngajamentoService.buscarUm(id)
                 .then((data) => {
@@ -98,7 +96,7 @@ const Profile = () => {
 
     const handlePageChange = (page) => {
         setPage(page);
-    };
+    }
 
     const renderMobileView = () => (
         <>
@@ -125,7 +123,6 @@ const Profile = () => {
                             (page) => (
                                 <button className="buttonPaginaItens"
                                     key={page}
-                                    // className={page === currentPage ? "active" : ""}
                                     onClick={() => handlePageChange(page)}
                                 >
                                     {page + 1}
@@ -133,7 +130,7 @@ const Profile = () => {
                             )
                         )}
                     </div>
-                    <hr className="solid" />
+                    <hr class="solid" />
                     <div className='profile__box__videos'>
                         {videos.map((video) => (
                             <Video_card key={video.uuid} video={video} />
@@ -143,7 +140,8 @@ const Profile = () => {
 
             </div>
         </>
-    )
+    );
+
     const renderDesktopView = () => (
         <>
             <Side_Bar />
@@ -175,7 +173,6 @@ const Profile = () => {
                             (page) => (
                                 <button className="buttonPaginaItens"
                                     key={page}
-                                    // className={page === currentPage ? "active" : ""}
                                     onClick={() => handlePageChange(page)}
                                 >
                                     {page + 1}
@@ -195,16 +192,16 @@ const Profile = () => {
 
 
 
-    )
+    );
+
     const getViewToRender = () => {
         if (screenSize.width > 900) {
             return renderDesktopView();
-            // } else if (screenSize.width < 900 && screenSize.width > 500) {
-            //   return renderTabletView();
         } else {
             return renderMobileView();
         }
-    };
+    }
+
     return <>{getViewToRender()}</>;
 }
 

@@ -15,7 +15,6 @@ const InputDisabled = ({ placeholder, value, onChange, onClick, required, type, 
   const day = new Date().getDate()
 
   useEffect(() => {
-
     if(value) {
       setLabelColor({ color: "#BF94FF" })
       setInputBorderColor({ borderColor: "#BF94FF" })
