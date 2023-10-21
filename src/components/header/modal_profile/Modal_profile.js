@@ -6,12 +6,13 @@ import Cookies from 'js-cookie'
 
 // react
 import { Link, useNavigate } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import ThemeToggle from '../theme_toggle/ThemeToggle'
 
 const Modal_profile = ({ isOpen }) => {
 
     const nav = useNavigate();
+    const [user, setUser] = useState()
 
     function Logout() {
         Cookies.remove('token')
@@ -28,7 +29,6 @@ const Modal_profile = ({ isOpen }) => {
     }
 
     const userExist = Cookies.get("token")
-    const user = JSON.parse(Cookies.get("user"))
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -39,6 +39,11 @@ const Modal_profile = ({ isOpen }) => {
 
         const handleResize = () => {
             isOpen()
+        }
+
+        if(userExist) {
+            const objUser = JSON.parse(Cookies.get('user'))
+            setUser(objUser)
         }
 
         document.addEventListener('click', handleClickOutside)
