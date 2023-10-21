@@ -35,7 +35,7 @@ const Shortcard = ({ short }) => {
                 {short.views > 999
                     ?
                     <span>
-                        {numeral(short.visualizacoes).format('0.0a')} de visualizações
+                        {numeral(short.views).format('0.0a')} de visualizações
                     </span>
                     :
                     <span>

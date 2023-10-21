@@ -34,9 +34,9 @@ const CarouselShorts = ({ shorts }) => {
             <div className="container__capi__shorts">
                 <span>CapiShorts</span>
                 <Slider ref={sliderRef}{...settings}>
-                    {shorts && shorts.map((short) => {
-                        return <Shortcard short={short} />
-                    })}
+                    {shorts && shorts.map((short) => (
+                        <Shortcard short={short} />
+                    ))}
                 </Slider>
             </div>
         </DraggableCore>
