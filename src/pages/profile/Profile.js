@@ -29,13 +29,13 @@ const Profile = () => {
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     const [videos, setVideos] = useState([])
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState(0)
     const [size, setSize] = useState(3)
     const [totalPages, setTotalPages] = useState(1)
 
     useEffect(() => {
         console.log(id)
-        if(id){
+        if (id) {
             UsuarioEngajamentoService.buscarUm(id)
                 .then((data) => {
                     setUsuario(data)
@@ -61,6 +61,7 @@ const Profile = () => {
 
     useEffect(() => {
         getVideos();
+        console.log(page)
     }, [page, size]);
 
     const userProfile = () => {
@@ -118,7 +119,7 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="profile__pagination__desktop">
+                    <div className="profile__pagination__mobile">
                         Páginas:
                         {Array.from({ length: totalPages }, (_, index) => index).map(
                             (page) => (
@@ -134,7 +135,7 @@ const Profile = () => {
                     </div>
                     <hr className="solid" />
                     <div className='profile__box__videos'>
-                    {videos.map((video) => (
+                        {videos.map((video) => (
                             <Video_card key={video.uuid} video={video} />
                         ))}
                     </div>
