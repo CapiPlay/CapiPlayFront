@@ -21,28 +21,26 @@ import VideoService from '../../service/Video/VideoService';
 import UsuarioEngajamentoService from '../../service/Engajamento/UsuarioEngajamentoService';
 
 const Profile = () => {
-
-    const { idUsuario } = useParams();
+    const { id } = useParams();
     const [usuario, setUsuario] = useState({});
     const [foto, setFoto] = useState(ProfilePicture)
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     const [videos, setVideos] = useState([])
-    const [page, setPage] = useState(1)
+    const [page, setPage] = useState(0)
     const [size, setSize] = useState(3)
     const [totalPages, setTotalPages] = useState(1)
 
-    const userDataJSON = Cookies.get('user');
-    const [uuid, setUuid] = useState()
-
     useEffect(() => {
-        UsuarioEngajamentoService.buscarUm()
-            .then((data) => {
-                setUsuario(data)
-            })
-            .catch((error) => console.error('Erro ao buscar usuario:', error));
-    }, [idUsuario]);
+        if (id) {
+            UsuarioEngajamentoService.buscarUm(id)
+                .then((data) => {
+                    setUsuario(data)
+                })
+                .catch((error) => console.error('Erro ao buscar usuario:', error));
+        }
+    }, [id]);
 
     useEffect(() => {
         setFoto('http://10.4.96.50:7000/api/usuario/static/' + usuario.foto)
@@ -61,6 +59,7 @@ const Profile = () => {
 
     useEffect(() => {
         getVideos();
+        console.log(page)
     }, [page, size]);
 
     const userProfile = () => {
@@ -85,19 +84,9 @@ const Profile = () => {
     }
 
     const getVideos = async () => {
-        if (userDataJSON) {
-            try {
-                const userData = JSON.parse(userDataJSON);
-                setUuid(userData.uuid);
-            } catch (error) {
-                console.error('Erro ao fazer o parse do JSON:', error);
-            }
-        } else {
-            console.log('Cookie não encontrado.');
-        }
         try {
             const response = await VideoService.buscarUploads(size, page, {
-                donoCanalId: uuid
+                donoCanalId: id
             });
             setVideos(response)
         } catch (error) {
@@ -107,7 +96,7 @@ const Profile = () => {
 
     const handlePageChange = (page) => {
         setPage(page);
-    };
+    }
 
     const renderMobileView = () => (
         <>
@@ -128,13 +117,12 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="profile__pagination__desktop">
+                    <div className="profile__pagination__mobile">
                         Páginas:
                         {Array.from({ length: totalPages }, (_, index) => index).map(
                             (page) => (
                                 <button className="buttonPaginaItens"
                                     key={page}
-                                    // className={page === currentPage ? "active" : ""}
                                     onClick={() => handlePageChange(page)}
                                 >
                                     {page + 1}
@@ -144,7 +132,7 @@ const Profile = () => {
                     </div>
                     <hr class="solid" />
                     <div className='profile__box__videos'>
-                    {videos.map((video) => (
+                        {videos.map((video) => (
                             <Video_card key={video.uuid} video={video} />
                         ))}
                     </div>
@@ -152,7 +140,8 @@ const Profile = () => {
 
             </div>
         </>
-    )
+    );
+
     const renderDesktopView = () => (
         <>
             <Side_Bar />
@@ -184,7 +173,6 @@ const Profile = () => {
                             (page) => (
                                 <button className="buttonPaginaItens"
                                     key={page}
-                                    // className={page === currentPage ? "active" : ""}
                                     onClick={() => handlePageChange(page)}
                                 >
                                     {page + 1}
@@ -204,16 +192,16 @@ const Profile = () => {
 
 
 
-    )
+    );
+
     const getViewToRender = () => {
         if (screenSize.width > 900) {
             return renderDesktopView();
-            // } else if (screenSize.width < 900 && screenSize.width > 500) {
-            //   return renderTabletView();
         } else {
             return renderMobileView();
         }
-    };
+    }
+
     return <>{getViewToRender()}</>;
 }
 

@@ -1,12 +1,11 @@
-
-.like__dislike__btns{
+.like__dislike__btns {
     display: flex;
     justify-content: end;
     gap: 0.6rem;
     float: right;
 }
 
-.views__div{
+.views__div {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -14,7 +13,7 @@
     color: var(--lightpurple);
 }
 
-.likes__div{
+.likes__div {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -22,7 +21,7 @@
     color: var(--lightpurple);
 }
 
-.interaction{
+.interaction {
     display: grid;
     grid-template-columns: 50% 50%;
     font-size: 0.9rem;
@@ -30,61 +29,61 @@
     font-weight: bolder;
 }
 
-.video__title{
+.video__title {
     color: var(--whiteBlack);
     margin: 1rem;
     font-size: 2rem;
 }
 
-.space{
+.space {
     height: 50px;
 }
 
-.interaction__info{
+.interaction__info {
     display: flex;
     gap: 0.5rem;
 }
 
-.video__player__desktop{
+.video__player__desktop {
     margin: 0;
     width: 100%;
     height: 100%;
 }
 
-.video__container{
+.video__container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.channel{
+.channel {
     width: max-content;
 }
 
-.comments__container{
+.comments__container {
     margin: 1rem;
 }
 
-.total__comments{
+.total__comments {
     color: var(--lightpurple);
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.teste{
+.teste {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.things{
+.things {
     display: grid;
     grid-template-columns: 70% 30%;
     margin: 2.5rem;
 }
 
-.return__btn{
+.return__btn {
     width: max-content;
     display: flex;
     align-items: center;
@@ -93,22 +92,24 @@
     gap: 0.5rem;
 }
 
-.comments{
+.comments {
     margin-top: 1rem;
 }
 
-.player__page{
+.player__page {
     margin: 1rem;
 }
 
-.videos__desktop{
+.videos__desktop {
+    align-self: center;
+    justify-self: center;
     display: flex;
-    flex-direction: column; 
-    align-items: center;
-    gap: 2%;
+    flex-direction: column;
+    padding-left: 1rem;
+    gap: 2rem;
 }
 
-.toggleComment{
+.toggleComment {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -116,7 +117,7 @@
     gap: 5px;
 }
 
-.comments__input{
+.comments__input {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -124,7 +125,7 @@
     gap: 10px;
 }
 
-.comments__input > input {
+.comments__input>input {
     outline: none;
     width: 100%;
     border: none;
@@ -134,23 +135,23 @@
     font-weight: bolder;
 }
 
-.comments__input >input:focus{
+.comments__input>input:focus {
     border: solid var(--lightpurple) 2.5px;
 }
 
-.no__comments{
+.no__comments {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.no__comments__image{
+.no__comments__image {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.send__comments__icon{
+.send__comments__icon {
     background-color: var(--purple);
     border: solid var(--purple);
     display: flex;
@@ -160,12 +161,12 @@
     cursor: pointer;
 }
 
-.send__comments__icon:hover{
+.send__comments__icon:hover {
     background-color: var(--purplehover);
     border: solid var(--purplehover);
 }
 
-.show__more__comments{
+.show__more__comments {
     margin-top: 5%;
     display: flex;
     justify-content: center;

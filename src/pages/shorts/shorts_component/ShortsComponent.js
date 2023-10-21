@@ -34,6 +34,8 @@ const ShortsComponent = ({ short }) => {
     const [isVideoInView, setIsVideoInView] = useState(false)
     const [isMuted, setIsMuted] = useState(true)
 
+    const [likes, setLikes] = useState(0)
+
     const [channelPicture, setChannelPicture] = useState("")
     const [channelName, setChannelName] = useState("")
 
@@ -71,12 +73,15 @@ const ShortsComponent = ({ short }) => {
             if (engagementLike) {
                 setLikeShort(!likeShort)
                 setDislikeShort(false)
+                setLikes(short?.curtidas)
             } else if (engagementLike === false) {
                 setDislikeShort(!dislikeShort)
                 setLikeShort(false)
             }
         }
         findLike()
+
+        setLikes(short?.curtidas)
     }, [])
 
     useEffect(() => {
@@ -121,15 +126,10 @@ const ShortsComponent = ({ short }) => {
     const updateListShorts = async () => {
         const shortUuid = short.uuid
         if (shortUuid !== id && shortUuid) {
-            try {
-                await getUUID()
-                const response = await VideoService.buscarShorts()
-                const newShorts = response.data
-                dispatch(setListShorts(newShorts))
-                navigate(`/shorts/${shortUuid}`)
-            } catch (err) {
-                console.error(err)
-            }
+            await getUUID()
+            const response = await VideoService.buscarShorts()
+            dispatch(setListShorts(response))
+            navigate(`/shorts/${shortUuid}`)
         }
     }
 
@@ -142,16 +142,22 @@ const ShortsComponent = ({ short }) => {
     }
 
     const validateUser = () => {
-        if (user instanceof Object && user.uuid) {
+        if (user) {
             return true
         } else {
             navigate("/login")
         }
     }
 
+    const updateLike = async () => {
+        const takeLike = await VideoService.buscarCompleto(short?.uuid)
+        console.log(takeLike)
+    }
+
     const funcLikeShorts = async () => {
-        if (validateUser) {
+        if (validateUser()) {
             setLikeShort(!likeShort)
+            updateLike()
             setDislikeShort(false)
             const cmd = { idUsuario: user.uuid, idVideo: id, curtida: true }
             await ReacaoService.criar(cmd)
@@ -159,9 +165,10 @@ const ShortsComponent = ({ short }) => {
     }
 
     const funcDislikeShorts = async () => {
-        if (validateUser) {
+        if (validateUser()) {
             setDislikeShort(!dislikeShort)
             setLikeShort(false)
+
             const cmd = { idUsuario: user.uuid, idVideo: id, curtida: false }
             await ReacaoService.criar(cmd)
         }
@@ -189,7 +196,7 @@ const ShortsComponent = ({ short }) => {
             <div className='container__icons__shorts'>
                 <div onClick={funcLikeShorts}>
                     {likeShort ? <BiSolidLike /> : <BiLike />}
-                    <span>{short?.curtidas}</span>
+                    <span>{likes}</span>
                 </div>
                 <div>
                     {dislikeShort ? <BiSolidDislike onClick={funcDislikeShorts} /> : <BiDislike onClick={funcDislikeShorts} />}

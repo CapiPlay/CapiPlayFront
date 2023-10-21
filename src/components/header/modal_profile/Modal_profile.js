@@ -6,17 +6,25 @@ import Cookies from 'js-cookie'
 
 // react
 import { Link, useNavigate } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import ThemeToggle from '../theme_toggle/ThemeToggle'
 
 const Modal_profile = ({ isOpen }) => {
 
     const nav = useNavigate();
+    const [user, setUser] = useState()
 
     function Logout() {
         Cookies.remove('token')
         Cookies.remove('user')
         nav('/')
+        window.location.reload()
+    }
+
+    
+    function Profile() {
+     
+        nav(`/profile/${user?.uuid}`)
         window.location.reload()
     }
 
@@ -33,6 +41,11 @@ const Modal_profile = ({ isOpen }) => {
             isOpen()
         }
 
+        if(userExist) {
+            const objUser = JSON.parse(Cookies.get('user'))
+            setUser(objUser)
+        }
+
         document.addEventListener('click', handleClickOutside)
         window.addEventListener('resize', handleResize)
 
@@ -46,7 +59,7 @@ const Modal_profile = ({ isOpen }) => {
         <div className='modal__profile__container'>
             {
                 userExist ? (
-                    <Link to="/profile"><p>Seu canal</p></Link>
+                    <p onClick={Profile}>Seu canal</p>
                 ) : (
                     <Link to="/login"><p>Acessar Conta</p></Link>
                 )
@@ -66,9 +79,6 @@ const Modal_profile = ({ isOpen }) => {
                     <></>
                 )
             }
-            <div className='divider__profile__modal'></div>
-            
-            <Link to="/settings" ><p>Configurações</p></Link>
             <div className='divider__profile__modal'></div>
             <p onClick={Logout}>Sair</p>
         </div >
