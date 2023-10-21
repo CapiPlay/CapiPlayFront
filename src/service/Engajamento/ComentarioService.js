@@ -23,11 +23,10 @@ const ComentarioService = {
    * @param {*} buscarUmComentarioCommand (String idComentario)
    * @returns Comentario
    */
-  buscarUm: async (buscarUmComentarioCommand) => {
+  buscarUm: async (idComentario) => {
     try {
       const response = await axios.get(
-        "/engajamento/comentario",
-        buscarUmComentarioCommand
+        "/engajamento/comentario/"+idComentario
       );
       return response.data;
     } catch (err) {
