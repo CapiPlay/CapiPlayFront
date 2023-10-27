@@ -128,7 +128,9 @@ const ShortsComponent = ({ short }) => {
         if (shortUuid !== id && shortUuid) {
             await getUUID()
             const response = await VideoService.buscarShorts()
-            dispatch(setListShorts(response))
+            const list = []
+            list.push(response)
+            dispatch(setListShorts(list))
             navigate(`/shorts/${shortUuid}`)
         }
     }
@@ -219,7 +221,7 @@ const ShortsComponent = ({ short }) => {
                     </div>
                 </div>
             </div>
-            {openModalComments && <CommentsComponent func={funcOpenModalComments} />}
+            {openModalComments && <CommentsComponent func={funcOpenModalComments} videoId={short.uuid}/>}
         </div>
     )
 }
