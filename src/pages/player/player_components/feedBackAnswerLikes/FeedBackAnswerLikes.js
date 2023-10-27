@@ -20,28 +20,42 @@ const FeedBackAnswerLikes = ({ answerId }) => {
     }
 
     const getReacaoAmount = async () => {
+      let like = 0
+      let deslike = 0
       const temp = await RespostaService.buscarUm(answerId)
-      if(temp !== undefined || temp !== null){
-        setLikesAmount(0)
-        setDislikesAmount(0)
-        let lista = temp.reacaoRespostaList
-        lista.forEach(reaction => {
-            if(reaction.curtida){
-                if(likeBtnActive){
-                  setLikesAmount(likesAmount -1)
-                }else{
-                  setLikesAmount(likesAmount + 1)
-                }
-              }else if(!reaction.curtida){
-                if(dislikeBtnActive){
-                  setDislikesAmount(dislikesAmount - 1)
-                }else{
-                  setDislikesAmount(dislikesAmount + 1)
-                }
-            }
-        });
+      if (likesAmount === 0 && dislikesAmount === 0) {
+        if (temp !== undefined || temp !== null) {
+          let lista = temp.reacaoRespostaList
+          if (lista !== undefined || lista !== null) {
+            lista.forEach(reaction => {
+              if (reaction.curtida) {
+                like += 1
+              } else if (!reaction.curtida) {
+                deslike += 1
+              }
+            });
+          }
+        }
       }
+      setLikesAmount(like)
+      setDislikesAmount(deslike)
     }
+
+    const getLikeAmountCount = (event) => {
+    if (event) {
+      setLikesAmount(likesAmount + 1)
+    } else {
+      setLikesAmount(likesAmount - 1)
+    }
+  }
+
+  const getDislikeAmountCount = (event) => {
+    if (event) {
+      setDislikesAmount(dislikesAmount + 1)
+    } else {
+      setDislikesAmount(dislikesAmount - 1)
+    }
+  }
   
     useEffect(() => {
       getReacao()
@@ -60,40 +74,42 @@ const FeedBackAnswerLikes = ({ answerId }) => {
     }, [reacao])
   
     const handleToggleLikeBtn = async () => {
-      const like = {idResposta: answerId, curtida: true}
+      const like = { idResposta: answerId, curtida: true }
       if (!likeBtnActive && !dislikeBtnActive) {
-        setLikeBtnActive(true) 
-        await ReacaoRespostaService.criar(like)
-        getReacaoAmount()
+        setLikeBtnActive(true)
+        await RespostaService.criar(like)
+        getLikeAmountCount(true)
       } else if (likeBtnActive && !dislikeBtnActive) {
-        setLikeBtnActive(false) 
-        await ReacaoRespostaService.criar(like)
-        getReacaoAmount()
-      }else if (dislikeBtnActive) {
-        setLikeBtnActive(true) 
-        setDislikeBtnActive(false) 
-        await ReacaoRespostaService.criar(like)
-        getReacaoAmount()
+        setLikeBtnActive(false)
+        await RespostaService.criar(like)
+        getLikeAmountCount(false)
+      } else if (dislikeBtnActive) {
+        setLikeBtnActive(true)
+        setDislikeBtnActive(false)
+        await RespostaService.criar(like)
+        getLikeAmountCount(true)
+        getDislikeAmountCount(false)
       }
-    } 
+    }
   
     const handleToggleDislikeBtn = async () => {
-      const deslike = {idResposta: answerId, curtida: false} 
+      const deslike = { idResposta: answerId, curtida: false }
       if (!likeBtnActive && !dislikeBtnActive) {
-        setDislikeBtnActive(true) 
-        await ReacaoRespostaService.criar(deslike)
-        getReacaoAmount()
+        setDislikeBtnActive(true)
+        await RespostaService.criar(deslike)
+        getDislikeAmountCount(true)
       } else if (!likeBtnActive && dislikeBtnActive) {
-        setDislikeBtnActive(false) 
-        await ReacaoRespostaService.criar(deslike)
-        getReacaoAmount()
+        setDislikeBtnActive(false)
+        await RespostaService.criar(deslike)
+        getDislikeAmountCount(false)
       } else if (likeBtnActive) {
-        setDislikeBtnActive(true) 
-        setLikeBtnActive(false) 
-        await ReacaoRespostaService.criar(deslike)
-        getReacaoAmount()
+        setDislikeBtnActive(true)
+        setLikeBtnActive(false)
+        await RespostaService.criar(deslike)
+        getDislikeAmountCount(true)
+        getLikeAmountCount(false)
       }
-    } 
+    }
   
     return (
       <div className="like__dislike__buttons__comments"> 
