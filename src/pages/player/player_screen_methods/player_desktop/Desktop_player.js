@@ -47,6 +47,7 @@ function Desktop_player({ video }) {
             })
             setCommentText('');
         }
+        setComments(!comment)
     }
 
     const buscarComments = async () => {

@@ -10,14 +10,10 @@ import LikesComment from '../feedBackCommentLikes/LikesComment'
 //item (video) que vai ser o objeto vindo do back_end que conterá todas as informações
 function Comments_component({ commentVideo }) {
     const [showMore, setShowMore] = useState(false);
-    const [like_btn, setLikeBtn] = useState(true);
-    const [dislike_btn, setDislikeBtn] = useState(true);
     const [commentsAnswer, setCommentsAnswer] = useState(false);
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
     const [date, setDate] = useState();
     const [formatoHora, setFormatoHora] = useState()
-    const [curtidas, setCurtidas] = useState(0)
-    const [descurtidas, setDescurtidas] = useState(0)
     const [foto, setFoto] = useState(ProfilePicture)
     const [answer, setAnswer] = useState(false)
     const [answerText, setAnswerText] = useState('')
@@ -28,7 +24,6 @@ function Comments_component({ commentVideo }) {
     }, [commentVideo])
 
     useEffect(() => {
-        setCommentLikes()
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
@@ -49,19 +44,6 @@ function Comments_component({ commentVideo }) {
 
     const toggleShowMore = () => {
         setShowMore(!showMore);
-    };
-
-    const setCommentLikes = async () => {
-        
-    }
-
-    const toggleLikeBtn = () => {
-       
-        setLikeBtn(!like_btn);
-    };
-
-    const toggleDislikeBtn = () => {
-        setDislikeBtn(!dislike_btn);
     };
 
     const toggleCommentsAnswers = () => {
