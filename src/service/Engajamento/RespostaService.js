@@ -25,11 +25,10 @@ const RespostaService = {
    * @returns Resposta (String idResposta, String texto, ZonedDateTime dataHora, Usuario idUsuario, Comentario idComentario)
 }
    */
-  buscarUm: async (buscarUmaRespostaCommand) => {
+  buscarUm: async (idResposta) => {
     try {
       const response = await axios.get(
-        "/engajamento/resposta",
-        buscarUmaRespostaCommand
+        "/engajamento/resposta/" +idResposta
       );
       return response.data;
     } catch (err) {

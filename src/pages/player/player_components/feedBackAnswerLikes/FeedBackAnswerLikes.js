@@ -19,25 +19,33 @@ const FeedBackAnswerLikes = ({ answerId }) => {
         setReacao(temp)
     }
 
-    // const getReacaoAmount = async () => {
-    //   const temp = await RespostaService.buscarUm(answerId)
-    //   if(temp !== undefined || temp !== null){
-    //     setLikesAmount(0)
-    //     setDislikesAmount(0)
-    //     let lista = temp.reacaoComentarioList
-    //     lista.forEach(reaction => {
-    //       if(reaction.curtida){
-    //         setLikesAmount(likesAmount + 1)
-    //       }else if(!reaction.curtida){
-    //         setDislikesAmount(dislikesAmount + 1)
-    //       }
-    //     });
-    //   }
-    // }
+    const getReacaoAmount = async () => {
+      const temp = await RespostaService.buscarUm(answerId)
+      if(temp !== undefined || temp !== null){
+        setLikesAmount(0)
+        setDislikesAmount(0)
+        let lista = temp.reacaoRespostaList
+        lista.forEach(reaction => {
+            if(reaction.curtida){
+                if(likeBtnActive){
+                  setLikesAmount(likesAmount -1)
+                }else{
+                  setLikesAmount(likesAmount + 1)
+                }
+              }else if(!reaction.curtida){
+                if(dislikeBtnActive){
+                  setDislikesAmount(dislikesAmount - 1)
+                }else{
+                  setDislikesAmount(dislikesAmount + 1)
+                }
+            }
+        });
+      }
+    }
   
     useEffect(() => {
       getReacao()
-    //   getReacaoAmount()
+      getReacaoAmount()
     }, [answerId])
 
     useEffect(() => {
@@ -56,16 +64,16 @@ const FeedBackAnswerLikes = ({ answerId }) => {
       if (!likeBtnActive && !dislikeBtnActive) {
         setLikeBtnActive(true) 
         await ReacaoRespostaService.criar(like)
-        // getReacaoAmount()
+        getReacaoAmount()
       } else if (likeBtnActive && !dislikeBtnActive) {
         setLikeBtnActive(false) 
         await ReacaoRespostaService.criar(like)
-        // getReacaoAmount()
+        getReacaoAmount()
       }else if (dislikeBtnActive) {
         setLikeBtnActive(true) 
         setDislikeBtnActive(false) 
         await ReacaoRespostaService.criar(like)
-        // getReacaoAmount()
+        getReacaoAmount()
       }
     } 
   
@@ -74,16 +82,16 @@ const FeedBackAnswerLikes = ({ answerId }) => {
       if (!likeBtnActive && !dislikeBtnActive) {
         setDislikeBtnActive(true) 
         await ReacaoRespostaService.criar(deslike)
-        // getReacaoAmount()
+        getReacaoAmount()
       } else if (!likeBtnActive && dislikeBtnActive) {
         setDislikeBtnActive(false) 
         await ReacaoRespostaService.criar(deslike)
-        // getReacaoAmount()
+        getReacaoAmount()
       } else if (likeBtnActive) {
         setDislikeBtnActive(true) 
         setLikeBtnActive(false) 
         await ReacaoRespostaService.criar(deslike)
-        // getReacaoAmount()
+        getReacaoAmount()
       }
     } 
   
