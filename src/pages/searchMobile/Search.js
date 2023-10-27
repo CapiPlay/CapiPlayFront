@@ -10,47 +10,40 @@ import { useEffect, useState } from "react";
 import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 import VideoService from "../../service/Video/VideoService";
 
-const Search = ({ valueSearch, change, searches, lastSearches, setLastSearches }) => {
+const Search = ({ change, searches, setSearches, setLastSearches }) => {
     const nav = useNavigate();
     const [back, setBack] = useState(false);
 
     const location = useLocation();
     const urlSearchParams = new URLSearchParams(location.search);
     const searchParams = urlSearchParams.get("search");
-    const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : valueSearch ? valueSearch : "");
+    // const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : valueSearch ? valueSearch : "");
     
-
     const handleSearch = (value) => {
-        VideoService.pesquisarValor(value && value.length > 0 ? value : valueInput, false).then(
-            nav(`/result-search?search=${encodeURIComponent(value && value.length > 0 ? value : valueInput)}`))
+        nav(`/result-search?search=${encodeURIComponent(value)}`)
     }
 
     useEffect(() => {
         VideoService.buscarHistoricoPesquisa().then(
             (res) => {
-                setLastSearches(res);
+                setSearches([...Array.from(
+                    new Set(res.map(video => video.pesquisa))
+                ).map(pesquisa => {
+                    return res.find(video => video.pesquisa=== pesquisa);
+                })].slice(0, 11));
+                setLastSearches([...Array.from(
+                    new Set(res.map(video => video.pesquisa))
+                ).map(pesquisa => {
+                    return res.find(video => video.pesquisa=== pesquisa);
+                })].slice(0, 11));
             }
         )
-
     }, [])
 
-    useEffect(() => {
-        console.log(searches)
-    }, [searches])
-
     const renderSearch = () => {
-        if (valueInput?.trim() === '' && searches.length === 0) {
-            return (
-                <>
-                    {lastSearches && lastSearches.map((lastSearch) => (
-                        <div className="search__box" onClick={() => handleSearch(lastSearch.pesquisa)}>
-                            <MdRestartAlt className="icons__search" />
-                            <span>{lastSearch.pesquisa}</span>
-                        </div>
-                    ))}
-                </>
-            )
-        } else {
+        // valueInput?.trim() === '' && 
+        // if (searches.length === 0) {
+
             return (    
                 <>
                     {searches.map((search) => (
@@ -61,7 +54,17 @@ const Search = ({ valueSearch, change, searches, lastSearches, setLastSearches }
                     ))}
                 </>
             )
-        }
+            // return (
+            //     <>
+            //         {lastSearches && lastSearches.map((lastSearch) => (
+            //             <div className="search__box" onClick={() => handleSearch(lastSearch.pesquisa)}>
+            //                 <MdRestartAlt className="icons__search" />
+            //                 <span>{lastSearch.pesquisa}</span>
+            //             </div>
+            //         ))}
+            //     </>
+            // )
+        // } 
     }
 
     return (
@@ -70,7 +73,6 @@ const Search = ({ valueSearch, change, searches, lastSearches, setLastSearches }
                 &&
                 <HeaderSearch
                     handleSearch={handleSearch}
-                    valueInput={valueInput}
                     handleChange={change}
                     functionBack={() => setBack(!back)} />
             }
