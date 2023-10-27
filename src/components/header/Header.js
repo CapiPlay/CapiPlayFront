@@ -40,18 +40,7 @@ const Header = ({ searchValue }) => {
     const [widthPage, setWidthPage] = useState()
     const [openModalProfile, setOpenModalProfile] = useState(false)
     const [searches, setSearches] = useState([]);
-    const [lastSearches, setLastSearches] = useState([
-        "Benefícios da meditação para a saúde",
-        "Receita de bolo de cenoura com cobertura de chocolate",
-        "Principais destinos turísticos na Europa",
-        "História da America Latina",
-        "Receita de pão de queijo",
-        "Livros românticos",
-        "Eu a patroa e as criancas",
-        "React icons como funciona",
-        "Torta de frango receita",
-        "Livros de aventura 2023",
-    ]);
+    const [lastSearches, setLastSearches] = useState([]);
 
     // Search
     const handleClick = () => {
@@ -82,14 +71,13 @@ const Header = ({ searchValue }) => {
 
     const filterSearch = (searchValue) => {
         const search = lastSearches&&lastSearches.filter((search) => {
-            return search.pesquisa.toLowerCase().includes(searchValue);
+            if(search.pesquisa.toLowerCase().includes(searchValue)) return search;
         });
         setSearches(search);
     };
     
 
     useEffect(() => { 
-
         if (valueInput === null) {
             const urlSearchParams = new URLSearchParams(location.search)
             const searchParams = urlSearchParams.get("q")
@@ -113,7 +101,6 @@ const Header = ({ searchValue }) => {
 
     //Ações de usuário
     const handleOpenModalProfile = (state) => {
-        console.log("Entrei")
         if (state === true || state === false) {
             setOpenModalProfile(state)
         } else {
@@ -175,7 +162,7 @@ const Header = ({ searchValue }) => {
                 </div>
                 {
                     search &&
-                    <Search valueSearch={valueInput} change={handleChange} searches={searches} lastSearches={lastSearches} setLastSearches={setLastSearches}/>
+                    <Search  change={handleChange} searches={searches} setSearches={setSearches} setLastSearches={setLastSearches}/>
                 }
             </div>
             <div className='header__info'>

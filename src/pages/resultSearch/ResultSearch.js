@@ -46,7 +46,7 @@ const ResultSearch = () => {
       setVideos(response);
     };
     pesquisar();
-  }, []);
+  }, [searchParams]);
 
   useEffect(() => {
     setDefaultFilter(false);
