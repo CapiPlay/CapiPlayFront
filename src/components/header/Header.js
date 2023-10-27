@@ -32,7 +32,6 @@ const Header = ({ searchValue }) => {
     const dispatch = useDispatch()
 
     const [search, setSearch] = useState(false)
-    const [verifyClicked, setVerifyClicked] = useState(false)
     const [valueInput, setValueInput] = useState(searchValue)
 
     const [image, setImage] = useState(notFound)
@@ -84,11 +83,11 @@ const Header = ({ searchValue }) => {
             setValueInput(searchParams)
         } 
 
-        if (verifyClicked) {
-            setSearch(true)
-        } else {
-            setSearch(false)
-        }
+        // if (verifyClicked) {
+        //     setSearch(true)
+        // } else {
+        //     setSearch(false)
+        // }
 
         document.addEventListener("click", handleClickBlur)
         setWidthPage(window.innerWidth)
