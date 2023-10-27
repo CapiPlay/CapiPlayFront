@@ -28,7 +28,7 @@ const ReacaoRespostaService = {
       const response = await axios.get(
         "/engajamento/reacaoResposta/" + idResposta
       );
-      return response.data;
+      return response.data.curtida;
     } catch (err) {
       console.error(err);
     }
