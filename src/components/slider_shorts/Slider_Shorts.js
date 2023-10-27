@@ -3,13 +3,16 @@ import Slider from 'react-slick';
 import Shortcard from '../short_card/ShortCard';
 import VideoService from '../../service/Video/VideoService';
 
-function Slider_Shorts() {
+function Slider_Shorts({ historic }) {
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
     const [videosRec, setVideosRec] = useState([])
+    // shorts que vão vir da HistoricService 
+    const [shortHistoric, setShortHistoric] = useState([]);
 
     useEffect(() => {
         getVideosRec();
+        getShortsHistoric();
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
@@ -19,6 +22,14 @@ function Slider_Shorts() {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    const getShortsHistoric = async () => {
+        const shorts = await VideoService.buscarHistorico(1, 1, true).then(
+            (res) => {
+                setShortHistoric(res);
+            }
+        );
+    }
 
     const getVideosRec = async () => {
         const pageable = await VideoService.buscarTodos(12, 0, true);
@@ -129,9 +140,22 @@ function Slider_Shorts() {
 
             {videosRec ? (
                 <Slider {...settingsDesk}>
-                    {videosRec.map((video) => (
-                        <Shortcard key={video.uuid} short={video} />
-                    ))}
+                    {historic
+                        ?
+                        <>
+                            {shortHistoric && shortHistoric.map((videoHistoric) => (
+                                <>
+                                    <Shortcard key={videoHistoric.uuid} short={videoHistoric} />
+                                </>
+                            ))}
+                        </>
+                        :
+                        <>
+                            {videosRec.map((video) => (
+                                <Shortcard key={video.uuid} short={video} />
+                            ))}
+                        </>
+                    }
                 </Slider>
             ) : (
                 <div className="ui segment">

@@ -1,5 +1,5 @@
 import "./CarouselShorts.css";
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { DraggableCore } from 'react-draggable';
 import Shortcard from '../../../components/short_card/ShortCard';
 import Slider from 'react-slick';
