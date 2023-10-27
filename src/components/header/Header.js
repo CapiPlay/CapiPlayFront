@@ -64,14 +64,14 @@ const Header = ({ searchValue }) => {
     }
 
     const handleChange = (e) => {
-        const searchValue = e.target.value.toLowerCase();
+        const searchValue = e.target.value;
         setValueInput(searchValue);
         filterSearch(searchValue);
     };
 
     const filterSearch = (searchValue) => {
         const search = lastSearches&&lastSearches.filter((search) => {
-            if(search.pesquisa.toLowerCase().includes(searchValue)) return search;
+            return search.pesquisa.includes(searchValue);
         });
         setSearches(search);
     };
