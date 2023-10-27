@@ -4,7 +4,6 @@ import '../commentsComponent/CommentsComponent.css'
 //icons
 import { IoMdClose, IoMdSend } from 'react-icons/io'
 
-//func: função utilizada para abrir  e fechar o componente de comentário
 const CommentsComponent = ({ func }) => {
 
     return (
@@ -14,10 +13,10 @@ const CommentsComponent = ({ func }) => {
                 <IoMdClose onClick={func} />
             </div>
             <div>
+                {/* <Comments />
                 <Comments />
                 <Comments />
-                <Comments />
-                <Comments />
+                <Comments /> */}
             </div>
             <div>
                 <input type="text" />
