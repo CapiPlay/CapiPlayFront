@@ -43,8 +43,13 @@ const Header = ({ searchValue }) => {
 
     // Search
     const handleClick = () => {
+        setSearch(true)
         handleSearch(valueInput)
     }
+
+    useEffect(() => {
+        console.log(search)
+    }, [search])
 
     const handleSearch = () => {
         if (valueInput === null || valueInput === undefined || valueInput === "") {
@@ -81,13 +86,7 @@ const Header = ({ searchValue }) => {
             const urlSearchParams = new URLSearchParams(location.search)
             const searchParams = urlSearchParams.get("q")
             setValueInput(searchParams)
-        } 
-
-        // if (verifyClicked) {
-        //     setSearch(true)
-        // } else {
-        //     setSearch(false)
-        // }
+        }
 
         document.addEventListener("click", handleClickBlur)
         setWidthPage(window.innerWidth)
@@ -114,9 +113,10 @@ const Header = ({ searchValue }) => {
 
     const handleClickBlur = (e) => {
         const element = e.target.offsetParent
+        
         if (element == null || !element.classList.contains("header__input__container")) {
             setSearch(false)
-        }
+        } 
     }
 
     useEffect(() => {

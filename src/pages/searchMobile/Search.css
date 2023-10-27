@@ -2,8 +2,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: fit-content;
-    max-height: 41vh;
+    height: 100vh;
     background-color: var(--darkpurple);
     overflow: hidden;
     position: absolute;
@@ -44,6 +43,7 @@
         height: fit-content;
         background-color: var(--whitesmoke);
         border-radius: 10px;
+        max-height: 41vh;
     }
 
     .search__box>span {
