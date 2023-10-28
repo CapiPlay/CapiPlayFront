@@ -59,9 +59,9 @@ const Modal_profile = ({ isOpen }) => {
         <div className='modal__profile__container'>
             {
                 userExist ? (
-                    <p onClick={Profile}>Seu canal</p>
+                    <p className='text__channel' onClick={Profile}>Seu canal</p>
                 ) : (
-                    <Link to="/login"><p>Acessar Conta</p></Link>
+                    <Link className='text__channel' to="/login"><p>Acessar Conta</p></Link>
                 )
             }
             <div className='divider__profile__modal' />
@@ -80,7 +80,7 @@ const Modal_profile = ({ isOpen }) => {
                 )
             }
             <div className='divider__profile__modal'></div>
-            <p onClick={Logout}>Sair</p>
+            <p className='text__channel' onClick={Logout}>Sair</p>
         </div >
     )
 }
