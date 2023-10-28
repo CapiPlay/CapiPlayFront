@@ -10,7 +10,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { IoMenu } from 'react-icons/io5'
 
 // hooks
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 // imagens
@@ -32,7 +32,6 @@ const Header = ({ searchValue }) => {
     const dispatch = useDispatch()
 
     const [search, setSearch] = useState(false)
-    const [verifyClicked, setVerifyClicked] = useState(false)
     const [valueInput, setValueInput] = useState(searchValue)
 
     const [image, setImage] = useState(notFound)
@@ -40,25 +39,21 @@ const Header = ({ searchValue }) => {
     const [widthPage, setWidthPage] = useState()
     const [openModalProfile, setOpenModalProfile] = useState(false)
     const [searches, setSearches] = useState([]);
-    const [lastSearches, setLastSearches] = useState([
-        "Benefícios da meditação para a saúde",
-        "Receita de bolo de cenoura com cobertura de chocolate",
-        "Principais destinos turísticos na Europa",
-        "História da America Latina",
-        "Receita de pão de queijo",
-        "Livros românticos",
-        "Eu a patroa e as criancas",
-        "React icons como funciona",
-        "Torta de frango receita",
-        "Livros de aventura 2023",
-    ]);
+    const [lastSearches, setLastSearches] = useState([]);
 
     // Search
     const handleClick = () => {
-        setSearch(true)
+        if (widthPage <= 900) {
+            setSearch(true)
+        } else {
+            handleSearch(valueInput)
+        }
     }
 
     const handleSearch = () => {
+        if (valueInput === null || valueInput === undefined || valueInput === "") {
+            return
+        }
         VideoService.pesquisarValor(valueInput, false).then(
             nav(`/result-search?search=${encodeURIComponent(valueInput)}`)
         )
@@ -72,31 +67,24 @@ const Header = ({ searchValue }) => {
     }
 
     const handleChange = (e) => {
-        const searchValue = e.target.value.toLowerCase();
+        const searchValue = e.target.value;
         setValueInput(searchValue);
         filterSearch(searchValue);
     };
 
     const filterSearch = (searchValue) => {
-        const search = lastSearches.filter((search) => {
-            return search.pesquisa.toLowerCase().includes(searchValue);
+        const search = lastSearches&&lastSearches.filter((search) => {
+            return search.pesquisa.includes(searchValue);
         });
         setSearches(search);
     };
     
 
     useEffect(() => { 
-
         if (valueInput === null) {
             const urlSearchParams = new URLSearchParams(location.search)
             const searchParams = urlSearchParams.get("q")
             setValueInput(searchParams)
-        } 
-
-        if (verifyClicked) {
-            setSearch(true)
-        } else {
-            setSearch(false)
         }
 
         document.addEventListener("click", handleClickBlur)
@@ -110,7 +98,6 @@ const Header = ({ searchValue }) => {
 
     //Ações de usuário
     const handleOpenModalProfile = (state) => {
-        console.log("Entrei")
         if (state === true || state === false) {
             setOpenModalProfile(state)
         } else {
@@ -124,8 +111,15 @@ const Header = ({ searchValue }) => {
     }
 
     const handleClickBlur = (e) => {
+        console.log(e)
         const element = e.target.offsetParent
-        if (element == null || !element.classList.contains("header__input__container")) {
+
+        if ((e.target.id === "lupa" || widthPage <= 900) && !element?.classList.contains("container__input__search") || e.target.localName === "input") {
+            handleClick()
+            return
+        }
+        
+        if ((element == null || !element.classList.contains("header__input__container"))) {
             setSearch(false)
         }
     }
@@ -168,11 +162,11 @@ const Header = ({ searchValue }) => {
                         value={valueInput}
                         onKeyPress={verifyKeyPress}
                         onChange={handleChange} />
-                    <AiOutlineSearch onClick={handleClick} />
+                    <AiOutlineSearch onClick={handleClick} id="lupa"/>
                 </div>
                 {
                     search &&
-                    <Search valueSearch={valueInput} change={handleChange} searches={searches} lastSearches={lastSearches} setLastSearches={setLastSearches}/>
+                    <Search  searches={searches} setSearches={setSearches} setLastSearches={setLastSearches}/>
                 }
             </div>
             <div className='header__info'>

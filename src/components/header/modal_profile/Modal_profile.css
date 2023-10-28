@@ -32,6 +32,10 @@
   color: var(--white);
 }
 
+.text__channel {
+  cursor: pointer;
+}
+
 .modal__profile__container::after {
   position: absolute;
   content: '';
