@@ -2,6 +2,7 @@ import "./HeaderSearch.css"
 
 import { IoMdArrowBack } from "react-icons/io"
 import { AiOutlineSearch } from "react-icons/ai"
+import { useState } from "react"
 
 // PROPS: 
 // - valueInput = valor que vai representar o que o usuário digitar na pesquisa
@@ -11,11 +12,13 @@ import { AiOutlineSearch } from "react-icons/ai"
 
 // OBS.: todas as informações serão setadas pelo Search/ResultSearch
 
-const HeaderSearch = ({ valueInput, handleChange, functionBack, handleSearch }) => {
+const HeaderSearch = ({ valueInput, functionBack, handleSearch }) => {
+
+    const [value, setValue] = useState(valueInput? valueInput : "")
 
     const verifyKeyPress = (e) => {
         if (e.key === 'Enter') {
-            handleSearch(valueInput);
+            handleSearch(value);
         }
     }
 
@@ -25,10 +28,10 @@ const HeaderSearch = ({ valueInput, handleChange, functionBack, handleSearch }) 
             <div className="container__input__search">
                 <input
                     type="text"
-                    value={valueInput}
-                    onChange={(e)=>handleChange(e)}
+                    value={value}
+                    onChange={(e) => setValue(e.target.value)}
                     onKeyPress={verifyKeyPress} />
-                <AiOutlineSearch className="icon__search" onClick={()=>handleSearch(valueInput)}/>
+                <AiOutlineSearch className="icon__search" onClick={()=>handleSearch(value)}/>
             </div>
         </div>
     )

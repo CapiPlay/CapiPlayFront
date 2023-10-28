@@ -10,7 +10,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { IoMenu } from 'react-icons/io5'
 
 // hooks
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 // imagens
@@ -43,13 +43,12 @@ const Header = ({ searchValue }) => {
 
     // Search
     const handleClick = () => {
-        setSearch(true)
-        handleSearch(valueInput)
+        if (widthPage <= 900) {
+            setSearch(true)
+        } else {
+            handleSearch(valueInput)
+        }
     }
-
-    useEffect(() => {
-        console.log(search)
-    }, [search])
 
     const handleSearch = () => {
         if (valueInput === null || valueInput === undefined || valueInput === "") {
@@ -112,11 +111,17 @@ const Header = ({ searchValue }) => {
     }
 
     const handleClickBlur = (e) => {
+        console.log(e)
         const element = e.target.offsetParent
+
+        if ((e.target.id === "lupa" || widthPage <= 900) && !element?.classList.contains("container__input__search") || e.target.localName === "input") {
+            handleClick()
+            return
+        }
         
-        if (element == null || !element.classList.contains("header__input__container")) {
+        if ((element == null || !element.classList.contains("header__input__container"))) {
             setSearch(false)
-        } 
+        }
     }
 
     useEffect(() => {
@@ -157,11 +162,11 @@ const Header = ({ searchValue }) => {
                         value={valueInput}
                         onKeyPress={verifyKeyPress}
                         onChange={handleChange} />
-                    <AiOutlineSearch onClick={handleClick} />
+                    <AiOutlineSearch onClick={handleClick} id="lupa"/>
                 </div>
                 {
                     search &&
-                    <Search  change={handleChange} searches={searches} setSearches={setSearches} setLastSearches={setLastSearches}/>
+                    <Search  searches={searches} setSearches={setSearches} setLastSearches={setLastSearches}/>
                 }
             </div>
             <div className='header__info'>
