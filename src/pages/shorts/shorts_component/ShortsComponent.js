@@ -35,6 +35,9 @@ const ShortsComponent = ({ short }) => {
     const [isMuted, setIsMuted] = useState(true)
 
     const [likes, setLikes] = useState(0)
+    const [currentLikes, setCurrentLikes] = useState(0)
+    const [currentEngagementState, setCurrentEngagementState] = useState(0)
+    const [isMinusLikes, setIsMinusLikes] = useState(false)
 
     const [channelPicture, setChannelPicture] = useState("")
     const [channelName, setChannelName] = useState("")
@@ -70,14 +73,12 @@ const ShortsComponent = ({ short }) => {
     useEffect(() => {
         const findLike = async () => {
             const engagementLike = await ReacaoService.buscarUm(short?.uuid)
-            if (engagementLike) {
-                setLikeShort(!likeShort)
-                setDislikeShort(false)
-                setLikes(short?.curtidas)
-            } else if (engagementLike === false) {
-                setDislikeShort(!dislikeShort)
-                setLikeShort(false)
-            }
+
+            setCurrentEngagementState(engagementLike)
+            setLikeShort(engagementLike)
+            setDislikeShort(!engagementLike)
+            setLikes(short?.curtidas)
+            setCurrentLikes(short?.curtidas)
         }
         findLike()
 
@@ -157,23 +158,31 @@ const ShortsComponent = ({ short }) => {
     }
 
     const funcLikeShorts = async () => {
-        if (validateUser()) {
-            setLikeShort(!likeShort)
-            updateLike()
-            setDislikeShort(false)
-            const cmd = { idUsuario: user.uuid, idVideo: id, curtida: true }
-            await ReacaoService.criar(cmd)
-        }
+        if (!validateUser()) return
+        
+        
+        setLikes(likes + (likeShort ? -1 : 1))
+        
+        setDislikeShort(false)
+        setLikeShort(!likeShort)
+
+        const cmd = { idUsuario: user.uuid, idVideo: id, curtida: true }
+        await ReacaoService.criar(cmd)
+        
     }
 
     const funcDislikeShorts = async () => {
-        if (validateUser()) {
-            setDislikeShort(!dislikeShort)
-            setLikeShort(false)
+        if (!validateUser()) return
 
-            const cmd = { idUsuario: user.uuid, idVideo: id, curtida: false }
-            await ReacaoService.criar(cmd)
-        }
+        setLikeShort(false)
+        
+        setLikes(currentLikes - (currentEngagementState ? 1 : 0))
+        
+        setDislikeShort(!dislikeShort)
+
+        const cmd = { idUsuario: user.uuid, idVideo: id, curtida: false }
+        await ReacaoService.criar(cmd)
+        
     }
 
     const getPathShorts = (currentPath) => {
