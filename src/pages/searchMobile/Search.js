@@ -10,16 +10,17 @@ import { useEffect, useState } from "react";
 import HeaderSearch from "../../components/headerSearch/HeaderSearch";
 import VideoService from "../../service/Video/VideoService";
 
-const Search = ({ change, searches, setSearches, setLastSearches }) => {
+const Search = ({ searches, setSearches, setLastSearches }) => {
     const nav = useNavigate();
     const [back, setBack] = useState(false);
-
-    const location = useLocation();
-    const urlSearchParams = new URLSearchParams(location.search);
-    const searchParams = urlSearchParams.get("search");
-    // const [valueInput, setValueInput] = useState(searchParams ? String(searchParams) : valueSearch ? valueSearch : "");
     
     const handleSearch = (value) => {
+        console.log(value)
+
+        if (value === null || value === undefined || value === "") {
+            return
+        }
+
         nav(`/result-search?search=${encodeURIComponent(value)}`)
     }
 
@@ -73,7 +74,6 @@ const Search = ({ change, searches, setSearches, setLastSearches }) => {
                 &&
                 <HeaderSearch
                     handleSearch={handleSearch}
-                    handleChange={change}
                     functionBack={() => setBack(!back)} />
             }
             {renderSearch()}
