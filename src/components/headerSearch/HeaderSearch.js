@@ -14,7 +14,7 @@ import { useState } from "react"
 
 const HeaderSearch = ({ valueInput, functionBack, handleSearch }) => {
 
-    const [value, setValue] = useState(valueInput? valueInput : "")
+    const [value, setValue] = useState(valueInput? valueInput : window.location.search.split("=")[1])
 
     const verifyKeyPress = (e) => {
         if (e.key === 'Enter') {
