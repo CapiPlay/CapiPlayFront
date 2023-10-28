@@ -102,7 +102,7 @@
 }
 
 .videos__desktop {
-    align-self: center;
+    align-self: flex-start;
     justify-self: center;
     display: flex;
     flex-direction: column;
