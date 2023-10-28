@@ -73,7 +73,7 @@ const ShortsComponent = ({ short }) => {
     useEffect(() => {
         const findLike = async () => {
             const engagementLike = await ReacaoService.buscarUm(short?.uuid)
-    
+
             setCurrentEngagementState(engagementLike)
             setLikeShort(engagementLike)
             setDislikeShort(!engagementLike)
