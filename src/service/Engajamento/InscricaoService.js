@@ -3,7 +3,7 @@ import axios from "../AxiosConfig";
 const InscricaoService = {
   /**
    *
-   * @param {*} criarInscricaoCommand (String idUsuario, String canal)
+   * @param {*} criarInscricaoCommand (String idUsuario, String idCanal)
    * @returns void
    */
   criar: async (criarInscricaoCommand) => {

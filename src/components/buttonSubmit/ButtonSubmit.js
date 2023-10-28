@@ -9,10 +9,12 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import InscricaoService from '../../service/Engajamento/InscricaoService'
 
-const ButtonSubmit = () => {
+const ButtonSubmit = ({donoDoCanal}) => {
 
   const idUserPost = useSelector((state) => state.shorts.idUserPost)
+
   const nav = useNavigate()
 
   const [user, setUser] = useState()
@@ -22,7 +24,7 @@ const ButtonSubmit = () => {
   const handleClick = async () => {
     if (user) {
       setIsSubscribe(!isSubscribe)
-      EngajamentoService.criar({ idUsuario: user.uuid, idCanal: idUserPost })
+      InscricaoService.criar({ idCanal: donoDoCanal.idUsuario })
     } else {
       nav("/login")
     }
@@ -38,7 +40,7 @@ const ButtonSubmit = () => {
   useEffect(() => {
     const findSubscriber = async () => {
       if (user) {
-        const engajGet = await EngajamentoService.buscarUm(idUserPost)
+        const engajGet = await InscricaoService.buscarUm( user.uuid )
         if (engajGet) {
           setIsSubscribe(true)
         }

@@ -43,7 +43,7 @@ function Channel_component({video}) {
                     </div>
                 </Link>
                 <div className='subscribe'>
-                    <ButtonSubmit/>
+                    <ButtonSubmit donoDoCanal={usuario}/>
                 </div>
             </div>
         </div>
