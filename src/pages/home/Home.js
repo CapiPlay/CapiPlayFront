@@ -144,7 +144,7 @@ function Home(darkMode) {
             )}
           </div>
           <div className='container__shorts__cards__desk'>
-            <Slider_Shorts />
+            <Slider_Shorts historic={false}/>
           </div>
           <div className='container__video__cards__desk'>
             {videosReu ? (

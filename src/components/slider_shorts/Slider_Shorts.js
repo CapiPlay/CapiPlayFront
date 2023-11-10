@@ -7,12 +7,12 @@ function Slider_Shorts({ historic }) {
 
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
     const [videosRec, setVideosRec] = useState([])
-    // shorts que vão vir da HistoricService 
     const [shortHistoric, setShortHistoric] = useState([]);
 
     useEffect(() => {
         getVideosRec();
         getShortsHistoric();
+
         function handleResize() {
             setScreenSize({ width: window.innerWidth, height: window.innerHeight });
         }
@@ -24,16 +24,18 @@ function Slider_Shorts({ historic }) {
     }, []);
 
     const getShortsHistoric = async () => {
-        const shorts = await VideoService.buscarHistorico(1, 1, true).then(
-            (res) => {
-                setShortHistoric(res);
-            }
-        );
+        try {
+            const res = await VideoService.buscarHistorico(6, 0, true)
+            setShortHistoric(res);
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     const getVideosRec = async () => {
         const pageable = await VideoService.buscarTodos(12, 0, true);
         const videos = pageable.content;
+        console.log(videos)
         if (videos?.length >= 6) {
             setVideosRec([...videos]);
         } else {
@@ -137,25 +139,15 @@ function Slider_Shorts({ historic }) {
 
     const renderDesktopView = () => (
         <div>
-
             {videosRec ? (
                 <Slider {...settingsDesk}>
                     {historic
-                        ?
-                        <>
-                            {shortHistoric && shortHistoric.map((videoHistoric) => (
-                                <>
-                                    <Shortcard key={videoHistoric.uuid} short={videoHistoric} />
-                                </>
-                            ))}
-                        </>
-                        :
-                        <>
-                            {videosRec.map((video) => (
-                                <Shortcard key={video.uuid} short={video} />
-                            ))}
-                        </>
-                    }
+                        ? shortHistoric.map((video) => (
+                            <Shortcard key={video.uuid} short={video} />
+                        ))
+                        : videosRec.map((video) => (
+                            <Shortcard key={video.uuid} short={video} />
+                        ))}
                 </Slider>
             ) : (
                 <div className="ui segment">

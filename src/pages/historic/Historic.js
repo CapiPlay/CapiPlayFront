@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import VideoService from "../../service/Video/VideoService";
 import Video_card from "../../components/video_card/Video_card"
 import HeaderToBack from "../../components/headerToBack/HeaderToBack"
+import Slider_Shorts from "../../components/slider_shorts/Slider_Shorts";
 import Shortcard from "../../components/short_card/ShortCard";
 
 const Historic = () => {
@@ -64,12 +65,7 @@ const Historic = () => {
                 videoHistoric
                     ?
                     <div className="historic__data">
-                        {/* {shortHistoric &&
-                            <div className="container__slider__shorts__historic">
-                                <CarouselShorts shorts={shortHistoric}/>
-                            </div>
-
-                        } */}
+                        <Slider_Shorts historic={true}/>
                         {videoHistoric &&
                             <div className="container__videos__historic__mob">
                                 {videoHistoric.map((video) => (
