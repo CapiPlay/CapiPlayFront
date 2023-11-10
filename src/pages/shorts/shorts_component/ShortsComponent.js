@@ -9,6 +9,8 @@ import { setListShorts, setActualShorts } from '../../../store/features/shorts/s
 
 // icons
 import { BiLike, BiDislike, BiCommentDetail, BiSolidLike, BiSolidDislike } from 'react-icons/bi'
+import { VscMute, VscUnmute } from 'react-icons/vsc'
+import { BsPlay, BsPause } from 'react-icons/bs'
 
 // component
 import ButtonSubmit from '../../../components/buttonSubmit/ButtonSubmit'
@@ -33,6 +35,7 @@ const ShortsComponent = ({ short }) => {
     const [dislikeShort, setDislikeShort] = useState(false)
     const [isVideoInView, setIsVideoInView] = useState(false)
     const [isMuted, setIsMuted] = useState(true)
+    const [isPaused, setIsPaused] = useState(true)
 
     const [likes, setLikes] = useState(0)
     const [currentLikes, setCurrentLikes] = useState(0)
@@ -126,18 +129,26 @@ const ShortsComponent = ({ short }) => {
 
     const updateListShorts = async () => {
         const shortUuid = short?.uuid
-        if (shortUuid !== id && shortUuid) {
-            await getUUID()
-            const response = await VideoService.buscarShorts()
-            const list = []
-            list.push(response)
-            dispatch(setListShorts(list))
-            navigate(`/shorts/${shortUuid}`)
-        }
+        if (!(shortUuid !== id && shortUuid)) return
+        await getUUID()
+        const response = await VideoService.buscarShorts()
+        const list = []
+        list.push(response)
+        dispatch(setListShorts(list))
+        navigate(`/shorts/${shortUuid}`)
     }
 
     const toggleMute = () => {
         setIsMuted(!isMuted)
+    }
+
+    const togglePause = () => {
+        setIsPaused(!isPaused)
+        if(isPaused) {
+            targetRef.current.pause()
+        } else {
+            targetRef.current.play()
+        }
     }
 
     const funcOpenModalComments = () => {
@@ -159,30 +170,30 @@ const ShortsComponent = ({ short }) => {
 
     const funcLikeShorts = async () => {
         if (!validateUser()) return
-        
-        
+
+
         setLikes(likes + (likeShort ? -1 : 1))
-        
+
         setDislikeShort(false)
         setLikeShort(!likeShort)
 
         const cmd = { idUsuario: user.uuid, idVideo: id, curtida: true }
         await ReacaoService.criar(cmd)
-        
+
     }
 
     const funcDislikeShorts = async () => {
         if (!validateUser()) return
 
         setLikeShort(false)
-        
+
         setLikes(currentLikes - (currentEngagementState ? 1 : 0))
-        
+
         setDislikeShort(!dislikeShort)
 
         const cmd = { idUsuario: user.uuid, idVideo: id, curtida: false }
         await ReacaoService.criar(cmd)
-        
+
     }
 
     const getPathShorts = (currentPath) => {
@@ -201,9 +212,22 @@ const ShortsComponent = ({ short }) => {
                 ref={targetRef}
                 loop
                 muted={isMuted}
-                onChange={console.log()}
                 {...(isVideoInView && { autoPlay: true })}
             />
+            {
+                isMuted ? (
+                    <VscMute onClick={toggleMute} style={{ fill: 'white', position: 'absolute', fontSize: '1.5rem', right: "1rem", top: '1rem', cursor: 'pointer' }} />
+                ) : (
+                    <VscUnmute onClick={toggleMute} style={{ fill: 'white', position: 'absolute', fontSize: '1.5rem', right: "1rem", top: '1rem', cursor: 'pointer' }} />
+                )
+            }
+            {
+                isPaused ? (
+                    <BsPlay onClick={togglePause} style={{ fill: 'white', position: 'absolute', fontSize: '1.5rem', left: "1rem", top: '1rem', cursor: 'pointer' }} />
+                ) : (
+                    <BsPause onClick={togglePause} style={{ fill: 'white', position: 'absolute', fontSize: '1.5rem', left: "1rem", top: '1rem', cursor: 'pointer' }} />
+                )
+            }
             <div className='container__icons__shorts'>
                 <div onClick={funcLikeShorts}>
                     {likeShort ? <BiSolidLike /> : <BiLike />}
@@ -230,7 +254,7 @@ const ShortsComponent = ({ short }) => {
                     </div>
                 </div>
             </div>
-            {openModalComments && <CommentsComponent func={funcOpenModalComments} videoId={short.uuid}/>}
+            {openModalComments && <CommentsComponent func={funcOpenModalComments} videoId={short.uuid} />}
         </div>
     )
 }

@@ -73,13 +73,16 @@ const Shorts = () => {
             const newShorts = []
 
             const firstShort = await VideoService.buscarCompleto(id)
-            dispatch(getIdUserPost(firstShort?.usuario?.uuid))
+            // console.log(firstShort)
+            // dispatch(getIdUserPost(firstShort?.usuario?.uuid))
 
             newShorts.push(firstShort)
 
             const promise = Array.from({ length: 3 }, () => VideoService.buscarShorts())
             const otherShorts = await Promise.all(promise)
             newShorts.push(...otherShorts)
+
+            console.log(newShorts)
 
             dispatch(setListShorts(newShorts))
         }
@@ -101,7 +104,7 @@ const Shorts = () => {
                     shorts && (
                         <>
                             {
-                                shorts.map((short, i) => <ShortsComponent key={short?.uuid + i} short={short} position={i} />)
+                                shorts.map((short, i) => <ShortsComponent key={i} short={short} position={i} />)
                             }
                         </>
                     )
