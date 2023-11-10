@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 
 const Shortcard = ({ short }) => {
 
-
-
     const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
     useEffect(() => {
@@ -35,7 +33,7 @@ const Shortcard = ({ short }) => {
                 {short.views > 999
                     ?
                     <span>
-                        {numeral(short.visualizacoes).format('0.0a')} de visualizações
+                        {numeral(short.views).format('0.0a')} de visualizações
                     </span>
                     :
                     <span>

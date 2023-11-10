@@ -9,6 +9,7 @@ import Slider_Shorts from '../../components/slider_shorts/Slider_Shorts';
 import VideoService from '../../service/Video/VideoService';
 import Aos from 'aos'
 import Cookies from 'js-cookie';
+import Shortcard from '../../components/short_card/ShortCard';
 
 function Home(darkMode) {
   const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
@@ -143,7 +144,7 @@ function Home(darkMode) {
             )}
           </div>
           <div className='container__shorts__cards__desk'>
-            <Slider_Shorts />
+            <Slider_Shorts historic={false}/>
           </div>
           <div className='container__video__cards__desk'>
             {videosReu ? (

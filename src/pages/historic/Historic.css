@@ -46,9 +46,10 @@
 
 .container__videos__historic__mob {
     padding-top: 2rem;
-    align-items: center;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 2rem;
 }
 

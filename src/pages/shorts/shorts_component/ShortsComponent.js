@@ -125,7 +125,7 @@ const ShortsComponent = ({ short }) => {
     }
 
     const updateListShorts = async () => {
-        const shortUuid = short.uuid
+        const shortUuid = short?.uuid
         if (shortUuid !== id && shortUuid) {
             await getUUID()
             const response = await VideoService.buscarShorts()

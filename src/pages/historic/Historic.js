@@ -1,72 +1,77 @@
 import "./Historic.css"
-
 import { useEffect, useState } from "react"
-import { format } from 'date-fns';
 
 // Componentes
-import HeaderToBack from "../../components/headerToBack/HeaderToBack"
-import Video_card from "../../components/video_card/Video_card"
-import Slider_Shorts from "../../components/slider_shorts/Slider_Shorts";
-import HistoricoService from "../../service/Engajamento/HistoricoService";
 import VideoService from "../../service/Video/VideoService";
+import Video_card from "../../components/video_card/Video_card"
+import HeaderToBack from "../../components/headerToBack/HeaderToBack"
+import Slider_Shorts from "../../components/slider_shorts/Slider_Shorts";
+import Shortcard from "../../components/short_card/ShortCard";
 
 const Historic = () => {
 
     // videos que vão vir da HistoricService 
     const [videoHistoric, setVideoHistoric] = useState([]);
 
-    // shorts que vão vir da HistoricService 
-    // *pode haver mudanças em como o short será renderizado
-    const [shortHistoric, setShortHistoric] = useState([]);
 
-    // formato de data exemplar
-    const dateTest = new Date("2023-05-18")
-    const dateFormat = 'dd/MM/yy';
-
-    // responsividade
-    const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
     useEffect(() => {
         const func = async () => {
 
-            VideoService.buscarHistorico(99999, 0).then(
+            // histórico de vídeos 
+            VideoService.buscarHistorico(99999, 0, false).then(
                 (res) => {
                     console.log(res)
                     setVideoHistoric(res);
                 }
             );
+
+            // histórico de shorts
+            // VideoService.buscarHistorico(1, 1, true).then(
+            //     (res) => {
+            //         console.log(res)
+            //         setShortHistoric(res);
+            //     }
+            // );
         }
 
         func()
-        function handleResize() {
-            setScreenSize({ width: window.innerWidth, height: window.innerHeight });
-        }
-        window.addEventListener('resize', handleResize);
-        handleResize();
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
 
     }, []);
 
-    const renderMobileView = () => (
+    const shortModelo = {
+        duracao: 16,
+        publicacao: "2023-09-05",
+        shorts: true,
+        titulo: "shorts 2",
+        curtidas: 1,
+        visualizacoes: 649,
+        categoria: "ESPORTES",
+        uuid: "02b29960-5098-4452-acc4-d5c24146372e",
+        caminhos: [
+            "02b29960-5098-4452-acc4-d5c24146372e\\miniatura_R154X268_8432913452328941688.png",
+            "02b29960-5098-4452-acc4-d5c24146372e\\miniatura_R200X348_4682049452551627663.png",
+            "02b29960-5098-4452-acc4-d5c24146372e\\miniatura_R230X388_8041872667063717547.png",
+            "02b29960-5098-4452-acc4-d5c24146372e\\miniatura_R340X193_16118392655351469333.png",
+            "02b29960-5098-4452-acc4-d5c24146372e\\miniatura_R380X193_7644675720426672719.png",
+            "02b29960-5098-4452-acc4-d5c24146372e\\video_4244732591020306533.mp4"
+        ]
+    }
+
+    return (
         <div className="historic__container">
             <HeaderToBack text={"Histórico"} route={"/"} />
+            <Shortcard short={shortModelo} />
             {
                 videoHistoric
                     ?
                     <div className="historic__data">
-                        <div>
-                            <span>{format(dateTest, dateFormat)}</span>
-                        </div>
-                        {shortHistoric &&
-                            <div className="container__slider__shorts__historic">
-                                <Slider_Shorts />
-                            </div>
-                        }
+                        <Slider_Shorts historic={true}/>
                         {videoHistoric &&
                             <div className="container__videos__historic__mob">
                                 {videoHistoric.map((video) => (
-                                    <Video_card key={video.id} video={video} />
+                                    <div>
+                                        <Video_card key={video.id} video={video} />
+                                    </div>
                                 ))}
                             </div>
                         }
@@ -76,75 +81,5 @@ const Historic = () => {
             }
         </div>
     )
-
-    const renderTabletView = () => (
-        <div className="historic__container">
-            <HeaderToBack text={"Histórico"} route={"/"} />
-            {
-                videoHistoric
-                    ?
-                    <div className="historic__data">
-                        <div>
-                            <span>{format(dateTest, dateFormat)}</span>
-                        </div>
-                        {shortHistoric &&
-                            <div className="container__slider__shorts__historic">
-                                <Slider_Shorts />
-                            </div>
-                        }
-                        {videoHistoric &&
-                            <div className="container__videos__historic__tablet">
-                                {videoHistoric.map((video) => (
-                                    <Video_card key={video.id} video={video} />
-                                ))}
-                            </div>
-                        }
-                    </div>
-                    :
-                    <span>Você ainda não viu nenhum vídeo</span>
-            }
-        </div>
-    )
-
-    const renderDesktopView = () => (
-        <div className="historic__container">
-            <HeaderToBack text={"Histórico"} route={"/"} />
-            {
-                videoHistoric
-                    ?
-                    <div className="historic__data">
-                        <div>
-                            <span>{format(dateTest, dateFormat)}</span>
-                        </div>
-                        {shortHistoric &&
-                            <div className="container__slider__shorts__historic">
-                                <Slider_Shorts />
-                            </div>
-                        }
-                        {videoHistoric &&
-                            <div className="container__videos__historic__desktop">
-                                {videoHistoric.map((video) => (
-                                    <Video_card key={video.id} video={video} />
-                                ))}
-                            </div>
-                        }
-                    </div>
-                    :
-                    <span>Você ainda não viu nenhum vídeo</span>
-            }
-        </div>
-    )
-
-    const getViewToRender = () => {
-        if (screenSize.width > 900) {
-            return renderDesktopView();
-        } else if (screenSize.width < 900 && screenSize.width > 500) {
-            return renderTabletView();
-        } else {
-            return renderMobileView();
-        }
-    };
-
-    return <>{getViewToRender()}</>;
 }
 export default Historic

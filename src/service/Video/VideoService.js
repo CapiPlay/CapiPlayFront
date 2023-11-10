@@ -46,10 +46,10 @@ const VideoService = {
    * Long getDuracao(), LocalDate getPublicacao(), Long getVisualizacoes(), Long getCurtidas(),String getCategoria(),
    * String getCaminho(), List<String> getCaminhos()
    */
-  buscarHistorico: async (size, page) => {
+  buscarHistorico: async (size, page, shorts) => {
     try {
       const response = await axios.get(
-        `/video/buscar-historico?size=${size}&page=${page}`
+        `/video/buscar-historico?size=${size}&page=${page}&shorts=${shorts}`
       );
 
       return response.data;
