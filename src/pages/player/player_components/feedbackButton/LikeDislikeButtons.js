@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react'
 import './LikeDislikeButtons.css'
 import { BiLike, BiSolidLike, BiDislike, BiSolidDislike } from 'react-icons/bi'
 import ReacaoService from '../../../../service/Engajamento/ReacaoService'
+import { set } from 'date-fns'
 
 function LikeDislikeButtons({ video }) {
 
   const [likeBtnActive, setLikeBtnActive] = useState(false)
   const [dislikeBtnActive, setDislikeBtnActive] = useState(false)
 
-  const [reacao, setReacao] = useState(undefined)
+  const [reacao, setReacao] = useState(null)
 
   async function getReacao() {
     try {
-      const a = await ReacaoService.buscarUm(video.uuid)
+      const a = await ReacaoService.buscarUmVideoCurtida(video.uuid)
       return a
       } catch (error) {
       console.error(error)
@@ -21,18 +22,19 @@ function LikeDislikeButtons({ video }) {
 
   useEffect(() => {
     getReacao().then((a) => {
-      setReacao(a)
+      setReacao(a) // Tu ta aqui
     })
   }, [video.uuid])
 
   useEffect(() => {
-    if (reacao == undefined) {
+    console.log("Isso: " + reacao)
+    if (reacao === false) {
+      setDislikeBtnActive(true)
+    } else if (reacao === true) {
+      setLikeBtnActive(true)
+    }else{
       setLikeBtnActive(false)
       setDislikeBtnActive(false)
-    } else if (reacao == false) {
-      setDislikeBtnActive(true)
-    } else if (reacao == true) {
-      setLikeBtnActive(true)
     }
   }, [reacao])
 
