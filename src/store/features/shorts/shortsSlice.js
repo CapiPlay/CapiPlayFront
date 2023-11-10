@@ -14,8 +14,6 @@ const shortsSlice = createSlice({
     modifyListShorts: (state, action) => {
       const { list } = action.payload
       state.listShorts = [...state.listShorts, ...list]
-      console.log("Today")
-
     },
     modifyActualShorts: (state, action) => {
       const { short, position } = action.payload

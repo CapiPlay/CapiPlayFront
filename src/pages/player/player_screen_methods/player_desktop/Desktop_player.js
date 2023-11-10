@@ -13,6 +13,7 @@ import {BiSolidDownArrow, BiSolidUpArrow} from 'react-icons/bi'
 import ComentarioService from '../../../../service/Engajamento/ComentarioService'
 import notFound from '../../../../assets/image/404_NotFound.png'
 import LikeDislikeButtons from '../../player_components/feedbackButton/LikeDislikeButtons'
+import UsuarioEngajamentoService from '../../../../service/Engajamento/UsuarioEngajamentoService'; 
 
 // import Video_player_contructor from '../../video_player_contructor/Video_player_contructor'
 
@@ -23,6 +24,14 @@ function Desktop_player({ video }) {
     let [allComments, setAllComments] = useState([])
     const [last, setLast] = useState(true) 
     const [page, setPage] = useState(0)
+    const [usuario, setUsuario] = useState({});
+
+
+    useEffect(() => {
+        UsuarioEngajamentoService.buscarUm(video.usuario.uuid)
+            .then((data) => setUsuario(data))
+            .catch((error) => console.error('Erro ao buscar usuario:', error));
+    }, [video]);
 
     useEffect( () => {
         buscarComments()
@@ -39,14 +48,16 @@ function Desktop_player({ video }) {
 
     }
 
-    const handleNewComment = () => {
+    const handleNewComment = async () => {
         if (commentText.trim() !== '') {
-            ComentarioService.criar({
+            let teste = await ComentarioService.criar({
                 texto: commentText,
                 idVideo: video.uuid
             })
+            allComments.push(teste)
             setCommentText('');
         }
+        setComments(!comment)
     }
 
     const buscarComments = async () => {

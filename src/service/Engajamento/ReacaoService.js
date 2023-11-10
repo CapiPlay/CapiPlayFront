@@ -24,14 +24,12 @@ const ReacaoService = {
    * @returns Reacao ( String idUsuario, String idVideo, Boolean curtida)
    */
   buscarUm: async (idVideo) => {
-    try {
-      const response = await axios.get(
+    
+      return await axios.get(
         "/engajamento/reacao/" + idVideo
-      );
-      return response.data.curtida;
-    } catch (err) {
-      return
-    }
+      )
+      .then((response) => response?.data?.curtida | 0)
+      .catch((e)=> 0);
   },
 
   /**
