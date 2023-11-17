@@ -4,6 +4,28 @@
 .profile__container_mobile{
     margin-top: 3rem;
 }
+
+.profile__pagination__mobile{
+    margin-left: 2rem;
+    width: 80vw;
+     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.buttonPaginaItens__mobile{
+    background-color: var(--lightpurple);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    width: 10%;
+    font-weight: bold;
+    color: var(--darkpurple)
+}
+
 .upload__page {
     height: 100vh;
 }
@@ -102,6 +124,7 @@
     margin-left: 10rem;
     width: 80vw;
 }
+
 
 .buttonPaginaItens{
     background-color: var(--lightpurple);

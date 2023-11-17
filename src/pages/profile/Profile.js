@@ -121,7 +121,7 @@ const Profile = () => {
                         Páginas:
                         {Array.from({ length: totalPages }, (_, index) => index).map(
                             (page) => (
-                                <button className="buttonPaginaItens"
+                                <button className="buttonPaginaItens__mobile"
                                     key={page}
                                     onClick={() => handlePageChange(page)}
                                 >
